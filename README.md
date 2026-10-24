@@ -22,7 +22,8 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Dish wash | 5.41 × 2.00 | Hatch, receiving table, double sink, hood dishwasher, clean table |
 | Washroom | 2.96 × 1.70 | Sage-tile WC and marble basin, with a hand-wash lobby |
 | Store room | 2.70 × 6.46 | Steel racking, door into the kitchen |
-| Pathway | about 1.00 wide | Between the bar and the kitchen block, open |
+| Pathway behind the bar | 1.60 wide | From where the hall wall ends, between the bar side of the hall and the kitchen / dish-wash block, open |
+| Pathway south of the hall | 3.46 wide | Between the hall's 9.20 m edge and the existing restaurant, from the landing east to the passage behind the bar |
 
 Every open side closes with roll-down clear PVC (button in the toolbar rolls them up or down). The roof is low, so there are no ceiling fans: misting fans on the pillars and two vertical tower ACs cool the hall.
 
@@ -35,7 +36,7 @@ Every open side closes with roll-down clear PVC (button in the toolbar rolls the
 
 ## Sizes: where they come from
 
-Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the kitchen block width (5.41 = 2.45 + 2.96), the washroom (2.96 × 1.70) and the 6.38 m block depth are printed on the survey plan. The store room (2.70 × 6.46) was given separately. The front (gate 1.70, garden 5 × 5, approach path 1.20, landing 5 × 5, positions from the marked survey plan), the 80 cm railing and the finishes (pillars, tiles, ceiling, brick counter) come from the site videos of 24 Oct 2026. The dish wash / kitchen depths (2.00 / 4.38), the pathway width (about 1.00), the counter zone width (2.10), wall and ceiling heights, and the roof shape are estimates or design choices, to be confirmed on site.
+Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the kitchen block width (5.41 = 2.45 + 2.96), the washroom (2.96 × 1.70) and the 6.38 m block depth are printed on the survey plan. The store room (2.70 × 6.46) was given separately. The pathways (1.60 behind the bar, 3.46 between the hall and the existing restaurant) were given on site. The front (gate 1.70, garden 5 × 5, approach path 1.20, landing 5 × 5, positions from the marked survey plan), the 80 cm railing and the finishes (pillars, tiles, ceiling, brick counter) come from the site videos of 24 Oct 2026. The dish wash / kitchen depths (2.00 / 4.38),  the counter zone width (2.10), wall and ceiling heights, and the roof shape are estimates or design choices, to be confirmed on site.
 
 ## Files
 
