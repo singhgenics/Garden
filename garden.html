@@ -308,7 +308,7 @@ function setPvc(f){dirty=true;curtains.forEach(c=>{c.parts.forEach(p=>{p.pm.scal
 wall(BX0,0,BX1,0,[[BX0+0.4,BX0+1.5,1.55,2.45]],BH,M.plaster,G.walls);
 // lobby + washroom
 wall(BX0,TY0,BX1,TY0,[[BX1-1.1,BX1-0.5,1.7,2.3]],BH,M.plaster,G.walls);
-wall(TX0,TY0,TX0,0,[[-1.4,-0.5,0,2.1]],BH,M.plaster,G.walls);
+wall(TX0,TY0,TX0,0,[[-1.5,-0.6,0,2.1]],BH,M.plaster,G.walls);
 // east wall, from the washroom down the whole length of the kitchen and store room
 wall(BX1,TY0,BX1,SY1,[[3.1,4.5,1.5,2.5]],BH,M.plaster,G.walls);
 // west wall of dish wash + kitchen (onto the pathway): dirty-dish hatch, kitchen door, pass window
@@ -321,7 +321,7 @@ wall(BX0,BY1,BX1,BY1,[[BX1-1.85,BX1-0.95,0,2.1]],BH,M.plaster,G.walls);
 wall(SX0,BY1,SX0,SY1,[],BH,M.plaster,G.walls);wall(SX0,SY1,BX1,SY1,[],BH,M.plaster,G.walls);
 // doors (leaf shown ajar) and window glass
 function door(x,z,alongX,w,mat,swing){const g=new THREE.Group();const leaf=bx(0,w,0,2.05,-0.02,0.02,mat||M.timber,g);g.position.set(x,0,z);g.rotation.y=(alongX?0:-Math.PI/2)+(swing||-1.15);G.walls.add(g);}
-door(TX0,-0.5,false,0.9,M.timber,-1.1);door(BX0+4.15,DISH,true,0.9,M.ss,0.0+1.0);door(BX1-1.85,BY1,true,0.9,M.ss,-1.0);
+door(TX0,-1.5,false,0.9,M.timber,-1.2);door(BX0+4.15,DISH,true,0.9,M.ss,0.0+1.0);door(BX1-1.85,BY1,true,0.9,M.ss,-1.0);
 /* pass window + hatch glazing frames */
 function frame(x0,x1,y0,y1,z0,z1){bx(x0,x1,y0-0.04,y0,z0,z1,M.ss,G.walls);bx(x0,x1,y1,y1+0.04,z0,z1,M.ss,G.walls);}
 frame(BX0-0.1,BX0+0.1,0.95,1.6,0.35,1.65);frame(BX0-0.1,BX0+0.1,0.95,1.75,4.3,5.6);
@@ -736,7 +736,7 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
   const ar=new THREE.Mesh(new THREE.PlaneGeometry(0.6,0.2),new THREE.MeshStandardMaterial({map:signTex(256,80,[['WASHROOM →',32,0.52]],'#2a1a10','#f6ecd6','#e9b54a')}));ar.position.set(HX+0.3,1.9,0.15);ar.rotation.y=0;G.wash.add(ar);
   cyl(0.18,0.2,0.3,lx0+0.2,0,TY0+0.35,M.pot,g,14);for(let i=0;i<4;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.14,8,6),M.leaf);l.position.set(lx0+0.2+(i-1.5)*0.05,0.5+i%2*0.14,TY0+0.35);g.add(l);}}
 }
-bx(TX0-0.04,TX0,1.95,2.15,-1.4,-0.5,M.brass,G.wash,false);
+bx(TX0-0.04,TX0,2.1,2.16,-1.5,-0.6,M.brass,G.wash,false);
 [[TX0+1.4,-0.85],[BX0+1.25,-0.85]].forEach(([x,z])=>sph(0.01,x,0,z,M.black,G.wash));
 
 /* ======================= STORE ROOM ======================= */
@@ -805,6 +805,7 @@ const VIEWS={
  backbar:{p:[14.95,1.55,0.7],t:[15.6,1.45,3.2],card:'backbar',fov:66},
  kitchen:{p:[BX0+0.45,1.7,2.4],t:[BX1,1.0,5.4],card:'kitchen',fov:70},
  dish:{p:[BX0+0.35,1.7,1.7],t:[BX0+3.4,0.9,0.3],card:'dish',fov:72},
+ lobby:{p:[18.1,6.2,-0.2],t:[18.1,0,-0.95],card:'wash',fov:42,roof:false},
  wash:{p:[TX0+0.3,1.6,-0.25],t:[BX1,1.0,-1.4],card:'wash',fov:78},
  store:{p:[SX0+1.35,1.7,BY1+0.5],t:[SX0+1.35,1.0,SY1],card:'store',fov:70},
  outside:{p:[8,2.2,19],t:[8,1.4,6],card:'curtains',fov:50},
