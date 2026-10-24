@@ -587,23 +587,25 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
  // POS nook at the door end of the back bar
  {const n0=0.08,n1=0.56;[n0,n1-0.025].forEach(z=>B(0.03,0.4,0.96,1.34,z,z+0.025,M.timber));B(0.03,0.4,1.32,1.35,n0,n1,M.timber);B(0.03,0.05,0.96,1.32,n0,n1,M.timberDark,false);B(0.06,0.1,0.96,0.98,0.2,0.42,M.black);{const t=B(0.14,0.16,1.0,1.2,0.18,0.44,M.black);t.rotation.z=0.35;}B(0.22,0.34,0.96,0.99,0.5,0.55,M.black);B(0.06,0.28,0.96,1.08,0.1,0.17,M.white);}
  // ---------- COUNTER ----------
+ // as filmed it runs only about half way across the end: 2.80 m, from 1.0 m off the north wall to the brick pier, leaving a 1.35 m open staff entry on the open side
+ const k0=1.35,k1=4.15;
  // the counter as built on site: an exposed red-brick stand (the tan ply on it today is temporary), brick pilasters on the front,
  // a deeper brick pier at the hall end, thick timber top with a brass edge, warm LED under the overhang
  const brickM=(u,v)=>{const t=brickTex.clone();t.needsUpdate=true;t.repeat.set(u/0.92,v/0.6);return S({map:t,roughness:0.95});};
  const brickBox=(x0,x1,y0,y1,z0,z1)=>{const dx=x1-x0,dy=y1-y0,dz=z1-z0;const m=new THREE.Mesh(new THREE.BoxGeometry(dx,dy,dz),[brickM(dz,dy),brickM(dz,dy),brickM(dx,dz),brickM(dx,dz),brickM(dx,dy),brickM(dx,dy)]);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);m.castShadow=m.receiveShadow=true;g.add(m);return m;};
- brickBox(1.1,1.6,0,0.98,c0+0.3,c1);
- for(let z=c0+1.35;z<c1-0.3;z+=1.05)brickBox(1.6,1.67,0,0.98,z-0.17,z+0.17);
- brickBox(1.04,1.7,0,0.98,c0-0.1,c0+0.3);B(1.03,1.71,0,0.06,c0-0.11,c0+0.31,M.conc);          // end pier, the brick "stand"
- B(1.0,1.78,0.98,1.04,c0-0.14,c1,M.timberDark);B(1.77,1.79,0.975,1.045,c0-0.14,c1,M.brass,false);B(1.71,1.74,0.95,0.975,c0+0.3,c1,M.led,false);rod(V(1.86,0.22,c0+0.3),V(1.86,0.22,c1),0.024,M.brass,g);
+ brickBox(1.1,1.6,0,0.98,k0+0.3,k1);
+ for(let z=k0+0.95;z<k1-0.3;z+=1.05)brickBox(1.6,1.67,0,0.98,z-0.17,z+0.17);
+ brickBox(1.04,1.7,0,0.98,k0-0.1,k0+0.3);B(1.03,1.71,0,0.06,k0-0.11,k0+0.31,M.conc);          // end pier, the brick "stand"
+ B(1.0,1.78,0.98,1.04,k0-0.14,k1,M.timberDark);B(1.77,1.79,0.975,1.045,k0-0.14,k1,M.brass,false);B(1.71,1.74,0.95,0.975,k0+0.3,k1,M.led,false);rod(V(1.86,0.22,k0+0.3),V(1.86,0.22,k1),0.024,M.brass,g);
  // bartender side: louvred keg-cabinet doors and the bar sink / ice well
- [[0.1,0.55],[0.55,1.0]].forEach(([a,b])=>{B(1.08,1.1,0.08,0.88,a+0.01,b-0.01,M.oliveWood);for(let y=0.13;y<0.84;y+=0.055)B(1.077,1.08,y,y+0.025,a+0.05,b-0.05,M.black,false);B(1.06,1.08,0.6,0.7,b-0.08,b-0.06,M.brass,false);});
- B(0.9,1.1,0,0.85,3.9,c1,M.ss);B(0.92,1.08,0.7,0.86,3.95,4.45,M.white);B(1.1,1.12,0.06,0.8,1.15,1.65,M.ss,false);
+ [[k0+0.35,k0+0.8],[k0+0.8,k0+1.25]].forEach(([a,b])=>{B(1.08,1.1,0.08,0.88,a+0.01,b-0.01,M.oliveWood);for(let y=0.13;y<0.84;y+=0.055)B(1.077,1.08,y,y+0.025,a+0.05,b-0.05,M.black,false);B(1.06,1.08,0.6,0.7,b-0.08,b-0.06,M.brass,false);});
+ B(0.9,1.1,0,0.85,3.45,k1,M.ss);B(0.92,1.08,0.7,0.86,3.5,4.0,M.white);B(1.1,1.12,0.06,0.8,2.85,3.35,M.ss,false);
  // 3 craft taps on one brass font, drip tray and chilled-line riser
  {const zc=2.45;B(1.0,1.3,1.04,1.06,zc-0.35,zc+0.35,M.ss);cyl(0.045,0.05,0.42,1.45,1.04,zc,M.brass,g,16);rod(V(1.45,1.46,zc-0.27),V(1.45,1.46,zc+0.27),0.034,M.brass,g);
   [-0.22,0,0.22].forEach((o,i)=>{cyl(0.012,0.012,0.08,1.45,1.38,zc+o,M.brass,g,8);cyl(0.02,0.014,0.15,1.45,1.48,zc+o,[M.timberDark,M.brass,M.oliveWood][i],g,8);});
   const tp=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.12),new THREE.MeshStandardMaterial({map:signTex(256,77,[['CRAFT ON TAP',24,0.52]],'#161412','#e9a94b','#c9993f'),roughness:0.8}));tp.position.set(1.455,1.62,zc);tp.rotation.y=Math.PI/2;g.add(tp);}
- // ---------- floating glass rack over the whole counter ----------
- {const rx0=1.05,rx1=1.72,rz0=c0+0.1,rz1=c1-0.1,yl=2.3,yu=2.58;
+ // ---------- floating glass rack over the counter ----------
+ {const rx0=1.05,rx1=1.72,rz0=k0+0.1,rz1=k1-0.1,yl=2.3,yu=2.58;
   [yl,yu].forEach(y=>{[rx0,rx1].forEach(x=>rod(V(x,y,rz0),V(x,y,rz1),0.014,M.brass,g));[rz0,rz1,(rz0+rz1)/2].forEach(z=>rod(V(rx0,y,z),V(rx1,y,z),0.012,M.brass,g));});
   [[rx0,rz0],[rx1,rz0],[rx0,rz1],[rx1,rz1]].forEach(([x,z])=>{rod(V(x,yl,z),V(x,yu,z),0.012,M.brass,g);rod(V(x,yu,z),V(x,3.0,z),0.008,M.black,g);});
   B(rx0,rx1,yu+0.012,yu+0.024,rz0,rz1,M.shelfGlass,false);[rx0-0.012,rx1+0.012].forEach(x=>B(x-0.012,x+0.012,yl-0.035,yl-0.02,rz0,rz1,M.warmLed,false));
@@ -619,11 +621,11 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   const seat=new THREE.Mesh(new THREE.CylinderGeometry(0.21,0.2,0.1,20),M.velvetSand);seat.position.set(x,0.73,z);g.add(seat);
   const back=new THREE.Mesh(new THREE.CylinderGeometry(0.21,0.21,0.42,20,1,true,0,Math.PI),M.velvetSand);back.position.set(x+0.02,1.0,z);g.add(back);
   const b2=new THREE.Mesh(new THREE.CylinderGeometry(0.19,0.19,0.4,20,1,true,0,Math.PI),M.velvetSand.clone());b2.material.side=THREE.DoubleSide;b2.position.set(x+0.02,1.0,z);g.add(b2);}
- for(let z=0.5;z<L-0.2;z+=0.62)stool(2.02,z);
+ for(let z=k0+0.4;z<k1-0.15;z+=0.62)stool(2.02,z);
  // neon over the back bar
  {const nd=new THREE.Mesh(new THREE.PlaneGeometry(1.5,0.45),M.neonDraught);nd.rotation.y=Math.PI/2;nd.position.set(0.05,2.74,2.4);nd.renderOrder=4;g.add(nd);}
 }
-solids.push([[HX-1.75,0.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
+solids.push([[HX-1.75,1.0],[HX-1.75,3.9]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
 
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers (cap 35) --- */
 const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,4.2,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
@@ -944,7 +946,7 @@ const VIEWS={
  tv:{p:[3.2,1.4,4.6],t:[0.7,1.9,0.7],card:'tv',fov:60},
  gate:{p:[-7.5,1.7,16.85],t:[4.0,1.9,15.6],card:'gate',fov:56},
  entry:{p:[EM,1.6,9.4],t:[EM,1.4,3.2],card:'entry',fov:62},
- bar:{p:[11.5,1.6,4.3],t:[14.2,1.0,2.0],card:'bar',fov:64},
+ bar:{p:[10.2,1.6,2.85],t:[15.2,1.1,2.85],card:'bar',fov:64},
  backbar:{p:[14.95,1.55,0.7],t:[15.6,1.45,3.2],card:'backbar',fov:66},
  kitchen:{p:[BX0+0.45,1.7,2.4],t:[BX1,1.0,5.4],card:'kitchen',fov:70},
  dish:{p:[BX0+0.35,1.7,1.7],t:[BX0+3.4,0.9,0.3],card:'dish',fov:72},
@@ -961,7 +963,7 @@ const CARDS={
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Seen from every table on the west half of the hall']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
  backbar:['Back bar','Behind the counter','Olive back bar with a marble top, an amber onyx panel over sage tile, timber shelves lit from below with labelled bottles, infusion jars, a lit mixer cooler, a glasswasher, a soju riser and the ON TAP board.',['One brass font with 3 craft taps on the counter','POS nook at the south end']],
- bar:['Bar','The counter zone, 5.48 m','The existing counter, finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack.',['Neon DRAUGHT over the back bar','Brick: red with light mortar, as on site']],
+ bar:['Bar','The counter, 2.80 m (half the 5.48 m end)','The existing counter, about half way across the end (2.80 m, from 1.0 m off the north wall to the brick pier, with an open staff entry on the open side), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack.',['Neon DRAUGHT over the back bar','Brick: red with light mortar, as on site']],
  kitchen:['Kitchen','5.41 × 4.38 m','Cooking line along the east wall under one stainless hood: stock range, twin fryer, dim sum steamer, 2-burner wok range. Prep island, refrigeration, a pass window to the pathway and the dish-wash door.',['Hood duct rises above the roof','Anti-slip floor with a drain channel','Hand-wash station by the dish-wash door']],
  dish:['Dish wash','5.41 × 2.00 m','One-way line from dirty to clean: hatch from the pathway, receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, then the door into the kitchen.',['Hot-water cylinder, louvre extractor, floor drain']],
  wash:['Washroom','2.96 × 1.70 m','Sage-tile washroom with a WC, jet spray, marble basin, mirror and hand-dryer, entered from a hand-wash lobby with its own basin and mirror.',['Door opens from the lobby on the pathway side']],
