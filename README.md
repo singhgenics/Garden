@@ -20,7 +20,7 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Front | gate to hall | From the marked survey plan: arched whitewashed gateway (1.70 m, blue gable, sign) on the Cavelossim-Assolna road; main path east to the residence veranda; 5 × 5 m garden on its north side below the hall's 2.98 m edge; a 1.20 m stepping-stone approach path (about 5.5 m, to confirm) north to the 5 × 5 m red-oxide landing between the hall wing and the existing restaurant; the hall entrance faces the landing. Existing restaurant and residence shown as massing |
 | Kitchen | 5.41 × 4.38 | Cooking line under one hood, prep island, refrigeration, pass window |
 | Dish wash | 5.41 × 2.00 | Hatch, receiving table, double sink, hood dishwasher, clean table |
-| Washroom | 2.96 × 1.70 | Sage-tile WC and marble basin, with a hand-wash lobby |
+| Washroom | 2.96 × 1.70 | As on site: 70 cm door, the only hand-wash basin on the right, a partition with a 70 cm opening, then the WC; reached through a plain lobby |
 | Store room | 2.70 × 6.46 | Steel racking, door into the kitchen |
 | Pathway behind the bar | 1.60 wide | From where the hall wall ends, between the bar side of the hall and the kitchen / dish-wash block, open |
 | Pathway south of the hall | 3.46 wide | Between the hall's 9.20 m edge and the existing restaurant, from the landing east to the passage behind the bar |
