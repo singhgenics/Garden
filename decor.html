@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cabin East Garden Decor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a decor book. One full-bleed render per zone, then a two-column spec (what goes in / why) with its inspiration board. */
+:root{
+  --paper:#eef0ea; --ink:#1d2a22; --muted:#56635a; --line:#cfd5cc; --card:#f7f8f4;
+  --green:#1f3d2e; --brass:#9a7434; --brass-ink:#7a5a22;
+  --display:"Gloock",Georgia,"Times New Roman",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111915; --ink:#e7ebe3; --muted:#9aa79d; --line:#2a3830; --card:#17221c;
+  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111915; --ink:#e7ebe3; --muted:#9aa79d; --line:#2a3830; --card:#17221c;
+  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.1}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass-ink)}
+header{padding-block:48px 28px;display:grid;gap:14px}
+header h1{font-size:clamp(40px,7vw,76px);color:var(--green)}
+header p{max-width:62ch;margin:0;color:var(--muted);font-size:17px}
+figure{margin:0}
+.hero img,.zone img.render{width:100%;display:block;border-radius:4px;aspect-ratio:1376/768;object-fit:cover;background:var(--line)}
+figcaption{font:400 12.5px/1.4 var(--mono);color:var(--muted);margin-top:8px}
+.palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-top:40px}
+.sw{display:grid;gap:6px;font-size:13px}
+.sw i{display:block;height:64px;border-radius:3px;border:1px solid #0002}
+.sw b{font-weight:650}.sw span{color:var(--muted);font:12px/1.3 var(--mono)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:36px;padding-block:14px;border-block:1px solid var(--line);font-size:14px}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass)}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--brass-ink)}
+.zone{margin-top:72px;display:grid;gap:20px;scroll-margin-top:16px}
+.zone-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+.zone-head h2{font-size:clamp(30px,4.4vw,44px);color:var(--green)}
+.zone-head .eyebrow{flex-basis:100%}
+.zone-head .dim{font:500 13px var(--mono);color:var(--muted)}
+.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:760px){.cols{grid-template-columns:minmax(0,1fr)}}
+.lede{margin:0 0 14px;max-width:62ch}
+table.spec{width:100%;border-collapse:collapse;font-size:14.5px}
+table.spec th{text-align:left;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 12px 6px 0;width:30%;vertical-align:top}
+table.spec td{padding:0 0 6px;vertical-align:top}
+table.spec tr+tr th,table.spec tr+tr td{padding-top:9px;border-top:1px solid var(--line)}
+aside.inspo{display:grid;gap:8px}
+aside.inspo img{width:100%;border-radius:3px;display:block}
+.note{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:14px}
+.note b{color:var(--brass-ink);font-weight:650}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:600px){.pair{grid-template-columns:1fr}}
+.pair img{width:100%;border-radius:4px;display:block}
+.care{margin-top:72px;display:grid;gap:16px}
+.care h2{font-size:clamp(28px,4vw,40px);color:var(--green)}
+.care ul{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch}
+.next ol{margin:0;padding-left:22px;display:grid;gap:8px;max-width:72ch}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font:12.5px/1.5 var(--mono);color:var(--muted)}
+footer a{color:var(--muted)}
+.back{font:500 13px var(--mono);color:var(--brass-ink);text-decoration:none;justify-self:start}
+.back:hover,.back:focus-visible{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="back" href="garden.html">&larr; Open the 3D model</a>
+  <span class="eyebrow">Cabin East &middot; Garden &middot; decor concept</span>
+  <h1>A green room in a garden</h1>
+  <p>The look for the Garden hall, built on the 3D model and the Design Inspos boards: one deep bottle-green panelled wall dressed like an old pub, a dark fluted bar under hanging greenery, and a hall that opens straight onto a lit tropical garden. Every render below keeps the model's layout; only the finishes change.</p>
+</header>
+
+<figure class="hero">
+  <img src="decor/entry-1.jpg" alt="Looking into the open garden pub at dusk: string lights under timber beams, green panelled back wall, bar on the right">
+  <figcaption>From the entrance path at dusk, PVC curtains rolled up. Generated in Google Flow from the model's Entrance view.</figcaption>
+</figure>
+
+<div class="palette" aria-label="Palette">
+  <div class="sw"><i style="background:#1f3d2e"></i><b>Bottle green</b><span>walls, banquette</span></div>
+  <div class="sw"><i style="background:#9a7434"></i><b>Aged brass</b><span>sconces, rail, taps</span></div>
+  <div class="sw"><i style="background:#7b4f2c"></i><b>Teak</b><span>tables, beams, shelves</span></div>
+  <div class="sw"><i style="background:#cfae78"></i><b>Cane</b><span>chair backs, pendants</span></div>
+  <div class="sw"><i style="background:#e7e3dc"></i><b>Veined marble</b><span>bar top</span></div>
+  <div class="sw"><i style="background:#2b2d2b"></i><b>Charcoal check</b><span>floor</span></div>
+  <div class="sw"><i style="background:#a95a38"></i><b>Old brick</b><span>chalkboard bay, pots</span></div>
+</div>
+
+<nav class="toc" aria-label="Zones">
+  <a href="#wall">Decor wall</a><a href="#banquette">Banquette option</a><a href="#bar">Bar</a><a href="#hall">Hall and entrance</a><a href="#garden">Garden approach</a><a href="#materials">Materials</a><a href="#care">Built for Goa</a><a href="#next">Next steps</a>
+</nav>
+
+<section class="zone" id="wall">
+  <div class="zone-head"><span class="eyebrow">Zone 1</span><h2>The decor wall</h2><span class="dim">north wall &middot; 15.67 m</span></div>
+  <figure><img class="render" src="decor/decor-1.jpg" alt="Deep green panelled wall with gilt frames, brass sconces, rattan pendants and teak tables"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">The one solid wall carries the whole pub character. Keep it dark and rich so the open sides and garden read brighter against it.</p>
+      <table class="spec">
+        <tr><th>Wall</th><td>Bottle-green paint, eggshell, over raised MDF panel mouldings in tall rectangles; dark teak skirting</td></tr>
+        <tr><th>Art</th><td>Salon hang of 12 to 16 gilt and black frames: botanical prints and black-and-white Goa photographs, hung as one block centred on the wall</td></tr>
+        <tr><th>Lights</th><td>Brass twin-arm sconces with clear glass shades, one per panel bay, 2700 K filament bulbs on a dimmer</td></tr>
+        <tr><th>Above</th><td>Timber plant shelf at beam height with trailing pothos and Boston ferns</td></tr>
+        <tr><th>Tables</th><td>Solid teak tops, cane-backed teak armchairs, candle jars</td></tr>
+        <tr><th>Pendants</th><td>Woven rattan globes and cones over each table</td></tr>
+      </table>
+    </div>
+    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-decor.jpg" alt="Inspiration: green tufted booth with framed pictures; green panels with brick and brass lamps"><figcaption>Design Inspos / Wall</figcaption></aside>
+  </div>
+</section>
+
+<section class="zone" id="banquette">
+  <div class="zone-head"><span class="eyebrow">Zone 1 &middot; option</span><h2>With a buttoned banquette</h2><span class="dim">runs the wall-side tables</span></div>
+  <div class="pair">
+    <img src="decor/banquette-1.jpg" alt="Continuous bottle-green buttoned leather banquette along the green wall, with an exposed brick bay and chalkboard">
+    <img src="decor/banquette-2.jpg" alt="Second take: banquette, brick chimney bay with chalkboard, gilt botanical frames">
+  </div>
+  <div class="cols">
+    <div>
+      <p class="lede">Most of the wall photos you saved have deep-buttoned leather seating. A single banquette along the wall replaces the wall-side chairs at the four tables in the front row, so the hall feels more like a pub and the aisle gets wider.</p>
+      <table class="spec">
+        <tr><th>Seat</th><td>Built-in banquette, deep-buttoned bottle-green faux leather (marine-grade vinyl), brass nailhead trim, teak plinth, seat 450 mm high and 550 mm deep</td></tr>
+        <tr><th>Brick bay</th><td>One exposed old-brick panel with a black chalkboard (as in the model's last bay)</td></tr>
+        <tr><th>Covers</th><td>Should stay at 32 if each wall-side chair becomes a banquette place. Check it in the model before ordering</td></tr>
+      </table>
+    </div>
+    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-banquette.jpg" alt="Inspiration: emerald lounge with green velvet chairs; green tufted booth"><figcaption>Design Inspos / Wall</figcaption></aside>
+  </div>
+</section>
+
+<section class="zone" id="bar">
+  <div class="zone-head"><span class="eyebrow">Zone 2</span><h2>The bar</h2><span class="dim">counter 5.48 m</span></div>
+  <figure><img class="render" src="decor/bar-2.jpg" alt="Bar with dark fluted front, marble top, brass taps, Edison globes and hanging greenery"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">The bar is the brightest thing in the room: a warm glow under the counter, backlit shelves and clear globes, with plants hanging over it like a pergola.</p>
+      <table class="spec">
+        <tr><th>Front</th><td>Dark stained vertical fluted timber, brushed brass kick plate and foot rail, amber LED strip under the counter lip</td></tr>
+        <tr><th>Top</th><td>White-and-grey veined marble or quartz, 40 mm edge</td></tr>
+        <tr><th>Taps</th><td>Brass beer towers with the craft taps in one row</td></tr>
+        <tr><th>Back bar</th><td>Open walnut-tone shelves with amber backlight for glassware and bottles</td></tr>
+        <tr><th>Lights</th><td>Clear glass Edison globe pendants over the counter</td></tr>
+        <tr><th>Green</th><td>Hanging pothos and faux wisteria from the ceiling above the counter</td></tr>
+        <tr><th>Stools</th><td>Round teak seats on black steel legs with a footring</td></tr>
+        <tr><th>Signs</th><td>Warm-white neon script on the green wall, chalkboard for tonight's specials</td></tr>
+      </table>
+    </div>
+    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-bar.jpg" alt="Inspiration: dark fluted bar with marble top and Edison globes; open garden bar with backlit shelves"><figcaption>Design Inspos</figcaption></aside>
+  </div>
+</section>
+
+<section class="zone" id="hall">
+  <div class="zone-head"><span class="eyebrow">Zone 3</span><h2>Hall and entrance</h2><span class="dim">open edge 9.20 m</span></div>
+  <figure><img class="render" src="decor/entry-2.jpg" alt="Second take of the hall from the entrance"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">With the PVC rolled up, the hall should feel like a covered pergola. The string lights and climbing plants do most of that work.</p>
+      <table class="spec">
+        <tr><th>Ceiling</th><td>Festoon string lights zig-zagged under the timber beams, warm-white 2700 K, outdoor-rated (IP65)</td></tr>
+        <tr><th>Columns</th><td>Jasmine and bougainvillea trained up the white columns on stainless wire</td></tr>
+        <tr><th>Entrance</th><td>Patterned cement-tile mat panel at the door; a pair of large terracotta pots with areca palms either side</td></tr>
+        <tr><th>Floor</th><td>Charcoal-and-black checkerboard stone, honed (not polished) so it is not slippery when wet</td></tr>
+      </table>
+    </div>
+    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-entry.jpg" alt="Inspiration: string-lit timber pergola dining; vine-covered pergola with cushioned banquettes"><figcaption>Design Inspos</figcaption></aside>
+  </div>
+</section>
+
+<section class="zone" id="garden">
+  <div class="zone-head"><span class="eyebrow">Zone 4</span><h2>The garden approach</h2><span class="dim">outside, at blue hour</span></div>
+  <figure><img class="render" src="decor/outside-1.jpg" alt="Exterior at dusk: open-sided pub glowing amber in a lit tropical garden with festoon lights"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">The garden sells the place from the road. Light it in layers: festoon overhead, low path lights, and the glowing hall behind.</p>
+      <table class="spec">
+        <tr><th>Overhead</th><td>Festoon runs from the eaves out to timber posts in the garden</td></tr>
+        <tr><th>Path</th><td>Laterite stepping stones in gravel, low warm bollard or spike lights every 2 to 3 m</td></tr>
+        <tr><th>Planting</th><td>Frangipani, banana, heliconia, ferns and areca palms in terracotta; bougainvillea on the columns</td></tr>
+        <tr><th>Uplights</th><td>Warm spike uplights at the base of the coconut palms</td></tr>
+      </table>
+    </div>
+    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-outside.jpg" alt="Inspiration: lit pergola dining at night; vine-covered pergola terrace"><figcaption>Design Inspos</figcaption></aside>
+  </div>
+</section>
+
+<section class="zone" id="materials">
+  <div class="zone-head"><span class="eyebrow">Samples</span><h2>Materials board</h2><span class="dim">take this to suppliers</span></div>
+  <figure><img style="width:100%;display:block;border-radius:4px" src="decor/board-2.jpg" alt="Flat-lay of samples: green paint and moulding, brass sconce, fluted teak, marble, green buttoned leather, cane, rattan, checker tile, brick, gilt frame, pothos"></figure>
+</section>
+
+<section class="care" id="care">
+  <h2>Built for Goa</h2>
+  <p class="lede">The hall is open on three sides, so everything here gets monsoon humidity and salt air.</p>
+  <ul>
+    <li><b>Paint:</b> use an exterior-grade, anti-fungal emulsion on the green wall even though it is inside. Ask for a sample pot and look at it at night under 2700 K light before you commit, because dark greens read much darker under warm light.</li>
+    <li><b>Banquette:</b> marine-grade vinyl, not real leather. It survives humidity and wipes clean.</li>
+    <li><b>Brass:</b> lacquered or powder-coated brass-finish fittings, or they will go green within one monsoon.</li>
+    <li><b>Timber:</b> teak or treated hardwood with a marine varnish; MDF mouldings only on the solid wall, sealed on all faces.</li>
+    <li><b>Cane and rattan:</b> fine under the roof, but keep them out of driving rain when the curtains are up.</li>
+    <li><b>Art:</b> frames sealed at the back, prints behind glass, no unframed canvas.</li>
+    <li><b>Lights:</b> every fitting on the open sides IP65 or better.</li>
+  </ul>
+</section>
+
+<section class="care next" id="next">
+  <h2>Next steps</h2>
+  <ol>
+    <li>Choose chairs or the banquette along the wall. If it is the banquette, I update the 3D model and check the covers.</li>
+    <li>Order three green sample pots and paint them on 1 m boards on site.</li>
+    <li>Get quotes for the fluted bar front with the marble top, and for the banquette.</li>
+    <li>Plan the lighting circuits: sconces, pendants, festoon and garden on separate dimmers.</li>
+    <li>Start buying frames and prints early; a salon hang takes time to collect.</li>
+  </ol>
+</section>
+
+<footer>Renders: Google Flow (Nano Banana 2), project "Garden Decor", each from a screenshot of the Garden 3D model. <a href="garden.html">3D model</a>. Concept images, not construction drawings: sizes come from the model and its survey plan and still need checking on site.</footer>
+</div>
+</body>
+</html>

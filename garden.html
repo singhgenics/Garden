@@ -24,6 +24,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.
 .seg button{appearance:none;border:0;background:transparent;color:var(--muted);font:500 12px/1 var(--body);padding:8px 11px;border-radius:9px;cursor:pointer;white-space:nowrap}
 .seg button:hover{color:var(--fg);background:rgba(255,255,255,.06)}
 .seg button[aria-pressed="true"]{background:var(--amber);color:#1b120a}
+.seg a.seglink{color:var(--muted);font:500 12px/1 var(--body);padding:8px 11px;border-radius:9px;text-decoration:none;white-space:nowrap}.seg a.seglink:hover,.seg a.seglink:focus-visible{color:var(--fg);background:rgba(255,255,255,.06)}
 .row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .dimmer{pointer-events:auto;display:flex;align-items:center;gap:8px;background:rgba(19,15,12,.88);border:1px solid var(--line);border-radius:12px;padding:6px 12px;font:500 12px/1 var(--body);color:var(--muted)}
 .dimmer input{accent-color:var(--amber);width:110px}
@@ -70,6 +71,7 @@ body.walk .pad{display:grid}
         <button id="t-lbl" aria-pressed="true">Labels</button>
         <button id="t-dims" aria-pressed="false">Sizes</button>
       </div>
+      <div class="seg"><a class="seglink" href="decor.html">Decor concept &rarr;</a></div>
       <div class="seg"><button id="t-light" aria-expanded="false" aria-controls="lightpanel">Lighting · <span id="lc-name">Evening</span> ▾</button></div>
     </div>
     <div class="seg lightctl" id="lightpanel" role="group" aria-label="Lighting" hidden>

@@ -4,6 +4,8 @@ A 3D model of the Garden restaurant: an open-sided pub hall with its bar, kitche
 
 Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 
+Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from the model's toolbar)
+
 ## What is in the model
 
 | Part | Size (m) | Notes |
@@ -35,3 +37,4 @@ Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the
 
 - `garden.html`: the whole model (three.js r128, no build step)
 - `index.html`: redirects to `garden.html`
+- `decor.html` + `decor/`: the interior decor concept, Google Flow renders made from the model's camera views in the look of the Design Inspos boards, with a spec per zone. Source and image runner live in `../Decor` (outside this repo)
