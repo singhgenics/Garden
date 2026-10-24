@@ -8,7 +8,7 @@ Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 
 | Part | Size (m) | Notes |
 |---|---|---|
-| Main restaurant | 15.67 × 7.76 (irregular) | 8 square tables for 4 = **32 covers** (cap 35). Open on three sides, solid 15.67 m north wall |
+| Main restaurant | 15.67 × 7.76 (irregular) | 5 square tables for 4 + 2 family tables for 6 = **32 covers** (cap 35). Open on three sides, solid 15.67 m north wall |
 | Decor wall | 15.67 | Single deep-green wall with fine panel lines, brass Edison sconces, a salon hang of gilt and black frames, a brick bay with a chalkboard |
 | Bar | counter zone, 5.48 long | Dark fluted front with a brass base, marble top, amber under-light, beer towers and craft taps, backlit back bar, Edison globes, hanging wisteria |
 | Entrance | middle of the 9.20 m open edge | PVC strip door under rustic hanging signs |
