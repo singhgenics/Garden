@@ -11,7 +11,7 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Part | Size (m) | Notes |
 |---|---|---|
 | Main restaurant | 15.67 × 7.76 (irregular) | 5 square tables for 4 + 2 family tables for 6 (1.9 × 0.9 m, 3 chairs facing 3) = **32 covers** (cap 35). Open on three sides, solid 15.67 m north wall |
-| Decor wall | 15.67 | Single deep-green wall with fine panel lines, brass Edison sconces, a salon hang of gilt and black frames, a brick bay with a chalkboard |
+| Decor wall (with 2 of the 3 match TVs) | 15.67 | Single deep-green wall with fine panel lines, brass Edison sconces, a salon hang of gilt and black frames, a brick bay with a chalkboard |
 | Bar | counter zone, 4.8 long | Simplex bar style: backlit amber onyx behind a black mesh frame, marble top with brass edge, velvet stools, 3 craft taps on one brass font, floating glass rack; back bar with labelled bottles, infusion jars, lit cooler, ON TAP board |
 | Entrance | middle of the 9.20 m open edge | PVC strip door under rustic hanging signs |
 | Kitchen | 5.41 × 4.38 | Cooking line under one hood, prep island, refrigeration, pass window |

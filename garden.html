@@ -372,7 +372,7 @@ function cageLantern(x,y){const g=new THREE.Group();const arm=[];for(let i=0;i<=
 function mouldedPanel(x0,x1,y0,y1){const t=0.012,d=zi+0.03;[[x0,x1,y0,y0+t],[x0,x1,y1-t,y1],[x0,x0+t,y0,y1],[x1-t,x1,y0,y1]].forEach(([a,b,c,e])=>bx(a,b,c,e,d,d+0.02,M.emeraldMould,DW,false));}
 [[0.3,1.95],[2.05,3.4],[7.5,9.1],[9.2,10.8]].forEach(([a,b])=>mouldedPanel(a,b,0.35,3.15));
 [[7.3-0.0,0]];
-globeSconce(1.12,2.3);globeSconce(2.72,2.3);globeSconce(8.3,2.5);globeSconce(10.0,2.5);
+globeSconce(1.12,2.3);globeSconce(2.72,2.3);globeSconce(7.75,2.5);globeSconce(10.45,2.5);
 // salon hang: gilt and black frames on the emerald, inside a big moulded frame (x 3.5 to 7.2)
 mouldedPanel(3.5,7.2,0.35,3.2);
 {const gi=M.gilt,bk=M.blackMetal;const hang=[[3.95,2.5,0.5,0.62,gi,'portrait',3],[4.55,2.35,0.38,0.5,bk,'engraving',5],[4.5,1.78,0.5,0.4,gi,'landscape',7],[5.15,2.55,0.62,0.48,bk,'landscape',9],[5.35,1.85,0.5,0.62,gi,'portrait',12],[5.95,2.6,0.4,0.52,gi,'poster',2],[6.0,1.9,0.46,0.38,bk,'engraving',14],[6.55,2.5,0.5,0.62,bk,'portrait',20],[6.6,1.75,0.42,0.34,gi,'landscape',22],[3.9,1.8,0.34,0.42,bk,'poster',3],[6.95,2.85,0.3,0.36,gi,'engraving',30]];
@@ -392,6 +392,17 @@ function trailPlant(x,y,z,n){const r=rng(Math.round(x*10));bx(x-0.35,x+0.35,y,y+
 trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
 
 
+/* ---- match screens: three TVs, two on the decor wall and one over the back bar, so every table can see a screen ---- */
+{const tvTex=tex(512,288,(g,w,h)=>{g.fillStyle='#1d6b34';g.fillRect(0,0,w,h);for(let x=0;x<w;x+=64){g.fillStyle='rgba(255,255,255,.06)';g.fillRect(x,0,32,h);}g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=3;g.strokeRect(24,40,w-48,h-64);g.beginPath();g.moveTo(w/2,40);g.lineTo(w/2,h-24);g.stroke();g.beginPath();g.arc(w/2,h/2+8,36,0,7);g.stroke();g.strokeRect(24,h/2-50,60,100);g.strokeRect(w-84,h/2-50,60,100);
+  g.fillStyle='rgba(10,10,20,.88)';g.fillRect(14,8,230,26);g.fillStyle='#fff';g.font='700 15px "IBM Plex Sans", sans-serif';g.textAlign='left';g.fillText('LIVE   MATCH NIGHT   1 – 0   67\'',22,26);g.fillStyle='#e04a3a';g.beginPath();g.arc(w-26,22,7,0,7);g.fill();},1,1);
+ const tvMat=new THREE.MeshBasicMaterial({map:tvTex,toneMapped:false});
+ function wallTV(cx,cy,w,h,z,grp,ry){const t=new THREE.Group();const f=0.03;
+  bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.045,M.black,t,false);const sc=new THREE.Mesh(new THREE.PlaneGeometry(w,h),tvMat);sc.position.z=0.047;t.add(sc);
+  bx(-0.12,0.12,-0.08,0.08,-0.02,0,M.blackMetal,t,false);t.position.set(cx,cy,z);t.rotation.y=ry||0;grp.add(t);return t;}
+ wallTV(2.0,2.15,1.1,0.62,zi+0.04,DW);               // west, between the two brass sconces
+ wallTV(9.05,2.15,1.1,0.62,zi+0.04,DW);              // centre of the decor wall
+ // over the back bar, looking out to the whole hall (local bar coordinates: turned half a circle at x = 15.67)
+ {const bg=new THREE.Group();bg.position.set(HX,0,5.15);bg.rotation.y=Math.PI;G.bar.add(bg);const t=wallTV(0,0,0.9,0.5,0,bg,Math.PI/2);t.position.set(0.04,2.84,2.1);}}
 /* the wall is left clear: the decor wall is the feature, tables stand free in front of it */
 
 /* --- bar: the counter zone, rebuilt in the Simplex bar style (front and back) ---
@@ -790,7 +801,7 @@ function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.get
 /* ======================= labels ======================= */
 lbl('Main restaurant · 32 covers (5 × 4 + 2 family tables of 6)',6.5,2.6,3.2,'');
 lbl('Decor wall · 15.67 m',7.8,3.0,0.2,'o');
-lbl('Bar · the counter zone',14.6,2.6,1.5,'');
+lbl('Bar · the counter zone',14.6,2.6,1.5,'');lbl('Match screens · 3 TVs',9.05,2.75,0.3,'');
 lbl('Pathway · about 1.00 m',16.17,0.4,4.6,'k');
 lbl('Kitchen · 5.41 × 4.38 m',BX0+2.7,3.2,4.3,'k');
 lbl('Dish wash · 5.41 × 2.00 m',BX0+2.7,3.7,1.0,'w');
@@ -820,7 +831,7 @@ const VIEWS={
 };
 const CARDS={
  overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance in the middle of the 9.20 m open edge','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
- decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: dark panelled timber wainscot, emerald panels with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','Warm 2700 K sconces and jute pendants']],
+ decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: dark panelled timber wainscot, emerald panels with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','Three match screens: two on this wall, one over the back bar','Warm 2700 K sconces and jute pendants']],
  entry:['Entrance','Middle of the open 9.20 m edge','Guests come in through a PVC strip door centred on the open edge (4.6 m from each end), over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Planters either side']],
  backbar:['Back bar','Behind the counter','Olive back bar with a marble top, an amber onyx panel over sage tile, timber shelves lit from below with labelled bottles, infusion jars, a lit mixer cooler, a glasswasher, a soju riser and the ON TAP board.',['One brass font with 3 craft taps on the counter','POS nook at the south end']],
  bar:['Bar','The counter zone, 5.48 m','Backlit amber onyx behind a black mesh frame, marble top with a brass edge and LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack, as in the Simplex bar.',['Neon DRAUGHT over the back bar']],
