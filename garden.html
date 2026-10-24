@@ -227,7 +227,7 @@ M.coir=S({map:juteTex,roughness:1,side:THREE.DoubleSide});M.dome=S({color:'#f4ef
 M.beerGlass=S({color:'#e0a030',transparent:true,opacity:0.6,emissive:'#a06010',emissiveIntensity:0.5,roughness:0.1,depthWrite:false});M.edisonGlass=S({color:'#ffd9a0',transparent:true,opacity:0.2,roughness:0.05,emissive:'#ff9a30',emissiveIntensity:0.2,depthWrite:false});
 M.chrome=S({color:'#dfe4e8',roughness:0.15,metalness:0.95});M.taupe=S({color:'#a89886',roughness:0.95});M.pillow=S({color:'#cfd3d0',roughness:0.95});M.blackMetal=S({color:'#1c1c1c',roughness:0.5,metalness:0.6});M.petal=S({color:'#e0508a',roughness:0.8});
 M.flameGlass=S({color:'#ffe9c0',transparent:true,opacity:0.5,roughness:0.1,emissive:'#ffb050',emissiveIntensity:0.5,depthWrite:false});
-M.granite=S({map:graniteTex,roughness:0.3});M.goaWhite=S({color:'#f2efe8',roughness:0.75});M.navy=S({color:'#1f2a5c',roughness:0.5});M.gateBlue=S({color:'#2c3f9a',roughness:0.7});
+M.granite=S({map:graniteTex,roughness:0.3});M.pillarBlue=S({color:'#2443a6',roughness:0.45});M.goaWhite=S({color:'#f2efe8',roughness:0.75});M.navy=S({color:'#1f2a5c',roughness:0.5});M.gateBlue=S({color:'#2c3f9a',roughness:0.7});
 M.redOxide=S({map:(()=>{const t=redOxideTex.clone();t.needsUpdate=true;t.repeat.set(0.5,0.5);return t;})(),roughness:0.8});
 const NEONS=['neonRed','neonDraught','neonWok'];
 const EMI=[['dome',0.55],['beerGlass',0.5],['edisonGlass',0.2],['flameGlass',0.5],['lanR',0.7],['lanA',0.8],['lanG',0.6],['lanW',0.8],['rattan',0.25],['glow',1.2],['globe',1.3],['filament',1.7],['bulbGlass',0.45],['jute',0.35],['led',2.4],['flame',1.6]];
@@ -366,12 +366,11 @@ const bays=[];
     [[[15.67,5.48],[ENT_MID+ENT_W/2,5.48],[ENT_MID-ENT_W/2,5.48],[6.46,5.48]],'C-D'],
     [along(D,Hh,2),false],[along(Hh,Gp,1),false],[along(Gp,Fp,2),false],[along(Fp,A,2),false]];
   lines.forEach(([pts,tag])=>{pts.forEach(p=>addCol(p[0],p[1]));for(let i=0;i<pts.length-1;i++)bays.push({a:pts[i],b:pts[i+1],ent:tag==='C-D'&&i===1});});}
-/* pillars as on site: white turned Goan columns (base mouldings, long shaft, cup capital) standing on white pedestals that belong to the 80 cm balustrade */
+/* pillars as on site: blue round columns (about 24 cm across) standing on white pedestals that belong to the 80 cm balustrade, up to the ring beam */
 {const prof=Hs=>[[0,0],[0.15,0],[0.15,0.05],[0.12,0.07],[0.135,0.1],[0.135,0.13],[0.1,0.16],[0.11,0.2],[0.11,0.45],[0.125,0.47],[0.125,0.5],[0.095,0.53],[0.088,0.56],[0.078,Hs-0.42],[0.095,Hs-0.4],[0.095,Hs-0.37],[0.08,Hs-0.35],[0.086,Hs-0.31],[0.15,Hs-0.1],[0.158,Hs-0.07],[0.158,Hs-0.05],[0,Hs-0.05]].map(([r,y])=>new THREE.Vector2(r,y));
  colPts.forEach(([x,z])=>{const top=hc(z)-0.32,y0=0.86,Hs=top-y0;
   bx(x-0.18,x+0.18,0,0.1,z-0.18,z+0.18,M.navy,G.walls);bx(x-0.17,x+0.17,0.1,0.8,z-0.17,z+0.17,M.goaWhite,G.walls);bx(x-0.2,x+0.2,0.8,0.86,z-0.2,z+0.2,M.goaWhite,G.walls);
-  const c=new THREE.Mesh(new THREE.LatheGeometry(prof(Hs),20),M.goaWhite);c.position.set(x,y0,z);c.castShadow=c.receiveShadow=true;G.walls.add(c);
-  bx(x-0.17,x+0.17,top-0.05,top,z-0.17,z+0.17,M.goaWhite,G.walls);});}
+  cyl(0.12,0.12,Hs+0.06,x,y0,z,M.pillarBlue,G.walls,24);cyl(0.14,0.14,0.04,x,y0,z,M.goaWhite,G.walls,24);});}
 /* 80 cm balustrade between the pillars on every open edge: navy base band, white plinth and rail, navy turned balusters; 1.70 m opening at the entrance */
 {const balPts=[];const balGeo=new THREE.LatheGeometry([[0,0],[0.045,0],[0.045,0.04],[0.03,0.06],[0.032,0.09],[0.055,0.2],[0.055,0.28],[0.03,0.4],[0.025,0.46],[0.035,0.5],[0.04,0.52],[0.04,0.56],[0,0.56]].map(([r,y])=>new THREE.Vector2(r,y)),10);
  function balRun(ax,az,cx,cz){const L=Math.hypot(cx-ax,cz-az);if(L<0.1)return;const g=new THREE.Group();g.position.set((ax+cx)/2,0,(az+cz)/2);g.rotation.y=-Math.atan2(cz-az,cx-ax);G.walls.add(g);
@@ -605,7 +604,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
  const cz0=1.65,cz1=2.35;                           // lit mixer cooler is open behind glass
  B(0,0.4,0,0.92,0,cz0,M.oliveWood);B(0,0.4,0,0.92,cz1,L,M.oliveWood);B(0,0.42,0.92,0.96,0,L,M.marble);
  for(let z=0.6;z<L;z+=0.6)if(z<cz0-0.05||z>cz1+0.05)B(0.4,0.405,0.1,0.86,z-0.005,z+0.005,M.black,false);
- B(0,0.03,0.96,2.38,0,L,M.onyx,false);B(0,0.03,2.38,3.1,0,L,M.sage,false);
+ B(0,0.03,0.96,2.38,0,L,M.onyx,false);B(0,0.03,2.38,3.1,0,L,S({color:'#174030',roughness:0.55}),false);for(let z=0.6;z<L;z+=0.6)B(0.03,0.045,2.42,3.06,z-0.012,z+0.012,S({color:'#0f2c1f',roughness:0.6}),false);   // the tile panel above the back bar covered in the wall's green panelling
  // cooler: glass door, white lined interior, LED strip, mixers
  {B(0.4,0.41,0.1,0.86,cz0+0.02,cz1-0.02,M.shelfGlass,false);B(0.39,0.41,0.84,0.88,cz0,cz1,M.ss,false);B(0.39,0.41,0.08,0.11,cz0,cz1,M.ss,false);B(0.41,0.43,0.3,0.62,(cz0+cz1)/2-0.02,(cz0+cz1)/2+0.02,M.ss);B(0.03,0.39,0.46,0.48,cz0+0.03,cz1-0.03,M.ss,false);
   B(0.03,0.4,0.06,0.08,cz0,cz1,M.white,false);B(0.03,0.4,0.86,0.92,cz0,cz1,M.white,false);B(0.03,0.05,0.08,0.86,cz0,cz1,M.white,false);B(0.05,0.06,0.1,0.84,cz0+0.04,cz1-0.04,M.glow,false);
@@ -677,11 +676,11 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
 solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
 
 /* existing structural pillar inside the west wing (marked on the plan, as filmed): thick round blue column on a white square base, up to the ceiling */
-{const px=3.95,pz=6.3,top=hc(pz);M.pillarBlue=S({color:'#2443a6',roughness:0.45});
- bx(px-0.24,px+0.24,0,0.75,pz-0.24,pz+0.24,M.goaWhite,G.hall);bx(px-0.26,px+0.26,0.75,0.8,pz-0.26,pz+0.26,M.goaWhite,G.hall);
- cyl(0.175,0.175,top-0.8,px,0.8,pz,M.pillarBlue,G.hall,28);cyl(0.21,0.21,0.06,px,top-0.06,pz,M.goaWhite,G.hall,28);
- solids.push([[px-0.24,pz-0.24],[px+0.24,pz-0.24]],[[px+0.24,pz-0.24],[px+0.24,pz+0.24]],[[px+0.24,pz+0.24],[px-0.24,pz+0.24]],[[px-0.24,pz+0.24],[px-0.24,pz-0.24]]);
- lbl('Existing blue pillar · 0.35 m round',px,2.2,pz,'k');}
+{const px=3.95,pz=6.3,top=hc(pz),q=0.17;   // same column as on the open sides
+ bx(px-0.18,px+0.18,0,0.1,pz-0.18,pz+0.18,M.navy,G.hall);bx(px-q,px+q,0.1,0.8,pz-q,pz+q,M.goaWhite,G.hall);bx(px-0.2,px+0.2,0.8,0.86,pz-0.2,pz+0.2,M.goaWhite,G.hall);
+ cyl(0.12,0.12,top-0.86,px,0.86,pz,M.pillarBlue,G.hall,24);
+ solids.push([[px-q,pz-q],[px+q,pz-q]],[[px+q,pz-q],[px+q,pz+q]],[[px+q,pz+q],[px-q,pz+q]],[[px-q,pz+q],[px-q,pz-q]]);
+ lbl('Existing blue pillar',px,2.2,pz,'k');}
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers (cap 35) --- */
 const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,4.2,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
 function chair(x,z,ang,seat){const g=new THREE.Group();
@@ -1024,9 +1023,9 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance on the 9.20 m open edge, facing the landing','White turned Goan pillars on an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with green panelled wainscot','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
+ overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with green panelled wainscot','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
  decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is hidden behind green panelled WPC wainscot (1.0 m, one shade deeper than the wall, brass cap rail), white fluted pilasters kept, emerald paint above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces and jute pendants']],
- entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','White turned Goan pillars either side, as on site']],
+ entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Seen from every table on the west half of the hall']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
  backbar:['Back bar','Behind the counter','Olive back bar with a marble top, an amber onyx panel over sage tile, timber shelves lit from below with labelled bottles, infusion jars, a lit mixer cooler, a glasswasher, a soju riser and the ON TAP board.',['One brass font with 3 craft taps on the counter','POS nook at the south end']],
