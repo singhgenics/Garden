@@ -263,31 +263,32 @@ function shrub(x,z,s){const r=rng(Math.round(x*13+z*7)+5);const base=new THREE.M
   const c1=FLOWERS[Math.floor(r()*FLOWERS.length)],c2=FLOWERS[Math.floor(r()*FLOWERS.length)];for(let i=0;i<26;i++){const a=r()*6.283,u=r()*0.8,f=new THREE.Mesh(new THREE.SphereGeometry(0.075*s,6,5),fmat(i%3?c1:c2));f.position.set(x+Math.cos(a)*0.4*s*u,0.2*s+0.34*s*Math.sqrt(1-u*u)*0.9+r()*0.05,z+Math.sin(a)*0.4*s*u);G.ground.add(f);}}
 for(let i=0;i<14;i++){shrub(-2+i*1.6,-3.2,1+(i%3)*0.3);}for(let i=0;i<8;i++)shrub(-2.4,1+i*1.4,1.1);
 G.ground.add(new THREE.Mesh(new THREE.BoxGeometry(0.01,0.01,0.01)));
-/* ======================= front: gate, garden, pathway and landing (as on site) =======================
-   Through the gate (1.70 m opening): a 5 x 5 m garden on the left, a 1.00 m stepping-stone pathway on the right,
-   then a 5 x 5 m red-oxide landing right in front of the hall entrance. Plan z grows towards the road. */
-const EM=(HX+D[0])/2,LND=[EM-2.5,EM+2.5,5.48,10.48],PTH=[LND[1]-1,LND[1],10.48,15.48],GDN=[PTH[0]-5,PTH[0],10.48,15.48],GZ=15.48,GD=0.6,GX0=PTH[1]-1.7,GX1=PTH[1],GCX=(GX0+GX1)/2;
+/* ======================= front: gate, main path, garden, approach path and landing (from the marked survey plan + site video) =======================
+   The gate opens off the Cavelossim-Assolna road on the west. The main path (red oxide, grey kota edges) runs east from the gate to the veranda of the
+   existing residence. On its north side, below the hall's 2.98 m edge, is the 5 x 5 m garden. A 1.20 m stepping-stone approach path turns north off the
+   main path and leads to the 5 x 5 m landing in front of the hall entrance, between the hall's 5.45 m wing and the existing restaurant. Plan z grows south. */
+const EM=9.1,LND=[EM-2.5,EM+2.5,5.48,10.48],APP=[9.8,11.0,10.48,16.0],GDN=[4.6,9.6,11.0,16.0],MW=1.7,MZ=[16.0,16.0+MW],GXI=1.6,GD=0.6,MAIN=[GXI-GD-0.8,12.6];
 function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=true;t.repeat.set((x1-x0)/tile,(z1-z0)/tile);m=S({map:t,roughness:0.8});}const p=bx(x0,x1,y-0.04,y,z0,z1,m,G.ground,false);p.receiveShadow=true;return p;}
-{M.kota=S({map:kotaTex,roughness:0.85});
- // landing: red-oxide field inside a 30 cm grey kota band, one step down from the hall floor
- pave(LND[0]+0.3,LND[1]-0.3,LND[2]+0.3,LND[3]-0.3,-0.15,redOxideTex,1.2);
- [[LND[0],LND[1],LND[2],LND[2]+0.3],[LND[0],LND[1],LND[3]-0.3,LND[3]],[LND[0],LND[0]+0.3,LND[2]+0.3,LND[3]-0.3],[LND[1]-0.3,LND[1],LND[2]+0.3,LND[3]-0.3]].forEach(([a,b,c,d])=>pave(a,b,c,d,-0.15,kotaTex,1.2));
- // pathway: red squares set in grey kota with grass in the joints
- pave(PTH[0],PTH[1],PTH[2],PTH[3],-0.155,kotaTex,1.2);const grassJ=S({color:'#5f8a3c',roughness:1});
- for(let z=PTH[2]+0.1;z<PTH[3]-0.6;z+=0.75){pave(PTH[0]+0.2,PTH[1]-0.2,z,z+0.6,-0.148,null,0,M.redOxide);pave(PTH[0]+0.05,PTH[1]-0.05,z+0.62,z+0.7,-0.15,null,0,grassJ);}
- [PTH[0]+0.12,PTH[1]-0.12].forEach(x=>pave(x-0.03,x+0.03,PTH[2],PTH[3],-0.15,null,0,grassJ));
- // gate apron under the arch and onto the road
- pave(GX0,GX1,GZ,GZ+GD+0.8,-0.15,redOxideTex,1.2);
- // garden: lawn inside a laterite kerb, hedge along the west and the road, areca palms, two black lamp posts by the path
+{M.kota=S({map:kotaTex,roughness:0.85});const grassJ=S({color:'#5f8a3c',roughness:1});
+ const field=(x0,x1,z0,z1,b)=>{pave(x0+b,x1-b,z0+b,z1-b,-0.15,redOxideTex,1.2);[[x0,x1,z0,z0+b],[x0,x1,z1-b,z1],[x0,x0+b,z0+b,z1-b],[x1-b,x1,z0+b,z1-b]].forEach(([a,c,d,e])=>pave(a,c,d,e,-0.15,kotaTex,1.2));};
+ // landing in front of the hall entrance (one step down from the hall floor) and the main path from the gate
+ field(LND[0],LND[1],LND[2],LND[3],0.3);field(MAIN[0],MAIN[1],MZ[0],MZ[1],0.2);
+ // approach path, 1.20 m: red squares set in grey kota with grass in the joints (as filmed along the house)
+ pave(APP[0],APP[1],APP[2],APP[3],-0.155,kotaTex,1.2);
+ for(let z=APP[2]+0.12;z<APP[3]-0.6;z+=0.78){pave(APP[0]+0.2,APP[1]-0.2,z,z+0.62,-0.148,null,0,M.redOxide);pave(APP[0]+0.05,APP[1]-0.05,z+0.64,z+0.72,-0.15,null,0,grassJ);}
+ [APP[0]+0.12,APP[1]-0.12].forEach(x=>pave(x-0.03,x+0.03,APP[2],APP[3],-0.15,null,0,grassJ));
+ // garden 5 x 5 m: lawn inside a laterite kerb, hedge on the west and along the hall, areca palms, the approach path with its three black lamp posts
  pave(GDN[0],GDN[1],GDN[2],GDN[3],-0.16,null,0,M.grass);
  [[GDN[0],GDN[1],GDN[2],GDN[2]+0.08],[GDN[0],GDN[1],GDN[3]-0.08,GDN[3]],[GDN[0],GDN[0]+0.08,GDN[2],GDN[3]],[GDN[1]-0.08,GDN[1],GDN[2],GDN[3]]].forEach(([a,b,c,d])=>pave(a,b,c,d,-0.08,null,0,M.laterite));
- for(let z=GDN[2]+0.5;z<GDN[3]-0.3;z+=0.9)shrub(GDN[0]+0.45,z,0.8);for(let x=GDN[0]+1.3;x<GX0-0.2;x+=0.9)shrub(x,GDN[3]-0.45,0.75);
- for(let z=PTH[2]+0.4;z<PTH[3]-0.2;z+=0.8)shrub(PTH[1]+0.3,z,0.55);
- palm(GDN[0]+1.4,GDN[2]+1.2,3.6,0.25,0.5);palm(GDN[0]+2.2,GDN[2]+0.8,3.0,-0.2,0.45);palm(GDN[0]+0.9,GDN[3]-1.6,3.3,0.3,0.5);
- [GDN[2]+1.1,GDN[3]-1.4].forEach(z=>{const x=PTH[0]-0.15;cyl(0.09,0.11,0.25,x,-0.15,z,M.blackMetal,G.ground,12);cyl(0.035,0.04,2.3,x,0.1,z,M.blackMetal,G.ground,10);
+ for(let z=GDN[2]+0.5;z<GDN[3]-0.3;z+=0.9)shrub(GDN[0]+0.45,z,0.8);for(let x=GDN[0]+1.3;x<GDN[1]-0.3;x+=0.9)shrub(x,GDN[2]+0.45,0.7);
+ for(let x=GXI+0.6;x<GDN[0]-0.3;x+=0.9)shrub(x,MZ[0]-0.4,0.6);for(let x=GXI+0.6;x<MAIN[1]-0.3;x+=1.1)shrub(x,MZ[1]+0.45,0.6);
+ for(let z=APP[2]+0.4;z<APP[3]-0.3;z+=0.8)shrub(APP[1]+0.35,z,0.55);
+ palm(GDN[0]+1.3,GDN[2]+1.5,3.6,0.25,0.5);palm(GDN[0]+2.3,GDN[2]+1.1,3.0,-0.2,0.45);palm(GDN[0]+1.0,GDN[3]-1.4,3.3,0.3,0.5);
+ [APP[2]+0.9,(APP[2]+APP[3])/2,APP[3]-0.9].forEach(z=>{const x=APP[0]-0.15;   // the three black lamp posts along the narrow approach path, as filmed
+ cyl(0.09,0.11,0.25,x,-0.15,z,M.blackMetal,G.ground,12);cyl(0.035,0.04,2.3,x,0.1,z,M.blackMetal,G.ground,10);
   cyl(0.11,0.07,0.06,x,2.38,z,M.blackMetal,G.ground,4,false);cyl(0.07,0.07,0.24,x,2.44,z,M.globe,G.ground,4,false);const cap=new THREE.Mesh(new THREE.ConeGeometry(0.14,0.14,4),M.blackMetal);cap.position.set(x,2.75,z);cap.rotation.y=Math.PI/4;G.ground.add(cap);});
- // ---- the gateway: whitewashed piers and a flattened arch, cornice, blue gable with the sign board, black wall lanterns ----
- const gw=new THREE.Group();gw.position.set(GCX,0,GZ);G.ground.add(gw);
+ // ---- the gateway on the road (built in local coordinates: x across the 1.70 m opening, +z towards the road; turned to face west) ----
+ const gw=new THREE.Group();gw.position.set(GXI,0,(MZ[0]+MZ[1])/2);gw.rotation.y=-Math.PI/2;G.ground.add(gw);
  {const s=new THREE.Shape();s.moveTo(-1.4,-0.15);s.lineTo(1.4,-0.15);s.lineTo(1.4,3.0);s.lineTo(-1.4,3.0);s.closePath();
   const h=new THREE.Path();h.moveTo(-0.85,-0.15);h.lineTo(0.85,-0.15);h.lineTo(0.85,2.05);for(let i=1;i<16;i++){const a=i/16*Math.PI;h.lineTo(0.85*Math.cos(a),2.05+0.5*Math.sin(a));}h.lineTo(-0.85,2.05);h.closePath();s.holes.push(h);
   const m=new THREE.Mesh(new THREE.ExtrudeGeometry(s,{depth:GD,bevelEnabled:false}),M.goaWhite);m.castShadow=m.receiveShadow=true;gw.add(m);}
@@ -297,19 +298,25 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
   const board=new THREE.Mesh(new THREE.PlaneGeometry(1.3,0.56),S({map:signTex(512,220,[['Cabin East',104,0.46,'800 104px "Bricolage Grotesque", sans-serif'],['GARDEN',30,0.83,'600 30px "IBM Plex Mono", monospace']],'#f6c81e','#b8251c','#7a1a12'),roughness:0.6}));board.position.set(0,3.66,zf+0.005);gw.add(board);
   const strip=new THREE.Mesh(new THREE.PlaneGeometry(1.9,0.2),new THREE.MeshBasicMaterial({map:signTex(760,80,[['DIM SUM & CRAFT BEER',48,0.55]],'#2c3f9a','#f6c81e'),toneMapped:false}));strip.position.set(0,3.27,zf+0.005);gw.add(strip);}
  [-1.12,1.12].forEach(x=>{bx(x-0.04,x+0.04,2.2,2.32,GD,GD+0.06,M.blackMetal,gw,false);bx(x-0.07,x+0.07,2.0,2.24,GD+0.06,GD+0.2,M.blackMetal,gw,false);bx(x-0.055,x+0.055,2.03,2.21,GD+0.07,GD+0.19,M.globe,gw,false);});
- // wrought-iron double gates, hinged on the inside face and swung open into the garden and onto the pathway
- function leaf(hx,ang){const g=new THREE.Group();g.position.set(hx,-0.15,GZ+0.05);g.rotation.y=ang;G.ground.add(g);const w=0.84,bm=M.blackMetal;
+ // wrought-iron double gates, hinged on the inside face and swung open inwards
+ function leaf(hx,ang){const g=new THREE.Group();g.position.set(hx,-0.15,0.05);g.rotation.y=ang;gw.add(g);const w=0.84,bm=M.blackMetal;
   [0.1,0.8,1.45].forEach(y=>rod(V(0,y,0),V(w,y,0),0.018,bm,g));[0,w].forEach(x=>rod(V(x,0.08,0),V(x,1.62,0),0.022,bm,g));
   for(let x=0.1;x<w-0.04;x+=0.1)rod(V(x,0.1,0),V(x,1.45+0.12*Math.sin(Math.PI*x/w),0),0.008,bm,g,false);
   const sc=new THREE.Mesh(new THREE.TorusGeometry(0.09,0.008,6,18),bm);[0.25,0.59].forEach(x=>{const c=sc.clone();c.position.set(x,1.12,0);g.add(c);});}
- leaf(GX0+0.02,1.45);leaf(GX1-0.02,Math.PI-1.45);
- // compound wall either side of the gate: whitewashed, navy picket on top (as at the back of the site)
- const pickets=[];const fence=(x0,x1)=>{bx(x0,x1,-0.15,0.9,GZ+GD-0.2,GZ+GD,M.goaWhite,G.ground);bx(x0,x1,-0.15,-0.02,GZ+GD-0.21,GZ+GD+0.01,M.navy,G.ground,false);for(let x=x0+0.06;x<x1-0.03;x+=0.12)pickets.push(x);bx(x0,x1,1.12,1.17,GZ+GD-0.14,GZ+GD-0.06,M.navy,G.ground,false);};
- fence(GDN[0]-1.0,GCX-1.4);fence(GCX+1.4,GCX+4.2);
- {const im=new THREE.InstancedMesh(new THREE.BoxGeometry(0.07,0.4,0.06),M.navy,pickets.length),mt=new THREE.Matrix4();pickets.forEach((x,i)=>{mt.makeTranslation(x,1.1,GZ+GD-0.1);im.setMatrixAt(i,mt);});im.castShadow=true;G.ground.add(im);}   // one draw call
- solids.push([[GDN[0]-1.0,GZ+GD-0.1],[GX0,GZ+GD-0.1]],[[GX1,GZ+GD-0.1],[GCX+4.2,GZ+GD-0.1]]);
- lbl('Gate · 1.70 m opening',GCX,4.75,GZ+GD+0.3,'o');lbl('Garden · 5 × 5 m',(GDN[0]+GDN[1])/2,0.5,(GDN[2]+GDN[3])/2,'k');lbl('Pathway · 1.00 m',PTH[0]+0.5,0.35,13.0,'k');lbl('Landing · 5 × 5 m',EM,0.35,8.0,'k');}
-
+ leaf(-0.83,1.45);leaf(0.83,Math.PI-1.45);
+ // compound wall along the road either side of the gate: whitewashed, navy picket on top
+ const pickets=[];const fence=(x0,x1)=>{bx(x0,x1,-0.15,0.9,GD-0.2,GD,M.goaWhite,gw);bx(x0,x1,-0.15,-0.02,GD-0.21,GD+0.01,M.navy,gw,false);for(let x=x0+0.06;x<x1-0.03;x+=0.12)pickets.push(x);bx(x0,x1,1.12,1.17,GD-0.14,GD-0.06,M.navy,gw,false);};
+ fence(-6.0,-1.4);fence(1.4,5.0);
+ {const im=new THREE.InstancedMesh(new THREE.BoxGeometry(0.07,0.4,0.06),M.navy,pickets.length),mt=new THREE.Matrix4();pickets.forEach((x,i)=>{mt.makeTranslation(x,1.1,GD-0.1);im.setMatrixAt(i,mt);});im.castShadow=true;gw.add(im);}   // one draw call
+ const wx=GXI-GD+0.1,zc=(MZ[0]+MZ[1])/2;solids.push([[wx,zc-6.0],[wx,MZ[0]]],[[wx,MZ[1]],[wx,zc+5.0]]);
+ // existing buildings next to the paths, kept as simple massing for context: the existing restaurant and the residence with its blue-pillared veranda
+ const roofM=(w,d)=>{const t=roofTex.clone();t.needsUpdate=true;t.repeat.set(w/1.4,d/1.4);return S({map:t,roughness:0.85});};
+ function mass(x0,x1,z0,z1,h,veranda){const roofT=roofM(x1-x0+1,z1-z0+1);bx(x0,x1,-0.15,0.3,z0,z1,M.navy,G.ground);bx(x0+0.02,x1-0.02,0.3,h,z0+0.02,z1-0.02,M.goaWhite,G.ground);bx(x0-0.5,x1+0.5,h,h+0.15,z0-0.5,z1+0.5,roofT,G.roof);
+  if(veranda){const vx=x0-1.3;bx(vx,x0,-0.15,0.15,z0,z1,M.kota,G.ground);for(let z=z0+0.3;z<=z1-0.2;z+=2.0)cyl(0.1,0.1,h,vx+0.25,0,z,M.gateBlue,G.ground,12);bx(vx-0.2,x0,h,h+0.12,z0-0.3,z1+0.3,roofT,G.roof);}
+  solids.push([[x0,z0],[x1,z0]],[[x0,z1],[x1,z1]],[[x0,z0],[x0,z1]]);}
+ mass(12.0,19.2,6.6,12.1,2.9,false);mass(13.9,22.0,13.2,20.5,3.0,true);
+ lbl('Existing restaurant',15.6,3.3,9.3,'w');lbl('Existing residence · veranda',15.0,3.4,17.0,'w');
+ lbl('Gate · 1.70 m · off the road',GXI-0.3,4.75,(MZ[0]+MZ[1])/2,'o');lbl('Main path from the gate',6.5,0.35,(MZ[0]+MZ[1])/2,'k');lbl('Garden · 5 × 5 m',(GDN[0]+GDN[1])/2,0.5,(GDN[2]+GDN[3])/2,'k');lbl('Approach path · 1.20 m',(APP[0]+APP[1])/2,0.35,13.2,'k');lbl('Landing · 5 × 5 m',EM,0.35,8.0,'k');}
 /* ======================= floors ======================= */
 slab(hall,0.15,M.granite,-0.15,G.floors,M.conc);
 slab([[HX,0],[BX0,0],[BX0,BY1],[HX,BY1]],0.15,M.granite,-0.15,G.floors,M.conc);              // pathway between the bar and the kitchen
@@ -323,7 +330,7 @@ slab([[SX0,BY1],[BX1,BY1],[BX1,SY1],[SX0,SY1]],0.15,M.conc,-0.15,G.floors,M.conc
 /* ======================= hall: north wall (the decor wall), columns, beams, roof ======================= */
 wall(A[0],0,HX+T/2,0,[],hc(0),M.plaster,G.walls);
 /* open edges: columns + ring beam + PVC curtain bays. The entrance is centred on the 9.20 m south edge. */
-const ENT_MID=(HX+D[0])/2,ENT_W=2.47;
+const ENT_MID=EM,ENT_W=2.47;                       // entrance centred on the landing, at the west part of the 9.20 m edge
 const edges=[[B,C,[0,2.74,5.48]],[C,D,[15.67,ENT_MID+ENT_W/2,ENT_MID-ENT_W/2,6.46]],[D,Hh,[5.48,8.2,10.93]],[Hh,Gp,[6.46,3.48]],[Gp,Fp,[0,1]],[Fp,A,[7.76,3.9,0]]];
 const colPts=[];
 function addCol(x,z){if(!colPts.some(p=>Math.hypot(p[0]-x,p[1]-z)<0.05))colPts.push([x,z]);}
@@ -386,7 +393,7 @@ bays.forEach(b=>{
   const tube=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,L,12),M.pvcEdge);tube.rotation.z=Math.PI/2;tube.position.set(0,0.06,0);grp.add(tube);
   curtains.push({parts,hP,top,tube,ent:b.ent});
   if(b.ent){const g=new THREE.Mesh(new THREE.PlaneGeometry(1.8,0.5),new THREE.MeshBasicMaterial({map:signTex(512,140,[['ENTRANCE',64,0.52]],'#2a1a10','#f6ecd6','#e9b54a'),toneMapped:false}));g.position.set(0,0.28,0.03);grp.add(g);
-    lbl('Entrance · centre of the 9.20 m open edge',xm,hc(zm)-0.1,zm,'o');}
+    lbl('Entrance · from the landing',xm,hc(zm)-0.1,zm,'o');}
 });
 function setPvc(f){dirty=true;curtains.forEach(c=>{c.parts.forEach(p=>{p.pm.scale.y=Math.max(0.001,c.hP*f);p.bar.position.y=-c.hP*f;});c.tube.scale.set(1+(1-f)*1.1,1,1+(1-f)*1.1);c.tube.position.y=0.06;});}
 
@@ -484,21 +491,39 @@ function trailPlant(x,y,z,n){const r=rng(Math.round(x*10));bx(x-0.35,x+0.35,y,y+
 trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
 
 
-/* ---- match screens: three TVs, a 65 in across the north-west corner, one mid decor wall and one over the back bar, so every table can see a screen ---- */
-{const tvTex=tex(512,288,(g,w,h)=>{g.fillStyle='#1d6b34';g.fillRect(0,0,w,h);for(let x=0;x<w;x+=64){g.fillStyle='rgba(255,255,255,.06)';g.fillRect(x,0,32,h);}g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=3;g.strokeRect(24,40,w-48,h-64);g.beginPath();g.moveTo(w/2,40);g.lineTo(w/2,h-24);g.stroke();g.beginPath();g.arc(w/2,h/2+8,36,0,7);g.stroke();g.strokeRect(24,h/2-50,60,100);g.strokeRect(w-84,h/2-50,60,100);
-  g.fillStyle='rgba(10,10,20,.88)';g.fillRect(14,8,230,26);g.fillStyle='#fff';g.font='700 15px "IBM Plex Sans", sans-serif';g.textAlign='left';g.fillText('LIVE   MATCH NIGHT   1 – 0   67\'',22,26);g.fillStyle='#e04a3a';g.beginPath();g.arc(w-26,22,7,0,7);g.fill();},1,1);
+/* ---- one 65 in television across the north-west corner (where the decor wall meets the 7.76 m open side), set exactly on the diagonal, facing the room ----
+   Real proportions (65 in: 1.43 x 0.80 m picture, 6 mm bezel, 3 cm deep), a live broadcast on screen, a tilting wall arm and a soundbar below */
+{const tvTex=tex(1024,576,(g,w,h)=>{
+  const sky=g.createLinearGradient(0,0,0,h*0.42);sky.addColorStop(0,'#0b1220');sky.addColorStop(1,'#26324a');g.fillStyle=sky;g.fillRect(0,0,w,h*0.42);   // stadium bowl under lights
+  const r=rng(5);for(let i=0;i<2600;i++){g.fillStyle=['#c8c2b8','#8a3a3a','#e4e0d6','#3a4a7a','#d9b04a'][i%5];g.globalAlpha=0.55;g.fillRect(r()*w,h*0.12+r()*h*0.28,2,2);}g.globalAlpha=1;
+  for(let i=0;i<5;i++){const x=w*(0.1+i*0.2);g.fillStyle='rgba(255,250,230,.9)';g.beginPath();g.arc(x,h*0.06,6,0,7);g.fill();}
+  g.fillStyle='#1b2a3a';g.fillRect(0,h*0.4,w,h*0.04);g.fillStyle='#e9b54a';g.font='700 18px "IBM Plex Sans", sans-serif';for(let x=10;x<w;x+=170)g.fillText('CABIN EAST · CRAFT ON TAP',x,h*0.428);   // ad boards
+  // pitch in broadcast perspective, mown stripes, touchline, box and centre circle
+  const top=h*0.44;for(let i=0;i<10;i++){g.fillStyle=i%2?'#2f8a3e':'#3a9a48';const y0=top+(h-top)*Math.pow(i/10,1.3),y1=top+(h-top)*Math.pow((i+1)/10,1.3);g.fillRect(0,y0,w,y1-y0);}
+  g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=3;g.beginPath();g.moveTo(-40,h);g.lineTo(w*0.12,top+6);g.lineTo(w*0.88,top+6);g.lineTo(w+40,h);g.stroke();
+  g.beginPath();g.moveTo(w/2,top+6);g.lineTo(w/2,h);g.stroke();g.beginPath();g.ellipse(w/2,h*0.68,w*0.12,h*0.08,0,0,7);g.stroke();
+  // players and ball
+  [[0.32,0.62,'#d33'],[0.41,0.74,'#d33'],[0.55,0.58,'#fff'],[0.6,0.8,'#fff'],[0.47,0.66,'#d33'],[0.7,0.66,'#fff'],[0.24,0.82,'#fff']].forEach(([x,y,c])=>{g.fillStyle=c;g.fillRect(w*x-5,h*y-22,10,20);g.fillStyle='#e8c9a0';g.beginPath();g.arc(w*x,h*y-27,5,0,7);g.fill();g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.ellipse(w*x,h*y,10,3,0,0,7);g.fill();});
+  g.fillStyle='#fff';g.beginPath();g.arc(w*0.5,h*0.7,5,0,7);g.fill();
+  // score bug and channel logo, as on a real broadcast
+  g.fillStyle='rgba(12,14,22,.92)';g.fillRect(28,26,330,40);g.fillStyle='#d33';g.fillRect(28,26,8,40);g.fillStyle='#fff';g.font='700 24px "IBM Plex Sans", sans-serif';g.textAlign='left';g.fillText('GOA  1 – 0  KOL',48,55);g.fillStyle='#e9b54a';g.fillText("67'",292,55);
+  g.fillStyle='rgba(255,255,255,.8)';g.font='700 20px "IBM Plex Sans", sans-serif';g.textAlign='right';g.fillText('LIVE',w-30,52);g.fillStyle='#e04a3a';g.beginPath();g.arc(w-96,45,7,0,7);g.fill();
+  const gl=g.createLinearGradient(0,0,w,h);gl.addColorStop(0,'rgba(255,255,255,.07)');gl.addColorStop(0.4,'rgba(255,255,255,0)');g.fillStyle=gl;g.fillRect(0,0,w,h);},1,1);   // faint glass sheen
  const tvMat=new THREE.MeshBasicMaterial({map:tvTex,toneMapped:false});
- function wallTV(cx,cy,w,h,z,grp,ry){const t=new THREE.Group();const f=0.03;
-  bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.045,M.black,t,false);const sc=new THREE.Mesh(new THREE.PlaneGeometry(w,h),tvMat);sc.position.z=0.047;t.add(sc);
-  bx(-0.12,0.12,-0.08,0.08,-0.02,0,M.blackMetal,t,false);t.position.set(cx,cy,z);t.rotation.y=ry||0;grp.add(t);return t;}
- // 65 in screen across the corner where the decor wall meets the 7.76 m open side, set exactly on the diagonal (45°) facing the room,
- // on a slatted timber section that closes the corner between the wall and the corner pillar
- {const cg=new THREE.Group();cg.position.set(0.72,0,0.72);cg.rotation.y=Math.PI/4;DW.add(cg);
-  bx(-0.83,0.83,0.95,2.95,-0.06,-0.02,M.timberDark,cg);for(let x=-0.78;x<=0.79;x+=0.08)bx(x-0.022,x+0.022,0.95,2.95,-0.02,0.0,M.timber,cg,false);
-  bx(-0.83,0.83,0.9,0.95,-0.06,0.03,M.timberDark,cg);wallTV(0,1.95,1.43,0.805,0.06,cg);}
- wallTV(9.05,2.15,1.1,0.62,zi+0.04,DW);              // centre of the decor wall
- // over the back bar, looking out to the whole hall (local bar coordinates: turned half a circle at x = 15.67)
- {const bg=new THREE.Group();bg.position.set(HX,0,5.15);bg.rotation.y=Math.PI;G.bar.add(bg);const t=wallTV(0,0,0.9,0.5,0,bg,Math.PI/2);t.position.set(0.04,2.84,2.1);}}
+ const cg=new THREE.Group();cg.position.set(0.72,0,0.72);cg.rotation.y=Math.PI/4;DW.add(cg);
+ // slatted timber section that closes the corner between the wall and the corner pillar
+ bx(-0.83,0.83,0.95,2.95,-0.06,-0.02,M.timberDark,cg);for(let x=-0.78;x<=0.79;x+=0.08)bx(x-0.022,x+0.022,0.95,2.95,-0.02,0.0,M.timber,cg,false);
+ bx(-0.83,0.83,0.9,0.95,-0.06,0.03,M.timberDark,cg);
+ const W=1.43,H=0.805,cy=1.95,zf=0.11,b=0.006;const tv=new THREE.Group();tv.position.set(0,cy,zf);tv.rotation.x=-0.05;cg.add(tv);
+ bx(-W/2-b,W/2+b,-H/2-b-0.012,H/2+b,-0.03,0,M.black,tv);                                    // slim black body (thicker chin at the bottom)
+ const sc=new THREE.Mesh(new THREE.PlaneGeometry(W,H),tvMat);sc.position.z=0.0015;tv.add(sc);
+ bx(-0.5,0.5,-0.32,0.32,-0.055,-0.03,M.blackMetal,tv,false);                                  // rear panel bulge
+ bx(-0.03,0.03,-H/2-b-0.011,-H/2-b-0.003,0,0.002,M.chrome,tv,false);                           // logo badge on the chin
+ sph(0.004,0.62,-H/2-b-0.007,0.002,M.led,tv);                                                 // standby light
+ // tilting wall arm from the timber section
+ bx(-0.2,0.2,cy-0.15,cy+0.15,0.0,0.015,M.blackMetal,cg,false);[-0.12,0.12].forEach(x=>bx(x-0.015,x+0.015,cy-0.04,cy+0.04,0.015,0.085,M.blackMetal,cg,false));
+ // soundbar just below the screen
+ bx(-0.48,0.48,cy-H/2-0.16,cy-H/2-0.09,0.02,0.11,M.black,cg);bx(-0.47,0.47,cy-H/2-0.155,cy-H/2-0.095,0.11,0.112,S({color:'#2a2a2a',roughness:0.95}),cg,false);}
 /* the wall is left clear: the decor wall is the feature, tables stand free in front of it */
 
 /* --- bar: the counter zone, rebuilt in the Simplex bar style (front and back) ---
@@ -601,7 +626,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
 solids.push([[HX-1.75,0.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
 
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers (cap 35) --- */
-const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[8.8,4.2,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
+const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,4.2,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
 function chair(x,z,ang,seat){const g=new THREE.Group();
   bx(-0.22,0.22,0.43,0.47,-0.21,0.21,M.timberDark,g,false);bx(-0.19,0.19,0.47,0.54,-0.18,0.18,seat||M.taupe,g,false);
   [[-0.19,-0.19],[0.19,-0.19],[-0.19,0.19],[0.19,0.19]].forEach(p=>rod(V(p[0]*0.8,0.0,p[1]*0.8),V(p[0],0.43,p[1]),0.011,M.blackMetal,g));
@@ -659,7 +684,7 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
   const ring=new THREE.Mesh(new THREE.TorusGeometry(0.2,0.012,6,28),M.brass);ring.position.z=0.24;g.add(ring);for(let i=0;i<8;i++){const a=i/8*6.283;sph(0.012,Math.cos(a)*0.2,Math.sin(a)*0.2,0.25,M.brass,g);}
   const mist=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.1,1.3,22,1,true),M.mist);mist.rotation.x=Math.PI/2;mist.position.z=0.9;mist.castShadow=false;g.add(mist);
   g.position.set(x+nx*0.2,2.2,z+nz*0.2);g.rotation.y=Math.atan2(nx,nz);g.rotation.x=0.3;G.fans.add(g);}
-colPts.forEach(([x,z])=>{if(x>15.6&&z<0.2)return;if(x<0.1&&z<0.1)return;if(Math.abs(z-5.48)<0.05&&x>9.7&&x<12.4)return;pillarMistFan(x,z);});
+colPts.forEach(([x,z])=>{if(x>15.6&&z<0.2)return;if(x<0.1&&z<0.1)return;if(Math.abs(z-5.48)<0.05&&Math.abs(x-ENT_MID)<1.4)return;pillarMistFan(x,z);});
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
   bx(-0.18,0.18,0.06,1.75,-0.15,0.15,body,g);bx(-0.17,0.17,0.0,0.06,-0.14,0.14,M.black,g);
   bx(-0.16,0.16,1.35,1.62,0.15,0.152,M.black,g,false);for(let y=1.38;y<1.6;y+=0.04)bx(-0.15,0.15,y,y+0.012,0.152,0.158,M.ssDark,g,false);   // louvres
@@ -899,14 +924,14 @@ function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.get
 /* ======================= labels ======================= */
 lbl('Main restaurant · 32 covers (5 × 4 + 2 family tables of 6)',6.5,2.6,3.2,'');
 lbl('Decor wall · 15.67 m',7.8,3.0,0.2,'o');
-lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('Match screens · 3 TVs',9.05,2.75,0.3,'');lbl('65 in TV · corner mount',0.75,2.65,0.75,'');
+lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('65 in TV · the only screen',0.75,2.65,0.75,'');
 lbl('Pathway · about 1.00 m',16.17,0.4,4.6,'k');
 lbl('Kitchen · 5.41 × 4.38 m',BX0+2.7,3.2,4.3,'k');
 lbl('Dish wash · 5.41 × 2.00 m',BX0+2.7,3.7,1.0,'w');
 lbl('Washroom · 2.96 × 1.70 m',TX0+1.5,4.3,-0.85,'w');
 lbl('Store room · 2.70 × 6.46 m',SX0+1.35,3.2,BY1+3.2,'k');
 lbl('PVC roll-down curtains',-0.4,2.2,3.9,'o');
-[['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9],['5.00 m landing',EM,0.05,10.2],['5.00 m garden',EM-1.5,0.05,15.2],['1.00 m path',EM+2.0,0.05,15.2],['1.70 m gate',EM+1.65,2.4,16.3],['0.80 m railing',-0.6,0.8,2.0]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
+[['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9],['5.00 m landing',EM,0.05,10.2],['5.00 m garden',7.1,0.05,16.0],['1.20 m approach path',10.4,0.05,15.6],['1.70 m gate',GXI-0.4,2.4,16.85],['0.80 m railing',-0.6,0.8,2.0]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
 const lblEls=labels.map(l=>{const e=document.createElement('div');e.className='lbl '+l.cls;e.innerHTML=(l.cls==='d'?'':'<i></i>')+l.text;document.getElementById('labels').appendChild(e);return e;});
 const SHOW={lbl:true,dims:false};
 function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new THREE.Vector3();labels.forEach((l,i)=>{const e=lblEls[i];const on=l.cls==='d'?SHOW.dims:SHOW.lbl;if(!on){e.style.display='none';return;}
@@ -917,8 +942,8 @@ const VIEWS={
  iso:{p:[-9,16,26],t:[11,1,4.5],card:'overview',fov:46},
  decor:{p:[6.2,1.6,5.2],t:[5.4,2.1,0],card:'decor',roof:true,fov:68},
  tv:{p:[3.2,1.4,4.6],t:[0.7,1.9,0.7],card:'tv',fov:60},
- gate:{p:[12.7,1.7,23.5],t:[12.0,1.9,13.0],card:'gate',fov:52},
- entry:{p:[11.07,1.6,9.4],t:[11.07,1.4,3.2],card:'entry',fov:62},
+ gate:{p:[-7.5,1.7,16.85],t:[4.0,1.9,15.6],card:'gate',fov:56},
+ entry:{p:[EM,1.6,9.4],t:[EM,1.4,3.2],card:'entry',fov:62},
  bar:{p:[11.5,1.6,4.3],t:[14.2,1.0,2.0],card:'bar',fov:64},
  backbar:{p:[14.95,1.55,0.7],t:[15.6,1.45,3.2],card:'backbar',fov:66},
  kitchen:{p:[BX0+0.45,1.7,2.4],t:[BX1,1.0,5.4],card:'kitchen',fov:70},
@@ -930,11 +955,11 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance in the middle of the 9.20 m open edge','White turned Goan pillars on an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor, the existing tile dado on the north wall','65 in TV on the diagonal of the north-west corner','Front: arched gate (1.70 m), 5 × 5 m garden, 1.00 m path, 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
- decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the existing hand-painted tile dado (0.95 m) with a white cap, emerald panels above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','Three match screens: a 65 in across the north-west corner, one mid-wall, one over the back bar','Warm 2700 K sconces and jute pendants']],
- entry:['Entrance','Middle of the open 9.20 m edge','Guests cross the 5 × 5 m red-oxide landing and step up through a 1.70 m opening in the balustrade, centred on the open edge (4.6 m from each end), over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','White turned Goan pillars either side, as on site']],
+ overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance on the 9.20 m open edge, facing the landing','White turned Goan pillars on an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor, the existing tile dado on the north wall','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
+ decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the existing hand-painted tile dado (0.95 m) with a white cap, emerald panels above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces and jute pendants']],
+ entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','White turned Goan pillars either side, as on site']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Seen from every table on the west half of the hall']],
- gate:['Gate','Front entrance · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates. Inside, a 5 × 5 m garden on the left and a 1.00 m stepping-stone path (red squares in grey kota, grass joints) on the right lead to a 5 × 5 m red-oxide landing in front of the hall entrance.',['Gate leaves open inwards, over the garden edge and the path','Compound wall with a navy picket either side','Black lamp posts along the path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
+ gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
  backbar:['Back bar','Behind the counter','Olive back bar with a marble top, an amber onyx panel over sage tile, timber shelves lit from below with labelled bottles, infusion jars, a lit mixer cooler, a glasswasher, a soju riser and the ON TAP board.',['One brass font with 3 craft taps on the counter','POS nook at the south end']],
  bar:['Bar','The counter zone, 5.48 m','The existing counter, finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack.',['Neon DRAUGHT over the back bar','Brick: red with light mortar, as on site']],
  kitchen:['Kitchen','5.41 × 4.38 m','Cooking line along the east wall under one stainless hood: stock range, twin fryer, dim sum steamer, 2-burner wok range. Prep island, refrigeration, a pass window to the pathway and the dish-wash door.',['Hood duct rises above the roof','Anti-slip floor with a drain channel','Hand-wash station by the dish-wash door']],
@@ -942,7 +967,7 @@ const CARDS={
  wash:['Washroom','2.96 × 1.70 m','Sage-tile washroom with a WC, jet spray, marble basin, mirror and hand-dryer, entered from a hand-wash lobby with its own basin and mirror.',['Door opens from the lobby on the pathway side']],
  store:['Store room','2.70 × 6.46 m','Dry store with steel racking down both sides, a rice pallet and a door straight into the kitchen next to the cooking line.',['2.70 m wide: racks 0.5 m deep each side leave a 1.7 m aisle']],
  curtains:['PVC curtains','Every open side','Clear roll-down PVC hangs from the ring beam on all five open edges and behind the bar. Press the PVC button to roll them up or down. The entrance bay stays passable.',['Rolled up: a breezy garden. Down: dry in the monsoon']],
- plan:['Plan view','Top-down','Sizes are on the plan labels (press Sizes). Roof comes off for the plan.',['Hall 15.67 × 7.76 m, kitchen block 5.41 m wide']],
+ plan:['Plan view','Top-down','Sizes are on the plan labels (press Sizes). Roof comes off for the plan.',['Hall 15.67 × 7.76 m, kitchen block 5.41 m wide','Existing restaurant and residence shown as plain massing for context']],
 };
 function showCard(k){const c=CARDS[k];const el=document.getElementById('cardbody');if(!c){document.getElementById('card').style.display='none';return;}document.getElementById('card').style.display='';el.innerHTML='<div class="eye">'+c[0]+'</div><h2>'+c[1]+'</h2><p>'+c[2]+'</p><ul>'+c[3].map(x=>'<li>'+x+'</li>').join('')+'</ul>';}
 document.getElementById('cardx').onclick=()=>document.getElementById('card').style.display='none';
@@ -964,7 +989,7 @@ document.getElementById('lc-dim').oninput=e=>{LIGHT.dim=e.target.value/100;docum
 document.getElementById('t-light').onclick=e=>{const p=document.getElementById('lightpanel');p.hidden=!p.hidden;e.currentTarget.setAttribute('aria-expanded',String(!p.hidden));};
 
 /* walk mode */
-const stops=[['Entrance',[ENT_MID,7.2],[ENT_MID,2]],['Bar',[11.4,4.6],[15,2.2]],['Kitchen',[BX0+0.6,2.6],[BX1,5.6]],['Dish wash',[BX0+0.6,1.4],[BX1,0.4]],['Hand wash',[17.0,-0.8],[18.65,-0.05]],['Washroom',[TX0+0.5,-0.6],[BX1,-1.3]],['Store',[SX0+1.35,BY1+0.8],[SX0+1.35,SY1]]];
+const stops=[['Entrance',[ENT_MID,7.2],[ENT_MID,2]],['Bar',[12.95,2.9],[15,2.2]],['Kitchen',[BX0+0.6,2.6],[BX1,5.6]],['Dish wash',[BX0+0.6,1.4],[BX1,0.4]],['Hand wash',[17.0,-0.8],[18.65,-0.05]],['Washroom',[TX0+0.5,-0.6],[BX1,-1.3]],['Store',[SX0+1.35,BY1+0.8],[SX0+1.35,SY1]]];
 function applyLook(){camera.rotation.set(pitch,yaw,0,'YXZ');}
 function lookAt(p,t){camera.position.set(p[0],1.62,p[1]);yaw=Math.atan2(-(t[0]-p[0]),-(t[1]-p[1]));pitch=-0.04;applyLook();}
 function setWalk(on){walk=on;controls.enabled=!on;document.body.classList.toggle('walk',on);document.getElementById('hint').textContent=on?'Drag to look · W A S D or the arrow pad to walk · buttons below jump to a room':'Drag to orbit · scroll to zoom · right-drag to pan';
