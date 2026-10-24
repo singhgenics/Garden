@@ -119,7 +119,7 @@ controls.enableDamping=true;controls.dampingFactor=0.08;controls.minDistance=0.3
 /* ======================= PLAN (metres; plan x = east, plan y = south = three z) ======================= */
 const A=[0,0],B=[15.67,0],C=[15.67,5.48],D=[6.46,5.48],Hh=[6.46,10.93],Gp=[3.48,10.93],Fp=[0,7.76];
 const hall=[A,B,C,D,Hh,Gp,Fp];
-const T=0.2,HX=15.67,BX0=HX+1.6,KZ1=5.48+3.46-0.1,BX1=BX0+5.41,BY1=6.38,DISH=2.0,SD=6.46,SY1=BY1+SD,SX0=BX1-2.7,TX0=BX0+2.45,TY0=-1.7;
+const T=0.2,HX=15.67,BX0=HX+1.6,BX1=BX0+5.41,BY1=6.38,DISH=2.0,SD=6.46,SY1=BY1+SD,SX0=BX1-2.7,TX0=BX0+2.45,TY0=-1.7;
 const hc=z=>3.4-0.06*Math.max(0,z);                 // ceiling (soffit) height of the hall, falls 6 cm per metre towards the open south edge
 const BH=3.0;                                       // block ceiling height
 const zEnd=x=>x<=3.48?7.76+x*(3.17/3.48):x<=6.46?10.93:5.48;
@@ -324,6 +324,7 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
   if(veranda){const vx=x0-1.3;bx(vx,x0,-0.15,0.15,z0,z1,M.kota,G.ground);for(let z=z0+0.3;z<=z1-0.2;z+=2.0)cyl(0.1,0.1,h,vx+0.25,0,z,M.gateBlue,G.ground,12);bx(vx-0.2,x0,h,h+0.12,z0-0.3,z1+0.3,roofT,G.roof);}
   solids.push([[x0,z0],[x1,z0]],[[x0,z1],[x1,z1]],[[x0,z0],[x0,z1]]);}
  mass(13.5,SX0-0.1,ER0,13.0,2.9,false);   // runs up to the store-room wall, no gap
+ mass(BX0,SX0-0.1,BY1+0.1,ER0+0.3,2.9,false);   // its back part reaches north to the kitchen: the kitchen's south wall is the common wall
  // the existing restaurant's balcony: 1.50 m wide along its west face, over the landing and the approach path - the only usable part of that building.
  // Same 80 cm railing as the hall (white plinth and rail, navy turned balusters), navy round pillars on white pedestals as filmed, open to the landing at the north end.
  {const bx0=12.0,bx1=13.5,bz0=ER0,bz1=13.0,pts=[];
@@ -345,7 +346,6 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
 slab(hall,0.15,M.granite,-0.15,G.floors,M.conc);
 slab([[HX,0],[BX0,0],[BX0,BY1],[HX,BY1]],0.15,M.granite,-0.15,G.floors,M.conc);              // pathway between the bar and the kitchen
 slab([[BX0,DISH],[BX1,DISH],[BX1,BY1],[BX0,BY1]],0.15,M.quarry,-0.15,G.floors,M.conc);     // kitchen
-slab([[BX0,BY1],[SX0,BY1],[SX0,KZ1],[BX0,KZ1]],0.15,M.quarry,-0.15,G.floors,M.conc);      // kitchen extension towards the existing restaurant
 slab([[BX0,0],[BX1,0],[BX1,DISH],[BX0,DISH]],0.15,M.quarry,-0.15,G.floors,M.conc);         // dish wash
 slab([[TX0,TY0],[BX1,TY0],[BX1,0],[TX0,0]],0.15,M.granite,-0.15,G.floors,M.conc);          // washroom: blue-grey floor tile, as in the site photo
 slab([[BX0,TY0],[TX0,TY0],[TX0,0],[BX0,0]],0.15,M.checker,-0.15,G.floors,M.conc);            // lobby in front of the washroom
@@ -451,10 +451,8 @@ wall(BX1,TY0,BX1,SY1,[[3.1,4.5,1.5,2.5]],BH,M.plaster,G.walls);
 wall(BX0,0,BX0,BY1,[[0.35,1.65,0.95,1.6],[2.35,3.25,0,2.1],[4.3,5.6,0.95,1.75]],BH,M.plaster,G.walls);
 // partition between dish wash and kitchen, with a door at the clean end
 wall(BX0,DISH,BX1,DISH,[[BX0+4.15,BX0+5.05,0,2.1]],BH,M.plaster,G.walls);
-// south wall of the kitchen: only along the store room now (store-room door beside the cooking line); west of it the kitchen runs on south
-wall(SX0,BY1,BX1,BY1,[[BX1-1.85,BX1-0.95,0,2.1]],BH,M.plaster,G.walls);
-// kitchen extension: the gap between the kitchen and the existing restaurant, west of the store room, is closed in and added to the kitchen
-wall(BX0,BY1,BX0,KZ1,[],BH,M.plaster,G.walls);wall(BX0,KZ1,SX0,KZ1,[],BH,M.plaster,G.walls);
+// south wall of the kitchen with the store-room door beside the cooking line; west of the store room it is the common wall with the existing restaurant
+wall(BX0,BY1,BX1,BY1,[[BX1-1.85,BX1-0.95,0,2.1]],BH,M.plaster,G.walls);
 // store room
 wall(SX0,BY1,SX0,SY1,[],BH,M.plaster,G.walls);wall(SX0,SY1,BX1,SY1,[],BH,M.plaster,G.walls);
 // doors (leaf shown ajar) and window glass
@@ -464,7 +462,7 @@ door(TX0,-1.45,false,0.7,M.timber,-1.2);door(BX0+4.15,DISH,true,0.9,M.ss,0.0+1.0
 function frame(x0,x1,y0,y1,z0,z1){bx(x0,x1,y0-0.04,y0,z0,z1,M.ss,G.walls);bx(x0,x1,y1,y1+0.04,z0,z1,M.ss,G.walls);}
 frame(BX0-0.1,BX0+0.1,0.95,1.6,0.35,1.65);frame(BX0-0.1,BX0+0.1,0.95,1.75,4.3,5.6);
 /* block roof: flat slab with parapet and cement-board underside */
-const blockRoof=[[BX0-0.15,TY0-0.25],[BX1+0.25,TY0-0.25],[BX1+0.25,SY1+0.25],[SX0-0.25,SY1+0.25],[SX0-0.25,KZ1+0.15],[BX0-0.15,KZ1+0.15]];
+const blockRoof=[[BX0-0.15,TY0-0.25],[BX1+0.25,TY0-0.25],[BX1+0.25,SY1+0.25],[SX0-0.25,SY1+0.25],[SX0-0.25,BY1+0.25],[BX0-0.15,BY1+0.25]];
 slab(blockRoof,0.2,M.fascia,BH,G.roof,M.fascia);
 {const ch=[[BX0,TY0],[BX1,TY0],[BX1,SY1],[SX0,SY1],[SX0,BY1],[BX0,BY1]];const g=new THREE.ShapeGeometry(shapeOf(ch));g.rotateX(-Math.PI/2);g.translate(0,BH-0.01,0);const m=new THREE.Mesh(g,M.ceilPlain);G.roof.add(m);}
 /* roof-top kit: kitchen exhaust cowl */
@@ -864,12 +862,6 @@ bx(kx0+0.9,kx0+1.3,0.0,0.02,2.5,3.2,M.black,G.kitchen,false);bx(kx0+0.4,kx0+1.2,
 cyl(0.2,0.18,0.55,kx0+0.3,0,2.5,M.black,G.kitchen,14);
 {bx(kx1-1.2,kx1-0.7,0.0,0.04,5.2,5.8,M.ssDark,G.kitchen,false);}
 bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
-/* kitchen extension fit-out: two steel prep tables, wall shelving, a ceiling LED panel */
-{const g=G.kitchen;const zc=(BY1+KZ1)/2;
- [[BX0+0.35,BX0+1.95,KZ1-0.85,KZ1-0.15],[SX0-0.85,SX0-0.15,BY1+0.6,KZ1-1.2]].forEach(([x0,x1,z0,z1])=>{bx(x0,x1,0.86,0.9,z0,z1,M.ss,g);bx(x0+0.03,x1-0.03,0.15,0.18,z0+0.03,z1-0.03,M.ss,g,false);[[x0+0.04,z0+0.04],[x1-0.04,z0+0.04],[x0+0.04,z1-0.04],[x1-0.04,z1-0.04]].forEach(([x,z])=>cyl(0.02,0.02,0.86,x,0,z,M.ss,g,8,false));});
- [1.3,1.75].forEach(y=>bx(BX0+0.12,BX0+0.42,y,y+0.03,BY1+0.4,KZ1-1.1,M.ss,g,false));
- bx(BX0+0.9,SX0-0.9,BH-0.03,BH-0.01,zc-0.3,zc+0.3,M.panelLight,g,false);
- lbl('Kitchen extension · '+(SX0-BX0).toFixed(2)+' × '+(KZ1-BY1).toFixed(2)+' m',(BX0+SX0)/2,2.6,zc,'k');}
 /* kitchen lights: cool-white LED panels (work light), plus a warm bar to match the room */
 [[BX0+2.2,3.2],[BX0+2.2,5.4],[BX0+3.7,4.3]].forEach(([x,z])=>bx(x-0.35,x+0.35,BH-0.04,BH-0.01,z-0.15,z+0.15,M.panelLight,G.kitchen,false));
 /* store door sign + door-side pest net */

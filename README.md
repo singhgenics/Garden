@@ -18,7 +18,7 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Open edges | all five | Blue round pillars (about 24 cm) on white pedestals and an 80 cm balustrade (navy balusters, white rail), as on site |
 | Floor and ceiling | hall | Blue-grey granite in 60 cm tiles; flat white ceiling with white dropped beams, dark walnut false-beams and an interlocking square-frame feature light, as on site |
 | Front | gate to hall | From the marked survey plan: arched whitewashed gateway (1.70 m, blue gable, sign) on the Cavelossim-Assolna road; main path east to the residence veranda; 5 × 5 m garden on its north side below the hall's 2.98 m edge; a 1.20 m stepping-stone approach path (about 5.5 m, to confirm) north to the 5 × 5 m red-oxide landing between the hall wing and the existing restaurant; the hall entrance faces the landing. Existing restaurant and residence shown as massing |
-| Kitchen | 5.41 × 4.38, plus a 2.71 × 2.46 extension | Extension closes the gap south to the existing restaurant, west of the store room; prep tables and shelving. Cooking line under one hood, prep island, refrigeration, pass window |
+| Kitchen | 5.41 × 4.38 | Its south wall is the common wall with the existing restaurant (west of the store room). Cooking line under one hood, prep island, refrigeration, pass window |
 | Dish wash | 5.41 × 2.00 | Hatch, receiving table, double sink, hood dishwasher, clean table |
 | Washroom | 2.96 × 1.70 | As on site: 70 cm door, the only hand-wash basin on the right, a partition with a 70 cm opening, then the WC; reached through a plain lobby |
 | Store room | 2.70 × 6.46 | Steel racking, door into the kitchen |
