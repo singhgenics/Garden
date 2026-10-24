@@ -53,6 +53,8 @@ body.walk .pad{display:grid}
     <div class="seg" role="group" aria-label="Camera" id="views">
       <button data-view="iso" aria-pressed="true">Overview</button>
       <button data-view="decor" aria-pressed="false">Decor wall</button>
+      <button data-view="tv" aria-pressed="false">TV corner</button>
+      <button data-view="gate" aria-pressed="false">Gate</button>
       <button data-view="entry" aria-pressed="false">Entrance</button>
       <button data-view="bar" aria-pressed="false">Bar front</button>
       <button data-view="backbar" aria-pressed="false">Back bar</button>
@@ -142,6 +144,21 @@ const roofTex=tex(256,256,(g,w)=>{const r=rng(2);for(let i=0;i<16;i++){g.fillSty
 const caneTex=tex(64,64,(g,w)=>{g.fillStyle='#d8b87c';g.fillRect(0,0,w,w);g.strokeStyle='rgba(120,80,30,.55)';g.lineWidth=1.4;for(let i=-w;i<w*2;i+=7){g.beginPath();g.moveTo(i,0);g.lineTo(i+w,w);g.stroke();g.beginPath();g.moveTo(i,w);g.lineTo(i+w,0);g.stroke();}},3,3);
 const juteTex=tex(128,128,(g,w)=>{g.fillStyle='#b99363';g.fillRect(0,0,w,w);const r=rng(41);for(let i=0;i<300;i++){g.strokeStyle=`rgba(${r()<.5?'80,55,25':'235,205,150'},.35)`;g.lineWidth=1;g.beginPath();g.moveTo(0,r()*w);g.bezierCurveTo(w*.3,r()*w,w*.6,r()*w,w,r()*w);g.stroke();}},2,2);
 const stoneTex=tex(256,256,(g,w)=>{g.fillStyle='#b9b2a4';g.fillRect(0,0,w,w);const r=rng(55);for(let y=0;y<4;y++){let x=-r()*40;while(x<w){const sw=45+r()*55,sh=w/4-6;g.fillStyle=shade(['#f1ede4','#e8e2d6','#f6f2ea','#ddd6c8'][Math.floor(r()*4)],0.94+r()*0.1);g.beginPath();g.roundRect?g.roundRect(x+3,y*(w/4)+3,sw-6,sh,16):g.rect(x+3,y*(w/4)+3,sw-6,sh);g.fill();g.fillStyle='rgba(120,100,80,.12)';g.fillRect(x+6,y*(w/4)+sh-4,sw-12,5);x+=sw;}}},1,1);
+/* site finishes, read off the site video: blue-grey granite hall floor (60 cm), red-oxide courtyard with grey kota bands, hand-painted tile dado */
+const graniteTex=tex(256,256,(g,w)=>{const r=rng(31),s=w/2;for(let i=0;i<2;i++)for(let j=0;j<2;j++){g.fillStyle=shade('#56626b',0.94+r()*0.12);g.fillRect(i*s,j*s,s,s);for(let k=0;k<1400;k++){g.fillStyle=r()<0.55?`rgba(20,26,32,${0.25+r()*0.35})`:`rgba(200,210,220,${0.12+r()*0.25})`;g.fillRect(i*s+r()*s,j*s+r()*s,1+r()*2,1+r()*2);}}
+  g.strokeStyle='rgba(25,28,30,.85)';g.lineWidth=2;for(let k=0;k<=2;k++){g.beginPath();g.moveTo(k*s,0);g.lineTo(k*s,w);g.moveTo(0,k*s);g.lineTo(w,k*s);g.stroke();}},1/1.2,1/1.2);
+const redOxideTex=tex(256,256,(g,w)=>{const r=rng(47),s=w/2;for(let i=0;i<2;i++)for(let j=0;j<2;j++){g.fillStyle=shade('#b9473a',0.93+r()*0.1);g.fillRect(i*s,j*s,s,s);}for(let k=0;k<900;k++){g.fillStyle=`rgba(${r()<.5?'255,220,200':'70,20,15'},${r()*0.08})`;g.beginPath();g.arc(r()*w,r()*w,2+r()*10,0,7);g.fill();}
+  g.strokeStyle='rgba(90,30,25,.45)';g.lineWidth=2;for(let k=0;k<=2;k++){g.beginPath();g.moveTo(k*s,0);g.lineTo(k*s,w);g.moveTo(0,k*s);g.lineTo(w,k*s);g.stroke();}},1,1);
+const kotaTex=tex(256,256,(g,w)=>{const r=rng(53),s=w/2;for(let i=0;i<2;i++)for(let j=0;j<2;j++){g.fillStyle=shade('#5f6466',0.9+r()*0.18);g.fillRect(i*s,j*s,s,s);}for(let k=0;k<700;k++){g.fillStyle=`rgba(${r()<.5?'220,225,225':'20,25,25'},${r()*0.07})`;g.fillRect(r()*w,r()*w,2+r()*6,1+r()*3);}
+  g.strokeStyle='rgba(30,32,32,.6)';g.lineWidth=2;for(let k=0;k<=2;k++){g.beginPath();g.moveTo(k*s,0);g.lineTo(k*s,w);g.moveTo(0,k*s);g.lineTo(w,k*s);g.stroke();}},1,1);
+const azulejoTex=tex(256,256,(g,w)=>{const s=w/4;for(let i=0;i<4;i++)for(let j=0;j<4;j++){const x=i*s,y=j*s,k=(i+j)%2,c1=k?'#2a4f9a':'#e3b23c',c2=k?'#e3b23c':'#2a4f9a';g.save();g.beginPath();g.rect(x,y,s,s);g.clip();
+  g.fillStyle='#f3efe4';g.fillRect(x,y,s,s);g.fillStyle=c1;[[x,y],[x+s,y],[x,y+s],[x+s,y+s]].forEach(([cx,cy])=>{g.beginPath();g.arc(cx,cy,s*0.32,0,7);g.fill();});
+  g.fillStyle=c2;g.beginPath();for(let a=0;a<8;a++){const t=a/8*6.283,rr=a%2?s*0.12:s*0.3;g.lineTo(x+s/2+Math.cos(t)*rr,y+s/2+Math.sin(t)*rr);}g.closePath();g.fill();
+  g.fillStyle='#f3efe4';g.beginPath();g.arc(x+s/2,y+s/2,s*0.07,0,7);g.fill();g.strokeStyle='rgba(120,120,120,.6)';g.lineWidth=1.5;g.strokeRect(x,y,s,s);g.restore();}},1,1);
+const damaskTex=tex(256,256,(g,w)=>{const s=w/4;for(let i=0;i<4;i++)for(let j=0;j<4;j++){const x=i*s,y=j*s,cx=x+s/2,cy=y+s/2;g.save();g.beginPath();g.rect(x,y,s,s);g.clip();g.fillStyle='#eee4cf';g.fillRect(x,y,s,s);g.fillStyle='#7a5a3c';g.strokeStyle='#7a5a3c';g.lineWidth=3;
+  g.beginPath();g.ellipse(cx,cy,s*0.2,s*0.34,0,0,7);g.stroke();g.beginPath();g.ellipse(cx,cy,s*0.09,s*0.18,0,0,7);g.fill();[[x,y],[x+s,y],[x,y+s],[x+s,y+s]].forEach(([qx,qy])=>{g.beginPath();g.ellipse(qx,qy,s*0.16,s*0.12,0,0,7);g.fill();});
+  g.fillStyle='#eee4cf';g.beginPath();g.arc(cx,cy,s*0.04,0,7);g.fill();g.strokeStyle='rgba(150,130,100,.5)';g.lineWidth=1.5;g.strokeRect(x,y,s,s);g.restore();}},1,1);
+const flutedWhiteTex=tex(128,16,(g,w,h)=>{g.fillStyle='#f2efe8';g.fillRect(0,0,w,h);for(let i=0;i<6;i++){const x=8+i*20;const gr=g.createLinearGradient(x,0,x+12,0);gr.addColorStop(0,'#c9c4b8');gr.addColorStop(0.5,'#f7f4ee');gr.addColorStop(1,'#d8d3c8');g.fillStyle=gr;g.fillRect(x,0,12,h);}},1,1);
 function ginghamTex(c1){return tex(128,128,(g,w)=>{g.fillStyle='#f6f1e6';g.fillRect(0,0,w,w);g.fillStyle=c1;g.globalAlpha=0.6;for(let i=0;i<4;i++){g.fillRect(i*32,0,16,w);g.fillRect(0,i*32,w,16);}g.globalAlpha=1;},4,4);}
 const onyxTex=tex(256,512,(g,w,h)=>{const gr=g.createLinearGradient(0,0,w,h);gr.addColorStop(0,'#f7c46a');gr.addColorStop(.5,'#e8a246');gr.addColorStop(1,'#f3b85a');g.fillStyle=gr;g.fillRect(0,0,w,h);const r=rng(61);
   for(let i=0;i<40;i++){g.strokeStyle=`rgba(${r()<.5?'130,60,15':'255,240,200'},${0.12+r()*0.3})`;g.lineWidth=1+r()*5;g.beginPath();let x=r()*w,y=0;g.moveTo(x,y);while(y<h){x+=r()*40-20;y+=20+r()*30;g.lineTo(x,y);}g.stroke();}},4,1);
@@ -176,7 +193,7 @@ const M={
   terra:S({map:terraTex,roughness:0.75}),checker:S({map:(()=>{const t=darkCheckerTex.clone();t.needsUpdate=true;t.repeat.set(1/1.2,1/1.2);return t;})(),roughness:0.35}),quarry:S({map:quarryTex,roughness:0.6}),sage:S({map:sageTex,roughness:0.2}),whiteTile:S({map:whiteTileTex,roughness:0.28}),mosaic:S({map:mosaicTex,roughness:0.35}),conc:S({map:concTex,roughness:0.95}),
   gravel:S({map:gravelTex,roughness:1}),grass:S({map:grassTex,roughness:1}),laterite:S({color:'#8c523a',roughness:1}),
   leaf:S({map:leafTex,roughness:0.85}),leafSolid:S({color:'#3f8a45',roughness:0.8,side:THREE.DoubleSide}),trunk:S({color:'#8a745c',roughness:0.95}),pot:S({color:'#b4623e',roughness:0.9}),
-  roofTile:S({map:roofTex,roughness:0.85}),fascia:S({color:'#efe3cc',roughness:0.9}),ceiling:S({map:plankTex,color:'#7a6a58',roughness:0.85,side:THREE.BackSide}),ceilPlain:S({color:'#e9dfcc',roughness:0.95,side:THREE.BackSide}),
+  roofTile:S({map:roofTex,roughness:0.85}),fascia:S({color:'#efe3cc',roughness:0.9}),ceiling:S({color:'#f3f0ea',roughness:0.95,side:THREE.BackSide}),ceilPlain:S({color:'#e9dfcc',roughness:0.95,side:THREE.BackSide}),
   ss:S({color:'#c3c8cc',roughness:0.32,metalness:0.75}),ssDark:S({color:'#6d7276',roughness:0.4,metalness:0.7}),steel:S({color:'#2a2a2c',roughness:0.45,metalness:0.6}),brass:S({color:'#c9993f',roughness:0.28,metalness:0.9}),
   black:S({color:'#1a1a1a',roughness:0.6}),white:S({color:'#f4f1ec',roughness:0.25}),red:S({color:'#b0221c',roughness:0.5}),oil:S({color:'#a8721c',roughness:0.15}),water:S({color:'#7fa8b0',roughness:0.1,metalness:0.3}),
   cane:S({map:caneTex,roughness:0.85,side:THREE.DoubleSide}),leather:S({color:'#b8703f',roughness:0.45}),leatherTan:S({color:'#c48a58',roughness:0.5}),cushion:S({color:'#e9dfcd',roughness:1}),kilim:S({map:kilimTex,roughness:0.95}),
@@ -203,6 +220,8 @@ M.coir=S({map:juteTex,roughness:1,side:THREE.DoubleSide});M.dome=S({color:'#f4ef
 M.beerGlass=S({color:'#e0a030',transparent:true,opacity:0.6,emissive:'#a06010',emissiveIntensity:0.5,roughness:0.1,depthWrite:false});M.edisonGlass=S({color:'#ffd9a0',transparent:true,opacity:0.2,roughness:0.05,emissive:'#ff9a30',emissiveIntensity:0.2,depthWrite:false});
 M.chrome=S({color:'#dfe4e8',roughness:0.15,metalness:0.95});M.taupe=S({color:'#a89886',roughness:0.95});M.pillow=S({color:'#cfd3d0',roughness:0.95});M.blackMetal=S({color:'#1c1c1c',roughness:0.5,metalness:0.6});M.petal=S({color:'#e0508a',roughness:0.8});
 M.flameGlass=S({color:'#ffe9c0',transparent:true,opacity:0.5,roughness:0.1,emissive:'#ffb050',emissiveIntensity:0.5,depthWrite:false});
+M.granite=S({map:graniteTex,roughness:0.3});M.goaWhite=S({color:'#f2efe8',roughness:0.75});M.navy=S({color:'#1f2a5c',roughness:0.5});M.gateBlue=S({color:'#2c3f9a',roughness:0.7});
+M.redOxide=S({map:(()=>{const t=redOxideTex.clone();t.needsUpdate=true;t.repeat.set(0.5,0.5);return t;})(),roughness:0.8});
 const NEONS=['neonRed','neonDraught','neonWok'];
 const EMI=[['dome',0.55],['beerGlass',0.5],['edisonGlass',0.2],['flameGlass',0.5],['lanR',0.7],['lanA',0.8],['lanG',0.6],['lanW',0.8],['rattan',0.25],['glow',1.2],['globe',1.3],['filament',1.7],['bulbGlass',0.45],['jute',0.35],['led',2.4],['flame',1.6]];
 
@@ -233,9 +252,9 @@ function lbl(text,x,y,z,cls){labels.push({text,p:V(x,y,z),cls:cls||''});}
 /* ======================= ground and surroundings ======================= */
 {const g=new THREE.Mesh(new THREE.PlaneGeometry(300,300),M.grass);g.rotation.x=-Math.PI/2;g.position.y=-0.2;g.receiveShadow=true;G.ground.add(g);
  const lat=new THREE.Mesh(new THREE.PlaneGeometry(30,22),M.gravel);lat.rotation.x=-Math.PI/2;lat.position.set(10,-0.18,5);lat.receiveShadow=true;G.ground.add(lat);}
-function palm(x,z,h,lean){const g=new THREE.Group();const pts=[];for(let i=0;i<=8;i++){const t=i/8;pts.push(V(lean*t*t,h*t,0));}
-  const tube=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),12,0.13,7,false),M.trunk);tube.castShadow=true;g.add(tube);
-  for(let i=0;i<9;i++){const leaf=new THREE.Mesh(new THREE.PlaneGeometry(0.5,2.6),M.leafSolid);leaf.position.copy(pts[8]);leaf.rotation.set(0,i/9*Math.PI*2,0);leaf.rotateX(-1.05);leaf.translateY(1.2);leaf.castShadow=true;g.add(leaf);}
+function palm(x,z,h,lean,ls){ls=ls||1;const g=new THREE.Group();const pts=[];for(let i=0;i<=8;i++){const t=i/8;pts.push(V(lean*t*t,h*t,0));}
+  const tube=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),12,0.13*Math.max(ls,0.6),7,false),M.trunk);tube.castShadow=true;g.add(tube);
+  for(let i=0;i<9;i++){const leaf=new THREE.Mesh(new THREE.PlaneGeometry(0.5*ls,2.6*ls),M.leafSolid);leaf.position.copy(pts[8]);leaf.rotation.set(0,i/9*Math.PI*2,0);leaf.rotateX(-1.05);leaf.translateY(1.2*ls);leaf.castShadow=true;g.add(leaf);}
   g.position.set(x,0,z);G.ground.add(g);}
 palm(-11,2,8,0.7);palm(-10,15,8.5,0.9);palm(31,-2,7.4,-0.5);palm(29,16,8.5,-0.6);palm(14,26,7.8,0.4);
 const _fm={};const fmat=c=>_fm[c]||(_fm[c]=S({color:c,roughness:0.75}));
@@ -244,12 +263,56 @@ function shrub(x,z,s){const r=rng(Math.round(x*13+z*7)+5);const base=new THREE.M
   const c1=FLOWERS[Math.floor(r()*FLOWERS.length)],c2=FLOWERS[Math.floor(r()*FLOWERS.length)];for(let i=0;i<26;i++){const a=r()*6.283,u=r()*0.8,f=new THREE.Mesh(new THREE.SphereGeometry(0.075*s,6,5),fmat(i%3?c1:c2));f.position.set(x+Math.cos(a)*0.4*s*u,0.2*s+0.34*s*Math.sqrt(1-u*u)*0.9+r()*0.05,z+Math.sin(a)*0.4*s*u);G.ground.add(f);}}
 for(let i=0;i<14;i++){shrub(-2+i*1.6,-3.2,1+(i%3)*0.3);}for(let i=0;i<8;i++)shrub(-2.4,1+i*1.4,1.1);
 G.ground.add(new THREE.Mesh(new THREE.BoxGeometry(0.01,0.01,0.01)));
-/* stepping-stone path to the entrance */
-for(let i=0;i<7;i++)bx(10.2,11.9,-0.19,-0.12,6.2+i*0.9,6.9+i*0.9,M.conc,G.ground,false);
+/* ======================= front: gate, garden, pathway and landing (as on site) =======================
+   Through the gate (1.70 m opening): a 5 x 5 m garden on the left, a 1.00 m stepping-stone pathway on the right,
+   then a 5 x 5 m red-oxide landing right in front of the hall entrance. Plan z grows towards the road. */
+const EM=(HX+D[0])/2,LND=[EM-2.5,EM+2.5,5.48,10.48],PTH=[LND[1]-1,LND[1],10.48,15.48],GDN=[PTH[0]-5,PTH[0],10.48,15.48],GZ=15.48,GD=0.6,GX0=PTH[1]-1.7,GX1=PTH[1],GCX=(GX0+GX1)/2;
+function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=true;t.repeat.set((x1-x0)/tile,(z1-z0)/tile);m=S({map:t,roughness:0.8});}const p=bx(x0,x1,y-0.04,y,z0,z1,m,G.ground,false);p.receiveShadow=true;return p;}
+{M.kota=S({map:kotaTex,roughness:0.85});
+ // landing: red-oxide field inside a 30 cm grey kota band, one step down from the hall floor
+ pave(LND[0]+0.3,LND[1]-0.3,LND[2]+0.3,LND[3]-0.3,-0.15,redOxideTex,1.2);
+ [[LND[0],LND[1],LND[2],LND[2]+0.3],[LND[0],LND[1],LND[3]-0.3,LND[3]],[LND[0],LND[0]+0.3,LND[2]+0.3,LND[3]-0.3],[LND[1]-0.3,LND[1],LND[2]+0.3,LND[3]-0.3]].forEach(([a,b,c,d])=>pave(a,b,c,d,-0.15,kotaTex,1.2));
+ // pathway: red squares set in grey kota with grass in the joints
+ pave(PTH[0],PTH[1],PTH[2],PTH[3],-0.155,kotaTex,1.2);const grassJ=S({color:'#5f8a3c',roughness:1});
+ for(let z=PTH[2]+0.1;z<PTH[3]-0.6;z+=0.75){pave(PTH[0]+0.2,PTH[1]-0.2,z,z+0.6,-0.148,null,0,M.redOxide);pave(PTH[0]+0.05,PTH[1]-0.05,z+0.62,z+0.7,-0.15,null,0,grassJ);}
+ [PTH[0]+0.12,PTH[1]-0.12].forEach(x=>pave(x-0.03,x+0.03,PTH[2],PTH[3],-0.15,null,0,grassJ));
+ // gate apron under the arch and onto the road
+ pave(GX0,GX1,GZ,GZ+GD+0.8,-0.15,redOxideTex,1.2);
+ // garden: lawn inside a laterite kerb, hedge along the west and the road, areca palms, two black lamp posts by the path
+ pave(GDN[0],GDN[1],GDN[2],GDN[3],-0.16,null,0,M.grass);
+ [[GDN[0],GDN[1],GDN[2],GDN[2]+0.08],[GDN[0],GDN[1],GDN[3]-0.08,GDN[3]],[GDN[0],GDN[0]+0.08,GDN[2],GDN[3]],[GDN[1]-0.08,GDN[1],GDN[2],GDN[3]]].forEach(([a,b,c,d])=>pave(a,b,c,d,-0.08,null,0,M.laterite));
+ for(let z=GDN[2]+0.5;z<GDN[3]-0.3;z+=0.9)shrub(GDN[0]+0.45,z,0.8);for(let x=GDN[0]+1.3;x<GX0-0.2;x+=0.9)shrub(x,GDN[3]-0.45,0.75);
+ for(let z=PTH[2]+0.4;z<PTH[3]-0.2;z+=0.8)shrub(PTH[1]+0.3,z,0.55);
+ palm(GDN[0]+1.4,GDN[2]+1.2,3.6,0.25,0.5);palm(GDN[0]+2.2,GDN[2]+0.8,3.0,-0.2,0.45);palm(GDN[0]+0.9,GDN[3]-1.6,3.3,0.3,0.5);
+ [GDN[2]+1.1,GDN[3]-1.4].forEach(z=>{const x=PTH[0]-0.15;cyl(0.09,0.11,0.25,x,-0.15,z,M.blackMetal,G.ground,12);cyl(0.035,0.04,2.3,x,0.1,z,M.blackMetal,G.ground,10);
+  cyl(0.11,0.07,0.06,x,2.38,z,M.blackMetal,G.ground,4,false);cyl(0.07,0.07,0.24,x,2.44,z,M.globe,G.ground,4,false);const cap=new THREE.Mesh(new THREE.ConeGeometry(0.14,0.14,4),M.blackMetal);cap.position.set(x,2.75,z);cap.rotation.y=Math.PI/4;G.ground.add(cap);});
+ // ---- the gateway: whitewashed piers and a flattened arch, cornice, blue gable with the sign board, black wall lanterns ----
+ const gw=new THREE.Group();gw.position.set(GCX,0,GZ);G.ground.add(gw);
+ {const s=new THREE.Shape();s.moveTo(-1.4,-0.15);s.lineTo(1.4,-0.15);s.lineTo(1.4,3.0);s.lineTo(-1.4,3.0);s.closePath();
+  const h=new THREE.Path();h.moveTo(-0.85,-0.15);h.lineTo(0.85,-0.15);h.lineTo(0.85,2.05);for(let i=1;i<16;i++){const a=i/16*Math.PI;h.lineTo(0.85*Math.cos(a),2.05+0.5*Math.sin(a));}h.lineTo(-0.85,2.05);h.closePath();s.holes.push(h);
+  const m=new THREE.Mesh(new THREE.ExtrudeGeometry(s,{depth:GD,bevelEnabled:false}),M.goaWhite);m.castShadow=m.receiveShadow=true;gw.add(m);}
+ bx(-1.45,1.45,2.82,2.87,-0.04,GD+0.04,M.goaWhite,gw);bx(-1.52,1.52,3.0,3.14,-0.08,GD+0.08,M.goaWhite,gw);[[-1.42,-0.85],[0.85,1.42]].forEach(([a,b])=>bx(a,b,-0.15,0.08,-0.03,GD+0.03,M.navy,gw));
+ {const t=new THREE.Shape();t.moveTo(-1.55,0);t.lineTo(1.55,0);t.lineTo(0,1.15);t.closePath();const gb=new THREE.Mesh(new THREE.ExtrudeGeometry(t,{depth:GD+0.16,bevelEnabled:false}),M.gateBlue);gb.position.set(0,3.14,-0.08);gb.castShadow=true;gw.add(gb);
+  const zf=GD+0.1;beam(V(-1.62,3.12,zf),V(0,4.33,zf),0.05,0.09,M.goaWhite,gw);beam(V(1.62,3.12,zf),V(0,4.33,zf),0.05,0.09,M.goaWhite,gw);
+  const board=new THREE.Mesh(new THREE.PlaneGeometry(1.3,0.56),S({map:signTex(512,220,[['Cabin East',104,0.46,'800 104px "Bricolage Grotesque", sans-serif'],['GARDEN',30,0.83,'600 30px "IBM Plex Mono", monospace']],'#f6c81e','#b8251c','#7a1a12'),roughness:0.6}));board.position.set(0,3.66,zf+0.005);gw.add(board);
+  const strip=new THREE.Mesh(new THREE.PlaneGeometry(1.9,0.2),new THREE.MeshBasicMaterial({map:signTex(760,80,[['DIM SUM & CRAFT BEER',48,0.55]],'#2c3f9a','#f6c81e'),toneMapped:false}));strip.position.set(0,3.27,zf+0.005);gw.add(strip);}
+ [-1.12,1.12].forEach(x=>{bx(x-0.04,x+0.04,2.2,2.32,GD,GD+0.06,M.blackMetal,gw,false);bx(x-0.07,x+0.07,2.0,2.24,GD+0.06,GD+0.2,M.blackMetal,gw,false);bx(x-0.055,x+0.055,2.03,2.21,GD+0.07,GD+0.19,M.globe,gw,false);});
+ // wrought-iron double gates, hinged on the inside face and swung open into the garden and onto the pathway
+ function leaf(hx,ang){const g=new THREE.Group();g.position.set(hx,-0.15,GZ+0.05);g.rotation.y=ang;G.ground.add(g);const w=0.84,bm=M.blackMetal;
+  [0.1,0.8,1.45].forEach(y=>rod(V(0,y,0),V(w,y,0),0.018,bm,g));[0,w].forEach(x=>rod(V(x,0.08,0),V(x,1.62,0),0.022,bm,g));
+  for(let x=0.1;x<w-0.04;x+=0.1)rod(V(x,0.1,0),V(x,1.45+0.12*Math.sin(Math.PI*x/w),0),0.008,bm,g,false);
+  const sc=new THREE.Mesh(new THREE.TorusGeometry(0.09,0.008,6,18),bm);[0.25,0.59].forEach(x=>{const c=sc.clone();c.position.set(x,1.12,0);g.add(c);});}
+ leaf(GX0+0.02,1.45);leaf(GX1-0.02,Math.PI-1.45);
+ // compound wall either side of the gate: whitewashed, navy picket on top (as at the back of the site)
+ const pickets=[];const fence=(x0,x1)=>{bx(x0,x1,-0.15,0.9,GZ+GD-0.2,GZ+GD,M.goaWhite,G.ground);bx(x0,x1,-0.15,-0.02,GZ+GD-0.21,GZ+GD+0.01,M.navy,G.ground,false);for(let x=x0+0.06;x<x1-0.03;x+=0.12)pickets.push(x);bx(x0,x1,1.12,1.17,GZ+GD-0.14,GZ+GD-0.06,M.navy,G.ground,false);};
+ fence(GDN[0]-1.0,GCX-1.4);fence(GCX+1.4,GCX+4.2);
+ {const im=new THREE.InstancedMesh(new THREE.BoxGeometry(0.07,0.4,0.06),M.navy,pickets.length),mt=new THREE.Matrix4();pickets.forEach((x,i)=>{mt.makeTranslation(x,1.1,GZ+GD-0.1);im.setMatrixAt(i,mt);});im.castShadow=true;G.ground.add(im);}   // one draw call
+ solids.push([[GDN[0]-1.0,GZ+GD-0.1],[GX0,GZ+GD-0.1]],[[GX1,GZ+GD-0.1],[GCX+4.2,GZ+GD-0.1]]);
+ lbl('Gate · 1.70 m opening',GCX,4.75,GZ+GD+0.3,'o');lbl('Garden · 5 × 5 m',(GDN[0]+GDN[1])/2,0.5,(GDN[2]+GDN[3])/2,'k');lbl('Pathway · 1.00 m',PTH[0]+0.5,0.35,13.0,'k');lbl('Landing · 5 × 5 m',EM,0.35,8.0,'k');}
 
 /* ======================= floors ======================= */
-slab(hall,0.15,M.checker,-0.15,G.floors,M.conc);
-slab([[HX,0],[BX0,0],[BX0,BY1],[HX,BY1]],0.15,M.checker,-0.15,G.floors,M.conc);               // pathway between the bar and the kitchen
+slab(hall,0.15,M.granite,-0.15,G.floors,M.conc);
+slab([[HX,0],[BX0,0],[BX0,BY1],[HX,BY1]],0.15,M.granite,-0.15,G.floors,M.conc);              // pathway between the bar and the kitchen
 slab([[BX0,DISH],[BX1,DISH],[BX1,BY1],[BX0,BY1]],0.15,M.quarry,-0.15,G.floors,M.conc);     // kitchen
 slab([[BX0,0],[BX1,0],[BX1,DISH],[BX0,DISH]],0.15,M.quarry,-0.15,G.floors,M.conc);         // dish wash
 slab([[TX0,TY0],[BX1,TY0],[BX1,0],[TX0,0]],0.15,M.mosaic,-0.15,G.floors,M.conc);           // washroom
@@ -272,8 +335,21 @@ const bays=[];
     [[[15.67,5.48],[ENT_MID+ENT_W/2,5.48],[ENT_MID-ENT_W/2,5.48],[6.46,5.48]],'C-D'],
     [along(D,Hh,2),false],[along(Hh,Gp,1),false],[along(Gp,Fp,2),false],[along(Fp,A,2),false]];
   lines.forEach(([pts,tag])=>{pts.forEach(p=>addCol(p[0],p[1]));for(let i=0;i<pts.length-1;i++)bays.push({a:pts[i],b:pts[i+1],ent:tag==='C-D'&&i===1});});}
-colPts.forEach(([x,z])=>{const top=hc(z)-0.1;bx(x-0.19,x+0.19,0,0.12,z-0.19,z+0.19,M.fascia,G.walls);bx(x-0.14,x+0.14,0.12,top,z-0.14,z+0.14,M.fascia,G.walls);bx(x-0.19,x+0.19,top-0.14,top,z-0.19,z+0.19,M.fascia,G.walls);});
-bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0.2,b.b[1]);beam(a,c,0.2,0.24,M.timberDark,G.walls);});
+/* pillars as on site: white turned Goan columns (base mouldings, long shaft, cup capital) standing on white pedestals that belong to the 80 cm balustrade */
+{const prof=Hs=>[[0,0],[0.15,0],[0.15,0.05],[0.12,0.07],[0.135,0.1],[0.135,0.13],[0.1,0.16],[0.11,0.2],[0.11,0.45],[0.125,0.47],[0.125,0.5],[0.095,0.53],[0.088,0.56],[0.078,Hs-0.42],[0.095,Hs-0.4],[0.095,Hs-0.37],[0.08,Hs-0.35],[0.086,Hs-0.31],[0.15,Hs-0.1],[0.158,Hs-0.07],[0.158,Hs-0.05],[0,Hs-0.05]].map(([r,y])=>new THREE.Vector2(r,y));
+ colPts.forEach(([x,z])=>{const top=hc(z)-0.32,y0=0.86,Hs=top-y0;
+  bx(x-0.18,x+0.18,0,0.1,z-0.18,z+0.18,M.navy,G.walls);bx(x-0.17,x+0.17,0.1,0.8,z-0.17,z+0.17,M.goaWhite,G.walls);bx(x-0.2,x+0.2,0.8,0.86,z-0.2,z+0.2,M.goaWhite,G.walls);
+  const c=new THREE.Mesh(new THREE.LatheGeometry(prof(Hs),20),M.goaWhite);c.position.set(x,y0,z);c.castShadow=c.receiveShadow=true;G.walls.add(c);
+  bx(x-0.17,x+0.17,top-0.05,top,z-0.17,z+0.17,M.goaWhite,G.walls);});}
+/* 80 cm balustrade between the pillars on every open edge: navy base band, white plinth and rail, navy turned balusters; 1.70 m opening at the entrance */
+{const balPts=[];const balGeo=new THREE.LatheGeometry([[0,0],[0.045,0],[0.045,0.04],[0.03,0.06],[0.032,0.09],[0.055,0.2],[0.055,0.28],[0.03,0.4],[0.025,0.46],[0.035,0.5],[0.04,0.52],[0.04,0.56],[0,0.56]].map(([r,y])=>new THREE.Vector2(r,y)),10);
+ function balRun(ax,az,cx,cz){const L=Math.hypot(cx-ax,cz-az);if(L<0.1)return;const g=new THREE.Group();g.position.set((ax+cx)/2,0,(az+cz)/2);g.rotation.y=-Math.atan2(cz-az,cx-ax);G.walls.add(g);
+  bx(-L/2,L/2,0,0.1,-0.115,0.115,M.navy,g);bx(-L/2,L/2,0.1,0.14,-0.11,0.11,M.goaWhite,g);bx(-L/2,L/2,0.7,0.8,-0.13,0.13,M.goaWhite,g);
+  const n=Math.max(1,Math.round(L/0.14));for(let i=0;i<n;i++){const t=(i+0.5)/n;balPts.push([ax+(cx-ax)*t,az+(cz-az)*t]);}}
+ bays.forEach(b=>{const L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]),dx=(b.b[0]-b.a[0])/L,dz=(b.b[1]-b.a[1])/L,p=s=>[b.a[0]+dx*s,b.a[1]+dz*s];
+  (b.ent?[[0.2,L/2-0.85],[L/2+0.85,L-0.2]]:[[0.2,L-0.2]]).forEach(([s0,s1])=>{const a=p(s0),c=p(s1);balRun(a[0],a[1],c[0],c[1]);});});
+ const im=new THREE.InstancedMesh(balGeo,M.navy,balPts.length);const mt=new THREE.Matrix4();balPts.forEach(([x,z],i)=>{mt.makeTranslation(x,0.14,z);im.setMatrixAt(i,mt);});im.castShadow=true;G.walls.add(im);}
+bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0.2,b.b[1]);beam(a,c,0.3,0.24,M.goaWhite,G.walls);});
 /* solid collision for the curtained edges (the entrance bay stays open) */
 bays.forEach(b=>{if(!b.ent)solids.push([[b.a[0],b.a[1]],[b.b[0],b.b[1]]]);});
 /* ceiling, rafters and roof */
@@ -286,6 +362,14 @@ function slopeGeo(geo,off){const p=geo.attributes.position;for(let i=0;i<p.count
  const g2=new THREE.ExtrudeGeometry(shapeOf(roofPoly),{depth:0.14,bevelEnabled:false});g2.rotateX(-Math.PI/2);slopeGeo(g2,0.12);const rm=new THREE.Mesh(g2,[M.roofTile,M.fascia]);rm.castShadow=rm.receiveShadow=true;G.roof.add(rm);}
 {const tiles=M.roofTile.map;tiles.repeat.set(1/1.4,1/1.4);}
 for(let x=0.7;x<15.5;x+=1.2){const ze=Math.min(zEnd(x),x>HX-0.2?5.48:99);const z1=x<=3.48?zEnd(x):(x<=6.46?10.93:5.48);beam(V(x,hc(0.1)-0.14,0.1),V(x,hc(z1)-0.14,z1),0.1,0.18,M.timberDark,G.roof);}
+/* ceiling as on site: flat white plaster with deep white dropped beams making large coffers, dark walnut false-beams between them,
+   and an interlocking dark-wood square-frame feature with a ceiling light in the middle of the hall */
+{const W=S({color:'#f3f0ea',roughness:0.9});
+ const cb=(x0,z0,x1,z1)=>beam(V(x0,hc(z0)-0.11,z0),V(x1,hc(z1)-0.11,z1),0.3,0.22,W,G.roof);
+ cb(0.15,2.74,13.85,2.74);[3.48,9.55,12.6].forEach(x=>cb(x,0.15,x,(x<=6.46?zEnd(x):5.48)-0.15));
+ const fx=6.9,fz=2.74,y=hc(fz)-0.06;[[0,0,1.25],[0.45,0.4,0.85]].forEach(([ox,oz,w])=>{const cx=fx+ox,cz=fz+oz,t=0.12;
+  [[cx-w/2,cx+w/2,cz-w/2,cz-w/2+t],[cx-w/2,cx+w/2,cz+w/2-t,cz+w/2],[cx-w/2,cx-w/2+t,cz-w/2+t,cz+w/2-t],[cx+w/2-t,cx+w/2,cz-w/2+t,cz+w/2-t]].forEach(([a,b,c,d])=>bx(a,b,y-0.08,y,c,d,M.timberDark,G.roof,false));});
+ cyl(0.16,0.16,0.05,fx+0.22,y-0.06,fz+0.2,M.panelLight,G.roof,20,false);}
 [2.7,5.2,7.9,9.9].forEach(z=>{const [x0,x1]=xRange(z);const xx1=z>5.48?x1:Math.min(x1,HX-0.2);beam(V(x0+0.05,hc(z)-0.14,z),V(xx1,hc(z)-0.14,z),0.1,0.18,M.timberDark,G.roof);});
 /* roof fascia lip so the sloped roof reads as a roof from outside */
 
@@ -293,7 +377,7 @@ for(let x=0.7;x<15.5;x+=1.2){const ze=Math.min(zEnd(x),x>HX-0.2?5.48:99);const z
 const pvcState={f:1,target:1};const curtains=[];
 bays.forEach(b=>{
   const zm=(b.a[1]+b.b[1])/2,xm=(b.a[0]+b.b[0])/2,L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]);const ang=Math.atan2(b.b[1]-b.a[1],b.b[0]-b.a[0]);
-  const top=hc(zm)-0.42,hP=top-0.05;const grp=new THREE.Group();grp.position.set(xm,top,zm);grp.rotation.y=-ang;G.curt.add(grp);
+  const top=hc(zm)-0.42,hP=top-0.05;const grp=new THREE.Group();grp.position.set(xm+Math.sin(ang)*0.2,top,zm-Math.cos(ang)*0.2);grp.rotation.y=-ang;G.curt.add(grp);   // hung 20 cm outside the balustrade
   const mk=(w,offx,offz)=>{const g=new THREE.PlaneGeometry(w,1);g.translate(0,-0.5,0);const pm=new THREE.Mesh(g,M.pvc);pm.position.set(offx,0,offz);pm.scale.y=hP;pm.renderOrder=3;grp.add(pm);
     [-0.33,0.33].forEach(s=>{const st=bx(-0.03,0.03,-1,0,-0.004,0.004,M.pvcEdge,pm,false);st.position.set(s*w,-0.5,0.004);}); // vertical tie-straps ride with the panel
     const bar=bx(-w/2,w/2,-0.03,0.03,-0.03,0.03,M.pvcEdge,grp,false);bar.position.set(offx,-hP,offz);return {pm,bar};};
@@ -365,23 +449,31 @@ function globeSconce(x,y){const g=new THREE.Group();M.edison=M.edison||S({color:
 function cageLantern(x,y){const g=new THREE.Group();const arm=[];for(let i=0;i<=8;i++){const t=i/8;arm.push(V(0,0.14*Math.sin(t*Math.PI*0.5),0.02+0.2*t));}g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(arm),8,0.008,5,false),M.lanternCage));
   cyl(0.065,0.065,0.012,0,-0.02,0.24,M.lanternCage,g,12,false);cyl(0.07,0.07,0.2,0,-0.01,0.24,M.flameGlass,g,12,false);for(let k=0;k<6;k++){const a=k/6*6.283;cyl(0.005,0.005,0.2,Math.cos(a)*0.072,-0.01,0.24+Math.sin(a)*0.072,M.lanternCage,g,4,false);}
   const rf=new THREE.Mesh(new THREE.ConeGeometry(0.09,0.08,12),M.lanternCage);rf.position.set(0,0.23,0.24);g.add(rf);sph(0.028,0,0.09,0.24,M.filament,g);g.position.set(x,y,zi+0.03);DW.add(g);}
-// dark panelled timber wainscot all along the wall: boarded base, raised panels, brass-capped rail
+// the existing hand-painted tile dado (0.95 m, blue and yellow on white) along the wall, with a white cap, as on site
+// bays alternate the two tiles on site: brown-on-cream damask and the blue / yellow / sage patchwork
+const PIL=[1.4,3.45,7.3,10.0,13.75];
+[0.1,...PIL,15.2].forEach((x,i,a)=>{if(i<a.length-1)clad(x,a[i+1],0,0.95,zi-0.004,zi+0.006,i%2?azulejoTex:damaskTex,1.0,DW,0.25);});bx(0.1,15.2,0.95,0.99,zi-0.004,zi+0.025,M.goaWhite,DW,false);
+// white fluted pilasters on plinth blocks, dividing the wall into bays (kept as on site), with stepped capitals under the ceiling
+{const fl=flutedWhiteTex.clone();fl.needsUpdate=true;fl.repeat.set(1,1);const fm=S({map:fl,roughness:0.6});const top=hc(0.2)-0.02;
+ PIL.forEach(x=>{bx(x-0.2,x+0.2,0,1.02,zi,zi+0.14,M.goaWhite,DW);bx(x-0.22,x+0.22,1.02,1.07,zi,zi+0.16,M.goaWhite,DW);
+  bx(x-0.15,x+0.15,1.07,top-0.3,zi,zi+0.08,[M.goaWhite,M.goaWhite,M.goaWhite,M.goaWhite,fm,M.goaWhite],DW);
+  bx(x-0.19,x+0.19,top-0.3,top-0.22,zi,zi+0.12,M.goaWhite,DW);bx(x-0.23,x+0.23,top-0.22,top-0.12,zi,zi+0.16,M.goaWhite,DW);bx(x-0.27,x+0.27,top-0.12,top,zi,zi+0.2,M.goaWhite,DW);});}
 
 // emerald upper wall (0.15 to 7.3) with moulded panel frames and a crown moulding
 
 function mouldedPanel(x0,x1,y0,y1){const t=0.012,d=zi+0.03;[[x0,x1,y0,y0+t],[x0,x1,y1-t,y1],[x0,x0+t,y0,y1],[x1-t,x1,y0,y1]].forEach(([a,b,c,e])=>bx(a,b,c,e,d,d+0.02,M.emeraldMould,DW,false));}
-[[0.3,1.95],[2.05,3.4],[7.5,9.1],[9.2,10.8]].forEach(([a,b])=>mouldedPanel(a,b,0.35,3.15));
+
 [[7.3-0.0,0]];
-globeSconce(1.12,2.3);globeSconce(2.72,2.3);globeSconce(7.75,2.5);globeSconce(10.45,2.5);
+globeSconce(2.42,2.3);globeSconce(2.72,2.3);globeSconce(7.75,2.5);globeSconce(10.45,2.5);
 // salon hang: gilt and black frames on the emerald, inside a big moulded frame (x 3.5 to 7.2)
-mouldedPanel(3.5,7.2,0.35,3.2);
+
 {const gi=M.gilt,bk=M.blackMetal;const hang=[[3.95,2.5,0.5,0.62,gi,'portrait',3],[4.55,2.35,0.38,0.5,bk,'engraving',5],[4.5,1.78,0.5,0.4,gi,'landscape',7],[5.15,2.55,0.62,0.48,bk,'landscape',9],[5.35,1.85,0.5,0.62,gi,'portrait',12],[5.95,2.6,0.4,0.52,gi,'poster',2],[6.0,1.9,0.46,0.38,bk,'engraving',14],[6.55,2.5,0.5,0.62,bk,'portrait',20],[6.6,1.75,0.42,0.34,gi,'landscape',22],[3.9,1.8,0.34,0.42,bk,'poster',3],[6.95,2.85,0.3,0.36,gi,'engraving',30]];
   hang.forEach(([x,y,w,h,fm,k,sd],i)=>{const gp=framed(x,y,w,h,fm,artTex(k,sd+i*11,Math.round(256*w/h),256),null);gp.rotation.z=(i%3-1)*0.01;});
   // brass picture light over the biggest frame
   const pl=new THREE.Group();bx(-0.16,0.16,0,0.025,0.0,0.05,M.brass,pl,false);rod(V(0,0.0,0.03),V(0,-0.06,0.14),0.006,M.brass,pl,false);bx(-0.15,0.15,-0.09,-0.06,0.1,0.2,M.brass,pl,false);bx(-0.14,0.14,-0.08,-0.075,0.12,0.19,M.led,pl,false);pl.position.set(5.15,2.9,zi+0.04);DW.add(pl);}
 // exposed brick bay (7.3 to 13.55) in the pub-brick reference, framed by dark timber posts
 
-cageLantern(7.45,3.0);cageLantern(11.4,3.0);cageLantern(13.35,3.0);
+cageLantern(7.62,3.0);cageLantern(11.4,3.0);cageLantern(13.35,3.0);
 // neon and chalkboard in the last bay, a framed vintage poster over the brick base
 {const n=new THREE.Mesh(new THREE.PlaneGeometry(1.9,0.74),M.neonRed);n.position.set(12.15,2.7,zi+0.09);n.renderOrder=4;DW.add(n);
  const c=new THREE.Mesh(new THREE.PlaneGeometry(0.8,1.0),new THREE.MeshStandardMaterial({map:chalkTex,roughness:0.9}));c.position.set(12.95,1.78,zi+0.09);DW.add(c);bx(12.52,13.38,1.26,2.3,zi+0.07,zi+0.09,M.timberDark,DW,false).visible=false;
@@ -392,14 +484,18 @@ function trailPlant(x,y,z,n){const r=rng(Math.round(x*10));bx(x-0.35,x+0.35,y,y+
 trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
 
 
-/* ---- match screens: three TVs, two on the decor wall and one over the back bar, so every table can see a screen ---- */
+/* ---- match screens: three TVs, a 65 in across the north-west corner, one mid decor wall and one over the back bar, so every table can see a screen ---- */
 {const tvTex=tex(512,288,(g,w,h)=>{g.fillStyle='#1d6b34';g.fillRect(0,0,w,h);for(let x=0;x<w;x+=64){g.fillStyle='rgba(255,255,255,.06)';g.fillRect(x,0,32,h);}g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=3;g.strokeRect(24,40,w-48,h-64);g.beginPath();g.moveTo(w/2,40);g.lineTo(w/2,h-24);g.stroke();g.beginPath();g.arc(w/2,h/2+8,36,0,7);g.stroke();g.strokeRect(24,h/2-50,60,100);g.strokeRect(w-84,h/2-50,60,100);
   g.fillStyle='rgba(10,10,20,.88)';g.fillRect(14,8,230,26);g.fillStyle='#fff';g.font='700 15px "IBM Plex Sans", sans-serif';g.textAlign='left';g.fillText('LIVE   MATCH NIGHT   1 – 0   67\'',22,26);g.fillStyle='#e04a3a';g.beginPath();g.arc(w-26,22,7,0,7);g.fill();},1,1);
  const tvMat=new THREE.MeshBasicMaterial({map:tvTex,toneMapped:false});
  function wallTV(cx,cy,w,h,z,grp,ry){const t=new THREE.Group();const f=0.03;
   bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.045,M.black,t,false);const sc=new THREE.Mesh(new THREE.PlaneGeometry(w,h),tvMat);sc.position.z=0.047;t.add(sc);
   bx(-0.12,0.12,-0.08,0.08,-0.02,0,M.blackMetal,t,false);t.position.set(cx,cy,z);t.rotation.y=ry||0;grp.add(t);return t;}
- wallTV(2.0,2.15,1.1,0.62,zi+0.04,DW);               // west, between the two brass sconces
+ // 65 in screen across the corner where the decor wall meets the 7.76 m open side, set exactly on the diagonal (45°) facing the room,
+ // on a slatted timber section that closes the corner between the wall and the corner pillar
+ {const cg=new THREE.Group();cg.position.set(0.72,0,0.72);cg.rotation.y=Math.PI/4;DW.add(cg);
+  bx(-0.83,0.83,0.95,2.95,-0.06,-0.02,M.timberDark,cg);for(let x=-0.78;x<=0.79;x+=0.08)bx(x-0.022,x+0.022,0.95,2.95,-0.02,0.0,M.timber,cg,false);
+  bx(-0.83,0.83,0.9,0.95,-0.06,0.03,M.timberDark,cg);wallTV(0,1.95,1.43,0.805,0.06,cg);}
  wallTV(9.05,2.15,1.1,0.62,zi+0.04,DW);              // centre of the decor wall
  // over the back bar, looking out to the whole hall (local bar coordinates: turned half a circle at x = 15.67)
  {const bg=new THREE.Group();bg.position.set(HX,0,5.15);bg.rotation.y=Math.PI;G.bar.add(bg);const t=wallTV(0,0,0.9,0.5,0,bg,Math.PI/2);t.position.set(0.04,2.84,2.1);}}
@@ -466,12 +562,14 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
  // POS nook at the door end of the back bar
  {const n0=0.08,n1=0.56;[n0,n1-0.025].forEach(z=>B(0.03,0.4,0.96,1.34,z,z+0.025,M.timber));B(0.03,0.4,1.32,1.35,n0,n1,M.timber);B(0.03,0.05,0.96,1.32,n0,n1,M.timberDark,false);B(0.06,0.1,0.96,0.98,0.2,0.42,M.black);{const t=B(0.14,0.16,1.0,1.2,0.18,0.44,M.black);t.rotation.z=0.35;}B(0.22,0.34,0.96,0.99,0.5,0.55,M.black);B(0.06,0.28,0.96,1.08,0.1,0.17,M.white);}
  // ---------- COUNTER ----------
- B(1.1,1.6,0,0.06,c0,c1,M.black);B(1.1,1.55,0.06,0.96,c0,c1,M.black);
- B(1.55,1.6,0.06,0.96,c0,c1,M.onyxGlow);B(1.6,1.625,0.96,0.98,c0,c1,M.black,false);plane(c1-c0,0.9,M.meshWire,1.63,0.51,(c0+c1)/2,Math.PI/2);
- for(let z=c0;z<=c1+0.01;z+=0.55)B(1.6,1.63,0.06,0.96,z-0.015,z+0.015,M.black);
- // square end facing the hall
- B(1.1,1.6,0.06,0.96,c0-0.05,c0,M.onyxGlow);plane(0.5,0.9,M.meshWire,1.35,0.51,c0-0.056,Math.PI);B(1.1,1.6,0,0.06,c0-0.05,c0,M.black);B(1.0,1.75,0.98,1.04,c0-0.08,c0,M.marble);
- B(1.0,1.75,0.98,1.04,c0,c1,M.marble);B(1.71,1.74,0.97,1.045,c0,c1,M.brass,false);B(1.62,1.65,0.94,0.965,c0,c1,M.led,false);B(1.58,1.6,0.03,0.07,c0,c1,M.led,false);rod(V(1.86,0.22,c0),V(1.86,0.22,c1),0.024,M.brass,g);
+ // the counter as built on site: an exposed red-brick stand (the tan ply on it today is temporary), brick pilasters on the front,
+ // a deeper brick pier at the hall end, thick timber top with a brass edge, warm LED under the overhang
+ const brickM=(u,v)=>{const t=brickTex.clone();t.needsUpdate=true;t.repeat.set(u/0.92,v/0.6);return S({map:t,roughness:0.95});};
+ const brickBox=(x0,x1,y0,y1,z0,z1)=>{const dx=x1-x0,dy=y1-y0,dz=z1-z0;const m=new THREE.Mesh(new THREE.BoxGeometry(dx,dy,dz),[brickM(dz,dy),brickM(dz,dy),brickM(dx,dz),brickM(dx,dz),brickM(dx,dy),brickM(dx,dy)]);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);m.castShadow=m.receiveShadow=true;g.add(m);return m;};
+ brickBox(1.1,1.6,0,0.98,c0+0.3,c1);
+ for(let z=c0+1.35;z<c1-0.3;z+=1.05)brickBox(1.6,1.67,0,0.98,z-0.17,z+0.17);
+ brickBox(1.04,1.7,0,0.98,c0-0.1,c0+0.3);B(1.03,1.71,0,0.06,c0-0.11,c0+0.31,M.conc);          // end pier, the brick "stand"
+ B(1.0,1.78,0.98,1.04,c0-0.14,c1,M.timberDark);B(1.77,1.79,0.975,1.045,c0-0.14,c1,M.brass,false);B(1.71,1.74,0.95,0.975,c0+0.3,c1,M.led,false);rod(V(1.86,0.22,c0+0.3),V(1.86,0.22,c1),0.024,M.brass,g);
  // bartender side: louvred keg-cabinet doors and the bar sink / ice well
  [[0.1,0.55],[0.55,1.0]].forEach(([a,b])=>{B(1.08,1.1,0.08,0.88,a+0.01,b-0.01,M.oliveWood);for(let y=0.13;y<0.84;y+=0.055)B(1.077,1.08,y,y+0.025,a+0.05,b-0.05,M.black,false);B(1.06,1.08,0.6,0.7,b-0.08,b-0.06,M.brass,false);});
  B(0.9,1.1,0,0.85,3.9,c1,M.ss);B(0.92,1.08,0.7,0.86,3.95,4.45,M.white);B(1.1,1.12,0.06,0.8,1.15,1.65,M.ss,false);
@@ -561,7 +659,7 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
   const ring=new THREE.Mesh(new THREE.TorusGeometry(0.2,0.012,6,28),M.brass);ring.position.z=0.24;g.add(ring);for(let i=0;i<8;i++){const a=i/8*6.283;sph(0.012,Math.cos(a)*0.2,Math.sin(a)*0.2,0.25,M.brass,g);}
   const mist=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.1,1.3,22,1,true),M.mist);mist.rotation.x=Math.PI/2;mist.position.z=0.9;mist.castShadow=false;g.add(mist);
   g.position.set(x+nx*0.2,2.2,z+nz*0.2);g.rotation.y=Math.atan2(nx,nz);g.rotation.x=0.3;G.fans.add(g);}
-colPts.forEach(([x,z])=>{if(x>15.6&&z<0.2)return;if(Math.abs(z-5.48)<0.05&&x>9.7&&x<12.4)return;pillarMistFan(x,z);});
+colPts.forEach(([x,z])=>{if(x>15.6&&z<0.2)return;if(x<0.1&&z<0.1)return;if(Math.abs(z-5.48)<0.05&&x>9.7&&x<12.4)return;pillarMistFan(x,z);});
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
   bx(-0.18,0.18,0.06,1.75,-0.15,0.15,body,g);bx(-0.17,0.17,0.0,0.06,-0.14,0.14,M.black,g);
   bx(-0.16,0.16,1.35,1.62,0.15,0.152,M.black,g,false);for(let y=1.38;y<1.6;y+=0.04)bx(-0.15,0.15,y,y+0.012,0.152,0.158,M.ssDark,g,false);   // louvres
@@ -801,14 +899,14 @@ function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.get
 /* ======================= labels ======================= */
 lbl('Main restaurant · 32 covers (5 × 4 + 2 family tables of 6)',6.5,2.6,3.2,'');
 lbl('Decor wall · 15.67 m',7.8,3.0,0.2,'o');
-lbl('Bar · the counter zone',14.6,2.6,1.5,'');lbl('Match screens · 3 TVs',9.05,2.75,0.3,'');
+lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('Match screens · 3 TVs',9.05,2.75,0.3,'');lbl('65 in TV · corner mount',0.75,2.65,0.75,'');
 lbl('Pathway · about 1.00 m',16.17,0.4,4.6,'k');
 lbl('Kitchen · 5.41 × 4.38 m',BX0+2.7,3.2,4.3,'k');
 lbl('Dish wash · 5.41 × 2.00 m',BX0+2.7,3.7,1.0,'w');
 lbl('Washroom · 2.96 × 1.70 m',TX0+1.5,4.3,-0.85,'w');
 lbl('Store room · 2.70 × 6.46 m',SX0+1.35,3.2,BY1+3.2,'k');
 lbl('PVC roll-down curtains',-0.4,2.2,3.9,'o');
-[['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
+[['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9],['5.00 m landing',EM,0.05,10.2],['5.00 m garden',EM-1.5,0.05,15.2],['1.00 m path',EM+2.0,0.05,15.2],['1.70 m gate',EM+1.65,2.4,16.3],['0.80 m railing',-0.6,0.8,2.0]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
 const lblEls=labels.map(l=>{const e=document.createElement('div');e.className='lbl '+l.cls;e.innerHTML=(l.cls==='d'?'':'<i></i>')+l.text;document.getElementById('labels').appendChild(e);return e;});
 const SHOW={lbl:true,dims:false};
 function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new THREE.Vector3();labels.forEach((l,i)=>{const e=lblEls[i];const on=l.cls==='d'?SHOW.dims:SHOW.lbl;if(!on){e.style.display='none';return;}
@@ -818,6 +916,8 @@ function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new T
 const VIEWS={
  iso:{p:[-9,16,26],t:[11,1,4.5],card:'overview',fov:46},
  decor:{p:[6.2,1.6,5.2],t:[5.4,2.1,0],card:'decor',roof:true,fov:68},
+ tv:{p:[3.2,1.4,4.6],t:[0.7,1.9,0.7],card:'tv',fov:60},
+ gate:{p:[12.7,1.7,23.5],t:[12.0,1.9,13.0],card:'gate',fov:52},
  entry:{p:[11.07,1.6,9.4],t:[11.07,1.4,3.2],card:'entry',fov:62},
  bar:{p:[11.5,1.6,4.3],t:[14.2,1.0,2.0],card:'bar',fov:64},
  backbar:{p:[14.95,1.55,0.7],t:[15.6,1.45,3.2],card:'backbar',fov:66},
@@ -830,11 +930,13 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance in the middle of the 9.20 m open edge','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
- decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: dark panelled timber wainscot, emerald panels with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','Three match screens: two on this wall, one over the back bar','Warm 2700 K sconces and jute pendants']],
- entry:['Entrance','Middle of the open 9.20 m edge','Guests come in through a PVC strip door centred on the open edge (4.6 m from each end), over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Planters either side']],
+ overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance in the middle of the 9.20 m open edge','White turned Goan pillars on an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor, the existing tile dado on the north wall','65 in TV on the diagonal of the north-west corner','Front: arched gate (1.70 m), 5 × 5 m garden, 1.00 m path, 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
+ decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the existing hand-painted tile dado (0.95 m) with a white cap, emerald panels above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','Three match screens: a 65 in across the north-west corner, one mid-wall, one over the back bar','Warm 2700 K sconces and jute pendants']],
+ entry:['Entrance','Middle of the open 9.20 m edge','Guests cross the 5 × 5 m red-oxide landing and step up through a 1.70 m opening in the balustrade, centred on the open edge (4.6 m from each end), over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','White turned Goan pillars either side, as on site']],
+ tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Seen from every table on the west half of the hall']],
+ gate:['Gate','Front entrance · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates. Inside, a 5 × 5 m garden on the left and a 1.00 m stepping-stone path (red squares in grey kota, grass joints) on the right lead to a 5 × 5 m red-oxide landing in front of the hall entrance.',['Gate leaves open inwards, over the garden edge and the path','Compound wall with a navy picket either side','Black lamp posts along the path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
  backbar:['Back bar','Behind the counter','Olive back bar with a marble top, an amber onyx panel over sage tile, timber shelves lit from below with labelled bottles, infusion jars, a lit mixer cooler, a glasswasher, a soju riser and the ON TAP board.',['One brass font with 3 craft taps on the counter','POS nook at the south end']],
- bar:['Bar','The counter zone, 5.48 m','Backlit amber onyx behind a black mesh frame, marble top with a brass edge and LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack, as in the Simplex bar.',['Neon DRAUGHT over the back bar']],
+ bar:['Bar','The counter zone, 5.48 m','The existing counter, finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack.',['Neon DRAUGHT over the back bar','Brick: red with light mortar, as on site']],
  kitchen:['Kitchen','5.41 × 4.38 m','Cooking line along the east wall under one stainless hood: stock range, twin fryer, dim sum steamer, 2-burner wok range. Prep island, refrigeration, a pass window to the pathway and the dish-wash door.',['Hood duct rises above the roof','Anti-slip floor with a drain channel','Hand-wash station by the dish-wash door']],
  dish:['Dish wash','5.41 × 2.00 m','One-way line from dirty to clean: hatch from the pathway, receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, then the door into the kitchen.',['Hot-water cylinder, louvre extractor, floor drain']],
  wash:['Washroom','2.96 × 1.70 m','Sage-tile washroom with a WC, jet spray, marble basin, mirror and hand-dryer, entered from a hand-wash lobby with its own basin and mirror.',['Door opens from the lobby on the pathway side']],

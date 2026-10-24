@@ -11,9 +11,13 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Part | Size (m) | Notes |
 |---|---|---|
 | Main restaurant | 15.67 × 7.76 (irregular) | 5 square tables for 4 + 2 family tables for 6 (1.9 × 0.9 m, 3 chairs facing 3) = **32 covers** (cap 35). Open on three sides, solid 15.67 m north wall |
-| Decor wall (with 2 of the 3 match TVs) | 15.67 | Single deep-green wall with fine panel lines, brass Edison sconces, a salon hang of gilt and black frames, a brick bay with a chalkboard |
-| Bar | counter zone, 4.8 long | Simplex bar style: backlit amber onyx behind a black mesh frame, marble top with brass edge, velvet stools, 3 craft taps on one brass font, floating glass rack; back bar with labelled bottles, infusion jars, lit cooler, ON TAP board |
-| Entrance | middle of the 9.20 m open edge | PVC strip door under rustic hanging signs |
+| Decor wall | 15.67 | As on site: hand-painted tile dado (0.95 m, damask and blue/yellow patchwork bays) and white fluted pilasters on plinths; the colours above are repainted bottle green, with brass sconces, a salon hang, chalkboard and one match TV |
+| TV corner | NW corner | 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, on a slatted timber section |
+| Bar | counter zone, 4.8 long | The existing counter in exposed red brick (the tan ply on site is temporary): brick pilasters, a brick end pier, dark timber top with brass edge, velvet stools, 3 craft taps on one brass font, floating glass rack; back bar with labelled bottles, infusion jars, lit cooler, ON TAP board |
+| Entrance | middle of the 9.20 m open edge | 1.70 m opening in the balustrade, PVC strip door |
+| Open edges | all five | White turned Goan pillars on pedestals and an 80 cm balustrade (navy balusters, white rail), as on site |
+| Floor and ceiling | hall | Blue-grey granite in 60 cm tiles; flat white ceiling with white dropped beams, dark walnut false-beams and an interlocking square-frame feature light, as on site |
+| Front | gate to hall | Arched whitewashed gateway (1.70 m) with blue gable and sign; 5 × 5 m garden on the left, 1.00 m stepping-stone path on the right, 5 × 5 m red-oxide landing before the entrance |
 | Kitchen | 5.41 × 4.38 | Cooking line under one hood, prep island, refrigeration, pass window |
 | Dish wash | 5.41 × 2.00 | Hatch, receiving table, double sink, hood dishwasher, clean table |
 | Washroom | 2.96 × 1.70 | Sage-tile WC and marble basin, with a hand-wash lobby |
@@ -24,14 +28,14 @@ Every open side closes with roll-down clear PVC (button in the toolbar rolls the
 
 ## Using it
 
-- Camera buttons jump to the decor wall, entrance, bar, kitchen, dish wash, washroom, store room, from outside and the plan.
+- Camera buttons jump to the decor wall, TV corner, gate, entrance, bar, kitchen, dish wash, washroom, store room, from outside and the plan.
 - **Walk in** gives a first-person walk (W A S D, arrow pad on phones). Walls and doors block you.
 - The Lighting panel (Lunch, Sunset, Evening, Late, plus Time and Lights sliders) works as in Simplex: warm 2700 K fittings. Sizes shows the plan dimensions.
 - URL options: `?view=kitchen`, `?time=night`, `?pvc=up`, `?roof=0`, `?sizes`.
 
 ## Sizes: where they come from
 
-Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the kitchen block width (5.41 = 2.45 + 2.96), the washroom (2.96 × 1.70) and the 6.38 m block depth are printed on the survey plan. The store room (2.70 × 6.46) was given separately. The dish wash / kitchen depths (2.00 / 4.38), the pathway width (about 1.00), the counter zone width (2.10), wall and ceiling heights, and the roof shape are estimates or design choices, to be confirmed on site.
+Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the kitchen block width (5.41 = 2.45 + 2.96), the washroom (2.96 × 1.70) and the 6.38 m block depth are printed on the survey plan. The store room (2.70 × 6.46) was given separately. The front (gate 1.70, garden 5 × 5, path 1.00, landing 5 × 5), the 80 cm railing and the finishes (pillars, tiles, ceiling, brick counter) come from the site videos of 24 Oct 2026. The dish wash / kitchen depths (2.00 / 4.38), the pathway width (about 1.00), the counter zone width (2.10), wall and ceiling heights, and the roof shape are estimates or design choices, to be confirmed on site.
 
 ## Files
 
