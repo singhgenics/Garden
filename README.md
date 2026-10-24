@@ -11,7 +11,7 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Part | Size (m) | Notes |
 |---|---|---|
 | Main restaurant | 15.67 × 7.76 (irregular) | 5 square tables for 4 + 2 family tables for 6 (1.9 × 0.9 m, 3 chairs facing 3) = **32 covers** (cap 35). Open on three sides, solid 15.67 m north wall |
-| Decor wall | 15.67 | As on site: hand-painted tile dado (0.95 m, damask and blue/yellow patchwork bays) and white fluted pilasters on plinths; the colours above are repainted bottle green, with brass sconces, a salon hang and a chalkboard |
+| Decor wall | 15.67 | White fluted pilasters on plinths kept as on site; the tile dado (0.95 m) is covered with green panelled WPC wainscot on battens (1.0 m, one shade deeper than the wall, brass cap rail); the colours above are repainted bottle green, with brass sconces, a salon hang and a chalkboard |
 | TV corner | NW corner | The only TV: a 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, on a slatted timber section |
 | Bar | counter 2.80 long, half the end | The existing counter (as filmed, it runs only half way across the end, leaving an open staff entry on the open side) in exposed red brick (the tan ply on site is temporary): brick pilasters, a brick end pier, dark timber top with brass edge, velvet stools, 3 craft taps on one brass font, floating glass rack; back bar with labelled bottles, infusion jars, lit cooler, ON TAP board |
 | Entrance | middle of the 9.20 m open edge | 1.70 m opening in the balustrade, PVC strip door |
