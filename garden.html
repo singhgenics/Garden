@@ -432,8 +432,8 @@ bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0
   fig(170,170,1.0,'sax');fig(380,200,0.92,'guitar');fig(560,230,0.8,'mic');
   g.font='700 60px serif';['♪','♫','♩','♬','♪'].forEach((n,i)=>g.fillText(n,640+i*70,260+Math.sin(i)*60));
   g.lineWidth=3;for(let k=0;k<5;k++){g.beginPath();g.moveTo(600,330+k*14);g.bezierCurveTo(760,300+k*14,860,380+k*14,1000,330+k*14);g.stroke();}},1,1);
- const mp=new THREE.Mesh(new THREE.PlaneGeometry(z1-z0-0.3,1.5),S({map:mur,roughness:0.9}));mp.position.set(HX-0.105,1.75,(z0+z1)/2);mp.rotation.y=-Math.PI/2;G.walls.add(mp);
- [[0.45,0.2],[0.85,0.16]].forEach(([z,rr])=>{cyl(rr*0.7,rr*0.6,0.06,HX-0.35,0,z,M.pot,G.walls,14);const pot=new THREE.Mesh(new THREE.SphereGeometry(rr,14,10),M.pot);pot.scale.y=0.9;pot.position.set(HX-0.35,rr*0.95,z);G.walls.add(pot);});}
+ const mp=new THREE.Mesh(new THREE.PlaneGeometry(z1-z0-0.3,1.5),S({map:mur,roughness:0.9}));mp.position.set(HX-0.105,1.95,(z0+z1)/2);mp.rotation.y=-Math.PI/2;G.walls.add(mp);
+ [[0.35,0.18]].forEach(([z,rr])=>{cyl(rr*0.7,rr*0.6,0.06,HX-0.35,0,z,M.pot,G.walls,14);const pot=new THREE.Mesh(new THREE.SphereGeometry(rr,14,10),M.pot);pot.scale.y=0.9;pot.position.set(HX-0.35,rr*0.95,z);G.walls.add(pot);});}
 /* solid collision for the curtained edges (the entrance bay stays open) */
 bays.forEach(b=>{if(!b.ent)solids.push([[b.a[0],b.a[1]],[b.b[0],b.b[1]]]);});
 /* ceiling, rafters and roof */
@@ -590,6 +590,17 @@ cageLantern(7.62,3.0);cageLantern(11.4,3.0);cageLantern(13.35,3.0);
 function trailPlant(x,y,z,n){const r=rng(Math.round(x*10));bx(x-0.35,x+0.35,y,y+0.04,z,z+0.16,M.timber,DW,false);for(let i=0;i<n;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.1+r()*0.07,8,6),M.leaf);l.position.set(x-0.3+r()*0.6,y+0.12+r()*0.1,z+0.08);DW.add(l);}
   for(let i=0;i<6;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.06,6,5),M.leaf);l.position.set(x-0.3+i*0.12,y-0.05-r()*0.3,z+0.1);DW.add(l);}}
 trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
+// more frames on the bays that were bare: small salon groups under the sconces, mixed gilt and black, prints, photographs and engravings
+{const gi=M.gilt,bk=M.blackMetal,K=['portrait','landscape','engraving','poster'];let sd=40;
+ const grp=list=>list.forEach(([x,y,w,h,fm,k])=>{const t=framed(x,y,w,h,fm,artTex(k,sd,Math.round(256*w/h),256),null);t.rotation.z=((sd++)%3-1)*0.006;});
+ // bay between the TV corner and the big salon hang
+ grp([[2.0,1.75,0.42,0.54,gi,'portrait'],[2.58,1.85,0.5,0.38,bk,'landscape'],[2.58,1.4,0.34,0.3,gi,'engraving'],[3.05,1.62,0.3,0.42,bk,'poster'],[2.0,1.28,0.36,0.26,bk,'engraving']]);
+ // middle bay: a larger group around a big landscape
+ grp([[8.65,1.85,0.82,0.56,gi,'landscape'],[7.95,2.0,0.36,0.46,bk,'portrait'],[7.95,1.45,0.36,0.3,gi,'engraving'],[9.4,2.05,0.38,0.3,bk,'poster'],[9.4,1.55,0.38,0.5,gi,'portrait'],[8.4,1.3,0.3,0.24,bk,'engraving'],[8.95,1.3,0.34,0.24,gi,'landscape']]);
+ // left of the chalkboard poster
+ grp([[10.75,1.95,0.42,0.52,bk,'portrait'],[10.75,1.38,0.42,0.32,gi,'landscape']]);
+ // last bay by the bar
+ grp([[14.4,1.95,0.46,0.6,gi,'poster'],[14.4,1.36,0.4,0.3,bk,'engraving']]);}
 
 
 /* ---- one 65 in television across the north-west corner (where the decor wall meets the 7.76 m open side), set exactly on the diagonal, facing the room ----
@@ -723,10 +734,33 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   const back=new THREE.Mesh(new THREE.CylinderGeometry(0.21,0.21,0.42,20,1,true,0,Math.PI),M.velvetSand);back.position.set(x+0.02,1.0,z);g.add(back);
   const b2=new THREE.Mesh(new THREE.CylinderGeometry(0.19,0.19,0.4,20,1,true,0,Math.PI),M.velvetSand.clone());b2.material.side=THREE.DoubleSide;b2.position.set(x+0.02,1.0,z);g.add(b2);}
  for(let z=k0+0.4;z<k1-0.15;z+=0.62)stool(2.02,z);
+ // ---------- server station: the counter extended to the left, in front of the mural wall ----------
+ // front: the same brick counter and teak top run on 1.5 m (local z k1 to k2); a lower pick-up shelf on the hall side for the servers.
+ // back: a counter under the mural with the coffee machine, grinder, cup warmer, POS and cutlery / napkin trays. The last 0.7 m by the north wall stays open as the staff way in.
+ {const k2=k1+1.5;
+  brickBox(1.1,1.6,0,0.98,k1,k2);brickBox(1.6,1.67,0,0.98,k2-0.34,k2);
+  B(1.0,1.78,0.98,1.04,k1,k2+0.04,M.timberDark);B(1.77,1.79,0.975,1.045,k1,k2+0.04,M.brass,false);B(1.71,1.74,0.95,0.975,k1,k2,M.led,false);
+  B(1.62,1.95,0.78,0.82,k1+0.15,k2-0.4,M.timberDark);[k1+0.2,k2-0.45].forEach(z=>B(1.62,1.66,0.7,0.78,z-0.02,z+0.02,M.brass,false));   // servers' pick-up ledge
+  // bartender side of the extension: drawers for cutlery and napkins, a bus-tub shelf
+  B(1.08,1.1,0.1,0.88,k1+0.05,k2-0.05,M.oliveWood);for(let y=0.3;y<0.86;y+=0.27)B(1.06,1.08,y-0.01,y+0.01,k1+0.3,k2-0.3,M.brass,false);
+  // back counter under the mural
+  B(0,0.62,0,0.9,k1-0.05,k2,M.oliveWood);B(0,0.64,0.9,0.94,k1-0.05,k2,M.marble);
+  // espresso machine (two groups) with cups warming on top, grinder, knock box
+  {const z=k1+0.55;B(0.08,0.52,0.94,1.36,z-0.36,z+0.36,M.ss);B(0.5,0.53,1.0,1.3,z-0.34,z+0.34,M.black,false);B(0.08,0.52,1.36,1.38,z-0.36,z+0.36,M.ssDark,false);
+   [z-0.16,z+0.16].forEach(zz=>{cyl(0.035,0.035,0.06,0.58,1.1,zz,M.ss,g,12,false);rod(V(0.58,1.13,zz),V(0.7,1.13,zz),0.01,M.black,g,false);cyl(0.03,0.025,0.06,0.6,0.94,zz,M.white,g,10,false);});
+   rod(V(0.55,1.2,z+0.3),V(0.65,1.0,z+0.32),0.006,M.ss,g,false);
+   for(let i=0;i<6;i++)cyl(0.035,0.03,0.07,0.2+(i%2)*0.15,1.38,z-0.25+Math.floor(i/2)*0.25,M.white,g,10,false);
+   const grz=z+0.55;B(0.15,0.4,0.94,1.25,grz-0.11,grz+0.11,M.black);cyl(0.07,0.05,0.18,0.27,1.25,grz,S({color:'#3a2a1c',roughness:0.4,transparent:true,opacity:0.85}),g,14,false);
+   B(0.4,0.56,0.94,1.04,grz-0.09,grz+0.09,M.black);}
+  // POS screen and a stack of menus at the far end
+  {const z=k2-0.3;B(0.25,0.35,0.94,0.98,z-0.12,z+0.12,M.black);const t=B(0.28,0.3,0.98,1.24,z-0.17,z+0.17,M.black);t.rotation.z=0.3;B(0.15,0.45,0.94,0.98,z-0.45,z-0.25,M.timberDark,false);}
+  // open shelf on the wall above, glassware and coffee cups, kept low so the mural stays in view
+  B(0.0,0.26,1.55,1.58,k1+0.1,k2-0.1,M.timber,false);for(let zz=k1+0.2;zz<k2-0.15;zz+=0.12)cyl(0.04,0.035,0.08,0.13,1.58,zz,M.white,g,10,false);
+  const sign=new THREE.Mesh(new THREE.PlaneGeometry(0.6,0.16),new THREE.MeshStandardMaterial({map:signTex(300,80,[['SERVICE',34,0.55]],'#161412','#e9a94b','#c9993f'),roughness:0.8}));sign.position.set(1.95,0.95,(k1+k2)/2-0.2);sign.rotation.y=Math.PI/2;g.add(sign);}
  // neon over the back bar
  {const nd=new THREE.Mesh(new THREE.PlaneGeometry(1.5,0.45),M.neonDraught);nd.rotation.y=Math.PI/2;nd.position.set(0.05,2.7,0.95);nd.renderOrder=4;g.add(nd);}
 }
-solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
+solids.push([[HX-1.75,0.8],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
 
 /* existing structural pillar inside the west wing (marked on the plan, as filmed): thick round blue column on a white square base, up to the ceiling */
 {const px=3.95,pz=6.3,top=hc(pz),q=0.17;   // same column as on the open sides
@@ -1078,13 +1112,13 @@ const VIEWS={
 };
 const CARDS={
  overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with green panelled wainscot','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
- decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is hidden behind green panelled WPC wainscot (1.0 m, one shade deeper than the wall, brass cap rail), white fluted pilasters kept, emerald paint above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Wall left clear of seating so the decor reads end to end','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces and jute pendants']],
+ decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is hidden behind green panelled WPC wainscot (1.0 m, one shade deeper than the wall, brass cap rail), white fluted pilasters kept, emerald paint above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Frames in every bay: the big salon hang in the middle plus smaller groups under the sconces','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces and jute pendants']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Seen from every table on the west half of the hall']],
  approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. Overhead lines run from the three black lamp posts across to the edge of the existing restaurant\'s balcony roof, each with a brass lantern and a jute globe (the hanging lights from the Simplex model) and a hanging planter with trailing greens.',['Lights and planters kept 2.1 m or more above the path','Warm 2200-2700 K']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
  backbar:['Back bar','Behind the counter','Runs only behind the counter (2.80 m); to its left is the end wall with the mural. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a glasswasher, a lit bottle bay with the ON TAP board above it.',['One brass font with 3 craft taps on the counter','POS nook at the open-side end','Staff come in through the gap between the counter and the mural wall']],
- bar:['Bar','The counter, 2.80 m (half the 5.48 m end)','The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack.',['Left of the bar: the end wall with the black-and-white Sound of Music mural, as on site','Brick: red with light mortar, as on site']],
+ bar:['Bar','The counter, 2.80 m, plus a 1.50 m server station','The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, velvet stools, one brass font with 3 craft taps and a floating glass rack.',['Server station: the brick counter extended 1.5 m to the left, with a pick-up ledge, drawers, an espresso machine and grinder, POS and cups on a back counter under the mural','A 0.7 m staff way in by the north wall','The Sound of Music mural kept above the coffee station','Brick: red with light mortar, as on site']],
  kitchen:['Kitchen','5.41 × 4.38 m','Laid out as filmed: door from the passage near the corner; a black granite platform the length of the dish-wash wall with a shuttered window over it (no door in that wall); the cooking line along the east wall under a white masonry smoke hood; fridges and racks along the far wall; sloping white ceiling with a dark timber beam. Open middle, pass window to the passage.',['Hood duct rises above the roof','Fire extinguishers by the door, as on site','Equipment shown is the proposed fit-out']],
  dish:['Dish wash','5.41 × 2.00 m','Its own door from the passage; dirty ware comes in from the passage to the receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, and clean ware goes to the kitchen through the shuttered window over the granite platform.',['Hot-water cylinder, louvre extractor, floor drain']],
  wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Blue patterned tiles over a blue dado.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
