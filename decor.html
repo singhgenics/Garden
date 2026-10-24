@@ -4,26 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Cabin East Garden Decor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a decor book. One full-bleed render per zone, then a two-column spec (what goes in / why) with its inspiration board. */
+/* Layout: a walk-through book. You arrive at the gate and walk in: one full-bleed render per stop, then a two-column spec (what goes in / what is already there). */
 :root{
   --paper:#eef0ea; --ink:#1d2a22; --muted:#56635a; --line:#cfd5cc; --card:#f7f8f4;
-  --green:#1f3d2e; --brass:#9a7434; --brass-ink:#7a5a22;
+  --green:#1f3d2e; --brass:#9a7434; --brass-ink:#7a5a22; --blue:#2443a6;
   --display:"Gloock",Georgia,"Times New Roman",serif;
   --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#111915; --ink:#e7ebe3; --muted:#9aa79d; --line:#2a3830; --card:#17221c;
-  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; color-scheme:dark}}
+  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; --blue:#8fa6f0; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#111915; --ink:#e7ebe3; --muted:#9aa79d; --line:#2a3830; --card:#17221c;
-  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; color-scheme:dark}
+  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; --blue:#8fa6f0; color-scheme:dark}
 *{box-sizing:border-box}
-img{max-width:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
 .wrap{max-width:1120px;margin:0 auto}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.1}
@@ -32,11 +32,11 @@ header{padding-block:48px 28px;display:grid;gap:14px}
 header h1{font-size:clamp(40px,7vw,76px);color:var(--green)}
 header p{max-width:62ch;margin:0;color:var(--muted);font-size:17px}
 figure{margin:0}
-.hero img,.zone img.render{width:100%;display:block;border-radius:4px;aspect-ratio:1376/768;object-fit:cover;background:var(--line)}
+img.render{width:100%;max-width:100%;display:block;border-radius:4px;aspect-ratio:16/9;object-fit:cover;background:var(--line)}
 figcaption{font:400 12.5px/1.4 var(--mono);color:var(--muted);margin-top:8px}
 .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-top:40px}
 .sw{display:grid;gap:6px;font-size:13px}
-.sw i{display:block;height:64px;border-radius:3px;border:1px solid #0002}
+.sw i{display:block;height:64px;border-radius:3px;border:1px solid var(--line)}
 .sw b{font-weight:650}.sw span{color:var(--muted);font:12px/1.3 var(--mono)}
 nav.toc{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:36px;padding-block:14px;border-block:1px solid var(--line);font-size:14px}
 nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass)}
@@ -53,175 +53,186 @@ table.spec{width:100%;border-collapse:collapse;font-size:14.5px}
 table.spec th{text-align:left;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 12px 6px 0;width:30%;vertical-align:top}
 table.spec td{padding:0 0 6px;vertical-align:top}
 table.spec tr+tr th,table.spec tr+tr td{padding-top:9px;border-top:1px solid var(--line)}
-aside.inspo{display:grid;gap:8px}
-aside.inspo img{width:100%;border-radius:3px;display:block}
-.note{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:14px}
-.note b{color:var(--brass-ink);font-weight:650}
+.site{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:14px;display:grid;gap:8px}
+.site ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.site img{width:100%;max-width:100%;border-radius:3px;display:block;aspect-ratio:16/9;object-fit:cover}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:600px){.pair{grid-template-columns:1fr}}
-.pair img{width:100%;border-radius:4px;display:block}
 .care{margin-top:72px;display:grid;gap:16px}
 .care h2{font-size:clamp(28px,4vw,40px);color:var(--green)}
 .care ul{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch}
 .next ol{margin:0;padding-left:22px;display:grid;gap:8px;max-width:72ch}
 footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font:12.5px/1.5 var(--mono);color:var(--muted)}
 footer a{color:var(--muted)}
-.back{font:500 13px var(--mono);color:var(--brass-ink);text-decoration:none;justify-self:start}
-.back:hover,.back:focus-visible{text-decoration:underline}
 </style>
+
 </head>
 <body>
 <div class="wrap">
 <header>
-  <a class="back" href="garden.html">&larr; Open the 3D model</a>
   <span class="eyebrow">Cabin East &middot; Garden &middot; decor concept</span>
-  <h1>A green room in a garden</h1>
-  <p>The look for the Garden hall, built on the 3D model and the Design Inspos boards: one deep bottle-green panelled wall dressed like an old pub, a dark fluted bar under hanging greenery, and a hall that opens straight onto a lit tropical garden. Every render below keeps the model's layout; only the finishes change.</p>
+  <h1>A green room in a Goan garden</h1>
+  <p>The look for the Garden, built on the updated 3D model of the site as it stands: the blue columns and navy balustrade, the white fretwork and fleur-de-lis eaves, the coffered white ceiling and the brick bar all stay. The new layer is a bottle-green wall over green panelling that hides the old tiles, warm brass and jute light, teak and cane, and a lit path from the gate to the door. Every render keeps the model's layout; only the finishes change.</p>
 </header>
 
-<figure class="hero">
-  <img src="decor/entry-1.jpg" alt="Looking into the open garden pub at dusk: string lights under timber beams, green panelled back wall, bar on the right">
-  <figcaption>From the entrance path at dusk, PVC curtains rolled up. Generated in Google Flow from the model's Entrance view.</figcaption>
+<figure>
+  <img class="render" src="decor/entry-1.jpg" alt="Standing on the red-oxide landing at sunset, looking into the open hall between blue columns over the navy balustrade">
+  <figcaption>From the landing at sunset, curtains rolled up. Generated in Google Flow from the model's Entrance view.</figcaption>
 </figure>
 
 <div class="palette" aria-label="Palette">
-  <div class="sw"><i style="background:#1f3d2e"></i><b>Bottle green</b><span>walls, banquette</span></div>
-  <div class="sw"><i style="background:#9a7434"></i><b>Aged brass</b><span>sconces, rail, taps</span></div>
-  <div class="sw"><i style="background:#7b4f2c"></i><b>Teak</b><span>tables, beams, shelves</span></div>
-  <div class="sw"><i style="background:#cfae78"></i><b>Cane</b><span>chair backs, pendants</span></div>
-  <div class="sw"><i style="background:#e7e3dc"></i><b>Veined marble</b><span>bar top</span></div>
-  <div class="sw"><i style="background:#2b2d2b"></i><b>Charcoal check</b><span>floor</span></div>
-  <div class="sw"><i style="background:#a95a38"></i><b>Old brick</b><span>chalkboard bay, pots</span></div>
+  <div class="sw"><i style="background:#1f3d2e"></i><b>Bottle green</b><span>wall, wainscot</span></div>
+  <div class="sw"><i style="background:#2443a6"></i><b>Goa blue</b><span>columns (existing)</span></div>
+  <div class="sw"><i style="background:#1f2a5c"></i><b>Navy</b><span>balusters, plinth</span></div>
+  <div class="sw"><i style="background:#f2efe8"></i><b>Lime white</b><span>pilasters, fretwork, ceiling</span></div>
+  <div class="sw"><i style="background:#9a7434"></i><b>Aged brass</b><span>rails, sconces, lanterns</span></div>
+  <div class="sw"><i style="background:#7b4f2c"></i><b>Teak</b><span>tables, bar top, beams</span></div>
+  <div class="sw"><i style="background:#a9533a"></i><b>Old brick</b><span>bar counter (existing)</span></div>
+  <div class="sw"><i style="background:#b9473a"></i><b>Red oxide</b><span>landing, paths</span></div>
 </div>
 
-<nav class="toc" aria-label="Zones">
-  <a href="#wall">Decor wall</a><a href="#banquette">Banquette option</a><a href="#bar">Bar</a><a href="#hall">Hall and entrance</a><a href="#garden">Garden approach</a><a href="#materials">Materials</a><a href="#care">Built for Goa</a><a href="#next">Next steps</a>
+<nav class="toc" aria-label="Walk-through">
+  <a href="#gate">Gate</a><a href="#approach">Approach path</a><a href="#landing">Landing and entrance</a><a href="#wall">Green wall</a><a href="#tv">TV corner</a><a href="#bar">Bar and mural</a><a href="#materials">Materials</a><a href="#care">Built for Goa</a><a href="#next">Next steps</a>
 </nav>
 
-<section class="zone" id="wall">
-  <div class="zone-head"><span class="eyebrow">Zone 1</span><h2>The decor wall</h2><span class="dim">north wall &middot; 15.67 m</span></div>
-  <figure><img class="render" src="decor/decor-1.jpg" alt="Deep green panelled wall with gilt frames, brass sconces, rattan pendants and teak tables"></figure>
+<section class="zone" id="gate">
+  <div class="zone-head"><span class="eyebrow">Arriving</span><h2>The gate</h2><span class="dim">1.70 m opening &middot; off the Cavelossim road</span></div>
+  <figure><img class="render" src="decor/gate-1.jpg" alt="Whitewashed arched gateway with a blue gable and sign board, iron gates open, palms and the lit pub behind the compound wall"></figure>
   <div class="cols">
     <div>
-      <p class="lede">The one solid wall carries the whole pub character. Keep it dark and rich so the open sides and garden read brighter against it.</p>
+      <p class="lede">The gateway is the first thing anyone sees from the road. Keep its Goan whitewash and blue gable and make it glow after dark.</p>
       <table class="spec">
-        <tr><th>Wall</th><td>Bottle-green paint, eggshell, over raised MDF panel mouldings in tall rectangles; dark teak skirting</td></tr>
-        <tr><th>Art</th><td>Salon hang of 12 to 16 gilt and black frames: botanical prints and black-and-white Goa photographs, hung as one block centred on the wall</td></tr>
-        <tr><th>Lights</th><td>Brass twin-arm sconces with clear glass shades, one per panel bay, 2700 K filament bulbs on a dimmer</td></tr>
-        <tr><th>Above</th><td>Timber plant shelf at beam height with trailing pothos and Boston ferns</td></tr>
-        <tr><th>Tables</th><td>Solid teak tops, cane-backed teak armchairs, candle jars</td></tr>
-        <tr><th>Pendants</th><td>Woven rattan globes and cones over each table</td></tr>
+        <tr><th>Gateway</th><td>Fresh lime-white on the arch and piers, the gable repainted in the column blue, white cornice picked out</td></tr>
+        <tr><th>Sign</th><td>Cabin East board in the gable, lit by two small brass picture lights; the blue strip below for "Dim sum &amp; craft beer"</td></tr>
+        <tr><th>Gates</th><td>Black wrought iron, kept open in service hours; two black wall lanterns either side, 2700 K</td></tr>
+        <tr><th>Wall</th><td>Whitewashed compound wall with the navy picket rail, warm uplights at the palms behind it</td></tr>
       </table>
     </div>
-    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-decor.jpg" alt="Inspiration: green tufted booth with framed pictures; green panels with brick and brass lamps"><figcaption>Design Inspos / Wall</figcaption></aside>
+    <div class="site"><span class="eyebrow">Already on site</span><ul><li>Arched gateway, gable and iron gates</li><li>Compound wall along the road</li><li>Red-oxide path straight in</li></ul></div>
   </div>
 </section>
 
-<section class="zone" id="banquette">
-  <div class="zone-head"><span class="eyebrow">Zone 1 &middot; option</span><h2>With a buttoned banquette</h2><span class="dim">runs the wall-side tables</span></div>
-  <div class="pair">
-    <img src="decor/banquette-1.jpg" alt="Continuous bottle-green buttoned leather banquette along the green wall, with an exposed brick bay and chalkboard">
-    <img src="decor/banquette-2.jpg" alt="Second take: banquette, brick chimney bay with chalkboard, gilt botanical frames">
-  </div>
+<section class="zone" id="approach">
+  <div class="zone-head"><span class="eyebrow">Walking in</span><h2>The approach path</h2><span class="dim">1.20 m &middot; garden 5 &times; 5 m on the left</span></div>
+  <figure><img class="render" src="decor/approach-1.jpg" alt="Stepping-stone path at golden hour under hanging brass lanterns, jute globes and planters, black lamp posts on the left"></figure>
   <div class="cols">
     <div>
-      <p class="lede">Most of the wall photos you saved have deep-buttoned leather seating. A single banquette along the wall replaces the wall-side chairs at the four tables in the front row, so the hall feels more like a pub and the aisle gets wider.</p>
+      <p class="lede">Turn left past the garden onto the narrow path. Overhead lines from the three lamp posts to the balcony roof make it a lit walk under hanging lights and greens.</p>
       <table class="spec">
-        <tr><th>Seat</th><td>Built-in banquette, deep-buttoned bottle-green faux leather (marine-grade vinyl), brass nailhead trim, teak plinth, seat 450 mm high and 550 mm deep</td></tr>
-        <tr><th>Brick bay</th><td>One exposed old-brick panel with a black chalkboard (as in the model's last bay)</td></tr>
-        <tr><th>Covers</th><td>Should stay at 32 if each wall-side chair becomes a banquette place. Check it in the model before ordering</td></tr>
+        <tr><th>Overhead</th><td>Black steel wire from the lamp posts to the edge of the existing restaurant's balcony roof, one line every 75 cm or so</td></tr>
+        <tr><th>Lights</th><td>The two hanging lights from the Simplex pub: hexagonal brass lanterns with ribbed amber glass, and woven jute globes with ivy up the rope, IP65, 2200 K</td></tr>
+        <tr><th>Planters</th><td>Terracotta hanging bowls with trailing pothos, string-of-pearls and ferns, on drip trays</td></tr>
+        <tr><th>Clearance</th><td>Everything hangs 2.1 m or more above the path</td></tr>
+        <tr><th>Garden</th><td>Lawn, areca palms, white frangipani and a low hedge; warm spike uplights at the palms</td></tr>
       </table>
     </div>
-    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-banquette.jpg" alt="Inspiration: emerald lounge with green velvet chairs; green tufted booth"><figcaption>Design Inspos / Wall</figcaption></aside>
+    <div class="site"><span class="eyebrow">Already on site</span><ul><li>Three black lamp posts along the path</li><li>Stepping stones: red squares in grey kota</li><li>Existing restaurant balcony on the right (1.5 m, usable)</li></ul></div>
+  </div>
+</section>
+
+<section class="zone" id="landing">
+  <div class="zone-head"><span class="eyebrow">At the door</span><h2>Landing and entrance</h2><span class="dim">landing 5 &times; 5 m &middot; railing 80 cm</span></div>
+  <figure><img class="render" src="decor/entry-2.jpg" alt="Second take of the hall front from the landing"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">The front of the hall is already handsome: blue columns, a navy balustrade and white fretwork. The decor only warms it up.</p>
+      <table class="spec">
+        <tr><th>Landing</th><td>Red-oxide floor re-polished, grey kota border; two large terracotta pots with areca palms at the opening</td></tr>
+        <tr><th>Columns</th><td>Repaint in the existing blue, gloss; jasmine trained up two of them on stainless wire</td></tr>
+        <tr><th>Eaves</th><td>White fleur-de-lis valance and arched fretwork panels freshened in lime white</td></tr>
+        <tr><th>Door</th><td>Kilim runner in the 1.70 m opening; clear PVC curtains on every open side for the monsoon</td></tr>
+      </table>
+    </div>
+    <div class="site"><span class="eyebrow">Already on site</span><ul><li>Blue round columns on white pedestals</li><li>80 cm balustrade with navy balusters</li><li>White eave valance and arched fretwork</li></ul></div>
+  </div>
+</section>
+
+<section class="zone" id="wall">
+  <div class="zone-head"><span class="eyebrow">Inside</span><h2>The green wall</h2><span class="dim">north wall &middot; 15.67 m</span></div>
+  <figure><img class="render" src="decor/decor-1.jpg" alt="Bottle-green wall over green panelled wainscot, white fluted pilasters, gilt frames, brass sconces, coffered white ceiling"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">The one solid wall carries the pub character. The old tiles are covered, not broken out, and the white pilasters stay as the frame for each bay.</p>
+      <table class="spec">
+        <tr><th>Tiles</th><td>Hidden behind WPC panelled wainscot on battens, 1.0 m high, raised panels about 75 cm wide, painted one shade deeper than the wall; slim brass cap rail</td></tr>
+        <tr><th>Wall</th><td>Bottle-green matt above, anti-fungal; test the sample at night under 2700 K before buying</td></tr>
+        <tr><th>Pilasters</th><td>Existing white fluted pilasters kept and freshened</td></tr>
+        <tr><th>Art</th><td>Salon hang of gilt and black frames in the middle bay; brass globe sconces, trailing pothos on a timber shelf</td></tr>
+        <tr><th>Ceiling</th><td>Existing white coffers and dark false-beams kept; festoon lights under them</td></tr>
+        <tr><th>Floor</th><td>Existing blue-grey granite</td></tr>
+      </table>
+    </div>
+    <div class="site"><span class="eyebrow">Already on site</span><ul><li>Tile dado below (to be covered)</li><li>White fluted pilasters on plinths</li><li>Coffered white ceiling, dark beams</li><li>Blue-grey granite floor</li></ul></div>
+  </div>
+</section>
+
+<section class="zone" id="tv">
+  <div class="zone-head"><span class="eyebrow">Inside</span><h2>The TV corner</h2><span class="dim">one 65 in screen &middot; north-west corner</span></div>
+  <figure><img class="render" src="decor/tv-2.jpg" alt="A 65-inch TV across the corner on a slatted teak panel, blue column and navy balustrade on the left, green wall on the right"></figure>
+  <div class="cols">
+    <div>
+      <p class="lede">One screen only, set exactly on the diagonal where the long wall meets the open side, so it faces the whole west half of the room.</p>
+      <table class="spec">
+        <tr><th>Screen</th><td>65 in, slim black, on a tilting arm; centre about 1.95 m, bottom about 1.55 m</td></tr>
+        <tr><th>Panel</th><td>Slatted dark teak closing the corner from the wall to the corner column, cables run inside it</td></tr>
+        <tr><th>Sound</th><td>Slim soundbar under the screen</td></tr>
+      </table>
+    </div>
+    <div class="site"><span class="eyebrow">Already on site</span><ul><li>Corner where the wall meets the 7.76 m open side</li><li>Blue column at the corner</li></ul></div>
   </div>
 </section>
 
 <section class="zone" id="bar">
-  <div class="zone-head"><span class="eyebrow">Zone 2</span><h2>The bar</h2><span class="dim">counter 5.48 m</span></div>
-  <figure><img class="render" src="decor/bar-2.jpg" alt="Bar with dark fluted front, marble top, brass taps, Edison globes and hanging greenery"></figure>
+  <div class="zone-head"><span class="eyebrow">Inside</span><h2>The bar and the mural wall</h2><span class="dim">counter 2.80 m &middot; half the end</span></div>
+  <figure><img class="render" src="decor/bar-1.jpg" alt="Exposed red-brick bar counter with a teak top and brass taps, a black-and-white musicians mural on the white wall to its left"></figure>
   <div class="cols">
     <div>
-      <p class="lede">The bar is the brightest thing in the room: a warm glow under the counter, backlit shelves and clear globes, with plants hanging over it like a pergola.</p>
+      <p class="lede">The bar keeps its brick: the tan ply comes off and the brick is cleaned and sealed. The mural wall beside it stays as it is.</p>
       <table class="spec">
-        <tr><th>Front</th><td>Dark stained vertical fluted timber, brushed brass kick plate and foot rail, amber LED strip under the counter lip</td></tr>
-        <tr><th>Top</th><td>White-and-grey veined marble or quartz, 40 mm edge</td></tr>
-        <tr><th>Taps</th><td>Brass beer towers with the craft taps in one row</td></tr>
-        <tr><th>Back bar</th><td>Open walnut-tone shelves with amber backlight for glassware and bottles</td></tr>
-        <tr><th>Lights</th><td>Clear glass Edison globe pendants over the counter</td></tr>
-        <tr><th>Green</th><td>Hanging pothos and faux wisteria from the ceiling above the counter</td></tr>
-        <tr><th>Stools</th><td>Round teak seats on black steel legs with a footring</td></tr>
-        <tr><th>Signs</th><td>Warm-white neon script on the green wall, chalkboard for tonight's specials</td></tr>
+        <tr><th>Counter</th><td>Existing red brick, cleaned and sealed with a matt sealer; brick pilasters on the front, brick pier at the open side</td></tr>
+        <tr><th>Top</th><td>Thick dark teak with a brass edge, warm LED under the overhang, brass foot rail</td></tr>
+        <tr><th>Taps</th><td>One brass font with three craft taps</td></tr>
+        <tr><th>Back bar</th><td>Only behind the counter: lit bottle shelves, glass shelves, cooler and glass-washer, ON TAP board</td></tr>
+        <tr><th>Above</th><td>Floating brass glass rack with trailing ivy</td></tr>
+        <tr><th>Stools</th><td>Four cream velvet stools with backs</td></tr>
+        <tr><th>Mural wall</th><td>Existing Sound of Music mural kept; two clay pots at its foot</td></tr>
       </table>
     </div>
-    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-bar.jpg" alt="Inspiration: dark fluted bar with marble top and Edison globes; open garden bar with backlit shelves"><figcaption>Design Inspos</figcaption></aside>
-  </div>
-</section>
-
-<section class="zone" id="hall">
-  <div class="zone-head"><span class="eyebrow">Zone 3</span><h2>Hall and entrance</h2><span class="dim">open edge 9.20 m</span></div>
-  <figure><img class="render" src="decor/entry-2.jpg" alt="Second take of the hall from the entrance"></figure>
-  <div class="cols">
-    <div>
-      <p class="lede">With the PVC rolled up, the hall should feel like a covered pergola. The string lights and climbing plants do most of that work.</p>
-      <table class="spec">
-        <tr><th>Ceiling</th><td>Festoon string lights zig-zagged under the timber beams, warm-white 2700 K, outdoor-rated (IP65)</td></tr>
-        <tr><th>Columns</th><td>Jasmine and bougainvillea trained up the white columns on stainless wire</td></tr>
-        <tr><th>Entrance</th><td>Patterned cement-tile mat panel at the door; a pair of large terracotta pots with areca palms either side</td></tr>
-        <tr><th>Floor</th><td>Charcoal-and-black checkerboard stone, honed (not polished) so it is not slippery when wet</td></tr>
-      </table>
-    </div>
-    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-entry.jpg" alt="Inspiration: string-lit timber pergola dining; vine-covered pergola with cushioned banquettes"><figcaption>Design Inspos</figcaption></aside>
-  </div>
-</section>
-
-<section class="zone" id="garden">
-  <div class="zone-head"><span class="eyebrow">Zone 4</span><h2>The garden approach</h2><span class="dim">outside, at blue hour</span></div>
-  <figure><img class="render" src="decor/outside-1.jpg" alt="Exterior at dusk: open-sided pub glowing amber in a lit tropical garden with festoon lights"></figure>
-  <div class="cols">
-    <div>
-      <p class="lede">The garden sells the place from the road. Light it in layers: festoon overhead, low path lights, and the glowing hall behind.</p>
-      <table class="spec">
-        <tr><th>Overhead</th><td>Festoon runs from the eaves out to timber posts in the garden</td></tr>
-        <tr><th>Path</th><td>Laterite stepping stones in gravel, low warm bollard or spike lights every 2 to 3 m</td></tr>
-        <tr><th>Planting</th><td>Frangipani, banana, heliconia, ferns and areca palms in terracotta; bougainvillea on the columns</td></tr>
-        <tr><th>Uplights</th><td>Warm spike uplights at the base of the coconut palms</td></tr>
-      </table>
-    </div>
-    <aside class="inspo"><span class="eyebrow">From the inspiration</span><img src="decor/inspo-outside.jpg" alt="Inspiration: lit pergola dining at night; vine-covered pergola terrace"><figcaption>Design Inspos</figcaption></aside>
+    <div class="site"><span class="eyebrow">Already on site</span><ul><li>Brick counter on the right half of the end</li><li>White wall with the musicians mural on the left</li><li>Staff gap between them</li></ul></div>
   </div>
 </section>
 
 <section class="zone" id="materials">
   <div class="zone-head"><span class="eyebrow">Samples</span><h2>Materials board</h2><span class="dim">take this to suppliers</span></div>
-  <figure><img style="width:100%;display:block;border-radius:4px" src="decor/board-2.jpg" alt="Flat-lay of samples: green paint and moulding, brass sconce, fluted teak, marble, green buttoned leather, cane, rattan, checker tile, brick, gilt frame, pothos"></figure>
+  <figure><img style="width:100%;max-width:100%;display:block;border-radius:4px" src="decor/board-1.jpg" alt="Flat-lay of samples: green paint and panelling with brass rail, white fluted moulding, blue column paint, navy baluster, granite, red oxide, kota, brick, teak with brass, cane, jute, brass lantern, terracotta"></figure>
 </section>
 
 <section class="care" id="care">
   <h2>Built for Goa</h2>
   <p class="lede">The hall is open on three sides, so everything here gets monsoon humidity and salt air.</p>
   <ul>
-    <li><b>Paint:</b> use an exterior-grade, anti-fungal emulsion on the green wall even though it is inside. Ask for a sample pot and look at it at night under 2700 K light before you commit, because dark greens read much darker under warm light.</li>
-    <li><b>Banquette:</b> marine-grade vinyl, not real leather. It survives humidity and wipes clean.</li>
-    <li><b>Brass:</b> lacquered or powder-coated brass-finish fittings, or they will go green within one monsoon.</li>
-    <li><b>Timber:</b> teak or treated hardwood with a marine varnish; MDF mouldings only on the solid wall, sealed on all faces.</li>
-    <li><b>Cane and rattan:</b> fine under the roof, but keep them out of driving rain when the curtains are up.</li>
-    <li><b>Art:</b> frames sealed at the back, prints behind glass, no unframed canvas.</li>
-    <li><b>Lights:</b> every fitting on the open sides IP65 or better.</li>
+    <li><b>Wainscot:</b> WPC or PVC board, not MDF, fixed on treated battens with a 10 mm air gap over the tiles, so damp behind it can dry out.</li>
+    <li><b>Paint:</b> exterior-grade anti-fungal emulsion on the green wall even though it is inside.</li>
+    <li><b>Brick:</b> a breathable matt sealer on the bar so spills wipe off without darkening the brick.</li>
+    <li><b>Brass:</b> lacquered or powder-coated brass-finish fittings, or they go green within one monsoon.</li>
+    <li><b>Outdoor lights:</b> every lantern and globe on the approach path IP65, on its own circuit with a timer.</li>
+    <li><b>Hanging planters:</b> drip trays, and a hook rated for at least four times the wet weight.</li>
+    <li><b>Jute and cane:</b> fine under the roof; outdoor jute globes should be the synthetic weather-proof kind.</li>
   </ul>
 </section>
 
 <section class="care next" id="next">
   <h2>Next steps</h2>
   <ol>
-    <li>Choose chairs or the banquette along the wall. If it is the banquette, I update the 3D model and check the covers.</li>
-    <li>Order three green sample pots and paint them on 1 m boards on site.</li>
-    <li>Get quotes for the fluted bar front with the marble top, and for the banquette.</li>
-    <li>Plan the lighting circuits: sconces, pendants, festoon and garden on separate dimmers.</li>
-    <li>Start buying frames and prints early; a salon hang takes time to collect.</li>
+    <li>Get a quote for the WPC wainscot (about 15 m run, 1 m high) and a sample panel painted in the green.</li>
+    <li>Paint three green sample boards on site and look at them at night.</li>
+    <li>Remove the tan ply from the bar and check the brick before sealing.</li>
+    <li>Confirm the approach-path length and the balcony roof fixing points for the overhead lines.</li>
+    <li>Plan lighting circuits: hall, bar, approach path and gate on separate dimmers or timers.</li>
   </ol>
 </section>
 
-<footer>Renders: Google Flow (Nano Banana 2), project "Garden Decor", each from a screenshot of the Garden 3D model. <a href="garden.html">3D model</a>. Concept images, not construction drawings: sizes come from the model and its survey plan and still need checking on site.</footer>
+<footer><a href="garden.html">&larr; Back to the 3D model</a> &middot; Renders: Google Flow (Nano Banana 2), project "Garden Decor", each from a screenshot of the updated Garden 3D model (<a href="https://singhgenics.github.io/Garden/">singhgenics.github.io/Garden</a>). Concept images, not construction drawings: sizes come from the model and the site visit and still need checking on site.</footer>
 </div>
 </body>
 </html>
