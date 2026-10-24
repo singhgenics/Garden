@@ -9,7 +9,7 @@ Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 | Part | Size (m) | Notes |
 |---|---|---|
 | Main restaurant | 15.67 × 7.76 (irregular) | 8 square tables for 4 = **32 covers** (cap 35). Open on three sides, solid 15.67 m north wall |
-| Decor wall | 15.67 | Dark panelled timber wainscot, emerald moulded panels with brass sconces, salon hang of gilt/black frames, brick bay with wire-grid tin-sign panels, neon, chalkboard |
+| Decor wall | 15.67 | Single deep-green wall with fine panel lines, brass Edison sconces, a salon hang of gilt and black frames, a brick bay with a chalkboard |
 | Bar | counter zone, 5.48 long | Dark fluted front with a brass base, marble top, amber under-light, beer towers and craft taps, backlit back bar, Edison globes, hanging wisteria |
 | Entrance | middle of the 9.20 m open edge | PVC strip door under rustic hanging signs |
 | Kitchen | 5.41 × 4.38 | Cooking line under one hood, prep island, refrigeration, pass window |
