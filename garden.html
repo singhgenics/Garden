@@ -1047,10 +1047,11 @@ lbl('PVC roll-down curtains',-0.4,2.2,3.9,'o');
 const lblEls=labels.map(l=>{const e=document.createElement('div');e.className='lbl '+l.cls;e.innerHTML=(l.cls==='d'?'':'<i></i>')+l.text;document.getElementById('labels').appendChild(e);return e;});
 const SHOW={lbl:true,dims:false};
 const LPRI={'':0,o:1,w:2,k:3,d:4},LORDER=labels.map((l,i)=>i).sort((a,b)=>(LPRI[labels[a].cls]-LPRI[labels[b].cls])||a-b);
-function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new THREE.Vector3(),sr=stage.getBoundingClientRect(),placed=[];
+function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new THREE.Vector3(),sr=stage.getBoundingClientRect(),placed=[];const inside=camera.position.y<2.6;
   // keep labels off the controls and the open info card
   document.querySelectorAll('.toolbar .seg:not([hidden]),.toolbar .brand,#card').forEach(el=>{if(el.offsetParent===null&&el.id!=='card')return;if(el.id==='card'&&el.style.display==='none')return;const r=el.getBoundingClientRect();if(r.width)placed.push([r.left-sr.left,r.top-sr.top,r.right-sr.left,r.bottom-sr.top]);});
   LORDER.forEach(i=>{const l=labels[i],e=lblEls[i];const on=l.cls==='d'?SHOW.dims:SHOW.lbl;if(!on){e.style.display='none';return;}
+   if(inside&&l.cls!=='d'&&camera.position.distanceTo(l.p)>7){e.style.display='none';return;}   // eye-level views: only nearby labels, so other rooms don't show through walls
    tmp.copy(l.p).project(camera);if(tmp.z>1||tmp.z<-1||Math.abs(tmp.x)>1.05||Math.abs(tmp.y)>1.05){e.style.display='none';return;}
    const x=(tmp.x*0.5+0.5)*w,y=(-tmp.y*0.5+0.5)*h;if(!l.w){e.style.display='flex';l.w=e.offsetWidth;l.h=e.offsetHeight;}
    const r=[x-l.w/2-4,y-l.h/2-3,x+l.w/2+4,y+l.h/2+3];
