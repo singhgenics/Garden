@@ -636,7 +636,18 @@ trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
  // tilting wall arm from the timber section
  bx(-0.2,0.2,cy-0.15,cy+0.15,0.0,0.015,M.blackMetal,cg,false);[-0.12,0.12].forEach(x=>bx(x-0.015,x+0.015,cy-0.04,cy+0.04,0.015,0.085,M.blackMetal,cg,false));
  // soundbar just below the screen
- bx(-0.48,0.48,cy-H/2-0.16,cy-H/2-0.09,0.02,0.11,M.black,cg);bx(-0.47,0.47,cy-H/2-0.155,cy-H/2-0.095,0.11,0.112,S({color:'#2a2a2a',roughness:0.95}),cg,false);}
+ bx(-0.48,0.48,cy-H/2-0.16,cy-H/2-0.09,0.02,0.11,M.black,cg);bx(-0.47,0.47,cy-H/2-0.155,cy-H/2-0.095,0.11,0.112,S({color:'#2a2a2a',roughness:0.95}),cg,false);
+ // linear electric fireplace under the TV (LED log-flame effect, as in the reference): white mantel console with a black firebox and a glowing flame panel
+ {const fireT=tex(512,160,(c,w,h)=>{const gr=c.createLinearGradient(0,h,0,0);gr.addColorStop(0,'#ff5a10');gr.addColorStop(0.45,'#ff9a20');gr.addColorStop(1,'#2a0c02');c.fillStyle=gr;c.fillRect(0,0,w,h);const r=rng(9);
+   for(let i=0;i<46;i++){const x=r()*w,fh=h*(0.35+r()*0.5);const f=c.createLinearGradient(0,h,0,h-fh);f.addColorStop(0,'rgba(255,230,140,.95)');f.addColorStop(0.6,'rgba(255,140,30,.7)');f.addColorStop(1,'rgba(255,80,0,0)');c.fillStyle=f;c.beginPath();c.moveTo(x-12,h);c.quadraticCurveTo(x-8+r()*10,h-fh*0.6,x,h-fh);c.quadraticCurveTo(x+8,h-fh*0.5,x+12,h);c.fill();}
+   for(let i=0;i<9;i++){const x=20+i*54;c.fillStyle='#2a1208';c.save();c.translate(x,h-22);c.rotate((i%2?1:-1)*0.25);c.fillRect(-30,-9,60,18);c.fillStyle='#ff6a1a';c.fillRect(-26,6,52,3);c.restore();}},1,1);
+  M.fire=new THREE.MeshBasicMaterial({map:fireT,toneMapped:false});
+  bx(-0.78,0.78,0,0.06,0.0,0.36,M.black,cg);bx(-0.76,0.76,0.06,0.82,0.0,0.34,M.goaWhite,cg);                 // console with plinth
+  bx(-0.62,0.62,0.22,0.66,0.32,0.35,M.black,cg,false);const fp=new THREE.Mesh(new THREE.PlaneGeometry(1.14,0.36),M.fire);fp.position.set(0,0.44,0.352);cg.add(fp);
+  bx(-0.82,0.82,0.82,0.87,-0.02,0.4,M.goaWhite,cg);                                                     // mantel shelf
+  for(let x=-0.7;x<=0.71;x+=0.1)bx(x-0.004,x+0.004,0.08,0.2,0.34,0.345,S({color:'#e6e2da',roughness:0.8}),cg,false);   // tongue-and-groove base panel lines
+  cyl(0.03,0.03,0.09,-0.55,0.87,0.2,M.flameGlass,cg,10,false);cyl(0.035,0.035,0.12,0.5,0.87,0.18,M.flameGlass,cg,10,false);   // candles on the mantel
+  {const p=new THREE.Vector3(0,0.5,0.6);cg.localToWorld(p);lamp(p.x,p.y,p.z,'#ff8a3a',0.7,3.5);}}}
 /* the wall is left clear: the decor wall is the feature, tables stand free in front of it */
 
 /* --- bar: the counter zone, rebuilt in the Simplex bar style (front and back) ---
@@ -735,7 +746,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   const seat=new THREE.Mesh(new THREE.CylinderGeometry(0.19,0.18,0.05,24),M.timber);seat.position.set(x,0.735,z);g.add(seat);cyl(0.17,0.17,0.02,x,0.69,z,M.blackMetal,g,20,false);}
  for(let z=k0+0.4;z<k1-0.15;z+=0.62)stool(2.02,z);
  // ---------- bar that stands out (outdoor garden bar references) ----------
- {const kE=k1+1.5,O=new THREE.Matrix4();
+ {const kE=k1,O=new THREE.Matrix4();
   // bottle wall above the back bar and server station: two chunky teak shelves on black iron brackets, packed with bottles (instanced)
   const sh=[2.3,2.66],bot={wine:[],whisky:[],gin:[],vodka:[]},kinds=['wine','whisky','gin','vodka','wine','whisky'];
   sh.forEach((y,r)=>{B(0.03,0.34,y-0.06,y,0,kE,M.timberDark);for(let z=0.25;z<kE;z+=0.7)B(0.03,0.3,y-0.2,y-0.06,z-0.012,z+0.012,M.blackMetal,false);B(0.3,0.33,y-0.075,y-0.06,0.05,kE-0.05,M.warmLed,false);
@@ -751,37 +762,30 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   M.copper=M.copper||S({color:'#b0603a',roughness:0.35,metalness:0.8,side:THREE.DoubleSide});
   for(let z=k0+0.45;z<k1;z+=0.9){rod(V(1.95,3.0,z),V(1.95,2.32,z),0.006,M.black,g,false);const dm=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.2,0.16,20,1,true),M.copper);dm.position.set(1.95,2.24,z);g.add(dm);sph(0.045,1.95,2.18,z,M.globe,g);}}
 
- // ---------- server station: the counter extended to the left, in front of the mural wall ----------
- // front: the same brick counter and teak top run on 1.5 m (local z k1 to k2); a lower pick-up shelf on the hall side for the servers.
- // back: a counter under the mural with the coffee machine, grinder, cup warmer, POS and cutlery / napkin trays. The last 0.7 m by the north wall stays open as the staff way in.
- {const k2=k1+1.5;
-  brickBox(1.1,1.6,0,0.98,k1,k2);brickBox(1.6,1.67,0,0.98,k2-0.34,k2);
-  B(1.0,1.78,0.98,1.04,k1,k2+0.04,M.timberDark);B(1.77,1.79,0.975,1.045,k1,k2+0.04,M.brass,false);B(1.71,1.74,0.95,0.975,k1,k2,M.led,false);
-  B(1.62,1.95,0.78,0.82,k1+0.15,k2-0.4,M.timberDark);[k1+0.2,k2-0.45].forEach(z=>B(1.62,1.66,0.7,0.78,z-0.02,z+0.02,M.brass,false));   // servers' pick-up ledge
-  // bartender side of the extension: drawers for cutlery and napkins, a bus-tub shelf
-  B(1.08,1.1,0.1,0.88,k1+0.05,k2-0.05,M.oliveWood);for(let y=0.3;y<0.86;y+=0.27)B(1.06,1.08,y-0.01,y+0.01,k1+0.3,k2-0.3,M.brass,false);
-  // back counter under the mural
-  B(0,0.62,0,0.9,k1-0.05,k2,M.oliveWood);B(0,0.64,0.9,0.94,k1-0.05,k2,M.marble);
-  // espresso machine (two groups) with cups warming on top, grinder, knock box
-  {const z=k1+0.55;B(0.08,0.52,0.94,1.36,z-0.36,z+0.36,M.ss);B(0.5,0.53,1.0,1.3,z-0.34,z+0.34,M.black,false);B(0.08,0.52,1.36,1.38,z-0.36,z+0.36,M.ssDark,false);
-   [z-0.16,z+0.16].forEach(zz=>{cyl(0.035,0.035,0.06,0.58,1.1,zz,M.ss,g,12,false);rod(V(0.58,1.13,zz),V(0.7,1.13,zz),0.01,M.black,g,false);cyl(0.03,0.025,0.06,0.6,0.94,zz,M.white,g,10,false);});
-   rod(V(0.55,1.2,z+0.3),V(0.65,1.0,z+0.32),0.006,M.ss,g,false);
-   for(let i=0;i<6;i++)cyl(0.035,0.03,0.07,0.2+(i%2)*0.15,1.38,z-0.25+Math.floor(i/2)*0.25,M.white,g,10,false);
-   const grz=z+0.55;B(0.15,0.4,0.94,1.25,grz-0.11,grz+0.11,M.black);cyl(0.07,0.05,0.18,0.27,1.25,grz,S({color:'#3a2a1c',roughness:0.4,transparent:true,opacity:0.85}),g,14,false);
-   B(0.4,0.56,0.94,1.04,grz-0.09,grz+0.09,M.black);}
-  // POS screen and a stack of menus at the far end
-  {const z=k2-0.3;B(0.25,0.35,0.94,0.98,z-0.12,z+0.12,M.black);const t=B(0.28,0.3,0.98,1.24,z-0.17,z+0.17,M.black);t.rotation.z=0.3;B(0.15,0.45,0.94,0.98,z-0.45,z-0.25,M.timberDark,false);}
-  // the back bar extended over the server station: backlit onyx panel, three teak shelves with brass lips (cups, then bottles), up to 2.05 m; the mural sits above as a frieze
-  B(0,0.03,1.42,2.08,k1-0.05,k2,M.onyxGlow,false);[k1-0.05,k2].forEach(z=>rod(V(0.3,0.94,z),V(0.3,2.1,z),0.008,M.brass,g,false));
-  [1.45,1.76,2.05].forEach((y,row)=>{B(0.03,0.3,y,y+0.03,k1-0.05,k2,M.timber,false);B(0.29,0.31,y-0.01,y+0.035,k1-0.05,k2,M.brass,false);B(0.05,0.28,y-0.012,y,k1,k2-0.05,M.led,false);
-   if(row===0){for(let zz=k1+0.05;zz<k2-0.08;zz+=0.11)cyl(0.04,0.035,0.08,0.15,y+0.03,zz,M.white,g,10,false);}
-   else{const kinds=[SK('whisky','amber','gold',1),SK('gin','blue','silver',9),SK('vodka','clear','black',6),SK('whisky','ruby','gold',3),SK('liq','gold','black',10),SK('gin','amber','black',2),SK('vodka','clear','cork',8)];
-    let i=row;for(let zz=k1+0.1;zz<k2-0.08;zz+=0.17)bottle(kinds[(i++)%kinds.length],0.16,y+0.03,zz);}});
-  const sign=new THREE.Mesh(new THREE.PlaneGeometry(0.6,0.16),new THREE.MeshStandardMaterial({map:signTex(300,80,[['SERVICE',34,0.55]],'#161412','#e9a94b','#c9993f'),roughness:0.8}));sign.position.set(1.95,0.95,(k1+k2)/2-0.2);sign.rotation.y=Math.PI/2;g.add(sign);}
+ // ---------- coffee station in the space left of the bar (as in the coffee-corner reference), against the green end wall ----------
+ // olive panelled cabinet with brass knobs and a marble top, twin filter-coffee brewer and a hot-water urn, two floating oak shelves lit underneath, brass rail with a towel, trailing pothos
+ {const x0=0.1,c0=k1+0.25,c1=k1+1.55,zm=(c0+c1)/2;
+  B(x0,x0+0.6,0.1,0.88,c0,c1,M.oliveWood);B(x0+0.02,x0+0.56,0,0.1,c0+0.02,c1-0.02,M.black);
+  [[c0,zm],[zm,c1]].forEach(([a,b])=>{B(x0+0.6,x0+0.615,0.16,0.82,a+0.03,b-0.03,M.oliveWood);B(x0+0.615,x0+0.62,0.22,0.76,a+0.09,b-0.09,S({color:'#5f6a3a',roughness:0.6}),false);
+   [[0.22,0.76],[a+0.09,b-0.09]];sph(0.014,x0+0.63,0.62,zm+(a<zm?-0.05:0.05),M.brass,g);});
+  B(x0,x0+0.64,0.88,0.92,c0-0.02,c1+0.02,M.marble);B(x0,x0+0.02,0.92,1.08,c0,c1,M.marble,false);
+  // twin filter-coffee brewer with two glass carafes
+  {const z=c0+0.42;B(x0+0.06,x0+0.46,0.92,0.96,z-0.24,z+0.24,M.ss);B(x0+0.06,x0+0.2,0.96,1.38,z-0.24,z+0.24,M.ss);B(x0+0.06,x0+0.46,1.28,1.38,z-0.24,z+0.24,M.black);
+   [z-0.12,z+0.12].forEach(zz=>{B(x0+0.22,x0+0.4,1.18,1.28,zz-0.08,zz+0.08,M.black,false);cyl(0.075,0.07,0.17,x0+0.32,0.96,zz,M.shelfGlass,g,16,false);cyl(0.07,0.065,0.08,x0+0.32,0.97,zz,S({color:'#3a2010',roughness:0.2,transparent:true,opacity:0.85}),g,16,false);cyl(0.06,0.06,0.03,x0+0.32,1.13,zz,M.black,g,12,false);});}
+  // stainless hot-water urn with a tap and drip tray
+  {const z=c1-0.3;B(x0+0.06,x0+0.36,0.92,1.38,z-0.16,z+0.16,M.ss);B(x0+0.36,x0+0.37,1.0,1.3,z-0.15,z+0.15,M.ssDark,false);cyl(0.02,0.02,0.06,x0+0.4,1.06,z,M.black,g,8,false);B(x0+0.3,x0+0.48,0.92,0.94,z-0.13,z+0.13,M.ssDark,false);}
+  // two floating oak shelves with LED strips underneath: glasses below, cups and a pothos above
+  const oak=S({color:'#c99a5e',roughness:0.6});
+  [1.55,1.95].forEach((y,r)=>{B(x0,x0+0.3,y,y+0.05,c0,c1,oak);B(x0+0.04,x0+0.28,y-0.012,y,c0+0.05,c1-0.05,M.warmLed,false);
+   if(r===0)for(let z=c0+0.08;z<c1-0.05;z+=0.1)cyl(0.034,0.03,0.12,x0+0.15,y+0.05,z,M.shelfGlass,g,10,false);
+   else [c1-0.45,c1-0.25].forEach(z=>{for(let k=0;k<4;k++)cyl(0.06,0.05,0.035,x0+0.15,y+0.05+k*0.035,z,M.cushion,g,14,false);});});
+  {const pz=c0+0.25;cyl(0.07,0.06,0.13,x0+0.15,2.0,pz,M.brass,g,12,false);const r=rng(17);for(let i=0;i<22;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.035,6,5),M.leaf);const t=r();l.position.set(x0+0.12+r()*0.18,2.15-t*0.75,pz+(r()-0.5)*0.25);g.add(l);}}
+  rod(V(x0+0.09,1.45,c0+0.05),V(x0+0.09,1.45,c1-0.05),0.008,M.brass,g,false);B(x0+0.08,x0+0.1,1.05,1.43,c1-0.6,c1-0.42,M.cushion,false);
+  lbl('Coffee station',HX-0.4,1.7,5.15-zm,'');}
  // neon over the back bar
  {const nd=new THREE.Mesh(new THREE.PlaneGeometry(1.5,0.45),M.neonDraught);nd.rotation.y=Math.PI/2;nd.position.set(0.05,2.7,0.95);nd.renderOrder=4;g.add(nd);}
 }
-solids.push([[HX-1.75,0.8],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
+solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
 
 /* existing structural pillar inside the west wing (marked on the plan, as filmed): thick round blue column on a white square base, up to the ceiling */
 {const px=3.95,pz=6.3,top=hc(pz),q=0.17;   // same column as on the open sides
@@ -1102,7 +1106,7 @@ function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.get
 /* ======================= labels ======================= */
 lbl('Main restaurant · 32 covers (5 × 4 + 2 family tables of 6)',6.5,2.6,3.2,'');
 lbl('Decor wall · 15.67 m',7.8,3.0,0.2,'o');
-lbl('Server station · coffee machine',HX-0.4,1.6,1.55,'');lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('65 in TV · the only screen',0.75,2.65,0.75,'');
+lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('65 in TV · the only screen',0.75,2.65,0.75,'');
 lbl('Pathway behind the bar · 1.60 m',(HX+BX0)/2,0.4,4.6,'k');
 lbl('Kitchen · 5.41 × 4.38 m',BX0+2.7,3.2,4.3,'k');
 lbl('Dish wash · 5.41 × 2.00 m',BX0+2.7,3.7,1.0,'w');
@@ -1128,7 +1132,7 @@ function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new T
 const VIEWS={
  iso:{p:[-9,16,26],t:[11,1,4.5],card:'overview',fov:46},
  decor:{p:[6.2,1.6,5.2],t:[5.4,2.1,0],card:'decor',roof:true,fov:68},
- tv:{p:[3.2,1.4,4.6],t:[0.7,1.9,0.7],card:'tv',fov:60},
+ tv:{p:[2.6,1.75,3.0],t:[0.75,1.35,0.75],card:'tv',fov:66},
  garden:{p:[3.2,1.65,17.0],t:[8.2,0.9,12.6],card:'gardencard',fov:62},
  approach:{p:[10.4,1.7,17.2],t:[10.6,2.0,10.0],card:'approach',fov:60},
  gate:{p:[-7.5,1.7,16.85],t:[4.0,1.9,15.6],card:'gate',fov:56},
@@ -1147,12 +1151,12 @@ const CARDS={
  overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with green panelled wainscot','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
  decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is hidden behind green panelled WPC wainscot (1.0 m, one shade deeper than the wall, brass cap rail), white fluted pilasters kept, emerald paint above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Frames in every bay: the big salon hang in the middle plus smaller groups under the sconces','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces and jute pendants']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site']],
- tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Seen from every table on the west half of the hall']],
+ tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
  gardencard:['Garden','5 × 5 m, on the left as you come in','The lawn on the left of the main path just inside the gate, below the hall\'s 2.98 m edge: areca palms, white flowering shrubs and a hedge inside a laterite kerb, with the three lamp posts and the festoon canopy of the approach path along its far side.',['Warm uplights at the palms','Hedge along the hall side and the main path']],
  approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. A canopy of Edison festoon strings runs from the three black lamp posts to the existing restaurant\'s balcony roof, every 0.5 m with two crossing diagonals, and among them hang brass lanterns and jute globes (the hanging lights from the Simplex model) and planters with trailing greens.',['Lights and planters kept 2.1 m or more above the path','Warm 2200-2700 K']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
- backbar:['Back bar','Behind the counter','Runs behind the counter and the server station, with a bottle wall of two teak shelves above it, against the end wall now painted bottle green. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a glasswasher, a lit bottle bay with the ON TAP board above it.',['One brass font with 3 craft taps on the counter','POS nook at the open-side end','Staff come in through the 0.7 m gap by the north wall']],
- bar:['Bar','The counter, 2.80 m, plus a 1.50 m server station','The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, teak-seat black iron stools, one brass font with 3 craft taps, a floating glass rack, warm string lights along the counter edge, black iron brackets and copper dome pendants, in the spirit of the outdoor garden bar references.',['Server station: the brick counter extended 1.5 m to the left, with a pick-up ledge, drawers, an espresso machine and grinder, POS and cups on a back counter','A 0.7 m staff way in by the north wall','Bottle wall: two chunky teak shelves on iron brackets packed with bottles above the whole back bar and server station','Brick: red with light mortar, as on site']],
+ backbar:['Back bar','Behind the counter','Runs behind the counter, with a bottle wall of two teak shelves above it, against the end wall now painted bottle green. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a glasswasher, a lit bottle bay with the ON TAP board above it.',['One brass font with 3 craft taps on the counter','POS nook at the open-side end','Staff come in between the counter and the coffee station']],
+ bar:['Bar','The counter, 2.80 m, with a coffee station beside it','The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, teak-seat black iron stools, one brass font with 3 craft taps, a floating glass rack, warm string lights along the counter edge, black iron brackets and copper dome pendants, in the spirit of the outdoor garden bar references.',['Coffee station on its left against the green wall: olive panelled cabinet with a marble top, twin filter-coffee brewer, hot-water urn, two lit oak shelves with glasses and cups','Bottle wall: two chunky teak shelves on iron brackets packed with bottles above the back bar','Brick: red with light mortar, as on site']],
  kitchen:['Kitchen','5.41 × 4.38 m','Laid out as filmed: door from the passage near the corner; a black granite platform the length of the dish-wash wall with a shuttered window over it (no door in that wall); the cooking line along the east wall under a white masonry smoke hood; fridges and racks along the far wall; sloping white ceiling with a dark timber beam. Open middle, pass window to the passage.',['Hood duct rises above the roof','Fire extinguishers by the door, as on site','Equipment shown is the proposed fit-out']],
  dish:['Dish wash','5.41 × 2.00 m','Its own door from the passage; dirty ware comes in from the passage to the receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, and clean ware goes to the kitchen through the shuttered window over the granite platform.',['Hot-water cylinder, louvre extractor, floor drain']],
  wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Blue patterned tiles over a blue dado.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
