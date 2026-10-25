@@ -224,7 +224,7 @@ M.lanA=S({color:'#e6d8bc',emissive:'#ffd090',emissiveIntensity:0.8,roughness:0.9
 M.lanG=S({color:'#ede2cc',emissive:'#ffd9a0',emissiveIntensity:0.6,roughness:0.9,transparent:true,opacity:0.96});
 M.lanW=S({color:'#f6ecd6',emissive:'#ffd9a0',emissiveIntensity:0.8,roughness:0.9,transparent:true,opacity:0.96});
 M.rattan=S({map:caneTex,roughness:0.9,side:THREE.DoubleSide,emissive:'#4a2a0a',emissiveIntensity:0.25});
-M.stone=S({map:stoneTex,roughness:0.95});M.gingR=S({color:'#2a2420',roughness:0.95});M.gingB=S({color:'#33291f',roughness:0.95});M.teal=S({color:'#6e3a20',roughness:0.45});M.chester=S({color:'#6e3a20',roughness:0.45});M.leatherDark=S({color:'#3a2a20',roughness:0.45});M.indigo=S({color:'#2c4a5c',roughness:0.95});M.darkPanel=S({color:'#241a14',roughness:0.6});
+M.stone=S({map:stoneTex,roughness:0.95});M.gingR=S({color:'#2a2420',roughness:0.95});M.gingB=S({color:'#33291f',roughness:0.95});M.teal=S({color:'#6e3a20',roughness:0.45});M.chester=S({color:'#a2582a',roughness:0.38});M.walnut=S({map:darkWoodTex,color:'#8a6a58',roughness:0.55});M.leatherDark=S({color:'#3a2a20',roughness:0.45});M.indigo=S({color:'#2c4a5c',roughness:0.95});M.darkPanel=S({color:'#241a14',roughness:0.6});
 M.coir=S({map:juteTex,roughness:1,side:THREE.DoubleSide});M.dome=S({color:'#f4efe4',emissive:'#ffe2b0',emissiveIntensity:0.55,roughness:0.5,side:THREE.DoubleSide});
 M.beerGlass=S({color:'#e0a030',transparent:true,opacity:0.6,emissive:'#a06010',emissiveIntensity:0.5,roughness:0.1,depthWrite:false});M.edisonGlass=S({color:'#ffd9a0',transparent:true,opacity:0.2,roughness:0.05,emissive:'#ff9a30',emissiveIntensity:0.2,depthWrite:false});
 M.chrome=S({color:'#dfe4e8',roughness:0.15,metalness:0.95});M.taupe=S({color:'#a89886',roughness:0.95});M.pillow=S({color:'#cfd3d0',roughness:0.95});M.blackMetal=S({color:'#1c1c1c',roughness:0.5,metalness:0.6});M.petal=S({color:'#e0508a',roughness:0.8});
@@ -795,12 +795,13 @@ solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
  lbl('Existing blue pillar',px,2.2,pz,'k');}
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers (cap 35) --- */
 const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,4.2,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
+// dining chair: dark walnut frame and legs, woven cane back, cognac leather-look (marine-grade vinyl) seat pad
 function chair(x,z,ang,seat){const g=new THREE.Group();
   bx(-0.22,0.22,0.43,0.47,-0.21,0.21,M.timberDark,g,false);bx(-0.19,0.19,0.47,0.54,-0.18,0.18,seat||M.taupe,g,false);
-  [[-0.19,-0.19],[0.19,-0.19],[-0.19,0.19],[0.19,0.19]].forEach(p=>rod(V(p[0]*0.8,0.0,p[1]*0.8),V(p[0],0.43,p[1]),0.011,M.blackMetal,g));
-  bx(-0.22,0.22,0.43,0.45,-0.21,0.21,M.blackMetal,g,false);
-  [-0.22,0.22].forEach(sx=>{bx(sx-0.015,sx+0.015,0.5,0.52,-0.2,0.18,M.timber,g,false);bx(sx-0.015,sx+0.015,0.5,0.7,0.15,0.18,M.timber,g,false);bx(sx-0.015,sx+0.015,0.68,0.72,-0.2,0.18,M.timber,g,false);});
-  [[-0.2,0.0],[0.2,0.0]].forEach(([sx])=>bx(sx-0.015,sx+0.015,0.5,0.95,-0.2,-0.18,M.timber,g));bx(-0.22,0.22,0.92,0.96,-0.21,-0.17,M.timber,g,false);
+  [[-0.19,-0.19],[0.19,-0.19],[-0.19,0.19],[0.19,0.19]].forEach(p=>rod(V(p[0]*0.8,0.0,p[1]*0.8),V(p[0],0.43,p[1]),0.018,M.walnut,g));
+  bx(-0.22,0.22,0.43,0.45,-0.21,0.21,M.walnut,g,false);
+  [-0.22,0.22].forEach(sx=>{bx(sx-0.015,sx+0.015,0.5,0.52,-0.2,0.18,M.walnut,g,false);bx(sx-0.015,sx+0.015,0.5,0.7,0.15,0.18,M.walnut,g,false);bx(sx-0.015,sx+0.015,0.68,0.72,-0.2,0.18,M.walnut,g,false);});
+  [[-0.2,0.0],[0.2,0.0]].forEach(([sx])=>bx(sx-0.015,sx+0.015,0.5,0.95,-0.2,-0.18,M.walnut,g));bx(-0.22,0.22,0.92,0.96,-0.21,-0.17,M.walnut,g,false);
   const cn=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.4),M.cane);cn.position.set(0,0.74,-0.19);g.add(cn);
   g.position.set(x,0,z);g.rotation.y=ang;G.hall.add(g);}
 function pendant(x,z,dome){const g=G.hall;const top=hc(z)-0.18;
