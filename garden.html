@@ -255,6 +255,10 @@ function wall(x1,z1,x2,z2,gaps,h,mat,grp){gaps=(gaps||[]).slice().sort((p,q)=>p[
   let cur=a;for(const [g0,g1,sill,head] of gaps){const s=sill||0,hd=head===undefined?2.1:head;piece(cur,g0,0,h);sol(cur,g0);if(s>0){piece(g0,g1,0,s);sol(g0,g1);}piece(g0,g1,hd,h);cur=g1;}piece(cur,b,0,h);sol(cur,b);}
 function lamp(x,y,z,c,i,d){const l=new THREE.PointLight(c,i,d,2);l.position.set(x,y,z);scene.add(l);warm.push([l,i]);return l;}
 const warm=[];
+// baked light: additive radial-glow decals stand in for small local lights (table pools, wall wash, fireplace, centrepiece), so the scene keeps few real lights
+const FAKE=[];let _glowTex=null;
+function glowDecal(x,y,z,w,h,col,op,rx,ry){if(!_glowTex)_glowTex=tex(128,128,(g,W)=>{const gr=g.createRadialGradient(W/2,W/2,0,W/2,W/2,W/2);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(0.45,'rgba(255,255,255,.45)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,W,W);},1,1);
+  const m=new THREE.MeshBasicMaterial({map:_glowTex,color:col,transparent:true,opacity:op,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false});const d=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);d.position.set(x,y,z);d.rotation.set(rx||0,ry||0,0);d.renderOrder=2;scene.add(d);FAKE.push([m,op]);return d;}
 const labels=[];
 function lbl(text,x,y,z,cls){labels.push({text,p:V(x,y,z),cls:cls||''});}
 
@@ -280,7 +284,7 @@ function bougDrape(x,y,z,len,r,whiteMix){for(let t=0;t<len;t+=0.11)bougCluster(x
 function bougFlush(parent){const mt=new THREE.Matrix4(),q=new THREE.Quaternion(),sc=new THREE.Vector3(),e=new THREE.Euler(),r=rng(311);
   const mk=(list,geo,col,var_)=>{if(!list.length)return;const m=S({color:'#ffffff',roughness:0.75,side:THREE.DoubleSide});const im=new THREE.InstancedMesh(geo,m,list.length);const c=new THREE.Color();
    list.forEach(([x,y,z,k],i)=>{e.set(r()*3,r()*3,r()*3);q.setFromEuler(e);sc.set(k,k*0.7,k);mt.compose(new THREE.Vector3(x,y,z),q,sc);im.setMatrixAt(i,mt);c.set(col).offsetHSL((r()-0.5)*var_,0,(r()-0.5)*0.12);im.setColorAt(i,c);});im.castShadow=false;parent.add(im);list.length=0;};
-  mk(BOUG.leaf,new THREE.IcosahedronGeometry(0.034,0),'#2f6a2c',0.04);mk(BOUG.mag,new THREE.IcosahedronGeometry(0.026,0),'#d81b7a',0.05);mk(BOUG.wht,new THREE.IcosahedronGeometry(0.025,0),'#f6efe6',0.0);}
+  mk(BOUG.leaf,new THREE.OctahedronGeometry(0.036,0),'#2f6a2c',0.04);mk(BOUG.mag,new THREE.OctahedronGeometry(0.028,0),'#d81b7a',0.05);mk(BOUG.wht,new THREE.OctahedronGeometry(0.027,0),'#f6efe6',0.0);}
 /* ivy wicker orbs (reference): open-weave rattan spheres glowing warm from a bulb inside, hung on thick jute rope, ivy wrapped over the top and trailing down.
    Every hanging light in the hall and on the path uses them; all orbs, bulbs and ivy are instanced, so they cost a few draw calls in total */
 const ORBS=[];
@@ -713,7 +717,7 @@ trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
   bx(-0.82,0.82,0.82,0.87,-0.02,0.4,M.goaWhite,cg);                                                     // mantel shelf
   for(let x=-0.7;x<=0.71;x+=0.1)bx(x-0.004,x+0.004,0.08,0.2,0.34,0.345,S({color:'#e6e2da',roughness:0.8}),cg,false);   // tongue-and-groove base panel lines
   cyl(0.03,0.03,0.09,-0.55,0.87,0.2,M.flameGlass,cg,10,false);cyl(0.035,0.035,0.12,0.5,0.87,0.18,M.flameGlass,cg,10,false);   // candles on the mantel
-  {const p=new THREE.Vector3(0,0.5,0.6);cg.localToWorld(p);lamp(p.x,p.y,p.z,'#ff8a3a',0.7,3.5);}}}
+  {cg.updateMatrixWorld(true);const p=new THREE.Vector3(0,0.01,0.9);cg.localToWorld(p);glowDecal(p.x,0.012,p.z,1.6,1.6,'#ff7a2a',0.35,-Math.PI/2);}}}
 /* the wall is left clear: the decor wall is the feature, tables stand free in front of it */
 
 /* --- bar: the counter zone, rebuilt in the Simplex bar style (front and back) ---
@@ -829,7 +833,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
    B(bx0-0.09,bx0+0.09,by,by+0.16,za,zb,old);[za+0.3,zb-0.3].forEach(z=>rod(V(bx0,by+0.16,z),V(bx0,3.2,z),0.008,M.black,g,false));
    for(let z=za+0.25;z<zb;z+=0.55){const t=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.012,5,16),rope);t.position.set(bx0,by+0.08,z);t.rotation.y=Math.PI/2;t.scale.set(1,0.95,1);g.add(t);}
    const r=rng(33),iv=[],O=new THREE.Matrix4();for(let z=za;z<zb;z+=0.05){iv.push([bx0+(r()-0.5)*0.2,by+0.16+r()*0.04,z]);if(r()<0.35){const len=0.15+r()*0.5;for(let t=0;t<len;t+=0.05)iv.push([bx0+(r()<0.5?-0.1:0.1)+(r()-0.5)*0.03,by-t,z+(r()-0.5)*0.04]);}}
-   const im=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(0.035,0).scale(1.2,0.6,1),S({color:'#4f8a2e',roughness:0.7}),iv.length);iv.forEach(([x,y,z],i)=>{O.makeTranslation(x,y,z);im.setMatrixAt(i,O);});g.add(im);
+   const im=new THREE.InstancedMesh(new THREE.OctahedronGeometry(0.037,0).scale(1.2,0.6,1),S({color:'#4f8a2e',roughness:0.7}),iv.length);iv.forEach(([x,y,z],i)=>{O.makeTranslation(x,y,z);im.setMatrixAt(i,O);});g.add(im);
    for(let z=za+0.2,i=0;z<zb-0.1;z+=0.42,i++){const yb=2.18+((i*37)%5)*0.06;rod(V(bx0,by,z),V(bx0,yb+0.08,z),0.004,M.black,g,false);cyl(0.016,0.016,0.04,bx0,yb+0.06,z,M.brass,g,8,false);const bu=new THREE.Mesh(new THREE.SphereGeometry(0.04,12,10),M.edisonBulb||M.globe);bu.scale.y=1.35;bu.position.set(bx0,yb,z);g.add(bu);}}}
 
  // ---------- coffee station in the space left of the bar (as in the coffee-corner reference), against the green end wall ----------
@@ -877,7 +881,7 @@ solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
   L.forEach(([x,y,z],i)=>{e.set(r()*3,r()*3,r()*3);q.setFromEuler(e);mt0(x,y,z,i);});function mt0(x,y,z,i){sc.set(1,1,1);O.compose(new THREE.Vector3(x,y,z),q,sc);lm.setMatrixAt(i,O);col.set(['#1f4a1c','#2a5a24','#183e16','#33662b'][i%4]);lm.setColorAt(i,col);}
   lm.castShadow=true;G.hall.add(lm);
   const disc=new THREE.Mesh(new THREE.CircleGeometry(1.5,40),S({color:'#f6b26b',emissive:'#ff9a40',emissiveIntensity:0.7,roughness:1}));disc.rotation.x=Math.PI/2;disc.position.set(px,top-0.02,pz);G.hall.add(disc);
-  lamp(px,1.9,pz,'#ffb468',0.8,4);
+  glowDecal(px,0.47,pz,2.6,2.6,'#ffb060',0.22,-Math.PI/2);
   solids.push([[px-pr,pz-pr],[px+pr,pz-pr]],[[px+pr,pz-pr],[px+pr,pz+pr]],[[px+pr,pz+pr],[px-pr,pz+pr]],[[px-pr,pz+pr],[px-pr,pz-pr]]);}
  lbl('Centrepiece tree around the pillar',px,2.0,pz,'k');}
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers, + 3 stools at the drinking ledge = 35 (the cap) --- */
@@ -913,7 +917,7 @@ TABLES.forEach(([x,z,kind],i)=>{if(kind===6){const w=0.9,l=1.9;
   [-0.6,0,0.6].forEach(dx=>{cyl(0.04,0.04,0.11,x+dx*0.8,0.79,z,M.flameGlass,G.hall,12,false);cyl(0.045,0.045,0.012,x+dx*0.8,0.9,z,M.brass,G.hall,12,false);});
   [-0.6,0,0.6].forEach(dx=>[-1,1].forEach(sz=>cyl(0.115,0.1,0.014,x+dx,0.79,z+sz*0.28,M.white,G.hall,18,false)));
   const sk=M.chester;[-0.6,0,0.6].forEach(dx=>{chair(x+dx,z+0.73,Math.PI,sk);chair(x+dx,z-0.73,0,sk);});
-  pendant(x-0.5,z,false);pendant(x+0.5,z,false);lamp(x,1.62,z,'#ffb468',1.0,3.4);return;}
+  pendant(x-0.5,z,false);pendant(x+0.5,z,false);glowDecal(x,0.795,z,2.4,1.4,'#ffb060',0.32,-Math.PI/2);return;}
   const wallT=0;
   bx(x-0.45,x+0.45,0.72,0.78,z-0.45,z+0.45,M.timber,G.hall);bx(x-0.46,x+0.46,0.72,0.745,z-0.46,z+0.46,M.timberDark,G.hall,false);
   [[-0.36,-0.36],[0.36,-0.36],[-0.36,0.36],[0.36,0.36]].forEach(p=>bx(x+p[0]-0.04,x+p[0]+0.04,0,0.72,z+p[1]-0.04,z+p[1]+0.04,M.timberDark,G.hall));
@@ -925,7 +929,7 @@ TABLES.forEach(([x,z,kind],i)=>{if(kind===6){const w=0.9,l=1.9;
   const seat=M.chester;
   if(wallT){chair(x-0.25,z+0.7,Math.PI,seat);chair(x+0.25,z+0.7,Math.PI,seat);}
   else{chair(x,z+0.7,Math.PI,seat);chair(x,z-0.7,0,seat);chair(x-0.7,z,Math.PI/2,seat);chair(x+0.7,z,-Math.PI/2,seat);}
-  pendant(x,z,z<2);lamp(x,1.62,z,'#ffb468',0.85,3.0);});   // each orb pair throws a warm pool on its table
+  pendant(x,z,z<2);glowDecal(x,0.795,z,1.3,1.3,'#ffb060',0.32,-Math.PI/2);});   // each orb pair throws a warm pool on its table
 /* bar stools stand at the counter; planters + a kilim runner at the entrance */
 {const k=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.2),M.kilim);k.rotation.x=-Math.PI/2;k.position.set(ENT_MID,0.005,4.3);G.hall.add(k);}
 function planter(x,z,s){bx(x-0.25*s,x+0.25*s,0,0.5*s,z-0.25*s,z+0.25*s,M.pot,G.hall);for(let i=0;i<5;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.2*s,8,6),M.leaf);l.position.set(x+(i-2)*0.07,0.65*s+i%2*0.14,z+(i%3-1)*0.06);l.castShadow=true;G.hall.add(l);}}
@@ -1020,7 +1024,7 @@ flushOrbs();
    1. gallery wall wash - a small adjustable warm spot on the ceiling beam aimed at each bay of the gallery wall, so the paintings stay lit after dark
    2. acoustic felt - off-white felt panels set into the ceiling coffers over the dining room to soak up the noise off granite, tile and glass
    3. drinking ledge - a 30 cm teak ledge along the inside of the balustrade on the long open side, three high stools (covers 32 -> 35, the cap) */
-{[[2.45,1.62,3.25],[5.4,3.65,7.1],[8.65,7.5,9.8],[10.6,10.2,11.05],[14.5,13.95,15.05]].forEach(([x,a,b])=>{const sp=new THREE.SpotLight('#ffc98a',1.3,5.5,0.62,0.75,2);sp.position.set(x,hc(1.3)-0.25,1.3);sp.target.position.set(x,2.05,0);scene.add(sp);scene.add(sp.target);warm.push([sp,1.3]);
+{[[2.45,1.62,3.25],[5.4,3.65,7.1],[8.65,7.5,9.8],[10.6,10.2,11.05],[14.5,13.95,15.05]].forEach(([x,a,b])=>{glowDecal(x,2.15,zi+0.07,Math.min(2.2,(b-a)+0.3),2.0,'#ffc070',0.26);
    const can=new THREE.Group();cyl(0.035,0.04,0.12,0,-0.06,0,M.blackMetal,can,12,false);sph(0.028,0,-0.12,0,M.led,can);can.position.set(x,hc(1.3)-0.12,1.3);can.rotation.x=-0.75;G.hall.add(can);bx(x-0.04,x+0.04,hc(1.3)-0.13,hc(1.3)-0.01,1.27,1.33,M.blackMetal,G.hall,false);});
  const felt=S({color:'#ece6da',roughness:1});const fx=[];for(let x=1.3;x<14.4;x+=1.2)fx.push(x);
  fx.forEach(x=>[[0.6,2.4],[3.05,5.1]].forEach(([z0,z1])=>{const zz=(z0+z1)/2;bx(x-0.45,x+0.45,hc(zz)-0.035,hc(zz)-0.005,z0+0.1,z1-0.1,felt,G.roof,false);}));
@@ -1200,6 +1204,7 @@ function applyLight(){const t=LIGHT.t,d=LIGHT.dim,day=1-t;const sky=skyAt(t);sce
   hemi.intensity=0.95*Math.pow(day,1.1)+(0.06+0.3*d)*t;                      // after dark the only ambient is the warm bounce from the fittings
   warm.forEach(([l,i])=>{if(KEEP.includes(l)){l.intensity=i;return;}l.intensity=i*d*(0.35+0.9*t);});
   EMI.forEach(([k,b])=>M[k].emissiveIntensity=b*(0.06+0.94*d)*(0.55+0.45*t));
+  FAKE.forEach(([m,o])=>m.opacity=o*d*(0.25+0.75*t));
   NEONS.forEach(k=>M[k].opacity=d<0.02?0.08:0.45+0.55*Math.min(1,0.4+t));
   renderer.toneMappingExposure=1.0+0.15*t;
   const rd=document.getElementById('lc-read');if(rd)rd.textContent=Math.round(d*100)+'% · '+(d<0.02?'off':(t>0.6?'2700/2200 K':'2700 K'));
@@ -1342,12 +1347,16 @@ renderer.shadowMap.needsUpdate=true;
 const _lp=new THREE.Vector3(),_lq=new THREE.Quaternion();let _lf=0;
 let last=performance.now();
 let frames=0;
-function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;frames++;
+const PR_MAX=renderer.getPixelRatio();let prNow=PR_MAX,slow=0,fast=0;
+function adapt(ms){if(ms>24){slow++;fast=0;}else if(ms<12){fast++;slow=0;}else{slow=0;fast=0;}
+  if(slow>8&&prNow>0.75){prNow=Math.max(0.75,prNow-0.25);renderer.setPixelRatio(prNow);resize();slow=0;}
+  else if(fast>90&&prNow<PR_MAX){prNow=Math.min(PR_MAX,prNow+0.25);renderer.setPixelRatio(prNow);resize();fast=0;}}
+function loop(now){const raw=now-last;const dt=Math.min(0.05,raw/1000);last=now;frames++;
   if(anim){anim.t=Math.min(1,anim.t+dt*1.1);const e=anim.t*anim.t*(3-2*anim.t);camera.position.lerpVectors(anim.p0,anim.p1,e);controls.target.lerpVectors(anim.t0,anim.t1,e);if(anim.t>=1)anim=null;}
   if(Math.abs(pvcState.f-pvcState.target)>0.002){pvcState.f+=(pvcState.target-pvcState.f)*Math.min(1,dt*3.2);setPvc(pvcState.f);}
   step(dt);if(!walk)controls.update();
   if(!camera.position.equals(_lp)||!camera.quaternion.equals(_lq)||camera.fov!==_lf){_lp.copy(camera.position);_lq.copy(camera.quaternion);_lf=camera.fov;dirty=true;}
-  if(dirty||anim||Math.abs(pvcState.f-pvcState.target)>0.002){dirty=false;updateLabels();renderer.render(scene,camera);}
+  if(dirty||anim||Math.abs(pvcState.f-pvcState.target)>0.002){dirty=false;updateLabels();renderer.render(scene,camera);if(!Q.has('shot'))adapt(raw);}
   requestAnimationFrame(loop);}
 requestAnimationFrame(loop);window.__ready=true;
 }
