@@ -377,15 +377,18 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
   const brassG=BU.mergeBufferGeometries([new THREE.CylinderGeometry(0.12,0.1,0.03,6).translate(0,0.315,0),new THREE.CylinderGeometry(0.1,0.12,0.03,6).translate(0,-0.015,0),new THREE.CylinderGeometry(0.035,0.06,0.05,6).translate(0,0.355,0),
     ...[0,1,2,3,4,5].map(k=>new THREE.CylinderGeometry(0.006,0.006,0.28,4).translate(Math.cos(k*Math.PI/3)*0.108,0.15,Math.sin(k*Math.PI/3)*0.108))]);
   inst(glassG,M.lanternAmber,lants);inst(brassG,M.brass,lants,true);
-  // festoon canopy (as in the backyard reference): Edison-bulb strings every 0.5 m from the lamp-post line to the balcony roof edge, two diagonals crossing them
-  // and one along the balcony eave; bulbs every 0.38 m, hanging on short drops, lowest bulb still above 2.2 m
-  const ed=[],w2=[],push2=q=>{for(let i=0;i<q.length-1;i++)w2.push(q[i],q[i+1]);},edge=z=>z<13.0?11.75:12.45,string=(a,b,dip)=>{const L=a.distanceTo(b),n=Math.max(2,Math.round(L/0.38)),pts=sag(a,b,n*2,dip);push2(pts);for(let i=1;i<pts.length-1;i+=2)ed.push(pts[i].clone().add(V(0,-0.07,0)));};
-  for(let z=zA-0.6;z<=zB+0.61;z+=0.5)string(V(lx,ly+0.05,z),V(edge(z),2.9,z),0.24);
-  string(V(lx,ly+0.05,zA-0.6),V(edge(zB+0.6),2.9,zB+0.6),0.3);string(V(lx,ly+0.05,zB+0.6),V(edge(zA-0.6),2.9,zA-0.6),0.3);
-  string(V(11.75,2.92,zA-0.6),V(11.75,2.92,12.95),0.12);
-  M.edisonBulb=S({color:'#a85a14',emissive:'#ff8a1e',emissiveIntensity:0.9,roughness:0.15});EMI.push(['edisonBulb',0.9]);
-  inst(new THREE.SphereGeometry(0.036,10,8).scale(1,1.3,1),M.edisonBulb,ed);inst(new THREE.CylinderGeometry(0.016,0.016,0.035,8).translate(0,0.065,0),M.black,ed);
-  G.ground.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(w2),new THREE.LineBasicMaterial({color:'#262626'})));
+  // fairy-light pergola (reference): a light timber pergola over the path, beams from the lamp-post line to the balcony roof every 1.2 m and a beam along each side,
+  // with dense strands of warm micro fairy lights draped between the beams
+  M.fairy=S({color:'#ffe9b0',emissive:'#ffcf70',emissiveIntensity:1.6,roughness:0.3});EMI.push(['fairy',1.6]);
+  const pine=S({color:'#c99a5e',roughness:0.8}),edge=z=>z<13.0?11.75:12.45,yb=2.72,fl=[],w2=[];
+  const beam2=(a,b)=>beam(a,b,0.07,0.14,pine,G.ground);
+  beam2(V(lx,yb,zA-0.7),V(lx,yb,zB+0.7));beam2(V(11.72,yb+0.12,zA-0.7),V(11.72,yb+0.12,zB+0.7));
+  for(let z=zA-0.6;z<=zB+0.61;z+=1.2)beam2(V(lx-0.1,yb+0.1,z),V(edge(z)+0.05,yb+0.2,z));
+  [zA-0.65,zB+0.65].forEach(z=>{cyl(0.05,0.05,yb,lx,0,z,pine,G.ground,8);});
+  for(let x=lx+0.12;x<11.7;x+=0.11){const n=Math.round((zB-zA+1.3)/0.6);for(let k=0;k<n;k++){const z0=zA-0.6+k*0.6,pts=sag(V(x,yb+0.03,z0),V(x,yb+0.03,z0+0.6),8,0.05+((x*13)%3)*0.03);for(let i=0;i<pts.length-1;i++)w2.push(pts[i],pts[i+1]);pts.forEach((p,i)=>{if(i%2===0)fl.push(p.clone().add(V(0,-0.012,0)));});}}
+  inst(new THREE.SphereGeometry(0.011,5,4),M.fairy,fl);
+  M.edisonBulb=M.edisonBulb||S({color:'#a85a14',emissive:'#ff8a1e',emissiveIntensity:0.9,roughness:0.15});EMI.push(['edisonBulb',0.9]);
+  G.ground.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(w2),new THREE.LineBasicMaterial({color:'#3a3020',transparent:true,opacity:0.6})));
 
   // jute globe (Simplex): twelve tilted jute rings into an open lattice, rims, black cap, warm bulb with a spiral filament
   const JR=0.14,ring=new THREE.TorusGeometry(JR,0.0035,5,40);
@@ -399,7 +402,7 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
    ivy.forEach(([x,y,z],i)=>{q.setFromEuler(new THREE.Euler(r()*1.4-0.7,r()*6.28,r()*1.4-0.7));mt.compose(new THREE.Vector3(x,y,z),q,sc);lv.setMatrixAt(i,mt);});G.ground.add(lv);}
   const li=new THREE.InstancedMesh(new THREE.SphereGeometry(0.06,6,5),M.leaf,leaves.length);leaves.forEach(([x,y,z],i)=>{mt.makeTranslation(x,y,z);li.setMatrixAt(i,mt);});G.ground.add(li);
   lamp((lx+11.75)/2,2.3,(zA+zB)/2,'#ffc884',0.9,6);
-  lbl('Festoon canopy, brass lanterns, jute globes + planters',(lx+11.75)/2,2.95,(zA+zB)/2,'k');}
+  lbl('Fairy-light pergola, brass lanterns, jute globes + planters',(lx+11.75)/2,2.95,(zA+zB)/2,'k');}
  // bougainvillea over the gate arch: a mound on the cornice and gable edge, cascading down one pier and over the compound wall
  {const r=rng(515);for(let x=-1.5;x<=1.5;x+=0.13)bougCluster(x,2.95+r()*0.12,GD+0.16+r()*0.08,1.1,r,0.22);for(let x=-0.8;x<=0.8;x+=0.15)bougCluster(x,2.55+0.25*Math.cos(x*1.9),GD+0.14,0.8,r,0.22);
   for(let x=0.6;x<=1.55;x+=0.16)bougDrape(x,2.95,GD+0.12,0.6+r()*1.2,r,0.2);bougDrape(-1.35,2.95,GD+0.12,1.1,r,0.2);
@@ -447,8 +450,25 @@ const bays=[];
 bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0.2,b.b[1]);beam(a,c,0.3,0.24,M.goaWhite,G.walls);});
 /* the end wall left of the bar (behind the coffee station): the old white mural wall, finished in exposed red brick to match the bar counter */
 {const z0=0.1,z1=2.74-0.17,top=hc(0)-0.01;bx(HX-0.1,HX+0.1,0,top,z0,z1,M.plaster,G.walls);
- {const t=brickTex.clone();t.needsUpdate=true;t.repeat.set((z1-z0)/0.92,top/0.6);const bm=S({map:t,roughness:0.95});   // behind the coffee station: exposed red brick to the ceiling, the same brick as the bar counter
- bx(HX-0.13,HX-0.1,0,top,z0,z1,[bm,bm,bm,bm,bm,bm],G.walls,false);}bx(HX-0.11,HX+0.11,0,0.1,z0,z1,M.navy,G.walls,false);
+ // behind the coffee station: charcoal wall with a hand-painted mural of a winking woman (reference), her hair a cascade of red hanging flowers from the ceiling
+ {const W=z1-z0,mt=tex(1024,Math.round(1024*top/W),(c,w,h)=>{c.fillStyle='#2b2b2d';c.fillRect(0,0,w,h);const cx=w/2,cy=h*0.38,fr=w*0.17;
+   c.fillStyle='#b0185a';c.beginPath();c.moveTo(cx-fr*1.9,h*0.85);c.quadraticCurveTo(cx,h*0.62,cx+fr*1.9,h*0.85);c.lineTo(cx+fr*2.1,h);c.lineTo(cx-fr*2.1,h);c.fill();
+   c.fillStyle='#e0a77c';c.fillRect(cx-fr*0.35,cy+fr*1.0,fr*0.7,fr*0.9);c.beginPath();c.ellipse(cx,cy,fr,fr*1.3,0,0,7);c.fill();
+   c.fillStyle='rgba(160,90,60,.35)';c.beginPath();c.ellipse(cx+fr*0.35,cy+fr*0.2,fr*0.5,fr*0.9,0,0,7);c.fill();
+   c.strokeStyle='#2a1a12';c.lineWidth=fr*0.09;c.lineCap='round';c.beginPath();c.moveTo(cx-fr*0.8,cy-fr*0.45);c.quadraticCurveTo(cx-fr*0.45,cy-fr*0.7,cx-fr*0.12,cy-fr*0.5);c.stroke();c.beginPath();c.moveTo(cx+fr*0.12,cy-fr*0.55);c.quadraticCurveTo(cx+fr*0.45,cy-fr*0.6,cx+fr*0.8,cy-fr*0.35);c.stroke();
+   c.fillStyle='#fff';c.beginPath();c.ellipse(cx-fr*0.42,cy-fr*0.18,fr*0.24,fr*0.13,0,0,7);c.fill();c.fillStyle='#3b7fd0';c.beginPath();c.arc(cx-fr*0.42,cy-fr*0.18,fr*0.11,0,7);c.fill();c.fillStyle='#111';c.beginPath();c.arc(cx-fr*0.42,cy-fr*0.18,fr*0.05,0,7);c.fill();
+   c.strokeStyle='#1a1a1a';c.lineWidth=fr*0.05;c.beginPath();c.moveTo(cx-fr*0.68,cy-fr*0.25);c.quadraticCurveTo(cx-fr*0.42,cy-fr*0.36,cx-fr*0.16,cy-fr*0.25);c.stroke();
+   c.beginPath();c.moveTo(cx+fr*0.18,cy-fr*0.15);c.quadraticCurveTo(cx+fr*0.42,cy-fr*0.05,cx+fr*0.66,cy-fr*0.2);c.stroke();
+   c.fillStyle='#c41a2a';c.beginPath();c.moveTo(cx-fr*0.45,cy+fr*0.45);c.quadraticCurveTo(cx,cy+fr*1.05,cx+fr*0.45,cy+fr*0.45);c.quadraticCurveTo(cx,cy+fr*0.55,cx-fr*0.45,cy+fr*0.45);c.fill();
+   c.fillStyle='#fff';c.beginPath();c.moveTo(cx-fr*0.36,cy+fr*0.5);c.quadraticCurveTo(cx,cy+fr*0.62,cx+fr*0.36,cy+fr*0.5);c.quadraticCurveTo(cx,cy+fr*0.72,cx-fr*0.36,cy+fr*0.5);c.fill();
+   c.fillStyle='#8a4a30';c.beginPath();c.moveTo(cx,cy);c.lineTo(cx-fr*0.1,cy+fr*0.28);c.lineTo(cx+fr*0.06,cy+fr*0.3);c.fill();},1,1);
+  const mp=new THREE.Mesh(new THREE.PlaneGeometry(W,top),S({map:mt,roughness:0.85}));mp.position.set(HX-0.131,top/2,(z0+z1)/2);mp.rotation.y=-Math.PI/2;G.walls.add(mp);
+  // red hanging flowers (wisteria-style strands) and green leaves from the ceiling, forming her hair
+  const r=rng(61),red=[],grn=[],O=new THREE.Matrix4(),zc=(z0+z1)/2;
+  for(let z=z0+0.05;z<z1-0.05;z+=0.07){const dz=(z-zc)/(W/2),len=0.35+0.75*(1-Math.abs(dz))*Math.max(0,1-Math.abs(dz)*0.4)+r()*0.25;for(let t=0;t<len;t+=0.045)red.push([HX-0.17-r()*0.1,top-0.05-t,z+(r()-0.5)*0.04]);
+   for(let k=0;k<3;k++)grn.push([HX-0.18-r()*0.08,top-0.05-r()*0.3,z+(r()-0.5)*0.06]);}
+  const im=(list,geo,col)=>{const m=new THREE.InstancedMesh(geo,S({color:col,roughness:0.7}),list.length);list.forEach(([x,y,z],i)=>{O.makeTranslation(x,y,z);m.setMatrixAt(i,O);});G.walls.add(m);};
+  im(red,new THREE.IcosahedronGeometry(0.03,0).scale(1,1.6,1),'#b3121f');im(grn,new THREE.IcosahedronGeometry(0.045,0),'#2f6a2c');}bx(HX-0.11,HX+0.11,0,0.1,z0,z1,M.navy,G.walls,false);
  [[0.35,0.18]].forEach(([z,rr])=>{cyl(rr*0.7,rr*0.6,0.06,HX-0.35,0,z,M.pot,G.walls,14);const pot=new THREE.Mesh(new THREE.SphereGeometry(rr,14,10),M.pot);pot.scale.y=0.9;pot.position.set(HX-0.35,rr*0.95,z);G.walls.add(pot);});}
 /* solid collision for the curtained edges (the entrance bay stays open) */
 bays.forEach(b=>{if(!b.ent)solids.push([[b.a[0],b.a[1]],[b.b[0],b.b[1]]]);});
@@ -784,9 +804,13 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   const bl=[];for(let z=k0-0.1;z<kE;z+=0.15)bl.push(V(1.8,0.93,z));const bi=new THREE.InstancedMesh(new THREE.SphereGeometry(0.018,8,6),M.edisonBulb||M.globe,bl.length);bl.forEach((p,n)=>{O.makeTranslation(p.x,p.y,p.z);bi.setMatrixAt(n,O);});g.add(bi);
   g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(bl.map(p=>p.clone().add(V(0,0.025,0)))),new THREE.LineBasicMaterial({color:'#1a1a1a'})));
   for(let z=k0+0.3;z<kE-0.1;z+=0.6){B(1.6,1.62,0.72,0.97,z-0.01,z+0.01,M.blackMetal,false);B(1.6,1.76,0.95,0.97,z-0.01,z+0.01,M.blackMetal,false);rod(V(1.62,0.74,z),V(1.75,0.95,z),0.008,M.blackMetal,g,false);}
-  // copper dome pendants low over the guests' side of the counter
-  M.copper=M.copper||S({color:'#b0603a',roughness:0.35,metalness:0.8,side:THREE.DoubleSide});
-  for(let z=k0+0.45;z<k1;z+=0.9){rod(V(1.95,3.0,z),V(1.95,2.32,z),0.006,M.black,g,false);const dm=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.2,0.16,20,1,true),M.copper);dm.position.set(1.95,2.24,z);g.add(dm);sph(0.045,1.95,2.18,z,M.globe,g);}}
+  // above the bar (reference): a reclaimed timber beam hung on black chains over the guests' side, rope lashings, ivy trailing off it, Edison bulbs on long drops
+  {const bx0=1.9,by=2.78,za=k0-0.05,zb=k1+0.05,old=S({color:'#6b4a2e',roughness:0.95}),rope=S({color:'#b89a6a',roughness:1});
+   B(bx0-0.09,bx0+0.09,by,by+0.16,za,zb,old);[za+0.3,zb-0.3].forEach(z=>rod(V(bx0,by+0.16,z),V(bx0,3.2,z),0.008,M.black,g,false));
+   for(let z=za+0.25;z<zb;z+=0.55){const t=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.012,5,16),rope);t.position.set(bx0,by+0.08,z);t.rotation.y=Math.PI/2;t.scale.set(1,0.95,1);g.add(t);}
+   const r=rng(33),iv=[],O=new THREE.Matrix4();for(let z=za;z<zb;z+=0.05){iv.push([bx0+(r()-0.5)*0.2,by+0.16+r()*0.04,z]);if(r()<0.35){const len=0.15+r()*0.5;for(let t=0;t<len;t+=0.05)iv.push([bx0+(r()<0.5?-0.1:0.1)+(r()-0.5)*0.03,by-t,z+(r()-0.5)*0.04]);}}
+   const im=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(0.035,0).scale(1.2,0.6,1),S({color:'#4f8a2e',roughness:0.7}),iv.length);iv.forEach(([x,y,z],i)=>{O.makeTranslation(x,y,z);im.setMatrixAt(i,O);});g.add(im);
+   for(let z=za+0.2,i=0;z<zb-0.1;z+=0.42,i++){const yb=2.18+((i*37)%5)*0.06;rod(V(bx0,by,z),V(bx0,yb+0.08,z),0.004,M.black,g,false);cyl(0.016,0.016,0.04,bx0,yb+0.06,z,M.brass,g,8,false);const bu=new THREE.Mesh(new THREE.SphereGeometry(0.04,12,10),M.edisonBulb||M.globe);bu.scale.y=1.35;bu.position.set(bx0,yb,z);g.add(bu);}}}
 
  // ---------- coffee station in the space left of the bar (as in the coffee-corner reference), against the green end wall ----------
  // olive panelled cabinet with brass knobs and a marble top, twin filter-coffee brewer and a hot-water urn, two floating oak shelves lit underneath, brass rail with a towel, trailing pothos
@@ -802,10 +826,10 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   {const z=c1-0.3;B(x0+0.06,x0+0.36,0.92,1.38,z-0.16,z+0.16,M.ss);B(x0+0.36,x0+0.37,1.0,1.3,z-0.15,z+0.15,M.ssDark,false);cyl(0.02,0.02,0.06,x0+0.4,1.06,z,M.black,g,8,false);B(x0+0.3,x0+0.48,0.92,0.94,z-0.13,z+0.13,M.ssDark,false);}
   // two floating oak shelves with LED strips underneath: glasses below, cups and a pothos above
   const oak=S({color:'#c99a5e',roughness:0.6});
-  [1.55,1.95].forEach((y,r)=>{B(x0,x0+0.3,y,y+0.05,c0,c1,oak);B(x0+0.04,x0+0.28,y-0.012,y,c0+0.05,c1-0.05,M.warmLed,false);
+  [1.45].forEach((y,r)=>{B(x0,x0+0.3,y,y+0.05,c0,c1,oak);B(x0+0.04,x0+0.28,y-0.012,y,c0+0.05,c1-0.05,M.warmLed,false);
    if(r===0)for(let z=c0+0.08;z<c1-0.05;z+=0.1)cyl(0.034,0.03,0.12,x0+0.15,y+0.05,z,M.shelfGlass,g,10,false);
    else [c1-0.45,c1-0.25].forEach(z=>{for(let k=0;k<4;k++)cyl(0.06,0.05,0.035,x0+0.15,y+0.05+k*0.035,z,M.cushion,g,14,false);});});
-  {const pz=c0+0.25;cyl(0.07,0.06,0.13,x0+0.15,2.0,pz,M.brass,g,12,false);const r=rng(17);for(let i=0;i<22;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.035,6,5),M.leaf);const t=r();l.position.set(x0+0.12+r()*0.18,2.15-t*0.75,pz+(r()-0.5)*0.25);g.add(l);}}
+  // (upper shelf and pothos removed so the mural is clear)
   rod(V(x0+0.09,1.45,c0+0.05),V(x0+0.09,1.45,c1-0.05),0.008,M.brass,g,false);B(x0+0.08,x0+0.1,1.05,1.43,c1-0.6,c1-0.42,M.cushion,false);
   lbl('Coffee station',HX-0.4,1.7,5.15-zm,'');}
  // neon over the back bar
@@ -818,7 +842,26 @@ solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
  bx(px-0.18,px+0.18,0,0.1,pz-0.18,pz+0.18,M.navy,G.hall);bx(px-q,px+q,0.1,0.8,pz-q,pz+q,M.goaWhite,G.hall);bx(px-0.2,px+0.2,0.8,0.86,pz-0.2,pz+0.2,M.goaWhite,G.hall);
  cyl(0.12,0.12,top-0.86,px,0.86,pz,M.pillarBlue,G.hall,24);
  solids.push([[px-q,pz-q],[px+q,pz-q]],[[px+q,pz-q],[px+q,pz+q]],[[px+q,pz+q],[px-q,pz+q]],[[px-q,pz+q],[px-q,pz-q]]);
- lbl('Existing blue pillar',px,2.2,pz,'k');}
+ // centrepiece (reference): a large faux ficus tree wrapped around the pillar, its twisted trunk climbing the column into a wide canopy under the ceiling,
+ // standing in a round slatted-teak planter with white pebbles, a warm glowing ceiling disc above
+ {const r=rng(88),O=new THREE.Matrix4(),q=new THREE.Quaternion(),sc=new THREE.Vector3(),e=new THREE.Euler();
+  const pr=0.62,ph=0.46;cyl(pr,pr,ph,px,0,pz,M.timber,G.hall,40);cyl(pr+0.02,pr+0.02,0.04,px,ph,pz,M.timberDark,G.hall,40);
+  for(let i=0;i<48;i++){const a=i/48*6.283;bx(px+Math.cos(a)*(pr+0.005)-0.012,px+Math.cos(a)*(pr+0.005)+0.012,0.03,ph-0.02,pz+Math.sin(a)*(pr+0.005)-0.012,pz+Math.sin(a)*(pr+0.005)+0.012,M.timberDark,G.hall,false);}
+  cyl(pr-0.04,pr-0.04,0.02,px,ph,pz,S({color:'#e8e4dc',roughness:1}),G.hall,40,false);
+  const bark=S({color:'#4e3b2a',roughness:0.95}),top=hc(pz);
+  // bark wrapped over the pillar's white base so the trunk reads from the planter up
+  cyl(0.24,0.26,0.45,px,ph,pz,bark,G.hall,14);
+  for(let k=0;k<6;k++){const pts=[];for(let i=0;i<=24;i++){const t=i/24,a=k/6*6.283+t*7.5,rr=0.15+0.09*Math.max(0,1-t*3)+0.02*Math.sin(t*9+k);pts.push(V(px+Math.cos(a)*rr,ph+t*(1.75-ph)+0.0,pz+Math.sin(a)*rr));}
+   const m=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),40,0.035,6,false),bark);m.castShadow=true;G.hall.add(m);
+   const bp=[pts[24],V(px+Math.cos(k)*0.6,2.1+r()*0.1,pz+Math.sin(k)*0.6),V(px+Math.cos(k)*0.95,2.3,pz+Math.sin(k)*0.95)];const br=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(bp),12,0.03,5,false),bark);G.hall.add(br);}
+  const L=[];for(let i=0;i<7000;i++){const a=r()*6.283,u=Math.sqrt(r()),rad=1.5*u,yy=2.1+r()*(top-2.12-2.1)*(1-u*u*0.5)+(1-u)*0.12;L.push([px+Math.cos(a)*rad,Math.min(top-0.08,yy),pz+Math.sin(a)*rad]);}
+  const lm=new THREE.InstancedMesh(new THREE.PlaneGeometry(0.06,0.032),S({color:'#ffffff',roughness:0.7,side:THREE.DoubleSide}),L.length);const col=new THREE.Color();
+  L.forEach(([x,y,z],i)=>{e.set(r()*3,r()*3,r()*3);q.setFromEuler(e);mt0(x,y,z,i);});function mt0(x,y,z,i){sc.set(1,1,1);O.compose(new THREE.Vector3(x,y,z),q,sc);lm.setMatrixAt(i,O);col.set(['#1f4a1c','#2a5a24','#183e16','#33662b'][i%4]);lm.setColorAt(i,col);}
+  lm.castShadow=true;G.hall.add(lm);
+  const disc=new THREE.Mesh(new THREE.CircleGeometry(1.5,40),S({color:'#f6b26b',emissive:'#ff9a40',emissiveIntensity:0.7,roughness:1}));disc.rotation.x=Math.PI/2;disc.position.set(px,top-0.02,pz);G.hall.add(disc);
+  lamp(px,1.9,pz,'#ffb468',0.8,4);
+  solids.push([[px-pr,pz-pr],[px+pr,pz-pr]],[[px+pr,pz-pr],[px+pr,pz+pr]],[[px+pr,pz+pr],[px-pr,pz+pr]],[[px-pr,pz+pr],[px-pr,pz-pr]]);}
+ lbl('Centrepiece tree around the pillar',px,2.0,pz,'k');}
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers (cap 35) --- */
 const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,4.2,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
 // dining chair: dark walnut frame and legs, woven cane back, cognac leather-look (marine-grade vinyl) seat pad
@@ -1056,9 +1099,21 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
 {const g=G.wash;const x0=TX0+0.1,x1=BX1-0.1,z0=TY0+0.1,z1=-0.1,px=TX0+1.15,o0=-1.45,o1=-0.75;
  // as on site: the door opens onto the hand-wash basin on the right, then a partition wall with a 70 cm opening, then the WC straight ahead at the far end.
  // Blue patterned wall tiles over a blue dado, as in the photo.
- const tileW=(a,b,c,d,e,f)=>{clad(a,b,0.9,2.1,e,f,azulejoTex,0.45,g,0.3);bx(a,b,0,0.9,e,f,S({color:'#3d5a8a',roughness:0.3}),g,false);};
+ // walls as in the doodle-washroom reference: bright orange with black hand-drawn doodle line art above a white tiled dado (0.9 m), dark floor
+ const doodleTex=tex(512,512,(c,w,h)=>{c.fillStyle='#f28c1e';c.fillRect(0,0,w,h);const r=rng(23);c.strokeStyle='#161210';c.fillStyle='#161210';c.lineWidth=3;c.lineCap='round';c.lineJoin='round';
+   const eye=(x,y,s)=>{c.beginPath();c.arc(x,y,s,0,7);c.stroke();c.beginPath();c.arc(x+s*0.3,y,s*0.4,0,7);c.fill();};
+   const shapes=[(x,y,s)=>{c.beginPath();c.ellipse(x,y,s,s*0.8,0,0,7);c.stroke();eye(x-s*0.35,y-s*0.15,s*0.2);eye(x+s*0.35,y-s*0.15,s*0.2);c.beginPath();c.arc(x,y+s*0.2,s*0.35,0.2,Math.PI-0.2);c.stroke();},
+    (x,y,s)=>{c.beginPath();c.moveTo(x-s,y+s);c.lineTo(x-s*0.8,y-s*0.6);c.lineTo(x-s*0.4,y-s*0.2);c.lineTo(x,y-s);c.lineTo(x+s*0.4,y-s*0.2);c.lineTo(x+s*0.8,y-s*0.6);c.lineTo(x+s,y+s);c.closePath();c.stroke();eye(x-s*0.3,y+s*0.2,s*0.18);eye(x+s*0.3,y+s*0.2,s*0.18);},
+    (x,y,s)=>{c.strokeRect(x-s*0.6,y-s,s*1.2,s*2);c.beginPath();c.moveTo(x-s*0.6,y-s*0.4);c.lineTo(x+s*0.6,y-s*0.4);c.stroke();eye(x,y,s*0.25);},
+    (x,y,s)=>{c.beginPath();for(let k=0;k<10;k++){const a=k/10*6.283,rr=k%2?s*0.45:s;c.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);}c.closePath();c.stroke();},
+    (x,y,s)=>{c.beginPath();c.moveTo(x-s,y);for(let k=1;k<=6;k++)c.quadraticCurveTo(x-s+k*s/3-s/6,y+(k%2?-s*0.5:s*0.5),x-s+k*s/3,y);c.stroke();},
+    (x,y,s)=>{c.beginPath();c.arc(x,y,s,Math.PI,0);c.lineTo(x+s,y+s*0.8);c.lineTo(x-s,y+s*0.8);c.closePath();c.stroke();c.beginPath();c.moveTo(x,y-s);c.lineTo(x,y-s*1.5);c.stroke();eye(x-s*0.4,y+s*0.1,s*0.18);eye(x+s*0.4,y+s*0.1,s*0.18);},
+    (x,y,s)=>{c.beginPath();c.moveTo(x-s,y+s*0.5);c.lineTo(x,y-s);c.lineTo(x+s,y+s*0.5);c.stroke();c.beginPath();c.moveTo(x,y+s*0.5);c.lineTo(x,y+s);c.stroke();}];
+   for(let i=0;i<5;i++)for(let j=0;j<5;j++){const x=50+i*103+(r()-0.5)*30,y=50+j*103+(r()-0.5)*30;shapes[Math.floor(r()*shapes.length)](x,y,22+r()*16);}
+   for(let i=0;i<40;i++){const x=r()*w,y=r()*h;c.beginPath();c.arc(x,y,2,0,7);c.fill();}},1,1);
+ const tileW=(a,b,c,d,e,f)=>{clad(a,b,0.9,2.4,e,f,doodleTex,1.0,g,0.6);clad(a,b,0,0.9,e,f,M.whiteTile.map,0.3,g,0.25);};
  tileW(x0,x1,0,2.1,z0,z0+0.02);tileW(x0,x1,0,2.1,z1-0.02,z1);tileW(x1-0.02,x1,0,2.1,z0,z1);tileW(x0,x0+0.02,0,2.1,z0,o0);tileW(x0,x0+0.02,0,2.1,o1,z1);
- bx(x0,x1,2.1,2.14,z0,z0+0.04,M.brass,g,false);
+ bx(x0,x1,0.9,0.93,z0,z0+0.03,M.white,g,false);
  // partition between the hand-wash and the WC, 70 cm opening in line with the door
  bx(px-0.05,px+0.05,0,2.4,z0,o0,M.whiteTile,g);bx(px-0.05,px+0.05,0,2.4,o1,z1,M.whiteTile,g);bx(px-0.05,px+0.05,2.1,2.4,o0,o1,M.whiteTile,g);
  solids.push([[px,TY0],[px,o0]],[[px,o1],[px,0]]);
@@ -1163,6 +1218,7 @@ const VIEWS={
  garden:{p:[3.2,1.65,17.0],t:[8.2,0.9,12.6],card:'gardencard',fov:62},
  approach:{p:[10.4,1.7,17.2],t:[10.6,2.0,10.0],card:'approach',fov:60},
  hero:{p:[6.9,1.35,10.3],t:[12.6,1.75,2.4],card:'entry',fov:58},
+ tree:{p:[7.4,1.6,4.0],t:[3.95,1.9,6.3],card:'overview',fov:62},
  gate:{p:[-7.5,1.7,16.85],t:[4.0,1.9,15.6],card:'gate',fov:56},
  entry:{p:[EM,1.6,9.4],t:[EM,1.4,3.2],card:'entry',fov:62},
  bar:{p:[10.2,1.6,2.85],t:[15.2,1.1,2.85],card:'bar',fov:64},
@@ -1176,18 +1232,18 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with green panelled wainscot','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
+ overview:['Overview','Cabin East Garden','A 32-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers (cap 35)','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy brown stacked tile under the bottle green','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
  decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy chocolate-brown vertical stacked tile (1.0 m, two-tone with the bottle green above, brass rail between), white fluted pilasters kept, emerald paint above with brass globe sconces, a salon hang of gilt and black frames, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Frames in every bay: the big salon hang in the middle plus smaller groups under the sconces','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces and jute pendants']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site','Magenta and white bougainvillea along the eave of every open side, cascading down the entrance columns']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
  gardencard:['Garden','5 × 5 m, on the left as you come in','The lawn on the left of the main path just inside the gate, below the hall\'s 2.98 m edge: areca palms, white flowering shrubs and a hedge inside a laterite kerb, with the three lamp posts and the festoon canopy of the approach path along its far side.',['Warm uplights at the palms','Hedge along the hall side and the main path']],
- approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. A canopy of Edison festoon strings runs from the three black lamp posts to the existing restaurant\'s balcony roof, every 0.5 m with two crossing diagonals, and among them hang brass lanterns and jute globes (the hanging lights from the Simplex model) and planters with trailing greens.',['Lights and planters kept 2.1 m or more above the path','Warm 2200-2700 K']],
+ approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. A light timber pergola runs from the three black lamp posts to the existing restaurant\'s balcony roof, draped with dense strands of warm micro fairy lights, and among them hang brass lanterns and jute globes (the hanging lights from the Simplex model) and planters with trailing greens.',['Lights and planters kept 2.1 m or more above the path','Warm 2200-2700 K']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Magenta and white bougainvillea over the arch and spilling down one pier onto the compound wall','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
  backbar:['Back bar','Behind the counter','Runs behind the counter, with a bottle wall of two teak shelves above it, against the end wall now painted bottle green. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a glasswasher, a lit bottle bay with the ON TAP board above it.',['One brass font with 3 craft taps on the counter','POS nook at the open-side end','Staff come in between the counter and the coffee station']],
- bar:['Bar','The counter, 2.80 m, with a coffee station beside it','The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, teak-seat black iron stools, one brass font with 3 craft taps, a floating glass rack, warm string lights along the counter edge, black iron brackets and copper dome pendants, in the spirit of the outdoor garden bar references.',['Coffee station on its left against an exposed red-brick wall (same brick as the bar): olive panelled cabinet with a marble top, twin filter-coffee brewer, hot-water urn, two lit oak shelves with glasses and cups','Bottle wall: two chunky teak shelves on iron brackets packed with bottles above the back bar','Brick: red with light mortar, as on site']],
+ bar:['Bar','The counter, 2.80 m, with a coffee station beside it','The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, teak-seat black iron stools, one brass font with 3 craft taps, a floating glass rack, warm string lights along the counter edge and black iron brackets. Above it a reclaimed timber beam on black chains with rope lashings, trailing ivy and Edison bulbs on long drops.',['Coffee station on its left, against a charcoal wall with a painted mural of a winking woman whose hair is a cascade of red hanging flowers from the ceiling: olive panelled cabinet with a marble top, twin filter-coffee brewer, hot-water urn, a lit oak shelf with glasses','Bottle wall: two chunky teak shelves on iron brackets packed with bottles above the back bar','Brick: red with light mortar, as on site']],
  kitchen:['Kitchen','5.41 × 4.38 m','Laid out as filmed: door from the passage near the corner; a black granite platform the length of the dish-wash wall with a shuttered window over it (no door in that wall); the cooking line along the east wall under a white masonry smoke hood; fridges and racks along the far wall; sloping white ceiling with a dark timber beam. Open middle, pass window to the passage.',['Hood duct rises above the roof','Fire extinguishers by the door, as on site','Equipment shown is the proposed fit-out']],
  dish:['Dish wash','5.41 × 2.00 m','Its own door from the passage; dirty ware comes in from the passage to the receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, and clean ware goes to the kitchen through the shuttered window over the granite platform.',['Hot-water cylinder, louvre extractor, floor drain']],
- wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Blue patterned tiles over a blue dado.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
+ wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Walls in bright orange with black hand-drawn doodle art over a white tiled dado, as in the reference.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
  store:['Store room','2.70 × 6.46 m','Dry store with steel racking down both sides, a rice pallet and a door straight into the kitchen next to the cooking line.',['2.70 m wide: racks 0.5 m deep each side leave a 1.7 m aisle']],
  curtains:['PVC curtains','Every open side','Clear roll-down PVC hangs from the ring beam on all five open edges and behind the bar. Press the PVC button to roll them up or down. The entrance bay stays passable.',['Rolled up: a breezy garden. Down: dry in the monsoon']],
  plan:['Plan view','Top-down','Sizes are on the plan labels (press Sizes). Roof comes off for the plan.',['Hall 15.67 × 7.76 m, kitchen block 5.41 m wide','Existing restaurant and residence shown as plain massing for context','The existing restaurant\'s 1.50 m balcony along the landing and approach path is its only usable part; same 80 cm railing as the hall']],
