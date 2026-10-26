@@ -465,6 +465,11 @@ const bays=[];
   (b.ent?[[0.2,L/2-0.85],[L/2+0.85,L-0.2]]:[[0.2,L-0.2]]).forEach(([s0,s1])=>{const a=p(s0),c=p(s1);balRun(a[0],a[1],c[0],c[1]);});});
  const im=new THREE.InstancedMesh(balGeo,M.navy,balPts.length);const mt=new THREE.Matrix4();balPts.forEach(([x,z],i)=>{mt.makeTranslation(x,0.14,z);im.setMatrixAt(i,mt);});im.castShadow=true;G.walls.add(im);}
 bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0.2,b.b[1]);beam(a,c,0.3,0.24,M.goaWhite,G.walls);});
+/* photo spot: a small brass "CE" monogram plaque on the entrance column, the opening kept clear of furniture; a reed diffuser (jasmine) on a teak bracket beside it */
+{const pl=new THREE.Mesh(new THREE.CircleGeometry(0.16,32),S({map:tex(256,256,(c,w)=>{const g=c.createRadialGradient(w*0.4,w*0.4,10,w/2,w/2,w/2);g.addColorStop(0,'#e9c46a');g.addColorStop(1,'#9a7434');c.fillStyle=g;c.beginPath();c.arc(w/2,w/2,w/2,0,7);c.fill();c.strokeStyle='#5a4220';c.lineWidth=8;c.beginPath();c.arc(w/2,w/2,w/2-14,0,7);c.stroke();c.fillStyle='#3a2a14';c.font='700 96px "Bricolage Grotesque", serif';c.textAlign='center';c.textBaseline='middle';c.fillText('CE',w/2,w/2+4);},1,1),roughness:0.3,metalness:0.8}));
+ pl.position.set(EM-1.235+0.0,1.55,5.48+0.13);G.walls.add(pl);
+ bx(EM+1.35,EM+1.55,1.0,1.03,5.48+0.12,5.48+0.3,M.timber,G.walls,false);cyl(0.035,0.04,0.1,EM+1.45,1.03,5.48+0.21,S({color:'#6a3a1a',transparent:true,opacity:0.8,roughness:0.1}),G.walls,10,false);
+ for(let i=0;i<5;i++)rod(V(EM+1.45,1.1,5.69),V(EM+1.45+Math.cos(i)*0.06,1.32,5.69+Math.sin(i)*0.06),0.003,M.timberDark,G.walls,false);}
 /* the end wall left of the bar (behind the coffee station): the old white mural wall, finished in exposed red brick to match the bar counter */
 {const z0=0.1,z1=2.74-0.17,top=hc(0)-0.01;bx(HX-0.1,HX+0.1,0,top,z0,z1,M.plaster,G.walls);
  // behind the coffee station: exposed red-brick wall (as the bar) carrying the reference mural itself (the winking woman with red hanging-flower hair), from the counter top to the ceiling
@@ -641,7 +646,7 @@ function mouldedPanel(x0,x1,y0,y1){const t=0.012,d=zi+0.03;[[x0,x1,y0,y0+t],[x0,
 
 cageLantern(7.62,3.0);cageLantern(11.4,3.0);cageLantern(13.35,3.0);
 // neon and chalkboard in the last bay, a framed vintage poster over the brick base
-{const n=new THREE.Mesh(new THREE.PlaneGeometry(1.9,0.74),M.neonRed);n.position.set(12.15,2.7,zi+0.09);n.renderOrder=4;DW.add(n);
+{   // ("bao down" neon removed: it competed with the gallery and the mural)
  const c=new THREE.Mesh(new THREE.PlaneGeometry(0.8,1.0),new THREE.MeshStandardMaterial({map:chalkTex,roughness:0.9}));c.position.set(12.95,1.78,zi+0.09);DW.add(c);bx(12.52,13.38,1.26,2.3,zi+0.07,zi+0.09,M.timberDark,DW,false).visible=false;
 }
 // brass-wired sconces on the emerald side and trailing plants on timber shelves
@@ -696,7 +701,7 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
 // gallery wall (moody gallery reference): each bay a tight, aligned hang of thin gilt frames - a large statement painting at the centre of the big bays with a brass
 // picture light, around it oil landscapes, portraits, still lifes and flower pieces, cream-matted black-and-white prints (organic abstract shapes, leaf
 // silhouettes, line-drawn faces, a checkerboard), a small oval gilt mirror and a round plate; frames aligned to common edges with even 5 cm gaps
-{const r=rng(77),gap=0.05,Y0=1.14,Y1=2.98;
+{const r=rng(77),gap=0.09,Y0=1.18,Y1=2.92;   // hung with more air (about a fifth fewer pieces)
  const pool={},art=(k,sd)=>pool[k+sd]||(pool[k+sd]=artTex(k,sd,192,240));
  const print=(kind,sd)=>pool['p'+kind+sd]||(pool['p'+kind+sd]=tex(192,240,(c,w,h)=>{const q=rng(sd+9);c.fillStyle='#efe8da';c.fillRect(0,0,w,h);c.fillStyle='#161412';c.strokeStyle='#161412';c.lineCap='round';
    if(kind==='blob'){c.beginPath();c.moveTo(w*0.3,h*0.85);c.bezierCurveTo(w*0.05,h*0.5,w*0.35,h*0.12,w*0.55,h*0.22);c.bezierCurveTo(w*0.8,h*0.3,w*0.6,h*0.5,w*0.75,h*0.7);c.bezierCurveTo(w*0.85,h*0.9,w*0.5,h*0.95,w*0.3,h*0.85);c.fill();
@@ -724,7 +729,7 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
   if(W>1.5){put(x0+W*0.78,2.35,0.22,0.32,(x,y,w,h)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const ring=new THREE.Mesh(new THREE.TorusGeometry(1,0.14,6,28),M.gilt);ring.scale.set(w*0.45,h*0.45,0.2);ring.position.z=0.02;g.add(ring);const m=new THREE.Mesh(new THREE.CircleGeometry(1,24),M.mirror);m.scale.set(w*0.4,h*0.4,1);m.position.z=0.018;g.add(m);});
    put(x0+W*0.22,2.5,0.18,0.18,(x,y)=>{cyl(0.09,0.09,0.02,x,y,zi+0.04,M.white,DW,20,false).rotation.x=Math.PI/2;});}
   // fill the rest with aligned rectangles on a loose grid
-  for(let t=0;t<2600;t++){const w=[0.24,0.3,0.38,0.46,0.6][Math.floor(r()*5)],h=[0.3,0.36,0.44,0.52,0.62][Math.floor(r()*5)];if(w>W-0.04)continue;
+  for(let t=0;t<2600&&items.length<(bi+1)*999;t++){if(r()<0.2)continue;const w=[0.24,0.3,0.38,0.46,0.6][Math.floor(r()*5)],h=[0.3,0.36,0.44,0.52,0.62][Math.floor(r()*5)];if(w>W-0.04)continue;
    const x=x0+w/2+Math.round(r()*(W-w)/0.05)*0.05,y=Y0+h/2+Math.round(r()*(Y1-Y0-h)/0.05)*0.05;put(x,y,w,h,pic);}});}
 
 
@@ -977,7 +982,12 @@ TABLES.forEach(([x,z,kind],i)=>{if(kind===6){const w=0.9,l=1.9;
   [[-0.36,-0.36],[0.36,-0.36],[-0.36,0.36],[0.36,0.36]].forEach(p=>bx(x+p[0]-0.04,x+p[0]+0.04,0,0.72,z+p[1]-0.04,z+p[1]+0.04,M.timberDark,G.hall));
   bx(x-0.36,x+0.36,0.14,0.18,z-0.36,z-0.32,M.timberDark,G.hall,false);bx(x-0.36,x+0.36,0.14,0.18,z+0.32,z+0.36,M.timberDark,G.hall,false);
   tableCloth(x,z,0.9,0.9);
-  cyl(0.045,0.045,0.12,x,0.79,z,M.flameGlass,G.hall,12,false);cyl(0.05,0.05,0.012,x,0.91,z,M.brass,G.hall,12,false);sph(0.016,x,0.85,z,M.filament,G.hall);
+  cyl(0.045,0.045,0.12,x,0.79,z,M.flameGlass,G.hall,12,false);cyl(0.05,0.05,0.012,x,0.91,z,M.brass,G.hall,12,false);
+  M.bamboo=M.bamboo||S({color:'#c9a46a',roughness:0.8});M.bluewhite=M.bluewhite||S({map:tex(64,32,(c,w,h)=>{c.fillStyle='#f4f2ec';c.fillRect(0,0,w,h);c.strokeStyle='#2a4a8a';c.lineWidth=3;c.beginPath();for(let xx=0;xx<=w;xx+=4)c.lineTo(xx,h/2+Math.sin(xx/5)*6);c.stroke();c.fillStyle='#2a4a8a';c.fillRect(0,0,w,4);c.fillRect(0,h-4,w,4);},1,1),roughness:0.2});M.redLacquer=M.redLacquer||S({color:'#9a1c18',roughness:0.25});
+  cyl(0.11,0.11,0.07,x-0.18,0.79,z+0.12,M.bamboo,G.hall,16,false);cyl(0.115,0.11,0.02,x-0.18,0.86,z+0.12,M.bamboo,G.hall,16,false);
+  [[0.2,-0.14],[0.27,-0.14]].forEach(([dx,dz])=>cyl(0.028,0.024,0.045,x+dx,0.79,z+dz,M.bluewhite,G.hall,12,false));
+  bx(x+0.14,x+0.24,0.79,0.82,z+0.15,z+0.21,M.redLacquer,G.hall,false);
+  [[0,-0.4],[0,0.4],[-0.4,0],[0.4,0]].forEach(([dx,dz])=>bx(x+dx*0.9-0.02,x+dx*0.9+0.02,0.79,0.8,z+dz*0.9-0.012+(dx?0.12:0),z+dz*0.9+0.012+(dx?0.12:0),M.brass,G.hall,false));sph(0.016,x,0.85,z,M.filament,G.hall);
   bx(x+0.12,x+0.18,0.79,0.89,z+0.1,z+0.18,M.timberDark,G.hall,false);
   [[0,-0.32],[0,0.32],[-0.32,0],[0.32,0]].forEach(([dx,dz],k)=>{cyl(0.115,0.1,0.014,x+dx,0.79,z+dz,M.white,G.hall,18,false);cyl(0.034,0.02,0.1,x+dx*1.0+(dz?0.15:0),0.79,z+dz*1.0+(dx?0.15:0),M.clearBottle,G.hall,10,false);});
   const seat=M.chester;
@@ -985,7 +995,7 @@ TABLES.forEach(([x,z,kind],i)=>{if(kind===6){const w=0.9,l=1.9;
   else{chair(x,z+0.7,Math.PI,seat);chair(x,z-0.7,0,seat);chair(x-0.7,z,Math.PI/2,seat);chair(x+0.7,z,-Math.PI/2,seat);}
   pendant(x,z,z<2);glowDecal(x,0.795,z,1.3,1.3,'#ffb060',0.32,-Math.PI/2);});   // each orb pair throws a warm pool on its table
 /* bar stools stand at the counter; planters + a kilim runner at the entrance */
-{const k=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.2),M.kilim);k.rotation.x=-Math.PI/2;k.position.set(ENT_MID,0.005,4.3);G.hall.add(k);}
+{const cm=new THREE.Mesh(new THREE.PlaneGeometry(1.3,0.6),M.coir);cm.rotation.x=-Math.PI/2;cm.position.set(ENT_MID,0.004,5.85);G.hall.add(cm);const k=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.2),M.kilim);k.rotation.x=-Math.PI/2;k.position.set(ENT_MID,0.005,4.3);G.hall.add(k);}
 function planter(x,z,s){bx(x-0.25*s,x+0.25*s,0,0.5*s,z-0.25*s,z+0.25*s,M.pot,G.hall);for(let i=0;i<5;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.2*s,8,6),M.leaf);l.position.set(x+(i-2)*0.07,0.65*s+i%2*0.14,z+(i%3-1)*0.06);l.castShadow=true;G.hall.add(l);}}
 
 /* cooling for a low roof (no ceiling fans): misting fans on the pillars + two vertical tower ACs */
@@ -1001,7 +1011,10 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
   const ring=new THREE.Mesh(new THREE.TorusGeometry(0.2,0.012,6,28),M.brass);ring.position.z=0.24;g.add(ring);for(let i=0;i<8;i++){const a=i/8*6.283;sph(0.012,Math.cos(a)*0.2,Math.sin(a)*0.2,0.25,M.brass,g);}
   const mist=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.1,1.3,22,1,true),M.mist);mist.rotation.x=Math.PI/2;mist.position.z=0.9;mist.castShadow=false;g.add(mist);
   g.position.set(x+nx*0.2,2.2,z+nz*0.2);g.rotation.y=Math.atan2(nx,nz);g.rotation.x=0.3;G.fans.add(g);}
-colPts.forEach(([x,z])=>{if(x>15.6&&z<0.2)return;if(x<0.1&&z<0.1)return;if(Math.abs(z-5.48)<0.05&&Math.abs(x-ENT_MID)<1.4)return;pillarMistFan(x,z);});
+// misting fans removed; quiet ceiling fans with dark walnut blades sit in the coffers over the dining room (they also keep mosquitoes off)
+function ceilFan(x,z){const top=hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);cyl(0.012,0.012,0.35,0,-0.35,0,M.blackMetal,g,8,false);cyl(0.11,0.09,0.12,0,-0.48,0,M.blackMetal,g,16,false);
+  const bl=new THREE.Group();bl.position.y=-0.43;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.58,0.012,0.13),M.timberDark);b2.position.x=0.36;b2.rotation.x=0.12;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);}
+[[3.0,2.74],[6.6,2.74],[10.2,2.74],[2.6,5.9]].forEach(([x,z])=>ceilFan(x,z));
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
   bx(-0.18,0.18,0.06,1.75,-0.15,0.15,body,g);bx(-0.17,0.17,0.0,0.06,-0.14,0.14,M.black,g);
   bx(-0.16,0.16,1.35,1.62,0.15,0.152,M.black,g,false);for(let y=1.38;y<1.6;y+=0.04)bx(-0.15,0.15,y,y+0.012,0.152,0.158,M.ssDark,g,false);   // louvres
@@ -1012,10 +1025,7 @@ function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6
 towerAC(0.55,4.2,Math.PI/2);towerAC(5.85,9.2,-Math.PI/2+0.35);
 lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',5.85,2.0,9.2,'k');
 
-/* --- fairy lights criss-crossing the hall --- */
-{const mats=[];[[0.5,3.4,15.2,3.4],[0.5,6.8,6.2,6.8]].forEach(([x0,z0,x1,z1])=>{const pts=[];for(let i=0;i<=30;i++){const t=i/30,x=x0+(x1-x0)*t,z=z0+(z1-z0)*t;pts.push(V(x,hc(z)-0.4-0.12*Math.sin(Math.PI*t*3)*0.5,z));}
-  G.deco.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:'#2f2f2f'})));pts.forEach((p,i)=>{if(i%1===0)sph(0.028,p.x,p.y-0.04,p.z,M.led,G.deco);});});}
-
+/* (criss-cross fairy strands removed: one light language over the dining room) */
 /* ======================= HANGING DECOR + PERIMETER LIGHTING (the hall is open on three sides) ======================= */
 {const g=G.deco;
  // 1. festoon bulbs draped along every curtained bay, just inside the PVC
@@ -1050,7 +1060,8 @@ lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',5.85,2.0,9.2,'k');
 /* ======================= INSPIRATION LAYER (pergola greenery, string-light grid, hedge planters, arched gateway, sign wall) ======================= */
 {const g=G.deco;const r=rng(404);
  // 1. dense overhead string-light grid across the hall, between the rafters
- {const wires=[],bulbs=[];[1.4,3.4,5.2,7.2,9.4].forEach(zz=>{const [x0,x1]=xRange(zz);const xa=x0+0.25,xb=(zz>5.48?x1:Math.min(x1,HX-0.3))-0.25;const n=Math.round((xb-xa)/0.42);let prev=null;for(let i=0;i<=n;i++){const t=i/n,xx=xa+(xb-xa)*t,yy=hc(zz)-0.36-0.07*Math.abs(Math.sin(i*Math.PI/3));const p=V(xx,yy,zz);if(prev){wires.push(prev,p);}prev=p;if(i>0&&i<n)bulbs.push(p.clone().add(V(0,-0.05,0)));}});
+ // overhead string grid removed: festoon on the bays + orbs only
+ if(0){const wires=[],bulbs=[];[1.4,3.4,5.2,7.2,9.4].forEach(zz=>{const [x0,x1]=xRange(zz);const xa=x0+0.25,xb=(zz>5.48?x1:Math.min(x1,HX-0.3))-0.25;const n=Math.round((xb-xa)/0.42);let prev=null;for(let i=0;i<=n;i++){const t=i/n,xx=xa+(xb-xa)*t,yy=hc(zz)-0.36-0.07*Math.abs(Math.sin(i*Math.PI/3));const p=V(xx,yy,zz);if(prev){wires.push(prev,p);}prev=p;if(i>0&&i<n)bulbs.push(p.clone().add(V(0,-0.05,0)));}});
   g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(wires),new THREE.LineBasicMaterial({color:'#262626'})));
   const im=new THREE.InstancedMesh(new THREE.SphereGeometry(0.032,8,6),M.globe,bulbs.length);const mt=new THREE.Matrix4();bulbs.forEach((p,i)=>{mt.makeTranslation(p.x,p.y,p.z);im.setMatrixAt(i,mt);});g.add(im);}
  // 2. climbing + trailing greenery: instanced leaves on every beam bay and pillar, and hedge planters along the curtains
@@ -1210,6 +1221,9 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
   rod(V(0.35,0.9,0.03),V(0.35,0.75,0.12),0.015,M.ss,w,false);cyl(0.06,0.06,0.1,-0.38,0.8,0.07,M.white,w,12,false);}
  // high louvre window, plant, wall light
  bx(BX1-1.1,BX1-0.5,1.7,2.3,TY0+0.1,TY0+0.12,M.glass,g,false);
+ {const bxp=TX0+0.6;[[-0.1,0.18],[0.0,0.2]].forEach(([dx,hh])=>{cyl(0.03,0.03,hh*0.8,bxp+0.25+dx,0.89,z1-0.08,M.amberBottle,g,10,false);cyl(0.008,0.008,0.05,bxp+0.25+dx,0.89+hh*0.8,z1-0.08,M.black,g,6,false);});
+  const hr=new THREE.Mesh(new THREE.PlaneGeometry(0.22,0.3),S({map:signTex(220,300,[['HOUSE',26,0.25],['RULES',26,0.36],['wash your hands',14,0.55],['be kind to staff',14,0.65],['dim sum is life',14,0.75]],'#f3eada','#1a1a1a','#c49a3c'),roughness:0.8}));hr.position.set(px-0.06,1.55,z1-0.75);hr.rotation.y=-Math.PI/2;g.add(hr);
+  bx(x1-0.03,x1,2.05,2.3,-1.25,-0.95,M.white,g,false);for(let yy=2.08;yy<2.28;yy+=0.03)bx(x1-0.035,x1-0.03,yy,yy+0.012,-1.23,-0.97,M.ssDark,g,false);}
  const wl=new THREE.Group();cyl(0.1,0.1,0.14,0,0,0,M.jute,wl,14,false);sph(0.04,0,0.07,0,M.globe,wl);wl.position.set(px+0.9,2.0,z0+0.03);g.add(wl);
  // lobby: a plain passage to the washroom door (the only hand-wash is inside the washroom, as on site)
  {const lx0=BX0+0.1,lx1=TX0-0.1;
@@ -1240,10 +1254,10 @@ const hemi=new THREE.HemisphereLight('#ffe9cf','#6b5040',0.5);scene.add(hemi);
 const sun=new THREE.DirectionalLight('#fff1dc',1.0);sun.position.set(-8,16,-12);sun.target.position.set(10,0,5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
 Object.assign(sun.shadow.camera,{left:-20,right:20,top:20,bottom:-20,near:1,far:60});sun.shadow.bias=-0.0006;scene.add(sun);scene.add(sun.target);
 // hall: one warm light per pair of tables, bar, kitchen (work light kept constant), dish wash, washroom, store
-[[3.4,2.3,2.6],[9.6,2.3,2.8],[5.6,2.3,6.4]].forEach(([x,y,z])=>lamp(x,y,z,'#ffb468',2.2,10));
+[[3.4,2.3,2.6],[9.6,2.3,2.8],[5.6,2.3,6.4]].forEach(([x,y,z])=>lamp(x,y,z,'#ffa850',2.2,10));
 // perimeter glow for the three open sides: warm washes just inside the curtains
 
-lamp(14.2,2.0,2.8,'#ffc884',1.6,6);
+lamp(14.2,2.0,2.8,'#ffb060',1.6,6);
 const kitL=lamp(BX0+2.7,2.4,4.3,'#fff2dc',1.1,6);const dishL=lamp(BX0+2.7,2.3,1.0,'#fff2dc',0.9,4.5);
 lamp(TX0+0.6,2.2,-0.85,'#ffcf94',1.1,5);lamp(SX0+1.35,2.3,BY1+3.2,'#fff2dc',0.8,6);
 const KEEP=[kitL,dishL];
@@ -1317,7 +1331,7 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Cabin East Garden','A 35-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 + 3 stools at the drinking ledge = 35 covers (the cap)','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy brown stacked tile under the bottle green','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Low roof, so no ceiling fans: misting fans on the pillars and two tower ACs']],
+ overview:['Overview','Cabin East Garden','A 35-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 + 3 stools at the drinking ledge = 35 covers (the cap)','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy brown stacked tile under the bottle green','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet ceiling fans with dark walnut blades in the coffers, plus two tower ACs']],
  decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy chocolate-brown vertical stacked tile (1.0 m, two-tone with the bottle green above, brass rail between), white fluted pilasters kept, emerald paint above with brass globe sconces, a tight gallery hang in thin gilt frames (some black lacquer, one cinnabar red per bay) telling the pan-Asian and Indo-Chinese story: a large oil still life of a Chinese porcelain bowl beside a steel thali and a chilli-sauce bottle as the statement piece under a brass picture light, old eating-house photos, bilingual hand-painted signs and menu cards, a 1930s calendar-girl poster, woodblock waves, ink-brush bamboo and plum blossom, calligraphy, vintage Asian beer adverts, neon street photos and festival lanterns, plus a small oval mirror and a plate, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Gallery wall telling the pan-Asian and Indo-Chinese story: a bowl-and-thali still life under a picture light, eating-house photos, bilingual signs, menu cards, calendar girl, ink-brush, calligraphy, Asian beer adverts','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site','Magenta and white bougainvillea along the eave of every open side, cascading down the entrance columns']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
