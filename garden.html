@@ -724,39 +724,85 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
     c.shadowBlur=0;c.fillStyle='#1c1820';c.fillRect(0,h*0.78,w,h*0.22);for(let i=0;i<5;i++){c.fillStyle='#000';c.fillRect(r()*w,h*0.6,w*0.04,h*0.2);}}
   else{c.fillStyle='#1a0c0a';c.fillRect(0,0,w,h);for(let i=0;i<8;i++){const x=w*(0.15+(i%4)*0.23),y=h*(0.25+Math.floor(i/4)*0.35);const g=c.createRadialGradient(x,y,2,x,y,w*0.11);g.addColorStop(0,'#ffd27a');g.addColorStop(0.4,'#e8301c');g.addColorStop(1,'rgba(120,10,0,0)');c.fillStyle=g;c.beginPath();c.ellipse(x,y,w*0.1,h*0.08,0,0,7);c.fill();}}
   c.strokeStyle='rgba(0,0,0,.25)';c.lineWidth=3;c.strokeRect(0,0,w,h);},1,1);}
-// gallery wall (moody gallery reference): each bay a tight, aligned hang of thin gilt frames - a large statement painting at the centre of the big bays with a brass
-// picture light, around it oil landscapes, portraits, still lifes and flower pieces, cream-matted black-and-white prints (organic abstract shapes, leaf
-// silhouettes, line-drawn faces, a checkerboard), a small oval gilt mirror and a round plate; frames aligned to common edges with even 5 cm gaps
-{const r=rng(77),gap=0.09,Y0=1.18,Y1=2.92;   // hung with more air (about a fifth fewer pieces)
- const pool={},art=(k,sd)=>pool[k+sd]||(pool[k+sd]=artTex(k,sd,192,240));
- const print=(kind,sd)=>pool['p'+kind+sd]||(pool['p'+kind+sd]=tex(192,240,(c,w,h)=>{const q=rng(sd+9);c.fillStyle='#efe8da';c.fillRect(0,0,w,h);c.fillStyle='#161412';c.strokeStyle='#161412';c.lineCap='round';
-   if(kind==='blob'){c.beginPath();c.moveTo(w*0.3,h*0.85);c.bezierCurveTo(w*0.05,h*0.5,w*0.35,h*0.12,w*0.55,h*0.22);c.bezierCurveTo(w*0.8,h*0.3,w*0.6,h*0.5,w*0.75,h*0.7);c.bezierCurveTo(w*0.85,h*0.9,w*0.5,h*0.95,w*0.3,h*0.85);c.fill();
-     c.fillStyle='#efe8da';c.beginPath();c.ellipse(w*(0.4+q()*0.2),h*(0.4+q()*0.2),w*0.08,h*0.12,q()*3,0,7);c.fill();}
-   else if(kind==='leaf'){c.lineWidth=3;c.beginPath();c.moveTo(w/2,h*0.92);c.lineTo(w/2,h*0.12);c.stroke();for(let i=0;i<8;i++){const y=h*(0.2+i*0.09),sd2=i%2?1:-1;c.save();c.translate(w/2,y);c.rotate(sd2*0.7);c.beginPath();c.ellipse(sd2*w*0.14,0,w*0.15,h*0.035,0,0,7);c.fill();c.restore();}}
-   else if(kind==='face'){c.lineWidth=2.5;c.beginPath();c.ellipse(w/2,h*0.45,w*0.2,h*0.24,0,0,7);c.stroke();c.beginPath();c.moveTo(w*0.44,h*0.4);c.lineTo(w*0.47,h*0.52);c.lineTo(w*0.5,h*0.52);c.stroke();c.beginPath();c.arc(w*0.42,h*0.38,3,0,7);c.arc(w*0.58,h*0.38,3,0,7);c.fill();c.beginPath();c.arc(w/2,h*0.58,w*0.06,0.2,Math.PI-0.2);c.stroke();}
-   else{const n=6,cs=w*0.7/n;for(let i=0;i<n;i++)for(let j=0;j<n;j++)if((i+j)%2){c.fillRect(w*0.15+i*cs,h*0.25+j*cs,cs,cs);}c.strokeRect(w*0.15,h*0.25,cs*n,cs*n);}},1,1));
- M.lacquer=M.lacquer||S({color:'#111010',roughness:0.25,metalness:0.1});M.cinnabar=M.cinnabar||S({color:'#a8241c',roughness:0.35});let redUsed=false;
- const thin=(x,y,w,h,tx,mat,fm)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.03;
-   bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.03,fm||M.gilt,g,false);bx(-w/2,w/2,-h/2,h/2,0.03,0.032,M.timberDark,g,false);
-   if(mat){bx(-w/2,w/2,-h/2,h/2,0.032,0.034,S({color:'#efe8da',roughness:0.9}),g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w*0.7,h*0.7),new THREE.MeshStandardMaterial({map:tx,roughness:0.85}));p.position.z=0.036;g.add(p);}
-   else{const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tx,roughness:0.55}));p.position.z=0.034;g.add(p);}return g;};
+// gallery wall from the new references (vintage enamel signs, a pub wall of signs and lamps, bold graphic posters in thin dark-wood frames on brick):
+// big enamel banner signs across the top of each bay, round and tall signs, bell-shaded brass wall lamps, wall clocks, bold red / yellow / cream graphic posters in
+// slim walnut frames (dim sum, noodles, chilli, an op-art steaming bowl), plus a few of the earlier prints and the bowl-and-thali oil as the statement piece in a heavy walnut frame
+{const r=rng(2031),gap=0.07,Y0=1.18,Y1=2.94;
  const AP={};const aart=(k,sd)=>AP[k+sd]||(AP[k+sd]=asianArt(k,sd));
- const MIX=[['eatery',false,2.4],['twotable',false,1.6],['sign',false,1.4],['menu',true,1.2],['calendar',false,1.4],['wave',true,1.2],['bamboo',true,1.6],['plum',true,1.4],['callig',true,1.2],['beer',false,1.4],['neon',false,1.2],['lantern',false,0.8]];
- const mt=MIX.reduce((a,m)=>a+m[2],0);
- const pic=(x,y,w,h)=>{let u=r()*mt,m=MIX[0];for(const q of MIX){u-=q[2];if(u<=0){m=q;break;}}
-   let fm=null;const v=r();if(!redUsed&&v<0.08){fm=M.cinnabar;redUsed=true;}else if(v<0.3)fm=M.lacquer;
-   thin(x,y,w,h,aart(m[0],Math.floor(r()*4)),m[1],fm);};
+ const grain=(c,w,h,a)=>{for(let i=0;i<Math.round(w*h/260);i++){c.fillStyle=`rgba(${r()<0.5?'60,30,10':'255,240,215'},${r()*a})`;c.fillRect(r()*w,r()*h,1+r()*3,1+r()*2);}};
+ const FF='Impact, "Arial Narrow", "Helvetica Neue", sans-serif';
+ const enamel=(kind,W,H)=>AP['e'+kind]||(AP['e'+kind]=tex(W,H,(c,w,h)=>{
+   const sets={noodles:['#efe3c8','#b8201c','#141210',['NOODLES','面']],dimsum:['#141210','#efe3c8','#c9993f',['DIM SUM','点心']],chow:['#1e3a2a','#efe3c8','#c9993f',['CHOWMEIN','麵']],hakka:['#efe3c8','#141210','#b8201c',['HAKKA NOODLES','']],tea:['#1e3a2a','#efe3c8','#efe3c8',['TEA','茶']],bao:['#c9302c','#fff3d6','#fff3d6',['BAO','包']],lager:['#b8201c','#fff3d6','#fff3d6',['LAGER','啤酒']],kitchen:['#141210','#efe3c8','#efe3c8',['KITCHEN','→']],open:['#c9302c','#fff3d6','#fff3d6',['OPEN','']],chilli:['#c9302c','#fff3d6','#141210',['CHILLI OIL','辣']]};
+   const [bg,fg,ac,tx]=sets[kind];c.fillStyle=bg;c.fillRect(0,0,w,h);c.strokeStyle=ac;c.lineWidth=Math.max(4,h*0.045);c.strokeRect(c.lineWidth*0.9,c.lineWidth*0.9,w-c.lineWidth*1.8,h-c.lineWidth*1.8);
+   c.fillStyle=fg;c.textAlign='center';c.textBaseline='middle';
+   if(h>w*1.4){const ch2=tx[0].split('');c.font=`700 ${w*0.55}px ${FF}`;ch2.forEach((ch,i2)=>c.fillText(ch,w/2,h*0.09+i2*(h*0.68/ch2.length)+h*0.04));c.font=`700 ${w*0.5}px serif`;if(tx[1])c.fillText(tx[1],w/2,h*0.9);}
+   else if(tx[1]&&w<h*1.4){c.font=`700 ${h*0.38}px ${FF}`;c.fillText(tx[0],w/2,h*0.36);c.font=`700 ${h*0.3}px ${FF}`;c.fillText(tx[1],w/2,h*0.72);}
+   else if(tx[1]){c.font=`700 ${h*0.55}px ${FF}`;c.textAlign='left';c.fillText(tx[0],w*0.07,h*0.52);c.textAlign='right';c.font=`700 ${h*0.48}px serif`;c.fillStyle=ac;c.fillText(tx[1],w*0.93,h*0.52);}
+   else{c.font=`700 ${Math.min(h*0.62,w/(tx[0].length*0.5))}px ${FF}`;c.fillText(tx[0],w/2,h*0.54);}
+   grain(c,w,h,0.35);for(let i=0;i<24;i++){c.strokeStyle='rgba(255,255,255,.07)';c.lineWidth=1.5;c.beginPath();const x=r()*w,y=r()*h;c.moveTo(x,y);c.lineTo(x+r()*40,y+r()*6);c.stroke();}
+   const vg=c.createLinearGradient(0,0,w,h);vg.addColorStop(0,'rgba(255,255,255,.08)');vg.addColorStop(1,'rgba(0,0,0,.22)');c.fillStyle=vg;c.fillRect(0,0,w,h);},1,1));
+ const roundSign=(kind)=>AP['r'+kind]||(AP['r'+kind]=tex(256,256,(c,w)=>{const bg={lager:'#b8201c',tea:'#1e3a2a',beer:'#e8c84a'}[kind],fg=kind==='beer'?'#141210':'#fff3d6';c.fillStyle='#d8cfbf';c.fillRect(0,0,w,w);c.fillStyle=bg;c.beginPath();c.arc(w/2,w/2,w/2-4,0,7);c.fill();
+   c.strokeStyle=fg;c.lineWidth=6;c.beginPath();c.arc(w/2,w/2,w/2-22,0,7);c.stroke();c.fillStyle=fg;c.textAlign='center';c.textBaseline='middle';c.font=`italic 700 ${w*0.24}px Georgia, serif`;
+   c.fillText({lager:'Lager',tea:'Tea',beer:'Beer'}[kind],w/2,w*0.46);c.font=`700 ${w*0.1}px ${FF}`;c.fillText({lager:'ICE COLD',tea:'FRESH BREW',beer:'ON TAP'}[kind],w/2,w*0.66);c.font=`700 ${w*0.12}px serif`;c.fillText({lager:'啤酒',tea:'茶',beer:'酒'}[kind],w/2,w*0.28);grain(c,w,w,0.3);},1,1));
+ const posterTex=(kind)=>AP['p'+kind]||(AP['p'+kind]=tex(256,340,(c,w,h)=>{c.textAlign='center';c.textBaseline='middle';
+   if(kind==='noodles'){c.fillStyle='#c8201c';c.fillRect(0,0,w,h);c.fillStyle='#fff3d6';c.font=`700 ${w*0.3}px ${FF}`;c.fillText('FRESH',w/2,h*0.12);c.fillText('NOODLES',w/2,h*0.27);
+     c.fillStyle='#e8b04a';c.beginPath();c.ellipse(w/2,h*0.66,w*0.36,h*0.22,0,0,7);c.fill();c.fillStyle='#f6e6b8';for(let i=0;i<9;i++){c.beginPath();c.arc(w*(0.25+i*0.063),h*(0.64+Math.sin(i)*0.03),5,0,7);c.fill();}c.fillStyle='#f4efe4';c.beginPath();c.ellipse(w*0.4,h*0.6,w*0.08,h*0.06,0,0,7);c.fill();c.fillStyle='#e8a020';c.beginPath();c.arc(w*0.4,h*0.6,w*0.035,0,7);c.fill();c.fillStyle='#3a7a30';c.fillRect(w*0.55,h*0.7,w*0.12,h*0.08);}
+   else if(kind==='opart'){c.fillStyle='#efe6d0';c.fillRect(0,0,w,h);c.strokeStyle='#141210';c.lineWidth=3.5;for(let i=0;i<16;i++){c.beginPath();c.ellipse(w/2,h*0.42,w*(0.08+i*0.026),h*(0.04+i*0.021),0,Math.PI,0);c.stroke();}
+     c.fillStyle='#efe6d0';c.fillRect(0,h*0.44,w,h*0.5);c.strokeStyle='#141210';c.lineWidth=4;c.beginPath();c.ellipse(w/2,h*0.62,w*0.28,h*0.1,0,0,Math.PI);c.stroke();c.beginPath();c.moveTo(w*0.22,h*0.62);c.lineTo(w*0.78,h*0.62);c.stroke();c.fillStyle='#141210';c.font=`700 ${w*0.075}px ${FF}`;c.fillText('Bowl-Effect',w/2,h*0.84);}
+   else if(kind==='chilli'){c.fillStyle='#f2c92a';c.fillRect(0,0,w,h);c.fillStyle='#141210';c.font=`700 ${w*0.2}px ${FF}`;c.fillText('CHILLI',w/2,h*0.1);c.fillText('& SPICE',w/2,h*0.22);
+     c.fillStyle='#c8201c';c.beginPath();c.moveTo(w*0.18,h*0.32);c.bezierCurveTo(w*0.7,h*0.28,w*0.95,h*0.55,w*0.82,h*0.92);c.bezierCurveTo(w*0.6,h*0.72,w*0.3,h*0.6,w*0.18,h*0.32);c.fill();c.fillStyle='#3a7a30';c.beginPath();c.moveTo(w*0.18,h*0.32);c.quadraticCurveTo(w*0.1,h*0.25,w*0.08,h*0.18);c.lineTo(w*0.2,h*0.22);c.fill();
+     c.fillStyle='#fff3d6';c.fillRect(w*0.62,h*0.82,w*0.3,h*0.12);c.fillStyle='#141210';c.font=`700 ${w*0.1}px serif`;c.fillText('辣',w*0.77,h*0.88);}
+   else{c.fillStyle='#f4efe4';c.fillRect(0,0,w,h);c.fillStyle='#c8201c';c.font=`700 ${w*0.26}px ${FF}`;['DIM','SUM','DIM','SUM'].forEach((t,i)=>c.fillText(t,w/2,h*(0.1+i*0.17)));
+     for(let i=0;i<5;i++){c.fillStyle='#e8d6a8';c.beginPath();c.arc(w*(0.12+i*0.19),h*0.86,w*0.075,0,7);c.fill();c.strokeStyle='#8a6a3a';c.lineWidth=2;c.stroke();c.fillStyle='#8a6a3a';c.fillRect(w*(0.12+i*0.19)-w*0.04,h*0.85,w*0.08,2);}}
+   grain(c,w,h,0.1);},1,1));
+ const clockTex=tex(128,128,(c,w)=>{c.fillStyle='#4a3a26';c.beginPath();c.arc(w/2,w/2,w/2-1,0,7);c.fill();c.fillStyle='#f3ecd8';c.beginPath();c.arc(w/2,w/2,w/2-9,0,7);c.fill();c.fillStyle='#141210';c.textAlign='center';c.textBaseline='middle';c.font='700 13px serif';for(let i=1;i<=12;i++){const a2=i/12*6.283-1.5708;c.fillText(String(i),w/2+Math.cos(a2)*w*0.36,w/2+Math.sin(a2)*w*0.36);}
+   c.strokeStyle='#141210';c.lineCap='round';c.lineWidth=4;c.beginPath();c.moveTo(w/2,w/2);c.lineTo(w/2+Math.cos(-0.6)*w*0.2,w/2+Math.sin(-0.6)*w*0.2);c.stroke();c.lineWidth=3;c.beginPath();c.moveTo(w/2,w/2);c.lineTo(w/2+Math.cos(1.6)*w*0.3,w/2+Math.sin(1.6)*w*0.3);c.stroke();},1,1);
+ M.lacquer=M.lacquer||S({color:'#111010',roughness:0.25,metalness:0.1});M.frameWalnut=S({color:'#4a2c18',roughness:0.55});M.metalSide=S({color:'#2a2622',roughness:0.5,metalness:0.4});
+ const plate=(x,y,w,h,tx)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);bx(-w/2-0.012,w/2+0.012,-h/2-0.012,h/2+0.012,0,0.016,M.metalSide,g,false);
+   const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tx,roughness:0.5,metalness:0.3}));p.position.z=0.017;g.add(p);return g;};
+ const framedPoster=(x,y,w,h,tx,fm)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.032;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.034,fm||M.frameWalnut,g,false);bx(-w/2-0.006,w/2+0.006,-h/2-0.006,h/2+0.006,0.034,0.036,S({color:'#f4efe4',roughness:0.9}),g,false);
+   const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tx,roughness:0.55}));p.position.z=0.038;g.add(p);return g;};
+ const roundPlate=(x,y,d,tx)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(d/2,d/2,0.02,36),[M.metalSide,new THREE.MeshStandardMaterial({map:tx,roughness:0.45,metalness:0.3}),M.metalSide]);m.rotation.x=Math.PI/2;m.position.set(x,y,zi+0.045);DW.add(m);};
+ const clock=(x,y,d)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(d/2,d/2,0.035,32),[M.frameWalnut,new THREE.MeshStandardMaterial({map:clockTex,roughness:0.4}),M.frameWalnut]);m.rotation.x=Math.PI/2;m.position.set(x,y,zi+0.05);DW.add(m);};
+ const bellLamp=(x,y)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);M.shade=M.shade||S({color:'#f2dcb4',emissive:'#ffb860',emissiveIntensity:0.9,roughness:0.6,side:THREE.DoubleSide});if(!EMI.some(e2=>e2[0]==='shade'))EMI.push(['shade',0.9]);
+   bx(-0.03,0.03,-0.1,0.1,0,0.02,M.brass,g,false);rod(V(0,0,0.02),V(0,0,0.2),0.012,M.brass,g,false);rod(V(0,0.02,0.2),V(0,0.1,0.2),0.012,M.brass,g,false);
+   const sh=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.15,0.17,22,1,true),M.shade);sh.position.set(0,0.2,0.2);g.add(sh);cyl(0.07,0.07,0.012,0,0.285,0.2,M.brass,g,16,false);sph(0.04,0,0.2,0.2,M.globe,g);};
+ const art=(kind,sd)=>aart(kind,sd);
+ const oldArt=(x,y,w,h,kind,sd,mat)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.03;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.03,M.frameWalnut,g,false);
+   if(mat){bx(-w/2,w/2,-h/2,h/2,0.03,0.032,S({color:'#efe8da',roughness:0.9}),g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w*0.72,h*0.72),new THREE.MeshStandardMaterial({map:art(kind,sd),roughness:0.85}));p.position.z=0.034;g.add(p);}
+   else{const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:art(kind,sd),roughness:0.55}));p.position.z=0.032;g.add(p);}};
  const bays=[[1.62,3.25],[3.65,7.1],[7.5,9.8],[10.2,11.05],[13.95,15.05]];const items=[];
  const free=(x0,x1,y0,y1)=>!items.some(q=>x0<q[1]+gap&&x1>q[0]-gap&&y0<q[3]+gap&&y1>q[2]-gap)&&!(x0<7.82&&x1>7.42&&y1>2.75);
  const put=(x,y,w,h,f)=>{if(!free(x-w/2,x+w/2,y-h/2,y+h/2))return false;items.push([x-w/2,x+w/2,y-h/2,y+h/2]);f(x,y,w,h);return true;};
- bays.forEach(([x0,x1],bi)=>{const W=x1-x0,cx=(x0+x1)/2;redUsed=false;
-  if(W>2){put(cx,2.08,0.86,1.2,(x,y,w,h)=>{thin(x,y,w,h,aart(bi===1?'twotable':'calendar',bi),false);const pl=new THREE.Group();bx(-0.2,0.2,0,0.025,0,0.05,M.brass,pl,false);rod(V(0,0,0.03),V(0,-0.06,0.14),0.006,M.brass,pl,false);bx(-0.19,0.19,-0.09,-0.06,0.1,0.2,M.brass,pl,false);bx(-0.18,0.18,-0.08,-0.075,0.12,0.19,M.led,pl,false);pl.position.set(x,y+h/2+0.12,zi+0.04);DW.add(pl);});}
-  // oval mirror and a round plate in the larger bays
-  if(W>1.5){put(x0+W*0.78,2.35,0.22,0.32,(x,y,w,h)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const ring=new THREE.Mesh(new THREE.TorusGeometry(1,0.14,6,28),M.gilt);ring.scale.set(w*0.45,h*0.45,0.2);ring.position.z=0.02;g.add(ring);const m=new THREE.Mesh(new THREE.CircleGeometry(1,24),M.mirror);m.scale.set(w*0.4,h*0.4,1);m.position.z=0.018;g.add(m);});
-   put(x0+W*0.22,2.5,0.26,0.26,(x,y)=>bwPlate(x,y,0.12));put(x0+W*0.22+0.24,2.32,0.18,0.18,(x,y)=>bwPlate(x,y,0.085));}
-  // fill the rest with aligned rectangles on a loose grid
-  for(let t=0;t<2600&&items.length<(bi+1)*999;t++){if(r()<0.2)continue;const w=[0.24,0.3,0.38,0.46,0.6][Math.floor(r()*5)],h=[0.3,0.36,0.44,0.52,0.62][Math.floor(r()*5)];if(w>W-0.04)continue;
-   const x=x0+w/2+Math.round(r()*(W-w)/0.05)*0.05,y=Y0+h/2+Math.round(r()*(Y1-Y0-h)/0.05)*0.05;put(x,y,w,h,pic);}});}
+ const banners=['noodles','dimsum','chow','hakka'],tall=['tea','open'],strips=['kitchen','open','lager','chilli'];
+ // pick from the weighted mix, with dimensions per type
+ const PK=[['poster',5.0],['strip',1.5],['round',1.4],['tall',0.9],['clock',0.12],['old',1.4]];const pt=PK.reduce((a,k)=>a+k[1],0);
+ const pickKind=()=>{let u=r()*pt;for(const k of PK){u-=k[1];if(u<=0)return k[0];}return 'poster';};
+ const POSTERS=['noodles','opart','chilli','dimsum'],ROUNDS=['lager','tea','beer'],OLD=[['wave',true],['bamboo',true],['plum',true],['callig',true],['eatery',false],['menu',true],['calendar',false]];
+ let bi2=0;
+ bays.forEach(([x0,x1],bi)=>{const W=x1-x0,cx=(x0+x1)/2;
+  if(W>1.5){const bw=Math.min(W-0.12,bi===1?1.3:1.0);put(bi===1?cx-0.9:cx,2.76,bw,0.3,(x,y,w,h)=>plate(x,y,w,h,enamel(banners[bi%4],768,Math.round(768*h/w))));}
+  if(bi===1){put(cx+0.55,2.0,0.96,1.0,(x,y,w,h)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.06;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.05,M.frameWalnut,g,false);bx(-w/2-f*0.45,w/2+f*0.45,-h/2-f*0.45,h/2+f*0.45,0.05,0.056,M.brass,g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:art('twotable',3),roughness:0.55}));p.position.z=0.06;g.add(p);
+    const pl=new THREE.Group();bx(-0.2,0.2,0,0.025,0,0.05,M.brass,pl,false);rod(V(0,0,0.03),V(0,-0.06,0.14),0.006,M.brass,pl,false);bx(-0.19,0.19,-0.09,-0.06,0.1,0.2,M.brass,pl,false);bx(-0.18,0.18,-0.08,-0.075,0.12,0.19,M.led,pl,false);pl.position.set(x,y+h/2+0.12,zi+0.04);DW.add(pl);});}
+  if(W>1.5){put(x0+0.22,2.2,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));if(W>3)put(x1-0.22,2.2,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));}
+  if(W>1.5)put(x0+W*0.62,1.58,0.3,0.3,(x,y,w)=>clock(x,y,0.28));
+  for(let t=0;t<3200;t++){const k=pickKind();let w,h;
+   if(k==='poster'){w=[0.28,0.34,0.4,0.46][Math.floor(r()*4)];h=w*(1.2+r()*0.2);}
+   else if(k==='strip'){w=[0.5,0.62,0.78][Math.floor(r()*3)];h=[0.17,0.2,0.24][Math.floor(r()*3)];}
+   else if(k==='round'){w=h=[0.26,0.3,0.36][Math.floor(r()*3)];}
+   else if(k==='tall'){w=[0.15,0.18][Math.floor(r()*2)];h=[0.55,0.7][Math.floor(r()*2)];}
+   else if(k==='clock'){w=h=0.28;}
+   else{w=[0.26,0.32,0.4][Math.floor(r()*3)];h=w*(1.1+r()*0.3);}
+   if(w>W-0.04)continue;
+   const x=x0+w/2+Math.round(r()*(W-w)/0.05)*0.05,y=Y0+h/2+Math.round(r()*(Y1-Y0-h)/0.05)*0.05;
+   put(x,y,w+(k==='poster'||k==='old'?0.07:0.03),h+(k==='poster'||k==='old'?0.07:0.03),(xx,yy)=>{
+    if(k==='poster')framedPoster(xx,yy,w,h,posterTex(POSTERS[Math.floor(r()*4)]),r()<0.2?M.lacquer:null);
+    else if(k==='strip'){const kd=strips[Math.floor(r()*4)];plate(xx,yy,w,h,enamel(kd,512,Math.round(512*h/w)));}
+    else if(k==='round')roundPlate(xx,yy,w,roundSign(ROUNDS[Math.floor(r()*3)]));
+    else if(k==='tall')plate(xx,yy,w,h,enamel(tall[Math.floor(r()*2)],128,Math.round(128*h/w)));
+    else if(k==='clock')clock(xx,yy,w);
+    else{const o=OLD[Math.floor(r()*OLD.length)];oldArt(xx,yy,w,h,o[0],Math.floor(r()*4),o[1]);}});}
+ });}
 
 
 /* ---- one 65 in television across the north-west corner (where the decor wall meets the 7.76 m open side), set exactly on the diagonal, facing the room ----
@@ -965,6 +1011,12 @@ solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
   const lm=new THREE.InstancedMesh(new THREE.PlaneGeometry(0.06,0.032),S({color:'#ffffff',roughness:0.7,side:THREE.DoubleSide}),L.length);const col=new THREE.Color();
   L.forEach(([x,y,z],i)=>{e.set(r()*3,r()*3,r()*3);q.setFromEuler(e);mt0(x,y,z,i);});function mt0(x,y,z,i){sc.set(1,1,1);O.compose(new THREE.Vector3(x,y,z),q,sc);lm.setMatrixAt(i,O);col.set(['#1f4a1c','#2a5a24','#183e16','#33662b'][i%4]);lm.setColorAt(i,col);}
   lm.castShadow=true;G.hall.add(lm);
+  // warm fairy lights woven through and around the leaves: ~520 tiny bulbs, mostly on the outer shell and underside of the canopy, plus a few strands wound up the trunk (one instanced mesh)
+  {M.fairy=M.fairy||S({color:'#ffe9b0',emissive:'#ffcf70',emissiveIntensity:1.6,roughness:0.3});M.fairyTree=S({color:'#ffb050',emissive:'#ff9a2a',emissiveIntensity:2.0,roughness:0.3});EMI.push(['fairyTree',2.0]);
+   const fp=[];for(let i=0;i<520;i++){const a2=r()*6.283,u=0.62+0.38*Math.sqrt(r()),rad=1.52*u,yy=2.08+Math.pow(r(),0.8)*(top-2.2-2.08)*(1-0.55*u*u);fp.push([px+Math.cos(a2)*rad,yy,pz+Math.sin(a2)*rad]);}
+   for(let k=0;k<3;k++)for(let t=0;t<1;t+=0.045){const a2=k*2.1+t*14,rr=0.2+t*0.25;fp.push([px+Math.cos(a2)*rr,ph+0.5+t*(2.05-ph),pz+Math.sin(a2)*rr]);}
+   const fm=new THREE.InstancedMesh(new THREE.SphereGeometry(0.02,6,5),M.fairyTree,fp.length);fp.forEach(([x,y,z],i)=>{O.compose(new THREE.Vector3(x,y,z),new THREE.Quaternion(),new THREE.Vector3(1,1,1));fm.setMatrixAt(i,O);});G.hall.add(fm);
+   glowDecal(px,2.4,pz,3.4,3.4,'#ffd27a',0.16,-Math.PI/2);}
   const disc=new THREE.Mesh(new THREE.CircleGeometry(1.5,40),S({color:'#f6b26b',emissive:'#ff9a40',emissiveIntensity:0.7,roughness:1}));disc.rotation.x=Math.PI/2;disc.position.set(px,top-0.02,pz);G.hall.add(disc);
   glowDecal(px,0.47,pz,2.6,2.6,'#ffb060',0.22,-Math.PI/2);
   solids.push([[px-pr,pz-pr],[px+pr,pz-pr]],[[px+pr,pz-pr],[px+pr,pz+pr]],[[px+pr,pz+pr],[px-pr,pz+pr]],[[px-pr,pz+pr],[px-pr,pz-pr]]);}
@@ -1356,6 +1408,7 @@ const VIEWS={
  coffee:{p:[12.7,1.5,1.5],t:[15.5,1.7,1.4],card:'bar',fov:60},
  dining:{p:[12.9,1.75,4.7],t:[3.0,1.25,2.6],card:'overview',fov:66},
  tableclose:{p:[9.7,1.3,2.75],t:[9.0,0.85,1.45],card:'decor',fov:55},
+ wall:{p:[6.4,1.5,4.2],t:[6.4,2.0,0],card:'decor',fov:62},
  gate:{p:[-7.5,1.7,16.85],t:[4.0,1.9,15.6],card:'gate',fov:56},
  entry:{p:[EM,1.6,9.4],t:[EM,1.4,3.2],card:'entry',fov:62},
  bar:{p:[10.2,1.6,2.85],t:[15.2,1.1,2.85],card:'bar',fov:64},
@@ -1370,7 +1423,7 @@ const VIEWS={
 };
 const CARDS={
  overview:['Overview','Cabin East Garden','A 40-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers; 4 couple tables (two-tops) add 8 more = 40','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy terracotta-chocolate stacked tile (cream grout) under the bottle green','Blue-and-white porcelain in the pillars\' cobalt: ginger jars on the wall shelves, plates on the gallery wall, two floor jars at the entrance','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet flush-mount ceiling fans (blades about 24 cm below the ceiling) in the coffers, plus two tower ACs']],
- decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy warm terracotta-chocolate vertical stacked tile with cream grout (1.0 m, two-tone with the bottle green above, brass rail between), white fluted pilasters kept, emerald paint above with brass globe sconces, a tight gallery hang in thin gilt frames (some black lacquer, one cinnabar red per bay) telling the pan-Asian and Indo-Chinese story: a large oil still life of a Chinese porcelain bowl beside a steel thali and a chilli-sauce bottle as the statement piece under a brass picture light, old eating-house photos, bilingual hand-painted signs and menu cards, a 1930s calendar-girl poster, woodblock waves, ink-brush bamboo and plum blossom, calligraphy, vintage Asian beer adverts, neon street photos and festival lanterns, plus a small oval mirror and blue-and-white plates and ginger jars in the pillars’ cobalt, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Gallery wall telling the pan-Asian and Indo-Chinese story: a bowl-and-thali still life under a picture light, eating-house photos, bilingual signs, menu cards, calendar girl, ink-brush, calligraphy, Asian beer adverts','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
+ decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy warm terracotta-chocolate vertical stacked tile with cream grout (1.0 m, two-tone with the bottle green above, brass rail between), white fluted pilasters kept, emerald paint above with brass globe sconces, a dense vintage-sign gallery: weathered enamel banner signs (DIM SUM, NOODLES, CHOWMEIN) across the top of each bay, tall TEA signs, round LAGER and BEER signs, slim walnut-framed bold red, yellow and cream graphic posters, bell-shaded brass wall lamps, wall clocks and a few small prints, with a large oil still life of a Chinese bowl beside a steel thali as the statement piece under a brass picture light, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns and a chalkboard.',['Vintage-sign gallery wall: enamel banner signs, tall and round signs, bold graphic posters in slim walnut frames, bell-shaded brass lamps, clocks, and the bowl-and-thali oil under a picture light','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site','Magenta and white bougainvillea along the eave of every open side, cascading down the entrance columns']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
  couples:['Couple tables','Four tables for two','0.70 m square teak tables in burgundy linen, two chairs each, one wicker orb overhead. Two sit on the garden-facing rail of the west wing, one on the west edge by the TV corner and one on the south railing west of the entrance.',['Each keeps about 1.2 m clear walkway','Adds 8 covers: 32 to 40 (check the permitted limit)','Best seats for date night: the wing rail looks onto the lit garden']],
