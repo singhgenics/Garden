@@ -56,12 +56,13 @@ body.walk .pad{display:grid}
 <div id="stage">
   <div class="labels" id="labels"></div>
   <div class="toolbar">
-    <div class="brand">Cabin East · Garden <span>35 covers · 5 × 4 + 2 × 6 + 3 at the ledge</span></div>
+    <div class="brand">Cabin East · Garden <span>43 covers · 5 × 4 + 4 couples + 2 × 6 + 3 at the ledge</span></div>
     <div class="seg" role="group" aria-label="Camera" id="views">
       <button data-view="iso" aria-pressed="true">Overview</button>
       <button data-view="decor" aria-pressed="false">Decor wall</button>
       <button data-view="tv" aria-pressed="false">TV corner</button>
       <button data-view="gate" aria-pressed="false">Gate</button>
+      <button data-view="couples" aria-pressed="false">Couples</button>
       <button data-view="garden" aria-pressed="false">Garden</button>
       <button data-view="approach" aria-pressed="false">Approach</button>
       <button data-view="entry" aria-pressed="false">Entrance</button>
@@ -969,7 +970,8 @@ solids.push([[HX-1.75,2.3],[HX-1.75,5.2]],[[HX-0.4,0.3],[HX-0.4,5.2]]);
   solids.push([[px-pr,pz-pr],[px+pr,pz-pr]],[[px+pr,pz-pr],[px+pr,pz+pr]],[[px+pr,pz+pr],[px-pr,pz+pr]],[[px-pr,pz+pr],[px-pr,pz-pr]]);}
  lbl('Centrepiece tree around the pillar',px,2.0,pz,'k');}
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers, + 3 stools at the drinking ledge = 35 (the cap) --- */
-const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,3.75,0]];   // 5 tables of 4 + 2 family tables of 6 = 32 covers
+const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.7,3.75,0],
+  [7.05,4.5,2,'x'],[1.0,3.0,2,'z'],[3.9,10.1,2,'x'],[5.7,9.9,2,'z']];   // + 4 couple tables (two-tops): by the south railing west of the entrance, on the west edge, and two on the garden-facing rail of the west wing   // 5 tables of 4 + 2 family tables of 6 = 32 covers
 // dining chair: dark walnut frame and legs, woven cane back, cognac leather-look (marine-grade vinyl) seat pad
 function chair(x,z,ang,seat){const g=new THREE.Group();
   bx(-0.22,0.22,0.43,0.47,-0.21,0.21,M.timberDark,g,false);bx(-0.19,0.19,0.47,0.54,-0.18,0.18,seat||M.taupe,g,false);
@@ -993,7 +995,15 @@ function tableCloth(x,z,l,w){const o=0.04,dr=0.25,yt=0.788,hx=l/2+o,hz=w/2+o,t=0
   bx(x-hx-t,x+hx+t,yt-dr,yt,z-hz-t,z-hz,M.burgCloth,G.hall,false);bx(x-hx-t,x+hx+t,yt-dr,yt,z+hz,z+hz+t,M.burgCloth,G.hall,false);
   bx(x-hx-t,x-hx,yt-dr,yt,z-hz,z+hz,M.burgCloth,G.hall,false);bx(x+hx,x+hx+t,yt-dr,yt,z-hz,z+hz,M.burgCloth,G.hall,false);
   const h0=yt-dr,h1=h0+0.02,u=t*1.6;bx(x-hx-u,x+hx+u,h0,h1,z-hz-u,z-hz,M.burgHem,G.hall,false);bx(x-hx-u,x+hx+u,h0,h1,z+hz,z+hz+u,M.burgHem,G.hall,false);bx(x-hx-u,x-hx,h0,h1,z-hz,z+hz,M.burgHem,G.hall,false);bx(x+hx,x+hx+u,h0,h1,z-hz,z+hz,M.burgHem,G.hall,false);}
-TABLES.forEach(([x,z,kind],i)=>{if(kind===6){const w=0.9,l=1.9;
+TABLES.forEach(([x,z,kind,ori],i)=>{
+ if(kind===2){   // couple table: 0.70 x 0.70 teak top, burgundy cloth, two chairs facing each other, one wicker orb overhead, a candle, a mini steamer and two blue-and-white pots
+  bx(x-0.35,x+0.35,0.72,0.78,z-0.35,z+0.35,M.timber,G.hall);[[-0.28,-0.28],[0.28,-0.28],[-0.28,0.28],[0.28,0.28]].forEach(p=>bx(x+p[0]-0.035,x+p[0]+0.035,0,0.72,z+p[1]-0.035,z+p[1]+0.035,M.timberDark,G.hall));
+  tableCloth(x,z,0.7,0.7);cyl(0.04,0.04,0.1,x,0.79,z,M.flameGlass,G.hall,12,false);cyl(0.045,0.045,0.012,x,0.89,z,M.brass,G.hall,12,false);sph(0.014,x,0.84,z,M.filament,G.hall);
+  M.bamboo=M.bamboo||S({color:'#c9a46a',roughness:0.8});cyl(0.085,0.085,0.055,x-0.13,0.79,z+0.1,M.bamboo,G.hall,14,false);[[0.12,-0.12],[0.19,-0.12]].forEach(([dx,dz])=>cyl(0.024,0.02,0.04,x+dx,0.79,z+dz,M.white,G.hall,10,false));
+  [[0,-0.22],[0,0.22]].forEach(([dx,dz])=>cyl(0.1,0.09,0.012,x+(ori==='x'?dz:dx),0.79,z+(ori==='x'?dx:dz),M.white,G.hall,16,false));
+  if(ori==='x'){chair(x-0.58,z,Math.PI/2,M.chester);chair(x+0.58,z,-Math.PI/2,M.chester);}else{chair(x,z-0.58,0,M.chester);chair(x,z+0.58,Math.PI,M.chester);}
+  ivyOrb(x,1.88,z,0.17,hc(z)-0.15);glowDecal(x,0.795,z,0.95,0.95,'#ffb060',0.3,-Math.PI/2);return;}
+ if(kind===6){const w=0.9,l=1.9;
   bx(x-l/2,x+l/2,0.72,0.78,z-w/2,z+w/2,M.timber,G.hall);bx(x-l/2-0.01,x+l/2+0.01,0.72,0.745,z-w/2-0.01,z+w/2+0.01,M.timberDark,G.hall,false);
   [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>bx(x+a*(l/2-0.08)-0.04,x+a*(l/2-0.08)+0.04,0,0.72,z+b*(w/2-0.08)-0.04,z+b*(w/2-0.08)+0.04,M.timberDark,G.hall));
   bx(x-l/2+0.08,x+l/2-0.08,0.14,0.18,z-0.04,z+0.04,M.timberDark,G.hall,false);
@@ -1048,8 +1058,8 @@ function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6
   bx(-0.16,0.16,0.3,0.34,0.15,0.152,M.ssDark,g,false);bx(-0.15,0.15,0.62,1.3,0.15,0.153,S({color:'#dad6cd',roughness:0.6}),g,false);               // intake mesh panel
   const hose=[];for(let i=0;i<=12;i++){const t=i/12;hose.push(V(-0.18-0.35*t,0.5+0.5*Math.sin(t*3),-0.05));}g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(hose),16,0.035,6,false),S({color:'#d9d6cf',roughness:0.8})));
   g.position.set(x,0,z);g.rotation.y=ang;G.fans.add(g);}
-towerAC(0.55,4.2,Math.PI/2);towerAC(5.85,9.2,-Math.PI/2+0.35);
-lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',5.85,2.0,9.2,'k');
+towerAC(0.55,4.2,Math.PI/2);towerAC(6.2,8.6,-Math.PI/2+0.35);
+lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',6.2,2.0,8.6,'k');
 
 /* (criss-cross fairy strands removed: one light language over the dining room) */
 /* ======================= HANGING DECOR + PERIMETER LIGHTING (the hall is open on three sides) ======================= */
@@ -1308,7 +1318,7 @@ const PRE_NAME={lunch:'Lunch',dusk:'Sunset',evening:'Evening',late:'Late'};
 function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.getElementById('lc-time').value=t;document.getElementById('lc-dim').value=d;document.querySelectorAll('.lc-pre button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pre===k)));document.getElementById('lc-name').textContent=PRE_NAME[k];applyLight();}
 
 /* ======================= labels ======================= */
-lbl('Main restaurant · 35 covers (5 × 4 + 2 × 6 + 3 at the ledge)',6.5,2.6,3.2,'');
+lbl('Main restaurant · 43 covers (5 × 4 + 4 couple tables + 2 × 6 + 3 at the ledge)',6.5,2.6,3.2,'');lbl('Couple table',7.05,1.5,4.5,'');lbl('Couple table · by the TV',1.0,1.5,3.0,'');lbl('Couple tables · overlooking the garden',4.8,1.5,10.1,'');
 lbl('Decor wall · 15.67 m',7.8,3.0,0.2,'o');
 lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('65 in TV · the only screen',0.75,2.65,0.75,'');
 lbl('Pathway behind the bar · 1.60 m',(HX+BX0)/2,0.4,4.6,'k');
@@ -1340,6 +1350,8 @@ const VIEWS={
  garden:{p:[3.2,1.65,17.0],t:[8.2,0.9,12.6],card:'gardencard',fov:62},
  approach:{p:[10.4,1.7,17.2],t:[10.6,2.0,10.0],card:'approach',fov:60},
  hero:{p:[6.9,1.35,10.3],t:[12.6,1.75,2.4],card:'entry',fov:58},
+ couples:{p:[2.3,1.65,7.4],t:[5.0,0.95,10.3],card:'couples',fov:66},
+ couples2:{p:[3.2,1.6,5.0],t:[0.9,0.9,3.1],card:'couples',fov:66},
  tree:{p:[7.4,1.6,4.0],t:[3.95,1.9,6.3],card:'overview',fov:62},
  coffee:{p:[12.7,1.5,1.5],t:[15.5,1.7,1.4],card:'bar',fov:60},
  dining:{p:[12.9,1.75,4.7],t:[3.0,1.25,2.6],card:'overview',fov:66},
@@ -1357,10 +1369,11 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Cabin East Garden','A 35-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 + 3 stools at the drinking ledge = 35 covers (the cap)','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy terracotta-chocolate stacked tile (cream grout) under the bottle green','Blue-and-white porcelain in the pillars\' cobalt: ginger jars on the wall shelves, plates on the gallery wall, two floor jars at the entrance','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet ceiling fans with dark walnut blades in the coffers, plus two tower ACs']],
+ overview:['Overview','Cabin East Garden','A 43-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 + 3 stools at the drinking ledge = 35 covers; 4 couple tables (two-tops) add 8 more = 43','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy terracotta-chocolate stacked tile (cream grout) under the bottle green','Blue-and-white porcelain in the pillars\' cobalt: ginger jars on the wall shelves, plates on the gallery wall, two floor jars at the entrance','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet ceiling fans with dark walnut blades in the coffers, plus two tower ACs']],
  decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy warm terracotta-chocolate vertical stacked tile with cream grout (1.0 m, two-tone with the bottle green above, brass rail between), white fluted pilasters kept, emerald paint above with brass globe sconces, a tight gallery hang in thin gilt frames (some black lacquer, one cinnabar red per bay) telling the pan-Asian and Indo-Chinese story: a large oil still life of a Chinese porcelain bowl beside a steel thali and a chilli-sauce bottle as the statement piece under a brass picture light, old eating-house photos, bilingual hand-painted signs and menu cards, a 1930s calendar-girl poster, woodblock waves, ink-brush bamboo and plum blossom, calligraphy, vintage Asian beer adverts, neon street photos and festival lanterns, plus a small oval mirror and blue-and-white plates and ginger jars in the pillars’ cobalt, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns, neon and a chalkboard.',['Gallery wall telling the pan-Asian and Indo-Chinese story: a bowl-and-thali still life under a picture light, eating-house photos, bilingual signs, menu cards, calendar girl, ink-brush, calligraphy, Asian beer adverts','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site','Magenta and white bougainvillea along the eave of every open side, cascading down the entrance columns']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
+ couples:['Couple tables','Four tables for two','0.70 m square teak tables in burgundy linen, two chairs each, one wicker orb overhead. Two sit on the garden-facing rail of the west wing, one on the west edge by the TV corner and one on the south railing west of the entrance.',['Each keeps about 1.2 m clear walkway','Adds 8 covers: 35 to 43 (check the permitted limit)','Best seats for date night: the wing rail looks onto the lit garden']],
  gardencard:['Garden','5 × 5 m, on the left as you come in','The lawn on the left of the main path just inside the gate, below the hall\'s 2.98 m edge: areca palms, white flowering shrubs and a hedge inside a laterite kerb, with the three lamp posts and the festoon canopy of the approach path along its far side.',['Warm uplights at the palms','Hedge along the hall side and the main path']],
  approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. Dense strands of warm micro fairy lights are strung on fine wires from the three black lamp posts to the existing restaurant\'s balcony roof, with no frame, and among them hang brass lanterns and ivy-wrapped wicker orbs.',['Lights kept 2.1 m or more above the path','Warm 2200-2700 K']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Magenta and white bougainvillea over the arch and spilling down one pier onto the compound wall','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
