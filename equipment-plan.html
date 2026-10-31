@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cabin East Garden · Equipment plan</title>
+<meta name="description" content="Opening-day equipment plan for the Cabin East Garden kitchen, dish wash and bar, with every size in metres.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#130f0c;--fg:#f3ecdf;--muted:#b9a994;--amber:#e9b54a;--ox:#c4573c;--line:rgba(255,255,255,.14);--panel:#1b1512;--raise:rgba(255,255,255,.06);
+  --hot:#c4573c;--cold:#4f8fb0;--wet:#4aa593;--exist:#8a8178;--top:#e9b54a;--svc:#b9a994;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--amber)}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 16px 56px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.top a.back{font:500 12px/1 var(--body);text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:9px;padding:9px 12px}
+.top a.back:hover{color:var(--fg);background:var(--raise)}
+body.embed .top a.back{display:none}
+h1{font:700 clamp(26px,5vw,40px)/1.05 var(--display);margin:0 0 6px;letter-spacing:-.01em}
+h2{font:700 clamp(20px,3.4vw,26px)/1.15 var(--display);margin:0 0 4px}
+h3{font:600 13px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin:22px 0 8px}
+p{margin:0 0 10px;max-width:74ch}
+.lead{color:var(--muted);font-size:15px;max-width:70ch}
+.k{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:16px 0 8px}
+.cd{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.cd b{display:block;font:700 22px/1.1 var(--display)}
+.cd span{color:var(--muted);font-size:12.5px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 0;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px;border:1px solid rgba(255,255,255,.25)}
+section.zone{margin-top:34px;padding-top:22px;border-top:1px solid var(--line)}
+.zgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px;align-items:start;margin-top:12px}
+@media(max-width:940px){.zgrid{grid-template-columns:1fr}}
+.fig{background:#17110e;border:1px solid var(--line);border-radius:12px;padding:8px}
+.fig svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--body);fill:var(--fg)}
+svg .dm{stroke:#9fb4c2;stroke-width:1;fill:none}
+svg .dt{font:500 11px var(--mono);fill:#bcd0dc;text-anchor:middle}
+svg .nm{font:600 10px var(--body);text-anchor:middle;fill:#1a120d;pointer-events:none}
+svg .nm.l{fill:var(--fg)}
+svg .wall{fill:none;stroke:#cdbfa8;stroke-width:9}
+svg .gap{stroke:#17110e;stroke-width:13}
+svg .win{stroke:#9fb4c2;stroke-width:3;stroke-dasharray:6 4}
+svg .eq{stroke:rgba(0,0,0,.55);stroke-width:1.2}
+svg .hot{fill:var(--hot)}svg .cold{fill:var(--cold)}svg .wet{fill:var(--wet)}svg .exist{fill:url(#hatch)}
+svg .std{fill:#d9c9ac}svg .top{fill:var(--top)}
+svg .svc{fill:none;stroke:var(--svc);stroke-width:1.3;stroke-dasharray:7 5}
+svg .ghost{stroke:#e9b54a;stroke-width:1.5;stroke-dasharray:8 5}
+svg .arc{fill:none;stroke:#8e8372;stroke-width:1;stroke-dasharray:3 3}
+svg .zt{font:600 11px var(--body);fill:#b9a994;letter-spacing:.06em;text-transform:uppercase}
+svg .note{font:500 11px var(--body);fill:#e9b54a;text-anchor:middle}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.8px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.03);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.id{font:600 12px var(--mono);color:var(--amber);white-space:nowrap}
+td.sz{font:500 12px var(--mono);white-space:nowrap}
+td.q{text-align:center;font-family:var(--mono)}
+td .ex{display:inline-block;margin-left:4px;font-size:10.5px;color:#1a120d;background:var(--exist);border-radius:4px;padding:0 5px}
+.call{background:rgba(233,181,74,.08);border:1px solid rgba(233,181,74,.4);border-radius:12px;padding:12px 14px;margin:14px 0}
+.call b{color:var(--amber)}
+.call p:last-child{margin:0}
+ul.tight{margin:6px 0 0;padding-left:20px}ul.tight li{margin:3px 0;max-width:80ch}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+footer{margin-top:40px;color:var(--muted);font-size:12.5px}
+@media print{
+  :root{--bg:#fff;--fg:#1a1a1a;--muted:#555;--panel:#fff;--line:#bbb}
+  body,html{background:#fff}.fig{background:#fff}.top a.back{display:none}
+  svg text{fill:#1a1a1a}svg .nm.l{fill:#fff}svg .wall{stroke:#444}svg .gap{stroke:#fff}
+  .cd,.tw{break-inside:avoid}section.zone{break-before:page}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="garden.html">&larr; 3D model</a>
+    <span class="k">All sizes in metres · W × D × H (W along the wall, D out from the wall, H floor to top)</span>
+  </div>
+  <h1>Equipment plan</h1>
+  <p class="lead">What goes where on opening day: the kitchen, the dish wash and the bar. Built from the menu (59 items) and the positions in the 3D model. Numbers on the plans match the schedules below each plan.</p>
+
+  <div class="cards" id="cards"></div>
+  <div class="legend">
+    <span><i style="background:var(--hot)"></i>Hot (gas)</span>
+    <span><i style="background:var(--cold)"></i>Cold</span>
+    <span><i style="background:var(--wet)"></i>Wet / wash</span>
+    <span><i style="background:#d9c9ac"></i>Tables, shelves</span>
+    <span><i style="background:var(--top)"></i>Sits on a bench</span>
+    <span><i style="background:repeating-linear-gradient(45deg,#8a8178 0 3px,#4a443f 3px 6px)"></i>Already built</span>
+    <span><i style="background:none;border:1px dashed var(--svc)"></i>Above or in the floor</span>
+  </div>
+
+  <section class="zone" style="border-top:0;margin-top:22px;padding-top:0">
+    <h2>Where the three areas sit</h2>
+    <p class="k">Plan view, north up. The bar is at the east end of the hall; the kitchen block is across the 1.60 m pathway.</p>
+    <div class="fig" style="max-width:640px"><svg id="key" role="img" aria-label="Key plan of the bar, kitchen and dish wash"></svg></div>
+  </section>
+
+  <section class="zone" id="kitchen">
+    <h2>1 · Kitchen</h2>
+    <p class="k">5.41 × 4.38 m wall to wall · 5.21 × 4.18 m clear · <span id="k-area"></span></p>
+    <div class="zgrid">
+      <div class="fig"><svg id="svgK" role="img" aria-label="Kitchen equipment plan"></svg></div>
+      <div>
+        <div class="tw"><table id="tK"></table></div>
+      </div>
+    </div>
+    <div class="call"><b>Hot line.</b> The four cooking units total 3.82 m on the east wall, under one hood. That leaves 0.36 m of the 4.18 m wall free. The island leaves 1.08 m of aisle on each side, and 1.36 m between the island and the cooks.</div>
+    <h3>No oven, grill or tandoor</h3>
+    <p>Nothing on the menu is baked or grilled. Pork belly braises in a pot on the stock range, bao is steamed, and everything else is wok, fryer or steamer. A combi oven is a later purchase if you want to batch the braise.</p>
+  </section>
+
+  <section class="zone" id="dish">
+    <h2>2 · Dish wash</h2>
+    <p class="k">5.41 × 2.00 m wall to wall · 5.21 × 1.80 m clear · <span id="d-area"></span></p>
+    <div class="zgrid">
+      <div class="fig"><svg id="svgD" role="img" aria-label="Dish wash equipment plan"></svg></div>
+      <div><div class="tw"><table id="tD"></table></div></div>
+    </div>
+    <div class="call"><b>Flow.</b> Dirty ware comes in at the west door, goes through the receiving table, the sink and the hood dishwasher, and ends on the clean table. The wall run totals 5.17 m of 5.21 m, so there is no spare length. A pot-wash bowl would have to replace part of the clean table.</div>
+    <p>The wall between the dish wash and the kitchen has a shuttered window over the granite platform (at 2.3 to 3.3 m from the west wall), which lines up with the sink and dishwasher. A clean-ware hatch at the clean table (3.9 to 5.2 m) would save the walk round through the passage. That is a suggestion, not in the model.</p>
+  </section>
+
+  <section class="zone" id="bar">
+    <h2>3 · Bar</h2>
+    <p class="k">Back bar 2.80 m · counter 2.80 m · coffee station 1.30 m</p>
+    <div class="call"><b>Fix needed on the bar depth.</b> In the 3D model the back bar is 0.42 m deep and the counter's working face is 1.00 m from the east wall, so the bartender aisle is only 0.58 m. A working bar needs about 0.90 m, and the under-counter machines are 0.60 m deep. This plan puts the counter's working face 1.50 m from the wall (0.50 m further into the hall): back bar 0.60 m, aisle 0.90 m, counter stand 0.60 m. Measure the real counter on site before ordering. Check that the move does not clash with the nearest tables.</div>
+    <div class="zgrid">
+      <div class="fig" style="max-width:520px"><svg id="svgB" role="img" aria-label="Bar equipment plan"></svg></div>
+      <div><div class="tw"><table id="tB"></table></div></div>
+    </div>
+    <p>If the counter cannot move, drop the glass washer from the bar and run glasses through the hood dishwasher, and use a slimline bottle cooler that is no more than 0.42 m deep.</p>
+  </section>
+
+  <section class="zone" id="small">
+    <h2>4 · Starter smallwares</h2>
+    <p class="k">Loose items, not drawn. Sizes in metres (Ø = diameter).</p>
+    <div class="tw"><table id="tS"></table></div>
+  </section>
+
+  <section class="zone" id="svc">
+    <h2>5 · Services and safety</h2>
+    <p class="k">Required for the kitchen to run and pass inspection. Not drawn.</p>
+    <div class="tw"><table id="tV"></table></div>
+  </section>
+
+  <section class="zone" id="checks">
+    <h2>6 · What is not verified</h2>
+    <ul class="tight">
+      <li>The kitchen depth (4.38 m), the dish-wash depth (2.00 m) and the wall heights are estimates in the model. Measure them on site.</li>
+      <li>Equipment sizes are typical Indian market sizes, plus or minus 0.05 m by brand. Get the vendor's drawing before you order each unit.</li>
+      <li>The hood airflow, the electrical load and the gas quantity are estimates. Have the HVAC vendor, an electrician and the gas supplier confirm them.</li>
+      <li>FSSAI, fire NOC, panchayat and LPG storage rules for Goa have not been checked. An advocate or consultant should confirm them.</li>
+      <li>The store-room door on the kitchen's south wall opens 3.47 to 4.37 m from the west wall. Check its swing against the hot-line end.</li>
+    </ul>
+  </section>
+
+  <footer>Sizes come from the Cabin East Garden 3D model (<a href="garden.html">garden.html</a>). Dimensions in metres.</footer>
+</div>
+
+<script>
+(function(){
+if(/[?&]embed\b/.test(location.search))document.body.classList.add('embed');
+const P=100,M=60;                       // px per metre in the drawings, margin
+const f=v=>Math.round(v*P*10)/10;
+const NS='http://www.w3.org/2000/svg';
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const m2=v=>v.toFixed(2);
+
+/* ---------- drawing helpers (all inputs in metres) ---------- */
+function box(x,y,w,h,cls,id,opt){opt=opt||{};
+  let s='<rect class="eq '+cls+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>';
+  if(id){const fs=Math.max(8,Math.min(12,Math.min(w,h)*P*0.42));
+    s+='<text class="nm'+(opt.light?' l':'')+'" font-size="'+fs+'" x="'+f(x+w/2)+'" y="'+f(y+h/2+fs*0.35/P)+'" dy="'+(fs*0.35)+'">'+id+'</text>';}
+  return s;}
+function dash(x,y,w,h,label){return '<rect class="svc" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'"/>'+(label?'<text class="zt" x="'+f(x+w/2)+'" y="'+f(y-4)+'" text-anchor="middle" style="font-size:9px">'+label+'</text>':'');}
+function circ(cx,cy,r,cls,id){return '<circle class="eq '+cls+'" cx="'+f(cx)+'" cy="'+f(cy)+'" r="'+f(r)+'"/>'+(id?'<text class="nm" font-size="9" x="'+f(cx)+'" y="'+f(cy)+'" dy="3">'+id+'</text>':'');}
+function dimH(x1,x2,y,label,off){off=off==null?-8:off;const a=f(x1),b=f(x2),yy=f(y);
+  return '<g><path class="dm" d="M'+a+' '+yy+'H'+b+'M'+a+' '+(yy-5)+'V'+(yy+5)+'M'+b+' '+(yy-5)+'V'+(yy+5)+'"/><text class="dt" x="'+(a+b)/2+'" y="'+(yy+off)+'">'+label+'</text></g>';}
+function dimV(x,y1,y2,label,off){off=off==null?10:off;const a=f(y1),b=f(y2),xx=f(x);
+  return '<g><path class="dm" d="M'+xx+' '+a+'V'+b+'M'+(xx-5)+' '+a+'H'+(xx+5)+'M'+(xx-5)+' '+b+'H'+(xx+5)+'"/><text class="dt" transform="translate('+(xx+off)+' '+(a+b)/2+') rotate(-90)">'+label+'</text></g>';}
+function txt(x,y,s,cls,extra){return '<text class="'+(cls||'zt')+'" x="'+f(x)+'" y="'+f(y)+'" '+(extra||'')+'>'+s+'</text>';}
+function line(x1,y1,x2,y2,cls){return '<path class="'+cls+'" d="M'+f(x1)+' '+f(y1)+'L'+f(x2)+' '+f(y2)+'"/>';}
+function mount(id,W,H,body,padL,padR,padT,padB){padL=padL==null?M:padL;padR=padR==null?M:padR;padT=padT==null?M:padT;padB=padB==null?M:padB;
+  const el=document.getElementById(id);
+  el.setAttribute('viewBox',(-padL)+' '+(-padT)+' '+(W*P+padL+padR)+' '+(H*P+padT+padB));
+  el.innerHTML='<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#6d655d"/><rect width="3" height="8" fill="#4a443f"/></pattern></defs>'+body;}
+function room(W,H){return '<rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';}
+const gapV=(x,y1,y2)=>'<path class="gap" d="M'+f(x)+' '+f(y1)+'V'+f(y2)+'"/>';
+const gapH=(y,x1,x2)=>'<path class="gap" d="M'+f(x1)+' '+f(y)+'H'+f(x2)+'"/>';
+const winV=(x,y1,y2)=>'<path class="win" d="M'+f(x)+' '+f(y1)+'V'+f(y2)+'"/>';
+const winH=(y,x1,x2)=>'<path class="win" d="M'+f(x1)+' '+f(y)+'H'+f(x2)+'"/>';
+
+/* ---------- schedules (W, D, H in metres) ---------- */
+// fl = floor-standing, counts toward the floor footprint
+const KIT=[
+ ['K1','Wok range, 2 burners, high-pressure, with water tap and drain trough',1,1.07,0.75,0.85,'Hakka, fried rice, chilli dishes, basil chicken, Manchurian, kimchi fries',1],
+ ['K2','Stock / pot range, 2 burners',1,0.95,0.75,0.80,'3 soups, wonton poaching, claypot gravies, pork braise, noodle boil, house stocks',1],
+ ['K3','Twin-tank gas fryer, 2 × 15 L',1,0.90,0.75,0.90,'One tank veg, one non-veg. Salt & pepper, fried wontons, wings, fries, darsaan',1],
+ ['K4','Dim sum steamer, 2 stations, with bamboo baskets',1,0.90,0.75,0.90,'Dim sum, bao, steamer for two, jasmine rice backup',1],
+ ['K5','Exhaust hood over K1–K4 (lower edge at 1.85 m)',1,3.82,1.13,0.50,'About 5,000–6,000 CMH is an estimate; the HVAC vendor sizes it. Grease filters, make-up air',0],
+ ['K6','Upright chiller, SS',1,0.78,0.80,1.95,'Raw non-veg: chicken, pork, prawns, chonak',1],
+ ['K7','Upright freezer, SS',1,0.78,0.80,1.95,'Prawns, pork belly, wontons, ice-cream stock',1],
+ ['K8','Under-counter 3-door chiller with worktop',1,1.50,0.70,0.90,'Veg, sauces, garnish, dairy',1],
+ ['K9','SS work table with undershelf (island)',1,1.50,0.60,0.85,'Dumpling folding, non-veg prep',1],
+ ['K10','Black granite platform (already built)',1,3.36,0.62,0.90,'Plating, cold prep, rice cooker, grinder',1,1],
+ ['K11','Pass shelf with 3 heat lamps (at the pass window)',1,1.30,0.45,0.95,'Plates wait here for the runners',0],
+ ['K12','Wall shelves, 2 tiers (spice, mise)',2,0.90,0.30,0.04,'West wall, at 1.05 m and 1.35 m',0],
+ ['K13','Hand-wash basin, wall-hung, with soap and towel',1,0.45,0.40,0.85,'Not in the model; the washroom basin is the only one on site',1],
+ ['K14','Rice cooker / warmer, 10 L',1,0.45,0.45,0.45,'On K10. Plain Jane and rice bowls',0],
+ ['K15','Mixer-grinder, 3 jars',1,0.40,0.30,0.55,'On K10. Curry pastes, chilli oil, fillings',0],
+ ['K16','Granite mortar and pestle',1,0.25,0.25,0.20,'On K10. Papaya salad',0],
+ ['K17','Planetary mixer, 10 L (benchtop)',1,0.40,0.45,0.65,'On K9. Bao and dumpling dough. Skip it if you buy frozen',0],
+ ['K18','KOT thermal printer',1,0.14,0.20,0.14,'On K11. Orders from your POS',0],
+ ['K19','Waste bin, wet',1,0.40,0.40,0.60,'Under K10 at the east end',1],
+ ['K20','Fire extinguishers (ABC and K-class) and fire blanket',3,0.15,0.15,0.50,'Near the door; the model has 3 extinguishers',0]
+];
+const DISH=[
+ ['D1','Receiving table with scrap chute and pre-rinse spray',1,1.20,0.68,0.85,'Dirty ware lands here from the west door',1],
+ ['D2','Double-bowl sink (bowls 0.70 × 0.50 × 0.30)',1,1.60,0.68,0.85,'Pre-wash, then wash. Also steamers, claypots, woks',1],
+ ['D3','Hood-type dishwasher, 3-phase with booster heater (1.85 m with hood up)',1,0.85,0.70,0.90,'Plates, bowls, glasses, 50 × 50 cm racks',1],
+ ['D4','Clean table',1,1.32,0.68,0.85,'Drain and stack',1],
+ ['D4a','Wall shelves above D4, 2 tiers',2,1.30,0.30,0.04,'At 1.35 m and 1.85 m',0],
+ ['D5','Water heater, wall-mounted, 50–100 L',1,0.40,0.40,0.65,'Feeds the sink and the dishwasher',0],
+ ['D6','Racks: 6 dish, 6 glass (0.50 × 0.50 × 0.10), 2 cutlery cylinders',14,0.50,0.50,0.10,'Stack on D4 and under D1',0],
+ ['D7','Bus tubs',3,0.53,0.40,0.20,'Two on D1, one on the floor',0],
+ ['D8','Waste bins (dry, recycling)',2,0.40,0.40,0.60,'The wet bin is K19 in the kitchen',1],
+ ['D9','Mop sink or bucket station',1,0.50,0.50,0.25,'South wall, east end',1],
+ ['D10','Detergent and sanitiser dispenser',1,0.30,0.20,0.60,'Wall-mounted by D3',0],
+ ['D11','Floor drain grating (already modelled)',1,1.30,0.35,0.02,'In the aisle',0,1]
+];
+const BAR=[
+ ['B1','Back-bar bottle cooler, 2 glass doors',1,1.20,0.60,0.85,'Beer bottles, mixers, wine, soft drinks',0],
+ ['B2','Under-counter ice machine, 50 kg/day',1,0.50,0.60,0.82,'Highballs, cocktails, pitchers',0],
+ ['B3','Under-counter glass washer, 50 × 50 basket',1,0.50,0.60,0.82,'Pint, 330 ml, highball, rocks, coupe',0],
+ ['B4','POS nook: terminal, printer, cash drawer',1,0.60,0.60,0.20,'Sits on the back-bar top at the pier end',0],
+ ['B5','Keg chiller for 3 × 20 L kegs, with CO₂ cylinder (2–3 kg)',1,1.00,0.60,0.85,'Comrade Crisp, Gose Bumps, guest tap. Inside the counter',0],
+ ['B6','Brass tap font, 3 taps',1,0.60,0.20,0.45,'On the counter top above B5',0],
+ ['B7','Bar sink and ice well (hand wash and rinse)',1,0.70,0.55,0.85,'At the staff-entry end',0],
+ ['B8','Under-bar drawers for glass, straws, bar tools',1,1.10,0.60,0.85,'Fills the counter between B7 and B5',0],
+ ['B9','Under-counter fridge (milk, cream, lime, garnish)',1,0.60,0.60,0.85,'Under the coffee station',0],
+ ['B10','Under-counter shot freezer, -5 °C',1,0.60,0.60,0.85,'Vodka shots; Haku, Belvedere, house infusions',0],
+ ['B11','Twin filter-coffee brewer',1,0.45,0.40,0.65,'On the coffee station top',0],
+ ['B12','Hot-water urn',1,0.30,0.30,0.55,'On the coffee station top',0],
+ ['B13','Water filter set for B2 and B11',1,0.20,0.15,0.45,'Under B7, plumbed to the ice machine and brewer',0],
+ ['B14','Bar bin',1,0.30,0.30,0.50,'Staff aisle, north end',0],
+ ['B15','Floating glass rack (already modelled)',1,2.60,0.67,0.28,'Over the counter, hung at 2.3 m',0,1]
+];
+const SMALL=[
+ ['Carbon-steel woks','4','0.36 Ø','With 4 chuntas and 4 ladles'],
+ ['Stock pots','2 + 2','0.40 Ø × 0.40 (40 L), 0.32 Ø × 0.30 (20 L)','Stock and noodle boil; soups and braise'],
+ ['Saucepans','4','0.20 Ø × 0.12','Sauces and glazes'],
+ ['Claypots with rattan stands','12','0.18 Ø','Manchurian, Thai green curry'],
+ ['Bamboo steamers, 6 in lid and base','20','0.15 Ø','Dim sum, one per serve'],
+ ['Two-tier bamboo steamers, 8 in','3','0.20 Ø','Steamer for two'],
+ ['Fryer baskets and spiders','4 + 2','0.30 long, spider 0.30 Ø','Plus an SS oil-drain rack 0.60 × 0.40 × 0.10 by the fryer'],
+ ['Chinese cleavers and chef knives','3 + 3','0.18 blade, 0.20 blade','With a sharpening steel'],
+ ['Colour-coded chopping boards','6 + 2','0.45 × 0.30 × 0.02, 0.60 × 0.45 × 0.02','Veg, non-veg, seafood, dairy, cooked, bread'],
+ ['Gastronorm pans with lids','12 / 12 / 12','GN 1/1 0.53 × 0.325, GN 1/2 0.325 × 0.265, GN 1/3 0.325 × 0.176','Mise and holding'],
+ ['Storage containers (2 L and 4 L)','40','0.20–0.25 square','Labelled, for the walk-in-free chillers'],
+ ['Draining racks and sheet trays','3 + 6','0.60 × 0.40','Fried items drain 10 seconds on a rack'],
+ ['Squeeze bottles, scoops, tongs, whisks, strainers','20+','—','Sauces, oils, garnish'],
+ ['Digital scales (5 kg, 1 g)','2','0.20 × 0.20 × 0.04','Portioning'],
+ ['Probe thermometers and timers','2 + 4','—','Soup at 75 °C, chiller checks, fryer oil'],
+ ['Bar tools: shakers, jiggers, strainers, spoons, muddlers, juicer','1 set','—','8 cocktails, 3 zero-proof drinks'],
+ ['Glassware and crockery','—','—','Per the crockery and table-setting pages']
+];
+const SERV=[
+ ['Hood, ducting and make-up air','Hood K5; duct to the roof cowl already in the model; grease filters; make-up air about 80% of extract. Sized by the HVAC vendor.'],
+ ['Fire suppression','Wet-chemical system under the hood, tied to the gas shut-off. Plus K20.'],
+ ['LPG bank','4 × 19 kg cylinders (each about 0.31 Ø × 0.80), 2 working and 2 standby, outside in open air, with regulator, manifold, gas-leak sensor and shut-off valve. Position outside the kitchen east wall to be confirmed.'],
+ ['Electrical','3-phase supply, roughly 25–30 kW connected (an estimate). Fridges and freezers on their own circuit; generator or UPS cover for them. Dishwasher and glass washer need their own supplies.'],
+ ['Water and drainage','Overhead tank, hot water for D3 and D5, floor drain trough 0.15 wide along the hot line, anti-skid floor sloping to the drain, grease trap about 0.60 × 0.40 × 0.40 on the kitchen and dish-wash drain.'],
+ ['Pest control','Wall-mounted UV fly catcher (about 0.45 × 0.15 × 0.60) at the kitchen door; mesh on the louvres.'],
+ ['Dry store','6 four-tier racks, each 1.50 × 0.50 × 1.80, in the 2.70 × 6.46 m store room. It has space for 8.'],
+ ['Safety and hygiene','First-aid kit, colour-coded boards, wall thermometer log sheets, hand-wash soap at K13, B7 and the washroom.']
+];
+
+/* ---------- tables ---------- */
+function sz(a,b,c){return m2(a)+' × '+m2(b)+' × '+m2(c);}
+function tbl(id,rows){
+  const t=document.getElementById(id);
+  t.innerHTML='<thead><tr><th>No.</th><th>Equipment</th><th>Qty</th><th>W × D × H (m)</th><th>Notes</th></tr></thead><tbody>'+
+   rows.map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+esc(r[1])+(r[8]?'<span class="ex">existing</span>':'')+'</td><td class="q">'+r[2]+'</td><td class="sz">'+sz(r[3],r[4],r[5])+'</td><td>'+esc(r[6])+'</td></tr>').join('')+'</tbody>';}
+tbl('tK',KIT);tbl('tD',DISH);tbl('tB',BAR);
+document.getElementById('tS').innerHTML='<thead><tr><th>Item</th><th>Qty</th><th>Size (m)</th><th>Use</th></tr></thead><tbody>'+SMALL.map(r=>'<tr><td>'+esc(r[0])+'</td><td class="q">'+esc(r[1])+'</td><td class="sz">'+esc(r[2])+'</td><td>'+esc(r[3])+'</td></tr>').join('')+'</tbody>';
+document.getElementById('tV').innerHTML='<thead><tr><th>Item</th><th>What it needs</th></tr></thead><tbody>'+SERV.map(r=>'<tr><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1])+'</td></tr>').join('')+'</tbody>';
+
+/* floor footprints */
+function foot(rows){return rows.filter(r=>r[7]).reduce((s,r)=>s+r[2]*r[3]*r[4],0);}
+const kArea=5.21*4.18,dArea=5.21*1.80,kF=foot(KIT),dF=foot(DISH.filter(r=>r[0]!=='D11'));
+document.getElementById('k-area').textContent='Equipment floor area '+kF.toFixed(1)+' m² of '+kArea.toFixed(1)+' m² ('+Math.round(kF/kArea*100)+'%)';
+document.getElementById('d-area').textContent='Equipment floor area '+dF.toFixed(1)+' m² of '+dArea.toFixed(1)+' m² ('+Math.round(dF/dArea*100)+'%)';
+const cnt=r=>r.length;
+document.getElementById('cards').innerHTML=
+ [['Kitchen','5.21 × 4.18 m','clear, '+kArea.toFixed(1)+' m² · '+KIT.length+' items'],
+  ['Dish wash','5.21 × 1.80 m','clear, '+dArea.toFixed(1)+' m² · '+DISH.length+' items'],
+  ['Bar','2.80 m counter','back bar 2.80 m, coffee station 1.30 m · '+BAR.length+' items'],
+  ['Covers','40','5 × 4 + 2 × 6 + 4 couples (2 each)']].map(c=>'<div class="cd"><span>'+c[0]+'</span><b>'+c[1]+'</b><span>'+c[2]+'</span></div>').join('');
+
+/* ---------- KITCHEN plan ---------- */
+(function(){
+ const W=5.21,H=4.18;let s=room(W,H);
+ // openings: kitchen door (west), pass window (west), dish-wall window (north), store door (south)
+ s+=gapV(0,0.25,1.15)+winV(0,2.2,3.5)+winH(0,2.3,3.3)+gapH(H,3.47,4.37);
+ s+='<path class="arc" d="M0 '+f(0.25)+'A'+f(0.9)+' '+f(0.9)+' 0 0 1 '+f(0.9)+' '+f(0.25)+'"/>';
+ s+='<path class="arc" d="M'+f(3.47)+' '+f(H)+'A'+f(0.9)+' '+f(0.9)+' 0 0 0 '+f(3.47)+' '+f(H-0.9)+'"/>';
+ s+=dash(4.08,0.30,1.13,3.88,'Hood K5');
+ s+=box(4.46,0.35,0.75,0.95,'hot','K2')+box(4.46,1.30,0.75,0.90,'hot','K3')+box(4.46,2.20,0.75,0.90,'hot','K4')+box(4.46,3.10,0.75,1.07,'hot','K1');
+ s+=box(0.90,0,3.36,0.62,'exist','K10',{light:1});
+ s+=box(1.0,0.08,0.45,0.45,'top','K14')+box(1.6,0.12,0.40,0.30,'top','K15')+box(2.15,0.15,0.25,0.25,'top','K16');
+ s+=box(3.7,0.10,0.40,0.40,'std','K19');
+ s+=box(0.40,3.38,0.78,0.80,'cold','K6')+box(1.18,3.38,0.78,0.80,'cold','K7')+box(1.96,3.48,1.50,0.70,'cold','K8');
+ s+=box(1.6,1.70,1.50,0.60,'std','K9')+box(1.68,1.77,0.40,0.45,'top','K17');
+ s+=box(0,2.2,0.45,1.30,'std','K11')+box(0.12,3.05,0.14,0.20,'top');
+ s+=box(0,1.25,0.30,0.90,'std','K12');
+ s+=box(0,3.68,0.40,0.45,'wet','K13');
+ [0.52,0.68,0.84].forEach(x=>s+=circ(x,0.12,0.06,'hot'));s+=txt(0.46,0.30,'K20','zt','style="font-size:9px"');
+ // dimensions
+ s+=dimH(0,W,-0.28,'5.21 clear');
+ s+=dimV(W+0.40,0,H,'4.18 clear',12);
+ s+=dimV(W+0.15,0.35,4.17,'hot line 3.82',-6);
+ s+=dimV(2.35,0.62,1.70,'1.08',-5)+dimV(2.35,2.30,3.38,'1.08',-5);
+ s+=dimH(3.1,4.46,2.0,'1.36',-6);
+ s+=dimH(0.40,3.46,H+0.30,'fridge run 3.06');
+ s+=dimH(0.90,4.26,-0.12,'granite 3.36',-6);
+ s+=txt(W/2,H+0.62,'South wall: common wall with the existing restaurant','zt','text-anchor="middle" style="font-size:9px"');
+ s+=txt(0.05,-0.28,'W','zt','style="font-size:9px"');
+ mount('svgK',W,H,s,M,95,50,75);
+})();
+
+/* ---------- DISH WASH plan ---------- */
+(function(){
+ const W=5.21,H=1.80;let s=room(W,H);
+ s+=gapV(0,0.9,1.8)+winH(0,0.3,1.4);
+ s+='<path class="arc" d="M0 '+f(0.9)+'A'+f(0.9)+' '+f(0.9)+' 0 0 1 '+f(0.9)+' '+f(0.9)+'"/>';
+ s+=box(0.02,0.02,1.20,0.68,'wet','D1')+box(1.22,0.02,1.60,0.68,'wet','D2')+box(2.92,0.02,0.85,0.70,'wet','D3')+box(3.87,0.02,1.32,0.68,'wet','D4');
+ s+=box(0.10,0.20,0.53,0.40,'top','D7')+box(0.68,0.20,0.53,0.40,'top','D7');
+ s+=box(3.95,0.12,0.50,0.50,'top','D6')+box(4.55,0.12,0.50,0.50,'top','D6');
+ s+=txt(0.62,0.66,'D1','zt','text-anchor="middle" style="font-size:9px;fill:#1a120d"')+txt(4.53,0.66,'D4','zt','text-anchor="middle" style="font-size:9px;fill:#1a120d"')+dash(3.87,0.02,1.32,0.30)+txt(4.53,-0.12,'D4a (shelves above)','zt','text-anchor="middle" style="font-size:9px"');
+ s+=dash(0.25,0.04,0.40,0.15)+txt(0.45,-0.12,'D5 heater (above)','zt','text-anchor="middle" style="font-size:9px"');
+ s+=box(2.8,0.95,1.3,0.35,'exist','D11',{light:1});
+ s+=box(3.9,1.35,0.5,0.45,'std','D9')+box(4.45,1.35,0.40,0.40,'std','D8')+box(4.85,1.35,0.40,0.40,'std');
+ s+=box(3.2,1.60,0.30,0.20,'top','D10');
+ s+=dimH(0,W,-0.28,'5.21 clear');
+ s+=dimV(W+0.30,0,H,'1.80 clear',12);
+ s+=dimH(0.02,1.22,H+0.30,'1.20',16)+dimH(1.22,2.82,H+0.30,'1.60',16)+dimH(2.92,3.77,H+0.30,'0.85',16)+dimH(3.87,5.19,H+0.30,'1.32',16);
+ s+=dimV(2.0,0.70,1.80,'1.10 aisle',-5);
+ s+=txt(W/2,H+0.80,'Dirty to clean, left to right','note','');
+ s+=txt(0.06,1.55,'door','zt','style="font-size:9px"');
+ mount('svgD',W,H,s,M,70,50,110);
+})();
+
+/* ---------- BAR plan (x measured from 12.57 m; east wall at 3.10) ---------- */
+(function(){
+ const W=3.10,H=5.40;let s='';
+ s+='<path class="wall" d="M'+f(W)+' 0V'+f(H)+'M0 0H'+f(W)+'"/>';
+ s+=txt(W-0.06,-0.12,'East wall','zt','text-anchor="end" style="font-size:9px"');
+ // back bar line
+ s+=box(2.5,2.35,0.6,1.2,'cold','B1')+box(2.5,3.55,0.6,0.5,'cold','B2')+box(2.5,4.05,0.6,0.5,'wet','B3')+box(2.5,4.55,0.6,0.6,'top','B4');
+ // coffee station
+ s+=box(2.5,0.75,0.6,1.3,'std')+box(2.5,0.75,0.6,0.6,'cold')+box(2.5,1.40,0.6,0.6,'cold')+txt(2.44,1.07,'B9','nm l','text-anchor="end" style="font-size:10px"')+txt(2.44,1.72,'B10','nm l','text-anchor="end" style="font-size:10px"');
+ s+=box(2.6,0.82,0.40,0.45,'top','B11')+box(2.68,1.48,0.30,0.30,'top','B12');
+ // counter
+ s+=box(0.82,2.30,0.18,2.80,'std');
+ s+=box(1.0,2.30,0.6,0.70,'wet','B7')+box(1.0,3.0,0.6,1.1,'std','B8')+box(1.0,4.10,0.6,1.0,'cold','B5');
+ s+=box(1.38,4.30,0.2,0.6,'top','B6');
+ s+=box(1.65,2.40,0.30,0.30,'std','B14');
+ // stools
+ [2.65,3.25,3.85,4.45,4.95].forEach(y=>s+=circ(0.45,y,0.17,'std'));
+ s+=txt(0.45,5.4,'stools','zt','text-anchor="middle" style="font-size:9px"');
+ // old counter back edge
+ s+=line(2.10,2.20,2.10,5.20,'ghost');
+ s+=txt(2.04,5.38,'counter back in model','note','text-anchor="end" style="font-size:9px"');
+ // dims
+ s+=dimH(1.6,2.5,3.0,'0.90 aisle',-6);
+ s+=dimH(2.5,3.1,5.55,'0.60',-6);
+ s+=dimH(1.0,1.6,5.55,'0.60',-6);
+ s+=dimV(W+0.28,2.35,5.15,'back bar 2.80',12);
+ s+=dimV(W+0.28,0.75,2.05,'1.30',12);
+ s+=dimV(-0.08,2.30,5.10,'counter 2.80',-6);
+ s+=dimH(1.6,3.1,0.45,'1.50 wall to counter',-6);
+ s+=txt(1.05,2.2,'staff entry','note','text-anchor="middle"');
+ s+='<path class="dm" d="M'+f(1.05)+' '+f(2.12)+'V'+f(1.6)+'M'+f(1.0)+' '+f(1.7)+'L'+f(1.05)+' '+f(1.6)+'L'+f(1.1)+' '+f(1.7)+'"/>';
+ s+=txt(1.55,0.65,'COFFEE STATION','zt','text-anchor="middle" style="font-size:9px"');
+ mount('svgB',W,H,s,50,95,50,45);
+})();
+
+/* ---------- KEY plan (world metres; x east, y south) ---------- */
+(function(){
+ const x0=12.2,y0=-2.1,sc=0.42;       // plan pixels per metre scale factor relative to P
+ const X=x=>(x-x0)*P*sc,Y=y=>(y-y0)*P*sc;
+ const BX0=17.27,BX1=22.68,BY1=6.38,SX0=BX1-2.7,SY1=BY1+6.46,TX0=BX0+2.45;
+ const R=(x1,y1,x2,y2,fill,stroke,label,lx,ly,anchor)=>'<rect x="'+X(x1)+'" y="'+Y(y1)+'" width="'+(X(x2)-X(x1))+'" height="'+(Y(y2)-Y(y1))+'" fill="'+fill+'" stroke="'+(stroke||'#cdbfa8')+'" stroke-width="2"/>'+(label?'<text class="zt" x="'+X(lx)+'" y="'+Y(ly)+'" text-anchor="'+(anchor||'middle')+'" style="font-size:10px">'+label+'</text>':'');
+ let s='';
+ s+=R(12.2,0,15.67,5.48,'#241c17','#4a3f36','Hall (east end)',13.9,0.55);
+ s+=R(15.67,0,BX0,BY1,'#1e1713','#3b322b','',0,0);
+ s+='<text class="zt" transform="translate('+X(16.5)+' '+Y(3.2)+') rotate(-90)" text-anchor="middle" style="font-size:9px">Pathway 1.60</text>';
+ s+=R(13.39,2.30,15.67,5.15,'#4a6a80','#9fb4c2','',0,0);
+ s+='<text class="zt" x="'+X(14.5)+'" y="'+Y(3.75)+'" text-anchor="middle" style="font-size:12px;fill:#fff">BAR</text>';
+ s+=R(BX0,2,BX1,BY1,'#7a3a2b','#d9a58f','',0,0);
+ s+='<text class="zt" x="'+X(BX0+2.7)+'" y="'+Y(4.2)+'" text-anchor="middle" style="font-size:12px;fill:#fff">KITCHEN</text><text class="zt" x="'+X(BX0+2.7)+'" y="'+Y(4.75)+'" text-anchor="middle" style="font-size:10px">5.41 × 4.38</text>';
+ s+=R(BX0,0,BX1,2,'#2f6a5e','#8fd3c0','',0,0);
+ s+='<text class="zt" x="'+X(BX0+2.7)+'" y="'+Y(0.95)+'" text-anchor="middle" style="font-size:12px;fill:#fff">DISH WASH</text><text class="zt" x="'+X(BX0+2.7)+'" y="'+Y(1.5)+'" text-anchor="middle" style="font-size:10px">5.41 × 2.00</text>';
+ s+=R(BX0,-1.7,TX0,0,'#241c17','#4a3f36','Lobby',BX0+1.2,-0.8);
+ s+=R(TX0,-1.7,BX1,0,'#241c17','#4a3f36','Washroom',TX0+1.5,-0.8);
+ s+=R(SX0,BY1,BX1,SY1,'#241c17','#4a3f36','Store 2.70 × 6.46',SX0+1.35,BY1+3.2);
+ // north arrow
+ s+='<path d="M'+X(12.7)+' '+Y(10.7)+'V'+Y(9.2)+'M'+(X(12.7)-6)+' '+(Y(9.2)+10)+'L'+X(12.7)+' '+Y(9.2)+'L'+(X(12.7)+6)+' '+(Y(9.2)+10)+'" stroke="#cdbfa8" stroke-width="2" fill="none"/><text class="zt" x="'+X(12.7)+'" y="'+(Y(9.2)-6)+'" text-anchor="middle">N</text>';
+ const w=X(23.2)-X(x0),h=Y(SY1+0.3)-Y(y0);
+ const el=document.getElementById('key');
+ el.setAttribute('viewBox','0 0 '+Math.round(w)+' '+Math.round(h));
+ el.innerHTML=s;
+})();
+})();
+</script>
+</body>
+</html>
