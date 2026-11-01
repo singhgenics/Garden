@@ -1272,12 +1272,18 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
 {const x0=kx0+1.6,x1=kx0+3.1,z0=3.8,z1=4.4;   // 1.50 x 0.60 SS work table
  ssBox(x0,x1,0.82,0.85,z0,z1);[[x0+0.04,z0+0.04],[x1-0.04,z0+0.04],[x0+0.04,z1-0.04],[x1-0.04,z1-0.04]].forEach(([x,z])=>bx(x-0.025,x+0.025,0,0.82,z-0.025,z+0.025,M.ssDark,G.kitchen));
  bx(x0+0.03,x1-0.03,0.2,0.23,z0+0.03,z1-0.03,M.ss,G.kitchen);
+ // non-veg prep only: red board for raw meat, a blue one for seafood
+ bx(x0+0.08,x0+0.7,0.85,0.865,z0+0.08,z0+0.52,S({color:'#b0432f',roughness:0.6}),G.kitchen,false);bx(x0+0.8,x0+1.4,0.85,0.865,z0+0.08,z0+0.52,S({color:'#2f6aa3',roughness:0.6}),G.kitchen,false);}
+{const gz=2.1;   // granite platform: veg prep at the west end (wash sink + green board), machines and rice at the east end
+ // veg wash sink set into the granite, plumbed from the dish-wash side of the wall
+ bx(kx0+0.95,kx0+1.55,0.895,0.905,gz+0.08,gz+0.52,M.ss,G.kitchen,false);bx(kx0+1.0,kx0+1.5,0.9,0.91,gz+0.13,gz+0.47,M.black,G.kitchen,false);
+ rod(V(kx0+1.25,0.9,gz+0.05),V(kx0+1.25,1.15,gz+0.05),0.014,M.ss,G.kitchen,false);rod(V(kx0+1.25,1.15,gz+0.05),V(kx0+1.25,1.15,gz+0.3),0.012,M.ss,G.kitchen,false);
+ bx(kx0+1.65,kx0+2.35,0.9,0.915,gz+0.07,gz+0.53,S({color:'#3f8f55',roughness:0.6}),G.kitchen,false);   // green board, veg only
+ cyl(0.12,0.09,0.17,kx0+2.575,0.9,gz+0.275,M.black,G.kitchen,16);rod(V(kx0+2.6,1.0,gz+0.28),V(kx0+2.68,1.22,gz+0.22),0.022,M.black,G.kitchen,false);   // mortar and pestle
  // benchtop planetary mixer (10 L)
- bx(x0+0.05,x0+0.45,0.85,0.9,z0+0.08,z0+0.52,M.ssDark,G.kitchen);bx(x0+0.05,x0+0.2,0.9,1.5,z0+0.12,z0+0.48,M.ss,G.kitchen);bx(x0+0.05,x0+0.45,1.35,1.5,z0+0.1,z0+0.5,M.ss,G.kitchen);cyl(0.15,0.12,0.2,x0+0.31,0.9,z0+0.3,M.steel,G.kitchen,18);}
-{const gz=2.1;   // on the granite platform: rice cooker, mixer-grinder, mortar and pestle
- cyl(0.22,0.22,0.32,kx0+1.225,0.9,gz+0.305,M.white,G.kitchen,20);cyl(0.2,0.22,0.06,kx0+1.225,1.22,gz+0.305,M.ss,G.kitchen,20);sph(0.012,kx0+1.225,1.0,gz+0.53,M.glow,G.kitchen);
- bx(kx0+1.6,kx0+2.0,0.9,1.1,gz+0.12,gz+0.42,M.ssDark,G.kitchen);cyl(0.09,0.07,0.3,kx0+1.8,1.1,gz+0.27,M.shelfGlass,G.kitchen,16,false);
- cyl(0.12,0.09,0.17,kx0+2.275,0.9,gz+0.275,M.black,G.kitchen,16);rod(V(kx0+2.3,1.0,gz+0.28),V(kx0+2.38,1.22,gz+0.22),0.022,M.black,G.kitchen,false);}
+ {const mx=kx0+2.8;bx(mx,mx+0.4,0.9,0.95,gz+0.08,gz+0.52,M.ssDark,G.kitchen);bx(mx,mx+0.15,0.95,1.55,gz+0.12,gz+0.48,M.ss,G.kitchen);bx(mx,mx+0.4,1.4,1.55,gz+0.1,gz+0.5,M.ss,G.kitchen);cyl(0.15,0.12,0.2,mx+0.26,0.95,gz+0.3,M.steel,G.kitchen,18);}
+ cyl(0.22,0.22,0.32,kx0+3.525,0.9,gz+0.305,M.white,G.kitchen,20);cyl(0.2,0.22,0.06,kx0+3.525,1.22,gz+0.305,M.ss,G.kitchen,20);sph(0.012,kx0+3.525,1.0,gz+0.53,M.glow,G.kitchen);   // rice cooker
+ bx(kx0+3.8,kx0+4.2,0.9,1.1,gz+0.12,gz+0.42,M.ssDark,G.kitchen);cyl(0.09,0.07,0.3,kx0+4.0,1.1,gz+0.27,M.shelfGlass,G.kitchen,16,false);}   // mixer-grinder
 {const x0=kx0,z0=5.78,z1=6.23;   // wall-hung hand-wash basin with soap and towel dispensers, west wall south end
  bx(x0+0.02,x0+0.4,0.78,0.84,z0,z1,M.white,G.kitchen);bx(x0+0.06,x0+0.36,0.8,0.842,z0+0.06,z1-0.06,M.ssDark,G.kitchen,false);bx(x0+0.1,x0+0.3,0.3,0.78,(z0+z1)/2-0.05,(z0+z1)/2+0.05,M.white,G.kitchen,false);
  rod(V(x0+0.05,0.84,(z0+z1)/2),V(x0+0.05,1.0,(z0+z1)/2),0.012,M.ss,G.kitchen,false);rod(V(x0+0.05,1.0,(z0+z1)/2),V(x0+0.2,1.0,(z0+z1)/2),0.01,M.ss,G.kitchen,false);
