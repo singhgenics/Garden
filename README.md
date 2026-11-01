@@ -55,5 +55,6 @@ Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the
 
 - `garden.html`: the whole model (three.js r128, no build step)
 - `index.html`: redirects to `garden.html`
+- `stock-plan.html`: stock list from the menu (about 180 items), store-room rack layout, chiller and bar shelf maps, house-made items with shelf lives, opening and closing routine, and an interactive count sheet (opening, in, closing, used, order; saves per date on the device, exports CSV)
 - `equipment-plan.html`: opening-day equipment plan for the kitchen, dish wash and bar (plans, schedules with W × D × H in metres, smallwares, services). Opens inside the model from the toolbar's Equipment plan button, or on its own; `garden.html?eq` opens it directly
 - `decor.html` + `decor/`: the interior decor concept, Google Flow renders made from the model's camera views in the look of the Design Inspos boards, with a spec per zone. Source and image runner live in `../Decor` (outside this repo)
