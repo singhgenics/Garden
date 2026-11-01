@@ -1140,7 +1140,7 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
   g.position.set(x+nx*0.2,2.2,z+nz*0.2);g.rotation.y=Math.atan2(nx,nz);g.rotation.x=0.3;G.fans.add(g);}
 // misting fans removed; quiet flush-mount (hugger) ceiling fans with dark walnut blades sit in the coffers over the dining room - blades stay at least 2.5 m above the floor even at the low end (they also keep mosquitoes off)
 // flush-mount (hugger) fan for the low ceiling: no downrod, a low black canopy and motor housing, five walnut blades about 24 cm below the ceiling, a small light disc underneath
-function ceilFan(x,z){const top=hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);cyl(0.07,0.09,0.03,0,-0.03,0,M.blackMetal,g,18,false);cyl(0.12,0.12,0.09,0,-0.12,0,M.blackMetal,g,22,false);
+function ceilFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);cyl(0.07,0.09,0.03,0,-0.03,0,M.blackMetal,g,18,false);cyl(0.12,0.12,0.09,0,-0.12,0,M.blackMetal,g,22,false);
   const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.012,0.14),M.timberDark);b2.position.x=0.38;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
   cyl(0.07,0.06,0.02,0,-0.185,0,M.panelLight,g,16,false);}
 [[3.0,2.74],[6.6,2.74],[10.2,2.74],[2.6,5.9]].forEach(([x,z])=>ceilFan(x,z));
@@ -1402,7 +1402,33 @@ bx(TX0-0.04,TX0,2.1,2.16,-1.45,-0.75,M.brass,G.wash,false);
 [[TX0+1.4,-0.85],[BX0+1.25,-0.85]].forEach(([x,z])=>sph(0.01,x,0,z,M.black,G.wash));
 
 /* ======================= STAFF ROOM (the old store room) ======================= */
-{const g=G.store;   // staff accommodation: left empty here until it is designed; the kitchen door is closed
+{const g=G.store;
+ // staff accommodation for 4: two steel bunk beds along the west wall, four lockers and a shared cupboard along the east wall, one flush-mount fan over the aisle
+ const WX=SX0+0.1,EX=BX1-0.1,Z0=BY1+0.1,BW=0.92,BL=2.0;
+ const steel=M.blackMetal,mat=S({color:'#e9e1cf',roughness:0.95}),pil=M.pillow;
+ const blank=['#27406a','#7a2f2f','#2f5a46','#8a6a2a'].map(c=>S({color:c,roughness:0.95}));
+ function bunk(z0,k){const x0=WX,x1=WX+BW,z1=z0+BL;
+  [[x0,z0],[x1-0.06,z0],[x0,z1-0.06],[x1-0.06,z1-0.06]].forEach(([px,pz])=>bx(px,px+0.06,0,1.78,pz,pz+0.06,steel,g));
+  [0.32,1.22].forEach((y,i)=>{bx(x0,x1,y,y+0.05,z0,z1,steel,g);bx(x0+0.03,x1-0.03,y+0.05,y+0.17,z0+0.03,z1-0.03,mat,g);
+   bx(x0+0.03,x1-0.03,y+0.17,y+0.2,z0+0.55,z1-0.03,blank[(k*2+i)%4],g);bx(x0+0.08,x1-0.08,y+0.17,y+0.25,z0+0.06,z0+0.42,pil,g);});
+  bx(x1-0.04,x1,1.4,1.46,z0+0.35,z1-0.5,steel,g);bx(x1-0.04,x1,1.58,1.62,z0+0.35,z1-0.5,steel,g);
+  bx(x0,x1,1.4,1.46,z0,z0+0.04,steel,g);
+  [0.45,0.75,1.05].forEach(y=>bx(x1,x1+0.04,y,y+0.03,z1-0.5,z1-0.2,steel,g,false));
+  bx(x1,x1+0.03,0.2,1.3,z1-0.5,z1-0.47,steel,g,false);bx(x1,x1+0.03,0.2,1.3,z1-0.23,z1-0.2,steel,g,false);
+  solids.push([[x0,z0],[x1,z0]],[[x1,z0],[x1,z1]],[[x0,z1],[x1,z1]]);}
+ bunk(Z0,0);bunk(Z0+BL+0.1,1);
+ // four tall steel lockers, one per person, on the east wall
+ const lk=S({color:'#5d7266',roughness:0.5,metalness:0.3});
+ for(let i=0;i<4;i++){const z0=Z0+i*0.5;bx(EX-0.5,EX,0.06,1.9,z0+0.01,z0+0.49,lk,g);bx(EX-0.51,EX-0.5,0.1,1.86,z0+0.02,z0+0.48,M.ssDark,g,false);
+  for(let v=0;v<4;v++)bx(EX-0.512,EX-0.5,1.6+v*0.04,1.62+v*0.04,z0+0.12,z0+0.38,M.black,g,false);
+  bx(EX-0.525,EX-0.51,1.0,1.14,z0+0.38,z0+0.42,M.steel,g,false);}
+ // shared two-door timber cupboard and a low shoe cabinet after the lockers
+ {const z0=Z0+2.1;bx(EX-0.55,EX,0.0,2.0,z0,z0+1.0,M.timber,g);bx(EX-0.56,EX-0.55,0.05,1.95,z0+0.495,z0+0.505,M.timberDark,g,false);
+  [z0+0.4,z0+0.6].forEach(z=>bx(EX-0.58,EX-0.56,0.95,1.2,z-0.015,z+0.015,M.brass,g,false));
+  const z1=z0+1.1;bx(EX-0.4,EX,0.0,0.9,z1,z1+1.0,M.timberDark,g);bx(EX-0.41,EX-0.4,0.06,0.84,z1+0.495,z1+0.505,M.black,g,false);
+  bx(EX-0.42,EX,0.9,0.93,z1-0.02,z1+1.02,M.timber,g);
+  solids.push([[EX-0.55,Z0],[EX-0.55,z1+1.0]]);}
+ ceilFan(SX0+1.56,Z0+BL+0.05,BH);
  bx(SX0+1.0,SX0+1.7,BH-0.04,BH-0.01,BY1+1.0,BY1+1.3,M.panelLight,g,false);bx(SX0+1.0,SX0+1.7,BH-0.04,BH-0.01,BY1+4.5,BY1+4.8,M.panelLight,g,false);
  const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.7,0.2),new THREE.MeshStandardMaterial({map:signTex(256,76,[['STAFF ROOM',34,0.52]],'#2a1a10','#f6ecd6')}));sg.position.set(BX1-1.4,2.35,BY1-0.1+0.001);sg.rotation.y=Math.PI;g.add(sg);}
 
@@ -1486,7 +1512,7 @@ const VIEWS={
  dish:{p:[BX0+0.35,1.7,1.7],t:[BX0+3.4,0.9,0.3],card:'dish',fov:72},
  lobby:{p:[BX0+1.43,6.2,-0.2],t:[BX0+1.43,0,-0.95],card:'wash',fov:42,roof:false},
  wash:{p:[TX0+0.2,1.6,-1.1],t:[BX1,1.0,-1.1],card:'wash',fov:80},
- store:{p:[SX0+1.35,1.7,BY1+0.5],t:[SX0+1.35,1.0,SY1],card:'store',fov:70},
+ store:{p:[SX0+1.5,2.75,BY1+0.25],t:[SX0+1.3,0.5,BY1+4.6],card:'store',fov:78},
  outside:{p:[8,2.2,19],t:[8,1.4,6],card:'curtains',fov:50},
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
@@ -1504,7 +1530,7 @@ const CARDS={
  kitchen:['Kitchen','5.41 × 4.38 m','Laid out as filmed: door from the passage near the corner; a black granite platform the length of the dish-wash wall with a shuttered window over it (no door in that wall); the cooking line along the east wall under a white masonry smoke hood; fridges and racks along the far wall; sloping white ceiling with a dark timber beam. Open middle, pass window to the passage.',['Hood duct rises above the roof','Fire extinguishers by the door, as on site','Equipment shown is the proposed fit-out','Storage is built in: under the granite (U1, U2), under the pass shelf (U4), a tall pantry cabinet (T1) and a wall cabinet over the chillers (W1). The old store door is closed']],
  dish:['Dish wash','5.41 × 2.00 m','Its own door from the passage; dirty ware comes in from the passage to the receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, and clean ware goes to the kitchen through the shuttered window over the granite platform.',['Hot-water cylinder, louvre extractor, floor drain']],
  wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Walls in bright orange with black hand-drawn doodle art over a white tiled dado, as in the reference.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
- store:['Staff room','2.70 × 6.46 m, was the store room','Now staff accommodation. The door into the kitchen is closed, so the room needs its own entrance from outside. Food and supplies are stored in the kitchen, the dish wash and the bar.',['Fit-out not designed yet: beds, lockers and a washroom link are still to plan']],
+ store:['Staff room','2.70 × 6.46 m, was the store room','Now staff accommodation for four. The door into the kitchen is closed, so the room needs its own entrance from outside. Food and supplies are stored in the kitchen, the dish wash and the bar.',['Sleeps 4: two steel bunk beds along the west wall (0.92 × 2.0 m each), 1.08 m aisle','Four tall lockers (one each), a shared two-door cupboard and a low shoe cabinet on the east wall','One flush-mount fan over the aisle; still to plan: an entrance from outside and a washroom link']],
  curtains:['PVC curtains','Every open side','Clear roll-down PVC hangs from the ring beam on all five open edges and behind the bar. Press the PVC button to roll them up or down. The entrance bay stays passable.',['Rolled up: a breezy garden. Down: dry in the monsoon']],
  plan:['Plan view','Top-down','Sizes are on the plan labels (press Sizes). Roof comes off for the plan.',['Hall 15.67 × 7.76 m, kitchen block 5.41 m wide','Existing restaurant and residence shown as plain massing for context','The existing restaurant\'s 1.50 m balcony along the landing and approach path is its only usable part; same 80 cm railing as the hall']],
 };
