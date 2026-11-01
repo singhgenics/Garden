@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""Image jobs for the veg / non-veg variants and the drinks that had no photo. Run by gen-variants.sh.
+id -> (list of crockery refs, prompt body). Style tails are added below."""
+FOOD_TAIL = " Warm oak table, soft window daylight from the left, 45-degree angle, shallow depth of field, appetising, restaurant-quality plating, uncluttered. No text, no logo, no people, no hands."
+DRINK_TAIL = " Dark warm wood bar table, soft warm side light, 45-degree angle, shallow depth of field, condensation and sparkle, clean uncluttered styling. No text, no logo, no people, no hands."
+F = "Editorial restaurant food photograph. Plate the dish in the exact vessel(s) shown in the reference image(s): "
+D = "Editorial bar photograph. Use the exact glassware shown in the reference image(s): "
+JOBS = {
+ # --- soups
+ 'hotsour-chicken': (['soup'], F+"a stoneware soup bowl on a cream side plate holding glossy dark hot and sour soup with swirled egg ribbons, fine shreds of poached chicken, shredded mushroom and bamboo shoot, a dusting of white pepper and spring onion greens on top, a white porcelain soup spoon on the plate."+FOOD_TAIL),
+ 'tomkha-chicken': (['soup'], F+"a stoneware soup bowl on a cream side plate holding pale creamy coconut tom kha soup with slices of poached chicken, sliced mushrooms, a bruised lemongrass piece, torn lime leaf, red chilli slices and coriander leaves on top, a white porcelain spoon on the plate."+FOOD_TAIL),
+ # --- cabin starters
+ 'cabinfever-paneer': (['enplate'], F+"dry chilli paneer: golden crisp-fried paneer cubes tossed with green chilli rings, onion and capsicum squares and a glossy dark soy glaze, piled loosely in a low mound on the white enamel plate with olive rim from the reference image, spring onion greens on top, a small ceramic dish of sliced green chillies in vinegar beside it. Completely vegetarian, no meat."+FOOD_TAIL),
+ 'cabinfever-pork': (['enplate'], F+"dry chilli pork: crisp-edged slices of braised pork belly tossed with dried red chillies, garlic, dark soy and spring onion, piled loosely in a low mound on the white enamel plate with olive rim from the reference image, a small ceramic dish of sliced green chillies in vinegar beside it."+FOOD_TAIL),
+ 'honeytrap-chicken': (['enplate'], F+"honey chilli chicken: golden crisp chicken strips coated in a sticky glossy honey-chilli glaze with sesame seeds, red chilli flakes and spring onion rings, stacked loosely in a mound on the white enamel plate with olive rim from the reference image."+FOOD_TAIL),
+ 'saltpepa-mushroom': (['basket'], F+"salt and pepper fried mushrooms: golden crisp-battered oyster mushrooms tossed with garlic crumbs, crushed black pepper, green chilli rings and spring onion, in a black wire basket lined with kraft greaseproof paper, a small ceramic dish of pale kasundi mayo beside it. Completely vegetarian."+FOOD_TAIL),
+ 'saltpepa-chonak': (['basket'], F+"salt and pepper chonak fish fingers: golden crisp batons of white fish fillet tossed with garlic crumbs, crushed black pepper, green chilli rings and spring onion, in a black wire basket lined with kraft greaseproof paper, a small ceramic dish of pale kasundi mayo beside it."+FOOD_TAIL),
+ # --- noodles and rice
+ 'noodlearound-veg': (['noodle'], F+"vegetable Hakka noodles tossed dry on high heat with shredded cabbage, carrot strips, green beans and spring onion, no meat, no prawn and no egg, heaped in a wide shallow sand-glazed stoneware bowl with spring onion greens on top, a pair of stainless noodle tongs beside it. Completely vegetarian."+FOOD_TAIL),
+ 'noodlearound-chicken': (['noodle'], F+"chicken Hakka noodles tossed dry on high heat with strips of chicken, shredded cabbage, carrot and spring onion, heaped in a wide shallow sand-glazed stoneware bowl with spring onion greens on top, a pair of stainless noodle tongs beside it."+FOOD_TAIL),
+ 'ricebaby-chicken': (['oval'], F+"chicken fried rice with every grain separate, diced chicken, flecks of egg, carrot and beans, spring onion on top, mounded on an oval cream speckled stoneware platter with a stainless serving spoon."+FOOD_TAIL),
+ 'ricebaby-mixed': (['oval'], F+"mixed fried rice with every grain separate, egg strips, pieces of chicken and whole pink prawns, flecks of carrot and beans, spring onion on top, mounded on an oval cream speckled stoneware platter with a stainless serving spoon."+FOOD_TAIL),
+ # --- gravies and curries
+ 'manchurian-chicken': (['claypot'], F+"a brown glazed clay pot with the lid off on a rattan stand, filled with dark glossy ginger-garlic-soy Manchurian gravy and crisp fried chicken pieces with spring onion greens on top, steam rising."+FOOD_TAIL),
+ 'greencurry-chicken': (['claypot','rice'], F+"a brown glazed clay pot with the lid off on a rattan stand filled with pale green Thai green curry with pieces of chicken, aubergine, long beans, red chilli slices, torn lime leaf and Thai basil leaves, a small olive-glazed stoneware bowl of jasmine rice beside it."+FOOD_TAIL),
+ 'greencurry-prawn': (['claypot','rice'], F+"a brown glazed clay pot with the lid off on a rattan stand filled with pale green Thai green curry with whole pink prawns, aubergine, long beans, red chilli slices, torn lime leaf and Thai basil leaves, a small olive-glazed stoneware bowl of jasmine rice beside it."+FOOD_TAIL),
+ 'khaosuey-veg': (['noodle','toptray'], F+"vegetarian Burmese khao suey: golden coconut curry with egg noodles, cubes of tofu and vegetables in a wide shallow stoneware bowl, beside a round divided stoneware tray with five small compartments of crispy fried noodles, sliced shallots, fried garlic, lime wedges and red chilli flakes. Completely vegetarian."+FOOD_TAIL),
+ 'khaosuey-chicken': (['noodle','toptray'], F+"Burmese chicken khao suey: golden coconut curry with egg noodles and pieces of chicken thigh in a wide shallow stoneware bowl, beside a round divided stoneware tray with five small compartments of crispy fried noodles, sliced shallots, fried garlic, lime wedges and red chilli flakes."+FOOD_TAIL),
+ # --- drinks that had no photo
+ 'gimme': (['pint'], D+"a 500 ml pint glass of hazy amber-orange craft IPA with a thick white foam head and cold condensation, a small tasting glass of the same beer beside it."+DRINK_TAIL),
+ 'budweiser': (['pint'], D+"a chilled clear-glass lager bottle with a plain red-and-white label standing beside a pint glass of pale golden lager with a white foam head, on a wooden table. The label has no readable text."+DRINK_TAIL),
+ 'maltflight': (['flight','nosing'], D+"a wooden flight board holding three small tulip nosing glasses of whisky in pale gold, amber and deep copper, a tiny glass of water and a dish of chilli peanuts beside it."+DRINK_TAIL),
+ 'water': (['water'], D+"a glass bottle of still water and a glass tumbler of water with ice and a lemon slice, beside a small bottle of sparkling water."+DRINK_TAIL),
+ 'softdrinks': (['highball'], D+"a tall glass of dark cola with ice and a lime wedge beside a glass bottle of cola and a can of lemon-lime soda, labels plain with no readable text."+DRINK_TAIL),
+ 'tonic': (['highball'], D+"a tall highball glass of ice and tonic water with a lime wheel, beside a small glass bottle of tonic, the label plain with no readable text."+DRINK_TAIL),
+}
+
+JOBS.update({
+ 'wontonmore': (['basket','dip'], F+"six crisp golden fried chicken wontons with pleated, blistered wrappers, stacked loosely in a black wire basket lined with kraft greaseproof paper, spring onion rings and sesame seeds on top, a small white ceramic dipping dish of glossy red-orange sweet chilli sauce beside the basket."+FOOD_TAIL),
+ 'wontonmore-veg': (['basket','dip'], F+"six crisp golden fried vegetable wontons with pleated, blistered wrappers, one broken open to show a filling of carrot, water chestnut and edamame, stacked loosely in a black wire basket lined with kraft greaseproof paper, spring onion rings and sesame seeds on top, a small white ceramic dipping dish of glossy red-orange sweet chilli sauce beside the basket."+FOOD_TAIL),
+ 'smashhit': (['dessert'], F+"Chinese smashed cucumber salad: rough smashed chunks of cucumber glistening with dressing, sliced garlic, a spoon of red chilli oil, toasted sesame seeds and coriander leaves, heaped in a shallow charcoal stoneware bowl."+FOOD_TAIL),
+ 'scoop': (['dessert'], F+"two scoops of ice cream, one vanilla and one pale tender coconut, in a shallow dark charcoal stoneware bowl, warm palm jaggery syrup drizzled over them, a spoonful of toasted sesame and crushed peanut crunch on top, a stainless dessert spoon beside the bowl."+FOOD_TAIL),
+})

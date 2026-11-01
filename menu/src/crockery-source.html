@@ -1,0 +1,487 @@
+<title>Cabin East · Crockery and glassware</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Alfa+Slab+One&display=swap">
+<style>
+/* Layout: the menu's sand-paper card, carried into a buying sheet — materials, then dish→vessel and drink→glass maps, then a tickable photo checklist grouped by where each piece lives */
+:root{
+  --paper:#F3E9D2; --card:#F9F3E6; --ink:#1B1714; --muted:#6a5d4e; --line:#cdb99c;
+  --olive:#2F6F57; --orange:#B5321C; --tick:#2f7d32; --shade:rgba(42,36,32,.08);
+  --script:'Alfa Slab One','Rockwell',Georgia,serif;
+  --display:'Bricolage Grotesque','Avenir Next','Segoe UI',sans-serif;
+  --body:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1f1a16; --card:#2a2420; --ink:#efe3d0; --muted:#b5a690; --line:#4a3f34;
+  --olive:#6FC29A; --orange:#e2814f; --tick:#7cc47f; --shade:rgba(239,227,208,.06); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1f1a16; --card:#2a2420; --ink:#efe3d0; --muted:#b5a690; --line:#4a3f34;
+  --olive:#6FC29A; --orange:#e2814f; --tick:#7cc47f; --shade:rgba(239,227,208,.06); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:14.5px/1.55 var(--body);margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:20px;padding-block:28px 64px;display:grid;gap:48px}
+@media (max-width:480px){.wrap{padding-inline:16px}}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0;max-width:68ch}
+img{max-width:100%;display:block}
+.eyebrow{font:600 11px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--olive);margin:0}
+.script{font-family:var(--script);font-weight:400;color:var(--orange);line-height:1}
+.muted{color:var(--muted)}
+
+header.top{display:grid;gap:8px;justify-items:center;text-align:center;padding-bottom:22px;border-bottom:2px solid var(--ink)}
+header.top h1{font-size:clamp(46px,8vw,80px)}
+header.top .sub{font:700 clamp(20px,3vw,28px)/1.2 var(--display)}
+header.top p{color:var(--muted)}
+.progress{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;align-items:center;margin-top:8px;font:500 12px/1.4 var(--mono);color:var(--muted)}
+.bar{width:180px;height:8px;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--olive);transition:width .3s}
+.btn{appearance:none;font:600 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:9px 13px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;cursor:pointer}
+.btn:hover,.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+section>.head{display:grid;gap:4px;margin-bottom:18px}
+section>.head h2{font-size:42px}
+
+.fam{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px}
+.fam article{display:grid;gap:10px;align-content:start}
+.fam figure{margin:0;aspect-ratio:4/3;overflow:hidden;border-radius:6px;border:1.5px solid var(--ink)}
+.fam figure img{width:100%;height:100%;object-fit:cover}
+.fam h3{font:700 18px/1.25 var(--display)}
+.fam .tag{font:600 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--paper);background:var(--olive);padding:4px 7px;border-radius:4px;justify-self:start}
+.fam article:nth-child(2) .tag{background:var(--orange)}
+.fam article:nth-child(3) .tag{background:var(--ink)}
+.fam article:nth-child(4) .tag{background:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px 28px;margin-top:22px;padding:16px 18px;border:1.5px dashed var(--line);border-radius:10px}
+.rules div{font-size:13.5px}
+.rules b{font:700 14px/1.3 var(--display);display:block}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.mapwrap{overflow-x:auto;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 10.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr.grp td{font:600 26px/1 var(--script);color:var(--orange);padding-top:18px;border-bottom:1px solid var(--ink)}
+td.dish{font:700 14.5px/1.3 var(--display);width:22%}
+td.dish small{display:block;font:italic 400 12px/1.3 var(--body);color:var(--muted);margin-top:2px}
+td.ves{width:30%}
+.vchip{display:flex;gap:10px;align-items:center}
+.vchip img,.vchip .noimg{width:56px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--line);flex:none;background:var(--shade)}
+.vchip a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+.vchip a:hover{color:var(--orange);border-color:var(--orange)}
+td.why{color:var(--muted)}
+
+.grp-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:30px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--ink)}
+.grp-h h3{font:600 30px/1 var(--script);color:var(--orange)}
+.grp-h span{font:500 11.5px/1.4 var(--mono);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:18px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;scroll-margin-top:16px;transition:opacity .2s}
+.item figure{margin:0;aspect-ratio:4/3;overflow:hidden;position:relative;background:var(--shade)}
+.item figure img{width:100%;height:100%;object-fit:cover}
+.item figure .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;font:500 12px/1.4 var(--mono);color:var(--muted);border-bottom:1px dashed var(--line)}
+.item .body{padding:12px 14px 14px;display:grid;gap:7px;align-content:start;min-width:0}
+.item h4{font:700 16px/1.25 var(--display);margin:0}
+.item .spec{font:500 11.5px/1.45 var(--mono);color:var(--olive)}
+.item .use{font-size:13px;color:var(--muted)}
+.item .use b{font:600 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-right:5px}
+.item .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px;padding-top:9px;border-top:1px dashed var(--line)}
+.qty{font:600 13px/1.2 var(--mono);font-variant-numeric:tabular-nums}
+.qty small{font-weight:500;color:var(--muted)}
+label.chk{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;flex:none}
+label.chk input{position:absolute;opacity:0;width:1px;height:1px}
+label.chk span{width:20px;height:20px;border:1.5px solid var(--ink);border-radius:4px;display:grid;place-items:center}
+label.chk input:checked+span{background:var(--tick);border-color:var(--tick)}
+label.chk input:checked+span::after{content:"";width:9px;height:5px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+label.chk input:focus-visible+span{outline:2px solid var(--orange);outline-offset:2px}
+.item.done{opacity:.55}
+.item.flash{outline:2px solid var(--orange);outline-offset:2px}
+
+.setting{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:760px){.setting{grid-template-columns:1fr}}
+.setting svg{width:100%;max-width:480px;height:auto}
+.setting ol{margin:0;padding-left:20px;display:grid;gap:7px}
+.setting li b{font-family:var(--display)}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:20px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.box h3{font:600 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--olive)}
+.box ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px}
+
+footer{border-top:2px solid var(--ink);padding-top:14px;font-size:11.5px;color:var(--muted);display:grid;gap:6px}
+footer ol{margin:0;padding-left:18px;columns:3 240px;column-gap:24px}
+footer a{color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Betalbatim · Cabin East · fit-out</p>
+  <h1 class="script">crockery, glass &amp; cutlery</h1>
+  <p class="sub">What every dish and drink is served in, and what to buy</p>
+  <p>Built from the updated food menu (about 44 choices), the drinks menu and the warm cabin-and-beer-garden look. Sized for 28 covers plus the bar. Tick items off as you buy them; ticks are saved in this browser.</p>
+  <div class="progress" aria-live="polite">
+    <span id="pText">0 of 0 bought</span>
+    <span class="bar" aria-hidden="true"><i id="pBar"></i></span>
+    <button class="btn" id="copyBtn" type="button">Copy shopping list</button>
+    <button class="btn" id="resetBtn" type="button">Clear ticks</button>
+  </div>
+</header>
+
+<section aria-labelledby="h-fam">
+  <div class="head">
+    <p class="eyebrow">The look on the table</p>
+    <h2 id="h-fam" class="script">four materials, one story</h2>
+    <p class="muted">The menu is Indo-Chinese cabin food, a dim sum steamer counter, Korean and Thai plates and a Goan craft-beer pub in one room. Each world gets its own material, so the table tells guests where a dish comes from. No white banquet china: that is what the Asian places nearby already use.</p>
+  </div>
+  <div class="fam">
+    <article>
+      <figure><img src="g/enplate.jpg" alt="White plate with a dark rolled rim on a blue background"></figure>
+      <span class="tag">Cabin enamel</span>
+      <h3>White enamel with a coloured rim</h3>
+      <p class="muted">Cabin starters, fried bar bites, the Thai basil bowl and the lunch plates. The classic enamel plate: it doesn't shatter on the beer-garden floor, and chilli-red food looks loud on white. Pick an olive or rust rim.</p>
+    </article>
+    <article>
+      <figure><img src="g/steamer8.jpg" alt="Two bamboo steamers seen from above"></figure>
+      <span class="tag">Bamboo &amp; porcelain</span>
+      <h3>Steamers, soup spoons, chopstick rests</h3>
+      <p class="muted">Everything from the steamer goes to the table in its basket, so lifting the lid is the photo moment. White porcelain spoons for every soup. Dim sum arrive in the basket they were steamed in.</p>
+    </article>
+    <article>
+      <figure><img src="g/soup.jpg" alt="Rust-red glazed stoneware bowl on a dark background"></figure>
+      <span class="tag">Konkan stoneware</span>
+      <h3>Hand-glazed bowls and plates</h3>
+      <p class="muted">Bao, noodles, rice, soups, curries and desserts, in sand, olive, rust and charcoal glazes that sit well with limewash and wood. Buy from one Indian maker so pieces stack and reorder cleanly.</p>
+    </article>
+    <article>
+      <figure><img src="g/pint.jpg" alt="Tall pint glass of pale ale"></figure>
+      <span class="tag">Clear glass</span>
+      <h3>Plain, sturdy, dishwasher-safe glass</h3>
+      <p class="muted">Six glass shapes cover the whole drinks menu: pint, 330, highball, rocks, coupe and nosing glass, plus shots and an Irish coffee glass. Kings and Budweiser bottles are poured into the pint and 330. No branded glassware; the beer is the colour.</p>
+    </article>
+  </div>
+  <div class="rules">
+    <div><b>Dark food on light, light food on dark.</b> Chilli chicken on white enamel; pale bao and dumplings on charcoal or olive glaze.</div>
+    <div><b>Sharing is the default.</b> Starters and mains arrive in one vessel for the table. Each guest eats from a rice bowl and a side plate.</div>
+    <div><b>Steam goes straight to the table.</b> Dim sum is never re-plated. The basket sits on a side plate to catch drips.</div>
+    <div><b>Six glasses, not twenty.</b> Every drink on the menu fits one of the core shapes, so the bar back stays small and the washer racks stay simple.</div>
+  </div>
+</section>
+
+<section aria-labelledby="h-map">
+  <div class="head">
+    <p class="eyebrow">Item by item</p>
+    <h2 id="h-map" class="script">what goes in what</h2>
+    <p class="muted">Every dish and drink on the menus, what it's served in, what goes alongside, and why. Click a vessel to jump to it in the buying list.</p>
+  </div>
+  <div class="tabs" role="group" aria-label="Choose menu">
+    <button class="btn" type="button" data-map="food" aria-pressed="true">Food menu</button>
+    <button class="btn" type="button" data-map="drinks" aria-pressed="false">Drinks menu</button>
+  </div>
+  <div class="mapwrap"><table id="map"><thead><tr><th id="mapH">Dish</th><th>Served in</th><th>Alongside</th><th>Why</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section aria-labelledby="h-list">
+  <div class="head">
+    <p class="eyebrow">Buying checklist</p>
+    <h2 id="h-list" class="script">the buying list</h2>
+    <p class="muted">Quantities are for 28 covers and one bartender (with the owner helping behind the bar). Everything on a place setting is counted at two per cover: one in use and one in the wash or spare, so 56 for 28 covers. Ceramics and glass add 10% for breakage (62); steel and chopsticks stay at 56. Food-serving, beer, spirits and bar items are sized by dish and drink, not per cover. Product images show the style to buy, not a specific product.</p>
+  </div>
+  <div class="tabs" id="filters" role="group" aria-label="Show group"></div>
+  <div id="list"></div>
+</section>
+
+<section aria-labelledby="h-set">
+  <div class="head">
+    <p class="eyebrow">Per cover</p>
+    <h2 id="h-set" class="script">laying a place</h2>
+    <p class="muted">What's on the table before the first plate arrives. Forks and spoons are on the table in a cutlery cup; many guests from the rest of India will reach for them first.</p>
+  </div>
+  <div class="setting">
+    <svg viewBox="0 0 480 300" role="img" aria-labelledby="svgT">
+      <title id="svgT">Top view of one place setting: side plate with rice bowl, dipping dish, soup spoon, chopsticks on a rest and a water glass</title>
+      <rect x="1" y="1" width="478" height="298" rx="10" fill="none" stroke="var(--line)" stroke-dasharray="4 5"/>
+      <circle cx="210" cy="160" r="92" fill="var(--card)" stroke="var(--ink)" stroke-width="2"/>
+      <circle cx="210" cy="160" r="78" fill="none" stroke="var(--olive)" stroke-width="5"/>
+      <circle cx="210" cy="160" r="50" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+      <circle cx="210" cy="160" r="34" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+      <circle cx="330" cy="62" r="20" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+      <circle cx="330" cy="62" r="11" fill="var(--orange)" opacity=".75"/>
+      <circle cx="395" cy="70" r="24" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <circle cx="395" cy="70" r="18" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+      <rect x="352" y="222" width="28" height="12" rx="4" fill="var(--olive)"/>
+      <rect x="362" y="100" width="5" height="165" rx="2" fill="var(--ink)" transform="rotate(4 364 180)"/>
+      <rect x="373" y="100" width="5" height="165" rx="2" fill="var(--ink)" transform="rotate(4 375 180)"/>
+      <path d="M327 140 q-12 20 0 40 l6 70 h6 l6 -70 q12 -20 0 -40 z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">
+        <text x="30" y="36">1 side plate 7.5"</text>
+        <text x="30" y="52">2 rice bowl on top</text>
+        <text x="270" y="26">3 dip dish</text>
+        <text x="380" y="26">6 water</text>
+        <text x="30" y="285">4 soup spoon</text>
+        <text x="300" y="285">5 chopsticks + rest</text>
+      </g>
+    </svg>
+    <ol>
+      <li><b>Side plate, 7.5".</b> Eat from it, and set a steamer basket on it when dim sum arrives.</li>
+      <li><b>Rice bowl.</b> Rice, noodles, curry and gravy are served into it from the sharing vessel; jasmine rice comes to the table in it.</li>
+      <li><b>Dipping dish.</b> Soy and chilli vinegar to start; swapped for black vinegar and ginger with soup dumplings, or kasundi with the prawns.</li>
+      <li><b>Porcelain soup spoon.</b> For soup, and for holding a soup dumpling while it cools.</li>
+      <li><b>Chopsticks on a ceramic rest.</b> Reusable, square-edged so they don't roll.</li>
+      <li><b>Water glass,</b> filled from a table carafe. Folded cotton napkin under the chopsticks.</li>
+      <li><b>Per table:</b> one condiment set (soy, green chillies in vinegar, chilli oil), a cutlery cup with forks and spoons, and coasters.</li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="h-notes">
+  <div class="head">
+    <p class="eyebrow">Before you order</p>
+    <h2 id="h-notes" class="script">buying notes</h2>
+  </div>
+  <div class="notes">
+    <div class="box">
+      <h3>Where to look</h3>
+      <ul>
+        <li>Stoneware: Indian hotel-ware ceramic makers, or Khurja potteries for a custom glaze at volume. Get a sample of each glaze first.</li>
+        <li>Enamelware: hotel-supply wholesalers; check that it's lead-free and food-grade.</li>
+        <li>Steamers, porcelain spoons, chopstick rests: Chinese-kitchen suppliers (Mumbai's Crawford Market) or online restaurant-supply stores.</li>
+        <li>Glassware: one commercial range (tempered, stackable) so replacements match for years.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Test before a bulk order</h3>
+      <ul>
+        <li>Stack ten of each in the dish rack and glass rack you've planned. Thick stoneware and tall glasses eat space fast.</li>
+        <li>Run a piece of each through 20 dishwasher cycles. Cheap glaze dulls and enamel chips at the rim.</li>
+        <li>Put a full basket of dim sum on the 7.5" side plate. If it overhangs, step up to 8".</li>
+        <li>Pour a hot tom kha into the soup bowl and a hot green curry into the claypot. Both should be comfortable to hold on the side plate and the stand.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Bar and care</h3>
+      <ul>
+        <li>One bartender means one pair of hands: batch the syrups, rim salts and garnishes before opening, and keep two of each tool so one set is always clean.</li>
+        <li>Keep shot glasses and one rack of coupes in the freezer for chilled vodka and martinis.</li>
+        <li>Wash glass separately from greasy plates; a film of oil kills a beer's head.</li>
+        <li>Bamboo steamers: rinse only, no soap, dry upright. Buy steel-banded ones and budget 15% replacement a year.</li>
+        <li>Printed greaseproof paper under fried food keeps baskets clean and doubles as branding.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><b>Product images</b> are style references generated with Google Flow (Nano Banana 2.1) on a plain sand backdrop. They show the look to buy, not a specific supplier's product. Ask suppliers for samples that match.</p>
+</footer>
+</div>
+
+<script>
+const GROUPS={cover:['Per cover','On every table setting'],food:['Food serving','From the pass to the table'],service:['Table & service','Shared on each table'],beer:['Beer','Three taps, two bottles, pitchers, paddles'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed coffee'],tools:['Bar tools','Behind the bar']};
+// [id, group, photo|null, name, spec, used for, qty, unit]
+const ITEMS=[
+ ['side','cover','side','Side plate, 7.5"','Stoneware, sand-cream glaze with darker rim','Eating plate; underplate for steamer baskets and soup bowls',62,'pcs'],
+ ['rice','cover','rice','Rice bowl','~11 cm, 300 ml, reactive glaze','Rice, noodles and curry at the table; jasmine rice',62,'pcs'],
+ ['dip','cover','dip','Dipping dish','~8 cm, 50 ml, glazed','Soy, chilli vinegar, kasundi, chilli mayo, black vinegar, gochujang mayo',62,'pcs'],
+ ['cspoon','cover','cspoon','Porcelain soup spoon','White porcelain, ~14 cm','Wonton Kenobi, Hot & Bothered, Coconut Cuddle (tom kha)',62,'pcs'],
+ ['chop','cover','chop','Reusable chopsticks','Square-edged, dark fibreglass or lacquered wood, dishwasher-safe','One pair per cover',56,'pairs'],
+ ['crest','cover','crest','Chopstick rest','Ceramic, glaze to match the stoneware','One per cover',62,'pcs'],
+ ['cutlery','cover','cutlery','Dinner fork & dinner spoon','Matte brushed stainless steel, one range','Rice, noodles, darsaan; for guests who prefer them',56,'each'],
+ ['teaspoon','cover','teaspoon','Teaspoon','Same stainless range as the forks','Coffee, ice cream, sugar',56,'pcs'],
+ ['napkin','cover','napkin','Cotton napkin','Oatmeal khadi with olive stripe; or printed paper napkins','One per cover',62,'pcs'],
+ ['water','cover','water','Water glass','~300 ml straight tumbler, tempered','Water from the carafe at every cover',62,'pcs'],
+
+ ['susan','food','susan','Lazy susan','50 cm wooden turntable; fits a 75 cm 4-top','Cabin feast for four: four soups plus five shared dishes on one turning table',2,'pcs'],
+ ['steamer6','food','steamer6','Bamboo steamer, 6"','Steel-banded rim, with lid; holds 4 dim sum','Crystal Clear, Siu Mai Goodness, Prawn to Be Wild; happy-hour dumplings',40,'baskets + lids'],
+ ['steamer8','food','steamer8','Bamboo steamer, 8"','Steel-banded, stackable, with lid','Steamer for two: two tiers, 8 dim sum then 2 bao',6,'baskets + 4 lids'],
+ ['liner','food','liner','Steamer liners','Perforated parchment rounds 6" and 8", or reusable silicone','Under every dumpling so skins don\'t tear',2000,'rounds a month'],
+ ['enplate','food','enplate','Enamel plate, 10"','White enamel, olive or rust rolled rim','Cabin Fever, Honey Trap, happy-hour Cabin Fever; Slap Happy salad on request',40,'pcs'],
+ ['cabinplate','food','cabinplate','Large deep plate, 12"','White enamel or white stoneware, with a well','Holy Basil, Batman! rice bowl with fried egg; Bowl game lunch',24,'pcs'],
+ ['basket','food','basket','Fry basket, paper-lined','Black wire or enamel basket ~25 × 15 cm; printed greaseproof paper','Salt & Pepa (mushroom, chonak, prawns), Wonton More (veg, chicken), K-Pop Wings, Fry Hard',36,'baskets'],
+ ['paper','food','paper','Printed greaseproof paper','Food-safe, branded, cut to basket size','Lining every fried item',3000,'sheets a month'],
+ ['enbowl','food','enbowl','Small enamel bowl','~14 cm, white with dark rim','Bone and shell bowl for wings and prawn tails',16,'pcs'],
+ ['bao','food','bao','Long rectangular plate','~30 × 12 cm, matte white or charcoal','All three bao (Bao Down, Fever Pitch, Seoul Mate), 2 to a plate',24,'pcs'],
+ ['soup','food','soup','Soup bowl','~14 cm, 450 ml, rust or olive glaze','Wonton Kenobi, Hot & Bothered, Coconut Cuddle; Fire Starters wontons in chilli oil; Cabin feast soups',40,'pcs'],
+ ['noodle','food','noodle','Wide shallow bowl','~23 cm, 900 ml, sand glaze','Noodle Around (Hakka noodles), Suey Generis khao suey, Slap Happy papaya salad',28,'pcs'],
+ ['oval','food','oval','Oval sharing platter','~30 cm, olive or cream glaze','Rice Rice Baby (burnt garlic veg, chicken and mixed fried rice)',24,'pcs'],
+ ['claypot','food','claypot','Small claypot with stand','~600 ml glazed earthenware, with lid','Man, Churian! gravy and Green With Envy Thai green curry; keeps hot on the table',20,'pots'],
+  ['toptray','food','toptray','Divided topping tray','~25 cm stoneware, 5 compartments','Suey Generis khao suey: crispy noodles, shallots, fried garlic, lime, chilli flakes',8,'pcs'],
+ ['dessert','food','dessert','Dessert and salad bowl','~15 cm stoneware, shallow','Honey, I Shrunk the Noodles (darsaan), Sticky Situation (coconut sticky rice), Scoop There It Is (ice cream) and Smash Hit (smashed cucumber salad)',36,'pcs'],
+ ['board','food','board','Wooden serving board','~40 × 25 cm with handle; mango or acacia','Steamer for two: two stacked baskets, a plate of bao and dips',6,'pcs'],
+ ['serve','food','serve','Serving spoons & noodle tongs','Matte stainless, same range as cutlery','Shared rice, noodles, gravy and curry',30,'spoons + 12 tongs'],
+
+ ['sauces','service','sauces','Condiment set','Caddy with 3 glass cruets: soy, green chillies in vinegar, chilli oil','One per table, the old cafe habit',10,'caddies + 30 cruets'],
+ ['cutcup','service','cutcup','Cutlery cup','Glass or enamel cup','Forks and spoons standing on each table',10,'pcs'],
+ ['enmug','service','enmug','Enamel mug','~350 ml, white with dark rim','Chopstick holder or bill cup; staff chai',10,'pcs'],
+ ['carafe','service','carafe','Water carafe, 1 L','Clear glass, narrow neck','Water on every table',10,'pcs'],
+ ['coaster','service','coaster','Coasters','Printed thick card, branded','Under every glass, bar and garden',1000,'a month'],
+ ['bill','service','bill','Bill tray','Small enamel tray to match the cabin plates','Bills and the card machine',10,'pcs'],
+
+ ['pint','beer','pint','Pint glass, 500 ml','Nonic or straight, tempered, with a fill line','Large pours of Comrade Crisp, Gose Bumps and the guest tap; Kings and Budweiser bottles',48,'pcs'],
+ ['beer330','beer','beer330','Beer glass, 330 ml','Straight-sided, tempered, fill line','Small pours; happy-hour 330 taps and Kings; somaek',48,'pcs'],
+ ['pitcher','beer','pitcher','Beer pitcher, 1.5 L','Clear glass or polycarbonate for the garden','Pitcher of Comrade Crisp or a craft tap',6,'pcs'],
+ ['paddle','beer','paddle3','Tasting paddle + taster glasses','Wooden paddle with 3 holes; 150 ml taster glasses','Tasting paddle: all three taps, 3 × 150 ml',6,'paddles + 20 glasses'],
+
+ ['nosing','spirits','nosing','Whisky nosing glass','Glencairn-style tulip, ~175 ml','Single malts neat: Paul John, Amrut, Glenlivet, Talisker',24,'pcs'],
+ ['flight','spirits','flight','Whisky flight board','Wooden board for 3 nosing glasses, chalk or card notes','Single malt flight with water and chilli peanuts',4,'boards + 4 water droppers'],
+ ['rocks','spirits','rocks','Rocks glass','Double old fashioned, ~300 ml, heavy base','Whisky on the rocks, tamarind chilli margarita, Soju Yakult',36,'pcs'],
+ ['highball','spirits','highball','Highball glass','~350 ml, tall and straight','Whisky highballs, Toki highball, coconut feni highball, Sichuan G&T, Kimchi Mary, vodka tonic',48,'pcs'],
+ ['coupe','spirits','coupe','Coupe glass','~180 ml stemmed coupe','Kokum feni sour, lychee & lemongrass martini',24,'pcs'],
+ ['shot','spirits','shot','Shot glass','30/60 ml, heavy base, freezer-safe','Chilled vodka shots, house infusions, soju, somaek drop',36,'pcs'],
+ ['soju','spirits','soju','Soju glass','Small 50 ml tumbler','Soju neat, served with the bottle',12,'pcs'],
+ ['ice','spirits','ice','Large-ice moulds','Silicone 5 cm cube trays; clear-ice box if budget allows','One big cube for whisky and the margarita',6,'trays'],
+
+ ['highball2','zero','highball','Highball (shared)','Same highball as cocktails','Fresh lime soda, kokum soda, iced tea, soft drinks, tonic',0,'counted above'],
+ ['straws','zero','straws','Straws','Bamboo or paper, no plastic','Sodas, iced tea, highballs on request',1000,'a month'],
+ ['cup','zero','cup','Coffee cup & saucer','~200 ml, white or sand glaze','Brewed coffee, black or with milk',24,'sets'],
+ ['milk','zero','milk','Milk jug & sugar pot','Small ceramic jug ~150 ml, lidded sugar pot','With every coffee',8,'each'],
+ ['irish','zero','irish','Irish coffee glass','Stemmed toddy glass with handle, ~240 ml','Irish coffee: coffee, Jameson, sugar, cold cream',12,'pcs'],
+
+ ['shaker','tools','shaker','Boston shaker set','Two weighted stainless tins','Feni sour, lychee martini, margarita, Soju Yakult',2,'sets'],
+ ['bartools','tools','bartools','Bar tool kit','Jigger 30/60 ml, Hawthorne + fine strainer, bar spoon, muddler, bottle opener (Kings, Budweiser, soju, soft drinks)','Every cocktail; opening bottled beer, soju and soft drinks',2,'kits'],
+ ['squeezer','tools','squeezer','Citrus squeezer','Hand press, stainless or enamel','Fresh lime soda, margarita, G&T, sours',2,'pcs'],
+ ['icebucket','tools','icebucket','Ice bucket, scoop & tongs','Insulated bucket; stainless scoop and tongs','Bar well and table ice for highballs; chilling Kings and Budweiser bottles at garden tables',4,'sets'],
+ ['rim','tools','rim','Rimming dish & garnish tray','Shallow rim dish; lidded garnish tray','Chilli-salt and gochugaru rims; lime, lychee, lemon twists',2,'each'],
+ ['icescoop','tools','icescoop','Ice cream scoop, dipper well & 3 topping pots','Stainless scoop (~50 ml) with a dipper well; three lidded stainless pots','Scoop There It Is: two scoops, and the three toppings kept at the pass (palm jaggery syrup, sesame-peanut crunch, chocolate sauce)',2,'sets']
+];
+const BY=Object.fromEntries(ITEMS.map(i=>[i[0],i]));
+const FOOD=[
+ ['Soups',[
+  ['Wonton Kenobi','Chicken wonton soup','soup','Side plate underneath, porcelain spoon','One bowl, one person. The plate lets it travel without spilling.'],
+  ['Hot & Bothered','Hot & sour, veg or chicken','soup','Side plate underneath, porcelain spoon','Dark soup, so a light glaze shows it off.'],
+  ['Coconut Cuddle','Tom kha, veg or chicken','soup','Side plate underneath, porcelain spoon','Creamy coconut broth looks best in a rust or olive glaze.']]],
+ ['Cabin starters',[
+  ['Cabin Fever','Chilli, dry: paneer, chicken or pork','enplate','Green chillies in vinegar in a dipping dish','The cabin plate. Red-brown wok food pops on white.'],
+  ['Honey Trap','Honey chilli: potato or chicken','enplate','Toothpicks at the bar','A sticky glaze needs a plate with a well, not paper.'],
+  ['Salt & Pepa','Mushroom, chonak or prawns','basket','Kasundi mayo in a dipping dish, enamel bowl for prawn tails','Paper keeps the batter crisp.'],
+  ['Wonton More','Fried wontons with sweet chilli, veg or chicken, 6','basket','Sweet chilli dip in a dipping dish','Paper-lined basket keeps the wrappers crisp; the dip stays on the side.']]],
+ ['Dim sum',[
+  ['Crystal Clear','Crystal veg dumplings, 4','steamer6','Side plate under the basket, soy-chilli dip','Translucent skins: the lid-off moment.'],
+  ['Fire Starters','Chicken wontons in chilli oil','soup','Black vinegar in a dipping dish','Served in a bowl because the chilli oil pools.'],
+  ['Siu Mai Goodness','Chouriço & chicken siu mai, 4','steamer6','Chilli oil in a dipping dish',''],
+  ['Prawn to Be Wild','Prawn & chive dumplings, 4','steamer6','Soy-chilli dip','']]],
+ ['Bao',[
+  ['Bao Down','Pork belly bao, 2','bao','','A long plate lines the buns up for the photo.'],
+  ['Fever Pitch','Chilli chicken bao, 2','bao','',''],
+  ['Seoul Mate','Gochujang paneer bao, 2','bao','','']]],
+ ['Seoul to Bangkok',[
+  ['K-Pop Wings','Korean fried wings, 6','basket','Enamel bowl for bones, wet wipes','Pub food, eaten with a pint in the other hand.'],
+  ['Fry Hard','Kimchi fries','basket','Gochujang mayo on top','The basket goes under the torch without cracking.'],
+  ['Slap Happy','Raw papaya salad','noodle','Serving spoons','A wide bowl lets the salad be tossed at the table.'],
+  ['Smash Hit','Smashed cucumber salad','dessert','Chopsticks, chilli oil from the caddy','A small shallow bowl keeps it cold and shows the dressing.']]],
+ ['Noodles & rice',[
+  ['Noodle Around','Hakka noodles: veg, chicken or mixed','noodle','Rice bowls, noodle tongs, chilli vinegar from the caddy','A wide bowl lets noodles be lifted out.'],
+  ['Rice Rice Baby','Fried rice: burnt garlic veg, chicken or mixed','oval','Rice bowls, serving spoon','Mounded on an oval, the cabin way.'],
+  ['Holy Basil, Batman!','Thai basil chicken rice bowl','cabinplate','Fried egg on top, bird\'s-eye chillies in a dipping dish','One deep plate, eaten alone.'],
+  ['Plain Jane','Steamed jasmine rice','rice','Serving spoon','Comes to the table in the same bowl guests eat from.']]],
+ ['Gravies & curries',[
+  ['Man, Churian!','Manchurian gravy, veg or chicken','claypot','Serving spoon; pair with a fried rice','Clay keeps the gravy hot.'],
+  ['Green With Envy','Thai green curry: veg, chicken or prawn','claypot','Plain Jane jasmine rice, serving spoon','Green curry holds heat well in clay.'],
+  ['Suey Generis','Khao suey, veg or chicken','noodle','Divided topping tray: crispy noodles, shallots, fried garlic, lime, chilli flakes','The tray makes it a build-it-yourself bowl.']]],
+ ['Sweet',[
+  ['Honey, I Shrunk the Noodles','Darsaan with ice cream','dessert','Dessert spoon','Honey noodles beside one scoop.'],
+  ['Sticky Situation','Coconut sticky rice with ice cream','dessert','Dessert spoon','Dark glaze shows off the white scoop.'],
+  ['Scoop There It Is','Ice cream: 2 scoops, 1 topping','dessert','Dessert spoon, topping pots on the pass','A chilled dark bowl keeps the scoops firm and shows the colours.']]],
+ ['For the table',[
+  ['Steamer for two','2 baskets of dim sum + 2 bao','board','Two-tier 8" steamer for the baskets, long plate for the bao, dips','One board, carried out as a stack.'],
+  ['Cabin feast for four','4 soups + Cabin Fever, Salt & Pepa, Noodle Around, green curry with rice, darsaan','susan','Four soup bowls and spoons first; shared dishes on the lazy susan','Five shared dishes for four people fit only if the table turns.'],
+  ['Bowl game (lunch)','Noodles or rice with Cabin Fever, or a green curry with rice','cabinplate','Chilli vinegar','One big plate, served together.'],
+  ['Happy hour, 12–6 pm','Crystal Clear dumplings and Cabin Fever chicken','enplate','Dumplings in a 6" steamer','Quick from the bar.']]]
+];
+const DRINKS=[
+ ['Beer',[
+  ['Comrade Crisp','People\'s Lager, on tap','pint','330 ml or 500 ml','The beach beer; a chilled glass.'],
+  ['Gose Bumps','Kokum gose, on tap','beer330','330 ml shows off the pink',''],
+  ['Gimme Gimme Gimme','Rotating guest tap','pint','330 ml or 500 ml','IPA, porter or ale, whichever is pouring.'],
+  ['Kings','Premium pilsner, bottle','pint','Bottle opened at the table, chilled in the ice bucket outdoors','Bottle plus a glass.'],
+  ['Budweiser','American lager, bottle','pint','Bottle opened at the table',''],
+  ['Pitcher','1.5 L, Comrade Crisp or craft','pitcher','330 ml glasses for the table','Garden tables order these.'],
+  ['Tasting paddle','3 × 150 ml, all three taps','paddle','Paddle with taster glasses','Guests taste the whole tap list.']]],
+ ['Whisky',[
+  ['Single malts, neat','Paul John, Amrut, Glenlivet, Talisker','nosing','Water dropper on the side','A tulip glass holds the nose.'],
+  ['On the rocks','Any whisky','rocks','One large clear cube','A big cube melts slowly.'],
+  ['Dewar\'s / Suntory Toki highball','','highball','Lots of ice, soda, lemon twist','Tall and fizzy.'],
+  ['Blends with soda or ginger ale','Lawson\'s, Monkey Shoulder, JW Black, Jameson','highball','Ice; mixer bottle on the side',''],
+  ['Single malt flight','3 × 20 ml','flight','Water, chilli peanuts in a dipping dish','On a board with tasting notes.']]],
+ ['Vodka',[
+  ['Haku, Belvedere','Neat, from the freezer','shot','Chilled glass','Kept in the freezer.'],
+  ['House infused shots','Lemongrass-ginger, chilli-garlic','shot','Served with chilli chicken',''],
+  ['Vodka & tonic or soda','','highball','Ice, lime','']]],
+ ['Cocktails',[
+  ['Kokum feni sour','','coupe','Served up, no ice','Silky foam shows best in a coupe.'],
+  ['Coconut feni highball','','highball','Ice, soda, lemongrass',''],
+  ['Lychee & lemongrass martini','','coupe','Lychee on a pick','Double-strained, served up.'],
+  ['Tamarind chilli margarita','','rocks','Chilli-salt rim, big cube','Rim made in the rimming dish.'],
+  ['Sichuan G&T','','highball','Grapefruit, Sichuan pepper',''],
+  ['Kimchi Mary','','highball','Gochugaru rim',''],
+  ['Soju Yakult','','rocks','Over ice, lime',''],
+  ['Somaek','Soju and lager','beer330','Soju in a shot glass, dropped in','The shot glass goes in the beer.']]],
+ ['Zero proof & soft',[
+  ['Fresh lime soda','Sweet or salted','highball','Pressed to order on the squeezer','The cabin-table standard.'],
+  ['Kokum soda','','highball','Black salt',''],
+  ['Lemongrass-ginger iced tea','','highball','Ice, straw',''],
+  ['Water','1 L still · 330 ml sparkling','carafe','Water glass at every cover',''],
+  ['Soft drinks, tonic, ginger ale','','highball','Ice, lime on the side','']]],
+ ['Hot coffee',[
+  ['Brewed coffee','Black or with milk','cup','Milk jug and sugar pot, teaspoon',''],
+  ['Irish coffee','Jameson, brown sugar, cream','irish','Cold cream floated on top','The layers need clear glass.']]]
+];
+
+const STORE='dd-crockery-ticks-v2';
+let ticks={}; try{ticks=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){ticks={}}
+const save=()=>{try{localStorage.setItem(STORE,JSON.stringify(ticks))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COUNTED=ITEMS.filter(i=>i[6]>0);
+
+// maps
+let mapSel='food';
+function renderMap(){
+ const data=mapSel==='food'?FOOD:DRINKS;
+ document.getElementById('mapH').textContent=mapSel==='food'?'Dish':'Drink';
+ document.querySelector('#map tbody').innerHTML=data.map(([sec,rows])=>
+  `<tr class="grp"><td colspan="4">${esc(sec.toLowerCase())}</td></tr>`+rows.map(([d,sub,v,al,why])=>{const it=BY[v];
+   const pic=it[2]?`<img src="g/${it[2]}.jpg" alt="" loading="lazy">`:'<span class="noimg"></span>';
+   return `<tr><td class="dish">${esc(d)}${sub?`<small>${esc(sub)}</small>`:''}</td>
+   <td class="ves"><div class="vchip">${pic}<a href="#i-${it[0]}" data-jump="${it[0]}">${esc(it[3])}</a></div></td>
+   <td>${esc(al)}</td><td class="why">${esc(why)}</td></tr>`}).join('')).join('');
+}
+document.querySelectorAll('[data-map]').forEach(b=>b.addEventListener('click',()=>{mapSel=b.dataset.map;
+ document.querySelectorAll('[data-map]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));renderMap();}));
+renderMap();
+
+// checklist
+let filter='all';
+function card(i){const [id,g,img,n,spec,use,q,u]=i;
+ const fig=img?`<img src="g/${img}.jpg" alt="${esc(n)}" loading="lazy">`:`<div class="ph">No clean free photo.<br>Search: "${esc(spec.split(',')[0])}"</div>`;
+ const qty=q>0?`${q.toLocaleString('en-IN')} <small>${esc(u)}</small>`:`<small>${esc(u)}</small>`;
+ const chk=q>0?`<label class="chk"><input type="checkbox" id="c-${id}" data-id="${id}"${ticks[id]?' checked':''}><span></span>Bought</label>`:'';
+ return `<article class="item${ticks[id]?' done':''}" id="i-${id}"><figure>${fig}</figure><div class="body"><h4>${esc(n)}</h4>
+  <div class="spec">${esc(spec)}</div><div class="use"><b>For</b>${esc(use)}</div>
+  <div class="foot"><span class="qty">${qty}</span>${chk}</div></div></article>`;}
+function render(){
+ document.getElementById('list').innerHTML=Object.entries(GROUPS).filter(([k])=>filter==='all'||filter===k).map(([k,[t,s]])=>{
+  const its=ITEMS.filter(i=>i[1]===k);
+  return `<div class="grp-h"><h3>${esc(t.toLowerCase())}</h3><span>${esc(s)} · ${its.filter(i=>i[6]>0).length} items</span></div><div class="grid">${its.map(card).join('')}</div>`;}).join('');
+ progress();}
+function progress(){const n=COUNTED.filter(i=>ticks[i[0]]).length;
+ document.getElementById('pText').textContent=`${n} of ${COUNTED.length} bought`;
+ document.getElementById('pBar').style.width=(n/COUNTED.length*100)+'%';}
+document.getElementById('list').addEventListener('change',e=>{const id=e.target.dataset.id;if(!id)return;
+ if(e.target.checked)ticks[id]=true;else delete ticks[id];save();
+ e.target.closest('.item').classList.toggle('done',e.target.checked);progress();});
+const fl=document.getElementById('filters');
+fl.innerHTML=[['all','All'],...Object.entries(GROUPS).map(([k,v])=>[k,v[0]])].map(([k,v])=>`<button class="btn" type="button" data-f="${k}" aria-pressed="${k==='all'}">${esc(v)}</button>`).join('');
+fl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filter=b.dataset.f;
+ fl.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();});
+document.getElementById('map').addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();
+ if(filter!=='all'){filter='all';fl.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.f==='all')));render();}
+ const el=document.getElementById('i-'+a.dataset.jump);if(!el)return;
+ el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+ el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);});
+document.getElementById('resetBtn').addEventListener('click',()=>{ticks={};save();render();});
+document.getElementById('copyBtn').addEventListener('click',e=>{
+ const txt=Object.entries(GROUPS).map(([k,[t]])=>t.toUpperCase()+'\n'+COUNTED.filter(i=>i[1]===k).map(i=>`[${ticks[i[0]]?'x':' '}] ${i[3]} — ${i[6]} ${i[7]} — ${i[4]}`).join('\n')).join('\n\n');
+ const b=e.currentTarget;navigator.clipboard.writeText(txt).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy shopping list',1500)})
+  .catch(()=>{b.textContent='Copy blocked';setTimeout(()=>b.textContent='Copy shopping list',1500)});});
+render();
+
+</script>
