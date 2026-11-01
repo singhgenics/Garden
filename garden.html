@@ -35,6 +35,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.
 .eqbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);font:600 13px/1.2 var(--body)}
 .eqbar span{display:flex;align-items:center;gap:14px}.eqbar a{color:var(--amber);font-weight:500;font-size:12px;text-decoration:none;white-space:nowrap}
 .eqbar button{font:500 22px/1 var(--body);color:var(--fg);background:var(--raise);border:1px solid var(--line);border-radius:9px;width:36px;height:36px;cursor:pointer}
+#sopp{position:absolute;inset:0;z-index:30;background:#130f0c;display:flex;flex-direction:column}#sopp[hidden]{display:none}
+#sopf{flex:1;border:0;width:100%;background:#130f0c}
 #eqf{flex:1;border:0;width:100%;background:#130f0c}
 .card{position:absolute;right:12px;bottom:12px;width:min(380px,calc(100% - 24px));max-height:min(58%,calc(100% - 190px));overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13px}
 .card h2{font:700 17px/1.2 var(--display);margin:0 0 2px}
@@ -90,8 +92,8 @@ body.walk .pad{display:grid}
       </div>
       <div class="seg"><a class="seglink" href="decor.html">Decor concept &rarr;</a></div>
       <div class="seg"><a class="seglink" href="stock-plan.html">Stock plan &rarr;</a></div>
-      <div class="seg"><a class="seglink" href="sop.html">Service playbook &rarr;</a></div>
       <div class="seg"><button id="t-eq" aria-expanded="false" aria-controls="eqp">Equipment plan</button></div>
+      <div class="seg"><button id="t-sop" aria-expanded="false" aria-controls="sopp">Service playbook</button></div>
       <div class="seg"><button id="t-light" aria-expanded="false" aria-controls="lightpanel">Lighting · <span id="lc-name">Evening</span> ▾</button></div>
     </div>
     <div class="seg lightctl" id="lightpanel" role="group" aria-label="Lighting" hidden>
@@ -104,6 +106,10 @@ body.walk .pad{display:grid}
   <div class="eqbar"><b>Equipment plan · kitchen, dish wash, bar</b><span><a href="equipment-plan.html" target="_blank" rel="noopener">Open full page &#8599;</a><button id="eqx" aria-label="Close equipment plan">&times;</button></span></div>
   <iframe id="eqf" title="Equipment plan" data-src="equipment-plan.html?embed"></iframe>
 </div>
+  <div id="sopp" role="dialog" aria-label="Service playbook" hidden>
+  <div class="eqbar"><b>Service playbook · how the team runs a shift</b><span><a href="sop.html" target="_blank" rel="noopener">Open full page &#8599;</a><button id="sopx" aria-label="Close service playbook">&times;</button></span></div>
+  <iframe id="sopf" title="Service playbook" data-src="sop.html?embed"></iframe>
+  </div>
   <div class="card" id="card"><button class="x" id="cardx" aria-label="Close">×</button><div id="cardbody"></div></div>
   <div class="hint" id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
   <div class="pad" id="pad"><span></span><button data-k="w">▲</button><span></span><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
@@ -116,8 +122,12 @@ body.walk .pad{display:grid}
 /* equipment plan overlay: set up before the 3D viewer starts, so it also opens where WebGL is missing */
 {const eqp=document.getElementById('eqp'),eqb=document.getElementById('t-eq'),eqf=document.getElementById('eqf');
  const eqSet=on=>{eqp.hidden=!on;eqb.setAttribute('aria-expanded',String(on));if(on&&!eqf.src)eqf.src=eqf.dataset.src;};
- eqb.onclick=()=>eqSet(eqp.hidden);document.getElementById('eqx').onclick=()=>eqSet(false);
+ eqb.onclick=()=>{sopSet(false);eqSet(eqp.hidden);};document.getElementById('eqx').onclick=()=>eqSet(false);
  addEventListener('keydown',e=>{if(e.key==='Escape'&&!eqp.hidden)eqSet(false);});
+ const sopp=document.getElementById('sopp'),sopb=document.getElementById('t-sop'),sopf=document.getElementById('sopf');
+ function sopSet(on){sopp.hidden=!on;sopb.setAttribute('aria-expanded',String(on));if(on&&!sopf.src)sopf.src=sopf.dataset.src;}
+ sopb.onclick=()=>{if(sopp.hidden)eqSet(false);sopSet(sopp.hidden);};document.getElementById('sopx').onclick=()=>sopSet(false);
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&!sopp.hidden)sopSet(false);});
  if(new URLSearchParams(location.search).has('eq'))eqSet(true);}
 const stage=document.getElementById('stage');
 if(!window.THREE||!THREE.OrbitControls){stage.insertAdjacentHTML('beforeend','<div class="err">The 3D viewer could not load. Reload the page to try again.</div>');return;}
