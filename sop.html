@@ -67,6 +67,7 @@ section{padding-block:52px 4px}
 .send{background:var(--amber);color:#1C1714}
 .send .how{color:#1C1714}
 .send::before{background:#1C1714!important;color:#E49B1D!important}
+.flowvideo{display:block;width:100%;max-height:70vh;background:#000;border:2px solid var(--ink)}
 .clock{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 .clock div{flex:1 1 150px;min-width:0;border:2px solid var(--ink);background:var(--paper);padding:12px 14px}
 .clock b{display:block;font:850 26px var(--f-display);font-stretch:112%}
@@ -156,6 +157,8 @@ body.embed section:first-of-type{padding-top:28px}
     <h2>How one order goes</h2>
     <p>This is the whole journey, from a guest sitting down to the table being ready for the next guest. The coloured tag shows who does each step.</p>
   </div>
+  <video id="flowvideo" class="flowvideo" src="sop-flow.mp4" controls playsinline preload="metadata" aria-label="Short video of how one order flows from seat to reset"></video>
+  <p class="label" style="margin:10px 0 22px">Watch it in 44 seconds, then read the steps.</p>
   <ol class="steps">
     <li class="k-srv"><div><span class="who">Server</span><b>Greet and seat</b><span class="t">30 seconds</span></div><div class="how">Walk to the guest, smile, show them a table.</div></li>
     <li class="k-srv"><div><span class="who">Server</span><b>Water and menus</b><span class="t">2 minutes</span></div><div class="how">Say the special. Ask "any allergies?"</div></li>
