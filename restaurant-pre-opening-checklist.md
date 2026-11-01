@@ -1,44 +1,59 @@
 # Restaurant Pre-Opening Checklist
 
-Timeline: start 6–12 months out. Tick items off as you go. Items marked 🇦🇪 are UAE/Dubai-specific; replace with local equivalents if you're elsewhere.
+Timeline: start 6–12 months out. Tick items off as you go. Written for a restaurant in Goa, India (Cavelossim, Salcete). Items tagged 🇮🇳 are India/Goa-specific. Rules, fees and thresholds change, so confirm each one with the authority or a local consultant before relying on it.
 
 ## 1. Concept, Business Plan & Finance (12+ months out)
+
 - [ ] Concept, cuisine, target customer, price point and USP defined
-- [ ] Market and competitor research; location catchment analysis
-- [ ] Business plan: startup budget, 12–24 month P&L, cash flow, break-even
+- [ ] Market and competitor research; catchment analysis (tourists vs locals, season vs off-season)
+- [ ] 🇮🇳 Opening date planned around Goa's season (peak roughly Oct–May); fit-out and roof/drainage work finished before the monsoon (June–Sept)
+- [ ] Business plan: startup budget, 12–24 month P&L, cash flow, break-even, with a lean-monsoon cash plan
 - [ ] Contingency fund (10–20% of budget) and 3–6 months working capital
-- [ ] Funding secured (equity, loans, investors); business bank account opened
-- [ ] Accountant/bookkeeper appointed; chart of accounts set up
+- [ ] Funding secured (equity, loans, investors); current account opened
+- [ ] CA/accountant appointed; accounting and GST bookkeeping set up
 - [ ] Target food cost %, labour cost %, prime cost % and rent % set
 
 ## 2. Legal, Licensing & Compliance (9–12 months out)
-- [ ] Business structure chosen and entity registered
-- [ ] 🇦🇪 Trade licence (Dubai Economy / DET, or free zone) with F&B activity
-- [ ] 🇦🇪 Initial approval, name reservation, Ejari (tenancy contract registration)
-- [ ] 🇦🇪 Dubai Municipality food establishment registration, layout/plan approval and final inspection
-- [ ] 🇦🇪 Dubai Civil Defence design approval and fire safety certificate
-- [ ] 🇦🇪 Alcohol licence / pork-handling area permits (if applicable)
-- [ ] 🇦🇪 Signage and outdoor seating/terrace permits
-- [ ] 🇦🇪 Music/entertainment and live-performance permits (if applicable)
-- [ ] 🇦🇪 VAT registration and corporate tax registration
-- [ ] 🇦🇪 Municipality waste, grease-trap and pest-control contractor approvals
-- [ ] Trademark registration for name/logo
-- [ ] Lease reviewed by lawyer (term, fit-out period, rent-free period, exit clauses, guarantees)
-- [ ] Insurance: public liability, property, business interruption, workers' compensation, product liability, equipment breakdown
-- [ ] Contracts: supplier, landlord, employment, delivery-platform, POS/software agreements
-- [ ] Privacy/data-protection policy for guest and staff data
+
+- [ ] Business structure chosen and registered (proprietorship, partnership/LLP, or Pvt Ltd); PAN obtained; Udyam (MSME) registration optional
+- [ ] 🇮🇳 Land-use and property documents verified: title, conversion (sanad) status, TCP zoning allows commercial/restaurant use, occupancy/completion certificate
+- [ ] 🇮🇳 CRZ check (Cavelossim is coastal): confirm distance from High Tide Line, No Development Zone rules, and any Goa Coastal Zone Management Authority permission
+- [ ] 🇮🇳 Village Panchayat (Cavelossim) construction/renovation permission and NOC for the restaurant use
+- [ ] 🇮🇳 Trade licence from the Village Panchayat (renewed annually)
+- [ ] 🇮🇳 FSSAI licence via FoSCoS (State licence or Registration depending on turnover; applied under the right kitchen category) with the licence number displayed and printed on bills/menus
+- [ ] 🇮🇳 FSSAI Food Safety Supervisor (FoSTaC-trained) appointed; Food Safety Display Board put up
+- [ ] 🇮🇳 Fire safety NOC from the Goa Directorate of Fire & Emergency Services
+- [ ] 🇮🇳 Goa State Pollution Control Board consent (Consent to Establish/Operate) if applicable; DG-set and noise norms
+- [ ] 🇮🇳 Goa Excise licence for serving liquor/beer (bar licence, draught beer, display of licence and price list; know the dry days and age limit)
+- [ ] 🇮🇳 Goa Tourism trade registration (Goa Registration of Tourist Trade Act) if applicable to your premises
+- [ ] 🇮🇳 Shops & Establishments registration (Goa Labour Dept) and Goa Professional Tax registration
+- [ ] 🇮🇳 GST registration (confirm rate and input-tax-credit choice with your CA); FSSAI number and GSTIN on invoices
+- [ ] 🇮🇳 EPF and ESI registration once headcount thresholds are met; gratuity and minimum-wage compliance for Goa
+- [ ] 🇮🇳 Legal Metrology registration/verification for weighing scales and any packaged goods
+- [ ] 🇮🇳 Music licences: IPRS and PPL (copyright) for recorded music, plus police/panchayat permission for live music or loudspeakers; observe the noise-hours rules
+- [ ] 🇮🇳 Commercial electricity connection (Goa Electricity Department), water connection (PWD) or borewell approval, commercial LPG connection
+- [ ] 🇮🇳 Waste-management arrangement with the panchayat or an authorised collector; follow Goa's single-use plastic restrictions
+- [ ] Trademark registration for the name/logo (IP India)
+- [ ] Lease or ownership documents reviewed by a lawyer (term, fit-out period, rent-free period, exit clauses)
+- [ ] Insurance: public liability, fire and property, business interruption, workers' compensation, product liability
+- [ ] Contracts: supplier, landlord, employment, Zomato/Swiggy, POS/software agreements
+- [ ] Privacy policy for guest and staff data
 
 ## 3. Location, Design & Construction (6–9 months out)
+
 - [ ] Site selected; footfall, visibility, access, parking, delivery access verified
-- [ ] Landlord/mall design approvals obtained
 - [ ] Architect/interior designer/MEP consultant appointed
 - [ ] Floor plan: kitchen flow (receiving → storage → prep → cook → pass → wash), dining layout, seat count, accessibility
-- [ ] Utilities capacity confirmed: power, gas, water, drainage, ventilation, grease trap, internet
-- [ ] Kitchen ventilation/extraction and fire suppression designed and approved
+- [ ] Utilities capacity confirmed: power (3-phase), LPG, water, drainage, ventilation, internet
+- [ ] 🇮🇳 Power backup: inverter or DG set sized for kitchen, chillers and lights (Goa has monsoon outages); surge protection
+- [ ] 🇮🇳 Water: storage tank, borewell/PWD supply, filtration/RO; potable-water test report from an NABL lab (FSSAI requirement)
+- [ ] 🇮🇳 Wastewater: septic tank/soak pit or STP as per panchayat/GSPCB rules, grease trap, floor drains sloped for heavy rain
+- [ ] 🇮🇳 Open-sided hall protected for monsoon: roof, gutters, PVC curtains/blinds, anti-slip floor, damp-proofing, termite treatment
+- [ ] Kitchen extraction/hood and fire suppression designed; gas leak detection
 - [ ] Contractor appointed; fit-out programme and budget agreed
-- [ ] Handwash stations, separate prep areas, pest-proofing and washable finishes included
-- [ ] Toilets (guest and staff), changing rooms, staff rest area, dry store, cold rooms, waste area
-- [ ] Prayer room, baby-change and disabled access as required by code
+- [ ] 🇮🇳 FSSAI Schedule 4 layout points met: washable surfaces, fly-proofing, hand-wash stations, separate raw and cooked areas, covered bins
+- [ ] Toilets (guest and staff), changing area, staff rest area, dry store, cold storage, waste area
+- [ ] 🇮🇳 Staff accommodation (staff room) meets basic standards: ventilation, fire exit, wiring, water and toilets
 - [ ] Snagging list completed and signed off; handover documents and warranties collected
 - [ ] Deep clean after construction before any food arrives
 
@@ -46,8 +61,8 @@ Timeline: start 6–12 months out. Tick items off as you go. Items marked 🇦�
 - [ ] Menu engineered for profitability, kitchen capacity and skill level
 - [ ] Every recipe standardised with written spec, yield and photo
 - [ ] Each dish costed; selling price and margin set
-- [ ] Allergen matrix (14 major allergens) and halal/dietary labelling
-- [ ] Nutritional/calorie information if required by local regulation
+- [ ] Allergen matrix and dietary labelling
+- [ ] 🇮🇳 Veg (green dot) / non-veg (brown dot) marking on every dish as FSSAI requires; beef/pork and Goan-specific items labelled clearly
 - [ ] Menu tastings with team; menu tweaked after trial service
 - [ ] Beverage, dessert, kids and takeaway menus finalised
 - [ ] Menu design, print and digital (QR) versions proofread for spelling, prices, allergens
@@ -55,7 +70,7 @@ Timeline: start 6–12 months out. Tick items off as you go. Items marked 🇦�
 
 ## 5. Suppliers, Purchasing & Inventory (3–4 months out)
 - [ ] Primary and backup suppliers for each category (meat, fish, produce, dairy, dry goods, beverages, packaging, cleaning)
-- [ ] Supplier approval: licences, food-safety certificates, cold-chain, samples, references
+- [ ] 🇮🇳 Supplier approval: FSSAI licence numbers on file, cold-chain, samples, references; liquor bought only from licensed Goa wholesalers
 - [ ] Price lists, credit terms, delivery days, minimums, substitution policy agreed in writing
 - [ ] Par levels and reorder points set
 - [ ] Opening stock order placed and delivery timed 2–3 days before soft opening
@@ -76,9 +91,9 @@ Timeline: start 6–12 months out. Tick items off as you go. Items marked 🇦�
 ## 7. Technology & Systems (2–3 months out)
 - [ ] POS system selected, configured with menu, modifiers, prices, tax, tipping, discounts
 - [ ] Kitchen display system or printers tested end-to-end
-- [ ] Payment terminals tested (card, contactless, wallets); settlement bank account linked
+- [ ] 🇮🇳 UPI QR codes, card/POS terminals tested; settlement account linked; GST-compliant invoicing
 - [ ] Reservation/waitlist system (online + phone)
-- [ ] Online ordering and delivery-platform listings (Talabat, Deliveroo, Noon Food etc.) set up and tested
+- [ ] 🇮🇳 Zomato / Swiggy listings (FSSAI number required) and online ordering set up and tested
 - [ ] Inventory, accounting, payroll and scheduling software connected
 - [ ] Reliable Wi-Fi/network, backup internet, CCTV and access control
 - [ ] Music/audio licence and sound system tested
@@ -89,8 +104,9 @@ Timeline: start 6–12 months out. Tick items off as you go. Items marked 🇦�
 - [ ] Organisation chart and role descriptions (GM, chef, supervisors, FOH, BOH, stewarding, cleaners)
 - [ ] Labour budget and weekly rota template
 - [ ] Recruitment: job posts, interviews, trade tests (cook tests, service trials), reference checks
-- [ ] 🇦🇪 Work visas, Emirates ID, medical fitness, health cards, labour contracts and WPS payroll set up
-- [ ] 🇦🇪 Mandatory Dubai Municipality food-safety training and certificates for all food handlers; PIC / HACCP-trained supervisor
+- [ ] 🇮🇳 ID and address proof, police verification (especially for migrant staff), Aadhaar/PAN, bank accounts, appointment letters, PF/ESI enrolment, payroll set up
+- [ ] 🇮🇳 FSSAI FoSTaC training: Food Safety Supervisor certificate (at least one per 25 food handlers) and training records for all handlers
+- [ ] 🇮🇳 Annual medical fitness certificates and typhoid vaccination for all food handlers (FSSAI Schedule 4)
 - [ ] Employee handbook: dress code, grooming, hygiene, attendance, conduct, tips, grievance
 - [ ] Onboarding, uniforms and name badges issued
 - [ ] Training programme: menu knowledge, allergen handling, service steps, POS, upselling, complaints, safety, emergency procedures
@@ -113,8 +129,8 @@ Timeline: start 6–12 months out. Tick items off as you go. Items marked 🇦�
 - [ ] Fire extinguishers, fire blankets, alarms, emergency lighting, exit signage, evacuation plan and drill completed
 - [ ] Gas safety/leak detection and electrical safety inspections
 - [ ] Risk assessments (kitchen, slips/trips, manual handling, hot oils, knives)
-- [ ] Mock inspection against the regulator's checklist; deficiencies corrected
-- [ ] Final regulatory inspection passed and certificates displayed
+- [ ] 🇮🇳 Mock inspection against the FSSAI Schedule 4 hygiene checklist; deficiencies corrected
+- [ ] 🇮🇳 FSSAI/Food Safety Officer, fire and excise inspections passed; licences and certificates displayed
 
 ## 10. Branding, Marketing & Launch (6 weeks to launch)
 - [ ] Brand identity: name, logo, colours, tone of voice, signage, uniforms, packaging
