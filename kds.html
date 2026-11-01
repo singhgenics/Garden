@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cabin East Garden · Kitchen and bar screens</title>
+<meta name="description" content="The smart kitchen and bar display (KDS) that replaces paper KOT and BOT: screens, where they go, how dishes are routed and timed, and how to set it up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#eef0ea;--ink:#1d2a22;--muted:#56635a;--line:#cfd5cc;--card:#f7f8f4;--green:#1f3d2e;--brass:#9a7434;--brass-ink:#7a5a22;--blue:#2443a6;
+  --hot:#9a3b2a;--cold:#2443a6;--wet:#2d6b4d;--exist:#8c8a7c;--top:#c79a45;--std:#d8cdb2;--wall:#1f3d2e;--figbg:#f7f8f4;--ok:#2d6b4d;--warn:#9a3b2a;--inp:#fff;
+  --scr:#17130f;--scr-ink:#f3eadf;--scr-line:#3a3128;--scr-amber:#f2a03d;--scr-ok:#5cbf7a;--scr-bad:#e5604d;
+  --display:"Gloock",Georgia,serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--paper:#111915;--ink:#e7ebe3;--muted:#9aa79d;--line:#2a3830;--card:#17221c;--green:#8fbfa3;--brass:#d2a75c;--brass-ink:#e2b96e;--blue:#8fa6f0;
+  --hot:#b8503c;--cold:#3a5fd0;--wet:#3f8a67;--exist:#6f6f63;--std:#8d836c;--wall:#8fbfa3;--figbg:#17221c;--ok:#6fc29a;--warn:#e08a78;--inp:#0f1712;color-scheme:dark}}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--brass-ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-left,0px)) 56px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.top .nav{display:flex;gap:8px;flex-wrap:wrap}
+.top a{font:500 13px/1 var(--body);text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--card);border-radius:4px;padding:9px 12px}
+.top a:hover{border-color:var(--brass)}
+body.embed .top{display:none}
+h1,h2{font-family:var(--display);font-weight:400;color:var(--green);text-wrap:balance;margin:0 0 6px;line-height:1.1}
+h1{font-size:clamp(38px,7vw,68px)}h2{font-size:clamp(28px,4.2vw,40px)}
+h3{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass-ink);margin:24px 0 8px}
+p{margin:0 0 10px;max-width:76ch}
+.lead{color:var(--muted);font-size:17px;max-width:66ch}
+.k{font:400 12.5px/1.5 var(--mono);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:20px 0 8px}
+.cd{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+.cd b{display:block;font:400 24px/1.15 var(--display);color:var(--green)}
+.cd span{color:var(--muted);font-size:13px}
+section.zone{margin-top:56px;padding-top:26px;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.zgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start;margin-top:12px}
+@media(max-width:940px){.zgrid{grid-template-columns:1fr}}
+.fig{background:var(--figbg);border:1px solid var(--line);border-radius:4px;padding:8px}
+.fig svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .dm{stroke:var(--blue);stroke-width:1;fill:none}svg .dt{font:500 11px var(--mono);fill:var(--blue);text-anchor:middle}
+svg .wall{fill:none;stroke:var(--wall);stroke-width:9}
+svg .eq{stroke:rgba(0,0,0,.35);stroke-width:1.2}svg .hot{fill:var(--hot)}svg .cold{fill:var(--cold)}svg .std{fill:var(--std)}svg .top{fill:var(--top)}svg .exist{fill:var(--exist)}
+svg .scr{fill:#17130f;stroke:var(--brass);stroke-width:2.5}
+svg .nm{font:650 11px var(--body);text-anchor:middle;fill:#fff}svg .nm.dk{fill:#1d2a22}
+svg .zt{font:500 10px var(--mono);fill:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+svg .beam{fill:var(--brass);opacity:.18}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;background:var(--card);position:sticky;top:0}
+tr:last-child td{border-bottom:0}td.id{font:500 12.5px var(--mono);color:var(--brass-ink);white-space:nowrap}td.sz{font:500 12.5px var(--mono);white-space:nowrap}
+.call{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:4px;padding:12px 16px;margin:14px 0}
+.call b{color:var(--brass-ink)}.call p:last-child{margin:0}
+ul.tight,ol.tight{margin:6px 0 0;padding-left:22px}ul.tight li,ol.tight li{margin:5px 0;max-width:84ch}
+/* mock screens */
+.scr-m{background:var(--scr);color:var(--scr-ink);border:6px solid #2a231c;border-radius:10px;padding:10px;font:500 13px/1.35 var(--body)}
+.scr-m .bar{display:flex;gap:6px;align-items:center;margin-bottom:8px;font-weight:700}
+.scr-m .bar i{font-style:normal;background:var(--scr-amber);color:#1b1209;border-radius:6px;padding:2px 8px;font-size:12px}
+.scr-m .bar em{font-style:normal;color:#a8998a;font-weight:500;margin-left:auto;font-size:12px}
+.scr-m .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.tk{border:2px solid var(--scr-line);border-radius:8px;overflow:hidden;background:#201b16}
+.tk .h{display:flex;justify-content:space-between;background:#2a231c;padding:5px 8px;font-weight:800}
+.tk.late{border-color:#f2c14a}.tk.late .h{background:#5a4a1a}.tk.very{border-color:var(--scr-bad)}.tk.very .h{background:#6a2a1f}
+.tk .pr{height:4px;background:#2a231c}.tk .pr i{display:block;height:100%;background:var(--scr-ok)}.tk.late .pr i{background:#f2c14a}.tk.very .pr i{background:var(--scr-bad)}
+.tk .l{padding:5px 8px;border-bottom:1px dashed var(--scr-line);display:flex;gap:6px;flex-wrap:wrap;align-items:center}.tk .l:last-child{border:0}
+.tk .l.w{opacity:.45}.tk .l .q{font-weight:800}.tk .l b{flex:1;min-width:60%;font-weight:600}
+.tk .al{background:var(--scr-bad);color:#fff;border-radius:5px;padding:1px 6px;font-weight:800;flex-basis:100%}
+.ch{font:800 9px var(--body);text-transform:uppercase;letter-spacing:.04em;border-radius:99px;padding:1px 6px;color:#fff}
+.ch.wok{background:#7a2e1f}.ch.stock{background:#6a4a1a}.ch.fry{background:#8a6a12}.ch.steam{background:#2d6a77}.ch.cold{background:#2f4f8a}.ch.pass{background:#5a4a7a}.ch.bar{background:#24634a}
+.cdn{font-size:11px;color:#a8998a;font-weight:700;flex-basis:100%}.cdn.go{color:var(--scr-ok)}
+.rtr{background:var(--scr-ok);color:#0b2012;text-align:center;font-weight:900;letter-spacing:.08em;padding:3px}
+.vd{width:10px;height:10px;border:2px solid;border-radius:2px;display:inline-block}.vd.v{color:#3fae5a}.vd.n{color:#c4462f}
+.cap{font:400 12.5px/1.45 var(--mono);color:var(--muted);margin:6px 2px 0}
+/* planner */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.chips label{display:inline-flex;gap:6px;align-items:center;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 11px;cursor:pointer}
+.chips label:has(input:checked){background:var(--green);color:var(--paper);border-color:var(--green)}
+.chips input{accent-color:var(--brass)}
+.gantt{display:grid;gap:5px;margin-top:10px}
+.gr{display:grid;grid-template-columns:minmax(140px,24%) 1fr;gap:10px;align-items:center;font-size:13.5px}
+.gr .tr{position:relative;height:22px;background:var(--card);border:1px solid var(--line);border-radius:4px}
+.gr .tr i{position:absolute;top:2px;bottom:2px;border-radius:3px;background:var(--brass)}
+.gr .tr i.hold{background:repeating-linear-gradient(45deg,var(--exist) 0 5px,transparent 5px 10px);opacity:.6}
+.gr .tr i.c1{background:var(--hot)}.gr .tr i.c2{background:var(--cold)}.gr .tr i.c3{background:var(--wet)}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;margin:8px 0}
+.ctl label{display:grid;gap:3px;font:500 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ctl input,.ctl select{font:500 15px var(--body);color:var(--ink);background:var(--inp);border:1px solid var(--line);border-radius:4px;padding:7px 9px;min-height:36px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+footer{margin-top:44px;color:var(--muted);font-size:13px}
+@media print{.top{display:none}section.zone{break-before:page}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="nav"><a href="garden.html">&larr; 3D model</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="sop.html">Service playbook</a></div>
+    <span class="k">Sizes in metres · W × D × H</span>
+  </div>
+  <h1>Kitchen and bar screens</h1>
+  <p class="lead">A smart kitchen display system (KDS) instead of paper tickets. The kitchen ticket (KOT) and the bar ticket (BOT) both become screens. Each dish goes to the station that cooks it, slow dishes start first so a table's plates finish together, mains wait for the starters, and the pass shows what is ready to run.</p>
+  <div class="cards">
+    <div class="cd"><span>Screens</span><b>3</b><span>hot line, bar, pass</span></div>
+    <div class="cd"><span>Stations</span><b>7</b><span>wok, stock pots, fryer, steamer, cold &amp; plate, pass, bar</span></div>
+    <div class="cd"><span>Paper tickets</span><b>None</b><span>only if a screen goes offline</span></div>
+    <div class="cd"><span>Menu routed</span><b id="nroute">59</b><span>every dish and drink has a station and a time</span></div>
+  </div>
+
+  <section class="zone" id="screens">
+    <h2>1 · What each screen shows</h2>
+    <p class="k">Mock-ups of the real screens, which run inside the POS.</p>
+    <div class="two">
+      <div>
+        <div class="scr-m"><div class="bar">Hot line <i>All hot</i><em>7 cooking · 3 held</em></div>
+          <div class="cols">
+            <div class="tk very"><div class="h"><span>S1</span><span>16:02 / 10 min</span></div><div class="pr"><i style="width:100%"></i></div>
+              <div class="l"><span class="q">1×</span><b>K-Pop Wings</b><span class="ch fry">Fryer</span></div>
+              <div class="l"><span class="q">1×</span><b>Honey Trap</b><span class="vd v"></span><span class="ch fry">Fryer</span></div></div>
+            <div class="tk"><div class="h"><span>W1</span><span>2:02 / 8 min</span></div><div class="pr"><i style="width:25%"></i></div>
+              <div class="l"><span class="q">1×</span><b>Cabin Fever</b><span class="vd n"></span><span class="ch wok">Wok</span><span class="al">PEANUT ALLERGY</span></div>
+              <div class="l"><span class="q">1×</span><b>Crystal Clear</b><span class="vd v"></span><span class="ch steam">Steamer</span></div>
+              <div class="l w"><span class="q">1×</span><b>Hot &amp; Bothered</b><span class="ch stock">Stock pots</span><span class="cdn">start in 1:58</span></div></div>
+          </div></div>
+        <p class="cap">Hot line: the oldest ticket first. The bar under each ticket's header fills as the dish's own cook time runs out; amber when it is over, red three minutes later. A dimmed dish waits; it lights green when it is time to start.</p>
+      </div>
+      <div>
+        <div class="scr-m"><div class="bar">Pass <i>All tables</i><em>2 ready to run</em></div>
+          <div class="cols">
+            <div class="tk"><div class="h"><span>W2</span><span>3 pax · 9:03</span></div><div class="rtr">READY TO RUN</div>
+              <div class="l"><b>Starters</b><span class="ch pass" style="background:#2d6b4d">Served ✓</span></div>
+              <div class="l"><span class="q">1×</span><b>Hot &amp; Bothered</b><span class="cdn go">ready 1 min</span></div>
+              <div class="l"><span class="q">1×</span><b>Siu Mai Goodness</b><span class="cdn go">ready 0 min</span></div>
+              <div class="l w"><b>Mains · held</b><span class="cdn">1× Noodle Around</span></div></div>
+            <div class="tk"><div class="h"><span>W1</span><span>3 pax · 2:03</span></div>
+              <div class="l"><span class="q">2×</span><b>Comrade Crisp</b><span class="ch bar">Bar</span><span class="cdn">cooking</span></div>
+              <div class="l"><span class="q">1×</span><b>Cabin Fever</b><span class="ch wok">Wok</span><span class="cdn">cooking</span></div>
+              <div class="l w"><b>Mains · held</b><span class="cdn">fire now ▸</span></div></div>
+          </div></div>
+        <p class="cap">Pass: one card per table, grouped by course. When a whole course is ready the card pulses READY TO RUN and the pass chimes twice. Waiters see the same screen on their tablets.</p>
+      </div>
+    </div>
+    <div class="two" style="margin-top:16px">
+      <div>
+        <div class="scr-m"><div class="bar">Bar <i>Bar</i><em>2 pouring</em></div>
+          <div class="cols">
+            <div class="tk late"><div class="h"><span>W1</span><span>3:10 / 2 min</span></div><div class="pr"><i style="width:100%"></i></div>
+              <div class="l"><span class="q">2×</span><b>Comrade Crisp 330 ml</b><span class="ch bar">Bar</span></div>
+              <div class="l"><span class="q">1×</span><b>Kokum soda</b><span class="ch bar">Bar</span></div></div>
+            <div class="tk"><div class="h"><span>G2</span><span>0:40 / 5 min</span></div><div class="pr"><i style="width:13%"></i></div>
+              <div class="l"><span class="q">1×</span><b>Kimchi Mary</b><span class="ch bar">Bar</span></div></div>
+          </div></div>
+        <p class="cap">Bar: replaces the BOT slip. A cancelled drink shows as a red CANCELLED card for ten minutes.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">The one-tap rules</h3>
+        <ul class="tight">
+          <li><b>Tap a dish</b> when it is ready. <b>All ready</b> clears the whole ticket from the station.</li>
+          <li><b>Served ✓</b> on the pass closes a course. <b>Fire next course now</b> starts held mains early.</li>
+          <li><b>Recent</b> brings back a ticket bumped by mistake.</li>
+          <li>A red box is an allergy or diet note. Read it aloud.</li>
+          <li>The server's tablet says if mains are being held. <b>Send &amp; fire all</b> skips holding.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="zone" id="where">
+    <h2>2 · Where the screens go</h2>
+    <p class="k">Touch screens that wipe clean, on the wall, off the cooking line.</p>
+    <div class="zgrid">
+      <div class="fig"><svg id="svgW" role="img" aria-label="Screen positions in the kitchen and bar"></svg></div>
+      <div>
+        <div class="tw"><table id="tH"></table></div>
+      </div>
+    </div>
+    <div class="call"><b>Heat and grease.</b> S1 hangs 0.36 m from the hood's end and about 1.5 m from the stock-pot burner. Use a sealed-front commercial screen (or a polycarbonate cover), a steel heat shield on the burner side, and keep it off the wok end of the line. If it cooks or fogs, move it 0.5 m west along the wall.</div>
+    <div class="call"><b>Network and power.</b> Put the POS computer, the Wi-Fi router and a 5-port switch on a 1 kVA UPS at the counter, so a power cut does not stop orders. Run a network cable to S1 and S2 in the kitchen (steam and heat disturb Wi-Fi); S3 and the waiters' tablets can use Wi-Fi. Give the POS computer a fixed address on the router.</div>
+  </section>
+
+  <section class="zone" id="routing">
+    <h2>3 · How it decides</h2>
+    <div class="two">
+      <div>
+        <h3>Station and time</h3>
+        <p>Each dish has a <b>station</b> (where it is cooked), a <b>usual cook time</b> and a <b>course</b>. They are set from the menu below the first time the POS starts, and the owner can change any of them on the item (Menu, edit item).</p>
+        <h3>Start order</h3>
+        <p>Dishes of one course on one table are timed together. The slowest starts at once; the quicker ones show "start in 1:58" and light up when it is time, so everything finishes together.</p>
+      </div>
+      <div>
+        <h3>Courses</h3>
+        <p>On dine-in tables, mains wait until the starters are ready, plus a gap (8 minutes to begin with). Dessert waits for the mains. A held course always fires after 35 minutes. Takeaway and delivery are never held, and drinks are never held.</p>
+        <h3>When it is late</h3>
+        <p>Amber when a ticket passes the longest cook time on it; red three minutes after that. A cancelled dish appears as a red card, so nobody cooks it.</p>
+      </div>
+    </div>
+    <h3>The current menu, routed</h3>
+    <div class="ctl"><label>Show<select id="rsel"><option value="">All stations</option></select></label></div>
+    <div class="tw" style="max-height:520px;overflow:auto"><table id="tR"></table></div>
+    <p class="k" style="margin-top:8px">The POS's own menu list was loaded earlier (for example "Chimney soup") and does not match the menu above yet. Names it does not know are routed by their category and keywords, and you can set each one by hand.</p>
+  </section>
+
+  <section class="zone" id="try">
+    <h2>4 · Try it: what the cook will see</h2>
+    <p>Tick the dishes a table orders. The chart shows when each one starts, so each course's plates finish together, and when the next course fires.</p>
+    <div class="ctl"><label>Gap before the next course (minutes)<input type="number" id="gap" value="8" min="0" max="30"></label></div>
+    <div class="chips" id="pick"></div>
+    <div id="gantt" class="gantt"></div>
+    <div class="legend"><span><i style="background:var(--hot)"></i>Starters</span><span><i style="background:var(--cold)"></i>Mains</span><span><i style="background:var(--wet)"></i>Dessert</span><span><i style="background:repeating-linear-gradient(45deg,var(--exist) 0 5px,transparent 5px 10px)"></i>Waiting</span></div>
+    <p class="k" id="gnote" style="margin-top:8px"></p>
+  </section>
+
+  <section class="zone" id="setup">
+    <h2>5 · Setting it up</h2>
+    <ol class="tight">
+      <li>Buy three touch screens (sizes in the table above) with a wall bracket each. Any Android, Windows or Chromebook all-in-one that runs Chrome works.</li>
+      <li>Mount them. Run network cable to S1 and S2.</li>
+      <li>On the counter computer, start the POS (<b>Start POS.command</b>). It prints the address of the computer, for example <span class="k">http://192.168.0.226:8080</span>.</li>
+      <li>In the POS, add a staff account for the kitchen (role: kitchen) under Staff. Log in on each screen with that PIN.</li>
+      <li>Open one address on each screen, then choose "Add to Home Screen" and tap the screen once: <span class="k">/#/kds/hot</span> for S1, <span class="k">/#/kds/pass</span> for S2, <span class="k">/#/kds/bar</span> for S3. Switch the screen's sleep off.</li>
+      <li>Put a test order through: soup, a wok dish, a dim sum and a beer. The hot line should show three dishes with different start times and the bar should show the beer.</li>
+      <li>Under Settings, then Printers, leave "Always print paper KOT and BOT" unticked. Keep the kitchen thermal printer (K18) as the backup, set to Network or System queue, and tick the offline fallback.</li>
+      <li>Check every dish's station and time under Menu, edit item. Change anything the cooks disagree with.</li>
+    </ol>
+  </section>
+
+  <section class="zone" id="fail">
+    <h2>6 · If something goes wrong</h2>
+    <div class="tw"><table id="tF"></table></div>
+  </section>
+
+  <section class="zone" id="checks">
+    <h2>7 · What is not verified</h2>
+    <ul class="tight">
+      <li>Cook times and courses are my estimates from the menu. Cooks should correct them in the first week; the screen then times everything from your numbers.</li>
+      <li>I tested the POS side on a copy with sample orders and looked at screenshots of the three screens. I have not run it on real screens, on your Wi-Fi, or with a real thermal printer.</li>
+      <li>Screen sizes are typical, plus or minus 0.02 m by brand. Pick a sealed commercial model for S1.</li>
+      <li>Mounting heights and viewing distances come from the 3D model's walls. Check them against the real cook's eye line on site.</li>
+      <li>The fallback paper ticket needs a Network or System printer. A Browser printer is not used, because it would open a print dialog on the waiter's tablet.</li>
+    </ul>
+  </section>
+  <footer>Companion to the <a href="equipment-plan.html">equipment plan</a> and the <a href="sop.html">service playbook</a>.</footer>
+</div>
+
+<script>
+(function(){
+if(/[?&]embed\b/.test(location.search))document.body.classList.add('embed');
+const FOOD=[["Soups","Wonton Kenobi","stock",6,1],["Soups","Hot & Bothered","stock",6,1],["Soups","Coconut Cuddle","stock",6,1],["Cabin starters","Cabin Fever","wok",8,1],["Cabin starters","Honey Trap","fry",7,1],["Cabin starters","Salt & Pepa","fry",7,1],["Cabin starters","Wonton More","fry",7,1],["Dim sum","Crystal Clear","steam",8,1],["Dim sum","Fire Starters","stock",6,1],["Dim sum","Siu Mai Goodness","steam",8,1],["Dim sum","Prawn to Be Wild","steam",8,1],["Bao","Bao Down","steam",7,1],["Bao","Fever Pitch","steam",7,1],["Bao","Seoul Mate","steam",7,1],["Seoul to Bangkok","K-Pop Wings","fry",10,1],["Seoul to Bangkok","Fry Hard","fry",7,1],["Seoul to Bangkok","Slap Happy","cold",4,1],["Seoul to Bangkok","Smash Hit","cold",3,1],["Noodles & rice","Noodle Around","wok",8,2],["Noodles & rice","Rice Rice Baby","wok",8,2],["Noodles & rice","Holy Basil, Batman!","wok",8,2],["Noodles & rice","Plain Jane","cold",3,2],["Gravies & curries","Man, Churian!","stock",10,2],["Gravies & curries","Green With Envy","stock",10,2],["Gravies & curries","Suey Generis","stock",10,2],["Sweet","Honey, I Shrunk the Noodles","fry",6,3],["Sweet","Sticky Situation","cold",3,3],["Sweet","Scoop There It Is","cold",3,3],["For the table","Steamer for two","pass",15,1],["For the table","Cabin feast for four","pass",25,2],["For the table","Bowl game (lunch)","pass",12,2]], BAR=[["Beer","Comrade Crisp",2],["Beer","Gose Bumps",2],["Beer","Kings",2],["Beer","Pitcher",4],["Beer","Tasting paddle",4],["Whisky","Single malts, neat",2],["Whisky","Whisky on the rocks",2],["Whisky","Suntory Toki highball",5],["Vodka","Vodka shots",2],["Cocktails","Kokum feni sour",5],["Cocktails","Coconut feni highball",5],["Cocktails","Lychee & lemongrass martini",5],["Cocktails","Tamarind chilli margarita",5],["Cocktails","Sichuan G&T",5],["Cocktails","Kimchi Mary",5],["Cocktails","Soju Yakult",5],["Cocktails","Somaek",5],["Zero proof","Fresh lime soda",2],["Zero proof","Kokum soda",2],["Zero proof","Lemongrass-ginger iced tea",4],["Hot coffee","Irish coffee",4],["Hot coffee","Brewed coffee",4],["Beer","Gimme Gimme Gimme",2],["Beer","Budweiser",2],["Whisky","Single malt flight",4],["Zero proof","Water",2],["Zero proof","Soft drinks",2],["Zero proof","Tonic or ginger ale",2]];
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const ST={wok:'Wok',stock:'Stock pots',fry:'Fryer',steam:'Steamer',cold:'Cold & plate',pass:'Pass (sets)',bar:'Bar'};
+const CR={0:'Drinks',1:'Starters',2:'Mains',3:'Dessert'};
+document.getElementById('nroute').textContent=FOOD.length+BAR.length;
+
+/* routing table */
+const rsel=document.getElementById('rsel');
+Object.keys(ST).forEach(k=>rsel.insertAdjacentHTML('beforeend','<option value="'+k+'">'+ST[k]+'</option>'));
+const rows=FOOD.map(r=>({sec:r[0],name:r[1],prep:r[2],min:r[3],course:r[4]})).concat(BAR.map(r=>({sec:r[0],name:r[1],prep:'bar',min:r[2],course:0})));
+function drawR(){const v=rsel.value;document.getElementById('tR').innerHTML='<thead><tr><th>Menu section</th><th>Dish</th><th>Station</th><th>Usual minutes</th><th>Course</th></tr></thead><tbody>'+rows.filter(r=>!v||r.prep===v).map(r=>'<tr><td>'+esc(r.sec)+'</td><td>'+esc(r.name)+'</td><td><span class="ch '+r.prep+'">'+ST[r.prep]+'</span></td><td class="sz">'+r.min+'</td><td>'+CR[r.course]+'</td></tr>').join('')+'</tbody>';}
+rsel.onchange=drawR;drawR();
+
+/* hardware */
+document.getElementById('tH').innerHTML='<thead><tr><th>No.</th><th>Screen</th><th>W × D × H (m)</th><th>Where</th></tr></thead><tbody>'+[
+ ['S1','Hot line: 27 in touch, sealed front, wipe-clean','0.62 × 0.05 × 0.37','North (dish-wash) wall of the kitchen, above the east end of the granite, centred at 1.70 m, tilted 10° down. Seen from the stock pots, fryer and steamer.'],
+ ['S2','Pass: 21.5 in touch','0.50 × 0.05 × 0.29','West wall, above the pass window, bottom at 1.95 m, facing the kitchen. Seen by the cooks and the pass.'],
+ ['S3','Bar: 15.6 in touch','0.38 × 0.03 × 0.23','East wall of the bar, above the POS cabinet, bottom at 1.45 m. Between the POS nook and the lowest bottle shelf.'],
+ ['W','Waiters\' tablets (the POS ones)','—','Open the Pass screen. Nothing extra to buy.'],
+ ['SW','5-port network switch','0.16 × 0.10 × 0.03','At the counter, next to the router and POS computer.'],
+ ['UPS','1 kVA UPS for the computer, router and switch','0.15 × 0.35 × 0.20','Under the counter. Gives about 30 minutes in a power cut.'],
+ ['K18','Kitchen thermal printer (backup only)','0.14 × 0.20 × 0.14','On the pass shelf K11. Prints a ticket only if a screen goes offline.']
+].map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+r[1]+'</td><td class="sz">'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('')+'</tbody>';
+
+/* failure table */
+document.getElementById('tF').innerHTML='<thead><tr><th>What happens</th><th>What to do</th></tr></thead><tbody>'+[
+ ['A screen goes blank or loses Wi-Fi','The POS notices after about 90 seconds and prints new tickets for that station on the backup printer. Tap the screen to wake it; reload the page; check the cable.'],
+ ['The counter computer stops','Orders cannot be sent. Take orders on paper (table, items, time), shout them to the cooks, and type them in when it is back. Keep a notepad at the pass.'],
+ ['Power cut','The UPS keeps the computer, router and switch going. The screens need their own power: ask for screens with a battery, or plug them into the same UPS.'],
+ ['A dish is on the wrong station','Fix it under Menu, edit item (Cooked at). It applies to new orders straight away.'],
+ ['A table says mains are held but the guests are ready','Tap Fire next course now on the pass, or Send &amp; fire all at the till next time.'],
+ ['A ticket was bumped by mistake','Tap Recent on any screen, then Recall.'],
+ ['No sound','Tap the screen once after it loads. Browsers keep sound off until then.']
+].map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('')+'</tbody>';
+
+/* planner */
+const pick=document.getElementById('pick'),gap=document.getElementById('gap'),gantt=document.getElementById('gantt'),gnote=document.getElementById('gnote');
+const dishes=FOOD.filter(r=>r[2]!=='pass').map(r=>({name:r[1],prep:r[2],min:r[3],course:r[4]}));
+const DEF=['Wonton Kenobi','Cabin Fever','Crystal Clear','Noodle Around','Green With Envy','Scoop There It Is'];
+pick.innerHTML=dishes.map((d,i)=>'<label><input type="checkbox" value="'+i+'" '+(DEF.includes(d.name)?'checked':'')+'> '+esc(d.name)+' <span class="k">'+d.min+' min</span></label>').join('');
+function plan(){
+ const sel=[...pick.querySelectorAll('input:checked')].map(i=>dishes[+i.value]);
+ const g=Math.max(0,+gap.value||0);let fire=0,rows=[],end=0;
+ [1,2,3].forEach(c=>{const ls=sel.filter(d=>d.course===c);if(!ls.length)return;
+   const target=Math.max(...ls.map(d=>d.min));
+   ls.forEach(d=>rows.push({d,c,hold:[end?end:0,fire],start:fire+(target-d.min),finish:fire+target,fire}));
+   end=fire+target;fire=end+g;});
+ const total=Math.max(1,...rows.map(r=>r.finish));
+ gantt.innerHTML=rows.length?rows.map(r=>{const left=r.start/total*100,w=(r.d.min)/total*100,holdW=(r.start-r.hold[0]>0&&r.c>1?(r.start-r.hold[0])/total*100:0);
+  return '<div class="gr"><div>'+esc(r.d.name)+' <span class="ch '+r.d.prep+'">'+ST[r.d.prep]+'</span></div><div class="tr">'+(holdW?'<i class="hold" style="left:'+(r.hold[0]/total*100)+'%;width:'+holdW+'%"></i>':'')+'<i class="c'+r.c+'" style="left:'+left+'%;width:'+w+'%"></i></div></div>';}).join(''):'<p class="k">Tick at least one dish.</p>';
+ gnote.textContent=rows.length?('Total about '+Math.round(total)+' minutes from the first fire to the last plate, if each course is ready on its cook time and the next one fires after the '+g+'-minute gap.'):'';
+}
+pick.addEventListener('change',plan);gap.addEventListener('input',plan);plan();
+
+/* position map */
+(function(){
+ const P=100,f=v=>Math.round(v*P*10)/10;const el=document.getElementById('svgW');
+ const box=(x,y,w,h,c,id,dk)=>'<rect class="eq '+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>'+(id?'<text class="nm'+(dk?' dk':'')+'" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4">'+id+'</text>':'');
+ const W=5.21,H=4.18;let s='<g transform="translate(40 50)"><rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';
+ s+='<path d="M0 '+f(0.25)+'V'+f(1.15)+'" stroke="var(--figbg)" stroke-width="13"/><path d="M0 '+f(2.2)+'V'+f(3.5)+'" stroke="var(--blue)" stroke-width="3" stroke-dasharray="6 4"/>';
+ s+=box(0.90,0,3.36,0.62,'exist','granite',0)+box(4.46,0.35,0.75,3.82,'hot','HOT LINE')+box(0.40,3.38,3.06,0.80,'cold','chillers')+box(1.6,1.70,1.50,0.60,'std','K9',1)+box(0,2.2,0.45,1.30,'std','K11',1);
+ s+='<path class="beam" d="M'+f(3.86)+' '+f(0.1)+'L'+f(4.46)+' '+f(3.6)+'L'+f(1.9)+' '+f(3.4)+'Z"/>';
+ s+='<rect class="scr" x="'+f(3.55)+'" y="-6" width="'+f(0.62)+'" height="9" rx="2"/><text class="zt" x="'+f(3.86)+'" y="-12" text-anchor="middle">S1 hot line 0.62</text>';
+ s+='<rect class="scr" x="-4" y="'+f(2.6)+'" width="9" height="'+f(0.5)+'" rx="2"/><text class="zt" x="'+f(0.2)+'" y="'+f(3.62)+'" >S2 pass 0.50</text>';
+ s+='<text class="zt" x="'+f(2.6)+'" y="'+f(H+0.4)+'" text-anchor="middle">Kitchen, north wall at the top, pass window on the left</text></g>';
+ // bar
+ s+='<g transform="translate(40 560)"><text class="zt" x="0" y="-12">Bar, east wall on the right</text><rect class="wall" x="0" y="0" width="0" height="0"/>';
+ s+='<path class="wall" d="M'+f(3.1)+' 0V'+f(2.2)+'"/>';
+ s+=box(2.5,0.2,0.6,1.3,'std','coffee',1)+box(2.5,1.6,0.6,0.6,'top','POS',1);
+ s+=box(1.0,0.2,0.6,2.0,'cold','counter');
+ s+='<rect class="scr" x="'+f(3.08)+'" y="'+f(1.65)+'" width="9" height="'+f(0.4)+'" rx="2"/><text class="zt" x="'+f(3.2)+'" y="'+f(1.88)+'">S3 bar 0.38</text></g>';
+ el.setAttribute('viewBox','0 0 '+(W*P+160)+' 840');el.innerHTML=s;
+})();
+})();
+</script>
+</body>
+</html>

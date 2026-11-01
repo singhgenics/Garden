@@ -79,7 +79,9 @@ section{padding-block:52px 4px}
 .slip h3{font:500 15px var(--f-mono);letter-spacing:.14em;text-align:center;border-bottom:2px dashed #1C1714;padding-bottom:8px;margin-bottom:8px;text-transform:none}
 .slip .big{font-size:19px;font-weight:500}
 .slip hr{border:0;border-top:1px dashed #1C1714;margin:8px 0}
+.slip.screen{background:#1C1714;color:#F2E8D2;border-color:#3a3128}.slip.screen h3,.slip.screen hr{border-color:#F2E8D2}.slip.screen i{font-style:normal;color:#E49B1D}
 .slip .al{background:#1C1714;color:#FBF6E8;padding:2px 6px;display:inline-block;margin-top:4px}
+.slip.screen .al{background:#B5321C}
 .plainlist{margin:16px 0 0;padding-left:22px;display:grid;gap:6px}
 
 /* people */
@@ -126,7 +128,7 @@ body.embed section:first-of-type{padding-top:28px}
   </div>
 </header>
 <nav class="rail full" aria-label="Sections"><div class="wrap">
-  <a href="#rules">10 rules</a><a href="#journey">An order</a><a href="#tickets">KOT &amp; BOT</a><a href="#people">Each person</a><a href="#daily">Daily lists</a><a href="#wrong">If it goes wrong</a><a href="#practice">Practise</a><a href="#words">Words</a>
+  <a href="#rules">10 rules</a><a href="#journey">An order</a><a href="#tickets">Screens</a><a href="#people">Each person</a><a href="#daily">Daily lists</a><a href="#wrong">If it goes wrong</a><a href="#practice">Practise</a><a href="#words">Words</a>
 </div></nav>
 
 <main class="wrap">
@@ -163,9 +165,9 @@ body.embed section:first-of-type{padding-top:28px}
     <li class="k-srv"><div><span class="who">Server</span><b>Greet and seat</b><span class="t">30 seconds</span></div><div class="how">Walk to the guest, smile, show them a table.</div></li>
     <li class="k-srv"><div><span class="who">Server</span><b>Water and menus</b><span class="t">2 minutes</span></div><div class="how">Say the special. Ask "any allergies?"</div></li>
     <li class="k-srv"><div><span class="who">Server</span><b>Take the order on the tablet</b><span class="t">by 4 minutes</span></div><div class="how">Take drinks and food in the same visit. Read the order back to the guest.</div></li>
-    <li class="k-all send"><div><span class="who">Tablet</span><b>Tap SEND</b><span class="t">by 5 minutes</span></div><div class="how">One tap. Food prints in the kitchen (the KOT). Drinks print at the bar (the BOT). Check that both printed.</div></li>
-    <li class="k-bar"><div><span class="who">Bartender</span><b>Make the drinks</b><span class="t">5 minutes</span></div><div class="how">Make them in the order the slips came. Put them on the bar counter with the table number. Ring the bell.</div></li>
-    <li class="k-kit"><div><span class="who">Chef + helper</span><b>Cook the food</b><span class="t">15 minutes</span></div><div class="how">Chef reads the slip aloud. Helper puts dim sum in the steamer first, then soup, then the chef does the wok. Check the plate. Ring the bell.</div></li>
+    <li class="k-all send"><div><span class="who">Tablet</span><b>Tap SEND</b><span class="t">by 5 minutes</span></div><div class="how">One tap. The food appears on the kitchen screen and the drinks on the bar screen. Mains wait until the starters are ready. Check that the tablet says "Sent".</div></li>
+    <li class="k-bar"><div><span class="who">Bartender</span><b>Make the drinks</b><span class="t">5 minutes</span></div><div class="how">Make them in the order they show on the bar screen, oldest first. Tap each ticket when it is done. Put the drinks on the bar counter with the table number. Ring the bell.</div></li>
+    <li class="k-kit"><div><span class="who">Chef + helper</span><b>Cook the food</b><span class="t">15 minutes</span></div><div class="how">Chef reads the hot-line screen aloud. A dish that says "start in 1:58" waits; when it lights up green, start it. This way every plate finishes together. Tap each dish when it is ready. Check the plate. Ring the bell.</div></li>
     <li class="k-srv"><div><span class="who">Server</span><b>Serve</b><span class="t">within 90 seconds of the bell</span></div><div class="how">Drinks first, then all the food together. Say what each dish is.</div></li>
     <li class="k-srv"><div><span class="who">Server</span><b>Check back, then the bill</b><span class="t">2 minutes after serving</span></div><div class="how">"Is everything good?" Offer another drink. Print the bill when they ask. Take payment. Say thank you.</div></li>
     <li class="k-cln"><div><span class="who">Cleaner</span><b>Reset the table</b><span class="t">3 minutes</span></div><div class="how">Clear, wipe, reset cutlery, napkins, sauces and menus. The table is ready again.</div></li>
@@ -181,23 +183,21 @@ body.embed section:first-of-type{padding-top:28px}
 <section id="tickets">
   <div class="head">
     <div class="label">The ticket system</div>
-    <h2>KOT and BOT</h2>
-    <p><b>KOT</b> means Kitchen Order Ticket: the paper slip that tells the kitchen what to cook. <b>BOT</b> means Bar Order Ticket: the slip that tells the bartender what to pour. When the server taps Send on the tablet, the food prints in the kitchen and the drinks print at the bar by themselves. This is how nobody forgets anything and nobody has to shout.</p>
+    <h2>The kitchen and bar screens</h2>
+    <p>There are three screens: the <b>hot line</b> screen in the kitchen, the <b>bar</b> screen at the back bar, and the <b>pass</b> screen by the pass window. When the server taps Send on the tablet, the food shows up on the kitchen screen and the drinks on the bar screen by themselves. There is no paper. This is how nobody forgets anything and nobody has to shout.</p>
   </div>
   <div class="slips">
-    <div class="slip">
-      <h3>CABIN EAST · KOT</h3>
-      <div class="big">TABLE T2 · 3 guests</div>
+    <div class="slip screen">
+      <h3>HOT LINE · TABLE T2 · 3 guests</h3>
       <div>Server: S1 · 19:42</div>
       <hr>
-      <div>2 × Chicken dim sum</div>
-      <div>1 × Wonton Kenobi (soup)</div>
-      <div>1 × Chilli chicken</div>
+      <div>2 × Chicken dim sum &nbsp;[STEAMER]</div>
+      <div>1 × Wonton Kenobi &nbsp;[STOCK POTS] <i>start in 1:58</i></div>
+      <div>1 × Chilli chicken &nbsp;[WOK]</div>
       <div class="al">ALLERGY: PEANUT</div>
     </div>
-    <div class="slip">
-      <h3>CABIN EAST · BOT</h3>
-      <div class="big">TABLE T2 · 3 guests</div>
+    <div class="slip screen">
+      <h3>BAR · TABLE T2 · 3 guests</h3>
       <div>Server: S1 · 19:42</div>
       <hr>
       <div>2 × Comrade Crisp (pint)</div>
@@ -206,11 +206,14 @@ body.embed section:first-of-type{padding-top:28px}
     </div>
   </div>
   <ul class="plainlist">
-    <li>When a slip prints, say <b>"Heard"</b> out loud so the server knows it arrived.</li>
-    <li>Cook and pour in the order the slips came, oldest first.</li>
+    <li>When a new ticket appears the screen beeps. Say <b>"Heard"</b> out loud so the server knows it arrived.</li>
+    <li>Cook and pour in the order the tickets came, oldest first. A ticket turns <b>amber</b> when it is late and <b>red</b> when it is very late. A <b>red box</b> is an allergy or diet note: read it aloud.</li>
+    <li>A dish that is dimmed and says "start in 1:58" is waiting for a slower dish. Start it when it lights up.</li>
+    <li>Tap a dish when it is ready, or <b>All ready</b> for the whole ticket. The <b>pass</b> screen then says <b>READY TO RUN</b> for that table. The server taps <b>Served</b> after taking it out.</li>
+    <li>Mains are held until the starters are ready (plus a few minutes). If the guests want the mains now, tap <b>Fire next course now</b> on the pass screen.</li>
     <li>Want to add a dish later? Tap Send again. Never tell the chef by mouth only.</li>
-    <li>Wrong item? Ask an owner to cancel it on the tablet. A cancel slip prints in the kitchen.</li>
-    <li>Printer not working? Use the kitchen screen. If that fails too, write the order on the pad (table, items, time), take it to the kitchen, and type it in later.</li>
+    <li>Wrong item? Ask an owner to cancel it on the tablet. A red <b>CANCELLED</b> card shows on the screen: tap OK when you have seen it.</li>
+    <li>Screen not working? After about a minute the POS prints the ticket on the backup printer by itself. If the whole system is down, write the order on the pad (table, items, time), take it to the kitchen, and type it in later.</li>
     <li>The chef tells the servers when a dish has run out. Tell the guest before they order it.</li>
   </ul>
 </section>
@@ -242,9 +245,9 @@ body.embed section:first-of-type{padding-top:28px}
       <header><h3>Bartender</h3><p>Draught beer, spirits, coffee and soft drinks.</p></header>
       <div class="body">
         <h4>Before opening</h4>
-        <ul><li>Check the 3 beer kegs and the gas are connected. Pour a little and throw it away.</li><li>Ice full, lemons and garnish cut, glasses clean and dry.</li><li>Check there is paper in the bar printer.</li><li>Tell an owner if anything is running low.</li></ul>
+        <ul><li>Check the 3 beer kegs and the gas are connected. Pour a little and throw it away.</li><li>Ice full, lemons and garnish cut, glasses clean and dry.</li><li>Check the bar screen is on and says nothing is waiting.</li><li>Tell an owner if anything is running low.</li></ul>
         <h4>During service</h4>
-        <ul><li>Make drinks in the order the slips print. Say "Heard".</li><li>Beer: clean glass, tilt it, pour so it ends with about 2 cm of foam.</li><li>Measure every spirit with the jigger (the small measuring cup). The system counts stock by what you pour.</li><li>Put drinks on the bar with the table number and ring the bell.</li><li>Wipe the counter as you go.</li></ul>
+        <ul><li>Make drinks in the order they show on the bar screen. Say "Heard".</li><li>Beer: clean glass, tilt it, pour so it ends with about 2 cm of foam.</li><li>Measure every spirit with the jigger (the small measuring cup). The system counts stock by what you pour.</li><li>Put drinks on the bar with the table number and ring the bell.</li><li>Wipe the counter as you go.</li></ul>
         <h4>Never</h4>
         <ul class="never"><li>No alcohol for anyone under 21. If someone looks young, ask for ID.</li><li>Stop serving anyone who is drunk and call an owner.</li><li>Do not leave the bar empty.</li></ul>
         <h4>After closing</h4>
@@ -310,7 +313,7 @@ body.embed section:first-of-type{padding-top:28px}
       <label><input type="checkbox">Fridge and freezer temperature written down</label>
       <label><input type="checkbox">Food prepared and labelled with dates</label>
       <label><input type="checkbox">Beer kegs and ice ready, glasses clean</label>
-      <label><input type="checkbox">Tablets charged, printers have paper</label>
+      <label><input type="checkbox">Tablets charged; kitchen, bar and pass screens on</label>
       <label><input type="checkbox">Music, lights, fans and curtains set for the weather</label>
       <label><input type="checkbox">Chef tells the servers what has run out</label>
     </div>
@@ -370,9 +373,9 @@ body.embed section:first-of-type{padding-top:28px}
   </div>
   <div class="words">
     <div><b>Cover</b><br>One guest. 32 covers means 32 seats.</div>
-    <div><b>KOT / BOT</b><br>The kitchen slip and the bar slip.</div>
+    <div><b>KDS (the screens)</b><br>The kitchen, bar and pass screens that replace the old paper KOT and BOT slips.</div>
     <div><b>The pass</b><br>The counter where finished plates wait for the server.</div>
-    <div><b>Heard</b><br>What you say when a slip prints, so everyone knows.</div>
+    <div><b>Heard</b><br>What you say when a new ticket appears, so everyone knows.</div>
     <div><b>86 / "ran out"</b><br>A dish that is finished for the day.</div>
     <div><b>Prep</b><br>Cutting and preparing food before service so cooking is fast.</div>
     <div><b>Check back</b><br>Going to the table after the first bites to ask if all is good.</div>

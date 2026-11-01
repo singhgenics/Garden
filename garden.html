@@ -37,6 +37,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.
 .eqbar button{font:500 22px/1 var(--body);color:var(--fg);background:var(--raise);border:1px solid var(--line);border-radius:9px;width:36px;height:36px;cursor:pointer}
 #sopp{position:absolute;inset:0;z-index:30;background:#130f0c;display:flex;flex-direction:column}#sopp[hidden]{display:none}
 #sopf{flex:1;border:0;width:100%;background:#130f0c}
+#kdsp{position:absolute;inset:0;z-index:30;background:#130f0c;display:flex;flex-direction:column}#kdsp[hidden]{display:none}
+#kdsf{flex:1;border:0;width:100%;background:#130f0c}
 #eqf{flex:1;border:0;width:100%;background:#130f0c}
 .card{position:absolute;right:12px;bottom:12px;width:min(380px,calc(100% - 24px));max-height:min(58%,calc(100% - 190px));overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13px}
 .card h2{font:700 17px/1.2 var(--display);margin:0 0 2px}
@@ -94,6 +96,7 @@ body.walk .pad{display:grid}
       <div class="seg"><a class="seglink" href="stock-plan.html">Stock plan &rarr;</a></div>
       <div class="seg"><button id="t-eq" aria-expanded="false" aria-controls="eqp">Equipment plan</button></div>
       <div class="seg"><button id="t-sop" aria-expanded="false" aria-controls="sopp">Service playbook</button></div>
+      <div class="seg"><button id="t-kds" aria-expanded="false" aria-controls="kdsp">Kitchen screens</button></div>
       <div class="seg"><button id="t-light" aria-expanded="false" aria-controls="lightpanel">Lighting · <span id="lc-name">Evening</span> ▾</button></div>
     </div>
     <div class="seg lightctl" id="lightpanel" role="group" aria-label="Lighting" hidden>
@@ -110,6 +113,10 @@ body.walk .pad{display:grid}
   <div class="eqbar"><b>Service playbook · how the team runs a shift</b><span><a href="sop.html" target="_blank" rel="noopener">Open full page &#8599;</a><button id="sopx" aria-label="Close service playbook">&times;</button></span></div>
   <iframe id="sopf" title="Service playbook" data-src="sop.html?embed"></iframe>
   </div>
+  <div id="kdsp" role="dialog" aria-label="Kitchen and bar screens" hidden>
+  <div class="eqbar"><b>Kitchen and bar screens · the smart KDS that replaces paper tickets</b><span><a href="kds.html" target="_blank" rel="noopener">Open full page &#8599;</a><button id="kdsx" aria-label="Close kitchen screens">&times;</button></span></div>
+  <iframe id="kdsf" title="Kitchen and bar screens" data-src="kds.html?embed"></iframe>
+  </div>
   <div class="card" id="card"><button class="x" id="cardx" aria-label="Close">×</button><div id="cardbody"></div></div>
   <div class="hint" id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
   <div class="pad" id="pad"><span></span><button data-k="w">▲</button><span></span><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
@@ -122,13 +129,18 @@ body.walk .pad{display:grid}
 /* equipment plan overlay: set up before the 3D viewer starts, so it also opens where WebGL is missing */
 {const eqp=document.getElementById('eqp'),eqb=document.getElementById('t-eq'),eqf=document.getElementById('eqf');
  const eqSet=on=>{eqp.hidden=!on;eqb.setAttribute('aria-expanded',String(on));if(on&&!eqf.src)eqf.src=eqf.dataset.src;};
- eqb.onclick=()=>{sopSet(false);eqSet(eqp.hidden);};document.getElementById('eqx').onclick=()=>eqSet(false);
+ eqb.onclick=()=>{sopSet(false);kdsSet(false);eqSet(eqp.hidden);};document.getElementById('eqx').onclick=()=>eqSet(false);
  addEventListener('keydown',e=>{if(e.key==='Escape'&&!eqp.hidden)eqSet(false);});
  const sopp=document.getElementById('sopp'),sopb=document.getElementById('t-sop'),sopf=document.getElementById('sopf');
  function sopSet(on){sopp.hidden=!on;sopb.setAttribute('aria-expanded',String(on));if(on&&!sopf.src)sopf.src=sopf.dataset.src;}
- sopb.onclick=()=>{if(sopp.hidden)eqSet(false);sopSet(sopp.hidden);};document.getElementById('sopx').onclick=()=>sopSet(false);
+ const kdsp=document.getElementById('kdsp'),kdsb=document.getElementById('t-kds'),kdsf=document.getElementById('kdsf');
+ function kdsSet(on){kdsp.hidden=!on;kdsb.setAttribute('aria-expanded',String(on));if(on&&!kdsf.src)kdsf.src=kdsf.dataset.src;}
+ kdsb.onclick=()=>{if(kdsp.hidden){eqSet(false);sopSet(false);}kdsSet(kdsp.hidden);};document.getElementById('kdsx').onclick=()=>kdsSet(false);
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&!kdsp.hidden)kdsSet(false);});
+ sopb.onclick=()=>{if(sopp.hidden){eqSet(false);kdsSet(false);}sopSet(sopp.hidden);};document.getElementById('sopx').onclick=()=>sopSet(false);
  addEventListener('keydown',e=>{if(e.key==='Escape'&&!sopp.hidden)sopSet(false);});
- if(new URLSearchParams(location.search).has('eq'))eqSet(true);}
+ if(new URLSearchParams(location.search).has('eq'))eqSet(true);
+ if(new URLSearchParams(location.search).has('kds'))kdsSet(true);}
 const stage=document.getElementById('stage');
 if(!window.THREE||!THREE.OrbitControls){stage.insertAdjacentHTML('beforeend','<div class="err">The 3D viewer could not load. Reload the page to try again.</div>');return;}
 function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
@@ -159,6 +171,18 @@ const xRange=z=>z<=5.48?[0,HX]:z<=7.76?[0,6.46]:[(z-7.76)*3.48/3.17,6.46];
 /* ======================= textures ======================= */
 const aniso=Math.min(8,renderer.capabilities.getMaxAnisotropy());
 function tex(w,h,draw,rx,ry){const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');draw(g,w,h);const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx||1,ry||1);t.anisotropy=aniso;return t;}
+
+/* KDS screens: a mock of what the screen shows, drawn once */
+function kdsTex(kind){return tex(512,kind==='bar'?312:kind==='pass'?300:310,(g,w,h)=>{
+  g.fillStyle='#17130f';g.fillRect(0,0,w,h);g.fillStyle='#f3eadf';g.font='700 22px sans-serif';g.fillText(kind==='hot'?'Hot line':kind==='pass'?'Pass':'Bar',14,30);
+  g.fillStyle='#f2a03d';g.fillRect(w-150,12,136,24);g.fillStyle='#1b1209';g.font='700 14px sans-serif';g.fillText(kind==='pass'?'2 ready to run':'7 cooking',w-142,29);
+  const cards=kind==='pass'?[['W2','READY TO RUN','#5cbf7a'],['W1','',''],['S3','','']]:kind==='bar'?[['W1','','#f2c14a'],['G2','','#3a3128'],['S3','','#3a3128']]:[['S1','','#e5604d'],['W1','','#3a3128'],['S3','','#3a3128']];
+  cards.forEach((c,i)=>{const x=12+i*166,y=50,cw=154,chh=h-62;g.fillStyle='#201b16';g.fillRect(x,y,cw,chh);g.strokeStyle=c[2]||'#3a3128';g.lineWidth=3;g.strokeRect(x,y,cw,chh);
+   g.fillStyle=c[2]&&c[2]!=='#3a3128'?c[2]+'66':'#2a231c';g.fillRect(x,y,cw,30);g.fillStyle='#f3eadf';g.font='700 18px sans-serif';g.fillText(c[0],x+8,y+22);
+   if(c[1]){g.fillStyle='#5cbf7a';g.fillRect(x,y+30,cw,20);g.fillStyle='#0b2012';g.font='800 12px sans-serif';g.fillText(c[1],x+30,y+45);}
+   for(let k=0;k<3+(i===0?1:0);k++){const yy=y+(c[1]?64:46)+k*38;g.fillStyle=k===2&&i===1?'#6b5f54':'#e8dccd';g.font='600 14px sans-serif';g.fillText((['1× Wings','1× Honey Trap','1× Cabin Fever','1× Dim sum'])[(k+i)%4],x+8,yy);
+    g.fillStyle=['#8a6a12','#7a2e1f','#2d6a77','#6a4a1a'][(k+i)%4];g.fillRect(x+8,yy+6,52,12);}
+  });},1,1);}
 function woodDraw(base,n){return(g,w,h)=>{const r=rng(7);n=n||8;for(let i=0;i<n;i++){const y=i*h/n;g.fillStyle=shade(base,0.9+r()*0.2);g.fillRect(0,y,w,h/n);g.strokeStyle='rgba(90,55,25,.14)';for(let k=0;k<6;k++){g.beginPath();const yy=y+r()*h/n;g.moveTo(0,yy);g.bezierCurveTo(w*.3,yy+r()*6-3,w*.6,yy+r()*6-3,w,yy);g.stroke();}g.fillStyle='rgba(60,35,15,.4)';g.fillRect(0,y,w,1.5);}};}
 const limeTex=tex(256,256,(g,w)=>{g.fillStyle='#e6d9c0';g.fillRect(0,0,w,w);const r=rng(27);for(let i=0;i<1400;i++){g.fillStyle=`rgba(${r()<.5?'255,245,225':'150,120,90'},${r()*0.07})`;g.beginPath();g.arc(r()*w,r()*w,4+r()*22,0,7);g.fill();}},3,2);
 const brickTex=tex(256,256,(g,w)=>{g.fillStyle='#d9cfc2';g.fillRect(0,0,w,w);const r=rng(9);const bh=w/8,bw=w/4;for(let row=0;row<8;row++){const off=row%2?bw/2:0;for(let c=-1;c<5;c++){const x=c*bw+off;g.fillStyle=shade(['#a9533a','#b45f42','#9c4a33','#b86a4a','#a2563c'][Math.floor(r()*5)],0.92+r()*0.14);g.fillRect(x+2,row*bh+2,bw-4,bh-4);}}},1,1);
@@ -943,6 +967,8 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   B(0.03,0.06,2.22,3.0,1.78,2.42,M.timberDark,false);plane(0.58,0.72,S({map:tapT,roughness:0.85}),0.066,2.61,2.1,Math.PI/2);}   // ON TAP board above the bottle bay
  [[1.62,SK('liq','ruby','gold',11)],[2.5,SK('gin','blue','silver',9)]].forEach(([z,k])=>bottle(k,0.36,0.96,z));
  // POS nook at the door end of the back bar
+ // S3: KDS bar screen (15.6 in, 0.38 × 0.23) on the east wall above the POS nook, replaces the BOT slip
+ B(0.03,0.06,1.43,1.7,0.08,0.52,M.black,false);{const sm=new THREE.MeshBasicMaterial({map:kdsTex('bar')});plane(0.34,0.19,sm,0.0615,1.565,0.3,Math.PI/2);}
  {const n0=0.08,n1=0.56;[n0,n1-0.025].forEach(z=>B(0.03,0.4,0.96,1.34,z,z+0.025,M.timber));B(0.03,0.4,1.32,1.35,n0,n1,M.timber);B(0.03,0.05,0.96,1.32,n0,n1,M.timberDark,false);B(0.06,0.1,0.96,0.98,0.2,0.42,M.black);{const t=B(0.14,0.16,1.0,1.2,0.18,0.44,M.black);t.rotation.z=0.35;}B(0.22,0.34,0.96,0.99,0.5,0.55,M.black);B(0.06,0.28,0.96,1.08,0.1,0.17,M.white);}
  // ---------- COUNTER ----------
  // moved 0.50 m off the wall (equipment plan): working face 1.50 m from the wall, so the bartender aisle is 0.90 m
@@ -1299,6 +1325,10 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
  bx(x0+0.02,x0+0.4,0.78,0.84,z0,z1,M.white,G.kitchen);bx(x0+0.06,x0+0.36,0.8,0.842,z0+0.06,z1-0.06,M.ssDark,G.kitchen,false);bx(x0+0.1,x0+0.3,0.3,0.78,(z0+z1)/2-0.05,(z0+z1)/2+0.05,M.white,G.kitchen,false);
  rod(V(x0+0.05,0.84,(z0+z1)/2),V(x0+0.05,1.0,(z0+z1)/2),0.012,M.ss,G.kitchen,false);rod(V(x0+0.05,1.0,(z0+z1)/2),V(x0+0.2,1.0,(z0+z1)/2),0.01,M.ss,G.kitchen,false);
  bx(x0+0.0,x0+0.08,1.05,1.2,z0+0.07,z0+0.17,M.white,G.kitchen);bx(x0+0.0,x0+0.1,1.25,1.5,z1-0.25,z1-0.05,M.white,G.kitchen);}
+/* KDS screens: S1 hot line on the north wall above the east end of the granite, S2 pass on the west wall above the pass window */
+{const m1=new THREE.MeshBasicMaterial({map:kdsTex('hot')}),m2=new THREE.MeshBasicMaterial({map:kdsTex('pass')});
+ const x0=kx0+3.55,x1=kx0+4.17;bx(x0,x1,1.52,1.89,2.1,2.15,M.black,G.kitchen,false);const p1=new THREE.Mesh(new THREE.PlaneGeometry(0.58,0.33),m1);p1.position.set((x0+x1)/2,1.705,2.1515);G.kitchen.add(p1);
+ bx(kx0,kx0+0.05,1.95,2.24,4.7,5.2,M.black,G.kitchen,false);const p2=new THREE.Mesh(new THREE.PlaneGeometry(0.46,0.25),m2);p2.position.set(kx0+0.0515,2.095,4.95);p2.rotation.y=Math.PI/2;G.kitchen.add(p2);}
 /* storage built in (no store room): U1 and U2 under the granite, U4 under the pass shelf, T1 tall pantry, bins */
 {const z0=2.12,z1=2.7,p=kx0;
  // U1: slatted shelves with ventilated crates, west bay beside the veg sink

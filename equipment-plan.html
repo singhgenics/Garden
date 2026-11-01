@@ -53,7 +53,7 @@ svg .gap{stroke:var(--figbg);stroke-width:13}
 svg .win{stroke:var(--blue);stroke-width:3;stroke-dasharray:6 4}
 svg .eq{stroke:rgba(0,0,0,.35);stroke-width:1.2}
 svg .hot{fill:var(--hot)}svg .cold{fill:var(--cold)}svg .wet{fill:var(--wet)}svg .exist{fill:url(#hatch)}
-svg .vb{fill:#3f8f55}svg .rb{fill:#b0432f}svg .bb{fill:#2f6aa3}svg .std{fill:var(--std)}svg .top{fill:var(--top)}
+svg .scr{fill:#17130f;stroke:var(--brass);stroke-width:2}svg .vb{fill:#3f8f55}svg .rb{fill:#b0432f}svg .bb{fill:#2f6aa3}svg .std{fill:var(--std)}svg .top{fill:var(--top)}
 svg .svc{fill:none;stroke:var(--muted);stroke-width:1.3;stroke-dasharray:7 5}
 svg .ghost{stroke:var(--brass);stroke-width:1.8;stroke-dasharray:8 5}
 svg .arc{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
@@ -221,7 +221,9 @@ const KIT=[
  ['K15','Mixer-grinder, 3 jars',1,0.40,0.30,0.55,'On K10, east end. Curry pastes, chilli oil, fillings',0],
  ['K16','Granite mortar and pestle',1,0.25,0.25,0.20,'On K10, between the veg zone and the mixer. Papaya salad',0],
  ['K17','Planetary mixer, 10 L (benchtop)',1,0.40,0.45,0.65,'On K10, east end. Bao and dumpling dough. Skip it if you buy frozen',0],
- ['K18','KOT thermal printer',1,0.14,0.20,0.14,'On K11. Orders from your POS',0],
+ ['K18','Thermal printer (backup only)',1,0.14,0.20,0.14,'On K11. Prints a KOT only if a kitchen screen goes offline; the screens replace paper tickets',0],
+ ['K26','KDS hot-line screen S1: 27 in touch, sealed front',1,0.62,0.05,0.37,'North wall above the east end of K10, centred at 1.70 m, tilted 10° down. Network cable. Wok, stock pots, fryer, steamer, cold and plate',0],
+ ['K27','KDS pass screen S2: 21.5 in touch',1,0.50,0.05,0.29,'West wall above the pass window, bottom at 1.95 m, facing the kitchen. Ready-to-run view',0],
  ['K19','Waste bins: red non-veg (under K9), green veg (under the K21 sink)',2,0.35,0.35,0.55,'Colour-coded, lidded, on the floor under the benches',1],
  ['K21','Veg wash sink, single bowl, set into K10',1,0.60,0.45,0.25,'West end of K10, plumbed from the dish-wash side of the wall. Green board beside it for veg only',0],
  ['K22','U1 slatted shelves under K10, west bay: onions, potatoes, garlic, ginger',1,0.90,0.55,0.80,'Ventilated crates, beside the veg wash sink',0],
@@ -260,6 +262,7 @@ const BAR=[
  ['B12','Hot-water urn',1,0.30,0.30,0.55,'On the coffee station top',0],
  ['B13','Water filter set for B2 and B11',1,0.20,0.15,0.45,'Under B7, plumbed to the ice machine and brewer',0],
  ['B14','Bar bin',1,0.30,0.30,0.50,'Staff aisle, north end',0],
+ ['B16','KDS bar screen S3: 15.6 in touch',1,0.38,0.03,0.23,'East wall above the POS cabinet B4, bottom at 1.45 m. Replaces the BOT slip',0],
  ['B15','Floating glass rack (already modelled)',1,2.60,0.67,0.28,'Over the counter, hung at 2.3 m',0,1]
 ];
 const SMALL=[
@@ -287,6 +290,7 @@ const SERV=[
  ['LPG bank','4 × 19 kg cylinders (each about 0.31 Ø × 0.80), 2 working and 2 standby, outside in open air, with regulator, manifold, gas-leak sensor and shut-off valve. Position outside the kitchen east wall to be confirmed.'],
  ['Electrical','3-phase supply, roughly 25–30 kW connected (an estimate). Fridges and freezers on their own circuit; generator or UPS cover for them. Dishwasher and glass washer need their own supplies.'],
  ['Water and drainage','Overhead tank, hot water for D3 and D5, floor drain trough 0.15 wide along the hot line, anti-skid floor sloping to the drain, grease trap about 0.60 × 0.40 × 0.40 on the kitchen and dish-wash drain.'],
+ ['Screens and network','Three KDS screens (K26, K27, B16) on a wall bracket each; network cable to K26 and K27; a 5-port switch (0.16 × 0.10 × 0.03) and a 1 kVA UPS (0.15 × 0.35 × 0.20) at the counter with the POS computer and the router. See the kitchen and bar screens page.'],
  ['Pest control','Wall-mounted UV fly catcher (about 0.45 × 0.15 × 0.60) at the kitchen door; mesh on the louvres.'],
  ['Dry store','None. The store room is staff accommodation, so storage is under the granite and in cabinets in the kitchen (K22 to K25), a chemical cabinet in the dish wash (D12) and cabinets at the bar (B4, B8). See the stock plan.'],
  ['Safety and hygiene','First-aid kit, colour-coded boards, wall thermometer log sheets, hand-wash soap at K13, B7 and the washroom.']
@@ -328,6 +332,8 @@ document.getElementById('cards').innerHTML=
  s+=dash(2.72,0.06,1.46,0.5)+txt(3.45,0.7,'K23 (U2)','zt','text-anchor="middle" style="font-size:9px"')+dash(1.62,0.06,0.88,0.5)+txt(2.06,0.7,'K22 (U1)','zt','text-anchor="middle" style="font-size:9px"')+dash(1.0,0.12,0.36,0.36)+dash(1.66,1.82,0.36,0.36)+txt(1.86,2.08,'K19','zt','text-anchor="middle" style="font-size:9px"');
  s+=txt(1.65,0.95,'VEG PREP','note','')+txt(3.25,0.95,'MACHINES, RICE','note','');
  s+=dash(3.48,3.78,0.45,0.40,'K24 above door')+dash(1.96,3.84,1.5,0.34)+txt(2.7,3.78,'K25 wall cabinet above','zt','text-anchor="middle" style="font-size:9px"');
+ s+='<rect class="scr" x="'+f(3.55)+'" y="-7" width="'+f(0.62)+'" height="9" rx="2"/><text class="zt" x="'+f(3.86)+'" y="-12" text-anchor="middle" style="font-size:9px">K26 screen</text>';
+ s+='<rect class="scr" x="-5" y="'+f(2.6)+'" width="9" height="'+f(0.5)+'" rx="2"/>';
  s+=box(0.40,3.38,0.78,0.80,'cold','K6')+box(1.18,3.38,0.78,0.80,'cold','K7')+box(1.96,3.48,1.50,0.70,'cold','K8');
  s+=box(1.6,1.70,1.50,0.60,'std','K9')+box(1.68,1.77,0.60,0.46,'rb')+box(2.38,1.77,0.60,0.46,'bb')+txt(1.98,2.0,'raw','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+txt(2.68,2.0,'fish','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+txt(2.35,2.48,'NON-VEG PREP','note','');
  s+=box(0,2.2,0.45,1.30,'std','K11')+box(0.12,3.05,0.14,0.20,'top');
@@ -376,6 +382,7 @@ document.getElementById('cards').innerHTML=
  s+=txt(W-0.06,-0.12,'East wall','zt','text-anchor="end" style="font-size:9px"');
  // back bar line
  s+=box(2.5,2.35,0.6,1.2,'cold','B1')+box(2.5,3.55,0.6,0.5,'cold','B2')+box(2.5,4.05,0.6,0.5,'wet','B3')+box(2.5,4.55,0.6,0.6,'top','B4');
+ s+='<rect class="scr" x="'+f(3.06)+'" y="'+f(4.67)+'" width="8" height="'+f(0.38)+'" rx="2"/><text class="zt" x="'+f(3.05)+'" y="'+f(4.64)+'" text-anchor="end" style="font-size:9px">B16 screen</text>';
  // coffee station
  s+=box(2.5,0.75,0.6,1.3,'std')+box(2.5,0.75,0.6,0.6,'cold')+box(2.5,1.40,0.6,0.6,'cold')+txt(2.44,1.07,'B9','nm out','text-anchor="end" style="font-size:10px"')+txt(2.44,1.72,'B10','nm out','text-anchor="end" style="font-size:10px"');
  s+=box(2.6,0.82,0.40,0.45,'top','B11')+box(2.68,1.48,0.30,0.30,'top','B12');
