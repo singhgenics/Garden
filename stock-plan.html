@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Cabin East Garden · Stock plan</title>
-<meta name="description" content="Stock list, storage map and daily opening and closing count sheet for the Cabin East Garden kitchen, store room and bar.">
+<meta name="description" content="Stock list, storage map and daily opening and closing count sheet for the Cabin East Garden kitchen, dish wash and bar, with no store room.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -72,7 +72,7 @@ ul.tight,ol.tight{margin:6px 0 0;padding-left:22px}ul.tight li,ol.tight li{margi
 .sheet td.ord{font-weight:650;color:var(--warn)}
 .sheet td.ord.z{color:var(--ok);font-weight:500}
 .sheet small{display:block;color:var(--muted);font-size:12px;line-height:1.35;max-width:46ch}
-.sheet td.nm{min-width:210px}
+.sheet td.nm{min-width:210px}.sheet td.lf{min-width:150px;font-size:12.5px;color:var(--muted)}.sheet td.rs{white-space:nowrap;font-size:12.5px}
 #orderbox{display:none;margin-top:12px}
 footer{margin-top:44px;color:var(--muted);font-size:13px}
 @media print{
@@ -90,7 +90,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
     <span class="k">Quantities are starting levels for a 60-cover day. Adjust after two weeks of real sales.</span>
   </div>
   <h1>Stock plan</h1>
-  <p class="lead">Every ingredient and consumable the menu needs, where it lives when it is sealed, where it goes when it is in use, and a count sheet for opening and closing. Built from the food menu, the drinks menu and the kitchen, store room and bar in the equipment plan.</p>
+  <p class="lead">Every ingredient and consumable the menu needs, where it lives when it is sealed (all of it inside the kitchen, the dish wash or the bar, because the store room is now staff accommodation), where it goes when it is in use, and a count sheet for opening and closing. Built from the food menu, the drinks menu and the kitchen, store room and bar in the equipment plan.</p>
   <div class="cards" id="cards"></div>
 
   <section class="zone" id="how">
@@ -98,11 +98,11 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
     <div class="two">
       <div>
         <h3>Two homes for every item</h3>
-        <p>Each item has a <b>home</b>, where sealed stock sits (a store-room rack, a chiller shelf, the spirits cage), and a <b>working spot</b>, where the open pack or the day's issue sits in the kitchen or at the bar. You count the home and the working spot together as one number.</p>
+        <p>Each item has a <b>home</b>, where sealed stock sits (an under-counter cabinet, a chiller shelf, the locked spirits cabinet), and a <b>working spot</b>, where the open pack or the day's issue sits in the kitchen or at the bar. You count the home and the working spot together as one number.</p>
         <h3>Three kinds of count</h3>
         <ul class="tight">
           <li><b>Daily, opening and closing:</b> chilled and frozen food, eggs, dairy, kegs, and each bar bottle (open bottles in tenths).</li>
-          <li><b>Weekly, Monday opening:</b> the full store room, rack by rack, top to bottom.</li>
+          <li><b>Weekly, Monday opening:</b> every cabinet in the kitchen, dish wash and bar, unit by unit.</li>
           <li><b>Monthly:</b> everything, with the sealed-stock value for the books.</li>
         </ul>
       </div>
@@ -111,7 +111,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
         <ul class="tight">
           <li><span class="tag">M</span> Named or clearly implied by a dish on the menu.</li>
           <li><span class="tag A">A</span> A standard recipe component the menu does not name. Check these against your recipe cards.</li>
-          <li><span class="tag P">P</span> Made in house, on the prep list in section 5.</li>
+          <li><span class="tag P">P</span> Made in house, on the prep list in section 6.</li>
         </ul>
         <div class="call"><b>Order rule.</b> Order = par minus the closing count. Fresh items are ordered daily for the next morning. Dry goods are ordered weekly, when the closing count falls to half of par.</div>
       </div>
@@ -119,14 +119,16 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
   </section>
 
   <section class="zone" id="store">
-    <h2>2 · Store room</h2>
-    <p class="k">2.70 × 6.46 m · door from the kitchen at the north end · no window in the model</p>
+    <h2>2 · Storage inside the kitchen</h2>
+    <p class="k">The store room is now staff accommodation. Everything is held in under-counter and wall units, so the plan relies on smaller orders, more often.</p>
     <div class="zgrid">
-      <div class="fig"><svg id="svgS" role="img" aria-label="Store room layout"></svg></div>
+      <div class="fig"><svg id="svgS" role="img" aria-label="Kitchen storage plan"></svg></div>
       <div><div class="tw"><table id="tS"></table></div></div>
     </div>
-    <div class="call"><b>Ventilation.</b> The model's store room has no window. Onions, potatoes and garlic need air, and a closed room holds heat. Add a louvre or an extractor fan and keep the door closed to the kitchen steam.</div>
-    <div class="call"><b>Not in the store room.</b> The LPG cylinders (outside, open air), fresh meat, fish, dairy, eggs, cut vegetables and ice cream (chilled and frozen units only), and spare kegs for more than 48 hours (they need a cold place; a keg room or cold room is the later fix).</div>
+    <div class="call"><b>It fits, with room to spare.</b> My rough estimate is that the dry goods, packaging and ambient vegetables need about 360 litres, at the weekly restock. The units above give roughly 1,200 litres of usable space. The two things that are tight are cold stock (K8 about 250 of 400 litres) and drinks, which is why drinks are restocked three times a week.</div>
+    <div class="call"><b>Heat and grease.</b> T1 stands 0.40 m from the wok burner. Keep it steel, line the wall beside the burner with a steel splash panel, and put no oil, paper or cardboard in its top shelf. Check the clearance against the gas installer's rule.</div>
+    <div class="call"><b>Close the old store door.</b> Block the opening in the kitchen's south wall. It would put sleeping quarters on a food-preparation door, and it frees the wall for T1. Staff accommodation needs its own entrance; check the rule against your FSSAI licence conditions with a consultant, because I haven't verified it.</div>
+    <div class="call"><b>Not stored in the kitchen.</b> The LPG cylinders (outside, open air) and any spare kegs. A spare keg has no cold place, so the keg order is a standing weekly delivery, with a swap on the day a keg runs out.</div>
   </section>
 
   <section class="zone" id="cold">
@@ -136,8 +138,14 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
     <div class="call"><b>Prep surfaces.</b> Raw meat and fish come out of K6 and are prepared only on the island (K9). Vegetables come out of K8 and are prepared only at the west end of the granite platform (K10), at the veg wash sink. Dry goods are never opened on either surface.</div>
   </section>
 
+  <section class="zone" id="restock">
+    <h2>4 · Restock rhythm</h2>
+    <p class="k">Every item grouped by how often it is ordered. Order the day before it is needed; fresh items go in the evening order, dry goods in the weekly one.</p>
+    <div class="tw"><table id="tF"></table></div>
+  </section>
+
   <section class="zone" id="sheet">
-    <h2>4 · Stock list and count sheet</h2>
+    <h2>5 · Stock list and count sheet</h2>
     <p>Type the opening count, what came in, and the closing count. The sheet works out what was used and what to order. It saves on this device for each date.</p>
     <div class="ctl">
       <label>Date<input type="date" id="cdate"></label>
@@ -153,22 +161,22 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
   </section>
 
   <section class="zone" id="prep">
-    <h2>5 · House-made items</h2>
+    <h2>6 · House-made items</h2>
     <p class="k">Typical shelf lives for chilled food stored at 5 °C or below. These are working values to check with your food-safety consultant. Label every tub with the item, the date made and the use-by date.</p>
     <div class="tw"><table id="tP"></table></div>
   </section>
 
   <section class="zone" id="routine">
-    <h2>6 · Opening and closing routine</h2>
+    <h2>7 · Opening and closing routine</h2>
     <div class="two">
       <div>
         <h3>Opening, before prep</h3>
         <ol class="tight">
-          <li>Unlock the store room. Check the room for damp, pests and temperature.</li>
+          <li>Open every kitchen cabinet and look for damp, pests and spills. Check the bar and the dish-wash cabinet too.</li>
           <li>Read the chiller and freezer displays and write them on the log. Chilled should be 5 °C or below, frozen -18 °C or below.</li>
           <li>Receive deliveries. Check temperature, date and packaging, and put chilled and frozen goods away first. Write the quantities into the In column.</li>
           <li>Count the opening stock: K6, K8, K7, the bar fridge and each bar bottle. Write it in the Open column.</li>
-          <li>Pull the day's dry goods from the store room on one issue trip: rice, flour, oil, sauces, paper and liners.</li>
+          <li>Top up the working bins and bottles from U2, W1, U4 and T1. Nothing needs carrying from another room.</li>
           <li>Thaw tomorrow's frozen prawns, wontons and bao in K6, not on the bench.</li>
           <li>Check the fryer oil level and colour in both tanks, and the gas bank gauge.</li>
           <li>Bar: change the keg if one is empty, check the CO&#8322; gauge, fill the ice machine, and chill the vodka bottles in the shot freezer.</li>
@@ -182,9 +190,9 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
           <li>Move rice to a tray to cool, and put cooked pork, broths and sauces in the chiller within 90 minutes.</li>
           <li>Filter the fryer oil. Change it when it is dark or smells. Record each change.</li>
           <li>Print or read the Order list, and send it to the suppliers.</li>
-          <li>Return unopened dry goods to the store room, fronts facing out, oldest at the front.</li>
+          <li>Put anything unopened back in its unit, labels facing out, oldest at the front.</li>
           <li>Close the gas at the cylinder bank, and check the hood and fryer controls are off.</li>
-          <li>Lock the spirits cage and the chemical cupboard, then lock the store room.</li>
+          <li>Lock B8 (spirits), the chemical cabinet CH and T1. Check the gas is off at the cylinder bank.</li>
         </ol>
       </div>
     </div>
@@ -192,20 +200,21 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
     <ul class="tight">
       <li>One person counts, and a second person checks the bar and the pork and prawn lines once a week.</li>
       <li>First in, first out: new stock goes behind old.</li>
-      <li>Nothing leaves the store room without being written on the sheet.</li>
+      <li>Nothing leaves a locked unit without being written on the sheet.</li>
       <li>Weigh an open bottle by eye in tenths. Count a full bottle as 1.0.</li>
       <li>Happy hour (12–6 pm) drives the lager and Crystal Clear numbers. Weekends need about 1.6 times a weekday.</li>
     </ul>
   </section>
 
   <section class="zone" id="checks">
-    <h2>7 · What is not verified</h2>
+    <h2>8 · What is not verified</h2>
     <ul class="tight">
       <li>Every quantity is my estimate from the menu, for 60 covers a day and an assumed dish mix. It is not from your recipe cards or sales. Change the covers box to scale it, then adjust each par after two weeks.</li>
       <li>Items marked A come from standard recipes. Check them against your own.</li>
       <li>Shelf lives and temperatures are typical values, not FSSAI limits. Check them with your food-safety consultant or your licence conditions.</li>
       <li>Where kegs, ice cream and bao come from and in what pack size is a choice for your suppliers. Pack sizes here (20 L kegs, 5 L ice-cream tubs, 1 L coconut-milk packs) are assumptions.</li>
-      <li>The store room layout uses the model's 2.70 × 6.46 m. Measure it, and the door position, on site.</li>
+      <li>The unit sizes assume the model's kitchen (5.21 × 4.18 m clear) and the granite platform piers. Measure the bays on site; the piers may not be where the model puts them.</li>
+      <li>Shelf lives are typical values for sealed and opened food, not FSSAI limits. The restock rhythm assumes your suppliers will deliver that often, which I haven't checked.</li>
       <li>The chiller space for the vegetables and dairy in K8 is a rough estimate: about 250 litres of food in a 400-litre unit. If it overflows, order vegetables every day or add a second under-counter chiller.</li>
     </ul>
   </section>
@@ -219,20 +228,20 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'
 
 /* ---------- locations ---------- */
 const LOC={
- 'SR-W1':['Store room · west rack 1','Oils, sauces and vinegars. Heavy tins and bottles on the bottom shelf.'],
- 'SR-W2':['Store room · west rack 2','Rice, noodles, flour, starches, sugar, salt, nuts and seeds. Bins with lids on the bottom shelf.'],
- 'SR-W3':['Store room · west rack 3','Tins, jars, spices and dried goods.'],
- 'SR-E1':['Store room · east rack 1','Paper, liners, gloves, bin bags, bill rolls.'],
- 'SR-E2':['Store room · east rack 2','Bar dry goods: tea, coffee, syrups, tinned fruit, sugar.'],
- 'SR-E3':['Store room · east rack 3','Onions, potatoes, garlic, ginger in ventilated crates.'],
- 'SR-BEV':['Store room · beverage stack','Beer, water, soft drinks, soda and mixers, on a pallet. Spare CO₂ cylinder chained upright.'],
- 'SR-SPIRIT':['Store room · spirits cage','Locked. Sealed spare bottles only. Open bottles live on the back bar.'],
- 'SR-CHEM':['Store room · chemical cupboard','Locked, low, away from food. Detergent, sanitiser, floor cleaner.'],
+ 'U1':['Kitchen · U1 under the granite, west bay','Slatted shelves 0.90 m wide, beside the veg wash sink. Onions, potatoes, garlic, ginger in ventilated crates.'],
+ 'U2':['Kitchen · U2 under the granite, east bay','Lockable cabinet 1.56 m wide, bins on wheels. Oil, rice, noodles, flours, sugar, salt and the heavy sauce cans.'],
+ 'U4':['Kitchen · U4 base cabinet under the pass shelf','Doors, 1.30 m wide. Paper, liners, gloves, bin bags, bill rolls.'],
+ 'T1':['Kitchen · T1 tall pantry cabinet','Lockable, 0.60 m wide, where the old store door was. Tins, paper towels, napkins and the overflow of bar drinks on the bottom shelves.'],
+ 'W1':['Kitchen · W1 wall cabinet over K8','Doors, 1.50 m wide, at 1.30 m. Spices, small sauce bottles, peanuts, sesame, pepper.'],
+ 'CH':['Dish wash · CH chemical wall cabinet','Locked, fixed to the masonry, 0.80 m wide at 1.30 m. Detergent, rinse aid, sanitiser, floor cleaner.'],
+ 'B1':['Bar · B1 back-bar cooler','Beer, water, soft drinks, soda, tonic, ginger ale. About 1.5 days of stock.'],
+ 'B4':['Bar · B4 cabinet under the POS','Tea, coffee, filters, brown sugar, kokum, black salt, Sichuan pepper, straws, cocktail sticks.'],
+ 'B8':['Bar · B8 lockable under-counter cabinet','Sealed spare spirits only. Open bottles live on the back bar.'],
  'K6':['Kitchen · K6 upright chiller','Raw non-veg and cooked pork.'],
  'K8':['Kitchen · K8 under-counter chiller','Vegetables and herbs (left), sauces and dairy (middle), eggs, tofu, paneer, mushrooms (right).'],
  'K7':['Kitchen · K7 freezer','Prawns, folded dumplings, bao, wrappers, edamame, fries, ice cream.'],
  'B9':['Bar · B9 under-counter fridge','Milk, cream, citrus, bar syrups and mixers that need cold.'],
- 'B5':['Bar · B5 keg chiller','Three kegs on tap.'],
+ 'B5':['Bar · B5 keg chiller','Three kegs on tap. Spare CO₂ cylinder chained beside it.'],
  'BACK':['Bar · back-bar shelves','One open bottle of each spirit, within reach of the bartender.']
 };
 const ORDER=Object.keys(LOC);
@@ -433,34 +442,126 @@ add('B5',[
  ['Guest tap keg, 20 L','keg',1,0,'M','Gimme Gimme Gimme, rotating','B5','New keg every second week.']
 ]);
 
-/* ---------- store room plan ---------- */
+/* ---------- no store room: remap every item to a kitchen, dish-wash or bar home ---------- */
 (function(){
- const P=100,W=2.70,H=6.46,M=55;const f=v=>Math.round(v*P*10)/10;
- const box=(x,y,w,h,c,id,dk)=>'<rect class="eq '+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>'+(id?'<text class="nm'+(dk?' dk':'')+'" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4" font-size="'+(w<0.6&&h>w?10:11)+'" '+(w<0.6&&h>w?'transform="rotate(-90 '+f(x+w/2)+' '+f(y+h/2)+')"':'')+'>'+id+'</text>':'');
- const dimH=(x1,x2,y,l)=>'<g><path class="dm" d="M'+f(x1)+' '+f(y)+'H'+f(x2)+'M'+f(x1)+' '+(f(y)-5)+'V'+(f(y)+5)+'M'+f(x2)+' '+(f(y)-5)+'V'+(f(y)+5)+'"/><text class="dt" x="'+f((x1+x2)/2)+'" y="'+(f(y)-7)+'">'+l+'</text></g>';
- const dimV=(x,y1,y2,l)=>'<g><path class="dm" d="M'+f(x)+' '+f(y1)+'V'+f(y2)+'M'+(f(x)-5)+' '+f(y1)+'H'+(f(x)+5)+'M'+(f(x)-5)+' '+f(y2)+'H'+(f(x)+5)+'"/><text class="dt" transform="translate('+(f(x)+13)+' '+f((y1+y2)/2)+') rotate(-90)">'+l+'</text></g>';
+ const to=(r)=>{const h=r[0],n=r[1];
+  if(h==='SR-W1')return /frying oil|Light soy|Dark soy|White vinegar|Honey|ketchup/.test(n)?'U2':'W1';
+  if(h==='SR-W2')return /pepper|peanuts|sesame|Brown sugar/.test(n)?'W1':'U2';
+  if(h==='SR-W3')return /coconut|Bamboo|Water chestnut/.test(n)?'T1':'W1';
+  if(h==='SR-E1')return /Paper towels|Napkins/.test(n)?'T1':'U4';
+  if(h==='SR-E2')return /Chickpeas|Lychee|Tamarind/.test(n)?'T1':'B4';
+  if(h==='SR-E3')return 'U1';
+  if(h==='SR-BEV')return /CO₂/.test(n)?'B5':'B1';
+  if(h==='SR-SPIRIT')return 'B8';
+  if(h==='SR-CHEM')return 'CH';
+  return h;};
+ R.forEach(r=>{r[0]=to(r);});
+ // with no store room, drinks are held at about 1.5 days and restocked three times a week
+ const HALF={'Kings 330 ml':36,'Kings 650 ml':12,'Budweiser 330 ml':24,'Budweiser 650 ml':6,'Still water, 1 L':24,'Sparkling water, 330 ml':12,'Coke, 300 ml':12,'Diet Coke, 300 ml':12,'Thums Up, 300 ml':12,'Sprite, 300 ml':12,'Soda water, 300 ml':36,'Indian tonic water, 200 ml':24,'Ginger ale, 200 ml':12};
+ R.forEach(r=>{if(HALF[r[1]]!=null)r[3]=HALF[r[1]];});
+ R.forEach(r=>{if(/^Veg frying oil|^Non-veg frying oil/.test(r[1]))r[3]=1;if(/^Kings 330|^Budweiser 330/.test(r[1]))r[8]='Held at about 1.5 days. Cold stock only.';});
+ R.forEach(r=>{if(r[1]==='Mayonnaise')r[8]='Buy in 1 kg packs; hold in K8 only.';});
+})();
+/* ---------- shelf life and restock, by item ---------- */
+const MR=[
+ [/frying oil/,'12 months sealed. Fryer oil: change when dark, about every 3–5 days','Weekly'],
+ [/keg/,'About 6–8 weeks unopened and cold; about 1 week once tapped','Weekly'],
+ [/CO₂/,'Does not expire','On empty'],
+ [/Kings|Budweiser|water, |Coke|Thums|Sprite|Soda water|tonic|Ginger ale/,'6–12 months sealed; chill before serving','3 times a week'],
+ [/Chicken, boneless|wings/,'1–2 days at 5 °C or below; freeze on day 1 if not used','Daily'],
+ [/Fish fillet/,'1 day; use the day it arrives','Daily'],
+ [/thawed$|Prawns, peeled and deveined, thawed/,'24 hours once thawed','Daily (thaw from K7)'],
+ [/Pork belly, raw/,'2–3 days chilled','Every 2 days'],
+ [/Chouriço/,'2 weeks sealed; 5 days once opened','Weekly'],
+ [/Pork belly, braised/,'3 days in its liquid','Every 2 days'],
+ [/broth|Hot & sour base|Manchurian sauce/,'2 days','Every 2 days'],
+ [/Spring onion|Coriander|Holy basil|Garlic chives|Bok choy/,'2–3 days; stems in water','Daily'],
+ [/Lemongrass$|Galangal/,'1–2 weeks','Twice a week'],
+ [/Green chilli$|Bird/,'5–7 days','Twice a week'],
+ [/Capsicum|Aubergine|beans|^Tomato/,'4–5 days','Twice a week'],
+ [/Cabbage|Carrot|Cucumber|Green papaya/,'5–7 days','Twice a week'],
+ [/Limes|Lemons|Grapefruit/,'2–3 weeks','Twice a week'],
+ [/Edamame, frozen, thawed/,'1 day once thawed','Daily'],
+ [/Edamame, frozen$|French fries/,'9–12 months frozen','Weekly'],
+ [/Kaffir/,'12 months frozen','Monthly'],
+ [/Mayonnaise/,'3 months sealed; 1 week once opened','Weekly'],
+ [/Cheese/,'3–4 weeks','Weekly'],
+ [/Butter/,'1 month','Fortnightly'],
+ [/^Eggs/,'3–4 weeks (read the date on the tray)','Twice a week'],
+ [/Tofu/,'5 days sealed; 2 days opened','Twice a week'],
+ [/Paneer/,'7 days vacuum-packed; 2 days opened','Twice a week'],
+ [/mushrooms/,'3–5 days','Twice a week'],
+ [/^Milk/,'3 days','Every 2 days'],
+ [/Fresh cream/,'4–5 days; 2 days once whipped','Twice a week'],
+ [/Yakult/,'2–3 weeks','Weekly'],
+ [/Tomato juice/,'12 months sealed; 3 days opened','Weekly'],
+ [/Kimchi/,'14 days once fermented','Weekly'],
+ [/Green curry paste/,'7 days','Weekly'],
+ [/mayo/,'5 days','Twice a week'],
+ [/Pickled onion/,'5 days','Twice a week'],
+ [/chillies in vinegar/,'14 days','Fortnightly'],
+ [/Cooked rice/,'24 hours, cooled within 90 minutes','Daily'],
+ [/syrup|Syrup/,'7 days','Weekly'],
+ [/iced tea/,'24 hours','Daily'],
+ [/infused/,'Months once strained; infuse 48 hours','Every 2 weeks'],
+ [/wontons|dumplings|Siu mai|siu mai/,'30 days frozen; 24 hours thawed','Weekly'],
+ [/Prawns, peeled and deveined, frozen/,'3–6 months frozen','Weekly'],
+ [/Bao buns|Wonton wrappers/,'3 months frozen','Weekly'],
+ [/ice cream/,'3 months at -18 °C; use within 6 weeks once open','Weekly'],
+ [/Coconut milk|Coconut cream|Bamboo|Water chestnut|Chickpeas|Lychee/,'12–24 months sealed; 2 days once opened, chilled in a lidded tub','Weekly'],
+ [/Tamarind|Kasundi/,'12 months sealed; 1 month once opened, chilled','Monthly'],
+ [/Hoisin|Gochujang|Sweet chilli/,'12 months sealed; 3 months once opened, chilled','Weekly'],
+ [/soy|Oyster|Fish sauce|vinegar|Black vinegar|sesame oil|ketchup|Honey|Chocolate/,'12–24 months sealed; 1–3 months once opened','Weekly'],
+ [/rice|noodles|Noodles/,'12 months sealed, in a lidded bin','Weekly'],
+ [/flour|Flour|starch|Cornflour/,'9–12 months, dry and sealed','Weekly'],
+ [/Onion|onion|Potato|Garlic|Ginger/,'Onion 3–4 weeks, potato 3 weeks, garlic 4 weeks, ginger 2 weeks. Cool and ventilated','Twice a week'],
+ [/sugar|Salt|pepper|Pepper|jaggery|peanuts|sesame seeds|flakes|anise|Cinnamon|Cumin|Coriander seeds|kokum|Black salt|Sichuan/,'6–12 months dry; peanuts 3 months','Fortnightly'],
+ [/tea leaves|coffee, ground|filters/,'Tea 12 months; ground coffee 2 weeks once opened','Fortnightly'],
+ [/Greaseproof|liners|Napkins|Nitrile|caps|Cling|foil|Bin bags|Paper towels|straws|Cocktail|Thermal/,'Does not expire','Weekly'],
+ [/Scourers/,'Does not expire','Monthly']
+];
+function META(r){
+ if(r[2]==='btl')return['Years sealed; an open bottle keeps 1–2 years','Monthly'];
+ if(r[0]==='CH')return['12–24 months','Monthly'];
+ for(const [re,l,f] of MR)if(re.test(r[1]))return[l,f];
+ return['—','Weekly'];
+}
+const FREQ=['Daily','Daily (thaw from K7)','Every 2 days','Twice a week','3 times a week','Weekly','Fortnightly','Every 2 weeks','Monthly','On empty'];
+
+/* ---------- kitchen storage plan ---------- */
+(function(){
+ const P=100,W=5.21,H=4.18,M=45;const f=v=>Math.round(v*P*10)/10;
+ const box=(x,y,w,h,c,id,dk)=>'<rect class="eq '+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>'+(id?'<text class="nm'+(dk?' dk':'')+'" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4" font-size="11">'+id+'</text>':'');
+ const dash=(x,y,w,h,id)=>'<rect x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" fill="none" stroke="var(--brass)" stroke-width="2" stroke-dasharray="7 5"/>'+(id?'<text class="nm dk" style="fill:var(--brass-ink)" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4" font-size="11">'+id+'</text>':'');
  let s='<rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';
- s+='<path class="gap" d="M'+f(0.85)+' -5H'+f(1.75)+'"/>';
- s+='<text class="zt" x="'+f(1.3)+'" y="-14" text-anchor="middle">Door from kitchen 0.90</text>';
- s+=box(0,0.1,0.5,1.5,'r1','W1')+box(0,1.6,0.5,1.5,'r2','W2')+box(0,3.1,0.5,1.5,'r3','W3');
- s+=box(2.2,0.1,0.5,1.5,'r4','E1',1)+box(2.2,1.6,0.5,1.5,'r4','E2',1)+box(2.2,3.1,0.5,1.5,'r5','E3',1);
- s+=box(0,4.75,0.5,1.2,'r1','CHEM')+box(2.1,4.75,0.6,1.2,'r3','BEV')+box(0.6,5.96,1.2,0.5,'r6','SPIRITS');
- s+='<text class="zt" x="'+f(1.35)+'" y="'+f(3.0)+'" text-anchor="middle">aisle 1.70</text>';
- s+=dimH(0.5,2.2,4.95,'1.70');
- s+=dimV(W+0.28,0.1,4.6,'6 racks, 4 shelves each');
+ s+='<path class="gap" d="M-5 '+f(0.25)+'V'+f(1.15)+'"/>';   // kitchen door
+ s+=box(0.90,0,3.36,0.62,'r6','granite K10',0);
+ s+=box(4.46,0.35,0.75,3.82,'r1','HOT LINE');
+ s+=box(0.40,3.38,0.78,0.80,'r3','K6')+box(1.18,3.38,0.78,0.80,'r3','K7')+box(1.96,3.48,1.50,0.70,'r3','K8');
+ s+=box(1.6,1.70,1.50,0.60,'r5','K9',1);
+ // storage units
+ s+=box(1.6,0.0,0.9,0.62,'r4','U1',1)+box(2.64,0.0,1.56,0.62,'r2','U2');
+ s+=box(0,2.2,0.45,1.30,'r4','U4',1);
+ s+=box(3.46,3.58,0.60,0.60,'r2','T1');
+ s+=dash(1.96,3.88,1.5,0.30,'W1 on the wall above K8');
+ s+=dash(1.6,2.30,1.5,0.10,'');
+ s+='<text class="zt" x="'+f(2.35)+'" y="'+f(2.58)+'" text-anchor="middle">K9: undershelf for trays, waste bin</text>';
+ s+='<text class="zt" x="'+f(3.76)+'" y="'+f(4.42)+'" text-anchor="middle" style="font-size:9px">old store door, closed</text>';
+ s+='<text class="zt" x="'+f(2.6)+'" y="'+f(1.4)+'" text-anchor="middle" style="font-size:9px">aisle 1.08</text>';
+ s+='<text class="zt" x="'+f(0.35)+'" y="'+f(1.95)+'" style="font-size:9px">door</text>';
  const el=document.getElementById('svgS');
- el.setAttribute('viewBox',(-M)+' '+(-M)+' '+(W*P+M*2+30)+' '+(H*P+M*1.6));
+ el.setAttribute('viewBox',(-M)+' '+(-M)+' '+(W*P+M*2)+' '+(H*P+M*1.6));
  el.innerHTML=s;
  document.getElementById('tS').innerHTML='<thead><tr><th>Code</th><th>Unit (W × D × H, m)</th><th>What goes there</th></tr></thead><tbody>'+[
-  ['W1','Rack 1.50 × 0.50 × 1.80','Oils, sauces, vinegars. 15 L oil tins on the floor shelf.'],
-  ['W2','Rack 1.50 × 0.50 × 1.80','Rice, noodles, flour and starches in lidded bins; sugar, salt, nuts, seeds.'],
-  ['W3','Rack 1.50 × 0.50 × 1.80','Tins, jars, spices, dried goods.'],
-  ['E1','Rack 1.50 × 0.50 × 1.80','Paper, liners, gloves, bags, bill rolls.'],
-  ['E2','Rack 1.50 × 0.50 × 1.80','Tea, coffee, syrups, tinned fruit and chickpeas.'],
-  ['E3','Rack 1.50 × 0.50 × 1.80','Onions, potatoes, garlic, ginger in slatted crates.'],
-  ['BEV','Pallet stack 1.20 × 0.60 × 1.20','Beer, water, soft drinks, soda, mixers, spare CO₂ cylinder.'],
-  ['SPIRITS','Locked cage 1.20 × 0.50 × 1.80','Sealed spare spirits only.'],
-  ['CHEM','Locked cupboard 1.20 × 0.50 × 1.80','Cleaning chemicals, low and away from food.']
+  ['U1','Slatted shelves 0.90 × 0.55 × 0.80, under the granite K10, west bay','Onions, potatoes, garlic, ginger in ventilated crates. Beside the veg wash sink.'],
+  ['U2','Lockable cabinet 1.56 × 0.55 × 0.80, under K10, east bay','Two 15 L oil tins, rice and noodle bins (20 L, on wheels), flour and starch bins, sugar, salt, 5 and 10 L sauce cans.'],
+  ['U4','Base cabinet 1.30 × 0.45 × 0.90, under the pass shelf K11','Basket and steamer liners, gloves, caps, bin bags, bill rolls, cling film, foil.'],
+  ['T1','Tall lockable cabinet 0.60 × 0.50 × 1.95, where the old store door was','Tins (coconut milk, bamboo shoot, chestnuts, chickpeas, lychee), paper towels, napkins, and the bottom two shelves for spare drinks cartons.'],
+  ['W1','Wall cabinet 1.50 × 0.30 × 0.80, at 1.30 m above the K8 worktop','Spices, small sauce bottles, peanuts, sesame, pepper.'],
+  ['CH','Locked wall cabinet 0.80 × 0.30 × 0.80, at 1.30 m in the dish wash','Detergent, rinse aid, sanitiser, floor cleaner. Fix to the masonry; the full cans weigh about 40 kg.'],
+  ['B4','Cabinet 0.60 × 0.60 × 0.85, under the POS at the bar','Tea, coffee, filters, brown sugar, kokum, black salt, Sichuan pepper, straws, cocktail sticks.'],
+  ['B8','Lockable under-counter cabinet 1.10 × 0.60 × 0.85 in the bar counter','Sealed spare spirits, about 45 bottles.'],
+  ['K9 under','Open undershelf 1.44 × 0.55 × 0.20, under the island','Trays, GN pans, clean containers; the non-veg waste bin at the west end.']
  ].map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join('')+'</tbody>';
 })();
 
@@ -514,14 +615,14 @@ function load(){try{data=JSON.parse(localStorage.getItem(key())||'{}');}catch(e)
 function save(){try{localStorage.setItem(key(),JSON.stringify(data));}catch(e){}}
 const num=v=>{const n=parseFloat(v);return isNaN(n)?null:n;};
 function render(){
- const cov=Math.max(10,parseInt(covEl.value)||60),sel=locEl.value;let h='<thead><tr><th>Item</th><th>Unit</th><th>Par</th><th>Open</th><th>In</th><th>Close</th><th>Used</th><th>Order</th></tr></thead><tbody>';
+ const cov=Math.max(10,parseInt(covEl.value)||60),sel=locEl.value;let h='<thead><tr><th>Item</th><th>Unit</th><th>Par</th><th>Keeps</th><th>Restock</th><th>Open</th><th>In</th><th>Close</th><th>Used</th><th>Order</th></tr></thead><tbody>';
  ORDER.forEach(code=>{
   if(sel&&sel!==code)return;
   const rows=R.map((r,i)=>[r,i]).filter(x=>x[0][0]===code);if(!rows.length)return;
-  h+='<tr><th class="g" colspan="8">'+esc(LOC[code][0])+'<small style="font:400 12.5px var(--body);color:var(--muted);display:block;letter-spacing:0;margin-top:2px">'+esc(LOC[code][1])+'</small></th></tr>';
+  h+='<tr><th class="g" colspan="10">'+esc(LOC[code][0])+'<small style="font:400 12.5px var(--body);color:var(--muted);display:block;letter-spacing:0;margin-top:2px">'+esc(LOC[code][1])+'</small></th></tr>';
   rows.forEach(([r,i])=>{
    const d=data[i]||{};
-   h+='<tr data-i="'+i+'"><td class="nm">'+esc(r[1])+'<span class="tag '+(r[5]==='A'?'A':r[5]==='P'?'P':'')+'">'+r[5]+'</span><small>'+esc(r[8]?r[8]+' ':'')+'Used in: '+esc(r[6])+'. Working spot: '+esc(r[7])+'.</small></td><td>'+r[2]+'</td><td class="n par">'+fmt(par(r,cov))+'</td>'+
+   h+='<tr data-i="'+i+'"><td class="nm">'+esc(r[1])+'<span class="tag '+(r[5]==='A'?'A':r[5]==='P'?'P':'')+'">'+r[5]+'</span><small>'+esc(r[8]?r[8]+' ':'')+'Used in: '+esc(r[6])+'. Working spot: '+esc(r[7])+'.</small></td><td>'+r[2]+'</td><td class="n par">'+fmt(par(r,cov))+'</td><td class="lf">'+esc(META(r)[0])+'</td><td class="rs">'+esc(META(r)[1])+'</td>'+
     ['o','n','c'].map(k=>'<td><input inputmode="decimal" data-k="'+k+'" value="'+(d[k]!=null?esc(d[k]):'')+'" aria-label="'+esc(r[1])+' '+k+'"></td>').join('')+'<td class="n used"></td><td class="n ord"></td></tr>';
   });
  });
@@ -560,10 +661,15 @@ document.getElementById('csvbtn').onclick=()=>{
 const byHome={};R.forEach(r=>byHome[r[0]]=(byHome[r[0]]||0)+1);
 document.getElementById('cards').innerHTML=[
  ['Items on the list',R.length+'','across '+Object.keys(byHome).length+' storage locations'],
- ['Store room','6 racks + 3 bays','2.70 × 6.46 m, layout in section 2'],
+ ['Storage','9 units','all inside the kitchen, dish wash and bar'],
  ['Cold stock',(byHome.K6+byHome.K8+byHome.K7+byHome.B9+byHome.B5)+' items','K6, K8, K7, B9, B5'],
  ['Counts','Daily · weekly · monthly','open and close, one sheet']
 ].map(c=>'<div class="cd"><span>'+c[0]+'</span><b>'+c[1]+'</b><span>'+c[2]+'</span></div>').join('');
+(function(){
+ const g={};R.forEach(r=>{const f=META(r)[1];(g[f]=g[f]||[]).push(r);});
+ const keys=Object.keys(g).sort((a,b)=>{const i=FREQ.indexOf(a),j=FREQ.indexOf(b);return (i<0?99:i)-(j<0?99:j);});
+ document.getElementById('tF').innerHTML='<thead><tr><th>Order</th><th>Items</th></tr></thead><tbody>'+keys.map(k=>'<tr><td class="id">'+esc(k)+'<br><span class="k">'+g[k].length+' items</span></td><td>'+g[k].map(r=>esc(r[1])).join(', ')+'</td></tr>').join('')+'</tbody>';
+})();
 load();render();
 })();
 </script>

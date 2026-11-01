@@ -114,6 +114,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
       </div>
     </div>
     <div class="call"><b>Hot line.</b> The four cooking units total 3.82 m on the east wall, under one hood. That leaves 0.36 m of the 4.18 m wall free. The island leaves 1.08 m of aisle on each side, and 1.36 m between the island and the cooks.</div>
+    <div class="call"><b>Storage is built into the kitchen.</b> The store room is now staff accommodation, so the old store door in the south wall is closed. Dry goods live under the granite (K22 and K23), under the pass shelf (K11), in a tall pantry cabinet (K24) and in a wall cabinet over the chillers (K25). The stock plan lists what goes in each, with shelf lives and restock days. T1 (K24) stands 0.40 m from the wok burner; use steel and a splash panel.</div>
     <div class="call"><b>Veg and non-veg are kept apart.</b> Raw meat and seafood are prepared only on the island (K9), next to the non-veg chiller (K6). Vegetables are prepared only at the west end of the granite platform (K10), beside a veg wash sink (K21) and the veg chiller (K8). Raw meat never goes on K10. Plates are finished at the pass shelf (K11). The hand-wash basin (K13) is the only basin for hands; never wash hands in K21.</div>
     <h3>No oven, grill or tandoor</h3>
     <p>Nothing on the menu is baked or grilled. Pork belly braises in a pot on the stock range, bao is steamed, and everything else is wok, fryer or steamer. A combi oven is a later purchase if you want to batch the braise.</p>
@@ -213,7 +214,7 @@ const KIT=[
  ['K8','Under-counter 3-door chiller with worktop',1,1.50,0.70,0.90,'Veg, sauces, garnish, dairy',1],
  ['K9','SS work table with undershelf (island): NON-VEG prep only',1,1.50,0.60,0.85,'Raw chicken, pork, prawns and fish; dumpling filling. Red board (meat) and blue board (seafood)',1],
  ['K10','Black granite platform (already built)',1,3.36,0.62,0.90,'West end (0.9 to 2.4 m): VEG prep. East end: machines and rice. Plate at the pass shelf K11',1,1],
- ['K11','Pass shelf with 3 heat lamps (at the pass window)',1,1.30,0.45,0.95,'Plates wait here for the runners',0],
+ ['K11','Pass shelf with 3 heat lamps, on a base cabinet (U4)',1,1.30,0.45,0.95,'Plates wait on top. The cabinet below holds liners, gloves, bin bags, bill rolls',1],
  ['K12','Wall shelves, 2 tiers (spice, mise)',2,0.90,0.30,0.04,'West wall, at 1.05 m and 1.35 m',0],
  ['K13','Hand-wash basin, wall-hung, with soap and towel',1,0.45,0.40,0.85,'Not in the model; the washroom basin is the only one on site',1],
  ['K14','Rice cooker / warmer, 10 L',1,0.45,0.45,0.45,'On K10, east end. Plain Jane and rice bowls',0],
@@ -221,8 +222,12 @@ const KIT=[
  ['K16','Granite mortar and pestle',1,0.25,0.25,0.20,'On K10, between the veg zone and the mixer. Papaya salad',0],
  ['K17','Planetary mixer, 10 L (benchtop)',1,0.40,0.45,0.65,'On K10, east end. Bao and dumpling dough. Skip it if you buy frozen',0],
  ['K18','KOT thermal printer',1,0.14,0.20,0.14,'On K11. Orders from your POS',0],
- ['K19','Waste bin, wet',1,0.40,0.40,0.60,'Under K10 at the east end, below the mixer-grinder',1],
+ ['K19','Waste bins: red non-veg (under K9), green veg (under the K21 sink)',2,0.35,0.35,0.55,'Colour-coded, lidded, on the floor under the benches',1],
  ['K21','Veg wash sink, single bowl, set into K10',1,0.60,0.45,0.25,'West end of K10, plumbed from the dish-wash side of the wall. Green board beside it for veg only',0],
+ ['K22','U1 slatted shelves under K10, west bay: onions, potatoes, garlic, ginger',1,0.90,0.55,0.80,'Ventilated crates, beside the veg wash sink',0],
+ ['K23','U2 lockable cabinet under K10, east bay',1,1.56,0.55,0.80,'Oil tins, rice, noodle, flour and starch bins, sugar, salt, heavy sauce cans',0],
+ ['K24','T1 tall lockable pantry cabinet, at the closed old store door',1,0.60,0.50,1.95,'Tins, paper towels, napkins, spare drinks cartons. 0.40 m from the wok burner: steel, with a splash panel',1],
+ ['K25','W1 wall cabinet over the K8 worktop, at 1.30 m',1,1.50,0.30,0.80,'Spices, small sauce bottles, peanuts, sesame, pepper',0],
  ['K20','Fire extinguishers (ABC and K-class) and fire blanket',3,0.15,0.15,0.50,'Near the door; the model has 3 extinguishers',0]
 ];
 const DISH=[
@@ -237,17 +242,18 @@ const DISH=[
  ['D8','Waste bins (dry, recycling)',2,0.40,0.40,0.60,'The wet bin is K19 in the kitchen',1],
  ['D9','Mop sink or bucket station',1,0.50,0.50,0.25,'South wall, east end',1],
  ['D10','Detergent and sanitiser dispenser',1,0.30,0.20,0.60,'Wall-mounted by D3',0],
+ ['D12','CH locked chemical wall cabinet, at 1.30 m',1,0.80,0.30,0.80,'Detergent, rinse aid, sanitiser, floor cleaner. Fix to the masonry',0],
  ['D11','Floor drain grating (already modelled)',1,1.30,0.35,0.02,'In the aisle',0,1]
 ];
 const BAR=[
  ['B1','Back-bar bottle cooler, 2 glass doors',1,1.20,0.60,0.85,'Beer bottles, mixers, wine, soft drinks',0],
  ['B2','Under-counter ice machine, 50 kg/day',1,0.50,0.60,0.82,'Highballs, cocktails, pitchers',0],
  ['B3','Under-counter glass washer, 50 × 50 basket',1,0.50,0.60,0.82,'Pint, 330 ml, highball, rocks, coupe',0],
- ['B4','POS nook: terminal, printer, cash drawer',1,0.60,0.60,0.20,'Sits on the back-bar top at the pier end',0],
+ ['B4','POS nook: terminal, printer, cash drawer, on a cabinet',1,0.60,0.60,0.20,'The cabinet below holds tea, coffee, filters, brown sugar, kokum, straws',0],
  ['B5','Keg chiller for 3 × 20 L kegs, with CO₂ cylinder (2–3 kg)',1,1.00,0.60,0.85,'Comrade Crisp, Gose Bumps, guest tap. Inside the counter',0],
  ['B6','Brass tap font, 3 taps',1,0.60,0.20,0.45,'On the counter top above B5',0],
  ['B7','Bar sink and ice well (hand wash and rinse)',1,0.70,0.55,0.85,'At the staff-entry end',0],
- ['B8','Under-bar drawers for glass, straws, bar tools',1,1.10,0.60,0.85,'Fills the counter between B7 and B5',0],
+ ['B8','Lockable under-counter cabinet for spare spirits and bar tools',1,1.10,0.60,0.85,'About 45 sealed bottles; open bottles live on the back bar. Fills the counter between B7 and B5',0],
  ['B9','Under-counter fridge (milk, cream, lime, garnish)',1,0.60,0.60,0.85,'Under the coffee station',0],
  ['B10','Under-counter shot freezer, -5 °C',1,0.60,0.60,0.85,'Vodka shots; Haku, Belvedere, house infusions',0],
  ['B11','Twin filter-coffee brewer',1,0.45,0.40,0.65,'On the coffee station top',0],
@@ -282,7 +288,7 @@ const SERV=[
  ['Electrical','3-phase supply, roughly 25–30 kW connected (an estimate). Fridges and freezers on their own circuit; generator or UPS cover for them. Dishwasher and glass washer need their own supplies.'],
  ['Water and drainage','Overhead tank, hot water for D3 and D5, floor drain trough 0.15 wide along the hot line, anti-skid floor sloping to the drain, grease trap about 0.60 × 0.40 × 0.40 on the kitchen and dish-wash drain.'],
  ['Pest control','Wall-mounted UV fly catcher (about 0.45 × 0.15 × 0.60) at the kitchen door; mesh on the louvres.'],
- ['Dry store','6 four-tier racks, each 1.50 × 0.50 × 1.80, in the 2.70 × 6.46 m store room. It has space for 8.'],
+ ['Dry store','None. The store room is staff accommodation, so storage is under the granite and in cabinets in the kitchen (K22 to K25), a chemical cabinet in the dish wash (D12) and cabinets at the bar (B4, B8). See the stock plan.'],
  ['Safety and hygiene','First-aid kit, colour-coded boards, wall thermometer log sheets, hand-wash soap at K13, B7 and the washroom.']
 ];
 
@@ -312,16 +318,16 @@ document.getElementById('cards').innerHTML=
 (function(){
  const W=5.21,H=4.18;let s=room(W,H);
  // openings: kitchen door (west), pass window (west), dish-wall window (north), store door (south)
- s+=gapV(0,0.25,1.15)+winV(0,2.2,3.5)+winH(0,2.3,3.3)+gapH(H,3.47,4.37);
+ s+=gapV(0,0.25,1.15)+winV(0,2.2,3.5)+winH(0,2.3,3.3)+gapH(H,3.47,3.47);
  s+='<path class="arc" d="M0 '+f(0.25)+'A'+f(0.9)+' '+f(0.9)+' 0 0 1 '+f(0.9)+' '+f(0.25)+'"/>';
- s+='<path class="arc" d="M'+f(3.47)+' '+f(H)+'A'+f(0.9)+' '+f(0.9)+' 0 0 0 '+f(3.47)+' '+f(H-0.9)+'"/>';
  s+=dash(4.08,0.30,1.13,3.88,'Hood K5');
  s+=box(4.46,0.35,0.75,0.95,'hot','K2')+box(4.46,1.30,0.75,0.90,'hot','K3')+box(4.46,2.20,0.75,0.90,'hot','K4')+box(4.46,3.10,0.75,1.07,'hot','K1');
  s+=box(0.90,0,3.36,0.62,'exist','K10',{light:1});
  s+=box(0.95,0.08,0.60,0.45,'wet','K21')+box(1.65,0.07,0.70,0.46,'vb')+txt(2.0,0.34,'veg board','zt','text-anchor="middle" style="font-size:9px;fill:#fff"');
  s+=box(2.45,0.15,0.25,0.25,'top','K16')+box(2.8,0.08,0.40,0.45,'top','K17')+box(3.3,0.08,0.45,0.45,'top','K14')+box(3.8,0.12,0.40,0.30,'top','K15');
- s+=dash(3.7,0.10,0.40,0.40)+txt(4.0,0.78,'K19','zt','text-anchor="middle" style="font-size:9px"');
- s+=txt(1.65,0.82,'VEG PREP','note','')+txt(3.25,0.82,'MACHINES, RICE','note','');
+ s+=dash(2.72,0.06,1.46,0.5)+txt(3.45,0.7,'K23 (U2)','zt','text-anchor="middle" style="font-size:9px"')+dash(1.62,0.06,0.88,0.5)+txt(2.06,0.7,'K22 (U1)','zt','text-anchor="middle" style="font-size:9px"')+dash(1.0,0.12,0.36,0.36)+dash(1.66,1.82,0.36,0.36)+txt(1.86,2.08,'K19','zt','text-anchor="middle" style="font-size:9px"');
+ s+=txt(1.65,0.95,'VEG PREP','note','')+txt(3.25,0.95,'MACHINES, RICE','note','');
+ s+=box(3.46,3.58,0.60,0.60,'std','K24')+dash(1.96,3.84,1.5,0.34)+txt(2.7,3.78,'K25 wall cabinet above','zt','text-anchor="middle" style="font-size:9px"');
  s+=box(0.40,3.38,0.78,0.80,'cold','K6')+box(1.18,3.38,0.78,0.80,'cold','K7')+box(1.96,3.48,1.50,0.70,'cold','K8');
  s+=box(1.6,1.70,1.50,0.60,'std','K9')+box(1.68,1.77,0.60,0.46,'rb')+box(2.38,1.77,0.60,0.46,'bb')+txt(1.98,2.0,'raw','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+txt(2.68,2.0,'fish','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+txt(2.35,2.48,'NON-VEG PREP','note','');
  s+=box(0,2.2,0.45,1.30,'std','K11')+box(0.12,3.05,0.14,0.20,'top');
