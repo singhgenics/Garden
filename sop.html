@@ -115,6 +115,24 @@ section{padding-block:52px 4px}
 .words b{font-family:var(--f-mono);font-weight:500;color:var(--red)}
 .note{margin-top:36px;padding:16px 20px;border:2px dashed var(--muted);color:var(--muted);font-size:16px}
 .note b{color:var(--ink)}
+/* guest care */
+.moments{display:grid;gap:16px}
+.moment{background:var(--paper);border:2px solid var(--ink);border-left:12px solid var(--amber);padding:16px 18px;min-width:0}
+.moment h3{font-size:26px;display:flex;gap:14px;align-items:baseline}
+.moment h3 span{font:700 44px/1 var(--f-display);color:var(--amber)}
+.moment .goal{color:var(--muted);margin:4px 0 8px}
+.moment ul{margin:0;padding-left:22px;display:grid;gap:5px}
+.moment .q{margin-top:12px;padding:10px 14px;background:var(--bg);border-left:4px solid var(--amber);font-style:italic}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.three div{border:2px solid var(--ink);background:var(--paper);padding:14px 16px;min-width:0}
+.three b{display:block;font:700 30px/1.1 var(--f-display);text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.tbl{overflow-x:auto;border:2px solid var(--ink);background:var(--paper)}
+.tbl table{border-collapse:collapse;width:100%;min-width:560px;font-size:17px}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+.tbl th{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;background:var(--band);color:var(--on-band)}
+.tbl td:first-child{font-weight:700}
+.no{color:var(--red)}
+.ok{color:var(--green)}
 body.embed .site,body.embed .mast{display:none}
 body.embed section:first-of-type{padding-top:28px}
 @media(max-width:520px){.steps li{grid-template-columns:40px minmax(0,1fr);gap:0 10px}.steps li::before{width:36px;height:36px}}
@@ -128,7 +146,7 @@ body.embed section:first-of-type{padding-top:28px}
   </div>
 </header>
 <nav class="rail full" aria-label="Sections"><div class="wrap">
-  <a href="#rules">10 rules</a><a href="#journey">An order</a><a href="#tickets">Screens</a><a href="#people">Each person</a><a href="#daily">Daily lists</a><a href="#wrong">If it goes wrong</a><a href="#practice">Practise</a><a href="#words">Words</a>
+  <a href="#rules">10 rules</a><a href="#guest">Guest care</a><a href="#journey">An order</a><a href="#tickets">Screens</a><a href="#people">Each person</a><a href="#daily">Daily lists</a><a href="#wrong">If it goes wrong</a><a href="#practice">Practise</a><a href="#words">Words</a>
 </div></nav>
 
 <main class="wrap">
@@ -151,6 +169,207 @@ body.embed section:first-of-type{padding-top:28px}
     <li><b>Drinks: 21 and over, and sober</b><span>No alcohol for anyone under 21. No more drinks for anyone who is drunk.</span></li>
     <li><b>Clean as you go, and say thank you</b><span>Wipe spills straight away. Say "Thank you, see you soon" to every guest at the door.</span></li>
   </ol>
+</section>
+
+<section id="guest">
+  <div class="head">
+    <div class="label">Why guests come back</div>
+    <h2>Guest care</h2>
+    <p>Good food gets a guest to try us once. How we make them feel gets them to return and to bring friends. This section is a promise we keep on every table, every day. You do not need experience. You need to follow the steps and be kind.</p>
+  </div>
+
+  <div class="three">
+    <div><b>Seen</b>Every guest is noticed the moment they arrive and is never left wondering if anyone knows they are here.</div>
+    <div><b>Looked after</b>We notice what they need before they ask: a refill, a sauce, a clean plate, a chair for a child.</div>
+    <div><b>Remembered</b>We learn their name and what they like, and use it the next time. This is what turns a guest into a regular.</div>
+  </div>
+
+  <h3 style="margin:40px 0 14px">The seven moments</h3>
+  <div class="moments">
+
+    <article class="moment">
+      <h3><span>1</span>Before they arrive</h3>
+      <p class="goal">Goal: the guest feels expected.</p>
+      <ul>
+        <li>Answer the phone within 3 rings. Say: "Cabin East, good evening, this is [name]."</li>
+        <li>For a booking, write down the name, phone number, number of guests, time and any allergy or celebration (birthday, anniversary).</li>
+        <li>Send a WhatsApp the day before: "Hello [name], your table for [number] is booked tomorrow at [time]. See you at Cabin East." If they do not reply, do not worry. Hold the table for 15 minutes past the time.</li>
+        <li>Set the booked table 10 minutes early. Put a small "Reserved, [name]" card on it.</li>
+        <li>Check the bookings at the pre-shift huddle so everyone knows who is coming.</li>
+      </ul>
+    </article>
+
+    <article class="moment">
+      <h3><span>2</span>The welcome (first 30 seconds)</h3>
+      <p class="goal">Goal: the guest feels welcome before they sit down.</p>
+      <ul>
+        <li>Look up, smile and say hello within 30 seconds. Stop what you are doing, even for a moment.</li>
+        <li>Say "Welcome to Cabin East." If it is a booking: "Welcome, [name], your table is ready."</li>
+        <li>Walk them to the table. Do not point. Pull out a chair for anyone who needs help.</li>
+        <li>Choose a good table for them. A couple gets a quieter corner, a family gets room for a pram or a highchair, an older person gets a seat near the entrance and away from the fan.</li>
+        <li>Tell them about the PVC curtains and fans: "Is the temperature comfortable? I can adjust it."</li>
+        <li><b>If we are full:</b> never just say "no table". Say the real wait ("about 15 minutes"), take a name and phone number, and offer a drink from the bar while they wait. Call them by name when the table is ready.</li>
+      </ul>
+      <p class="q">"Welcome to Cabin East! Is this your first time with us?"</p>
+    </article>
+
+    <article class="moment">
+      <h3><span>3</span>Helping them choose</h3>
+      <p class="goal">Goal: the guest orders something they will love.</p>
+      <ul>
+        <li>If it is their first time, guide them: "Most people start with dim sum to share, then one main each. Would you like to taste our craft beers?"</li>
+        <li>Ask what they like: spicy or mild, vegetarian or not, any allergy. Then suggest two or three dishes. Do not read the whole menu.</li>
+        <li>Suggest, never push. If they say no to a drink or a dessert, smile and move on.</li>
+        <li>Be honest. If a dish is very spicy or takes longer, say so. If something has run out, say it before they order.</li>
+        <li>Tell them the real wait: "Your food will be about 15 minutes. I'll bring your drinks first."</li>
+        <li>Read the order back. Write allergies on the order and tell the chef yourself.</li>
+      </ul>
+      <p class="q">"Anything you do not eat, or any allergies I should tell the chef about?"</p>
+    </article>
+
+    <article class="moment">
+      <h3><span>4</span>During the meal</h3>
+      <p class="goal">Goal: the guest never has to ask for anything.</p>
+      <ul>
+        <li>Every time you walk past, glance at your tables. Look for: an empty glass, a finished plate, a guest looking around for you.</li>
+        <li>Fill water without asking. Offer another drink when a glass is a quarter full.</li>
+        <li>Check back two minutes after the food arrives. Ask a real question: "How is the chilli chicken?" is better than "Is everything okay?"</li>
+        <li>Clear finished plates quickly, but never while someone is still eating at the table.</li>
+        <li>Bring extra sauce, chopsticks, napkins and tissue before they ask.</li>
+        <li>Do not hover and do not interrupt a conversation. Wait for a pause.</li>
+        <li>Keep the music at a level where people can talk without raising their voice.</li>
+        <li>If a guest is unhappy with anything, go to step 5 straight away.</li>
+      </ul>
+    </article>
+
+    <article class="moment">
+      <h3><span>5</span>When something goes wrong</h3>
+      <p class="goal">Goal: the guest leaves happier than if nothing had gone wrong.</p>
+      <p style="margin-bottom:8px">A guest who sees a problem fixed well often trusts us more than one who never had a problem. Use <b>L.A.S.T.</b>:</p>
+      <ul>
+        <li><b>Listen.</b> Let them finish. Do not interrupt, argue or explain.</li>
+        <li><b>Apologise.</b> Say sorry once, sincerely: "I am sorry about that."</li>
+        <li><b>Solve.</b> Fix it right now: remake the dish, replace the drink, bring the bill again. Tell them what you are doing and how long it will take.</li>
+        <li><b>Thank.</b> "Thank you for telling me. It helps us do better."</li>
+      </ul>
+      <div class="tbl" style="margin-top:14px"><table>
+        <thead><tr><th>Problem</th><th>Server does straight away</th><th>Owner decides</th></tr></thead>
+        <tbody>
+          <tr><td>Dish is late</td><td>Update the guest, bring water or a small snack</td><td>A small gesture if it is over 20 minutes</td></tr>
+          <tr><td>Wrong or cold dish</td><td>Take it away, ask the kitchen to remake it</td><td>Whether the dish is charged</td></tr>
+          <tr><td>A guest is rude or upset</td><td>Stay calm, listen, fetch an owner</td><td>Everything else</td></tr>
+          <tr><td>Wrong bill</td><td>Fix it, apologise</td><td>Whether to take anything off</td></tr>
+          <tr><td>Something broken or spilled on a guest</td><td>Help at once, fetch an owner</td><td>Cleaning cost or a gesture</td></tr>
+        </tbody>
+      </table></div>
+      <p class="q">"I am so sorry. Let me fix this right now. It will take about five minutes."</p>
+    </article>
+
+    <article class="moment">
+      <h3><span>6</span>The bill and goodbye</h3>
+      <p class="goal">Goal: the last memory is as good as the first.</p>
+      <ul>
+        <li>Bring the bill within 2 minutes of being asked. Check it is right before it reaches the table.</li>
+        <li>Never add a service charge unless the guest has agreed to it.</li>
+        <li>Take payment quickly. If they pay by UPI or card, wait for it to go through and thank them.</li>
+        <li>Ask one question: "What was the best part of your evening?" Listen to the answer.</li>
+        <li>Walk them to the door. Say "Thank you, see you soon", and use their name if you know it.</li>
+        <li>If it is raining, offer an umbrella or help them to their car.</li>
+        <li>If they enjoyed themselves, ask softly: "If you liked it, a review on Google would help us a lot." Ask only once, and never push.</li>
+      </ul>
+    </article>
+
+    <article class="moment">
+      <h3><span>7</span>After they leave</h3>
+      <p class="goal">Goal: they remember us and come back.</p>
+      <ul>
+        <li>The same night, write down in the POS customer screen: name, phone number (only if they gave it), favourite dish or drink, allergies, and any celebration.</li>
+        <li>The next day, if they gave a number and agreed, send a short WhatsApp thank-you: "Thank you for visiting Cabin East, [name]. We hope to see you again."</li>
+        <li>When a regular returns, greet them by name and use what you know: "Welcome back, [name]. The usual lager?"</li>
+        <li>For birthdays and anniversaries, bring a small treat to the table (a dessert with a candle). The owner decides the treat.</li>
+        <li>Reply to every online review within 24 hours. Thank the good ones by name. For a bad review: say sorry, say what you will do, and invite them to talk. Never argue in public.</li>
+      </ul>
+    </article>
+  </div>
+
+  <h3 style="margin:44px 0 14px">How we speak</h3>
+  <p style="color:var(--muted);margin-bottom:12px">Small words make a big difference. Learn these.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Do not say</th><th>Say instead</th></tr></thead>
+    <tbody>
+      <tr><td class="no">"No problem."</td><td class="ok">"Of course." or "My pleasure."</td></tr>
+      <tr><td class="no">"I don't know."</td><td class="ok">"Let me find out for you."</td></tr>
+      <tr><td class="no">"That's not my table."</td><td class="ok">"I will take care of that."</td></tr>
+      <tr><td class="no">"We don't have that."</td><td class="ok">"We have run out of that. May I suggest something similar?"</td></tr>
+      <tr><td class="no">"You have to wait."</td><td class="ok">"It will be about ten minutes. May I bring you a drink?"</td></tr>
+      <tr><td class="no">"It's not our fault."</td><td class="ok">"I am sorry. Let me fix it."</td></tr>
+      <tr><td class="no">"Anything else?"</td><td class="ok">"Would you like anything else with that?"</td></tr>
+      <tr><td class="no">"Guys" or "Ma'am, ma'am!"</td><td class="ok">"Good evening, welcome." Use their name if you have it.</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="plainlist">
+    <li>Speak softly, slowly and clearly. Smile with your face and your voice.</li>
+    <li>Look at the guest's eyes when you speak to them. Do not look at your tablet.</li>
+    <li>Do not argue or complain about colleagues, the kitchen or the guests where a guest can hear. Talk about problems in the kitchen, not on the floor.</li>
+    <li>If you make a mistake, say so at once and fix it. Do not hide it.</li>
+  </ul>
+
+  <h3 style="margin:40px 0 14px">Guests who need extra care</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Guest</th><th>What we do</th></tr></thead>
+    <tbody>
+      <tr><td>Children</td><td>Offer a highchair and a plain, mild dish. Put hot plates out of reach. Bring the children's food first. Smile at the parents and be patient.</td></tr>
+      <tr><td>Older guests</td><td>Offer an arm. Choose a table near the entrance. Speak clearly. Explain dishes simply. Do not rush them.</td></tr>
+      <tr><td>Guests with a disability</td><td>Ask: "How can I make this easier for you?" Clear a path to the table. Do not touch a wheelchair without asking.</td></tr>
+      <tr><td>Vegetarian, Jain or allergy guests</td><td>Ask and confirm. Tell the chef. The chef cooks it on a clean surface with clean tools. Say it is safe only when you are sure.</td></tr>
+      <tr><td>Visitors who are new to Goa</td><td>Be friendly and helpful. Offer tips about the menu and the area. They will talk about us when they go home.</td></tr>
+      <tr><td>Large groups</td><td>Ask for the booking in advance. Take one order for the whole group. Bring drinks first. Give one person the bill, or split it on the tablet before it is printed.</td></tr>
+      <tr><td>A guest dining alone</td><td>Treat them like a VIP. Offer a seat at the bar or by the wall. Check in gently. Never rush or look sorry for them.</td></tr>
+      <tr><td>A celebration</td><td>Ask the occasion. Tell the owner. Bring a small treat with a candle at the end of the meal.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 style="margin:40px 0 14px">Look and attitude</h3>
+  <ul class="plainlist">
+    <li>Clean uniform, clean hands, trimmed nails, hair tidy. No strong perfume. Shoes clean.</li>
+    <li>Stand up straight. Do not lean on walls or tables. Do not chew gum or eat in front of guests.</li>
+    <li>If you are tired or upset, take a minute in the staff room. Then come back with a smile.</li>
+    <li>Treat every colleague kindly. Guests can feel the mood of a team.</li>
+  </ul>
+
+  <h3 style="margin:40px 0 14px">Team habits that keep it going</h3>
+  <ul class="plainlist">
+    <li><b>Before every shift (3 minutes):</b> read the bookings, the specials, what has run out, any guests who need extra care, and who is covering which tables.</li>
+    <li><b>After every shift (5 minutes):</b> one thing that went well, one thing to fix tomorrow, and any guest names or preferences to write down.</li>
+    <li><b>Once a week (15 minutes):</b> read the reviews and the complaints together. Choose one thing to improve this week.</li>
+    <li><b>Owners watch three tables each shift</b> with the checklist below and give kind, specific feedback. Praise in public, correct in private.</li>
+  </ul>
+
+  <div class="cols" style="margin-top:28px">
+    <div class="list">
+      <h3>Guest check (owners, three tables a shift)</h3>
+      <label><input type="checkbox">Greeted within 30 seconds, with a smile</label>
+      <label><input type="checkbox">Water and menus within 2 minutes</label>
+      <label><input type="checkbox">Allergies asked, order read back</label>
+      <label><input type="checkbox">Honest wait time given</label>
+      <label><input type="checkbox">Drinks arrived first</label>
+      <label><input type="checkbox">Check-back with a real question</label>
+      <label><input type="checkbox">Plates cleared quickly, glasses refilled</label>
+      <label><input type="checkbox">Guest's name used (if known)</label>
+      <label><input type="checkbox">Bill correct and fast</label>
+      <label><input type="checkbox">Thanked at the door</label>
+    </div>
+    <div class="list">
+      <h3>Weekly numbers (write on the wall)</h3>
+      <label><input type="checkbox">How many guests came back this week?</label>
+      <label><input type="checkbox">How many complaints, and what about?</label>
+      <label><input type="checkbox">How many dishes were remade, and why?</label>
+      <label><input type="checkbox">How many reviews, and the star average?</label>
+      <label><input type="checkbox">Slowest table of the week, and why?</label>
+      <label><input type="checkbox">One thing we will do better next week</label>
+    </div>
+  </div>
+  <p class="label" style="margin-top:18px">These are habits, not guarantees. Watch what your own guests say and change what does not work.</p>
 </section>
 
 <section id="journey">
