@@ -41,6 +41,11 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.
 .pad{position:absolute;left:12px;bottom:56px;display:none;grid-template-columns:repeat(3,44px);gap:4px}
 .pad button{height:40px;border-radius:10px;border:1px solid var(--line);background:rgba(19,15,12,.86);color:var(--fg);font-size:16px}
 body.walk .pad{display:grid}
+.chkpanel{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;background:#1d1720}.chkpanel[hidden]{display:none}
+.chkbar{display:flex;align-items:center;gap:10px;padding:10px 12px;padding-top:max(10px,env(safe-area-inset-top,0px));background:var(--panel);border-bottom:1px solid var(--line);color:var(--fg);font:600 14px/1 var(--body)}
+.chkbar b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chkbar a{color:var(--muted);font:500 12px/1 var(--body);text-decoration:none;white-space:nowrap}.chkbar a:hover{color:var(--fg)}
+.chkbar button{font:500 13px/1 var(--body);color:var(--fg);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:9px;padding:9px 13px;cursor:pointer}
+.chkpanel iframe{flex:1;width:100%;border:0;background:#F2E8D2}
 .err{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:var(--muted)}
 @media (max-width:760px){
   .toolbar{left:8px;right:8px;top:8px;gap:6px}.brand{font-size:14px}.brand span{display:none}
@@ -89,7 +94,7 @@ body.walk .pad{display:grid}
       <div class="seg"><a class="seglink" href="sop.html" target="_blank" rel="noopener">Service playbook</a></div>
       <div class="seg"><a class="seglink" href="kds.html" target="_blank" rel="noopener">Kitchen screens</a></div>
       <div class="seg"><a class="seglink" href="brand-merch.html" target="_blank" rel="noopener">Brand &amp; merch</a></div>
-      <div class="seg"><a class="seglink" href="opening-checklist.html" target="_blank" rel="noopener">Opening checklist</a></div>
+      <div class="seg"><button id="t-chk" aria-expanded="false" aria-controls="chkpanel">Opening checklist</button></div>
       <div class="seg"><button id="t-light" aria-expanded="false" aria-controls="lightpanel">Lighting · <span id="lc-name">Evening</span> ▾</button></div>
     </div>
     <div class="seg lightctl" id="lightpanel" role="group" aria-label="Lighting" hidden>
@@ -99,6 +104,7 @@ body.walk .pad{display:grid}
     </div>
   </div>
   <div class="card" id="card"><button class="x" id="cardx" aria-label="Close">×</button><div id="cardbody"></div></div>
+  <div class="chkpanel" id="chkpanel" role="dialog" aria-label="Opening checklist" hidden><div class="chkbar"><b>Opening checklist</b><a href="opening-checklist.html" target="_blank" rel="noopener">Open in new tab</a><button id="chkx" type="button">Back to model</button></div><iframe id="chkframe" title="Opening checklist"></iframe></div>
   <div class="hint" id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
   <div class="pad" id="pad"><span></span><button data-k="w">▲</button><span></span><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
 </div>
@@ -1617,6 +1623,14 @@ const fonts=['700 40px "Bricolage Grotesque"','40px Yellowtail','500 20px "IBM P
 let started=false;const go=()=>{if(started)return;started=true;init();};
 Promise.all(fonts).then(go,go);setTimeout(go,3000);
 })();
+</script>
+<script>
+(function(){var pn=document.getElementById('chkpanel'),fr=document.getElementById('chkframe'),b=document.getElementById('t-chk');
+function open(o){if(o&&!fr.getAttribute('src'))fr.src='opening-checklist.html?embed';pn.hidden=!o;b.setAttribute('aria-expanded',o);if(o)document.getElementById('chkx').focus();else b.focus()}
+b.onclick=function(){open(pn.hidden)};document.getElementById('chkx').onclick=function(){open(false)};
+addEventListener('keydown',function(e){if(e.key==='Escape'&&!pn.hidden)open(false)});
+addEventListener('message',function(e){if(e.source===fr.contentWindow&&e.data==='close-checklist'&&!pn.hidden)open(false)});
+if(/[?&]checklist\b/.test(location.search))open(true)})();
 </script>
 </body>
 </html>

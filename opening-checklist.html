@@ -64,6 +64,7 @@ body.embed .site{display:none}
 <script>
 (function(){
 if(/[?&]embed\b/.test(location.search))document.body.classList.add('embed');
+addEventListener('keydown',function(e){if(e.key==='Escape'&&parent!==window)parent.postMessage('close-checklist','*')});
 var KEY='garden-opening-checklist',st={};
 try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
 var boxes=[].slice.call(document.querySelectorAll('.chk input'));
