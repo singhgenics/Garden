@@ -23,20 +23,8 @@ The menu source of truth is `food.html` and `drinks.html` in the Dream repo (`~/
 7. **Photo menus.** Deleted on 2026-10-22 at the owner's request (`food-menu.html`, `drinks-menu.html` and their PDFs). Do not rebuild them. `src/build-menus.py` and `src/menus.css` are kept only in case they are wanted again.
 8. **Push.** Commit and push this repo to `main`; GitHub Pages rebuilds at https://singhgenics.github.io/Menu/ . Verify the live page loads with no broken images.
 8a. **Brand.** The pages carry the Cabin East logo (roof, wok and steam lockup) and the three WOK / STEAM / DRAUGHT planks. To re-apply it to the Dream menu pages and to `src/template.html` and `src/brand-snippets.json` here, run `python3 ~/Documents/Code/Dream/CabinEast/src/apply_logo.py` (idempotent; never touches menu data), then rebuild this site (steps 5 and 7). The printed A2 boards (`menu-food.pdf`, `menu-drinks.pdf`, `menu-board.pdf` in the Dream repo) are rebuilt from the live menu by `~/Documents/Code/Dream/CabinEast/src/render_boards.sh` (cream paper, ink section tabs, new logo); run it after any menu change and commit the three PDFs.
-8b. **Table setting page.** `table-setting.html` (nav tab "Table") is built by `python3 src/build-tableset.py` from `src/table-setting-source.html` (same source as the claude.ai artifact https://claude.ai/artifact/9RfkR21Rdp1kjM5JNXbgGX; its `g/` folder = crockery photos + `t-<id>.jpg`). Real table sizes come from the Simplex floor plan (tables for 4 are 1.2 × 0.65 m, tables for 2 are 0.6 × 0.6 m). Room photos: `src/gen-tableset.sh` (free Flow, 2-3 reference photos max per image; more fail), written to `img/tableset/`. If a crockery piece or the table plan changes, edit the source and rebuild.
 9. **Record it.** `node src/check-menu.mjs --update` so the hook goes quiet.
 10. Tell the owner what changed on each surface.
-
-## Furnishings (the fourth view)
-
-The furnishings schedule follows the **Simplex room** (`~/Documents/Code/Dream/Simplex`: 4.9 × 8.8 m, 18 covers inside + 8 in the garden), not the menu. When the Simplex layout or the 3D model changes (tables, bar, lights, AC), update it:
-
-1. Edit `src/furnishings_data.py`: one tuple per line in each `grp(...)` (code, name, size, material, qty, unit, low and high unit price in INR, phase 1 or 2, where, note, image id). Prices are planning ranges, not quotes. Codes (S1, T1, B1, L1, C1, ...) are what the two plans use.
-2. Edit `src/furnishing_plans.py` if a piece moves: it draws `img/furnishings/furniture-plan.svg` and `ceiling-plan.svg` from the same x/z coordinates as the Simplex model (x from the right wall -2.45 to the left wall +2.45, z from the shopfront 0 to the back wall 8.8) and prints the fan clearance checks.
-3. Images (free, Google Flow, same project as the rest): prompts are in `src/furnishing-jobs.py`; run `src/gen-furnishings.sh [id...]` (runs one at a time, because the gflow profile allows one process; it skips ids that exist, so delete a `img/furnishings/<id>.jpg` to redo it). Room shots use screenshots of the Simplex 3D model in `src/furnishing-refs/` as the layout reference.
-3a. The **Gallery** section lists every image by section from `GALLERY` in `src/furnishings_data.py` (id, caption); add a new image there and it appears, with the enlarge view.
-4. `node src/build.mjs` regenerates `furnishings.json`, both plans and `index.html`; it reports missing images.
-5. Commit and push as usual.
 
 ## Files
 
