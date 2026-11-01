@@ -1,4 +1,4 @@
-> Copy of the Menu repo (singhgenics/Menu) kept inside the Garden repo, made 2026-11-01. The original `Menu-repo/` still drives the edit hook and build scripts; re-copy after menu changes (`rsync -a --exclude .git Menu-repo/ Garden/web/menu/`). The Furnishings tab and table sizes still describe the archived Simplex layout, and its 3D link points to the Simplex site.
+> Copy of the Menu repo (singhgenics/Menu) kept inside the Garden repo, made 2026-11-01. The original `Menu-repo/` still drives the edit hook and build scripts; re-copy after menu changes (`rsync -a --exclude .git Menu-repo/ Garden/web/menu/`).
 
 # Cabin East: Menu
 
