@@ -114,7 +114,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
       </div>
     </div>
     <div class="call"><b>Hot line.</b> The four cooking units total 3.82 m on the east wall, under one hood. That leaves 0.36 m of the 4.18 m wall free. The island leaves 1.08 m of aisle on each side, and 1.36 m between the island and the cooks.</div>
-    <div class="call"><b>Storage is built into the kitchen.</b> The store room is now staff accommodation, so the old store door in the south wall is closed. Dry goods live under the granite (K22 and K23), under the pass shelf (K11), in a tall pantry cabinet (K24) and in a wall cabinet over the chillers (K25). The stock plan lists what goes in each, with shelf lives and restock days. T1 (K24) stands 0.40 m from the wok burner; use steel and a splash panel.</div>
+    <div class="call"><b>Storage is built into the kitchen.</b> The store room is now staff accommodation, entered through the old store door in the south wall (0.9 m, beside the cooking line). Dry goods live under the granite (K22 and K23), under the pass shelf (K11), in a wall cabinet over the chillers (K25) and in a small overhead cabinet above the staff-room door (K24). The stock plan lists what goes in each, with shelf lives and restock days. T1 (K24) stands 0.40 m from the wok burner; use steel and a splash panel.</div>
     <div class="call"><b>Veg and non-veg are kept apart.</b> Raw meat and seafood are prepared only on the island (K9), next to the non-veg chiller (K6). Vegetables are prepared only at the west end of the granite platform (K10), beside a veg wash sink (K21) and the veg chiller (K8). Raw meat never goes on K10. Plates are finished at the pass shelf (K11). The hand-wash basin (K13) is the only basin for hands; never wash hands in K21.</div>
     <h3>No oven, grill or tandoor</h3>
     <p>Nothing on the menu is baked or grilled. Pork belly braises in a pot on the stock range, bao is steamed, and everything else is wok, fryer or steamer. A combi oven is a later purchase if you want to batch the braise.</p>
@@ -226,7 +226,7 @@ const KIT=[
  ['K21','Veg wash sink, single bowl, set into K10',1,0.60,0.45,0.25,'West end of K10, plumbed from the dish-wash side of the wall. Green board beside it for veg only',0],
  ['K22','U1 slatted shelves under K10, west bay: onions, potatoes, garlic, ginger',1,0.90,0.55,0.80,'Ventilated crates, beside the veg wash sink',0],
  ['K23','U2 lockable cabinet under K10, east bay',1,1.56,0.55,0.80,'Oil tins, rice, noodle, flour and starch bins, sugar, salt, heavy sauce cans',0],
- ['K24','T1 tall lockable pantry cabinet, at the closed old store door',1,0.60,0.50,1.95,'Tins, paper towels, napkins, spare drinks cartons. 0.40 m from the wok burner: steel, with a splash panel',1],
+ ['K24','T1 lockable overhead cabinet above the staff-room door',1,0.45,0.40,0.80,'Paper towels, napkins and other light items (tins go under the granite). Near the wok burner: steel, with a splash panel',0],
  ['K25','W1 wall cabinet over the K8 worktop, at 1.30 m',1,1.50,0.30,0.80,'Spices, small sauce bottles, peanuts, sesame, pepper',0],
  ['K20','Fire extinguishers (ABC and K-class) and fire blanket',3,0.15,0.15,0.50,'Near the door; the model has 3 extinguishers',0]
 ];
@@ -318,7 +318,7 @@ document.getElementById('cards').innerHTML=
 (function(){
  const W=5.21,H=4.18;let s=room(W,H);
  // openings: kitchen door (west), pass window (west), dish-wall window (north), store door (south)
- s+=gapV(0,0.25,1.15)+winV(0,2.2,3.5)+winH(0,2.3,3.3)+gapH(H,3.47,3.47);
+ s+=gapV(0,0.25,1.15)+winV(0,2.2,3.5)+winH(0,2.3,3.3)+gapH(H,3.46,4.36);
  s+='<path class="arc" d="M0 '+f(0.25)+'A'+f(0.9)+' '+f(0.9)+' 0 0 1 '+f(0.9)+' '+f(0.25)+'"/>';
  s+=dash(4.08,0.30,1.13,3.88,'Hood K5');
  s+=box(4.46,0.35,0.75,0.95,'hot','K2')+box(4.46,1.30,0.75,0.90,'hot','K3')+box(4.46,2.20,0.75,0.90,'hot','K4')+box(4.46,3.10,0.75,1.07,'hot','K1');
@@ -327,7 +327,7 @@ document.getElementById('cards').innerHTML=
  s+=box(2.45,0.15,0.25,0.25,'top','K16')+box(2.8,0.08,0.40,0.45,'top','K17')+box(3.3,0.08,0.45,0.45,'top','K14')+box(3.8,0.12,0.40,0.30,'top','K15');
  s+=dash(2.72,0.06,1.46,0.5)+txt(3.45,0.7,'K23 (U2)','zt','text-anchor="middle" style="font-size:9px"')+dash(1.62,0.06,0.88,0.5)+txt(2.06,0.7,'K22 (U1)','zt','text-anchor="middle" style="font-size:9px"')+dash(1.0,0.12,0.36,0.36)+dash(1.66,1.82,0.36,0.36)+txt(1.86,2.08,'K19','zt','text-anchor="middle" style="font-size:9px"');
  s+=txt(1.65,0.95,'VEG PREP','note','')+txt(3.25,0.95,'MACHINES, RICE','note','');
- s+=box(3.46,3.58,0.60,0.60,'std','K24')+dash(1.96,3.84,1.5,0.34)+txt(2.7,3.78,'K25 wall cabinet above','zt','text-anchor="middle" style="font-size:9px"');
+ s+=dash(3.48,3.78,0.45,0.40,'K24 above door')+dash(1.96,3.84,1.5,0.34)+txt(2.7,3.78,'K25 wall cabinet above','zt','text-anchor="middle" style="font-size:9px"');
  s+=box(0.40,3.38,0.78,0.80,'cold','K6')+box(1.18,3.38,0.78,0.80,'cold','K7')+box(1.96,3.48,1.50,0.70,'cold','K8');
  s+=box(1.6,1.70,1.50,0.60,'std','K9')+box(1.68,1.77,0.60,0.46,'rb')+box(2.38,1.77,0.60,0.46,'bb')+txt(1.98,2.0,'raw','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+txt(2.68,2.0,'fish','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+txt(2.35,2.48,'NON-VEG PREP','note','');
  s+=box(0,2.2,0.45,1.30,'std','K11')+box(0.12,3.05,0.14,0.20,'top');

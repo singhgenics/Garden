@@ -127,7 +127,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
     </div>
     <div class="call"><b>It fits, with room to spare.</b> My rough estimate is that the dry goods, packaging and ambient vegetables need about 360 litres, at the weekly restock. The units above give roughly 1,200 litres of usable space. The two things that are tight are cold stock (K8 about 250 of 400 litres) and drinks, which is why drinks are restocked three times a week.</div>
     <div class="call"><b>Heat and grease.</b> T1 stands 0.40 m from the wok burner. Keep it steel, line the wall beside the burner with a steel splash panel, and put no oil, paper or cardboard in its top shelf. Check the clearance against the gas installer's rule.</div>
-    <div class="call"><b>Close the old store door.</b> Block the opening in the kitchen's south wall. It would put sleeping quarters on a food-preparation door, and it frees the wall for T1. Staff accommodation needs its own entrance; check the rule against your FSSAI licence conditions with a consultant, because I haven't verified it.</div>
+    <div class="call"><b>The old store door is the staff-room entrance.</b> Staff reach their room through the kitchen's south wall, beside the cooking line, so fit a self-closing, tight-fitting leaf with a bottom brush and keep the doorway clear. A sleeping room opening off a food-preparation area may not suit your FSSAI licence conditions; check it with a consultant, because I haven't verified the rule.</div>
     <div class="call"><b>Not stored in the kitchen.</b> The LPG cylinders (outside, open air) and any spare kegs. A spare keg has no cold place, so the keg order is a standing weekly delivery, with a swap on the day a keg runs out.</div>
   </section>
 
@@ -231,7 +231,7 @@ const LOC={
  'U1':['Kitchen · U1 under the granite, west bay','Slatted shelves 0.90 m wide, beside the veg wash sink. Onions, potatoes, garlic, ginger in ventilated crates.'],
  'U2':['Kitchen · U2 under the granite, east bay','Lockable cabinet 1.56 m wide, bins on wheels. Oil, rice, noodles, flours, sugar, salt and the heavy sauce cans.'],
  'U4':['Kitchen · U4 base cabinet under the pass shelf','Doors, 1.30 m wide. Paper, liners, gloves, bin bags, bill rolls.'],
- 'T1':['Kitchen · T1 tall pantry cabinet','Lockable, 0.60 m wide, where the old store door was. Tins, paper towels, napkins and the overflow of bar drinks on the bottom shelves.'],
+ 'T1':['Kitchen · T1 overhead cabinet','Lockable, 0.45 m wide, above the staff-room door. Paper towels, napkins and other light items.'],
  'W1':['Kitchen · W1 wall cabinet over K8','Doors, 1.50 m wide, at 1.30 m. Spices, small sauce bottles, peanuts, sesame, pepper.'],
  'CH':['Dish wash · CH chemical wall cabinet','Locked, fixed to the masonry, 0.80 m wide at 1.30 m. Detergent, rinse aid, sanitiser, floor cleaner.'],
  'B1':['Bar · B1 back-bar cooler','Beer, water, soft drinks, soda, tonic, ginger ale. About 1.5 days of stock.'],
@@ -447,9 +447,9 @@ add('B5',[
  const to=(r)=>{const h=r[0],n=r[1];
   if(h==='SR-W1')return /frying oil|Light soy|Dark soy|White vinegar|Honey|ketchup/.test(n)?'U2':'W1';
   if(h==='SR-W2')return /pepper|peanuts|sesame|Brown sugar/.test(n)?'W1':'U2';
-  if(h==='SR-W3')return /coconut|Bamboo|Water chestnut/.test(n)?'T1':'W1';
+  if(h==='SR-W3')return 'W1';
   if(h==='SR-E1')return /Paper towels|Napkins/.test(n)?'T1':'U4';
-  if(h==='SR-E2')return /Chickpeas|Lychee|Tamarind/.test(n)?'T1':'B4';
+  if(h==='SR-E2')return /Chickpeas|Lychee|Tamarind/.test(n)?'U2':'B4';
   if(h==='SR-E3')return 'U1';
   if(h==='SR-BEV')return /CO₂/.test(n)?'B5':'B1';
   if(h==='SR-SPIRIT')return 'B8';
@@ -542,11 +542,11 @@ const FREQ=['Daily','Daily (thaw from K7)','Every 2 days','Twice a week','3 time
  // storage units
  s+=box(1.6,0.0,0.9,0.62,'r4','U1',1)+box(2.64,0.0,1.56,0.62,'r2','U2');
  s+=box(0,2.2,0.45,1.30,'r4','U4',1);
- s+=box(3.46,3.58,0.60,0.60,'r2','T1');
+ s+=dash(3.48,3.78,0.45,0.40,'T1 above door');
  s+=dash(1.96,3.88,1.5,0.30,'W1 on the wall above K8');
  s+=dash(1.6,2.30,1.5,0.10,'');
  s+='<text class="zt" x="'+f(2.35)+'" y="'+f(2.58)+'" text-anchor="middle">K9: undershelf for trays, waste bin</text>';
- s+='<text class="zt" x="'+f(3.76)+'" y="'+f(4.42)+'" text-anchor="middle" style="font-size:9px">old store door, closed</text>';
+ s+='<text class="zt" x="'+f(3.76)+'" y="'+f(4.42)+'" text-anchor="middle" style="font-size:9px">staff-room door</text>';
  s+='<text class="zt" x="'+f(2.6)+'" y="'+f(1.4)+'" text-anchor="middle" style="font-size:9px">aisle 1.08</text>';
  s+='<text class="zt" x="'+f(0.35)+'" y="'+f(1.95)+'" style="font-size:9px">door</text>';
  const el=document.getElementById('svgS');
@@ -556,7 +556,7 @@ const FREQ=['Daily','Daily (thaw from K7)','Every 2 days','Twice a week','3 time
   ['U1','Slatted shelves 0.90 × 0.55 × 0.80, under the granite K10, west bay','Onions, potatoes, garlic, ginger in ventilated crates. Beside the veg wash sink.'],
   ['U2','Lockable cabinet 1.56 × 0.55 × 0.80, under K10, east bay','Two 15 L oil tins, rice and noodle bins (20 L, on wheels), flour and starch bins, sugar, salt, 5 and 10 L sauce cans.'],
   ['U4','Base cabinet 1.30 × 0.45 × 0.90, under the pass shelf K11','Basket and steamer liners, gloves, caps, bin bags, bill rolls, cling film, foil.'],
-  ['T1','Tall lockable cabinet 0.60 × 0.50 × 1.95, where the old store door was','Tins (coconut milk, bamboo shoot, chestnuts, chickpeas, lychee), paper towels, napkins, and the bottom two shelves for spare drinks cartons.'],
+  ['T1','Lockable overhead cabinet 0.45 × 0.40 × 0.80, above the staff-room door','Paper towels and napkins; tins now go to W1 (coconut milk, bamboo shoot, chestnuts) and U2 (chickpeas, lychee, tamarind).'],
   ['W1','Wall cabinet 1.50 × 0.30 × 0.80, at 1.30 m above the K8 worktop','Spices, small sauce bottles, peanuts, sesame, pepper.'],
   ['CH','Locked wall cabinet 0.80 × 0.30 × 0.80, at 1.30 m in the dish wash','Detergent, rinse aid, sanitiser, floor cleaner. Fix to the masonry; the full cans weigh about 40 kg.'],
   ['B4','Cabinet 0.60 × 0.60 × 0.85, under the POS at the bar','Tea, coffee, filters, brown sugar, kokum, black salt, Sichuan pepper, straws, cocktail sticks.'],
