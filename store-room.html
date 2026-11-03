@@ -100,7 +100,7 @@ const ROWS=[
  ['SR-E2','Steel rack, 4 shelves','1.50 × 0.50 × 1.80','Tea, coffee, filters, syrups, tinned fruit, brown sugar'],
  ['SR-E3','Steel rack, 4 shelves','1.50 × 0.50 × 1.80','Paper, liners, gloves, bin bags, bill rolls, napkins, straws'],
  ['SR-SP','Locked steel mesh cage','1.20 × 0.40 × 1.80','Sealed spare spirits; the owner holds the key'],
- ['Aisle','Clear floor between the racks','1.46 wide × 6.26 long','Door 0.90 at the north end; high louvre (east wall) and door grille for air']
+ ['Aisle','Clear floor between the racks','1.46 wide × 6.26 long','Door 0.90 at the north end; two windows on the east wall (one at each corner) and a door grille for air']
 ];
 document.getElementById('tbl').innerHTML='<thead><tr><th>Code</th><th>Unit</th><th>W × D × H (m)</th><th>Holds</th></tr></thead><tbody>'+ROWS.map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+esc(r[1])+'</td><td class="sz">'+r[2]+'</td><td>'+esc(r[3])+'</td></tr>').join('')+'</tbody>';
 </script>
