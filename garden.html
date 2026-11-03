@@ -85,8 +85,8 @@ body.walk .pad{display:grid}
     <div class="row2">
       <div class="seg" role="group" aria-label="Display">
         <button id="t-roof" aria-pressed="true">Roof</button>
-        <button id="t-pvc" aria-pressed="true">PVC curtains down</button>
-        <button id="t-lbl" aria-pressed="true">Labels</button>
+        <button id="t-pvc" aria-pressed="false">PVC curtains up</button>
+        <button id="t-lbl" aria-pressed="false">Labels</button>
         <button id="t-dims" aria-pressed="false">Sizes</button>
       </div>
       <div class="seg"><a class="seglink" href="decor.html" target="_blank" rel="noopener">Decor concept &rarr;</a></div>
@@ -570,7 +570,7 @@ for(let x=0.7;x<15.5;x+=1.2){const ze=Math.min(zEnd(x),x>HX-0.2?5.48:99);const z
 /* roof fascia lip so the sloped roof reads as a roof from outside */
 
 /* ======================= PVC roll-down curtains on every open edge ======================= */
-const pvcState={f:1,target:1};const curtains=[];
+const pvcState={f:0.06,target:0.06};const curtains=[];
 bays.forEach(b=>{if(b.wall)return;
   const zm=(b.a[1]+b.b[1])/2,xm=(b.a[0]+b.b[0])/2,L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]);const ang=Math.atan2(b.b[1]-b.a[1],b.b[0]-b.a[0]);
   const top=hc(zm)-0.42,hP=top-0.05;const grp=new THREE.Group();grp.position.set(xm+Math.sin(ang)*0.2,top,zm-Math.cos(ang)*0.2);grp.rotation.y=-ang;G.curt.add(grp);   // hung 20 cm outside the balustrade
@@ -1503,7 +1503,7 @@ lbl('Store room · 2.70 × 6.46 m',SX0+1.35,3.2,BY1+3.2,'k');
 lbl('PVC roll-down curtains',-0.4,2.2,3.9,'o');
 [['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9],['5.00 m landing',EM,0.05,10.2],['5.00 m garden',7.1,0.05,16.0],['1.20 m approach path',10.4,0.05,15.6],['1.70 m gate',GXI-0.4,2.4,16.85],['0.80 m railing',-0.6,0.8,2.0],['3.46 m pathway',14.0,0.05,7.2],['1.60 m',(HX+BX0)/2,0.05,6.9]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
 const lblEls=labels.map(l=>{const e=document.createElement('div');e.className='lbl '+l.cls;e.innerHTML=(l.cls==='d'?'':'<i></i>')+l.text;document.getElementById('labels').appendChild(e);return e;});
-const SHOW={lbl:true,dims:false};
+const SHOW={lbl:false,dims:false};
 const LPRI={'':0,o:1,w:2,k:3,d:4},LORDER=labels.map((l,i)=>i).sort((a,b)=>(LPRI[labels[a].cls]-LPRI[labels[b].cls])||a-b);
 function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new THREE.Vector3(),sr=stage.getBoundingClientRect(),placed=[];const inside=camera.position.y<2.6;
   // keep labels off the controls and the open info card
@@ -1611,12 +1611,13 @@ addEventListener('resize',resize);resize();
 /* ======================= start state ======================= */
 camera.position.set(...VIEWS.iso.p);controls.target.set(...VIEWS.iso.t);setFov(46);showCard('overview');
 setPre({day:'lunch',lunch:'lunch',dusk:'dusk',night:'evening',evening:'evening',late:'late'}[Q.get('time')]||'evening');
-if(Q.get('pvc')==='up'){pvcState.f=0.06;pvcState.target=0.06;const b=document.getElementById('t-pvc');b.setAttribute('aria-pressed',false);b.textContent='PVC curtains up';}
+// opens with the PVC folded up and no labels; ?pvc=down and ?labels turn them on
+if(Q.get('pvc')==='down'){pvcState.f=1;pvcState.target=1;const b=document.getElementById('t-pvc');b.setAttribute('aria-pressed',true);b.textContent='PVC curtains down';}
 setPvc(pvcState.f);
 if(Q.get('roof')==='0')setRoof(false);
 if(Q.get('view')&&(VIEWS[Q.get('view')]||Q.get('view')==='walk')){const k=Q.get('view');document.querySelectorAll('#views button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===k));
   if(k==='walk'){setWalk(true);if(Q.get('stop')){const s=stops.find(s=>s[0]===Q.get('stop'));if(s)lookAt(s[1],s[2]);}}else{const v=VIEWS[k];showCard(v.card);if(k==='plan')setRoof(false);else if(v.roof!==undefined&&Q.get('roof')===null)setRoof(v.roof);camera.position.set(...v.p);controls.target.set(...v.t);setFov(v.fov||48);}}
-if(Q.has('nolabels')){SHOW.lbl=false;document.getElementById('t-lbl').setAttribute('aria-pressed',false);}
+if(Q.has('labels')){SHOW.lbl=true;document.getElementById('t-lbl').setAttribute('aria-pressed',true);}
 if(Q.has('sizes')){SHOW.dims=true;document.getElementById('t-dims').setAttribute('aria-pressed',true);}
 if(Q.has('nocard'))document.getElementById('card').style.display='none';
 

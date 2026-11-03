@@ -45,7 +45,7 @@ Every open side closes with roll-down clear PVC (button in the toolbar rolls the
 - Camera buttons jump to the decor wall, TV corner, gate, entrance, bar, kitchen, dish wash, washroom, store room, from outside and the plan.
 - **Walk in** gives a first-person walk (W A S D, arrow pad on phones). Walls and doors block you.
 - The Lighting panel (Lunch, Sunset, Evening, Late, plus Time and Lights sliders) works as in Simplex: warm 2700 K fittings. Sizes shows the plan dimensions.
-- URL options: `?view=kitchen`, `?time=night`, `?pvc=up`, `?roof=0`, `?sizes`.
+- The model opens with the PVC folded up and the labels off. URL options: `?view=kitchen`, `?time=night`, `?pvc=down`, `?labels`, `?roof=0`, `?sizes`.
 
 ## Sizes: where they come from
 
