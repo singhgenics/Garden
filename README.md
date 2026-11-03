@@ -68,4 +68,4 @@ Pool lounge (added 2026-11-03): outside the hall's 7.76 m west edge, 6.8 m hall 
 
 Floor plans tab: floor-plans.html (linked from the 3D toolbar) shows sheets A-01 to A-08 as images, with the PDF download.
 
-Colour-coded equipment plans (kitchen, dish wash, bar): drawings/Garden-equipment-colour-plans.pdf, shown as tabs E-01 to E-03 on floor-plans.html and linked from the 3D toolbar.
+Colour-coded equipment plans (kitchen, dish wash, bar): drawings/Garden-equipment-colour-plans.pdf, shown on their own page, colour-plans.html (tabs E-01 to E-03), linked from the 3D toolbar.
