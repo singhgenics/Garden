@@ -263,7 +263,7 @@ rsel.onchange=drawR;drawR();
 
 /* hardware */
 document.getElementById('tH').innerHTML='<thead><tr><th>No.</th><th>Screen</th><th>W × D × H (m)</th><th>Where</th></tr></thead><tbody>'+[
- ['S1','Hot line: 27 in touch, sealed front, wipe-clean','0.62 × 0.05 × 0.37','North (dish-wash) wall of the kitchen, above the east end of the granite, centred at 1.70 m, tilted 10° down. Seen from the stock pots, fryer and steamer.'],
+ ['S1','Hot line: 27 in touch, sealed front, wipe-clean','0.62 × 0.05 × 0.37','East (temporary) wall of the kitchen, above the K8 chiller bench and beside the steamer, bottom at 1.52 m, facing west, tilted 10° down. Seen from the stock pots, wok, fryer and steamer on the north wall.'],
  ['S2','Pass: 21.5 in touch','0.50 × 0.05 × 0.29','West wall, above the pass window, bottom at 1.95 m, facing the kitchen. Seen by the cooks and the pass.'],
  ['S3','Bar: 15.6 in touch','0.38 × 0.03 × 0.23','East wall of the bar, above the back-bar cabinet, bottom at 1.45 m. Between the cabinet and the lowest bottle shelf.'],
  ['W','Waiters\' tablets (the POS ones)','—','Open the Pass screen. Nothing extra to buy.'],
@@ -308,18 +308,19 @@ pick.addEventListener('change',plan);gap.addEventListener('input',plan);plan();
  const box=(x,y,w,h,c,id,dk)=>'<rect class="eq '+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>'+(id?'<text class="nm'+(dk?' dk':'')+'" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4">'+id+'</text>':'');
  const W=5.21,H=4.18;let s='<g transform="translate(40 50)"><rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';
  s+='<path d="M0 '+f(0.25)+'V'+f(1.15)+'" stroke="var(--figbg)" stroke-width="13"/><path d="M0 '+f(2.2)+'V'+f(3.5)+'" stroke="var(--blue)" stroke-width="3" stroke-dasharray="6 4"/>';
- s+=box(0.90,0,3.36,0.62,'exist','granite',0)+box(4.46,0.35,0.75,3.82,'hot','HOT LINE')+box(0.40,3.38,3.06,0.80,'cold','chillers')+box(1.6,1.70,1.50,0.60,'std','K9',1)+box(0,2.2,0.45,1.30,'std','K11',1);
- s+='<path class="beam" d="M'+f(3.86)+' '+f(0.1)+'L'+f(4.46)+' '+f(3.6)+'L'+f(1.9)+' '+f(3.4)+'Z"/>';
- s+='<rect class="scr" x="'+f(3.55)+'" y="-6" width="'+f(0.62)+'" height="9" rx="2"/><text class="zt" x="'+f(3.86)+'" y="-12" text-anchor="middle">S1 hot line 0.62</text>';
+ s+='<path d="M'+f(4.1)+' 0V'+f(H)+'" stroke="var(--wall)" stroke-width="7"/>';
+ s+=box(0.90,0,2.92,0.75,'hot','HOT LINE')+box(3.35,0.8,0.75,0.9,'hot','K4')+box(3.4,1.78,0.7,0.9,'cold','K8',0)+box(0,1.12,0.6,0.95,'std','K10',1)+box(0,2.15,0.45,1.15,'std','K11',1)+box(0.55,2.57,1.2,0.8,'cold','chillers');
+ s+='<path class="beam" d="M'+f(4.05)+' '+f(2.25)+'L'+f(0.9)+' '+f(0.1)+'L'+f(3.8)+' '+f(0.1)+'Z"/>';
+ s+='<rect class="scr" x="'+f(4.03)+'" y="'+f(1.94)+'" width="9" height="'+f(0.62)+'" rx="2"/><text class="zt" x="'+f(3.4)+'" y="'+f(3.1)+'" text-anchor="middle">S1 hot line 0.62</text>';
  s+='<rect class="scr" x="-4" y="'+f(2.6)+'" width="9" height="'+f(0.5)+'" rx="2"/><text class="zt" x="'+f(0.2)+'" y="'+f(3.62)+'" >S2 pass 0.50</text>';
- s+='<text class="zt" x="'+f(2.6)+'" y="'+f(H+0.4)+'" text-anchor="middle">Kitchen, north wall at the top, pass window on the left</text></g>';
+ s+='<text class="zt" x="'+f(2.6)+'" y="'+f(H+0.4)+'" text-anchor="middle">Kitchen 4.10 × 3.37 m, cooking line on the north wall, pass window on the left</text></g>';
  // bar
  s+='<g transform="translate(40 560)"><text class="zt" x="0" y="-12">Bar, east wall on the right</text><rect class="wall" x="0" y="0" width="0" height="0"/>';
- s+='<path class="wall" d="M'+f(3.1)+' 0V'+f(2.2)+'"/>';
- s+=box(2.5,0.2,0.6,1.3,'std','coffee',1)+box(2.5,1.6,0.6,0.6,'top','POS',1);
- s+=box(1.0,0.2,0.6,2.0,'cold','counter');
- s+='<rect class="scr" x="'+f(3.08)+'" y="'+f(1.65)+'" width="9" height="'+f(0.4)+'" rx="2"/><text class="zt" x="'+f(3.2)+'" y="'+f(1.88)+'">S3 bar 0.38</text></g>';
- el.setAttribute('viewBox','0 0 '+(W*P+160)+' 840');el.innerHTML=s;
+ s+='<path class="wall" d="M'+f(3.1)+' 0V'+f(5.4)+'"/>';
+ s+=box(2.5,0.9,0.6,1.3,'std','coffee',1)+box(2.5,0.28,0.6,0.58,'top','POS',1);
+ s+=box(2.5,2.5,0.6,2.65,'std','back bar',1)+box(0.6,2.45,0.6,2.65,'cold','counter');
+ s+='<rect class="scr" x="'+f(3.06)+'" y="'+f(4.67)+'" width="9" height="'+f(0.38)+'" rx="2"/><text class="zt" x="'+f(3.2)+'" y="'+f(4.9)+'">S3 bar 0.38</text></g>';
+ el.setAttribute('viewBox','0 0 '+(W*P+160)+' 1130');el.innerHTML=s;
 })();
 })();
 </script>
