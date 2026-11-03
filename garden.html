@@ -77,6 +77,7 @@ body.walk .pad{display:grid}
       <button data-view="dish" aria-pressed="false">Dish wash</button>
       <button data-view="wash" aria-pressed="false">Washroom</button>
       <button data-view="store" aria-pressed="false">Store room</button>
+      <button data-view="pool" aria-pressed="false">Pool lounge</button>
       <button data-view="outside" aria-pressed="false">From outside</button>
       <button data-view="plan" aria-pressed="false">Plan</button>
       <button data-view="walk" aria-pressed="false">Walk in</button>
@@ -301,7 +302,7 @@ const _fm={};const fmat=c=>_fm[c]||(_fm[c]=S({color:c,roughness:0.75}));
 const FLOWERS=['#f4efe4','#e8d8d0','#d9c6cf','#efe4cf','#cfc4d8'];
 function shrub(x,z,s){const r=rng(Math.round(x*13+z*7)+5);const base=new THREE.Mesh(new THREE.SphereGeometry(0.42*s,10,8),fmat('#2a5a34'));base.scale.set(1,0.7,1);base.position.set(x,0.28*s,z);base.castShadow=true;G.ground.add(base);
   const c1=FLOWERS[Math.floor(r()*FLOWERS.length)],c2=FLOWERS[Math.floor(r()*FLOWERS.length)];for(let i=0;i<26;i++){const a=r()*6.283,u=r()*0.8,f=new THREE.Mesh(new THREE.SphereGeometry(0.075*s,6,5),fmat(i%3?c1:c2));f.position.set(x+Math.cos(a)*0.4*s*u,0.2*s+0.34*s*Math.sqrt(1-u*u)*0.9+r()*0.05,z+Math.sin(a)*0.4*s*u);G.ground.add(f);}}
-for(let i=0;i<14;i++){shrub(-2+i*1.6,-3.2,1+(i%3)*0.3);}for(let i=0;i<8;i++)shrub(-2.4,1+i*1.4,1.1);
+for(let i=0;i<14;i++){shrub(-2+i*1.6,-3.2,1+(i%3)*0.3);}for(let i=5;i<8;i++)shrub(-2.4,1+i*1.4,1.1);   // the rest of the west hedge now stands where the pool lounge is
 G.ground.add(new THREE.Mesh(new THREE.BoxGeometry(0.01,0.01,0.01)));
 /* bougainvillea (magenta with some white, as in the references): instanced leaves and bracts, one draw call per kind */
 const BOUG={leaf:[],mag:[],wht:[]};
@@ -476,8 +477,8 @@ const bays=[];
   const lines=[
     [along(B,C,2),'B-C'],
     [[[15.67,5.48],[ENT_MID+ENT_W/2,5.48],[ENT_MID-ENT_W/2,5.48],[6.46,5.48]],'C-D'],
-    [along(D,Hh,2),false],[along(Hh,Gp,1),false],[along(Gp,Fp,2),false],[along(Fp,A,2),false]];
-  lines.forEach(([pts,tag])=>{pts.forEach(p=>addCol(p[0],p[1]));for(let i=0;i<pts.length-1;i++)bays.push({a:pts[i],b:pts[i+1],ent:tag==='C-D'&&i===1,wall:tag==='B-C'&&i===0});});}
+    [along(D,Hh,2),false],[along(Hh,Gp,1),false],[along(Gp,Fp,2),false],[[[0,7.76],[0,5.9],[0,3.88],[0,0]],'POOL']];
+  lines.forEach(([pts,tag])=>{pts.forEach(p=>addCol(p[0],p[1]));for(let i=0;i<pts.length-1;i++)bays.push({a:pts[i],b:pts[i+1],ent:tag==='C-D'&&i===1,pool:tag==='POOL'&&i===1,wall:tag==='B-C'&&i===0});});}
 /* pillars as on site: blue round columns (about 24 cm across) standing on white pedestals that belong to the 80 cm balustrade, up to the ring beam */
 {const prof=Hs=>[[0,0],[0.15,0],[0.15,0.05],[0.12,0.07],[0.135,0.1],[0.135,0.13],[0.1,0.16],[0.11,0.2],[0.11,0.45],[0.125,0.47],[0.125,0.5],[0.095,0.53],[0.088,0.56],[0.078,Hs-0.42],[0.095,Hs-0.4],[0.095,Hs-0.37],[0.08,Hs-0.35],[0.086,Hs-0.31],[0.15,Hs-0.1],[0.158,Hs-0.07],[0.158,Hs-0.05],[0,Hs-0.05]].map(([r,y])=>new THREE.Vector2(r,y));
  colPts.forEach(([x,z])=>{const top=hc(z)-0.32,y0=0.86,Hs=top-y0;
@@ -489,7 +490,7 @@ const bays=[];
   bx(-L/2,L/2,0,0.1,-0.115,0.115,M.navy,g);bx(-L/2,L/2,0.1,0.14,-0.11,0.11,M.goaWhite,g);bx(-L/2,L/2,0.7,0.8,-0.13,0.13,M.goaWhite,g);
   const n=Math.max(1,Math.round(L/0.14));for(let i=0;i<n;i++){const t=(i+0.5)/n;balPts.push([ax+(cx-ax)*t,az+(cz-az)*t]);}}
  bays.forEach(b=>{if(b.wall)return;const L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]),dx=(b.b[0]-b.a[0])/L,dz=(b.b[1]-b.a[1])/L,p=s=>[b.a[0]+dx*s,b.a[1]+dz*s];
-  (b.ent?[[0.2,L/2-0.85],[L/2+0.85,L-0.2]]:[[0.2,L-0.2]]).forEach(([s0,s1])=>{const a=p(s0),c=p(s1);balRun(a[0],a[1],c[0],c[1]);});});
+  ((b.ent||b.pool)?[[0.2,L/2-(b.pool?0.8:0.85)],[L/2+(b.pool?0.8:0.85),L-0.2]]:[[0.2,L-0.2]]).forEach(([s0,s1])=>{const a=p(s0),c=p(s1);balRun(a[0],a[1],c[0],c[1]);});});
  const im=new THREE.InstancedMesh(balGeo,M.navy,balPts.length);const mt=new THREE.Matrix4();balPts.forEach(([x,z],i)=>{mt.makeTranslation(x,0.14,z);im.setMatrixAt(i,mt);});im.castShadow=true;G.walls.add(im);}
 bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0.2,b.b[1]);beam(a,c,0.3,0.24,M.goaWhite,G.walls);});
 /* photo spot: a small brass "CE" monogram plaque on the entrance column, the opening kept clear of furniture; a reed diffuser (jasmine) on a teak bracket beside it */
@@ -516,7 +517,7 @@ bays.forEach(b=>{const a=V(b.a[0],hc(b.a[1])-0.2,b.a[1]),c=V(b.b[0],hc(b.b[1])-0
   const mp=new THREE.Mesh(new THREE.PlaneGeometry(mw,mh),mm);mp.position.set(HX-2.133,0.95+mh/2,(z0+z1)/2);mp.rotation.y=-Math.PI/2;G.walls.add(mp);}bx(HX-0.11,HX+0.11,0,0.1,z0,z1,M.navy,G.walls,false);
  [[0.35,0.18]].forEach(([z,rr])=>{cyl(rr*0.7,rr*0.6,0.06,HX-0.35,0,z,M.pot,G.walls,14);const pot=new THREE.Mesh(new THREE.SphereGeometry(rr,14,10),M.pot);pot.scale.y=0.9;pot.position.set(HX-0.35,rr*0.95,z);G.walls.add(pot);});}
 /* solid collision for the curtained edges (the entrance bay stays open) */
-bays.forEach(b=>{if(!b.ent)solids.push([[b.a[0],b.a[1]],[b.b[0],b.b[1]]]);});
+bays.forEach(b=>{if(!b.ent&&!b.pool)solids.push([[b.a[0],b.a[1]],[b.b[0],b.b[1]]]);else if(b.pool){const L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]),dz=(b.b[1]-b.a[1])/L;solids.push([[b.a[0],b.a[1]],[b.a[0],b.a[1]+dz*(L/2-0.8)]],[[b.a[0],b.a[1]+dz*(L/2+0.8)],[b.b[0],b.b[1]]]);}});
 /* ceiling, rafters and roof */
 const OV=[0.3,0.35,0.8,0.8,0.8,0.8,0.8]; // overhang per edge A-B, B-C, C-D, D-H, H-G, G-F, F-A
 function offsetPoly(p,d){const n=p.length,out=[];const line=i=>{const a=p[i],b=p[(i+1)%n],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy),nx=dy/l,ny=-dx/l;return{p:[a[0]+nx*d[i],a[1]+ny*d[i]],d:[dx,dy]};};
@@ -574,7 +575,7 @@ bays.forEach(b=>{if(b.wall)return;
   const mk=(w,offx,offz)=>{const g=new THREE.PlaneGeometry(w,1);g.translate(0,-0.5,0);const pm=new THREE.Mesh(g,M.pvc);pm.position.set(offx,0,offz);pm.scale.y=hP;pm.renderOrder=3;grp.add(pm);
     [-0.33,0.33].forEach(s=>{const st=bx(-0.03,0.03,-1,0,-0.004,0.004,M.pvcEdge,pm,false);st.position.set(s*w,-0.5,0.004);}); // vertical tie-straps ride with the panel
     const bar=bx(-w/2,w/2,-0.03,0.03,-0.03,0.03,M.pvcEdge,grp,false);bar.position.set(offx,-hP,offz);return {pm,bar};};
-  const parts=b.ent?[mk(L/2+0.06,-L/4,0.025),mk(L/2+0.06,L/4,-0.025)]:[mk(L-0.08,0,0)];
+  const parts=(b.ent||b.pool)?[mk(L/2+0.06,-L/4,0.025),mk(L/2+0.06,L/4,-0.025)]:[mk(L-0.08,0,0)];
   const tubeL=Math.hypot(b.b[0]-b.a[0],hc(b.b[1])-hc(b.a[1]),b.b[1]-b.a[1]);
   const tube=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,L,12),M.pvcEdge);tube.rotation.z=Math.PI/2;tube.position.set(0,0.06,0);grp.add(tube);
   curtains.push({parts,hP,top,tube,ent:b.ent});
@@ -1215,7 +1216,7 @@ lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',6.2,2.0,8.6,'k');
  // 2. climbing + trailing greenery: instanced leaves on every beam bay and pillar, and hedge planters along the curtains
  const leafList=[],hedgeList=[],flowerList=[];const greens=['#2e6a3a','#3a7a40','#2a5a34','#356f3c'];
  const pick=a=>a[Math.floor(r()*a.length)];
- bays.forEach(b=>{const L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]),dx=(b.b[0]-b.a[0])/L,dz=(b.b[1]-b.a[1])/L,inx=7.5-(b.a[0]+b.b[0])/2,inz=4.5-(b.a[1]+b.b[1])/2,il=Math.hypot(inx,inz)||1,ox=inx/il,oz=inz/il;
+ bays.forEach(b=>{if(b.a[0]===0&&b.b[0]===0)return;const L=Math.hypot(b.b[0]-b.a[0],b.b[1]-b.a[1]),dx=(b.b[0]-b.a[0])/L,dz=(b.b[1]-b.a[1])/L,inx=7.5-(b.a[0]+b.b[0])/2,inz=4.5-(b.a[1]+b.b[1])/2,il=Math.hypot(inx,inz)||1,ox=inx/il,oz=inz/il;
    });
  // 3. wisteria drapes over the bar, and tall cacti + potted palms (dark-bar and blue-wall references)
   function cactus(x,z,h){const gm=S({color:'#4f8a4a',roughness:0.85});cyl(0.17,0.14,0.42,x,0,z,M.pot,g,16);cyl(0.1,0.1,h,x,0.42,z,gm,g,14);sph(0.1,x,0.42+h,z,gm,g);
@@ -1537,6 +1538,7 @@ const VIEWS={
  dish:{p:[BX0+0.35,1.7,1.7],t:[BX0+4.6,1.0,1.0],card:'dish',fov:72},
  lobby:{p:[BX0+1.43,6.2,-0.2],t:[BX0+1.43,0,-0.95],card:'wash',fov:42,roof:false},
  wash:{p:[TX0+0.2,1.6,-1.1],t:[BX1,1.0,-1.1],card:'wash',fov:80},
+ pool:{p:[3.6,1.65,4.7],t:[-2.4,1.0,3.6],card:'pool',fov:72},
  store:{p:[SX0+1.5,2.75,BY1+0.25],t:[SX0+1.3,0.5,BY1+4.6],card:'store',fov:78},
  outside:{p:[8,2.2,19],t:[8,1.4,6],card:'curtains',fov:50},
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
@@ -1555,6 +1557,7 @@ const CARDS={
  kitchen:['Kitchen','4.10 × 4.18 m clear, re-measured on site','Shortened from 5.21 m to 4.10 m: a temporary wall (which stays) closes the east side, with the WC shaft and a closed strip beyond it. The 0.80 m door is at the north end of the west wall. The granite platform is removed and the cooking line stands where it was, on the north wall (stock range, wok range, twin fryer), with the fryer on the east wall, a 0.90 m clear space in front of the sink in the north-east corner, and an L-shaped hood above; bamboo baskets steam over a pot on the stock range. An existing sink stands at the north-east corner, where the granite ended. The false partition stays, as in the site photo: a white-painted timber and plywood panel about 2.2 m high and open above, with its door-less 0.90 m opening on the west face, beside the freezer; the 1.95 m store passage behind it has the store door moved west (2.65 to 3.55 m); the dual-zone upright stands against the south wall. A pass table stands right beside the door for order pick-up. The wall to the dish wash is solid, so there is a 0.70 m pass hatch with a closing shutter by the door; the old pass window and counter on the west wall are gone (solid wall). The gas shut-off valve and leak detector are by the door, and four colour-coded dustbins stand along the south wall. The only sink is the existing one in the north-east corner.',['Exhaust: hood duct leaves through the dish-wash wall, runs across the dish wash and goes up through the roof to the fan','K8 under-counter chiller worktop against the partition is the raw-protein bench (red board); K10 veg bench and wash sink on the west wall','Hand-wash basin K13 on the temporary wall, south of K8','Pass hatch with a shutter to the dish wash by the door; the old pass window is gone. Dimensions are from your site sketches; the store door position is to be confirmed']],
  dish:['Dish wash','5.41 × 2.00 m, doorway 1.17 m','The west entry is now a 1.17 m doorway with no door. Dirty ware lands on the receiving table, goes through the 0.90 m opening into the 2.0 m cell at the east end (500 L tank overhead, two sinks: wash, then rinse and sanitise) and returns to the clean table beside the opening. Used plates are dropped on the table just inside the doorway, and all the working crockery is kept on racks along the south wall. The exhaust duct from the kitchen hood crosses overhead and rises at the north wall.',['500 L water tank over the cell, 2.0 m long','Hot-water cylinder, louvre extractor, floor drain','The 0.90 m opening in the cell wall is assumed, to be confirmed on site']],
  wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Walls in bright orange with black hand-drawn doodle art over a white tiled dado, as in the reference.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
+ pool:['Pool lounge','Outside the hall\'s 7.76 m west edge','From your annotated plan: a walled lounge of about 14 m². The side toward the hall is 6.8 m, the rear wall (with the graffiti, facing the hall) is 4.2 m, the two corner walls are 2.8 m each, which makes it 2.48 m deep. A 1.6 m entrance opens from the hall. One 6 ft pool table and two standing (high) tables.',['The 6 ft table (2.14 × 1.22 m) leaves only about 0.5 to 0.75 m of cue space on its long sides: use short cues, or a smaller table','Graffiti wall, billiard lamp over the table, flat roof at 2.9 m','The hall edge keeps its balustrade and curtain either side of the entrance','Depth 2.48 m is worked out from your 2.8, 6.8 and 4.2 m figures: check it against the real site']],
  store:['Store room','2.70 × 6.46 m','The dry store, back in use. Two windows on the east wall, one at each corner (assumed 0.90 × 0.70 m at 1.80 m, above the racks). Racks 0.50 m deep down both sides of a 1.46 m aisle: oils and sauces, rice and noodles, tins and spices on the west; a beverage pallet, veg crates, bar dry goods and paper on the east. A locked spirits cage at the far end and a locked chemical cupboard. Reached from the kitchen through the store passage.',['Entrance: the 0.9 m store door at the south end of the store passage in the kitchen','Fast-moving stock is nearest the door; spirits and chemicals are at the far end, locked','Two windows on the east wall, one at each corner, and a door grille; no fan','No chilled or frozen stock here: those stay in the kitchen and the bar']],
  curtains:['PVC curtains','Every open side','Clear roll-down PVC hangs from the ring beam on all five open edges and behind the bar. Press the PVC button to roll them up or down. The entrance bay stays passable.',['Rolled up: a breezy garden. Down: dry in the monsoon']],
  plan:['Plan view','Top-down','Sizes are on the plan labels (press Sizes). Roof comes off for the plan.',['Hall 15.67 × 7.76 m, kitchen block 5.41 m wide','Existing restaurant and residence shown as plain massing for context','The existing restaurant\'s 1.50 m balcony along the landing and approach path is its only usable part; same 80 cm railing as the hall']],
@@ -1614,6 +1617,49 @@ if(Q.get('view')&&(VIEWS[Q.get('view')]||Q.get('view')==='walk')){const k=Q.get(
 if(Q.has('nolabels')){SHOW.lbl=false;document.getElementById('t-lbl').setAttribute('aria-pressed',false);}
 if(Q.has('sizes')){SHOW.dims=true;document.getElementById('t-dims').setAttribute('aria-pressed',true);}
 if(Q.has('nocard'))document.getElementById('card').style.display='none';
+
+/* ======================= POOL LOUNGE (west of the hall) =======================
+   From the client's annotated plan: a walled lounge outside the hall's 7.76 m west edge. The hall side is 6.8 m, the rear wall (with graffiti, facing the hall) is 4.2 m,
+   the two corner (side) walls are 2.8 m each, so the depth is 2.48 m; a 1.6 m entrance from the hall. One pool table and two standing (high) tables. */
+{const PH=2.9,PT=0.2,xr=-2.48,zA=0.48,zB=7.28,zC=1.78,zD=5.98;
+ const pts=[[0,zA],[xr,zC],[xr,zD],[0,zB]];
+ slab(pts,0.15,M.granite,-0.15,G.floors,M.conc);
+ slab([[0.05,zA-0.1],[xr-0.1,zC-0.05],[xr-0.1,zD+0.05],[0.05,zB+0.1]],0.14,M.plaster,PH,G.roof,M.plaster);
+ const sw=(a,b)=>{const L=Math.hypot(b[0]-a[0],b[1]-a[1]);const g=new THREE.Group();g.position.set((a[0]+b[0])/2,0,(a[1]+b[1])/2);g.rotation.y=-Math.atan2(b[1]-a[1],b[0]-a[0]);G.walls.add(g);bx(-L/2,L/2,0,PH,-PT/2,PT/2,M.plaster,g);bx(-L/2,L/2,0,0.9,-PT/2-0.005,PT/2+0.005,S({color:'#1f2a3a',roughness:0.9}),g,false);solids.push([a,b]);};
+ sw([0,zA],[xr,zC]);sw([xr,zD],[0,zB]);sw([xr,zC],[xr,zD]);
+ // graffiti on the rear wall, facing the hall
+ const gt=tex(1024,512,(c,w,h)=>{const r=rng(77);c.fillStyle='#17171d';c.fillRect(0,0,w,h);
+  for(let i=0;i<40;i++){c.fillStyle=['#e5604d','#f2c14a','#3fa7d6','#59c9a5','#c04ccf','#ff8c42'][i%6]+'55';c.beginPath();c.ellipse(r()*w,r()*h,30+r()*120,20+r()*60,r()*3,0,7);c.fill();}
+  const word=(s,x,y,sz,f,sk,rot)=>{c.save();c.translate(x,y);c.rotate(rot||0);c.font='900 '+sz+'px "Arial Black",Impact,sans-serif';c.textAlign='center';c.lineJoin='round';c.lineWidth=sz*0.16;c.strokeStyle='#0b0b0f';c.strokeText(s,0,0);c.lineWidth=sz*0.06;c.strokeStyle=sk;c.strokeText(s,0,0);c.fillStyle=f;c.fillText(s,0,0);c.restore();};
+  word('CABIN EAST',512,180,150,'#f2c14a','#e5604d',-0.04);word('POOL',300,360,150,'#59c9a5','#17171d',0.05);word("RACK 'EM",720,380,110,'#3fa7d6','#ffffff',-0.06);
+  for(let i=0;i<26;i++){const x=40+r()*940,y0=60+r()*300;c.strokeStyle=['#e5604d','#f2c14a','#59c9a5','#c04ccf'][i%4];c.lineWidth=3+r()*3;c.beginPath();c.moveTo(x,y0);c.lineTo(x+r()*4,y0+30+r()*110);c.stroke();}
+  c.fillStyle='#fff';[[110,90,'8'],[900,70,'★'],[880,440,'☺'],[130,440,'♠']].forEach(([x,y,s])=>{c.font='900 70px Arial';c.fillText(s,x,y);});
+  c.strokeStyle='#fff';c.lineWidth=5;c.setLineDash([14,12]);c.strokeRect(14,14,w-28,h-28);},1,1);
+ {const gm=new THREE.Mesh(new THREE.PlaneGeometry(4.0,2.15),new THREE.MeshStandardMaterial({map:gt,roughness:0.9}));gm.position.set(xr+PT/2+0.002,1.2,(zC+zD)/2);gm.rotation.y=Math.PI/2;G.walls.add(gm);}
+ // 6 ft pool table (2.14 x 1.22 m outside, rails at 0.82 m), long axis along the rear wall
+ {const cx=-1.35,cz=3.88,TL=2.14,TW=1.22,wood=S({color:'#4a2a18',roughness:0.45}),felt=S({color:'#1f6b43',roughness:0.95}),cush=S({color:'#17573a',roughness:0.9});
+  bx(cx-TW/2,cx+TW/2,0.58,0.78,cz-TL/2,cz+TL/2,wood,G.hall);bx(cx-TW/2+0.1,cx+TW/2-0.1,0.78,0.795,cz-TL/2+0.1,cz+TL/2-0.1,felt,G.hall,false);
+  [[cx-TW/2,cx+TW/2,cz-TL/2,cz-TL/2+0.1],[cx-TW/2,cx+TW/2,cz+TL/2-0.1,cz+TL/2],[cx-TW/2,cx-TW/2+0.1,cz-TL/2,cz+TL/2],[cx+TW/2-0.1,cx+TW/2,cz-TL/2,cz+TL/2]].forEach(([a,b,c,d])=>bx(a,b,0.78,0.82,c,d,wood,G.hall));
+  [[cx-TW/2+0.1,cx+TW/2-0.1,cz-TL/2+0.1,cz-TL/2+0.15],[cx-TW/2+0.1,cx+TW/2-0.1,cz+TL/2-0.15,cz+TL/2-0.1],[cx-TW/2+0.1,cx-TW/2+0.15,cz-TL/2+0.1,cz+TL/2-0.1],[cx+TW/2-0.15,cx+TW/2-0.1,cz-TL/2+0.1,cz+TL/2-0.1]].forEach(([a,b,c,d])=>bx(a,b,0.795,0.83,c,d,cush,G.hall,false));
+  [[-1,-1],[1,-1],[-1,1],[1,1],[-1,0],[1,0]].forEach(([sx,sz])=>cyl(0.05,0.05,0.02,cx+sx*(TW/2-0.07),0.8,cz+sz*(sz?TL/2-0.07:0),M.black,G.hall,10,false));
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([sx,sz])=>bx(cx+sx*(TW/2-0.12)-0.07,cx+sx*(TW/2-0.12)+0.07,0,0.58,cz+sz*(TL/2-0.2)-0.07,cz+sz*(TL/2-0.2)+0.07,wood,G.hall));
+  // balls: a racked triangle at the far end, the cue ball at the near end
+  const cols=['#f2c14a','#2f6aa3','#c0392b','#5b2a86','#e8832b','#2e8b57','#7a1f1f','#111111'];let n=0;
+  for(let row=0;row<5;row++)for(let k=0;k<=row;k++){const b=new THREE.Mesh(new THREE.SphereGeometry(0.0286,10,8),S({color:cols[(n++)%8],roughness:0.3}));b.position.set(cx+(k-row/2)*0.058,0.826,cz+TL/4+0.2+row*0.05);G.hall.add(b);}
+  {const b=new THREE.Mesh(new THREE.SphereGeometry(0.0286,10,8),S({color:'#f4f1ea',roughness:0.3}));b.position.set(cx+0.05,0.826,cz-TL/4);G.hall.add(b);}
+  solids.push([[cx-TW/2-0.05,cz-TL/2-0.05],[cx+TW/2+0.05,cz-TL/2-0.05]],[[cx-TW/2-0.05,cz+TL/2+0.05],[cx+TW/2+0.05,cz+TL/2+0.05]],[[cx-TW/2-0.05,cz-TL/2],[cx-TW/2-0.05,cz+TL/2]],[[cx+TW/2+0.05,cz-TL/2],[cx+TW/2+0.05,cz+TL/2]]);
+  // billiard lamp over the table, 1.75 m above the floor
+  bx(cx-0.22,cx+0.22,1.7,1.78,cz-0.7,cz+0.7,S({color:'#1f3a2a',roughness:0.5}),G.hall);bx(cx-0.2,cx+0.2,1.695,1.7,cz-0.68,cz+0.68,M.led,G.hall,false);[cz-0.5,cz+0.5].forEach(z=>rod(V(cx,1.78,z),V(cx,PH,z),0.006,M.black,G.hall,false));
+  lamp(cx,1.6,cz,'#ffd9a0',0.9,5);}
+ // two standing (high) tables near the hall side, 1.05 m high, 0.70 m round tops
+ [[-0.6,1.5],[-0.6,6.26]].forEach(([x,z])=>{cyl(0.35,0.35,0.035,x,1.02,z,M.timberDark,G.hall,24);cyl(0.04,0.04,1.0,x,0.02,z,M.blackMetal,G.hall,10);cyl(0.22,0.24,0.03,x,0,z,M.blackMetal,G.hall,20);cyl(0.035,0.03,0.12,x+0.1,1.055,z,M.shelfGlass,G.hall,10,false);cyl(0.035,0.03,0.12,x-0.12,1.055,z+0.1,M.shelfGlass,G.hall,10,false);solids.push([[x-0.4,z],[x+0.4,z]]);});
+ // cue rack and a chalk shelf on the rear wall
+ {const x=xr+PT/2+0.03,z=2.75;bx(x-0.02,x+0.03,1.05,1.12,z-0.4,z+0.4,M.timberDark,G.walls,false);for(let i=0;i<4;i++)rod(V(x+0.04,0.3,z-0.3+i*0.2),V(x+0.04,1.35,z-0.3+i*0.2),0.008,S({color:i%2?'#c99a5e':'#6b4a2e',roughness:0.5}),G.walls,false);}
+ // warm wall lights on the side walls, a sign over the entrance and a label
+ [[-0.9,1.1],[-0.9,6.65]].forEach(([x,z])=>{cyl(0.04,0.04,0.12,x,2.1,z,M.blackMetal,G.hall,8,false);sph(0.05,x,2.05,z,M.globe,G.hall);});
+ {const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.9,0.26),new THREE.MeshStandardMaterial({map:signTex(420,120,[['POOL LOUNGE',44,0.55]],'#17171d','#f2c14a','#e5604d'),roughness:0.8}));sg.position.set(-0.05,2.45,4.88);sg.rotation.y=-Math.PI/2;G.hall.add(sg);}
+ lbl('Pool lounge · 6.8 / 4.2 m, depth 2.48 m',-1.2,2.7,4.4,'k');}
+
 /* ---- speed: merge every static mesh of each group into one mesh per material (thousands of draw calls become a few dozen) ---- */
 (function mergeStatic(){const U=THREE.BufferGeometryUtils;if(!U||!U.mergeBufferGeometries)return;
   ['ground','floors','walls','roof','deco','hall','bar','kitchen','dish','wash','store','fans'].forEach(k=>{const grp=G[k];grp.updateMatrixWorld(true);const buckets=new Map(),kill=[];
