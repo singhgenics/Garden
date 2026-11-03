@@ -263,7 +263,7 @@ rsel.onchange=drawR;drawR();
 
 /* hardware */
 document.getElementById('tH').innerHTML='<thead><tr><th>No.</th><th>Screen</th><th>W × D × H (m)</th><th>Where</th></tr></thead><tbody>'+[
- ['S1','Hot line: 27 in touch, sealed front, wipe-clean','0.62 × 0.05 × 0.37','East (temporary) wall of the kitchen, above the K8 chiller bench and beside the steamer, bottom at 1.52 m, facing west, tilted 10° down. Seen from the stock pots, wok, fryer and steamer on the north wall.'],
+ ['S1','Hot line: 27 in touch, sealed front, wipe-clean','0.62 × 0.05 × 0.37','East (temporary) wall of the kitchen, above the K8 chiller bench (2.62 to 3.24 m from the north wall), bottom at 1.52 m, facing west, tilted 10° down. Seen from the stock pots, wok, fryer and steamer.'],
  ['S2','Pass: 21.5 in touch','0.50 × 0.05 × 0.29','West wall, above the pass window, bottom at 1.95 m, facing the kitchen. Seen by the cooks and the pass.'],
  ['S3','Bar: 15.6 in touch','0.38 × 0.03 × 0.23','East wall of the bar, above the back-bar cabinet, bottom at 1.45 m. Between the cabinet and the lowest bottle shelf.'],
  ['W','Waiters\' tablets (the POS ones)','—','Open the Pass screen. Nothing extra to buy.'],
@@ -309,11 +309,11 @@ pick.addEventListener('change',plan);gap.addEventListener('input',plan);plan();
  const W=5.21,H=4.18;let s='<g transform="translate(40 50)"><rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';
  s+='<path d="M0 '+f(0.25)+'V'+f(1.15)+'" stroke="var(--figbg)" stroke-width="13"/><path d="M0 '+f(2.2)+'V'+f(3.5)+'" stroke="var(--blue)" stroke-width="3" stroke-dasharray="6 4"/>';
  s+='<path d="M'+f(4.1)+' 0V'+f(H)+'" stroke="var(--wall)" stroke-width="7"/>';
- s+=box(0.90,0,2.92,0.75,'hot','HOT LINE')+box(3.35,0.8,0.75,0.9,'hot','K4')+box(3.4,1.78,0.7,0.9,'cold','K8',0)+box(0,1.12,0.6,0.95,'std','K10',1)+box(0,2.15,0.45,1.15,'std','K11',1)+box(0.55,2.57,1.2,0.8,'cold','chillers');
- s+='<path class="beam" d="M'+f(4.05)+' '+f(2.25)+'L'+f(0.9)+' '+f(0.1)+'L'+f(3.8)+' '+f(0.1)+'Z"/>';
- s+='<rect class="scr" x="'+f(4.03)+'" y="'+f(1.94)+'" width="9" height="'+f(0.62)+'" rx="2"/><text class="zt" x="'+f(3.4)+'" y="'+f(3.1)+'" text-anchor="middle">S1 hot line 0.62</text>';
- s+='<rect class="scr" x="-4" y="'+f(2.6)+'" width="9" height="'+f(0.5)+'" rx="2"/><text class="zt" x="'+f(0.2)+'" y="'+f(3.62)+'" >S2 pass 0.50</text>';
- s+='<text class="zt" x="'+f(2.6)+'" y="'+f(H+0.4)+'" text-anchor="middle">Kitchen 4.10 × 3.37 m, cooking line on the north wall, pass window on the left</text></g>';
+ s+=box(0.90,0,2.02,0.75,'hot','K2 K1')+box(3.5,0,0.6,0.5,'wet','sink')+box(3.35,0.6,0.75,0.9,'hot','K3')+box(3.35,1.55,0.75,0.9,'hot','K4')+box(3.4,2.5,0.7,0.9,'cold','K8',0)+box(0,1.12,0.6,0.95,'std','K10',1)+box(0,2.15,0.45,1.15,'std','K11',1)+box(0.55,3.38,1.2,0.8,'cold','chillers');
+ s+='<path class="beam" d="M'+f(4.05)+' '+f(3.0)+'L'+f(0.9)+' '+f(0.1)+'L'+f(3.5)+' '+f(0.1)+'Z"/>';
+ s+='<rect class="scr" x="'+f(4.03)+'" y="'+f(2.62)+'" width="9" height="'+f(0.62)+'" rx="2"/><text class="zt" x="'+f(3.2)+'" y="'+f(3.7)+'" text-anchor="middle">S1 hot line 0.62</text>';
+ s+='<rect class="scr" x="-4" y="'+f(2.6)+'" width="9" height="'+f(0.5)+'" rx="2"/><text class="zt" x="'+f(0.2)+'" y="'+f(3.3)+'" >S2 pass 0.50</text>';
+ s+='<text class="zt" x="'+f(2.6)+'" y="'+f(H+0.4)+'" text-anchor="middle">Kitchen 4.10 × 4.18 m, cooking line on the north and east walls, pass window on the left</text></g>';
  // bar
  s+='<g transform="translate(40 560)"><text class="zt" x="0" y="-12">Bar, east wall on the right</text><rect class="wall" x="0" y="0" width="0" height="0"/>';
  s+='<path class="wall" d="M'+f(3.1)+' 0V'+f(5.4)+'"/>';
