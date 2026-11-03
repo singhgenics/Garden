@@ -7,13 +7,13 @@
 <meta name="description" content="The smart kitchen and bar display (KDS) that replaces paper KOT and BOT: screens, where they go, how dishes are routed and timed, and how to set it up.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-:root{--paper:#eef0ea;--ink:#1d2a22;--muted:#56635a;--line:#cfd5cc;--card:#f7f8f4;--green:#1f3d2e;--brass:#9a7434;--brass-ink:#7a5a22;--blue:#2443a6;
+:root{--paper:#F2E8D2;--ink:#1C1714;--muted:#5A4C42;--line:#D9B98F;--card:#F6EDD9;--green:#2F6F57;--brass:#E49B1D;--brass-ink:#B5321C;--blue:#2443a6;
   --hot:#9a3b2a;--cold:#2443a6;--wet:#2d6b4d;--exist:#8c8a7c;--top:#c79a45;--std:#d8cdb2;--wall:#1f3d2e;--figbg:#f7f8f4;--ok:#2d6b4d;--warn:#9a3b2a;--inp:#fff;
   --scr:#17130f;--scr-ink:#f3eadf;--scr-line:#3a3128;--scr-amber:#f2a03d;--scr-ok:#5cbf7a;--scr-bad:#e5604d;
-  --display:"Gloock",Georgia,serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root{--paper:#111915;--ink:#e7ebe3;--muted:#9aa79d;--line:#2a3830;--card:#17221c;--green:#8fbfa3;--brass:#d2a75c;--brass-ink:#e2b96e;--blue:#8fa6f0;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--paper:#2A221D;--ink:#E6DAC0;--muted:#CFC3AB;--line:#4a3c32;--card:#1C1714;--green:#6FC29A;--brass:#E49B1D;--brass-ink:#E49B1D;--blue:#8fa6f0;
   --hot:#b8503c;--cold:#3a5fd0;--wet:#3f8a67;--exist:#6f6f63;--std:#8d836c;--wall:#8fbfa3;--figbg:#17221c;--ok:#6fc29a;--warn:#e08a78;--inp:#0f1712;color-scheme:dark}}
 *{box-sizing:border-box}
 html{background:var(--paper)}
@@ -93,16 +93,32 @@ ul.tight,ol.tight{margin:6px 0 0;padding-left:22px}ul.tight li,ol.tight li{margi
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 footer{margin-top:44px;color:var(--muted);font-size:13px}
 @media print{.top{display:none}section.zone{break-before:page}}
+
+/* Cabin East website theme ("the hoarding"): red plywood header, cream paper, ink type, Alfa Slab One + IBM Plex */
+:root{--red:#B5321C;--wood:#2A221D;--cream:#F2E8D2}
+.hoard{background:var(--red);color:var(--cream);padding:18px 0 34px;margin:0 0 8px;display:block;
+  background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 23px),linear-gradient(180deg,#b5321c,#a22b17);border-bottom:6px solid var(--wood)}
+.hin{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.hoard h1{color:var(--cream)!important;font-size:clamp(42px,8vw,96px);line-height:.9;letter-spacing:-.01em;margin:6px 0 14px;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.hoard p,.hoard .lead,.hoard .k,.hoard .legend{color:#f6e3c8!important}.hoard a:not(.top a):not(.nav a){color:#fff}.hoard b{color:#fff}
+.hoard .top a,.hoard .nav a,.hoard a.back{background:#F2E8D2!important;color:#1C1714!important;border-color:transparent!important;border-radius:6px;font-weight:600;text-decoration:none}
+.hoard .top a:hover,.hoard .nav a:hover{background:#2A221D!important;color:#F2E8D2!important}
+.hoard .eyebrow,.eyebrow-bill{display:inline-block;background:#F2E8D2;color:#B5321C!important;font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:2px;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.2);justify-self:start}
+h1,h2{font-family:var(--display);font-weight:400}
+h2,h3{color:var(--ink)}
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
-<div class="wrap">
+<header class="hoard"><div class="hin">
   <div class="top">
     <div class="nav"><a href="garden.html">&larr; 3D model</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="sop.html">Service playbook</a></div>
     <span class="k">Sizes in metres · W × D × H</span>
   </div>
   <h1>Kitchen and bar screens</h1>
   <p class="lead">A smart kitchen display system (KDS) instead of paper tickets. The kitchen ticket (KOT) and the bar ticket (BOT) both become screens. Each dish goes to the station that cooks it, slow dishes start first so a table's plates finish together, mains wait for the starters, and the pass shows what is ready to run.</p>
+</div></header>
+<div class="wrap">
   <div class="cards">
     <div class="cd"><span>Screens</span><b>3</b><span>hot line, bar, pass</span></div>
     <div class="cd"><span>Stations</span><b>7</b><span>wok, stock pots, fryer, steamer, cold &amp; plate, pass, bar</span></div>

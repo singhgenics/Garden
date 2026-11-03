@@ -6,6 +6,12 @@ Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 
 Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from the model's toolbar)
 
+Furnishing & supplies checklist (furniture, lights, linen, paper goods, cleaning, safety; must-have vs add-later): https://singhgenics.github.io/Garden/furnishing.html
+
+Crockery & glassware (40 covers × 2 sets, every menu item matched to a piece): https://singhgenics.github.io/Garden/crockery.html
+
+Image prompts and the Flow runner for both pages: Dream/Garden/Supplies/src (Flow projects "Garden Crockery" and "Garden Furnishing").
+
 ## What is in the model
 
 | Part | Size (m) | Notes |

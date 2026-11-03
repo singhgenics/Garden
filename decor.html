@@ -1,24 +1,24 @@
 <title>Cabin East Garden Decor</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a walk-through book in five chapters (arrive, the door, the room, the bar, the washroom). Each stop: a full-bleed photo, then a two-column spec. A contact strip of every angle opens the page. */
 :root{
-  --paper:#eef0ea; --ink:#1d2a22; --muted:#56635a; --line:#cfd5cc; --card:#f7f8f4;
-  --green:#1f3d2e; --brass:#9a7434; --brass-ink:#7a5a22; --blue:#2443a6;
-  --display:"Gloock",Georgia,"Times New Roman",serif;
-  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --paper:#F2E8D2; --ink:#1C1714; --muted:#5A4C42; --line:#D9B98F; --card:#F6EDD9;
+  --green:#2F6F57; --brass:#E49B1D; --brass-ink:#B5321C; --blue:#2443a6;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#111915; --ink:#e7ebe3; --muted:#9aa79d; --line:#2a3830; --card:#17221c;
-  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; --blue:#8fa6f0; color-scheme:dark}}
+  --paper:#2A221D; --ink:#E6DAC0; --muted:#CFC3AB; --line:#4a3c32; --card:#1C1714;
+  --green:#6FC29A; --brass:#E49B1D; --brass-ink:#E49B1D; --blue:#8fa6f0; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#111915; --ink:#e7ebe3; --muted:#9aa79d; --line:#2a3830; --card:#17221c;
-  --green:#8fbfa3; --brass:#d2a75c; --brass-ink:#e2b96e; --blue:#8fa6f0; color-scheme:dark}
+  --paper:#2A221D; --ink:#E6DAC0; --muted:#CFC3AB; --line:#4a3c32; --card:#1C1714;
+  --green:#6FC29A; --brass:#E49B1D; --brass-ink:#E49B1D; --blue:#8fa6f0; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
 .wrap{max-width:1120px;margin:0 auto}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.1}
@@ -66,14 +66,29 @@ a.ph{display:block;border-radius:4px;outline-offset:3px}a.ph:focus-visible{outli
 .chapter p{margin:0;color:var(--muted);max-width:62ch}
 footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font:12.5px/1.5 var(--mono);color:var(--muted)}
 footer a{color:var(--muted)}
-</style>
 
-<div class="wrap">
-<header>
+/* Cabin East website theme ("the hoarding"): red plywood header, cream paper, ink type, Alfa Slab One + IBM Plex */
+:root{--red:#B5321C;--wood:#2A221D;--cream:#F2E8D2}
+.hoard{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)))!important;margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))!important;background:var(--red);color:var(--cream);padding:18px 0 34px;margin:0 0 8px;display:block;
+  background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 23px),linear-gradient(180deg,#b5321c,#a22b17);border-bottom:6px solid var(--wood)}
+.hin{max-width:1152px;display:grid;gap:14px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.hoard h1{color:var(--cream)!important;font-size:clamp(42px,8vw,96px);line-height:.9;letter-spacing:-.01em;margin:6px 0 14px;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.hoard p,.hoard .lead,.hoard .k,.hoard .legend{color:#f6e3c8!important}.hoard a:not(.top a):not(.nav a){color:#fff}.hoard b{color:#fff}
+.hoard .top a,.hoard .nav a,.hoard a.back{background:#F2E8D2!important;color:#1C1714!important;border-color:transparent!important;border-radius:6px;font-weight:600;text-decoration:none}
+.hoard .top a:hover,.hoard .nav a:hover{background:#2A221D!important;color:#F2E8D2!important}
+.hoard .eyebrow,.eyebrow-bill{display:inline-block;background:#F2E8D2;color:#B5321C!important;font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:2px;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.2);justify-self:start}
+h1,h2{font-family:var(--display);font-weight:400}
+h2,h3{color:var(--ink)}
+</style>
+<link rel="stylesheet" href="theme.css">
+
+
+<header class="hoard"><div class="hin">
   <span class="eyebrow">Cabin East &middot; Garden &middot; decor concept</span>
   <h1>A green room in a Goan garden</h1>
   <p>Dim sum and craft beer in the open hall of an old Goan house, photographed from every angle at blue hour. Built on the 3D model of the site as it stands: the blue columns, navy balustrade, white fretwork, coffered ceiling and brick bar stay. The new layer is bottle green over brown tile, a gallery wall that tells the story of Indo-Chinese food, ivy wicker orbs, bougainvillea and fairy lights.</p>
-</header>
+</div></header>
+<div class="wrap">
 <figure><a class="ph" href="decor/v7/hero.jpg" target="_blank" rel="noopener"><img class="render" src="decor/v7/hero.jpg" alt="The hall front at blue hour from the corner of the landing, bougainvillea along the eave"></a>
   <figcaption>Every image is generated in Google Flow (Nano Banana Pro) from a camera view of the 3D model and checked for glitches. Tap any image for full size.</figcaption></figure>
 <div class="strip" aria-label="Every angle"><a href="#gate"><img src="decor/v7/gate.jpg" alt="" loading="lazy"><span>Gate</span></a><a href="#garden"><img src="decor/v7/garden.jpg" alt="" loading="lazy"><span>Garden</span></a><a href="#approach"><img src="decor/v7/approach.jpg" alt="" loading="lazy"><span>Path</span></a><a href="#front"><img src="decor/v7/hero.jpg" alt="" loading="lazy"><span>Hall front</span></a><a href="#entrance"><img src="decor/v7/entry.jpg" alt="" loading="lazy"><span>Looking in</span></a><a href="#outside"><img src="decor/v7/outside.jpg" alt="" loading="lazy"><span>From the garden</span></a><a href="#dining"><img src="decor/v7/dining.jpg" alt="" loading="lazy"><span>Dining room</span></a><a href="#couples">Couples</a><a href="#couples"><img src="decor/v7/couples.jpg" alt="" loading="lazy"><span>Couples</span></a><a href="#wall"><img src="decor/v7/decor.jpg" alt="" loading="lazy"><span>Gallery wall</span></a><a href="#table"><img src="decor/v7/tableclose.jpg" alt="" loading="lazy"><span>Table</span></a><a href="#tree"><img src="decor/v7/tree.jpg" alt="" loading="lazy"><span>Centrepiece</span></a><a href="#tv"><img src="decor/v7/tv.jpg" alt="" loading="lazy"><span>TV corner</span></a><a href="#bar"><img src="decor/v7/bar.jpg" alt="" loading="lazy"><span>Bar</span></a><a href="#coffee"><img src="decor/v7/coffee.jpg" alt="" loading="lazy"><span>Coffee</span></a><a href="#backbar"><img src="decor/v7/backbar.jpg" alt="" loading="lazy"><span>Behind the bar</span></a><a href="#washroom"><img src="decor/v7/wash.jpg" alt="" loading="lazy"><span>Washroom</span></a></div>
