@@ -218,7 +218,7 @@ details.more{margin-top:14px}details.more summary{cursor:pointer;font:500 12px v
     <details class="more"><summary>Exhaust and air · notes</summary><div class="tw"><table id="tX"></table></div></details>
     <details class="more"><summary>Drainage · notes</summary><div class="tw"><table id="tY"></table></div></details>
     <div class="call"><b>How the kitchen exhaust works.</b> The hood K5 captures heat, steam and grease over the four cooking units. Grease filters catch the oil, a welded duct leaves through the dish-wash wall, crosses the dish wash and rises to a roof fan and cowl (X1 to X3), open to the sky above the dish-wash north wall, and the fan pulls about 5,000 to 6,000 m³ of air an hour out of the room (estimate). Air has to come back in: the make-up louvre on the west wall (X4), the open pass window and the door supply about 80% of it. Without it the kitchen goes under negative pressure, the flames flicker and doors slam.</div>
-    <div class="call"><b>How the drains work.</b> The kitchen floor falls 1:100 to the hot-line trough (Y1). The trough (the north end of its east leg) drains through the north wall into the dish-wash drain together with the sink K28; the veg sink runs along the north wall to the trough and the hand basin under the floor to it; the two cell sinks and the floor grating feed the same line (Y4 to Y5). It leaves through the east wall into one grease trap outside (Y6), then an inspection chamber (Y7) and the outfall. Kitchen and dish-wash water pass through the grease trap; the washroom does not. The outfall point (sewer, septic tank or soak pit) is not known and must be confirmed on site.</div>
+    <div class="call"><b>How the drains work.</b> The kitchen floor falls 1:100 to the hot-line trough (Y1). The trough (the north end of its east leg) drains through the north wall into the dish-wash drain together with the sink K28; the two cell sinks and the floor grating feed the same line (Y4 to Y5). It leaves through the east wall into one grease trap outside (Y6), then an inspection chamber (Y7) and the outfall. Kitchen and dish-wash water pass through the grease trap; the washroom does not. The outfall point (sewer, septic tank or soak pit) is not known and must be confirmed on site.</div>
   </section>
 
   <section class="zone" id="small">
@@ -269,7 +269,7 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const m2=v=>v.toFixed(2);
 const ex=document.getElementById('lex'),dr=document.getElementById('ldr');
 const lay=()=>{document.body.classList.toggle('hide-ex',!ex.checked);document.body.classList.toggle('hide-dr',!dr.checked);};
-ex.onchange=lay;dr.onchange=lay;
+ex.onchange=lay;dr.onchange=lay;lay();
 
 /* ---------- schedules: [id, name, qty, W, D, H, notes, floor-standing, existing] (metres) ---------- */
 const KIT=[
@@ -281,23 +281,19 @@ const KIT=[
  ['K6/K7','Dual-zone upright, SS, 2 doors: chiller (K6, left) and freezer (K7, right)',1,1.20,0.80,1.95,'South wall, 0.55 to 1.75 m from the west wall, west of the store-passage partition. K6 chiller: raw chicken, pork, prawns, fish, cooked pork, broths. K7 freezer: prawns, wontons, dumplings, bao, wrappers, fries, ice cream. About 300 L each side (typical)',1],
  ['K32','Opening in the temporary wall to the washroom, 0.90 m (existing): a left turn after it to the washroom door',1,0.90,0.10,2.05,'In the temporary wall, 2.85 to 3.75 m from the north wall, where I had put the raw bench. Walk east through the store passage, through the opening, turn left (north) to the washroom door. Washroom door position and the opening size assumed',0,1],
  ['K8','Under-counter 2-door chiller with worktop (raw-protein bench)',1,0.90,0.70,0.90,'Against the north face of the false partition (2.00 to 2.70 m from the north wall, 2.25 to 3.15 m from the west wall), facing the line; it gave up its place on the east side to the washroom opening. Vegetables, sauces, dairy, eggs below; red and blue boards on top for raw meat and seafood. About 190 L gross (typical)',1],
- ['K10','Veg prep bench with slatted undershelf (U1) and the K21 sink',1,0.60,0.95,0.90,'West wall, under the window (2.32 to 3.27 m from the north wall). Green board for veg only; the mixer-grinder and mortar sit at its south end. Replaces the granite platform',1],
+ ['K10','Veg prep bench with slatted undershelf (U1)',1,0.60,0.95,0.90,'West wall, under the window (2.32 to 3.27 m from the north wall). Green board for veg only; veg is washed in the one kitchen sink K28. Replaces the granite platform',1],
  ['K11','Pass table, next to the door: order pick-up, with the open base U4',1,0.55,1.15,0.92,'West wall, directly south of the kitchen door (1.12 to 2.27 m from the north wall), so waiters take plates the moment they are up. Plates are finished and wait here. The open base holds the working dry stock (U4), liners and gloves; screen S2 is above it',1],
- ['K12','Wall shelves, 2 tiers (spice, mise)',2,0.30,1.15,0.04,'West wall above the pass table K11, at 1.30 m and 1.60 m, below screen S2. The only wall storage in the kitchen',0],
- ['K13','Hand-wash basin, wall-hung, with soap and towel dispenser',1,0.40,0.40,0.85,'West wall, south end (3.45 to 3.85 m from the north wall), beside the K6/K7 corner, with open floor in front. Moved off the removed partition',0],
+ ['K12','Wall shelf, one tier (spices, sauces in squeeze bottles)',1,0.30,1.15,0.04,'West wall above the pass table K11, at 1.30 m, below screen S2. The only wall storage in the kitchen; the stock plan keeps the jars and bottles in use here',0],
  ['K14','Rice cooker / warmer, 10 L',1,0.45,0.45,0.45,'On the landing beside the sink K28 (north wall, 2.92 to 3.50 m). Plain Jane and rice bowls',0],
- ['K15','Mixer-grinder, 3 jars',1,0.40,0.30,0.55,'On K10, south end. Curry pastes, chilli oil, fillings. A domestic-grade unit is enough at the start',0],
- ['K16','Granite mortar and pestle',1,0.25,0.25,0.20,'On K10, south end. Papaya salad',0],
  ['K26','KDS hot-line screen S1: 27 in touch, sealed front',1,0.62,0.05,0.37,'On the north face of the store-passage partition (3.35 to 3.97 m from the west wall), bottom at 1.52 m, facing the cooks, tilted 10° down. Network cable. Wok, stock pots, fryer, steamer, cold and plate',0],
  ['K27','KDS pass screen S2: 21.5 in touch',1,0.50,0.05,0.29,'West wall above the pass table K11, bottom at 1.95 m, facing the kitchen. Ready-to-run view',0],
  ['K19','Dustbins, lidded and colour-coded: green veg waste (under K10), red non-veg waste, black dry, blue recycling',4,0.35,0.35,0.55,'The red, black and blue bins stand along the south wall between K6/K7 and the store door; the green bin is under K10. Wet bins are emptied every service. Pedal lids, liners in every bin',1],
- ['K21','Veg wash sink, single bowl, set into K10',1,0.50,0.40,0.25,'North end of K10. Waste goes to the hot-line trough Y1 (Y3). Green board beside it for veg only',0],
- ['K28','Sink at the east end of the old granite platform (existing, not measured)',1,0.60,0.50,0.85,'North-east corner, 3.50 to 4.10 m from the west wall. Size shown is a typical sink, not measured. Use: pot filling and cooks\' rinsing (not hand washing, which is K13). Drains to Y1 / Y3',0,1],
+ ['K28','The kitchen\'s only sink (existing, not measured)',1,0.60,0.50,0.85,'North-east corner, 3.50 to 4.10 m from the west wall, where the granite ended. Size shown is a typical sink, not measured. It does everything: veg washing, pot filling and cooks\' rinsing. Drains to Y1 / Y3',0,1],
  ['K22','U1 slatted shelves under K10',1,0.55,0.90,0.80,'Onions, potatoes, garlic, ginger for two days; bulk is in the store room',0],
  ['K29','Gas: shut-off valve and gas-leak detector, with the manifold pipe along the north wall',1,0.30,0.12,0.30,'Red quarter-turn valve and the detector on the north wall near the door, at about 1.5 m, where the cooks reach it on the way out. The cylinders are outside (section 7); the hood system trips the same valve',0],
  ['K30','Kitchen door, 0.80 m, steel, self-closing, opens in',1,0.80,0.05,2.05,'North end of the west wall (0.25 to 1.05 m from the north wall); its swing is clear of the pass table K11. Closes with the pass hatch at the end of service',0],
  ['K31','False partition (existing): white-painted timber and plywood panel on a frame, open above, with a door-less 0.90 m opening on its west face beside the freezer, leading to the store room and washroom',1,1.95,0.10,2.20,'Along the north face of the store passage (2.70 m from the north wall, 2.15 to 4.10 m from the west wall) and down its west face, where the opening is (3.22 to 4.12 m from the north wall, beside K6/K7). About 2.2 m high from the site photo (not measured); the sloping roof shows above it. Timber and plywood is not fire-rated: check this with the fire rules before putting the cooking line beside it',0,1],
- ['K20','Fire extinguishers (ABC and K-class) and fire blanket',3,0.15,0.15,0.50,'West wall by K13, away from the hot line; the model has 3 extinguishers',0],
+ ['K20','Fire extinguishers (ABC and K-class) and fire blanket',3,0.15,0.15,0.50,'West wall, south end, away from the hot line; the model has 3 extinguishers',0],
 ];
 const DISH=[
  ['D1','Used-plate drop-off table (receiving) with scrap chute and pre-rinse spray',1,1.20,0.68,0.85,'Just inside the 1.17 m west doorway (0.25 m in from the west wall): waiters and runners drop used plates and glasses here. Scraped and pre-rinsed, then through to the cell sinks',1],
@@ -362,7 +358,7 @@ const EXH=[
 const DRN=[
  ['Y1','Hot-line floor trough, L-shaped, cast channel with removable grating',1,4.30,0.10,0.10,'2.40 m in front of K2 and K1, then 1.90 m beside K3 and K4. Takes the wok water trough, hose-down and the steamer and fryer drains. Falls 1:100 to the north end of the east leg, where Y3 leaves with the sink K28 waste',0],
  ['Y2','Kitchen floor, anti-skid, falling 1:100 to Y1',1,4.18,0.15,0.00,'About 4 cm of fall from the south wall to the trough',0],
- ['Y3','Kitchen outlet: 75 mm pipe from the east end of the trough through the north wall, plus 50 mm from K21 and 40 mm from K13',1,0.10,0.10,0.10,'Joins the dish-wash drain D11. K21 waste runs along the north wall to the west end of Y1; K13 waste runs under the floor to Y1; the sink K28 drains straight into it',0],
+ ['Y3','Kitchen outlet: 75 mm pipe from the east end of the trough through the north wall, plus the sink K28',1,0.10,0.10,0.10,'Joins the dish-wash drain D11. the sink K28 drains straight into it',0],
  ['Y4','Dish-wash floor drain D11 (existing) and 50 mm sink wastes from D2 and D3',1,1.30,0.35,0.02,'Floor falls 1:100 to D11. The mop bucket is emptied here. The D2 and D3 wastes (east cell) join the Y5 line directly',0,1],
  ['Y5','100 mm dish-wash drain line through the east wall, to Y6',1,0.10,0.10,0.10,'Carries everything from the kitchen and dish wash',0],
  ['Y6','Grease trap outside the east wall, cast masonry with a lid',1,0.60,0.40,0.40,'About 90 L (estimate); the plumber sizes it. Emptied weekly',0],
@@ -396,11 +392,11 @@ const SERV=[
  ['Fire suppression','Wet-chemical system under the hood, tied to the gas shut-off, plus the extinguishers K20 and SR-FE. Check what the fire NOC requires before you decide anything here.'],
  ['LPG bank','4 × 19 kg cylinders (each about 0.31 Ø × 0.80), 2 working and 2 standby, outside in open air, chained, with regulator and manifold. Position outside the kitchen east wall to be confirmed. The kitchen end is K29: the shut-off valve and the gas-leak detector by the door.'],
  ['Electrical','Probably single-phase is enough with this kit: roughly 10 to 14 kW connected (an estimate; the dishwasher, ice machine and glass washer were the 3-phase loads). Fridges and freezers on their own circuit. A small inverter or UPS for the POS, router and screens; the fridges ride on the grid unless you add a generator.'],
- ['Water and hot water','The existing 500 L overhead tank D9 over the dish-wash cell, one 50 L heater D5 for the dish wash, cold water to K21, K13, B7 and the washroom. Hot water at the bar sink B7 from a small heater.'],
+ ['Water and hot water','The existing 500 L overhead tank D9 over the dish-wash cell, one 50 L heater D5 for the dish wash, cold water to the sink K28, B7 and the washroom. Hot water at the bar sink B7 from a small heater.'],
  ['Screens and network','Three KDS screens (K26, K27, B16) on a wall bracket each; network cable to K26 and K27; a 5-port switch (0.16 × 0.10 × 0.03) and a 1 kVA UPS (0.15 × 0.35 × 0.20) in the cupboard under the POS desk B17, with the router. See the kitchen and bar screens page.'],
  ['Pest control','Wall-mounted UV fly catcher (about 0.45 × 0.15 × 0.60) at the kitchen door; mesh on the louvres; brush strip under the store door.'],
  ['Store room','Racks, pallet, cage and cupboard are in section 4; the stock plan says what lives where.'],
- ['Safety and hygiene','First-aid kit, colour-coded boards, wall thermometer log sheets, hand-wash soap at K13, B7 and the washroom.']
+ ['Safety and hygiene','First-aid kit, colour-coded boards, wall thermometer log sheets, hand-wash soap at B7 and the washroom.']
 ];
 const LEFT=[
  ['Hood-type dishwasher','Dish wash, east cell (no room beside D2 and D3)','Hand wash in three bowls does the job at this volume. Add when plates pile up at the peak even with two people on the sinks. It needs 3-phase, a booster heater and a drain.'],
@@ -411,11 +407,12 @@ const LEFT=[
  ['Planetary mixer','Kitchen, K11 top','Bao and wonton wrappers are bought frozen. Add when you make dough in house.'],
  ['Thermal KOT printer (backup)','Kitchen pass','The screens carry the tickets. If a screen goes down, write the order by hand until it is back.'],
  ['Heat lamps on the pass','Kitchen pass','Service is plated straight to the table. Add if plates wait.'],
- ['Wall cabinet W1 and overhead cabinet T1','Kitchen','The store room holds the stock; K12 shelves hold the jars in use.'],
+ ['Wall cabinet W1 and overhead cabinet T1','Kitchen','The store room holds the stock; jars in use stay on the pass table K11.'],
  ['Mop sink, detergent dispenser, chemical wall cabinet','Dish wash','A mop bucket emptied at D11, bottles on D4a, and the locked cupboard in the store room do the job.'],
  ['Dish-wash and store extractor fans','Ventilation','Both rooms ventilate passively (louvre and grille). Add fans if they stay hot or damp.'],
  ['Staff bunk room and lockers','Was the store room','The room is back to storage. Staff changing space is not planned.'],
  ['Dedicated non-veg prep table (the old island K9) and the U2 dry-stock shelves','Kitchen','The 4.10 × 4.18 m kitchen has no room for an island. K8 carries the raw-protein board, K10 the veg board, and the U4 open base of K11 holds the working dry stock. Add a mobile prep table when the room allows.'],
+ ['Mixer-grinder, mortar and a second sink or hand-wash basin (K13, K15, K16, K21: items removed)','Kitchen','Taken out to keep the 4.10 × 4.18 m kitchen uncluttered, with only the one sink K28. Add the hand-wash basin first (inspectors expect one); grind pastes in the store or buy them ready-made.'],
  ['Combi oven, grill, tandoor','Kitchen','Nothing on the menu needs one.']
 ];
 
@@ -427,7 +424,7 @@ function tbl(id,rows){document.getElementById(id).innerHTML='<thead><tr><th>No.<
    rows.map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+esc(r[1])+(r[8]?'<span class="exs">existing</span>':'')+'</td><td class="q">'+r[2]+'</td><td class="sz">'+sz(r[3],r[4],r[5])+'</td><td>'+esc(r[6])+'</td></tr>').join('')+'</tbody>';}
 function lst(id,rows,short){document.getElementById(id).innerHTML='<thead><tr><th>No.</th><th>Equipment</th><th>W × D × H</th></tr></thead><tbody>'+
    rows.map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+esc(short[r[0]]||r[1])+(r[2]>1?' <span class="q2">× '+r[2]+'</span>':'')+(r[8]?'<span class="exs">existing</span>':'')+'</td><td class="sz">'+sz(r[3],r[4],r[5])+'</td></tr>').join('')+'</tbody>';}
-const SH={'K1':'Wok range, 2 burners','K2':'Stock / pot range, 2 burners','K3':'Twin-tank fryer, 2 × 15 L','K4':'Dim sum steamer, 2 stations','K5':'Exhaust hood','K6/K7':'Dual-zone upright: chiller + freezer','K8':'Under-counter chiller + raw bench','K10':'Veg prep bench + sink','K11':'Pass table, by the door','K12':'Wall shelves, 2 tiers','K13':'Hand-wash basin','K14':'Rice cooker, 10 L','K15':'Mixer-grinder','K16':'Mortar and pestle','K26':'KDS screen S1, 27 in','K27':'KDS screen S2, 21.5 in','K19':'Waste bins, red and green','K21':'Veg wash sink','K22':'U1 slatted shelves, under K10','K23':'U2 open shelves, under K10','K20':'Extinguishers and blanket',
+const SH={'K1':'Wok range, 2 burners','K2':'Stock / pot range, 2 burners','K3':'Twin-tank fryer, 2 × 15 L','K4':'Dim sum steamer, 2 stations','K5':'Exhaust hood','K6/K7':'Dual-zone upright: chiller + freezer','K8':'Under-counter chiller + raw bench','K10':'Veg prep bench','K11':'Pass table, by the door','K12':'Wall shelf, one tier','K13':'Hand-wash basin','K14':'Rice cooker, 10 L','K15':'Mixer-grinder','K16':'Mortar and pestle','K26':'KDS screen S1, 27 in','K27':'KDS screen S2, 21.5 in','K19':'Waste bins, red and green','K21':'Veg wash sink','K22':'U1 slatted shelves, under K10','K23':'U2 open shelves, under K10','K20':'Extinguishers and blanket',
  'D1':'Used-plate drop-off table','D2':'Wash sink (east cell)','D3':'Rinse + sanitise sink (east cell)','D9':'Water tank, 500 L (existing)','D12':'Pass hatch with shutter','D13':'Crockery racks','K29':'Gas shut-off + detector','K30':'Kitchen door 0.80','K32':'Washroom opening 0.90','K31':'False partition (existing)','D14':'Dish-wash door 1.17','K28':'Sink (existing, NE corner)','D10':'Cell partition (existing)','D4':'Clean table','D4a':'Wall shelves, 2 tiers','D5':'Water heater, 50 L','D6':'Racks','D7':'Bus tubs','D8':'Waste bins','D11':'Floor drain grating','D9':'Water tank, 500 L','D10':'Cell partition','B18':'Wooden slab 0.47 wide','B19':'Sink behind coffee wall',
  'B1':'Bottle cooler, 2 glass doors','B2':'Base cabinet (plain)','B4':'Back-bar cabinet','B17':'POS desk','B17a':'Cash drawer, under the desk','B5':'Keg chiller, 3 kegs','B6':'Tap font, 3 taps','B7':'Sink with ice well','B8':'Lockable cabinet','B9':'Under-counter fridge','B11':'Filter-coffee brewer','B12':'Hot-water urn','B13':'Water filter','B14':'Bar bin','B16':'KDS screen S3, 15.6 in','B15':'Hanging glass rack','B18':'Wooden slab, 0.47 wide (existing)','B20':'Bar top, 1.08 m high','B21':'Blue pillar (existing)','B19':'Sink in the aisle (existing)',
  'SR-W1':'Rack: oils, sauces','SR-W2':'Rack: rice, noodles, flour','SR-W3':'Rack: tins, jars, spices','SR-CHEM':'Chemical cupboard, locked','SR-BEV':'Beverage pallet stack','SR-E1':'Rack: veg crates','SR-E2':'Rack: bar dry goods','SR-E3':'Rack: paper, packaging','SR-SP':'Spirits cage, locked','SR-FE':'Extinguisher',
@@ -441,10 +438,10 @@ const MUST=[
  ['Kitchen','Gas','Shut-off valve and gas-leak detector (K29) at the door; regulators and ISI-marked hoses on every burner and the fryer; check hoses for cracks weekly and replace on schedule; cylinders chained outside; a laminated "if you smell gas" notice by the valve.'],
  ['Kitchen','Dustbins (K19)','Four lidded pedal bins, colour-coded (green veg, red non-veg, black dry, blue recycling), liners in each, wet bins emptied every service and washed daily; none opened near open food.'],
  ['Kitchen','Fire and first aid','Extinguishers (ABC and K-class) and a fire blanket (K20); a blue-plaster first-aid box with burn gel on the wall by the door; exit and fire-plan notices.'],
- ['Kitchen','Hand washing (K13)','Soap, paper towel and a foot-operated bin at the basin; a hand-wash poster above it; no hand-washing in the food sinks K21 and K28.'],
+ ['Kitchen','Hand washing','The kitchen has one sink (K28) and no separate hand basin drawn. A food-safety inspector expects a hand-wash basin with soap and paper towel near the door: add K13 back (0.40 m, west wall south end) when you can. Until then no hand-washing in K28.'],
  ['Kitchen','Temperature control','A thermometer in each cold unit (K6, K7, K8) and a probe thermometer for cooked food; a temperature log sheet on a clipboard by K6/K7, filled at opening, mid-service and close.'],
  ['Kitchen','Labels and dates','Day-dot labels and a marker for every open tub and prep container (the stock plan sets the shelf lives); a "use first" tray in K6 and K8.'],
- ['Kitchen','Knives, boards, utensils','Colour-coded boards (SMALL), a wall knife strip, a ladle and spoon rail by K2 and K1, a spice rack on K12; nothing stored on the floor.'],
+ ['Kitchen','Knives, boards, utensils','Colour-coded boards (SMALL), a wall knife strip, a ladle and spoon rail by K2 and K1,  nothing stored on the floor.'],
  ['Kitchen','Cleaning','Wet-floor sign, mop and bucket, dustpan, floor scraper, scourers and cleaning cloths per colour code; anti-slip mats in front of the line (K1 to K4); a daily cleaning checklist on the wall.'],
  ['Kitchen','Pest control','UV fly catcher by the door, mesh on the louvres, a brush strip under the store door and the pass-hatch shutters closed at night.'],
  ['Kitchen','Notices and records','FSSAI licence and registration number on display, the food-safety poster, an allergen notice, the staff-hygiene rules by K13, and a visitors and complaints book at the pass table.'],
@@ -507,7 +504,7 @@ const fan=(cx,cy,r,c)=>C(cx,cy,r,c)+L(cx-r*0.7,cy-r*0.7,cx+r*0.7,cy+r*0.7,c)+L(c
 const bowl=(x,y,w,h)=>R(x,y,w,h,'bowl',{rx:6});
 const tap=(cx,cy)=>C(cx,cy,0.035,'tapc');
 
-const TS={'K6/K7':'Dual-zone upright','K22':'U1 shelves','K16':'Mortar','K14':'Rice cooker','K15':'Mixer-grinder','K21':'Veg wash sink','K12':'Wall shelves','K20':'Extinguishers','K5':'Exhaust hood','X2':'Duct across the dish wash','X3':'Roof fan, cowl','K19':'Waste bins','K26':'KDS screen S1','K27':'KDS screen S2','K13':'Hand-wash basin','K11':'Pass table, by the door','K10':'Veg prep bench + sink','K3':'Twin-tank fryer','K4':'Dim sum steamer','K1':'Wok range','K2':'Stock range','K9':'Non-veg prep table','K8':'Under-counter chiller',
+const TS={'K6/K7':'Dual-zone upright','K22':'U1 shelves','K16':'Mortar','K14':'Rice cooker','K15':'Mixer-grinder','K21':'Veg wash sink','K12':'Wall shelves','K20':'Extinguishers','K5':'Exhaust hood','X2':'Duct across the dish wash','X3':'Roof fan, cowl','K19':'Waste bins','K26':'KDS screen S1','K27':'KDS screen S2','K13':'Hand-wash basin','K11':'Pass table, by the door','K10':'Veg prep bench','K3':'Twin-tank fryer','K4':'Dim sum steamer','K1':'Wok range','K2':'Stock range','K9':'Non-veg prep table','K8':'Under-counter chiller',
  'D1':'Used-plate drop-off table','D2':'Wash sink (east cell)','D3':'Rinse + sanitise sink','D4':'Clean table','D4a':'Shelves, 2 tiers','D5':'Water heater','D11':'Floor drain grating','D8':'Waste bins',
  'B1':'Bottle cooler','B2':'Base cabinet','B4':'Back-bar cabinet','B5':'Keg chiller','B6':'Tap font, 3 taps','B7':'Sink with ice well','B8':'Lockable cabinet','B9':'Under-counter fridge','B11':'Filter-coffee brewer','B12':'Hot-water urn','B14':'Bar bin','B16':'KDS screen S3','B17':'POS desk','B17a':'Cash drawer, under desk',
  'SR-W1':'Rack: oils, sauces','SR-W2':'Rack: rice, noodles','SR-W3':'Rack: tins, jars, spices','SR-CHEM':'Chemical cupboard','SR-BEV':'Beverage pallet','SR-E1':'Rack: veg crates','SR-E2':'Rack: bar dry goods','SR-E3':'Rack: paper, packs','SR-SP':'Spirits cage','X6':'Store louvre, grille','X5':'Dish-wash louvre','X7':'Washroom extractor','Y7':'Inspection + outfall'};
@@ -536,12 +533,12 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  s+=gapV(KW,2.85,3.75)+'<path class="drl" style="stroke:var(--muted);stroke-dasharray:4 3" d="M'+f(4.05)+' '+f(3.3)+'L'+f(4.7)+' '+f(3.3)+'L'+f(4.7)+' '+f(2.5)+'" marker-end="url(#mfl)"/>'+R(4.42,2.28,0.56,0.07,'blu')+TXT(4.68,2.15,'washroom door','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+TXT(4.6,3.55,'to washroom','zt','text-anchor="middle" style="font-size:9px;fill:#fff"');
  s+='<rect class="scr" x="'+f(3.35)+'" y="'+f(2.66)+'" width="'+f(0.62)+'" height="9" rx="2"/>';
  // west wall: K10, K12, K11, S2
- s+=R(0,2.32,0.60,0.95,'std')+R(0.06,2.37,0.48,0.40,'bowl',{rx:6})+tap(0.12,2.57)+R(0.06,2.82,0.48,0.26,'vb')+R(0.04,2.34,0.52,0.91,'dsh')+R(0.05,3.1,0.30,0.12,'mix')+C(0.46,3.16,0.06,'stone');
- s+=R(0,1.12,0.30,1.15,'shelf')+[0,1,2,3].map(i=>C(0.1,1.25+i*0.26,0.04,'jar2')).join('');
+ s+=R(0,2.32,0.60,0.95,'std')+R(0.06,2.40,0.48,0.40,'vb')+R(0.04,2.34,0.52,0.91,'dsh');
  s+=R(0,1.12,0.55,1.15,'std')+R(0.04,1.16,0.47,1.07,'dsh')+[0,1,2].map(i=>C(0.2,1.35+i*0.3,0.13,'cook2')).join('');
+ s+=R(0,1.12,0.28,1.15,'shelf');
  s+=R(-0.05,1.45,0.07,0.5,'scr');
  // K13 basin and extinguishers, west wall south end
- s+=R(0,3.45,0.40,0.40,'sink')+R(0.05,3.50,0.28,0.30,'bowl',{rx:10})+tap(0.06,3.65)+[0.10,0.22,0.34].map(x=>C(x,4.10,0.05,'extc')).join('');
+ s+=[0.10,0.22,0.34].map(x=>C(x,4.10,0.05,'extc')).join('');
  // K6/K7 on the south wall (moved back)
  s+=R(0.55,3.38,0.60,0.80,'cold')+R(1.15,3.38,0.60,0.80,'fz')+L(1.08,3.42,1.08,3.66,'ln')+L(1.22,3.42,1.22,3.66,'ln')+TXT(0.85,4.10,'CHILLER','nm','text-anchor="middle" style="font-size:9px"')+TXT(1.45,4.10,'FREEZER','nm','text-anchor="middle" style="font-size:9px"');
  s+='<path class="arc" d="M'+f(1.15)+' '+f(3.38)+'A'+f(0.6)+' '+f(0.6)+' 0 0 0 '+f(0.55)+' '+f(2.78)+'"/><path class="arc" d="M'+f(1.15)+' '+f(3.38)+'A'+f(0.6)+' '+f(0.6)+' 0 0 1 '+f(1.75)+' '+f(2.78)+'"/>';
@@ -550,12 +547,11 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  s+=T2('K2',6.0,0.20,[1.4,0.36])+T2('K1',6.0,0.62,[2.4,0.4])+T2('K28',6.0,1.04,[3.8,0.25])+T2('K3',6.0,1.46,[3.7,1.0])+T2('K4',6.0,1.88,[3.7,2.0])+T2('K5',6.0,2.30,[3.0,1.4]);
  s+=T2('K8',6.0,2.72,[2.7,2.35]);
  s+=T2('K11',-1.5,1.55,[0.25,1.7])+T2('K10',-1.5,2.55,[0.3,2.8]);
- s+=T2('K13',-0.4,H+0.65,[0.2,3.9])+T2('K6/K7',2.1,H+0.65,[1.15,4.0]);
+ s+=T2('K6/K7',2.1,H+0.65,[1.15,4.0]);
  // drainage
  s+=LD(R(0.90,0.80,2.40,0.10,'drc')+R(3.20,0.60,0.10,1.90,'drc')+[...Array(16)].map((_,i)=>L(0.95+i*0.15,0.80,0.95+i*0.15,0.90,'drt')).join('')+[...Array(12)].map((_,i)=>L(3.20,0.66+i*0.15,3.30,0.66+i*0.15,'drt')).join('')+
    '<path class="drl" marker-end="url(#mdr)" d="M'+f(3.25)+' '+f(0.6)+'L'+f(3.25)+' '+f(-0.32)+'"/>'+
-   '<path class="drl" marker-end="url(#mdr)" d="M'+f(0.30)+' '+f(1.40)+'L'+f(0.30)+' '+f(0.85)+'L'+f(0.88)+' '+f(0.85)+'"/>'+
-   '<path class="drl dsh2" marker-end="url(#mdr)" d="M'+f(0.4)+' '+f(3.65)+'L'+f(0.72)+' '+f(3.65)+'L'+f(0.72)+' '+f(0.92)+'"/>'+TXT(1.7,1.55,'floor falls 1:100 to Y1','note','text-anchor="middle"')+
+   TXT(1.7,1.55,'floor falls 1:100 to Y1','note','text-anchor="middle"')+
    TXT(4.1,-0.1,'to dish-wash line','note','style="fill:var(--drn)"')+
    T2('Y1',2.2,1.2,[2.0,0.88],{}).replace('class="tg"','class="tg dtg"'));
  // exhaust and air
@@ -685,8 +681,7 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  // drainage
  s+=LD(R(1.0,4.6,2.4,0.1,'drc')+R(3.3,4.4,0.1,1.9,'drc')+
    '<path class="drl" marker-end="url(#mdr)" d="M'+f(3.35)+' '+f(4.4)+'L'+f(3.35)+' '+f(3.0)+'"/>'+
-   '<path class="drl" marker-end="url(#mdr)" d="M'+f(0.5)+' '+f(5.2)+'L'+f(0.5)+' '+f(4.65)+'L'+f(0.98)+' '+f(4.65)+'"/>'+
-   '<path class="drl dsh2" marker-end="url(#mdr)" d="M'+f(0.5)+' '+f(7.5)+'L'+f(0.8)+' '+f(7.5)+'L'+f(0.8)+' '+f(4.72)+'"/>'+
+   
    '<path class="drl" d="M'+f(4.7)+' '+f(2.3)+'L'+f(4.7)+' '+f(2.9)+'"/><path class="drl" d="M'+f(4.7)+' '+f(3.1)+'L'+f(4.7)+' '+f(2.9)+'"/>'+
    '<path class="drl" marker-end="url(#mdr)" d="M'+f(4.2)+' '+f(2.92)+'L'+f(5.75)+' '+f(2.92)+'"/>'+
    R(5.75,2.72,0.6,0.4,'drc')+TXT(6.05,3.0,'Y6','nm','text-anchor="middle" style="font-size:10px"')+R(6.5,2.77,0.3,0.3,'drc')+'<path class="drl" marker-end="url(#mdr)" d="M'+f(6.35)+' '+f(2.92)+'L'+f(6.5)+' '+f(2.92)+'"/>'+
