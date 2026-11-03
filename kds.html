@@ -309,7 +309,7 @@ pick.addEventListener('change',plan);gap.addEventListener('input',plan);plan();
  const W=5.21,H=4.18;let s='<g transform="translate(40 50)"><rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';
  s+='<path d="M0 '+f(0.25)+'V'+f(1.15)+'" stroke="var(--figbg)" stroke-width="13"/><path d="M0 '+f(2.2)+'V'+f(3.5)+'" stroke="var(--blue)" stroke-width="3" stroke-dasharray="6 4"/>';
  s+='<path d="M'+f(4.1)+' 0V'+f(H)+'" stroke="var(--wall)" stroke-width="7"/>';
- s+=box(0.90,0,2.02,0.75,'hot','K2 K1')+box(3.5,0,0.6,0.5,'wet','sink')+box(3.35,0.6,0.75,0.9,'hot','K3')+box(3.35,1.55,0.75,0.9,'hot','K4')+box(2.25,2.0,0.9,0.7,'cold','K8',0)+box(0,1.12,0.6,0.95,'std','K10',1)+box(0,2.15,0.45,1.15,'std','K11',1)+box(0.55,3.38,1.2,0.8,'cold','chillers');
+ s+=box(0.90,0,2.02,0.75,'hot','K2 K1')+box(3.5,0,0.6,0.5,'wet','sink')+box(3.35,1.4,0.75,0.9,'hot','K3')+box(2.25,2.0,0.9,0.7,'cold','K8',0)+box(0,1.12,0.6,0.95,'std','K10',1)+box(0,2.15,0.45,1.15,'std','K11',1)+box(0.55,3.38,1.2,0.8,'cold','chillers');
  s+='<path class="beam" d="M'+f(4.05)+' '+f(3.0)+'L'+f(0.9)+' '+f(0.1)+'L'+f(3.5)+' '+f(0.1)+'Z"/>';
  s+='<rect class="scr" x="'+f(3.35)+'" y="'+f(2.66)+'" width="'+f(0.62)+'" height="9" rx="2"/><text class="zt" x="'+f(3.2)+'" y="'+f(3.7)+'" text-anchor="middle">S1 hot line 0.62</text>';
  s+='<rect class="scr" x="-4" y="'+f(2.6)+'" width="9" height="'+f(0.5)+'" rx="2"/><text class="zt" x="'+f(0.2)+'" y="'+f(3.3)+'" >S2 pass 0.50</text>';
