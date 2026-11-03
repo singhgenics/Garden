@@ -1,5 +1,3 @@
-> Copy of the Menu repo (singhgenics/Menu) kept inside the Garden repo, made 2026-11-01. The original `Menu-repo/` still drives the edit hook and build scripts; re-copy after menu changes (`rsync -a --exclude .git Menu-repo/ Garden/web/menu/`).
-
 # Cabin East: Menu
 
 Menu, crockery and plating guide for a Pan-Asian dim sum and craft-beer pub in Betalbatim, Goa. One page with four views:

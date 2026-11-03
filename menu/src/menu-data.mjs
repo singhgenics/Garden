@@ -2,7 +2,9 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-export const DREAM = process.env.DREAM || path.join(os.homedir(), 'Documents/Code/Dream');
+import { fileURLToPath } from 'url';
+// The menu source (food.html, drinks.html) lives in ../source inside the Garden repo.
+export const DREAM = process.env.DREAM || path.join(path.dirname(fileURLToPath(import.meta.url)), '../source');
 function grab(fn) {
   const s = fs.readFileSync(path.join(DREAM, fn), 'utf8');
   const i = s.indexOf('const MENU=[');

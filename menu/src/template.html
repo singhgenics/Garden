@@ -322,7 +322,7 @@ footer.site b{color:var(--ink)}
 </main>
 
 <footer class="site"><div class="wrap">
-  <p><b>Cabin East</b> is the working name (trademark not cleared). Betalbatim, Goa. Prices in ₹, taxes extra. Alcohol is served only to guests aged 21 and over; please drink responsibly.</p>
+  <p><b>Cabin East</b> is the working name (trademark not cleared). Betalbatim, Goa. Prices in rupees, taxes extra. Alcohol is served only to guests aged 21 and over; please drink responsibly.</p>
   <p>Menu, crockery list, and plating guide for the fit-out and opening. Dish, crockery, plating and room images were generated with Google Flow as visual targets and show the style, not a specific supplier's product.</p>
 </div></footer>
 
@@ -369,7 +369,7 @@ document.addEventListener('click',e=>{const a=e.target.closest('[data-go]');if(!
 
 /* ---------- menu */
 let kind='food';
-const price=p=>{p=String(p);return /[₹]|daily/.test(p)?p:'₹'+p};
+const price=p=>String(p);
 const marks=m=>m==='v'?'<i class="mk v" title="Veg"></i>':m==='nv'?'<i class="mk nv" title="Non-veg"></i>':m==='vn'?'<i class="mk v" title="Veg option"></i><i class="mk nv" title="Non-veg option"></i>':'';
 const badge=b=>b==='kol'?'<span class="badge kol">Cabin classic</span>':b==='goa'?'<span class="badge goa">Konkan touch</span>':'';
 function item(sec,it){
@@ -387,8 +387,8 @@ function renderMenu(){
     ?'<span><i class="mk v"></i>Veg</span><span><i class="mk nv"></i>Non-veg</span><span><i class="mk v"></i><i class="mk nv"></i>Pick your protein</span><span><span class="badge kol">Cabin classic</span></span><span><span class="badge goa">Konkan touch</span></span><span><span class="heat">••</span>Spice, one to three</span>'
     :'<span><span class="badge kol">Cabin classic</span></span><span><span class="badge goa">Konkan touch</span></span>';
   $('#menuNote').innerHTML=kind==='food'
-    ?'<span>Prices in ₹, taxes extra. Dim sum come 4 to a basket, bao 2 to a plate.</span><span>Tell us about allergies: shellfish, pork, peanuts, gluten, egg, soy, sesame.</span><span>Drinks are on the drinks menu.</span>'
-    :'<span>Prices in ₹, taxes extra. Spirits are poured in 30 ml / 60 ml.</span><span>Happy hour 12–6 pm daily: 330 ml taps ₹179 · Kings 330 ml ₹99. The guest tap changes every couple of weeks.</span><span>Please drink responsibly. Alcohol is served only to guests aged 21 and over.</span>';
+    ?'<span>Prices in rupees, taxes extra. Dim sum come 4 to a basket, bao 2 to a plate.</span><span>Tell us about allergies: shellfish, pork, peanuts, gluten, egg, soy, sesame.</span><span>Drinks are on the drinks menu.</span>'
+    :'<span>Prices in rupees, taxes extra. Spirits are poured in 30 ml / 60 ml.</span><span>Happy hour 12–6 pm daily: 330 ml taps 179 · Kings 330 ml 99. The guest tap changes every couple of weeks.</span><span>Please drink responsibly. Alcohol is served only to guests aged 21 and over.</span>';
   $$('#menuTabs [data-kind]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.kind===kind)));
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-pv]');if(!b)return;const f=b.closest('figure'),img=f.querySelector('img');

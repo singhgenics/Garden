@@ -2,7 +2,7 @@
 
 Standing rule from the owner: **any change to the menu or its items updates everything**: the crockery checklist, the plating cards and this site.
 
-The menu source of truth is `food.html` and `drinks.html` in the Dream repo (`~/Documents/Code/Dream`). A Claude Code hook in that project runs `src/check-menu.mjs` after edits and raises a reminder when the menu data no longer matches `src/menu.hash` (the hash of the menu this site was last built from).
+The menu source of truth is `source/food.html` and `source/drinks.html` in this folder (`~/Documents/Code/Dream/Garden/web/menu`). A Claude Code hook in that project runs `src/check-menu.mjs` after edits and raises a reminder when the menu data no longer matches `src/menu.hash` (the hash of the menu this site was last built from).
 
 ## Checklist
 
@@ -21,8 +21,8 @@ The menu source of truth is `food.html` and `drinks.html` in the Dream repo (`~/
 5. **Rebuild the site.** `node src/build.mjs` (writes `index.html`, reports missing images). Check it in a browser at desktop and phone width.
 6. **Crockery checklist.** It lives only on the Menu site now (the Crockery tab, built from `src/crockery-source.html`). The separate claude.ai checklist artifact was deleted on 2026-10-20 at the owner's request; do not recreate it.
 7. **Photo menus.** Deleted on 2026-10-22 at the owner's request (`food-menu.html`, `drinks-menu.html` and their PDFs). Do not rebuild them. `src/build-menus.py` and `src/menus.css` are kept only in case they are wanted again.
-8. **Push.** Commit and push this repo to `main`; GitHub Pages rebuilds at https://singhgenics.github.io/Menu/ . Verify the live page loads with no broken images.
-8a. **Brand.** The pages carry the Cabin East logo (roof, wok and steam lockup) and the three WOK / STEAM / DRAUGHT planks. To re-apply it to the Dream menu pages and to `src/template.html` and `src/brand-snippets.json` here, run `python3 ~/Documents/Code/Dream/CabinEast/src/apply_logo.py` (idempotent; never touches menu data), then rebuild this site (steps 5 and 7). The printed A2 boards (`menu-food.pdf`, `menu-drinks.pdf`, `menu-board.pdf` in the Dream repo) are rebuilt from the live menu by `~/Documents/Code/Dream/CabinEast/src/render_boards.sh` (cream paper, ink section tabs, new logo); run it after any menu change and commit the three PDFs.
+8. **Push.** Commit and push the Garden repo (`singhgenics/Garden`) to `main`; GitHub Pages rebuilds at https://singhgenics.github.io/Garden/menu/ . Verify the live page loads with no broken images.
+8a. **Brand.** The pages carry the Cabin East logo (roof, wok and steam lockup) and the three WOK / STEAM / DRAUGHT planks. To re-apply it to the Dream menu pages and to `src/template.html` and `src/brand-snippets.json` here, run `python3 ~/Documents/Code/Dream/CabinEast/src/apply_logo.py` (idempotent; never touches menu data), then rebuild this site (steps 5 and 7). The printed A2 boards (`menu-food.pdf`, `menu-drinks.pdf`, `menu-board.pdf` in `source/`) are rebuilt from the live menu by `~/Documents/Code/Dream/CabinEast/src/render_boards.sh` (cream paper, ink section tabs, new logo); run it after any menu change and commit the three PDFs.
 9. **Record it.** `node src/check-menu.mjs --update` so the hook goes quiet.
 10. Tell the owner what changed on each surface.
 
@@ -36,3 +36,7 @@ The menu source of truth is `food.html` and `drinks.html` in the Dream repo (`~/
 - `src/check-menu.mjs`, `src/menu.hash`: change detector used by the hook.
 - `src/plating-variant-jobs.py`, `src/gen-variants.sh`: prompts and runner for the option photos and the drinks that had none.
 - `src/build-menus.py`, `src/menus.css`: the old photo-menu builder (outputs deleted 2026-10-22, do not run).
+
+## One home for the menu (2026-11-03)
+
+The separate `singhgenics/Menu` repo, the local `Menu-repo/` and the menu copies in the Dream repo are gone. Everything lives here: `source/` (food.html, drinks.html, A2 board PDFs), `src/` (build), `img/`, `picture/` (photo menu, self-contained `index.html` + PDF). Prices carry no rupee sign anywhere (menu data, site, boards, picture menu); the footers say "Prices in rupees". The A2 boards are rebuilt by `CabinEast/src/render_boards.sh`, which now copies the PDFs into `source/`.
