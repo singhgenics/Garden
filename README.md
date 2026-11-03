@@ -67,3 +67,5 @@ Brand: https://singhgenics.github.io/Garden/brand-kit.html (logos, colours in th
 Pool lounge (added 2026-11-03): outside the hall's 7.76 m west edge, 6.8 m hall side, 4.2 m rear wall with graffiti, two 2.8 m side walls, 1.6 m entrance; one 6 ft pool table and two standing tables. 3D view 'Pool lounge'; sheets A-07 (hall, pool lounge, garden and patio) and A-08 in drawings/Garden-architect-drawings.pdf.
 
 Floor plans tab: floor-plans.html (linked from the 3D toolbar) shows sheets A-01 to A-08 as images, with the PDF download.
+
+Colour-coded equipment plans (kitchen, dish wash, bar): drawings/Garden-equipment-colour-plans.pdf, shown as tabs E-01 to E-03 on floor-plans.html and linked from the 3D toolbar.

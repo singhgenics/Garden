@@ -35,9 +35,9 @@ h1{font-family:var(--display);font-weight:400;color:var(--green);margin:0 0 6px;
 <div class="wrap">
   <div class="top"><a href="garden.html">&larr; 3D model</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a></div>
   <h1>Floor plans</h1>
-  <p class="lead">Architect-style plans drawn to scale on A3: solid walls at their real thickness, door swings, windows, dimension strings and a schedule beside each plan. The restaurant hall shows every table and chair as built in the 3D model.</p>
+  <p class="lead">Architect-style plans drawn to scale on A3 (A-01 to A-08), then the colour-coded equipment plans for the kitchen, dish wash and bar (E-01 to E-03), where every item is coloured by type and labelled with its name and size. solid walls at their real thickness, door swings, windows, dimension strings and a schedule beside each plan. The restaurant hall shows every table and chair as built in the 3D model.</p>
   <div class="tabs" id="tabs" role="tablist"></div>
-  <div class="bar"><span class="k" id="meta"></span><button id="zoom" type="button">Zoom to full size</button><a id="open" href="#" target="_blank" rel="noopener">Open image</a><a href="drawings/Garden-architect-drawings.pdf" target="_blank" rel="noopener">Download all as PDF</a></div>
+  <div class="bar"><span class="k" id="meta"></span><button id="zoom" type="button">Zoom to full size</button><a id="open" href="#" target="_blank" rel="noopener">Open image</a><a href="drawings/Garden-architect-drawings.pdf" target="_blank" rel="noopener">Architect drawings (PDF)</a><a href="drawings/Garden-equipment-colour-plans.pdf" target="_blank" rel="noopener">Colour-coded equipment plans (PDF)</a></div>
   <div class="view" id="view"><img id="img" alt=""></div>
   <p class="note">Preliminary drawings for review. Sizes come from the site sketches and photos; the items marked as assumed (door and opening positions, the pool lounge depth, the store windows, wall heights) still need checking on site. Print the PDF at 100% to keep the scale.</p>
 </div>
@@ -50,7 +50,10 @@ const SHEETS=[
  ['A-05','Store room','1:30','Racks, aisle and the two corner windows'],
  ['A-06','Exhaust and drainage','1:50','Hood duct across the dish wash, drains, grease trap'],
  ['A-07','Hall, pool lounge, garden, patio','1:100','Every table and chair as modelled, the pool lounge, garden, landing and paths'],
- ['A-08','Pool lounge','1:40','Pool table, standing tables and the cue clearance']];
+ ['A-08','Pool lounge','1:40','Pool table, standing tables and the cue clearance'],
+ ['E-01','Kitchen, colour-coded','1:35','Every kitchen item by type with its name and size: gas appliances, gas pipe and cylinders, chillers, sink, benches, dustbins, screens, extinguishers'],
+ ['E-02','Dish wash, colour-coded','1:35','Drop-off table, clean table, crockery racks, the two-sink cell, tank, bins'],
+ ['E-03','Bar, colour-coded','1:30','Counter, coffee station, keg chiller with its CO₂ cylinder, sink, stools, bin']];
 const tabs=document.getElementById('tabs'),img=document.getElementById('img'),view=document.getElementById('view'),meta=document.getElementById('meta'),open_=document.getElementById('open');
 function show(i){const s=SHEETS[i];img.src='drawings/'+s[0]+'.png';img.alt=s[0]+' '+s[1];meta.textContent=s[0]+' · '+s[1]+' · scale '+s[2]+' · '+s[3];open_.href='drawings/'+s[0]+'.png';
   [...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));view.classList.remove('zoom');document.getElementById('zoom').textContent='Zoom to full size';try{history.replaceState(null,'','#'+s[0])}catch(e){}}
