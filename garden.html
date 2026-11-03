@@ -76,7 +76,7 @@ body.walk .pad{display:grid}
       <button data-view="kitchen" aria-pressed="false">Kitchen</button>
       <button data-view="dish" aria-pressed="false">Dish wash</button>
       <button data-view="wash" aria-pressed="false">Washroom</button>
-      <button data-view="store" aria-pressed="false">Staff room</button>
+      <button data-view="store" aria-pressed="false">Store room</button>
       <button data-view="outside" aria-pressed="false">From outside</button>
       <button data-view="plan" aria-pressed="false">Plan</button>
       <button data-view="walk" aria-pressed="false">Walk in</button>
@@ -590,7 +590,7 @@ wall(BX0,0,BX0,BY1,[[1.0,1.9,0,2.1],[2.35,3.25,0,2.1],[4.3,5.6,0.95,1.75]],BH,M.
 // wall between dish wash and kitchen: no door, a shuttered window over the kitchen's granite platform (as filmed)
 wall(BX0,DISH,BX1,DISH,[[BX0+2.4,BX0+3.4,1.05,1.95]],BH,M.plaster,G.walls);
 // south wall of the kitchen with the store-room door beside the cooking line; west of the store room it is the common wall with the existing restaurant
-// the old store door (0.9 m, beside the cooking line, as filmed) is now the staff-room entrance, straight from the kitchen
+// the store door (0.9 m, beside the cooking line, as filmed) leads straight from the kitchen into the store room
 wall(BX0,BY1,BX1,BY1,[[BX1-1.85,BX1-0.95,0,2.1]],BH,M.plaster,G.walls);
 // store room
 wall(SX0,BY1,SX0,SY1,[],BH,M.plaster,G.walls);wall(SX0,SY1,BX1,SY1,[],BH,M.plaster,G.walls);
@@ -915,10 +915,9 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   B(0.03,0.4,0.06,0.08,cz0,cz1,M.white,false);B(0.03,0.4,0.86,0.92,cz0,cz1,M.white,false);B(0.03,0.05,0.08,0.86,cz0,cz1,M.white,false);B(0.05,0.06,0.1,0.84,cz0+0.04,cz1-0.04,M.glow,false);
   const mix=[GL('#bfe3f2',0.55),GL('#d9e6ea',0.5),GL('#c8a24a',0.7),GL('#2e5a3a',0.8),GL('#bfe3f2',0.55),GL('#e04a3a',0.8)];
   [0.12,0.49].forEach((y,row)=>{let k=row*2;for(let z=cz0+0.07;z<cz1-0.04;z+=0.075){const m=mix[k++%mix.length];[0.12,0.26].forEach(x=>{cyl(0.028,0.03,0.2,x,y,z,m,g,10,false);cyl(0.012,0.024,0.04,x,y+0.2,z,m,g,8,false);});}});g=BG;}
- // under-counter glass washer (z 0.6-1.1) and ice machine (z 1.1-1.6), flush with the back-bar front
+ // no glass washer or ice machine at the start: a plain SS base cabinet, two doors, flush with the back-bar front (bay kept for them)
  g=SG;
- {const g0=0.6,g1=1.1;B(0.4,0.412,0.12,0.7,g0+0.03,g1-0.03,M.ssDark,false);B(0.41,0.43,0.64,0.67,g0+0.07,g1-0.07,M.black);B(0.4,0.412,0.74,0.86,g0+0.03,g1-0.03,M.black,false);sph(0.01,0.412,0.8,g1-0.07,M.glow,g);}
- {const i0=1.1,i1=1.6;B(0.4,0.412,0.1,0.86,i0+0.03,i1-0.03,M.ss,false);B(0.41,0.43,0.12,0.5,i0+0.06,i1-0.06,M.ssDark);B(0.41,0.43,0.55,0.8,i0+0.06,i1-0.06,M.shelfGlass,false);B(0.41,0.43,0.53,0.55,i0+0.06,i1-0.06,M.black,false);sph(0.01,0.412,0.84,i1-0.07,M.glow,g);}
+ [[0.6,1.1],[1.1,1.6]].forEach(([g0,g1])=>{B(0.4,0.412,0.1,0.86,g0+0.03,g1-0.03,M.ss,false);B(0.41,0.43,0.62,0.66,g0+0.12,g1-0.12,M.steel,false);});
  g=BG;
  // bay A: glassware shelves (hi-ball, coupes, rocks) over the infusion jars
  {const a0=0.62,a1=1.55;
@@ -941,7 +940,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
  // POS nook at the door end of the back bar
  // S3: KDS bar screen (15.6 in, 0.38 × 0.23) on the east wall above the POS nook, replaces the BOT slip
  B(0.03,0.06,1.43,1.7,0.08,0.52,M.black,false);{const sm=new THREE.MeshBasicMaterial({map:kdsTex('bar')});plane(0.34,0.19,sm,0.0615,1.565,0.3,Math.PI/2);}
- {const n0=0.08,n1=0.56;[n0,n1-0.025].forEach(z=>B(0.03,0.4,0.96,1.34,z,z+0.025,M.timber));B(0.03,0.4,1.32,1.35,n0,n1,M.timber);B(0.03,0.05,0.96,1.32,n0,n1,M.timberDark,false);B(0.06,0.1,0.96,0.98,0.2,0.42,M.black);{const t=B(0.14,0.16,1.0,1.2,0.18,0.44,M.black);t.rotation.z=0.35;}B(0.22,0.34,0.96,0.99,0.5,0.55,M.black);B(0.06,0.28,0.96,1.08,0.1,0.17,M.white);}
+ {const n0=0.08,n1=0.56;[n0,n1-0.025].forEach(z=>B(0.03,0.4,0.96,1.34,z,z+0.025,M.timber));B(0.03,0.4,1.32,1.35,n0,n1,M.timber);B(0.03,0.05,0.96,1.32,n0,n1,M.timberDark,false);[0.13,0.25,0.37,0.49].forEach((z,i)=>cyl(0.045,0.045,0.14,0.2,0.96,z,[M.ochre,M.white,M.red,M.ochre][i],g,10,false));}   // back-bar nook: tea, coffee and sugar tins (the POS moved to the desk beside the coffee station)
  // ---------- COUNTER ----------
  // moved 0.50 m off the wall (equipment plan): working face 1.50 m from the wall, so the bartender aisle is 0.90 m
  const CG=new THREE.Group();CG.position.x=0.5;BG.add(CG);g=CG;
@@ -1010,7 +1009,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   M.cabBlue=M.cabBlue||S({color:'#22409a',roughness:0.45});B(x0,x0+0.6,0.1,0.88,c0,c1,M.cabBlue);   // royal-blue cabinet, the same family as the pillarsB(x0+0.02,x0+0.56,0,0.1,c0+0.02,c1-0.02,M.black);
   [[c0,zm],[zm,c1]].forEach(([a,b])=>{B(x0+0.6,x0+0.615,0.16,0.82,a+0.03,b-0.03,M.cabBlue);B(x0+0.615,x0+0.62,0.22,0.76,a+0.09,b-0.09,S({color:'#1a3480',roughness:0.5}),false);
    [[0.22,0.76],[a+0.09,b-0.09]];sph(0.014,x0+0.63,0.62,zm+(a<zm?-0.05:0.05),M.brass,g);});
-  B(x0+0.62,x0+0.625,0.68,0.74,c0+0.4,c0+0.55,M.black,false);sph(0.008,x0+0.627,0.71,c0+0.47,M.glow,g);   // -5 C shot freezer display (under-counter fridge sits behind the second door)
+  
   B(x0,x0+0.64,0.88,0.92,c0-0.02,c1+0.02,M.marble);B(x0,x0+0.02,0.92,1.08,c0,c1,M.marble,false);
   // twin filter-coffee brewer with two glass carafes
   {const z=c0+0.42;B(x0+0.06,x0+0.46,0.92,0.96,z-0.24,z+0.24,M.ss);B(x0+0.06,x0+0.2,0.96,1.38,z-0.24,z+0.24,M.ss);B(x0+0.06,x0+0.46,1.28,1.38,z-0.24,z+0.24,M.black);
@@ -1022,7 +1021,18 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   // (no wall shelves: the mural fills the wall; glasses live in the cabinet)
   // (upper shelf and pothos removed so the mural is clear)
   rod(V(x0+0.09,1.45,c0+0.05),V(x0+0.09,1.45,c1-0.05),0.008,M.brass,g,false);B(x0+0.08,x0+0.1,1.05,1.43,c1-0.6,c1-0.42,M.cushion,false);
-  lbl('Coffee station',HX-0.4,1.7,5.15-zm,'');}
+  // POS desk beside the coffee station: counter-height royal-blue cabinet to match, marble top, terminal, receipt printer and card reader, with a lockable cash drawer under the top and a cupboard below
+  {const d0=c1+0.04,d1=d0+0.58,dm=(d0+d1)/2;
+   B(x0,x0+0.6,0.1,0.88,d0,d1,M.cabBlue);B(x0+0.02,x0+0.56,0,0.1,d0+0.02,d1-0.02,M.black);
+   B(x0,x0+0.64,0.88,0.92,d0-0.02,d1+0.02,M.marble);
+   B(x0+0.6,x0+0.615,0.66,0.84,d0+0.03,d1-0.03,M.cabBlue);B(x0+0.615,x0+0.62,0.69,0.81,d0+0.06,d1-0.06,S({color:'#1a3480',roughness:0.5}),false);   // cash drawer front
+   B(x0+0.62,x0+0.64,0.76,0.78,dm-0.1,dm+0.1,M.brass,false);sph(0.012,x0+0.625,0.72,dm,M.brass,g);   // handle and lock
+   B(x0+0.6,x0+0.615,0.14,0.62,d0+0.03,d1-0.03,M.cabBlue);sph(0.014,x0+0.63,0.5,dm+0.18,M.brass,g);   // cupboard for the router, switch and UPS
+   B(x0+0.1,x0+0.3,0.92,0.93,dm-0.2,dm,M.black,false);B(x0+0.18,x0+0.2,0.93,1.05,dm-0.11,dm-0.09,M.black,false);{const tb=B(x0+0.12,x0+0.2,1.04,1.26,dm-0.24,dm-0.0,M.black);tb.rotation.z=0.3;}   // tablet terminal on a stand
+   B(x0+0.38,x0+0.52,0.92,1.04,dm-0.18,dm+0.02,M.black);B(x0+0.4,x0+0.5,1.04,1.1,dm-0.12,dm-0.02,M.white,false);   // receipt printer with paper
+   B(x0+0.34,x0+0.4,0.92,0.96,dm+0.08,dm+0.2,M.black,false);   // card reader
+   const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.2,0.05),new THREE.MeshStandardMaterial({map:signTex(160,40,[['CASH',20,0.6]],'#161412','#e9a94b'),roughness:0.7}));sg.position.set(x0+0.622,0.68,dm);sg.rotation.y=Math.PI/2;g.add(sg);}
+  lbl('Coffee station and POS desk',HX-0.4,1.7,5.15-zm,'');}
  // neon over the back bar
  {const nd=new THREE.Mesh(new THREE.PlaneGeometry(1.5,0.45),M.neonDraught);nd.rotation.y=Math.PI/2;nd.position.set(0.05,2.7,0.95);nd.renderOrder=4;g.add(nd);}
 }
@@ -1225,7 +1235,7 @@ flushOrbs();
 
 /* ======================= KITCHEN ======================= */
 const kx0=BX0+0.1,kx1=BX1-0.1,kz0=DISH+0.1,kz1=BY1-0.1;
-clad(BX0+0.1,BX1-1.85,0,1.9,BY1-0.1-0.02,BY1-0.1,M.whiteTile.map,0.6,G.kitchen);clad(BX1-0.95,BX1-0.1,0,1.9,BY1-0.1-0.02,BY1-0.1,M.whiteTile.map,0.6,G.kitchen); // south wall tiles, broken by the staff-room door
+clad(BX0+0.1,BX1-1.85,0,1.9,BY1-0.1-0.02,BY1-0.1,M.whiteTile.map,0.6,G.kitchen);clad(BX1-0.95,BX1-0.1,0,1.9,BY1-0.1-0.02,BY1-0.1,M.whiteTile.map,0.6,G.kitchen); // south wall tiles, broken by the store door
 clad(BX1-0.12,BX1-0.1,0,1.9,kz0,kz1,M.whiteTile.map,0.6,G.kitchen);              // east wall behind the line
 clad(kx0,kx0+0.02,0,1.9,kz0,kz1,M.whiteTile.map,0.6,G.kitchen);                  // west wall
 bx(kx0,kx1,1.9,1.94,kz1-0.02,kz1,M.ss,G.kitchen,false);
@@ -1249,14 +1259,13 @@ bx(LX0-0.3,LX1,1.85,2.0,2.4,6.3,M.goaWhite,G.kitchen);bx(LX0-0.15,LX1,2.0,2.75,2
 [2.9,3.9,4.9,5.8].forEach(z=>bx(LX0-0.2,LX0-0.06,1.88,1.9,z-0.14,z+0.14,M.panelLight,G.kitchen,false));
 // refrigeration along the south wall: 2-door upright fridge, upright freezer, under-counter chillers with worktop
 {const y=BY1-0.1;function fridge(x0,x1,col){ssBox(x0,x1,0.06,1.95,y-0.8,y);bx(x0+0.02,x1-0.02,0.1,1.9,y-0.805,y-0.79,col,G.kitchen,false);bx((x0+x1)/2-0.01,(x0+x1)/2+0.01,0.1,1.9,y-0.81,y-0.8,M.black,G.kitchen,false);[[0.9,1.4]].forEach(([a,b])=>{bx(x0+0.06,x0+0.08,a,b,y-0.84,y-0.8,M.black,G.kitchen,false);bx(x1-0.08,x1-0.06,a,b,y-0.84,y-0.8,M.black,G.kitchen,false);});}
- fridge(kx0+0.40,kx0+1.18,M.ssDark);fridge(kx0+1.18,kx0+1.96,M.ss);   // chiller + freezer; 0.40 m left at the west wall for the hand-wash basin
- const u0=kx0+1.96,u1=kx0+3.46;
- ssBox(u0,u1,0.06,0.9,y-0.7,y);[u0+0.4,u0+1.1].forEach(x=>bx(x-0.3,x+0.3,0.15,0.75,y-0.705,y-0.69,M.ssDark,G.kitchen,false));bx(u0,u1,0.9,0.94,y-0.72,y,M.ss,G.kitchen);
- // W1 wall cabinet 1.50 x 0.30 x 0.80 at 1.30 m: spices, small sauce bottles, peanuts, sesame, pepper
- bx(u0,u1,1.3,2.1,y-0.3,y,M.ss,G.kitchen);[0.5,1.0].forEach(o=>bx(u0+o-0.005,u0+o+0.005,1.3,2.1,y-0.31,y-0.3,M.ssDark,G.kitchen,false));[0.25,0.75,1.25].forEach(o=>bx(u0+o-0.1,u0+o+0.1,1.35,1.38,y-0.325,y-0.31,M.steel,G.kitchen,false));
+ fridge(kx0+0.45,kx0+1.05,M.ssDark);fridge(kx0+1.05,kx0+1.65,M.ss);   // one dual-zone upright 1.20 m: chiller door (left), freezer door (right); 0.45 m corner left for broom and mop
+ const u0=kx0+1.65,u1=kx0+2.85;
+ ssBox(u0,u1,0.06,0.9,y-0.7,y);[u0+0.3,u0+0.9].forEach(x=>bx(x-0.27,x+0.27,0.15,0.75,y-0.705,y-0.69,M.ssDark,G.kitchen,false));bx(u0,u1,0.9,0.94,y-0.72,y,M.ss,G.kitchen);
+ // no wall cabinet: the jars in use sit on the K12 shelves
  bx(u0+0.05,u1-0.05,0.94,1.02,y-0.2,y-0.05,M.timber,G.kitchen,false); }
 // west wall: pass window shelf with heat lamps + order rail, spice shelves, hand-wash, door side
-{bx(kx0,kx0+0.45,0.92,0.96,4.3,5.6,M.ss,G.kitchen);bx(BX0-0.45,BX0+0.1,0.92,0.96,4.3,5.6,M.ss,G.kitchen);[4.55,5.05,5.35].forEach(z=>{cyl(0.02,0.02,0.4,BX0-0.1,1.35,z,M.ssDark,G.kitchen,6,false);sph(0.06,BX0-0.1,1.28,z,M.led,G.kitchen);});rod(V(BX0+0.12,1.8,4.3),V(BX0+0.12,1.8,5.6),0.012,M.ss,G.kitchen,false);for(let i=0;i<5;i++)bx(BX0+0.13,BX0+0.15,1.5,1.8,4.38+i*0.24,4.38+i*0.24+0.14,M.white,G.kitchen,false);
+{bx(kx0,kx0+0.45,0.92,0.96,4.3,5.6,M.ss,G.kitchen);bx(BX0-0.45,BX0+0.1,0.92,0.96,4.3,5.6,M.ss,G.kitchen);rod(V(BX0+0.12,1.8,4.3),V(BX0+0.12,1.8,5.6),0.012,M.ss,G.kitchen,false);for(let i=0;i<5;i++)bx(BX0+0.13,BX0+0.15,1.5,1.8,4.38+i*0.24,4.38+i*0.24+0.14,M.white,G.kitchen,false);
  bx(kx0,kx0+0.3,1.35,1.39,3.35,4.25,M.ss,G.kitchen);bx(kx0,kx0+0.3,1.05,1.09,3.35,4.25,M.ss,G.kitchen);for(let i=0;i<9;i++){cyl(0.05,0.05,0.14,kx0+0.15,1.39,3.42+i*0.1,[M.white,M.ochre,M.red][i%3],G.kitchen,8,false);cyl(0.05,0.05,0.12,kx0+0.15,1.09,3.42+i*0.1,[M.timber,M.white][i%2],G.kitchen,8,false);}
  for(let i=0;i<5;i++){rod(V(kx0+0.05,1.75,3.4+i*0.18),V(kx0+0.05,1.5,3.4+i*0.18),0.01,M.ssDark,G.kitchen,false);}
  // fire extinguishers by the door, as filmed
@@ -1289,32 +1298,32 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
  rod(V(kx0+1.25,0.9,gz+0.05),V(kx0+1.25,1.15,gz+0.05),0.014,M.ss,G.kitchen,false);rod(V(kx0+1.25,1.15,gz+0.05),V(kx0+1.25,1.15,gz+0.3),0.012,M.ss,G.kitchen,false);
  bx(kx0+1.65,kx0+2.35,0.9,0.915,gz+0.07,gz+0.53,S({color:'#3f8f55',roughness:0.6}),G.kitchen,false);   // green board, veg only
  cyl(0.12,0.09,0.17,kx0+2.575,0.9,gz+0.275,M.black,G.kitchen,16);rod(V(kx0+2.6,1.0,gz+0.28),V(kx0+2.68,1.22,gz+0.22),0.022,M.black,G.kitchen,false);   // mortar and pestle
- // benchtop planetary mixer (10 L)
- {const mx=kx0+2.8;bx(mx,mx+0.4,0.9,0.95,gz+0.08,gz+0.52,M.ssDark,G.kitchen);bx(mx,mx+0.15,0.95,1.55,gz+0.12,gz+0.48,M.ss,G.kitchen);bx(mx,mx+0.4,1.4,1.55,gz+0.1,gz+0.5,M.ss,G.kitchen);cyl(0.15,0.12,0.2,mx+0.26,0.95,gz+0.3,M.steel,G.kitchen,18);}
+ // no planetary mixer at the start: bao and wonton wrappers are bought frozen
  cyl(0.22,0.22,0.32,kx0+3.525,0.9,gz+0.305,M.white,G.kitchen,20);cyl(0.2,0.22,0.06,kx0+3.525,1.22,gz+0.305,M.ss,G.kitchen,20);sph(0.012,kx0+3.525,1.0,gz+0.53,M.glow,G.kitchen);   // rice cooker
  bx(kx0+3.8,kx0+4.2,0.9,1.1,gz+0.12,gz+0.42,M.ssDark,G.kitchen);cyl(0.09,0.07,0.3,kx0+4.0,1.1,gz+0.27,M.shelfGlass,G.kitchen,16,false);}   // mixer-grinder
-{const x0=kx0,z0=5.78,z1=6.23;   // wall-hung hand-wash basin with soap and towel dispensers, west wall south end
- bx(x0+0.02,x0+0.4,0.78,0.84,z0,z1,M.white,G.kitchen);bx(x0+0.06,x0+0.36,0.8,0.842,z0+0.06,z1-0.06,M.ssDark,G.kitchen,false);bx(x0+0.1,x0+0.3,0.3,0.78,(z0+z1)/2-0.05,(z0+z1)/2+0.05,M.white,G.kitchen,false);
- rod(V(x0+0.05,0.84,(z0+z1)/2),V(x0+0.05,1.0,(z0+z1)/2),0.012,M.ss,G.kitchen,false);rod(V(x0+0.05,1.0,(z0+z1)/2),V(x0+0.2,1.0,(z0+z1)/2),0.01,M.ss,G.kitchen,false);
- bx(x0+0.0,x0+0.08,1.05,1.2,z0+0.07,z0+0.17,M.white,G.kitchen);bx(x0+0.0,x0+0.1,1.25,1.5,z1-0.25,z1-0.05,M.white,G.kitchen);}
+{const x0=kx0+2.95,x1=kx0+3.4,zb=kz1,zf=zb-0.4,cx=(x0+x1)/2;   // wall-hung hand-wash basin on the south wall beside the store door, 1.4 m of open floor in front
+ bx(x0,x1,0.78,0.84,zf,zb,M.white,G.kitchen);bx(x0+0.04,x1-0.04,0.8,0.842,zf+0.05,zb-0.05,M.ssDark,G.kitchen,false);bx(cx-0.05,cx+0.05,0.3,0.78,zb-0.1,zb-0.02,M.white,G.kitchen,false);
+ rod(V(cx,0.84,zb-0.05),V(cx,1.0,zb-0.05),0.012,M.ss,G.kitchen,false);rod(V(cx,1.0,zb-0.05),V(cx,1.0,zb-0.2),0.01,M.ss,G.kitchen,false);
+ bx(x0+0.02,x0+0.12,1.05,1.2,zb-0.08,zb,M.white,G.kitchen);bx(x1-0.22,x1-0.02,1.25,1.5,zb-0.1,zb,M.white,G.kitchen);}
 /* KDS screens: S1 hot line on the north wall above the east end of the granite, S2 pass on the west wall above the pass window */
 {const m1=new THREE.MeshBasicMaterial({map:kdsTex('hot')}),m2=new THREE.MeshBasicMaterial({map:kdsTex('pass')});
  const x0=kx0+3.55,x1=kx0+4.17;bx(x0,x1,1.52,1.89,2.1,2.15,M.black,G.kitchen,false);const p1=new THREE.Mesh(new THREE.PlaneGeometry(0.58,0.33),m1);p1.position.set((x0+x1)/2,1.705,2.1515);G.kitchen.add(p1);
  bx(kx0,kx0+0.05,1.95,2.24,4.7,5.2,M.black,G.kitchen,false);const p2=new THREE.Mesh(new THREE.PlaneGeometry(0.46,0.25),m2);p2.position.set(kx0+0.0515,2.095,4.95);p2.rotation.y=Math.PI/2;G.kitchen.add(p2);}
-/* storage built in (no store room): U1 and U2 under the granite, U4 under the pass shelf, T1 tall pantry, bins */
+/* working stock under the granite (U1, U2) and under the pass shelf (U4); bulk is in the store room */
 {const z0=2.12,z1=2.7,p=kx0;
  // U1: slatted shelves with ventilated crates, west bay beside the veg sink
  [0.15,0.5].forEach(y=>bx(p+1.6,p+2.5,y,y+0.03,z0+0.03,z1-0.03,M.timber,G.kitchen,false));
  [[1.65,0.18],[2.1,0.18],[1.65,0.53],[2.1,0.53]].forEach(([x,y],i)=>bx(p+x,p+x+0.4,y,y+0.27,z0+0.08,z1-0.08,[S({color:'#b4905c',roughness:0.9}),S({color:'#8a6a3a',roughness:0.9})][i%2],G.kitchen,false));
- // U2: lockable cabinet, four doors
- bx(p+2.7,p+4.2,0.06,0.86,z0,z1,M.ss,G.kitchen);[2.7,3.075,3.45,3.825].forEach((o,i)=>{bx(p+o+0.01,p+o+0.365,0.1,0.82,z1,z1+0.012,M.ss,G.kitchen,false);bx(p+o+0.17,p+o+0.2,0.7,0.78,z1+0.012,z1+0.03,M.steel,G.kitchen,false);});
+ // U2: open steel shelves (no doors) with bins on wheels, working stock only
+ {[0.06,0.46].forEach(y=>bx(p+2.7,p+4.2,y,y+0.03,z0+0.02,z1-0.02,M.ssDark,G.kitchen,false));[p+2.7,p+4.2].forEach(x=>[z0+0.03,z1-0.03].forEach(z=>bx(x-0.02,x+0.02,0,0.8,z-0.02,z+0.02,M.steel,G.kitchen,false)));
+  [3.0,3.5,4.0].forEach((o,i)=>cyl(0.18,0.18,0.4,p+o-0.2,0.09,(z0+z1)/2,i%2?M.white:S({color:'#b4905c',roughness:0.9}),G.kitchen,14,false));
+  [3.0,3.7].forEach(o=>bx(p+o-0.15,p+o+0.15,0.49,0.69,z0+0.1,z1-0.1,S({color:'#a5855a',roughness:0.95}),G.kitchen,false));}
  // veg waste bin (green) under the sink, non-veg waste bin (red) under the island
  cyl(0.17,0.15,0.5,p+1.25,0,2.35,S({color:'#3f8f55',roughness:0.7}),G.kitchen,14);cyl(0.17,0.15,0.55,p+1.75,0,4.1,S({color:'#b0432f',roughness:0.7}),G.kitchen,14);
  // U4: base cabinet under the pass shelf
  bx(p,p+0.45,0.06,0.92,4.3,5.6,M.ss,G.kitchen);[4.95].forEach(z=>bx(p+0.45,p+0.455,0.1,0.88,z-0.005,z+0.005,M.ssDark,G.kitchen,false));[4.62,5.28].forEach(z=>bx(p+0.455,p+0.47,0.6,0.66,z-0.1,z+0.1,M.steel,G.kitchen,false));
- // T1: lockable overhead cabinet above the staff-room door (the old tall pantry spot is now the doorway), light dry goods, paper and napkins
- {const t0=BX1-1.85+0.02,t1=t0+0.45,tz1=BY1-0.1,tz0=tz1-0.4;bx(t0,t1,2.14,2.94,tz0,tz1,M.ss,G.kitchen);bx(t0+0.224,t0+0.226,2.17,2.91,tz0-0.01,tz0,M.ssDark,G.kitchen,false);
-  [t0+0.14,t0+0.31].forEach(x=>bx(x,x+0.03,2.46,2.62,tz0-0.025,tz0-0.01,M.steel,G.kitchen,false));}}
+ // no T1 overhead cabinet: dry goods are in the store room
+}
 /* kitchen lights: cool-white LED panels (work light), plus a warm bar to match the room */
 [[BX0+2.2,3.2],[BX0+2.2,5.4],[BX0+3.7,4.3]].forEach(([x,z])=>bx(x-0.35,x+0.35,BH-0.04,BH-0.01,z-0.15,z+0.15,M.panelLight,G.kitchen,false));
 /* store door sign + door-side pest net */
@@ -1333,23 +1342,22 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
  bx(sx0,sx1,0.9,1.15,tz0,tz0+0.03,M.ss,g,false);
  {const px=sx0+0.8;rod(V(px,0.9,tz0+0.08),V(px,1.75,tz0+0.08),0.016,M.ss,g,false);const spr=[];for(let i=0;i<=16;i++){const t=i/16;spr.push(V(px+0.08*Math.sin(t*14)*0.4,1.75-t*0.55,tz0+0.1+0.2*t*t));}
   g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(spr),20,0.008,5,false),M.steel));cyl(0.02,0.03,0.13,px,1.12,tz0+0.3,M.ss,g,8,false);rod(V(px,1.75,tz0+0.08),V(px+0.35,1.88,tz0+0.08),0.014,M.brass,g,false);rod(V(px+0.35,1.88,tz0+0.08),V(px+0.35,1.7,tz0+0.2),0.012,M.brass,g,false);}
- // hood-type dishwasher (0.8 x 0.7), hot-water cylinder above
- const dx0=sx1+0.1,dx1=dx0+0.85;bx(dx0,dx1,0.0,0.9,tz0,tz1,M.ss,g);bx(dx0,dx1,0.9,0.96,tz0,tz1,M.ssDark,g);bx(dx0+0.03,dx1-0.03,0.96,1.85,tz0+0.05,tz1-0.05,M.ss,g);bx(dx0+0.1,dx1-0.1,1.1,1.55,tz1-0.052,tz1-0.04,M.glass,g,false);bx(dx0+0.1,dx1-0.1,1.45,1.5,tz1-0.06,tz1-0.04,M.panelLight,g,false);bx(dx1-0.08,dx1-0.03,1.2,1.6,tz1-0.07,tz1-0.04,M.black,g,false);
- bx(dx0+0.05,dx0+0.2,1.75,1.85,tz1-0.1,tz1,M.red,g,false);
+ // no dishwasher at the start: a third sink bowl (sanitise) in its place, wash > rinse > sanitise > air-dry
+ const dx0=sx1+0.1,dx1=dx0+0.85;bx(dx0,dx1,0.84,0.9,tz0,tz1,M.ss,g);bx(dx0+0.06,dx1-0.06,0.5,0.86,tz0+0.06,tz1-0.06,M.black,g,false);bx(dx0+0.07,dx1-0.07,0.78,0.88,tz0+0.08,tz1-0.08,M.water,g,false);
+ [dx0+0.04,dx1-0.04].forEach(x=>[tz0+0.04,tz1-0.04].forEach(z=>bx(x-0.025,x+0.025,0,0.84,z-0.025,z+0.025,M.ssDark,g)));bx(dx0+0.02,dx1-0.02,0.2,0.23,tz0+0.03,tz1-0.03,M.ss,g);bx(dx0,dx1,0.9,1.15,tz0,tz0+0.03,M.ss,g,false);
+ rod(V((dx0+dx1)/2,0.9,tz0+0.08),V((dx0+dx1)/2,1.1,tz0+0.08),0.014,M.ss,g,false);rod(V((dx0+dx1)/2,1.1,tz0+0.08),V((dx0+dx1)/2,1.1,tz0+0.25),0.012,M.ss,g,false);
  // clean table + rack stack beside the clean door
  const cx0=dx1+0.1,cx1=BX1-0.12;bx(cx0,cx1,0.84,0.9,tz0,tz1,M.ss,g);[cx0+0.04,cx1-0.04].forEach(x=>[tz0+0.04,tz1-0.04].forEach(z=>bx(x-0.025,x+0.025,0,0.84,z-0.025,z+0.025,M.ssDark,g)));bx(cx0+0.03,cx1-0.03,0.2,0.23,tz0+0.03,tz1-0.03,M.ss,g);
  for(let i=0;i<4;i++)bx(cx0+0.04,cx1-0.04,0.9+i*0.05,0.93+i*0.05,tz0+0.08,tz1-0.1,M.white,g,false);
  // wall shelves + hanging racks over the clean table
  [1.35,1.85].forEach(y=>bx(sx1-0.5,cx1,y,y+0.04,tz0,tz0+0.3,M.ss,g));for(let i=0;i<9;i++){cyl(0.05,0.05,0.12,sx1-0.4+i*0.17,1.39,tz0+0.15,[M.white,M.ochre,M.white][i%3],g,10,false);cyl(0.06,0.06,0.18,sx1-0.4+i*0.17,1.89,tz0+0.15,M.clearBottle,g,10,false);}
  rod(V(tx0+0.05,1.85,tz0+0.05),V(tx0+1.15,1.85,tz0+0.05),0.012,M.ss,g,false);
- // geyser (water heater), extractor louvre, drain, mop sink corner
+ // geyser (water heater), louvre, drain, mop bucket corner
  cyl(0.2,0.2,0.65,tx0+0.5,1.25,tz0+0.2,M.white,g,18);rod(V(tx0+0.5,1.25,tz0+0.2),V(tx0+0.5,1.1,tz0+0.2),0.02,M.copper||M.brass,g,false);
  bx(BX0+0.4,BX0+1.5,1.55,2.45,0.1,0.12,M.glass,g,false);bx(BX0+0.4,BX0+1.5,1.55,1.58,0.05,0.12,M.ss,g,false);bx(BX0+0.4,BX0+1.5,2.42,2.45,0.05,0.12,M.ss,g,false);for(let y=1.6;y<2.4;y+=0.08)bx(BX0+0.42,BX0+1.48,y,y+0.012,0.06,0.12,M.ss,g,false);
  bx(BX0+2.9,BX0+4.2,0.0,0.004,1.05,1.4,M.steel,g,false);for(let x=BX0+2.92;x<BX0+4.18;x+=0.1)bx(x,x+0.04,0.004,0.008,1.05,1.4,M.black,g,false);
  [BX0+4.7,BX0+5.1].forEach(x=>cyl(0.2,0.18,0.6,x,0,1.65,M.black,g,14));   // dry and recycling bins
- bx(BX0+3.95,BX0+4.45,0,0.25,1.45,1.9,M.white,g);bx(BX0+3.99,BX0+4.41,0.245,0.255,1.49,1.86,M.black,g,false);rod(V(BX0+4.2,0.5,1.88),V(BX0+4.2,1.0,1.88),0.012,M.ss,g,false);bx(BX0+3.95,BX0+4.45,1.3,1.34,1.86,1.9,M.ss,g,false);   // mop sink and mop rail
- bx(BX0+1.2,BX0+2.0,1.3,2.1,1.6,1.9,M.white,g);bx(BX0+1.2,BX0+2.0,1.3,2.1,1.59,1.6,S({color:'#b0432f',roughness:0.6}),g,false);bx(BX0+1.57,BX0+1.63,1.65,1.75,1.58,1.59,M.black,g,false);   // CH locked chemical wall cabinet
- bx(BX0+3.3,BX0+3.6,1.2,1.8,1.7,1.9,M.white,g);bx(BX0+3.35,BX0+3.55,1.5,1.62,1.69,1.7,S({color:'#22409a',roughness:0.5}),g,false);   // detergent and sanitiser dispenser
+ cyl(0.16,0.13,0.3,BX0+4.2,0,1.6,S({color:'#2f6aa3',roughness:0.6}),g,14);rod(V(BX0+4.45,0.3,1.85),V(BX0+4.45,1.1,1.85),0.012,M.ss,g,false);   // mop bucket beside the floor drain (no mop sink at the start)
  bx(kx1-0.45,kx1-0.35,1.1,1.6,1.5,1.9,M.red,g,false);
  const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.5,0.18),new THREE.MeshStandardMaterial({map:signTex(256,92,[['DISH WASH',40,0.52]],'#1f4f6e','#f6ecd6')}));sg.position.set(BX0+0.125,1.85,1.0);sg.rotation.y=Math.PI/2;G.dish.add(sg);
  // hatch label + shelf outside
@@ -1404,36 +1412,48 @@ bx(kx0+0.04,kx0+0.14,0.8,1.3,2.2,2.5,M.red,G.kitchen,false);
 bx(TX0-0.04,TX0,2.1,2.16,-1.45,-0.75,M.brass,G.wash,false);
 [[TX0+1.4,-0.85],[BX0+1.25,-0.85]].forEach(([x,z])=>sph(0.01,x,0,z,M.black,G.wash));
 
-/* ======================= STAFF ROOM (the old store room) ======================= */
+/* ======================= STORE ROOM (dry goods, beverages, spirits, chemicals) ======================= */
 {const g=G.store;
- // staff accommodation for 4: door from the kitchen at the north end (x 0.85 to 1.75 m from the west wall), a 1 m lobby, then two steel bunk beds along the west wall, four lockers and a shared cupboard along the east wall, one flush-mount fan over the aisle
- const WX=SX0+0.1,EX=BX1-0.1,Z0=BY1+0.1,BW=0.92,BL=2.0;
- const steel=M.blackMetal,mat=S({color:'#e9e1cf',roughness:0.95}),pil=M.pillow;
- const blank=['#27406a','#7a2f2f','#2f5a46','#8a6a2a'].map(c=>S({color:c,roughness:0.95}));
- function bunk(z0,k){const x0=WX,x1=WX+BW,z1=z0+BL;
-  [[x0,z0],[x1-0.06,z0],[x0,z1-0.06],[x1-0.06,z1-0.06]].forEach(([px,pz])=>bx(px,px+0.06,0,1.78,pz,pz+0.06,steel,g));
-  [0.32,1.22].forEach((y,i)=>{bx(x0,x1,y,y+0.05,z0,z1,steel,g);bx(x0+0.03,x1-0.03,y+0.05,y+0.17,z0+0.03,z1-0.03,mat,g);
-   bx(x0+0.03,x1-0.03,y+0.17,y+0.2,z0+0.55,z1-0.03,blank[(k*2+i)%4],g);bx(x0+0.08,x1-0.08,y+0.17,y+0.25,z0+0.06,z0+0.42,pil,g);});
-  bx(x1-0.04,x1,1.4,1.46,z0+0.35,z1-0.5,steel,g);bx(x1-0.04,x1,1.58,1.62,z0+0.35,z1-0.5,steel,g);
-  bx(x0,x1,1.4,1.46,z0,z0+0.04,steel,g);
-  [0.45,0.75,1.05].forEach(y=>bx(x1,x1+0.04,y,y+0.03,z1-0.5,z1-0.2,steel,g,false));
-  bx(x1,x1+0.03,0.2,1.3,z1-0.5,z1-0.47,steel,g,false);bx(x1,x1+0.03,0.2,1.3,z1-0.23,z1-0.2,steel,g,false);
-  solids.push([[x0,z0],[x1,z0]],[[x1,z0],[x1,z1]],[[x0,z1],[x1,z1]]);}
- bunk(Z0+1.0,0);bunk(Z0+BL+1.1,1);
- // four tall steel lockers, one per person, on the east wall
- const lk=S({color:'#5d7266',roughness:0.5,metalness:0.3});
- for(let i=0;i<4;i++){const z0=Z0+i*0.5;bx(EX-0.5,EX,0.06,1.9,z0+0.01,z0+0.49,lk,g);bx(EX-0.51,EX-0.5,0.1,1.86,z0+0.02,z0+0.48,M.ssDark,g,false);
-  for(let v=0;v<4;v++)bx(EX-0.512,EX-0.5,1.6+v*0.04,1.62+v*0.04,z0+0.12,z0+0.38,M.black,g,false);
-  bx(EX-0.525,EX-0.51,1.0,1.14,z0+0.38,z0+0.42,M.steel,g,false);}
- // shared two-door timber cupboard and a low shoe cabinet after the lockers
- {const z0=Z0+2.1;bx(EX-0.55,EX,0.0,2.0,z0,z0+1.0,M.timber,g);bx(EX-0.56,EX-0.55,0.05,1.95,z0+0.495,z0+0.505,M.timberDark,g,false);
-  [z0+0.4,z0+0.6].forEach(z=>bx(EX-0.58,EX-0.56,0.95,1.2,z-0.015,z+0.015,M.brass,g,false));
-  const z1=z0+1.1;bx(EX-0.4,EX,0.0,0.9,z1,z1+1.0,M.timberDark,g);bx(EX-0.41,EX-0.4,0.06,0.84,z1+0.495,z1+0.505,M.black,g,false);
-  bx(EX-0.42,EX,0.9,0.93,z1-0.02,z1+1.02,M.timber,g);
-  solids.push([[EX-0.55,Z0],[EX-0.55,z1+1.0]]);}
- ceilFan(SX0+1.56,Z0+3.05,BH);
- bx(SX0+1.0,SX0+1.7,BH-0.04,BH-0.01,BY1+1.0,BY1+1.3,M.panelLight,g,false);bx(SX0+1.0,SX0+1.7,BH-0.04,BH-0.01,BY1+4.5,BY1+4.8,M.panelLight,g,false);
- const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.12),new THREE.MeshStandardMaterial({map:signTex(256,76,[['STAFF ROOM',34,0.52]],'#2a1a10','#f6ecd6')}));sg.position.set(BX1-1.16,2.28,BY1-0.1+0.001);sg.rotation.y=Math.PI;g.add(sg);}
+ // racks 0.50 deep down both sides of a 1.46 m aisle, door from the kitchen at the north end. Fast-moving stock nearest the door; spirits cage and chemicals at the far end.
+ const WX=SX0+0.12,EX=BX1-0.12,RH=1.8,Z=l=>BY1+l;
+ const card=S({color:'#b99a6b',roughness:0.95}),card2=S({color:'#a5855a',roughness:0.95}),tin=S({color:'#9aa0a4',roughness:0.4,metalness:0.5}),sack=S({color:'#e9e1cf',roughness:0.95}),crateM=S({color:'#c8a46a',roughness:0.9});
+ const glassC=[M.amberBottle,M.clearBottle,M.oil];
+ function rackFrame(x0,x1,z0,z1,tag,faceDir){[[x0,z0],[x1,z0],[x0,z1],[x1,z1]].forEach(p=>bx(p[0]-0.025,p[0]+0.025,0,RH,p[1]-0.025,p[1]+0.025,M.steel,g));
+  for(let i=0;i<4;i++)bx(x0,x1,0.18+i*0.5,0.21+i*0.5,z0,z1,M.ssDark,g);
+  const pl=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.14),new THREE.MeshStandardMaterial({map:signTex(320,45,[[tag,22,0.55]],'#1f3d2e','#f6ecd6','#c49a3c')}));pl.position.set(faceDir>0?x1+0.004:x0-0.004,1.9,(z0+z1)/2);pl.rotation.y=faceDir>0?Math.PI/2:-Math.PI/2;g.add(pl);}
+ function fill(x0,x1,z0,z1,kind,seed){const r=rng(seed),cx=(x0+x1)/2,n=Math.max(2,Math.round((z1-z0)/0.33));
+  for(let l=0;l<4;l++){const y=0.21+l*0.5;for(let j=0;j<n;j++){const cz=z0+0.18+j*(z1-z0-0.36)/(n-1);
+   if(kind==='oil'){if(l===0)bx(cx-0.13,cx+0.13,y,y+0.34,cz-0.13,cz+0.13,tin,g,false);else{for(let k=0;k<2;k++)cyl(0.045,0.045,0.26,cx-0.1+k*0.2,y,cz,glassC[(r()*3)|0],g,10,false);}}
+   else if(kind==='bin'){if(l===0)cyl(0.2,0.2,0.44,cx,y,cz,M.white,g,14,false);else bx(cx-0.2,cx+0.2,y,y+0.15+r()*0.1,cz-0.14,cz+0.14,sack,g,false);}
+   else if(kind==='jar'){for(let k=0;k<2;k++)cyl(0.07,0.07,0.16+r()*0.1,cx-0.12+k*0.24,y,cz,[M.ochre,M.white,M.red,M.clearBottle][(r()*4)|0],g,10,false);}
+   else if(kind==='crate'){bx(cx-0.22,cx+0.22,y,y+0.3,cz-0.15,cz+0.15,crateM,g,false);bx(cx-0.22,cx+0.22,y+0.12,y+0.15,cz-0.151,cz+0.151,M.timber,g,false);}
+   else if(kind==='box'){bx(cx-0.21,cx+0.21,y,y+0.22+r()*0.1,cz-0.14,cz+0.14,r()<0.5?card:card2,g,false);}
+   else if(kind==='pack'){bx(cx-0.2,cx+0.2,y,y+0.3,cz-0.15,cz+0.15,r()<0.6?M.white:sack,g,false);}}}}
+ const WR=[['SR-W1 · OILS, SAUCES',0.15,1.65,'oil'],['SR-W2 · RICE, NOODLES, FLOUR',1.65,3.15,'bin'],['SR-W3 · TINS, JARS, SPICES',3.15,4.65,'jar']];
+ WR.forEach(([tag,a,b,k],i)=>{rackFrame(WX,WX+0.5,Z(a),Z(b-0.04),tag,1);fill(WX,WX+0.5,Z(a),Z(b-0.04),k,11+i);});
+ const ER=[['SR-E1 · VEG CRATES',1.45,2.95,'crate'],['SR-E2 · BAR DRY GOODS',2.95,4.45,'box'],['SR-E3 · PAPER, PACKAGING',4.45,5.95,'pack']];
+ ER.forEach(([tag,a,b,k],i)=>{rackFrame(EX-0.5,EX,Z(a),Z(b-0.04),tag,-1);fill(EX-0.5,EX,Z(a),Z(b-0.04),k,31+i);});
+ // beverage stack on a pallet, nearest the door, with a spare CO2 cylinder chained to the wall
+ {const z0=Z(0.15),z1=Z(1.35);bx(EX-0.6,EX,0,0.12,z0,z1,M.timber,g);const r=rng(5);
+  for(let a=0;a<3;a++)for(let b=0;b<3;b++)for(let l=0;l<3;l++)bx(EX-0.58+a*0.2,EX-0.4+a*0.2,0.12+l*0.26,0.12+l*0.26+0.24,z0+0.03+b*0.39,z0+0.39+b*0.39-0.03,r()<0.5?card:S({color:['#b0221c','#2f6aa3','#3f8f55'][(r()*3)|0],roughness:0.9}),g,false);
+  const sg=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.14),new THREE.MeshStandardMaterial({map:signTex(320,45,[['SR-BEV · BEER, SOFT DRINKS',22,0.55]],'#1f3d2e','#f6ecd6','#c49a3c')}));sg.position.set(EX-0.604,1.45,(z0+z1)/2);sg.rotation.y=-Math.PI/2;g.add(sg);}
+ // locked chemical cupboard (west, far end)
+ {const z0=Z(4.75),z1=Z(5.95);bx(WX,WX+0.5,0,RH,z0,z1,M.white,g);bx(WX+0.5,WX+0.512,0.05,RH-0.05,(z0+z1)/2-0.005,(z0+z1)/2+0.005,M.ssDark,g,false);
+  bx(WX+0.51,WX+0.52,1.1,1.5,z0+0.1,z0+0.5,M.red,g,false);bx(WX+0.51,WX+0.52,1.1,1.5,z1-0.5,z1-0.1,M.red,g,false);[(z0+z1)/2-0.06,(z0+z1)/2+0.06].forEach(z=>bx(WX+0.512,WX+0.53,0.95,1.05,z-0.015,z+0.015,M.steel,g,false));
+  const pl=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.14),new THREE.MeshStandardMaterial({map:signTex(320,45,[['SR-CHEM · LOCKED',22,0.55]],'#7a1f18','#f6ecd6','#c49a3c')}));pl.position.set(WX+0.524,1.9,(z0+z1)/2);pl.rotation.y=Math.PI/2;g.add(pl);}
+ // spirits cage across the south end: steel mesh frame, locked, sealed spares only
+ {const x0=SX0+0.75,x1=SX0+1.95,z0=Z(5.96),z1=Z(6.36);[[x0,z0],[x1,z0],[x0,z1],[x1,z1]].forEach(p=>bx(p[0]-0.02,p[0]+0.02,0,RH,p[1]-0.02,p[1]+0.02,M.steel,g));
+  for(let i=0;i<4;i++)bx(x0,x1,0.18+i*0.5,0.2+i*0.5,z0,z1,M.ssDark,g);
+  bx(x0,x1,RH-0.02,RH,z0,z1,M.ssDark,g,false);for(let x=x0+0.1;x<x1;x+=0.1)bx(x-0.004,x+0.004,0.2,RH,z0-0.004,z0+0.004,M.steel,g,false);
+  const r=rng(9);for(let l=0;l<3;l++)for(let k=0;k<11;k++)cyl(0.04,0.04,0.28,x0+0.08+k*0.104,0.2+l*0.5,z1-0.1,[M.amberBottle,M.clearBottle,M.wine][(r()*3)|0],g,8,false);
+  bx(x0+0.5,x0+0.54,0.9,1.0,z0-0.03,z0,M.brass,g,false);
+  const pl=new THREE.Mesh(new THREE.PlaneGeometry(0.9,0.14),new THREE.MeshStandardMaterial({map:signTex(320,50,[['SPIRITS · LOCKED',22,0.55]],'#2a1a10','#f6ecd6','#c49a3c')}));pl.position.set((x0+x1)/2,1.95,z0-0.01);pl.rotation.y=Math.PI;g.add(pl);}
+ // pallet scale is not modelled; wall louvre + extractor fan high on the east wall, strip lights over the aisle, extinguisher by the door
+ {const fz=Z(3.1);bx(EX-0.03,EX,2.0,2.45,fz,fz+0.45,M.white,g,false);for(let yy=2.04;yy<2.42;yy+=0.05)bx(EX-0.035,EX-0.03,yy,yy+0.015,fz+0.03,fz+0.42,M.ssDark,g,false);cyl(0.06,0.06,0.06,EX-0.07,2.2,fz+0.225,M.black,g,10,false);}
+ cyl(0.075,0.075,0.5,SX0+1.95,0.9,Z(0.22),M.red,g,12);cyl(0.02,0.02,0.08,SX0+1.95,1.4,Z(0.22),M.black,g,6,false);
+ bx(SX0+0.95,SX0+1.75,BH-0.04,BH-0.01,BY1+1.0,BY1+1.2,M.panelLight,g,false);bx(SX0+0.95,SX0+1.75,BH-0.04,BH-0.01,BY1+3.1,BY1+3.3,M.panelLight,g,false);bx(SX0+0.95,SX0+1.75,BH-0.04,BH-0.01,BY1+5.0,BY1+5.2,M.panelLight,g,false);
+ solids.push([[WX+0.5,Z(0.15)],[WX+0.5,Z(5.95)]],[[EX-0.6,Z(0.15)],[EX-0.6,Z(1.35)]],[[EX-0.5,Z(1.45)],[EX-0.5,Z(5.95)]],[[SX0+0.75,Z(5.96)],[SX0+1.95,Z(5.96)]]);
+ const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.5,0.14),new THREE.MeshStandardMaterial({map:signTex(256,70,[['STORE ROOM',32,0.52]],'#2a1a10','#f6ecd6')}));sg.position.set(BX1-1.4,2.3,BY1-0.1+0.001);sg.rotation.y=Math.PI;g.add(sg);}
 
 /* ======================= lights (few on purpose; warm and bright enough to feel light) ======================= */
 const hemi=new THREE.HemisphereLight('#ffe9cf','#6b5040',0.5);scene.add(hemi);
@@ -1475,7 +1495,7 @@ lbl('Pathway behind the bar · 1.60 m',(HX+BX0)/2,0.4,4.6,'k');
 lbl('Kitchen · 5.41 × 4.38 m',BX0+2.7,3.2,4.3,'k');
 lbl('Dish wash · 5.41 × 2.00 m',BX0+2.7,3.7,1.0,'w');
 lbl('Washroom · 2.96 × 1.70 m',TX0+1.5,4.3,-0.85,'w');
-lbl('Staff room (was the store) · 2.70 × 6.46 m',SX0+1.35,3.2,BY1+3.2,'k');
+lbl('Store room · 2.70 × 6.46 m',SX0+1.35,3.2,BY1+3.2,'k');
 lbl('PVC roll-down curtains',-0.4,2.2,3.9,'o');
 [['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9],['5.00 m landing',EM,0.05,10.2],['5.00 m garden',7.1,0.05,16.0],['1.20 m approach path',10.4,0.05,15.6],['1.70 m gate',GXI-0.4,2.4,16.85],['0.80 m railing',-0.6,0.8,2.0],['3.46 m pathway',14.0,0.05,7.2],['1.60 m',(HX+BX0)/2,0.05,6.9]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
 const lblEls=labels.map(l=>{const e=document.createElement('div');e.className='lbl '+l.cls;e.innerHTML=(l.cls==='d'?'':'<i></i>')+l.text;document.getElementById('labels').appendChild(e);return e;});
@@ -1529,12 +1549,12 @@ const CARDS={
  gardencard:['Garden','5 × 5 m, on the left as you come in','The lawn on the left of the main path just inside the gate, below the hall\'s 2.98 m edge: areca palms, white flowering shrubs and a hedge inside a laterite kerb, with the three lamp posts and the festoon canopy of the approach path along its far side.',['Warm uplights at the palms','Hedge along the hall side and the main path']],
  approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. Dense strands of warm micro fairy lights are strung on fine wires from the three black lamp posts to the existing restaurant\'s balcony roof, with no frame, and among them hang brass lanterns and ivy-wrapped wicker orbs.',['Lights kept 2.1 m or more above the path','Warm 2200-2700 K']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Magenta and white bougainvillea over the arch and spilling down one pier onto the compound wall','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','Sign board shows Cabin East (the site sign today is the old one)']],
- backbar:['Back bar','Behind the counter','Runs behind the counter, with its bottles on two lit teak shelves within reach, against the end wall now painted bottle green. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a glasswasher, a lit bottle bay with the ON TAP board above it.',['One brass font with 3 craft taps on the counter','POS nook at the open-side end','Staff come in between the counter and the coffee station']],
- bar:['Bar','The counter, 2.80 m, with a coffee station beside it','In the equipment plan the working face of the counter sits 1.50 m from the east wall (0.50 m further out than first modelled) so the bartender aisle is 0.90 m; the back bar is 0.60 m deep with the POS, glass washer, ice machine and bottle cooler. The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, teak-seat black iron stools, one brass font with 3 craft taps, a floating glass rack, warm string lights along the counter edge and black iron brackets. Above it a reclaimed timber beam on black chains with rope lashings, trailing ivy and Edison bulbs on long drops.',['Coffee station on its left, against an exposed deep-red brick wall (a shade darker than the bar, with darker mortar, so the mural leads) in a dark teak frame with a brass inner line, with a slim teak post at the corner where it meets the green wall, carrying the reference mural of the winking woman with red hanging-flower hair: royal-blue panelled cabinet with brass knobs and a marble top, twin filter-coffee brewer, hot-water urn, glasses kept in the cabinet so the mural reads in full','Bottles brought down onto the back bar shelves (1.80 m and 2.10 m, within reach), packed on teak shelves lit from below','Brick: red with light mortar, as on site']],
- kitchen:['Kitchen','5.41 × 4.38 m','Laid out as filmed: door from the passage near the corner; a black granite platform the length of the dish-wash wall with a shuttered window over it (no door in that wall); the cooking line along the east wall under a white masonry smoke hood; fridges and racks along the far wall; sloping white ceiling with a dark timber beam. Open middle, pass window to the passage.',['Hood duct rises above the roof','Fire extinguishers by the door, as on site','Equipment shown is the proposed fit-out','Storage is built in: under the granite (U1, U2), under the pass shelf (U4), a tall pantry cabinet (T1) and a wall cabinet over the chillers (W1). The old store door is closed']],
- dish:['Dish wash','5.41 × 2.00 m','Its own door from the passage; dirty ware comes in from the passage to the receiving table, double sink with pre-rinse spray, hood dishwasher, clean table, and clean ware goes to the kitchen through the shuttered window over the granite platform.',['Hot-water cylinder, louvre extractor, floor drain']],
+ backbar:['Back bar','Behind the counter','Runs behind the counter, with its bottles on two lit teak shelves within reach, against the end wall now painted bottle green. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a plain base cabinet in the bay kept for an ice machine and glass washer, a lit bottle bay with the ON TAP board above it.',['One brass font with 3 craft taps on the counter','Tea and coffee nook at the open-side end; the POS desk is beside the coffee station','Staff come in between the counter and the coffee station']],
+ bar:['Bar','The counter, 2.80 m, with a coffee station beside it','In the equipment plan the working face of the counter sits 1.50 m from the east wall (0.50 m further out than first modelled) so the bartender aisle is 0.90 m; the back bar is 0.60 m deep with the bottle cooler, a plain base cabinet (no ice machine or glass washer at the start) and the tea and coffee nook; the POS desk with its cash drawer stands beside the coffee station. The existing counter, about half way across the end and on the right as you face it (2.80 m from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall), finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, thick dark timber top with a brass edge and a warm LED lip, brass foot rail, teak-seat black iron stools, one brass font with 3 craft taps, a floating glass rack, warm string lights along the counter edge and black iron brackets. Above it a reclaimed timber beam on black chains with rope lashings, trailing ivy and Edison bulbs on long drops.',['Coffee station on its left, against an exposed deep-red brick wall (a shade darker than the bar, with darker mortar, so the mural leads) in a dark teak frame with a brass inner line, with a slim teak post at the corner where it meets the green wall, carrying the reference mural of the winking woman with red hanging-flower hair: royal-blue panelled cabinet with brass knobs and a marble top, twin filter-coffee brewer, hot-water urn, glasses kept in the cabinet so the mural reads in full','Bottles brought down onto the back bar shelves (1.80 m and 2.10 m, within reach), packed on teak shelves lit from below','Brick: red with light mortar, as on site']],
+ kitchen:['Kitchen','5.41 × 4.38 m','Laid out as filmed: door from the passage near the corner; a black granite platform the length of the dish-wash wall with a shuttered window over it (no door in that wall); the cooking line along the east wall under a white masonry smoke hood; one dual-zone upright, an under-counter chiller and a hand-wash basin along the far wall; sloping white ceiling with a dark timber beam. Open middle, pass window to the passage.',['Hood duct rises above the roof','Fire extinguishers by the door, as on site','Equipment shown is the proposed fit-out','Working stock only: under the granite (U1, U2) and under the pass shelf (U4); bulk is in the store room next door','No dishwasher, mixer, wall cabinets or heat lamps at the start']],
+ dish:['Dish wash','5.41 × 2.00 m','Its own door from the passage; dirty ware comes in from the passage to the receiving table, double sink with pre-rinse spray, a sanitise sink bowl, clean table, and clean ware goes to the kitchen through the shuttered window over the granite platform.',['Hot-water cylinder, louvre extractor, floor drain']],
  wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Walls in bright orange with black hand-drawn doodle art over a white tiled dado, as in the reference.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
- store:['Staff room','2.70 × 6.46 m, was the store room','Now staff accommodation for four, entered from the kitchen through the old store door. Food and supplies are stored in the kitchen, the dish wash and the bar.',['Entrance: the old store door in the kitchen wall (0.9 m, beside the cooking line); staff walk through the kitchen','Sleeps 4: two steel bunk beds along the west wall (0.92 × 2.0 m each), 1.08 m aisle, 1 m lobby inside the door','Four tall lockers (one each), a shared two-door cupboard and a low shoe cabinet on the east wall; one flush-mount fan over the aisle','T1 pantry is now an overhead cabinet above the door; still to plan: washroom link']],
+ store:['Store room','2.70 × 6.46 m','The dry store, back in use. Racks 0.50 m deep down both sides of a 1.46 m aisle: oils and sauces, rice and noodles, tins and spices on the west; a beverage pallet, veg crates, bar dry goods and paper on the east. A locked spirits cage at the far end and a locked chemical cupboard. Door straight into the kitchen next to the cooking line.',['Entrance: the 0.9 m store door in the kitchen wall, beside the cooking line','Fast-moving stock is nearest the door; spirits and chemicals are at the far end, locked','High louvre and extractor fan on the east wall; no window','No chilled or frozen stock here: those stay in the kitchen and the bar']],
  curtains:['PVC curtains','Every open side','Clear roll-down PVC hangs from the ring beam on all five open edges and behind the bar. Press the PVC button to roll them up or down. The entrance bay stays passable.',['Rolled up: a breezy garden. Down: dry in the monsoon']],
  plan:['Plan view','Top-down','Sizes are on the plan labels (press Sizes). Roof comes off for the plan.',['Hall 15.67 × 7.76 m, kitchen block 5.41 m wide','Existing restaurant and residence shown as plain massing for context','The existing restaurant\'s 1.50 m balcony along the landing and approach path is its only usable part; same 80 cm railing as the hall']],
 };
