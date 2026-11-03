@@ -37,7 +37,7 @@ h1{font-family:var(--display);font-weight:400;color:var(--green);margin:0 0 6px;
   <h1>Colour plans</h1>
   <p class="lead">The kitchen, dish wash and bar with every item coloured by type and labelled with its name and size (W × D × H, metres). Gas appliances are red, the gas pipe, shut-off valve and cylinders amber, chillers and freezers blue, water items teal, tables and shelves tan, electrics purple, extinguishers magenta, and the dustbins in their own colours. Each sheet has its colour key.</p>
   <div class="tabs" id="tabs" role="tablist"></div>
-  <div class="bar"><span class="k" id="meta"></span><button id="zoom" type="button">Zoom to full size</button><a id="open" href="#" target="_blank" rel="noopener">Open image</a><a href="drawings/Garden-equipment-colour-plans.pdf" target="_blank" rel="noopener">Download as PDF</a><a href="floor-plans.html">Floor plans &rarr;</a></div>
+  <div class="bar"><span class="k" id="meta"></span><button id="zoom" type="button">Zoom to full size</button><a id="open" href="#" target="_blank" rel="noopener">Open full size</a><a href="drawings/Garden-equipment-colour-plans.pdf" target="_blank" rel="noopener">Download as PDF</a><a href="floor-plans.html">Floor plans &rarr;</a></div>
   <div class="view" id="view"><img id="img" alt=""></div>
   <p class="note">Preliminary drawings for review. Sizes come from the site sketches and photos; the LPG cylinder position, the sink sizes and the opening positions are assumed and still need checking on site. Print the PDF at 100% to keep the scale.</p>
 </div>
@@ -47,7 +47,7 @@ const SHEETS=[
  ['E-02','Dish wash','1:35','Drop-off table, clean table, crockery racks, the two-sink cell, tank, bins'],
  ['E-03','Bar','1:30','Counter, coffee station, keg chiller with its CO₂ cylinder, sink, stools, bin']];
 const tabs=document.getElementById('tabs'),img=document.getElementById('img'),view=document.getElementById('view'),meta=document.getElementById('meta'),open_=document.getElementById('open');
-function show(i){const s=SHEETS[i];img.src='drawings/'+s[0]+'.png';img.alt=s[0]+' '+s[1];meta.textContent=s[0]+' · '+s[1]+' · scale '+s[2]+' · '+s[3];open_.href='drawings/'+s[0]+'.png';
+function show(i){const s=SHEETS[i];img.src='drawings/'+s[0]+'.svg';img.alt=s[0]+' '+s[1];meta.textContent=s[0]+' · '+s[1]+' · scale '+s[2]+' · '+s[3];open_.href='drawings/'+s[0]+'.svg';
   [...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));view.classList.remove('zoom');document.getElementById('zoom').textContent='Zoom to full size';try{history.replaceState(null,'','#'+s[0])}catch(e){}}
 SHEETS.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML='<b>'+s[0]+'</b>'+s[1];b.onclick=()=>show(i);tabs.appendChild(b);});
 function zoomToggle(){const z=view.classList.toggle('zoom');document.getElementById('zoom').textContent=z?'Fit to width':'Zoom to full size';}
