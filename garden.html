@@ -1262,7 +1262,7 @@ wall(kx1+0.1,KZ(2.30),BX1-0.1,KZ(2.30),[[kx1+0.25,kx1+1.05,0,2.05]],BH,M.plaster
  bx(PX,kx1,2.14,2.2,PZ-0.1,PZ+0.1,tf,G.walls);bx(KX(2.15),kx1,0.84,0.88,PZ-0.105,PZ-0.09,tf,G.walls,false);
  [KX(2.6),KX(3.05),KX(3.5),KX(3.8)].forEach(x=>bx(x-0.02,x+0.02,0.05,2.14,PZ-0.105,PZ-0.09,tf,G.walls,false));bx(PX-0.1,PX,2.14,2.2,PZ,kzOld,tf,G.walls);
  lbl('False partition: painted timber and plywood, open above (existing)',KX(3.6),2.4,PZ,'k');}
-clad(kx0,kx0+0.02,0,1.9,kz0,kzOld,M.whiteTile.map,0.6,G.kitchen);                          // west wall
+clad(kx0,kx0+0.02,0,1.9,kz0,2.35,M.whiteTile.map,0.6,G.kitchen);clad(kx0,kx0+0.02,0,1.9,3.15,kzOld,M.whiteTile.map,0.6,G.kitchen);   // west wall, tiled either side of the kitchen door (the door opening stays clear)
 clad(kx0,BX0+2.75,0,1.9,kzOld-0.02,kzOld,M.whiteTile.map,0.6,G.kitchen);clad(BX0+3.65,kx1,0,1.9,kzOld-0.02,kzOld,M.whiteTile.map,0.6,G.kitchen);                       // south wall, either side of the store door
 clad(kx1-0.02,kx1,0,1.9,kz0,KZ(2.85),M.whiteTile.map,0.6,G.kitchen);clad(kx1-0.02,kx1,0,1.9,KZ(3.75),kzOld,M.whiteTile.map,0.6,G.kitchen);                          // temporary wall, kitchen face
 lbl('WC shaft and closed strip (existing, not ours)',kx1+0.6,2.2,KZ(1.2),'k');
@@ -1333,7 +1333,7 @@ bx(KX(0.90),KX(2.92),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(le
 
 /* ======================= DISH WASH ======================= */
 /* Re-measured: the west doorway is 1.17 m with no door; a 2.0 m cell at the east end holds the 500 L overhead tank and two sinks. Dirty ware enters west, clean ware leaves west. */
-{const g=G.dish;clad(BX0+0.1,BX1-0.1,0,2.0,0.1,0.12,M.whiteTile.map,0.6,g);clad(kx0,kx0+0.02,0,2.0,0.12,DISH-0.1,M.whiteTile.map,0.6,g);clad(BX1-0.12,BX1-0.1,0,2.0,0.12,DISH-0.1,M.whiteTile.map,0.6,g);
+{const g=G.dish;clad(BX0+0.1,BX1-0.1,0,2.0,0.1,0.12,M.whiteTile.map,0.6,g);clad(kx0,kx0+0.02,0,2.0,0.12,0.73,M.whiteTile.map,0.6,g);clad(BX1-0.12,BX1-0.1,0,2.0,0.12,DISH-0.1,M.whiteTile.map,0.6,g);
  const tz0=0.12,tz1=0.8;
  const leg=(x,z)=>bx(x-0.025,x+0.025,0,0.84,z-0.025,z+0.025,M.ssDark,g);
  const table=(x0,x1,under)=>{bx(x0,x1,0.84,0.9,tz0,tz1,M.ss,g);[x0+0.04,x1-0.04].forEach(x=>[tz0+0.04,tz1-0.04].forEach(z=>leg(x,z)));if(under!==false)bx(x0+0.03,x1-0.03,0.2,0.23,tz0+0.03,tz1-0.03,M.ss,g);};
