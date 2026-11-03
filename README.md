@@ -65,3 +65,5 @@ Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the
 Brand: https://singhgenics.github.io/Garden/brand-kit.html (logos, colours in the Garden palette, type, direction board) and https://singhgenics.github.io/Garden/brand-merch.html (coasters, stickers, bags, uniforms); both open from the model toolbar's Brand & merch button. Source and build scripts: `Dream/GardenBrand/` (local).
 
 Pool lounge (added 2026-11-03): outside the hall's 7.76 m west edge, 6.8 m hall side, 4.2 m rear wall with graffiti, two 2.8 m side walls, 1.6 m entrance; one 6 ft pool table and two standing tables. 3D view 'Pool lounge'; sheets A-07 (hall, pool lounge, garden and patio) and A-08 in drawings/Garden-architect-drawings.pdf.
+
+Floor plans tab: floor-plans.html (linked from the 3D toolbar) shows sheets A-01 to A-08 as images, with the PDF download.
