@@ -139,7 +139,8 @@ controls.enableDamping=true;controls.dampingFactor=0.08;controls.minDistance=0.3
 const A=[0,0],B=[15.67,0],C=[15.67,5.48],D=[6.46,5.48],Hh=[6.46,10.93],Gp=[3.48,10.93],Fp=[0,7.76];
 const hall=[A,B,C,D,Hh,Gp,Fp];
 const T=0.2,HX=15.67,BX0=HX+1.6,BX1=BX0+5.41,BY1=6.38,DISH=2.0,SD=6.46,SY1=BY1+SD,SX0=BX1-2.7,TX0=BX0+2.45,TY0=-1.7;
-const hc=z=>3.4-0.06*Math.max(0,z);                 // ceiling (soffit) height of the hall, falls 6 cm per metre towards the open south edge
+const CEIL_W=2.18,CEIL_E=2.8;                       // measured by Tanvi: 0.90 m tile + 1.28 m wall = 2.18 m at the main wall; 2.8 m at the entrance edge (estimate to confirm)
+const hc=z=>CEIL_W+(CEIL_E-CEIL_W)*Math.min(Math.max(z,0),5.48)/5.48;   // soffit rises about 11 cm per metre from the main wall to the open entrance edge, level beyond it
 const BH=3.0;                                       // block ceiling height
 const zEnd=x=>x<=3.48?7.76+x*(3.17/3.48):x<=6.46?10.93:5.48;
 const xRange=z=>z<=5.48?[0,HX]:z<=7.76?[0,6.46]:[(z-7.76)*3.48/3.17,6.46];
@@ -665,18 +666,18 @@ function cageLantern(x,y){const g=new THREE.Group();const arm=[];for(let i=0;i<=
 // the existing hand-painted tile dado (0.95 m, blue and yellow on white) along the wall, with a white cap, as on site
 // bays alternate the two tiles on site: brown-on-cream damask and the blue / yellow / sage patchwork
 const PIL=[1.4,3.45,7.3,10.0,13.75];
-// the old tile dado is covered with glossy warm terracotta-chocolate tile in a vertical stacked pattern (long narrow tiles, straight-set, cream grout), up to 1.0 m,
+// the old tile dado is covered with glossy warm terracotta-chocolate tile in a vertical stacked pattern (long narrow tiles, straight-set, cream grout), up to 0.90 m,
 // with a slim brass rail between it and the bottle green above; it stops at the white pilaster plinths
 {const tt=tex(512,256,(g,w,h)=>{const r=rng(71),cw=w/16,ch=h/2;g.fillStyle='#efe5d2';g.fillRect(0,0,w,h);   // cream grout
   for(let i=0;i<16;i++)for(let j=0;j<2;j++){const x=i*cw,y=j*ch,base=shade('#5f2d1c',0.88+r()*0.24);const gr=g.createLinearGradient(x,y,x+cw,y+ch);gr.addColorStop(0,base);gr.addColorStop(0.5,shade('#723a24',0.9+r()*0.22));gr.addColorStop(1,base);g.fillStyle=gr;g.fillRect(x+2,y+2,cw-4,ch-4);
    g.fillStyle='rgba(255,235,215,'+(0.06+r()*0.1)+')';g.fillRect(x+3,y+4+r()*ch*0.5,cw*0.25,ch*0.3);}},1,1);
- [0.1,...PIL,15.2].forEach((x,i,a)=>{if(i===a.length-1)return;const x0=x+(i?0.2:0),x1=a[i+1]-(i<a.length-2?0.2:0);const t=tt.clone();t.needsUpdate=true;t.repeat.set((x1-x0)/1.04,1.0/0.42);
-  bx(x0,x1,0,1.0,zi,zi+0.03,S({map:t,roughness:0.12,metalness:0.05}),DW,false);});
- bx(0.1,15.2,1.0,1.04,zi,zi+0.06,M.brass,DW,false);}
+ [0.1,...PIL,15.2].forEach((x,i,a)=>{if(i===a.length-1)return;const x0=x+(i?0.2:0),x1=a[i+1]-(i<a.length-2?0.2:0);const t=tt.clone();t.needsUpdate=true;t.repeat.set((x1-x0)/1.04,0.9/0.42);
+  bx(x0,x1,0,0.9,zi,zi+0.03,S({map:t,roughness:0.12,metalness:0.05}),DW,false);});
+ bx(0.1,15.2,0.9,0.94,zi,zi+0.06,M.brass,DW,false);}
 // white fluted pilasters on plinth blocks, dividing the wall into bays (kept as on site), with stepped capitals under the ceiling
 {const fl=flutedWhiteTex.clone();fl.needsUpdate=true;fl.repeat.set(1,1);const fm=S({map:fl,roughness:0.6});const top=hc(0.2)-0.02;
- PIL.forEach(x=>{bx(x-0.2,x+0.2,0,1.02,zi,zi+0.14,M.goaWhite,DW);bx(x-0.22,x+0.22,1.02,1.07,zi,zi+0.16,M.goaWhite,DW);
-  bx(x-0.15,x+0.15,1.07,top-0.3,zi,zi+0.08,[M.goaWhite,M.goaWhite,M.goaWhite,M.goaWhite,fm,M.goaWhite],DW);
+ PIL.forEach(x=>{bx(x-0.2,x+0.2,0,0.92,zi,zi+0.14,M.goaWhite,DW);bx(x-0.22,x+0.22,0.92,0.97,zi,zi+0.16,M.goaWhite,DW);
+  bx(x-0.15,x+0.15,0.97,top-0.3,zi,zi+0.08,[M.goaWhite,M.goaWhite,M.goaWhite,M.goaWhite,fm,M.goaWhite],DW);
   bx(x-0.19,x+0.19,top-0.3,top-0.22,zi,zi+0.12,M.goaWhite,DW);bx(x-0.23,x+0.23,top-0.22,top-0.12,zi,zi+0.16,M.goaWhite,DW);bx(x-0.27,x+0.27,top-0.12,top,zi,zi+0.2,M.goaWhite,DW);});}
 
 // emerald upper wall (0.15 to 7.3) with moulded panel frames and a crown moulding
@@ -689,10 +690,10 @@ function mouldedPanel(x0,x1,y0,y1){const t=0.012,d=zi+0.03;[[x0,x1,y0,y0+t],[x0,
 
 // exposed brick bay (7.3 to 13.55) in the pub-brick reference, framed by dark timber posts
 
-cageLantern(7.62,3.0);cageLantern(11.4,3.0);cageLantern(13.35,3.0);
+cageLantern(7.62,1.7);cageLantern(11.4,1.7);cageLantern(13.35,1.7);
 // neon and chalkboard in the last bay, a framed vintage poster over the brick base
 {   // ("bao down" neon removed: it competed with the gallery and the mural)
- const c=new THREE.Mesh(new THREE.PlaneGeometry(0.8,1.0),new THREE.MeshStandardMaterial({map:chalkTex,roughness:0.9}));c.position.set(12.95,1.78,zi+0.09);DW.add(c);bx(12.52,13.38,1.26,2.3,zi+0.07,zi+0.09,M.timberDark,DW,false).visible=false;
+ const c=new THREE.Mesh(new THREE.PlaneGeometry(0.8,0.8),new THREE.MeshStandardMaterial({map:chalkTex,roughness:0.9}));c.position.set(12.95,1.5,zi+0.09);DW.add(c);bx(12.52,13.38,1.1,1.9,zi+0.07,zi+0.09,M.timberDark,DW,false).visible=false;
 }
 // blue-and-white porcelain in the pillars' cobalt, so the blue repeats inside the hall: ginger jars on the shelves, wall plates, two floor jars at the entrance
 const COB='#22409a';
@@ -714,8 +715,8 @@ function bwPlate(x,y,r){const p=new THREE.Mesh(new THREE.CylinderGeometry(r,r*0.
 // brass-wired sconces on the emerald side and trailing plants on timber shelves
 function trailPlant(x,y,z,n){const r=rng(Math.round(x*10));bx(x-0.35,x+0.35,y,y+0.04,z,z+0.16,M.timber,DW,false);for(let i=0;i<n;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.1+r()*0.07,8,6),M.leaf);l.position.set(x-0.3+r()*0.6,y+0.12+r()*0.1,z+0.08);DW.add(l);}
   for(let i=0;i<6;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.06,6,5),M.leaf);l.position.set(x-0.3+i*0.12,y-0.05-r()*0.3,z+0.1);DW.add(l);}}
-trailPlant(3.2,3.0,zi+0.05,6);trailPlant(7.3,3.05,zi+0.05,6);
-gingerJar(2.98,3.04,zi+0.12,0.26);gingerJar(3.4,3.04,zi+0.12,0.2);gingerJar(7.1,3.09,zi+0.12,0.2);gingerJar(7.5,3.09,zi+0.12,0.26);
+
+
 
 // pan-Asian + Indo-Chinese gallery art (no place names anywhere): Hakka family portraits, old eating-house photos, a "two tables" still life (Chinese bowl beside a
 // steel thali and a chilli-sauce bottle), bilingual hand-painted signs, menu cards, a 1930s calendar-girl poster, woodblock waves, ink-brush bamboo and plum
@@ -764,7 +765,7 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
 // gallery wall from the new references (vintage enamel signs, a pub wall of signs and lamps, bold graphic posters in thin dark-wood frames on brick):
 // big enamel banner signs across the top of each bay, round and tall signs, bell-shaded brass wall lamps, wall clocks, bold red / yellow / cream graphic posters in
 // slim walnut frames (dim sum, noodles, chilli, an op-art steaming bowl), plus a few of the earlier prints and the bowl-and-thali oil as the statement piece in a heavy walnut frame
-{const r=rng(2031),gap=0.07,Y0=1.18,Y1=2.94;
+{const r=rng(2031),gap=0.07,Y0=1.0,Y1=2.08;
  const AP={};const aart=(k,sd)=>AP[k+sd]||(AP[k+sd]=asianArt(k,sd));
  const grain=(c,w,h,a)=>{for(let i=0;i<Math.round(w*h/260);i++){c.fillStyle=`rgba(${r()<0.5?'60,30,10':'255,240,215'},${r()*a})`;c.fillRect(r()*w,r()*h,1+r()*3,1+r()*2);}};
  const FF='Impact, "Arial Narrow", "Helvetica Neue", sans-serif';
@@ -809,7 +810,7 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
    if(mat){bx(-w/2,w/2,-h/2,h/2,0.03,0.032,S({color:'#efe8da',roughness:0.9}),g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w*0.72,h*0.72),new THREE.MeshStandardMaterial({map:art(kind,sd),roughness:0.85}));p.position.z=0.034;g.add(p);}
    else{const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:art(kind,sd),roughness:0.55}));p.position.z=0.032;g.add(p);}};
  const bays=[[1.62,3.25],[3.65,7.1],[7.5,9.8],[10.2,11.05],[13.95,15.05]];const items=[];
- const free=(x0,x1,y0,y1)=>!items.some(q=>x0<q[1]+gap&&x1>q[0]-gap&&y0<q[3]+gap&&y1>q[2]-gap)&&!(x0<7.82&&x1>7.42&&y1>2.75);
+ const free=(x0,x1,y0,y1)=>!items.some(q=>x0<q[1]+gap&&x1>q[0]-gap&&y0<q[3]+gap&&y1>q[2]-gap)&&!(x0<7.82&&x1>7.42&&y1>2.0);
  const put=(x,y,w,h,f)=>{if(!free(x-w/2,x+w/2,y-h/2,y+h/2))return false;items.push([x-w/2,x+w/2,y-h/2,y+h/2]);f(x,y,w,h);return true;};
  const banners=['noodles','dimsum','chow','hakka'],tall=['tea','open'],strips=['kitchen','open','lager','chilli'];
  // pick from the weighted mix, with dimensions per type
@@ -818,11 +819,11 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
  const POSTERS=['noodles','opart','chilli','dimsum'],ROUNDS=['lager','tea','beer'],OLD=[['wave',true],['bamboo',true],['plum',true],['callig',true],['eatery',false],['menu',true],['calendar',false]];
  let bi2=0;
  bays.forEach(([x0,x1],bi)=>{const W=x1-x0,cx=(x0+x1)/2;
-  if(W>1.5){const bw=Math.min(W-0.12,bi===1?1.3:1.0);put(bi===1?cx-0.9:cx,2.76,bw,0.3,(x,y,w,h)=>plate(x,y,w,h,enamel(banners[bi%4],768,Math.round(768*h/w))));}
-  if(bi===1){put(cx+0.55,2.0,0.96,1.0,(x,y,w,h)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.06;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.05,M.frameWalnut,g,false);bx(-w/2-f*0.45,w/2+f*0.45,-h/2-f*0.45,h/2+f*0.45,0.05,0.056,M.brass,g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:art('twotable',3),roughness:0.55}));p.position.z=0.06;g.add(p);
+  if(W>1.5){const bw=Math.min(W-0.12,bi===1?1.3:1.0);put(bi===1?cx-0.9:cx,1.96,bw,0.26,(x,y,w,h)=>plate(x,y,w,h,enamel(banners[bi%4],768,Math.round(768*h/w))));}
+  if(bi===1){put(cx+0.55,1.42,0.86,0.66,(x,y,w,h)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.06;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.05,M.frameWalnut,g,false);bx(-w/2-f*0.45,w/2+f*0.45,-h/2-f*0.45,h/2+f*0.45,0.05,0.056,M.brass,g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:art('twotable',3),roughness:0.55}));p.position.z=0.06;g.add(p);
     const pl=new THREE.Group();bx(-0.2,0.2,0,0.025,0,0.05,M.brass,pl,false);rod(V(0,0,0.03),V(0,-0.06,0.14),0.006,M.brass,pl,false);bx(-0.19,0.19,-0.09,-0.06,0.1,0.2,M.brass,pl,false);bx(-0.18,0.18,-0.08,-0.075,0.12,0.19,M.led,pl,false);pl.position.set(x,y+h/2+0.12,zi+0.04);DW.add(pl);});}
-  if(W>1.5){put(x0+0.22,2.2,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));if(W>3)put(x1-0.22,2.2,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));}
-  if(W>1.5)put(x0+W*0.62,1.58,0.3,0.3,(x,y,w)=>clock(x,y,0.28));
+  if(W>1.5){put(x0+0.22,1.48,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));if(W>3)put(x1-0.22,1.48,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));}
+  if(W>1.5)put(x0+W*0.62,1.5,0.3,0.3,(x,y,w)=>clock(x,y,0.28));
   for(let t=0;t<3200;t++){const k=pickKind();let w,h;
    if(k==='poster'){w=[0.28,0.34,0.4,0.46][Math.floor(r()*4)];h=w*(1.2+r()*0.2);}
    else if(k==='strip'){w=[0.5,0.62,0.78][Math.floor(r()*3)];h=[0.17,0.2,0.24][Math.floor(r()*3)];}
@@ -863,9 +864,9 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
  const tvMat=new THREE.MeshBasicMaterial({map:tvTex,toneMapped:false});
  const cg=new THREE.Group();cg.position.set(0.72,0,0.72);cg.rotation.y=Math.PI/4;DW.add(cg);
  // slatted timber section that closes the corner between the wall and the corner pillar
- bx(-0.83,0.83,0.95,2.95,-0.06,-0.02,M.timberDark,cg);for(let x=-0.78;x<=0.79;x+=0.08)bx(x-0.022,x+0.022,0.95,2.95,-0.02,0.0,M.timber,cg,false);
+ bx(-0.83,0.83,0.95,2.2,-0.06,-0.02,M.timberDark,cg);for(let x=-0.78;x<=0.79;x+=0.08)bx(x-0.022,x+0.022,0.95,2.2,-0.02,0.0,M.timber,cg,false);
  bx(-0.83,0.83,0.9,0.95,-0.06,0.03,M.timberDark,cg);
- const W=1.43,H=0.805,cy=1.95,zf=0.11,b=0.006;const tv=new THREE.Group();tv.position.set(0,cy,zf);tv.rotation.x=-0.05;cg.add(tv);
+ const W=1.43,H=0.805,cy=1.62,zf=0.11,b=0.006;const tv=new THREE.Group();tv.position.set(0,cy,zf);tv.rotation.x=-0.05;cg.add(tv);
  bx(-W/2-b,W/2+b,-H/2-b-0.012,H/2+b,-0.03,0,M.black,tv);                                    // slim black body (thicker chin at the bottom)
  const sc=new THREE.Mesh(new THREE.PlaneGeometry(W,H),tvMat);sc.position.z=0.0015;tv.add(sc);
  bx(-0.5,0.5,-0.32,0.32,-0.055,-0.03,M.blackMetal,tv,false);                                  // rear panel bulge
@@ -920,7 +921,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
  // back bar 0.60 m deep (equipment plan): POS cabinet, glass washer, ice machine, 2-door bottle cooler
  B(0,0.6,0,0.92,0,0.6,M.oliveWood);B(0,0.6,0,0.92,0.6,cz0,M.ss);B(0.03,0.23,0.06,0.92,cz0,cz1,M.white,false);B(0,0.62,0.92,0.96,0,L,M.marble);
  [0.6,1.1,1.6].forEach(z=>B(0.6,0.605,0.1,0.86,z-0.005,z+0.005,M.black,false));
- B(0,0.03,0.96,2.38,0,L,M.onyx,false);B(0,0.03,2.38,3.1,0,L,S({color:'#0b2624',roughness:0.7}),false);for(let z=0.6;z<L;z+=0.6)B(0.03,0.045,2.42,3.06,z-0.012,z+0.012,S({color:'#061a19',roughness:0.75}),false);   // the tile panel above the back bar covered in the wall's green panelling
+ B(0,0.03,0.96,2.38,0,L,M.onyx,false);// (the green panelling above the onyx panel is gone: the ceiling over the bar is only 2.5 to 2.7 m)
  const SG=new THREE.Group();SG.position.x=0.2;BG.add(SG);g=SG;   // the cooler block was drawn for a 0.40 m back bar: shifted 0.20 m to the new front
  // cooler: glass door, white lined interior, LED strip, mixers
  {B(0.4,0.41,0.1,0.86,cz0+0.02,cz1-0.02,M.shelfGlass,false);B(0.39,0.41,0.84,0.88,cz0,cz1,M.ss,false);B(0.39,0.41,0.08,0.11,cz0,cz1,M.ss,false);B(0.41,0.43,0.3,0.62,(cz0+cz1)/2-0.02,(cz0+cz1)/2+0.02,M.ss);B(0.03,0.39,0.46,0.48,cz0+0.03,cz1-0.03,M.ss,false);
@@ -945,9 +946,9 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
   B(0.08,0.3,0.96,0.985,z0+0.2,z1-0.2,M.timber,false);[1.85,2.02,2.19].forEach(z=>{cyl(0.026,0.03,0.07,0.19,0.985,z,M.shelfGlass,g,12,false);cyl(0.024,0.024,0.02,0.19,0.99,z,glassT.gold,g,12,false);});}
  // bay C: soju riser and the ON TAP board
  {const sojuG=GL('#1f7a3a',0.8),sojuL=S({color:'#eaf3e6',roughness:0.7});
-  const tapT=tex(360,512,(c,w,h)=>{c.fillStyle='#161412';c.fillRect(0,0,w,h);c.strokeStyle='#c9993f';c.lineWidth=8;c.strokeRect(10,10,w-20,h-20);c.fillStyle='#e9a94b';c.textAlign='center';c.font='700 46px "Bricolage Grotesque", serif';c.fillText('ON TAP',w/2,74);c.fillStyle='#c9993f';c.fillRect(w/2-60,90,120,3);
-   [['Comrade Crisp','lager'],['Gose Bumps','kokum gose'],['Hoppy Hippie','IPA']].forEach(([n,t],i)=>{const yy=160+i*95;c.fillStyle='#f3e8d9';c.textAlign='left';c.font='600 26px "Bricolage Grotesque", serif';c.fillText(n,30,yy);c.fillStyle='#b5a28c';c.font='500 18px "IBM Plex Mono", monospace';c.fillText(t,30,yy+26);});},1,1);
-  B(0.03,0.06,2.22,3.0,1.78,2.42,M.timberDark,false);plane(0.58,0.72,S({map:tapT,roughness:0.85}),0.066,2.61,2.1,Math.PI/2);}   // ON TAP board above the bottle bay
+  const tapT=tex(700,240,(c,w,h)=>{c.fillStyle='#161412';c.fillRect(0,0,w,h);c.strokeStyle='#c9993f';c.lineWidth=6;c.strokeRect(8,8,w-16,h-16);c.fillStyle='#e9a94b';c.textAlign='center';c.font='700 44px "Bricolage Grotesque", serif';c.fillText('ON TAP',w/2,62);c.fillStyle='#c9993f';c.fillRect(w/2-60,76,120,3);
+   [['Comrade Crisp','lager'],['Gose Bumps','kokum gose'],['Hoppy Hippie','IPA']].forEach(([n,t],i)=>{const xx=26+i*226;c.fillStyle='#f3e8d9';c.textAlign='left';c.font='600 26px "Bricolage Grotesque", serif';c.fillText(n,xx,142);c.fillStyle='#b5a28c';c.font='500 18px "IBM Plex Mono", monospace';c.fillText(t,xx,172);});},1,1);
+  B(0.03,0.06,2.08,2.36,1.72,2.48,M.timberDark,false);plane(0.7,0.24,S({map:tapT,roughness:0.85}),0.066,2.22,2.1,Math.PI/2);}   // ON TAP board above the bottle bay
  [[1.62,SK('liq','ruby','gold',11)],[2.5,SK('gin','blue','silver',9)]].forEach(([z,k])=>bottle(k,0.36,0.96,z));
  // POS nook at the door end of the back bar
  // S3: KDS bar screen (15.6 in, 0.38 × 0.23) on the east wall above the POS nook, replaces the BOT slip
@@ -1047,7 +1048,7 @@ EMI.push(['onyxGlow',0.95],['warmLed',2.2],['cool',0.8]);
    const sg=new THREE.Mesh(new THREE.PlaneGeometry(0.2,0.05),new THREE.MeshStandardMaterial({map:signTex(160,40,[['CASH',20,0.6]],'#161412','#e9a94b'),roughness:0.7}));sg.position.set(x0+0.622,0.68,dm);sg.rotation.y=Math.PI/2;g.add(sg);}
   lbl('Coffee station and POS desk',HX-2.5,1.7,5.15-zm,'');}
  // neon over the back bar
- {const nd=new THREE.Mesh(new THREE.PlaneGeometry(1.5,0.45),M.neonDraught);nd.rotation.y=Math.PI/2;nd.position.set(0.05,2.7,0.95);nd.renderOrder=4;g.add(nd);}
+ {const nd=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.34),M.neonDraught);nd.rotation.y=Math.PI/2;nd.position.set(0.05,2.18,0.95);nd.renderOrder=4;g.add(nd);}
 }
 solids.push([[HX-2.25,2.3],[HX-2.25,5.2]],[[HX-0.65,0.3],[HX-0.65,5.2]]);
 
@@ -1094,7 +1095,7 @@ function chair(x,z,ang,seat){const g=new THREE.Group();
   [[-0.2,0.0],[0.2,0.0]].forEach(([sx])=>bx(sx-0.015,sx+0.015,0.5,0.95,-0.2,-0.18,M.walnut,g));bx(-0.22,0.22,0.92,0.96,-0.21,-0.17,M.walnut,g,false);
   const cn=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.4),M.cane);cn.position.set(0,0.74,-0.19);g.add(cn);
   g.position.set(x,0,z);g.rotation.y=ang;G.hall.add(g);}
-function pendant(x,z,dome){const top=hc(z)-0.15;ivyOrb(x-0.12,1.82,z,0.2,top);ivyOrb(x+0.14,2.12,z+0.1,0.16,top);}   // a pair of ivy wicker orbs at staggered heights over each table
+function pendant(x,z,dome){const top=hc(z)-0.15;ivyOrb(x-0.17,hc(z)-0.62,z,0.2,top);ivyOrb(x+0.17,hc(z)-0.38,z+0.1,0.16,top);}   // a pair of ivy wicker orbs at staggered heights over each table
 // burgundy tablecloths on every table: heavy woven cotton-linen with a tone-on-tone damask, 25 cm drop on all sides and a stitched hem
 const clothTex=tex(512,512,(g,w)=>{g.fillStyle='#5c1322';g.fillRect(0,0,w,w);const r=rng(61);
   for(let y=0;y<w;y+=2){g.fillStyle=`rgba(${r()<.5?'120,30,48':'40,6,14'},${0.18+r()*0.12})`;g.fillRect(0,y,w,1);}
@@ -1185,7 +1186,7 @@ lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',6.2,2.0,8.6,'k');
    g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:'#2a2a2a'})));
    pts.forEach((p,i)=>{if(i>0&&i<n){cyl(0.004,0.004,0.06,p.x,p.y-0.06,p.z,M.steel,g,4,false);const bl=new THREE.Mesh(new THREE.SphereGeometry(0.045,10,8),M.globe);bl.position.set(p.x,p.y-0.1,p.z);g.add(bl);}});});
  // 2. bronze cage lantern mounted on every pillar on a curved arm, plus a ground uplight
- colPts.forEach(([x,z])=>{const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,nx=inx/il,nz=inz/il,y=2.0;const lg=new THREE.Group();
+ colPts.forEach(([x,z])=>{const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,nx=inx/il,nz=inz/il,y=hc(z)-0.52;const lg=new THREE.Group();
    const arm=[];for(let i=0;i<=8;i++){const t=i/8;arm.push(V(0,0.12*Math.sin(t*Math.PI*0.5),0.02+0.2*t));}lg.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(arm),8,0.008,5,false),M.blackMetal));
    cyl(0.07,0.07,0.012,0,0.0,0.24,M.blackMetal,lg,14,false);cyl(0.075,0.075,0.3,0,0.01,0.24,M.flameGlass,lg,14,false);
    for(let k=0;k<6;k++){const a=k/6*6.283;cyl(0.005,0.005,0.3,Math.cos(a)*0.077,0.01,0.24+Math.sin(a)*0.077,M.blackMetal,lg,4,false);}
@@ -1547,9 +1548,9 @@ const VIEWS={
 };
 const CARDS={
  overview:['Overview','Cabin East Garden','A 40-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers; 4 couple tables (two-tops) add 8 more = 40','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy terracotta-chocolate stacked tile (cream grout) under the bottle green','Blue-and-white porcelain in the pillars\' cobalt: ginger jars on the wall shelves, plates on the gallery wall, two floor jars at the entrance','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet flush-mount ceiling fans (blades about 24 cm below the ceiling) in the coffers, plus two tower ACs']],
- decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy warm terracotta-chocolate vertical stacked tile with cream grout (1.0 m, two-tone with the bottle green above, brass rail between), white fluted pilasters kept, emerald paint above with brass globe sconces, a dense vintage-sign gallery: weathered enamel banner signs (DIM SUM, NOODLES, CHOWMEIN) across the top of each bay, tall TEA signs, round LAGER and BEER signs, slim walnut-framed bold red, yellow and cream graphic posters, bell-shaded brass wall lamps, wall clocks and a few small prints, with a large oil still life of a Chinese bowl beside a steel thali as the statement piece under a brass picture light, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns and a chalkboard.',['Vintage-sign gallery wall: enamel banner signs, tall and round signs, bold graphic posters in slim walnut frames, bell-shaded brass lamps, clocks, and the bowl-and-thali oil under a picture light','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
+ decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy warm terracotta-chocolate vertical stacked tile with cream grout (0.90 m, two-tone with the bottle green above, brass rail between; 1.28 m of wall above it to a 2.18 m ceiling), white fluted pilasters kept, emerald paint above with brass globe sconces, a dense vintage-sign gallery: weathered enamel banner signs (DIM SUM, NOODLES, CHOWMEIN) across the top of each bay, tall TEA signs, round LAGER and BEER signs, slim walnut-framed bold red, yellow and cream graphic posters, bell-shaded brass wall lamps, wall clocks and a few small prints, with a large oil still life of a Chinese bowl beside a steel thali as the statement piece under a brass picture light, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns and a chalkboard.',['Vintage-sign gallery wall: enamel banner signs, tall and round signs, bold graphic posters in slim walnut frames, bell-shaded brass lamps, clocks, and the bowl-and-thali oil under a picture light','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site','Magenta and white bougainvillea along the eave of every open side, cascading down the entrance columns']],
- tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.95 m, bottom edge about 1.55 m: clear over seated heads','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
+ tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.62 m, bottom edge about 1.22 m, top 2.02 m under a 2.2 m ceiling at this corner','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
  couples:['Couple tables','Four tables for two','0.70 m square teak tables in burgundy linen, two chairs each, one wicker orb overhead. Two sit on the garden-facing rail of the west wing, one on the west edge by the TV corner and one on the south railing west of the entrance.',['Each keeps about 1.2 m clear walkway','Adds 8 covers: 32 to 40 (check the permitted limit)','Best seats for date night: the wing rail looks onto the lit garden']],
  gardencard:['Garden','5 × 5 m, on the left as you come in','The lawn on the left of the main path just inside the gate, below the hall\'s 2.98 m edge: areca palms, white flowering shrubs and a hedge inside a laterite kerb, with the three lamp posts and the festoon canopy of the approach path along its far side.',['Warm uplights at the palms','Hedge along the hall side and the main path']],
  approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. Dense strands of warm micro fairy lights are strung on fine wires from the three black lamp posts to the existing restaurant\'s balcony roof, with no frame, and among them hang brass lanterns and ivy-wrapped wicker orbs.',['Lights kept 2.1 m or more above the path','Warm 2200-2700 K']],
@@ -1664,7 +1665,7 @@ if(Q.has('nocard'))document.getElementById('card').style.display='none';
  lbl('Pool lounge · 6.8 / 4.2 m, depth 2.48 m',-1.2,2.7,4.4,'k');}
 
 /* ---- speed: merge every static mesh of each group into one mesh per material (thousands of draw calls become a few dozen) ---- */
-(function mergeStatic(){const U=THREE.BufferGeometryUtils;if(!U||!U.mergeBufferGeometries)return;
+(function mergeStatic(){const U=THREE.BufferGeometryUtils;if(!U||!U.mergeBufferGeometries||Q.has('nomerge'))return;
   ['ground','floors','walls','roof','deco','hall','bar','kitchen','dish','wash','store','fans'].forEach(k=>{const grp=G[k];grp.updateMatrixWorld(true);const buckets=new Map(),kill=[];
     grp.traverse(o=>{if(!o.isMesh||o.isInstancedMesh||!o.visible||Array.isArray(o.material)||!o.geometry||!o.geometry.attributes||!o.geometry.attributes.position)return;
       let g=o.geometry.clone();g.applyMatrix4(o.matrixWorld);if(g.index)g=g.toNonIndexed();
@@ -1687,6 +1688,7 @@ function loop(now){const raw=now-last;const dt=Math.min(0.05,raw/1000);last=now;
   if(!camera.position.equals(_lp)||!camera.quaternion.equals(_lq)||camera.fov!==_lf){_lp.copy(camera.position);_lq.copy(camera.quaternion);_lf=camera.fov;dirty=true;}
   if(dirty||anim||Math.abs(pvcState.f-pvcState.target)>0.002){dirty=false;updateLabels();renderer.render(scene,camera);if(!Q.has('shot'))adapt(raw);}
   requestAnimationFrame(loop);}
+if(Q.has('dbg'))window.__dbg={scene,G,hc,THREE};
 requestAnimationFrame(loop);window.__ready=true;
 }
 const fonts=['700 40px "Bricolage Grotesque"','40px Yellowtail','500 20px "IBM Plex Mono"'].map(f=>document.fonts&&document.fonts.load?document.fonts.load(f):Promise.resolve());
