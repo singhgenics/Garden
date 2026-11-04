@@ -309,7 +309,7 @@ const KIT=[
  ['K2','Stock / pot range, 2 burners',1,0.95,0.75,0.80,'North wall, west end of the line (0.90 m from the west wall, clear of the door swing). 3 soups, wonton poaching, claypot gravies, pork braise, noodle boil, house stocks. A pot on one burner can also carry bamboo baskets when the steamer K4 is busy',1],
  ['K3','Twin-tank gas fryer, 2 × 15 L',1,0.90,0.75,0.90,'East (temporary) wall, 1.40 to 2.30 m from the north wall, so there is 0.90 m of clear floor between it and the sink K28. One tank veg, one non-veg, so veg guests are never fed from meat oil. Salt & pepper, fried wontons, wings, fries, darsaan',1],
  ['K4','Dim sum steamer, 1 station, with bamboo baskets',1,0.55,0.75,0.90,'North wall, on the 0.58 m landing between the wok range K1 and the sink K28 (2.94 to 3.49 m from the west wall). Dim sum, bao, steamer for two, jasmine rice backup. One station fits here and keeps the 0.90 m clear in front of the sink; a two-station 0.90 m unit does not fit',1],
- ['K5','Exhaust hood, L-shaped, over K1–K3 (lower edge at 1.85 m)',1,2.60,1.13,0.50,'2.60 m along the north wall (K2, K1 and the steamer K4) plus a 1.30 m return over the fryer K3 on the east wall (1.10 m deep). Grease filters; the duct leaves through the dish-wash wall (X2) to the roof fan X3. See section 5',0],
+ ['K5','Exhaust hood, L-shaped, over K1–K3 (lower edge at 1.85 m)',1,2.60,1.13,0.50,'2.60 m along the north wall (K2, K1 and the steamer K4) plus a 2.50 m return down the east wall, round the sink corner and over the fryer K3 (1.10 m deep): one continuous L. Grease filters; the whole L draws through one collar and one duct (X2) at its corner, which leaves through the dish-wash wall to the roof fan X3. See section 5',0],
  ['K6/K7','Dual-zone upright, SS, 2 doors: chiller (K6, left) and freezer (K7, right)',1,1.20,0.80,1.95,'South wall, 0.55 to 1.75 m from the west wall, west of the store-passage partition. K6 chiller: raw chicken, pork, prawns, fish, cooked pork, broths. K7 freezer: prawns, wontons, dumplings, bao, wrappers, fries, ice cream. About 300 L each side (typical)',1],
  ['K32','Opening in the temporary wall to the washroom, 0.90 m (existing): a left turn after it to the washroom door',1,0.90,0.10,2.05,'In the temporary wall, 2.85 to 3.75 m from the north wall, where I had put the raw bench. Walk east through the store passage, through the opening, turn left (north) to the washroom door. Washroom door position and the opening size assumed',0,1],
  ['K8','Under-counter 2-door chiller with worktop (raw-protein bench)',1,0.90,0.70,0.90,'Against the north face of the false partition (2.00 to 2.70 m from the north wall, 2.25 to 3.15 m from the west wall), facing the line; it gave up its place on the east side to the washroom opening. Vegetables, sauces, dairy, eggs below; red and blue boards on top for raw meat and seafood. About 190 L gross (typical)',1],
@@ -379,8 +379,8 @@ const STORE=[
  ['SR-FE','Fire extinguisher, ABC',1,0.15,0.15,0.50,'On the north wall beside the door',0]
 ];
 const EXH=[
- ['X1','Hood K5 with baffle grease filters',1,2.60,1.13,0.50,'L-shaped wall canopy over K1 to K3 (2.60 m on the north wall plus a 1.30 m return over K3). Filters are lifted out and washed in D2 weekly',0],
- ['X2','Duct from the hood: through the dish-wash wall, across the dish wash, up its north wall, welded stainless',1,0.50,2.00,0.40,'About 2 m across the dish wash at 2.15 to 2.55 m, then 1.9 m up to the roof (estimate). Slopes back to the hood so grease drains back; access panel at each bend. Passes over D4a and the louvre X5',0],
+ ['X1','Hood K5 with baffle grease filters',1,2.60,1.13,0.50,'L-shaped wall canopy over K1 to K3 (2.60 m on the north wall plus a 2.50 m return down the east wall over the sink corner and K3, one continuous L). Filters are lifted out and washed in D2 weekly',0],
+ ['X2','Duct from the hood: through the dish-wash wall, across the dish wash, up its north wall, welded stainless',1,0.50,2.00,0.40,'The only exit for the smoke: one collar at the corner of the L-shaped hood (3.0 to 3.5 m from the west wall) serves both legs, so there is one duct, one fan and one fire-damper position. About 2 m across the dish wash over the clean table D4 at 2.15 to 2.55 m, then 1.9 m up to the roof (estimate); it clears the top of the D4a shelf stock by about 8 cm. Slopes back to the hood so grease drains back; access panel at each bend. Passes over D4a and the louvre X5',0],
  ['X3','Roof exhaust fan with cowl, open to the sky above the dish wash north wall',1,0.90,0.90,0.88,'About 5,000 to 6,000 m³/h (estimate); speed controller; above the 3.0 m roof. Check the fire-NOC rules for a duct that runs through another room',0],
  ['X4','Make-up air louvre, west wall, at 2.2 m, with fly mesh',1,0.90,0.10,0.40,'About 80% of the extract (estimate), plus the kitchen door and the pass hatch when open; the dish-wash doorway helps too. Above K10',0],
  ['X5','Dish wash: louvred window in the north wall (existing)',1,1.10,0.10,0.90,'Passive, no fan at the start. With no dishwasher the steam load is low',0,1],
@@ -587,10 +587,10 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
    TXT(4.1,-0.1,'to dish-wash line','note','style="fill:var(--drn)"')+
    T2('Y1',2.2,1.2,[2.0,0.88],{}).replace('class="tg"','class="tg dtg"'));
  // exhaust and air
- s+=LX(R(0.90,0,2.60,1.13,'exf')+R(3.0,1.3,1.10,1.2,'exf')+[...Array(8)].map((_,i)=>L(0.95+i*0.32,0.1,0.95+i*0.32,1.05,'exl')).join('')+
-   R(2.15,0,0.5,0.5,'exd')+'<path class="exl2 dsh2" marker-end="url(#mex)" d="M'+f(2.4)+' '+f(0.25)+'L'+f(2.4)+' '+f(-0.6)+'"/>'+TXT(2.4,-0.75,'duct crosses the dish wash to the roof fan','note','text-anchor="middle" style="fill:var(--exh)"')+
+ s+=LX(R(0.90,0,2.60,1.13,'exf')+R(3.0,0,1.10,2.5,'exf')+[...Array(8)].map((_,i)=>L(0.95+i*0.32,0.1,0.95+i*0.32,1.05,'exl')).join('')+
+   R(3.0,0,0.5,0.5,'exd')+'<path class="exl2 dsh2" marker-end="url(#mex)" d="M'+f(3.25)+' '+f(0.25)+'L'+f(3.25)+' '+f(-0.6)+'"/>'+TXT(3.25,-0.75,'duct crosses the dish wash to the roof fan','note','text-anchor="middle" style="fill:var(--exh)"')+
    R(-0.05,1.2,0.1,0.9,'exr')+'<path class="exl2" marker-end="url(#mex)" d="M'+f(-0.5)+' '+f(1.65)+'L'+f(0.4)+' '+f(1.65)+'"/>'+
-   TN('X1',6.0,-0.3,[3.5,0.1],{fs:13})+TN('X2',6.0,-0.75,[2.4,-0.4],{fs:13})+TN('X4',-1.5,-1.3,[-0.4,1.65],{fs:13}));
+   TN('X1',6.0,-0.3,[3.5,0.1],{fs:13})+TN('X2',6.0,-0.75,[3.25,-0.4],{fs:13})+TN('X4',-1.5,-1.3,[-0.4,1.65],{fs:13}));
  s+=dimH(0,KW,-0.95,'4.10 clear',18)+dimV(W+1.25,0,H,'4.18 clear (kitchen)',12);
  s+=TXT(KW/2,H+1.85,'Temporary wall at 4.10 stays. South wall is the common wall with the existing restaurant.','zt','text-anchor="middle" style="font-size:9px"');
  mount('svgK',W,H,s,400,250,170,230);
@@ -623,7 +623,7 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  s+=T2('D2',4.9,-0.45,[4.9,0.4])+T2('D3',4.9,-0.9,[4.9,1.3])+T2('D9',4.9,-1.35,[4.76,0.55]);
  s+=T2('D11',3.0,H+1.05,[3.4,1.2])+T2('D13',3.2,H+0.55,[3.1,1.8]);
  s+=LD('<path class="drl" marker-end="url(#mdr)" d="M'+f(4.66)+' '+f(0.9)+'L'+f(4.2)+' '+f(1.2)+'"/>'+TXT(3.5,1.45,'floor falls 1:100 to D11','note','text-anchor="middle"'));
- s+=LX(R(0.3,-0.04,1.1,0.08,'exr')+TXT(0.85,-0.26,'X5 louvred window 1.10 × 0.90, no fan','note','style="fill:var(--exh)"')+R(2.15,0.0,0.5,1.85,'exd')+'<path class="exl2 dsh2" marker-end="url(#mex)" d="M'+f(2.4)+' '+f(1.85)+'L'+f(2.4)+' '+f(0.2)+'"/>'+TXT(2.4,1.97,'duct overhead, 2.15 to 2.55 m','note','text-anchor="middle" style="fill:var(--exh)"')+TN('X2',3.3,-1.85,[2.4,0.1],{fs:13}));
+ s+=LX(R(0.3,-0.04,1.1,0.08,'exr')+TXT(0.85,-0.26,'X5 louvred window 1.10 × 0.90, no fan','note','style="fill:var(--exh)"')+R(3.0,0.0,0.5,1.85,'exd')+'<path class="exl2 dsh2" marker-end="url(#mex)" d="M'+f(3.25)+' '+f(1.85)+'L'+f(3.25)+' '+f(0.2)+'"/>'+TXT(3.25,1.97,'duct overhead, 2.15 to 2.55 m','note','text-anchor="middle" style="fill:var(--exh)"')+TN('X2',3.3,-1.85,[3.25,0.1],{fs:13}));
  s+=dimH(0,W,H+0.55,'5.21 clear');
  s+=dimV(W+1.55,0,H,'1.80 clear',12);
  mount('svgD',W,H,s,100,250,250,330);
@@ -705,11 +705,11 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  s+=R(4.4,1.95,0.6,0.7,'wet')+R(4.4,2.75,0.6,0.7,'wet')+R(4.18,1.8,0.1,1.8,'rmx',{st:'fill:var(--wet);opacity:.5'});
  s+=R(2.9,2.75,1.3,0.35,'exist');
  // exhaust
- s+=LX(R(1.0,3.8,2.6,1.13,'exf')+R(3.1,5.1,1.1,1.2,'exf')+R(2.25,1.7,0.5,2.1,'exd')+R(2.25,1.7,0.5,0.5,'exr')+fan(2.5,1.95,0.14,'exs')+
+ s+=LX(R(1.0,3.8,2.6,1.13,'exf')+R(3.1,3.8,1.1,2.5,'exf')+R(3.1,1.7,0.5,2.1,'exd')+R(3.1,1.7,0.5,0.5,'exr')+fan(3.35,1.95,0.14,'exs')+
    R(-0.05,5.1,0.1,0.9,'exr')+'<path class="exl2" marker-end="url(#mex)" d="M'+f(-0.55)+' '+f(5.55)+'L'+f(0.5)+' '+f(5.55)+'"/>'+
-   R(0.3,1.66,1.1,0.08,'exr')+R(5.36,8.2,0.1,0.9,'exr')+R(5.36,13.5,0.1,0.9,'exr')+'<path class="exl2 dsh2" marker-end="url(#mex)" d="M'+f(2.5)+' '+f(3.8)+'L'+f(2.5)+' '+f(2.3)+'"/>'+
+   R(0.3,1.66,1.1,0.08,'exr')+R(5.36,8.2,0.1,0.9,'exr')+R(5.36,13.5,0.1,0.9,'exr')+'<path class="exl2 dsh2" marker-end="url(#mex)" d="M'+f(3.35)+' '+f(3.8)+'L'+f(3.35)+' '+f(2.3)+'"/>'+
    R(5.36,0.7,0.1,0.3,'exr')+
-   TN('X1',7.7,4.3,[4.2,5.0],{fs:13})+TN('X2',-2.1,2.95,[2.4,3.0],{fs:13})+TN('X3',-2.1,1.95,[2.35,1.95],{fs:13})+TN('X4',-2.1,5.55,[-0.5,5.55],{fs:13})+TN('X5',-2.1,1.3,[0.3,1.7],{fs:13})+TN('X6',7.7,10.4,[5.45,8.65],{fs:13})+TN('X7',7.7,0.95,[5.45,0.85],{fs:13}));
+   TN('X1',7.7,4.3,[4.2,5.0],{fs:13})+TN('X2',-2.1,2.95,[3.2,3.0],{fs:13})+TN('X3',-2.1,1.95,[3.2,1.95],{fs:13})+TN('X4',-2.1,5.55,[-0.5,5.55],{fs:13})+TN('X5',-2.1,1.3,[0.3,1.7],{fs:13})+TN('X6',7.7,10.4,[5.45,8.65],{fs:13})+TN('X7',7.7,0.95,[5.45,0.85],{fs:13}));
  // drainage
  s+=LD(R(1.0,4.6,2.4,0.1,'drc')+R(3.3,4.4,0.1,1.9,'drc')+
    '<path class="drl" marker-end="url(#mdr)" d="M'+f(3.35)+' '+f(4.4)+'L'+f(3.35)+' '+f(3.0)+'"/>'+
