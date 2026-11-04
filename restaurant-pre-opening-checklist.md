@@ -15,29 +15,31 @@ Timeline: start 6–12 months out. Tick items off as you go. Written for a resta
 
 ## 2. Legal, Licensing & Compliance (9–12 months out)
 
-- [ ] Business structure chosen and registered (proprietorship, partnership/LLP, or Pvt Ltd); PAN obtained; Udyam (MSME) registration optional
-- [ ] 🇮🇳 Land-use and property documents verified: title, conversion (sanad) status, TCP zoning allows commercial/restaurant use, occupancy/completion certificate
-- [ ] 🇮🇳 CRZ check (Cavelossim is coastal): confirm distance from High Tide Line, No Development Zone rules, and any Goa Coastal Zone Management Authority permission
-- [ ] 🇮🇳 Village Panchayat (Cavelossim) construction/renovation permission and NOC for the restaurant use
-- [ ] 🇮🇳 Trade licence from the Village Panchayat (renewed annually)
-- [ ] 🇮🇳 FSSAI licence via FoSCoS (State licence or Registration depending on turnover; applied under the right kitchen category) with the licence number displayed and printed on bills/menus
-- [ ] 🇮🇳 FSSAI Food Safety Supervisor (FoSTaC-trained) appointed; Food Safety Display Board put up
-- [ ] 🇮🇳 Fire safety NOC from the Goa Directorate of Fire & Emergency Services
-- [ ] 🇮🇳 Goa State Pollution Control Board consent (Consent to Establish/Operate) if applicable; DG-set and noise norms
-- [ ] 🇮🇳 Goa Excise licence for serving liquor/beer (bar licence, draught beer, display of licence and price list; know the dry days and age limit)
-- [ ] 🇮🇳 Goa Tourism trade registration (Goa Registration of Tourist Trade Act) if applicable to your premises
-- [ ] 🇮🇳 Shops & Establishments registration (Goa Labour Dept) and Goa Professional Tax registration
-- [ ] 🇮🇳 GST registration (confirm rate and input-tax-credit choice with your CA); FSSAI number and GSTIN on invoices
-- [ ] 🇮🇳 EPF and ESI registration once headcount thresholds are met; gratuity and minimum-wage compliance for Goa
-- [ ] 🇮🇳 Legal Metrology registration/verification for weighing scales and any packaged goods
-- [ ] 🇮🇳 Music licences: IPRS and PPL (copyright) for recorded music, plus police/panchayat permission for live music or loudspeakers; observe the noise-hours rules
-- [ ] 🇮🇳 Commercial electricity connection (Goa Electricity Department), water connection (PWD) or borewell approval, commercial LPG connection
-- [ ] 🇮🇳 Waste-management arrangement with the panchayat or an authorised collector; follow Goa's single-use plastic restrictions
-- [ ] Trademark registration for the name/logo (IP India)
-- [ ] Lease or ownership documents reviewed by a lawyer (term, fit-out period, rent-free period, exit clauses)
-- [ ] Insurance: public liability, fire and property, business interruption, workers' compensation, product liability
-- [ ] Contracts: supplier, landlord, employment, Zomato/Swiggy, POS/software agreements
-- [ ] Privacy policy for guest and staff data
+> Status: all licences and approvals are complete.
+
+- [x] Business structure chosen and registered (proprietorship, partnership/LLP, or Pvt Ltd); PAN obtained; Udyam (MSME) registration optional
+- [x] 🇮🇳 Land-use and property documents verified: title, conversion (sanad) status, TCP zoning allows commercial/restaurant use, occupancy/completion certificate
+- [x] 🇮🇳 CRZ check (Cavelossim is coastal): confirm distance from High Tide Line, No Development Zone rules, and any Goa Coastal Zone Management Authority permission
+- [x] 🇮🇳 Village Panchayat (Cavelossim) construction/renovation permission and NOC for the restaurant use
+- [x] 🇮🇳 Trade licence from the Village Panchayat (renewed annually)
+- [x] 🇮🇳 FSSAI licence via FoSCoS (State licence or Registration depending on turnover; applied under the right kitchen category) with the licence number displayed and printed on bills/menus
+- [x] 🇮🇳 FSSAI Food Safety Supervisor (FoSTaC-trained) appointed; Food Safety Display Board put up
+- [x] 🇮🇳 Fire safety NOC from the Goa Directorate of Fire & Emergency Services
+- [x] 🇮🇳 Goa State Pollution Control Board consent (Consent to Establish/Operate) if applicable; DG-set and noise norms
+- [x] 🇮🇳 Goa Excise licence for serving liquor/beer (bar licence, draught beer, display of licence and price list; know the dry days and age limit)
+- [x] 🇮🇳 Goa Tourism trade registration (Goa Registration of Tourist Trade Act) if applicable to your premises
+- [x] 🇮🇳 Shops & Establishments registration (Goa Labour Dept) and Goa Professional Tax registration
+- [x] 🇮🇳 GST registration (confirm rate and input-tax-credit choice with your CA); FSSAI number and GSTIN on invoices
+- [x] 🇮🇳 EPF and ESI registration once headcount thresholds are met; gratuity and minimum-wage compliance for Goa
+- [x] 🇮🇳 Legal Metrology registration/verification for weighing scales and any packaged goods
+- [x] 🇮🇳 Music licences: IPRS and PPL (copyright) for recorded music, plus police/panchayat permission for live music or loudspeakers; observe the noise-hours rules
+- [x] 🇮🇳 Commercial electricity connection (Goa Electricity Department), water connection (PWD) or borewell approval, commercial LPG connection
+- [x] 🇮🇳 Waste-management arrangement with the panchayat or an authorised collector; follow Goa's single-use plastic restrictions
+- [x] Trademark registration for the name/logo (IP India)
+- [x] Lease or ownership documents reviewed by a lawyer (term, fit-out period, rent-free period, exit clauses)
+- [x] Insurance: public liability, fire and property, business interruption, workers' compensation, product liability
+- [x] Contracts: supplier, landlord, employment, Zomato/Swiggy, POS/software agreements
+- [x] Privacy policy for guest and staff data
 
 ## 3. Location, Design & Construction (6–9 months out)
 
@@ -191,6 +193,34 @@ Timeline: start 6–12 months out. Tick items off as you go. Written for a resta
 - [ ] Compliance re-check: licences, certificates, training renewals and expiry dates
 - [ ] Marketing retargeting, loyalty and repeat-customer tracking
 - [ ] 90-day review versus business plan; adjust forecasts
+
+## 16. Lighting Plan (3–4 months out; test before soft opening)
+- [ ] Lighting designer or electrician appointed; lighting plan drawn for each zone (dining, bar, kitchen, passages, washroom, outdoor)
+- [ ] Target light levels set: dining about 50–150 lux at the table, bar 100–200, kitchen about 500–550 (confirm FSSAI figure), passages 200–300, outdoor paths 10–50
+- [ ] Colour temperature chosen: 2200–2700 K warm in dining and bar, 4000–5000 K in kitchen and back of house
+- [ ] Fittings specified with CRI 90+ in dining, CRI 80+ in back of house
+- [ ] Dimmable, low-flicker LED drivers (0–10 V or DALI) fitted on all dining and bar circuits
+- [ ] Lighting scenes programmed and labelled: lunch, sunset, evening, late
+- [ ] Glare checked from every seat; fittings shaded or aimed away from guests' eyes
+- [ ] Accent light on the gallery wall, bar back and focal pieces
+- [ ] Outdoor and open-edge fittings rated IP44 or higher (IP65 where rain can reach), corrosion-resistant for the coast
+- [ ] Emergency lighting, exit signs and critical circuits on backup power
+- [ ] Lux test on site at dusk with a lux meter and a printed menu; adjust and record readings
+- [ ] Spare lamps and drivers stocked; cleaning and replacement schedule set
+
+## 17. Mosquito & Pest Control (before soft opening, then monthly)
+- [ ] No standing water: planters, pebble beds, saucers, gutters, drains, grease trap, ice bins and buckets checked and drained
+- [ ] Floor drains and gutters sloped to empty fully; vents and drain openings fitted with fine mesh
+- [ ] Planting near seating pruned and well drained so it does not hold damp or give mosquitoes resting spots
+- [ ] Licensed pest-control contractor appointed with monthly larvicide and outdoor treatment (also covers kitchen pest control; records kept)
+- [ ] Panchayat fogging and larvicide schedule checked and coordinated
+- [ ] Low-level fans at table height along the open edges, plus the ceiling fans
+- [ ] Warm amber lighting on the open sides; no bright white floodlights or UV on the guest side; any trap or zapper kept well away from seating and food
+- [ ] Repellent basket or spray at the entrance for guests
+- [ ] PVC curtains lowered during the dusk peak, with the fans running
+- [ ] Fine mosquito netting or fly screens on kitchen, bar and store openings; self-closing doors or an air curtain at the kitchen
+- [ ] No fogging or chemical spraying while guests are present or food is exposed; treat only before opening or after closing with approved products
+- [ ] Monsoon routine: more frequent drain checks, treatment and curtain use
 
 ---
 
