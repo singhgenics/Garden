@@ -96,6 +96,12 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
 .ltab .lb{display:block;height:6px;border-radius:3px;background:var(--line);margin-top:4px;overflow:hidden}.ltab .lb i{display:block;height:100%;background:#E49B1D}
 .ltab td.lv.off{color:var(--muted)}
 .ltab tr.grp td{background:var(--paper);font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.setphotos{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(0,1fr);gap:14px;margin:16px 0 8px}
+@media (max-width:720px){.setphotos{grid-template-columns:1fr}}
+.setphotos figure{margin:0}.setphotos img{display:block;width:100%;height:100%;object-fit:cover;border-radius:2px;box-shadow:0 8px 18px -8px rgba(28,23,20,.35)}
+.setphotos a{display:block;aspect-ratio:auto}.setphotos figure:first-child a{aspect-ratio:1376/768}.setphotos figure:last-child a{aspect-ratio:1}
+.setphotos figcaption{font-size:13.5px;color:var(--muted);padding-top:6px}
 </style>
 
 <link rel="stylesheet" href="theme.css">
@@ -127,6 +133,8 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
   <section id="setting">
     <h2>Laying the table</h2>
     <p class="lead">How every table looks when the doors open, before anyone sits down. Lay it the same way every time, so the room looks calm and any staff member can reset a table in two minutes. The drawings are to scale (1 square = 10 cm) and use the pieces on the <a href="crockery.html">crockery page</a>.</p>
+    <div class="setphotos"><figure><a href="furnishing/tableset.jpg" target="_blank" rel="noopener"><img src="furnishing/tableset.jpg" alt="A square table in a burgundy damask cloth laid for four under two glowing wicker orbs: ivory plates with folded napkins, gold cutlery, chopsticks on brass rests, amber tumblers, a brass caddy of blue-and-white pots and a candle, four walnut and cane chairs" loading="lazy" width="1376" height="768"></a><figcaption>A square table laid for four, ready before guests arrive.</figcaption></figure>
+      <figure><a href="furnishing/tableset-top.jpg" target="_blank" rel="noopener"><img src="furnishing/tableset-top.jpg" alt="The same table seen from straight above: four identical places around a brass caddy and a candle" loading="lazy" width="1000" height="1000"></a><figcaption>From above: every place the same, fork on the guest's left.</figcaption></figure></div>
     <div class="seg" role="group" aria-label="Table size" id="laytabs" style="margin-top:14px"><button data-t="sq" aria-pressed="true">Square 80 × 80 (four)</button><button data-t="six" aria-pressed="false">Six-top 190 × 90</button><button data-t="two" aria-pressed="false">Two-top 70 × 70</button></div>
     <div class="laywrap"><figure class="layfig"><svg id="laysvg" role="img" aria-labelledby="laycap"></svg><figcaption id="laycap"></figcaption></figure>
       <div class="laykey"><h3>On the table before guests arrive</h3><ol id="laykey"></ol></div></div>
@@ -174,7 +182,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
       <li><b>Keep receipts and warranties</b> for furniture, fans, ACs, TV and speakers in one folder; you will need them for insurance and repairs.</li>
     </ul>
   </section>
-  <footer>Counts come from the 3D model (tables, chairs and light fittings) and the lean equipment plan. First-month stock assumes about 60 covers a day; reorder from what you actually use. Safety counts (extinguishers, exits) are a starting point only: the Fire Department's NOC inspection decides the final number and type. Pictures are illustrative renders made in Google Flow (project “Garden Furnishing”), not real products. Ticks are saved only in this browser.</footer>
+  <footer>Counts come from the 3D model (tables, chairs and light fittings) and the lean equipment plan. First-month stock assumes about 60 covers a day; reorder from what you actually use. Safety counts (extinguishers, exits) are a starting point only: the Fire Department's NOC inspection decides the final number and type. Pictures are illustrative renders made in Google Flow (project “Garden Furnishing”), not real products; the laid-table photos were made from the crockery and furniture pictures on these pages. Ticks are saved only in this browser.</footer>
 </div>
 <script>
 // layout: a = model (5 square 4-tops + 2 six-tops + 4 two-tops = 40), b = all 10 squares (60)
