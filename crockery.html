@@ -131,6 +131,17 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
     <div id="groups"></div>
   </section>
 
+  <section id="carry">
+    <h2>Bringing it to the table</h2>
+    <ul class="tips">
+      <li><b>Drinks go on the round tray</b>, carried flat on the fingertips of the left hand, close to the body. Load the heaviest and tallest glasses in the middle, unload from the outside in. Hold glasses by the base or stem, never by the rim.</li>
+      <li><b>Two plates or fewer: carry by hand.</b> Three or more, or anything with a claypot or steamer stack: food tray, carried at shoulder height, with the tray stand opened at the table first.</li>
+      <li><b>Hot pieces travel on their underplate.</b> Soup bowls on a side plate, steamer baskets on a side plate, claypots on their wire stand; pick them up with the service cloth.</li>
+      <li><b>Serve from the guest's right, clear from the right</b>, plates set down with the main item toward the guest. Shared dishes go in the middle of the table; rice bowls, dip dishes and soup spoons arrive with the dish that needs them.</li>
+      <li><b>Never put a tray on the guest table</b> and never carry used plates and fresh food together. Clear on the way back, not on the way out.</li>
+    </ul>
+  </section>
+
   <section id="map">
     <h2>Every dish and drink, and what it is served in</h2>
     <p class="lead">From the current menu (Garden/web/menu). If a dish is added or changed, add its piece here as well.</p>
@@ -152,7 +163,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
 </div>
 <script>
 const COVERS=40,SETS=2,PER=COVERS*SETS;
-const GROUPS={cover:['On every place setting','Two sets per cover: '+PER+' of each'],food:['Food serving','From the pass to the table'],service:['On every table','Shared on each table (11 tables in the layout plus spares)'],beer:['Beer','Three taps, two bottles, pitchers and the paddle'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed and Irish coffee'],tools:['Bar tools','Behind the bar, in brass']};
+const GROUPS={cover:['On every place setting','Two sets per cover: '+PER+' of each'],food:['Food serving','From the pass to the table'],service:['On every table','Shared on each table (11 tables in the layout plus spares)'],carry:['Carrying to the table','What the servers carry food and drinks on, from the pass and the bar'],beer:['Beer','Three taps, two bottles, pitchers and the paddle'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed and Irish coffee'],tools:['Bar tools','Behind the bar, in brass']};
 // [id, group, name, spec, used for, qty, unit, how counted, priority d1|later]
 const ITEMS=[
  ['side','cover','Side plate, 19 cm','Ivory matte stoneware, thin raw chocolate-brown rim','Each guest\'s eating plate; underplate for soup bowls and steamer baskets',PER,'pcs','40 covers × 2','d1'],
@@ -189,6 +200,10 @@ const ITEMS=[
  ['carafe','service','Water carafe, 1 L','Amber-tinted ribbed glass, narrow neck','Water on every table',22,'pcs','11 tables × 2 (one out, one chilling)','d1'],
  ['coaster','service','Coasters','Thick card, cream with a burgundy border (print the logo later)','Under every glass on bare tables, at the bar and in the pool lounge',1000,'a month','throwaway','d1'],
  ['bill','service','Bill box','Red lacquer with brass corners','Bill and card slip to the table',13,'pcs','11 tables + 2 spare','d1'],
+ ['drinktray','carry','Drinks tray, round 35 cm','Non-slip cork top, thin brass rim, light to hold on one hand','Every drinks order from the bar: glasses by the base, tallest and heaviest in the middle',6,'trays','2 per server + 2 waiting at the bar','d1'],
+ ['foodtray','carry','Food tray, oval about 60 × 45 cm','Non-slip walnut-look top, brass rim, heat-proof','Orders of three or more plates, steamer stacks, claypots and the feast for four',4,'trays','1 per server + 2 spare','d1'],
+ ['traystand','carry','Tray stand','Folding walnut stand with burgundy straps','Opened beside the table so the food tray rests on it while plates go down; never put a tray on a guest\'s table',3,'stands','one per dining area (hall, west wing, garden side)','d1'],
+ ['servcloth','carry','Service cloth','Ivory cotton, folded long, burgundy stripe','Carried over the forearm to hold hot plates, claypots and steamer baskets and to wipe a drip',12,'cloths','3 per server per shift, one shift in the wash','d1'],
 
  ['pint','beer','Pint glass, 500 ml','Clear nonic, tempered, fill line at 500 ml','Large pours of Comrade Crisp, Gose Bumps, the guest tap; Kings and Budweiser bottles',60,'pcs','~30 at once × 2','d1'],
  ['beer330','beer','Beer glass, 330 ml','Clear straight-sided, tempered, fill line','Small pours, happy-hour taps and Kings 330, Somaek, pitcher glasses',60,'pcs','~30 at once × 2','d1'],
