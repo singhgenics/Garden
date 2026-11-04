@@ -38,3 +38,14 @@ td.id,.id{color:var(--brass-ink)}
 .site b{color:var(--brass)!important}.rail{background:var(--paper)}
 .rules li::before{background:var(--bottle)!important;color:var(--cream)!important}
 :focus-visible{outline-color:var(--brass)!important}
+/* header buttons: each one in a different brand colour, cycling through the palette (all pairs at least 4.8:1 contrast) */
+.hoard .top a:nth-of-type(7n+1),.hoard .nav a:nth-of-type(7n+1){background:#C49A3C!important;color:#17221C!important}
+.hoard .top a:nth-of-type(7n+2),.hoard .nav a:nth-of-type(7n+2){background:#6A1622!important;color:#F2E8D2!important}
+.hoard .top a:nth-of-type(7n+3),.hoard .nav a:nth-of-type(7n+3){background:#2443A6!important;color:#F2E8D2!important}
+.hoard .top a:nth-of-type(7n+4),.hoard .nav a:nth-of-type(7n+4){background:#A9533A!important;color:#FFFFFF!important}
+.hoard .top a:nth-of-type(7n+5),.hoard .nav a:nth-of-type(7n+5){background:#4A2A1E!important;color:#F2E8D2!important}
+.hoard .top a:nth-of-type(7n+6),.hoard .nav a:nth-of-type(7n+6){background:#D81B7A!important;color:#FFFFFF!important}
+.hoard .top a:nth-of-type(7n+7),.hoard .nav a:nth-of-type(7n+7){background:#F2E8D2!important;color:#17221C!important}
+.hoard .top a,.hoard .nav a{box-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .16s cubic-bezier(.23,1,.32,1),filter .16s}
+@media (hover:hover) and (pointer:fine){.hoard .top a:hover,.hoard .nav a:hover{filter:brightness(1.12);transform:translateY(-1px)}}
+.hoard .top a:active,.hoard .nav a:active{transform:scale(.97)}
