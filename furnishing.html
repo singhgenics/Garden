@@ -79,13 +79,30 @@ h2,h3{color:var(--ink)}h2{font-size:clamp(28px,4.4vw,40px)}
 .seg{border:2px solid var(--ink)}
 section{border-top:2px dashed var(--line)}
 th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
+
+.laywrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
+@media (max-width:820px){.laywrap{grid-template-columns:1fr}}
+.layfig{margin:0;background:var(--card);border-radius:2px;padding:12px;box-shadow:0 1px 0 rgba(28,23,20,.06),0 8px 18px -8px rgba(28,23,20,.28)}
+.layfig svg{display:block;width:100%;height:auto}.layfig figcaption{font-size:13.5px;color:var(--muted);padding-top:8px}
+.laykey ol{margin:6px 0 0;padding-left:0;list-style:none;counter-reset:k}
+.laykey li{counter-increment:k;display:grid;grid-template-columns:26px 1fr;gap:8px;margin:7px 0;font-size:14.5px}
+.laykey li::before{content:counter(k);display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font:600 12px var(--mono)}
+.laykey li small{display:block;color:var(--muted);font-size:13px}
+.laycols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:6px}.laycols .call{margin:8px 0}
+#prechk td{border-bottom:1px solid var(--line)}#prechk tr.done td:not(.c){opacity:.5;text-decoration:line-through}
+
+.ltab{table-layout:fixed;min-width:1040px}.ltab th{vertical-align:bottom;white-space:normal}.ltab th:nth-child(1){width:230px}.ltab th:nth-child(2){width:150px}.ltab th:nth-child(3){width:58px}.ltab th small{display:block;font:400 11px var(--mono);text-transform:none;letter-spacing:0;color:var(--muted)}
+.ltab td.lv{min-width:74px;font:500 12.5px var(--mono);white-space:nowrap}
+.ltab .lb{display:block;height:6px;border-radius:3px;background:var(--line);margin-top:4px;overflow:hidden}.ltab .lb i{display:block;height:100%;background:#E49B1D}
+.ltab td.lv.off{color:var(--muted)}
+.ltab tr.grp td{background:var(--paper);font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 </style>
 
 <link rel="stylesheet" href="theme.css">
 </head>
 <body>
 <header class="hoard"><div class="hin">
-  <div class="top"><a href="garden.html">&larr; 3D model</a><a href="crockery.html">Crockery &amp; glassware</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="opening-checklist.html">Opening checklist</a><a href="decor.html">Decor concept</a></div>
+  <div class="top"><a href="garden.html">&larr; 3D model</a><a href="crockery.html">Crockery &amp; glassware</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="opening-checklist.html">Opening checklist</a><a href="#setting">Laying the table</a><a href="#lights">Lights through the day</a><a href="decor.html">Decor concept</a></div>
   <span class="eyebrow-bill">Cabin East · Garden</span>
   <h1>Furnishing &amp; supplies</h1>
   <p class="lead">One list of everything the restaurant needs to open, apart from kitchen and bar equipment (in the <a href="equipment-plan.html">equipment plan</a>) and plates and glasses (on the <a href="crockery.html">crockery page</a>). It runs from tables and chairs down to tissues, bin bags and toilet rolls. Each line is marked <b>must have to open</b> or <b>add later</b>, so you can buy in two rounds.</p>
@@ -105,6 +122,33 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
     <h2>The key pieces</h2>
     <p class="lead">The pieces that set the look. The chair is the one in your 3D model and decor renders: dark walnut frame, woven cane back, cognac seat.</p>
     <div class="feat" id="feat"></div>
+  </section>
+
+  <section id="setting">
+    <h2>Laying the table</h2>
+    <p class="lead">How every table looks when the doors open, before anyone sits down. Lay it the same way every time, so the room looks calm and any staff member can reset a table in two minutes. The drawings are to scale (1 square = 10 cm) and use the pieces on the <a href="crockery.html">crockery page</a>.</p>
+    <div class="seg" role="group" aria-label="Table size" id="laytabs" style="margin-top:14px"><button data-t="sq" aria-pressed="true">Square 80 × 80 (four)</button><button data-t="six" aria-pressed="false">Six-top 190 × 90</button><button data-t="two" aria-pressed="false">Two-top 70 × 70</button></div>
+    <div class="laywrap"><figure class="layfig"><svg id="laysvg" role="img" aria-labelledby="laycap"></svg><figcaption id="laycap"></figcaption></figure>
+      <div class="laykey"><h3>On the table before guests arrive</h3><ol id="laykey"></ol></div></div>
+    <div class="laycols">
+      <div class="call"><b>Brought after guests sit.</b> Water carafe, filled and chilled (it warms up if it waits on the table); menus, one per two guests; then rice bowls, dip dishes and soup spoons with the food that needs them; bone bowl and wet wipes with wings and prawns; the lazy susan only for the Cabin feast for four; ice bucket for bottled beer in the garden.</div>
+      <div class="call"><b>Kept at the side station.</b> Spare set for every table size (plate, napkin, fork, spoon, chopsticks, rest, tumbler); dip dishes, soup spoons and rice bowls; extra napkins and tissues; wet wipes; spare charged candles; bill boxes and pens; table numbers and reserved signs; a crumber and a cloth for spills; a tray.</div>
+      <div class="call"><b>Lunch and dinner.</b> Dinner: burgundy cloth, candle lit (flameless), orbs on the Evening setting. Lunch: same setting on the bare table (or with the linen runner), no candle, orbs on Lunch. Reserved tables get the "Reserved" sign on the plate of the seat facing the entrance.</div>
+    </div>
+    <h3 style="margin-top:22px">30 minutes before opening</h3>
+    <p class="note" style="margin:0 0 8px">One person walks every table with this list. Ticks clear themselves each day.</p>
+    <div class="tw"><table><tbody id="prechk"></tbody></table></div>
+  </section>
+
+  <section id="lights">
+    <h2>Lights through the day</h2>
+    <p class="lead">Every light in the 3D model, and how bright it should be at each point of the day. Numbers are the dimmer setting (100 = full). They match the model's Lighting presets (Lunch, Sunset, Evening, Late), so you can preview each one there.</p>
+    <div class="tw" style="margin-top:14px"><table class="ltab"><thead><tr id="lthead"></tr></thead><tbody id="ltbody"></tbody></table></div>
+    <div class="laycols" style="margin-top:6px">
+      <div class="call"><b>Wire it in five groups.</b> A: table orbs. B: wall lights (gallery spots, bell lamps, picture lights, brick-bay lanterns). C: festoon on the beams. D: bar. E: outdoor (path, tree, gate sign) on a timer with a light sensor. A to D each on its own dimmer, so one person can set the whole room in four turns of a knob.</div>
+      <div class="call"><b>How bright is right.</b> Tables at dinner: about 50–80 lux, a warm pool on each table and no bare bulb in a seated guest's eye line. Bar counter: about 150 lux. Kitchen and dish wash: 500 lux, cool white, never dimmed. Washroom: about 200 lux. All dining bulbs 2200 K so the room glows amber; walls and art 2700 K.</div>
+      <div class="call"><b>Rules of thumb.</b> Dim in steps, not all at once: change the room every hour after sunset. Late at night keep the walls and the bar a little brighter than the tables: the room still looks full. On a dark monsoon afternoon, use the Sunset settings at lunch. After close, turn everything up to full to clean, then off.</div>
+    </div>
   </section>
 
   <section id="list">
@@ -158,7 +202,8 @@ const SECS=[
   ['orb','Wicker orb pendant over tables','Open-weave rattan sphere, jute rope, faux ivy; a pair over each square and six-top table section, one over each two-top (as in the model)',t=>t.orbs,'pendants','d1'],
   ['','Wicker orbs, ambient','The four extra orbs in the model: bar end, entrance and the west wing',4,'pendants','later'],
   ['','LED filament bulbs, 2200 K, dimmable, E27','For every orb, lamp and lantern, plus 10% spare; one brand and batch',t=>Math.ceil((t.orbs+4+4+3)*1.1),'bulbs','d1'],
-  ['','Dimmer for the dining lights','Orbs on their own circuit and dimmer so you can set lunch, sunset and late (as in the model\'s lighting panel)',2,'dimmers','d1'],
+  ['','Dimmers for the dining lights','Four groups on their own dimmers: A table orbs, B wall lights, C festoon, D bar (see Lights through the day)',4,'dimmers','d1'],
+  ['','Timer with light sensor for outside','Group E: path lamp posts, canopy, tree and gate sign switch on at dusk by themselves',1,'timer','d1'],
   ['candle','Table candle jar + LED candle','Glass hurricane with brass rim, rechargeable flameless candle: one per small table, three per six-top',t=>t.candles,'jars','d1'],
   ['','Candle charging tray','Charges all the LED candles overnight behind the bar',1,'tray','d1'],
   ['','LED strips under the bar shelves','Two floating shelves at the coffee station, plus bar task light',2,'strips','d1'],
@@ -191,7 +236,7 @@ const SECS=[
   ['','Printed menus','Food and drinks inserts from the menu site; reprint whenever prices change',t=>Math.ceil(t.seats/2)+10,'sets','d1'],
   ['','Table numbers','Small brass stand with a number, so orders go to the right table',t=>t.tables,'stands','d1'],
   ['','"Reserved" table signs','Brass or card',4,'signs','later'],
-  ['','Tissue holder on each table','Small brass box for paper napkins; for wings and chilli-oil fingers',t=>t.tables,'holders','d1']]],
+  ['','Tissue holder','Small brass box for paper napkins, kept at the side station and brought with wings, Salt & Pepa and anything with chilli oil (the 80 cm tables have no room for it laid)',4,'holders','d1']]],
  ['Paper, packing and throwaways (first month)',[
   ['','Paper napkins / tissues','Two-ply, plain ivory; in the table holders and at the bar',4000,'napkins','d1'],
   ['','Wet wipes, single-pack','With every K-Pop Wings and on request',1000,'packs','d1'],
@@ -301,6 +346,85 @@ document.getElementById('secs').addEventListener('change',e=>{const id=e.target.
 document.querySelectorAll('[data-l]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.l===L);b.addEventListener('click',()=>{L=b.dataset.l;document.querySelectorAll('[data-l]').forEach(x=>x.setAttribute('aria-pressed',x===b));save();render();});});
 document.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{pf=b.dataset.p;document.querySelectorAll('[data-p]').forEach(x=>x.setAttribute('aria-pressed',x===b));render();}));
 render();
+</script>
+<script>
+/* table setting drawings, to scale in cm; covers are drawn at the bottom edge and rotated round the table */
+(function(){
+const TB={sq:{W:80,D:80,covers:[[40,0],[40,90],[40,180],[40,270]],cap:'Square table, 80 × 80 cm, laid for four. Each place is shifted a little to the left so the chopsticks clear the next guest; the middle (about 30 cm) stays almost empty for shared dishes.'},
+  six:{W:190,D:90,covers:[[35,0],[95,0],[155,0],[35,180],[95,180],[155,180]],cap:'Table for six, 190 × 90 cm: three places along each long side, 60 cm apart, ends left free. Three candles and one caddy down the middle.'},
+  two:{W:70,D:70,covers:[[35,0],[35,180]],cap:'Table for two, 70 × 70 cm: two places facing each other; candle and caddy to the side away from the railing.'}};
+const KEY=[['Side plate, 19 cm','2 cm from the edge, centred on the chair'],['Napkin','Folded in a rectangle on the plate, burgundy border at the bottom'],['Fork','Left of the plate, gold, end 2 cm from the edge'],['Spoon','Right of the plate'],['Chopsticks on a brass rest','Right of the spoon, tips away from the guest, resting on the rest'],['Water tumbler','Above the spoon, right way up, polished'],['Condiment caddy','Soy, chillies in vinegar, chilli oil; pots two-thirds full, spoons in, handles turned the same way'],['Candle jar','Charged, switched on at dusk'],['Table number','On the caddy, facing the entrance']];
+const C={cloth:'#6a1622',clothEdge:'#4a0f18',ivory:'#efe6d4',rim:'#4a2a1a',gold:'#c9a457',chop:'#4a2c18',brass:'#b08a4a',amber:'#c98a3a',blue:'#2a4a8a',ink:'#1C1714'};
+const r1=v=>Math.round(v*10)/10;
+function cover(px,n){ // local: x across the cover, y depth from the edge into the table (y = D - ly)
+  return (D,mark)=>{const X=lx=>r1(px-3+lx),Y=ly=>r1(D-ly);let o='';
+   o+=`<circle cx="${X(0)}" cy="${Y(11.5)}" r="9.5" fill="${C.ivory}" stroke="${C.rim}" stroke-width=".7"/>`;
+   o+=`<rect x="${X(-5)}" y="${Y(18)}" width="10" height="13" rx=".6" fill="#f7f1e4" stroke="#d9cdb6" stroke-width=".3"/><line x1="${X(-4.2)}" y1="${Y(5.8)}" x2="${X(4.2)}" y2="${Y(5.8)}" stroke="${C.cloth}" stroke-width=".35"/>`;
+   o+=`<rect x="${X(-12.6)}" y="${Y(15)}" width="1.2" height="13" rx=".5" fill="${C.gold}"/><rect x="${X(-13.2)}" y="${Y(20.5)}" width="2.4" height="5.5" rx=".6" fill="${C.gold}"/>`;
+   o+=`<rect x="${X(11.4)}" y="${Y(14)}" width="1.2" height="12" rx=".5" fill="${C.gold}"/><ellipse cx="${X(12)}" cy="${Y(17)}" rx="1.9" ry="3" fill="${C.gold}"/>`;
+   o+=`<rect x="${X(14.3)}" y="${Y(21.5)}" width="4" height="1.3" rx=".5" fill="${C.brass}"/><line x1="${X(15.6)}" y1="${Y(2.5)}" x2="${X(15.7)}" y2="${Y(25)}" stroke="${C.chop}" stroke-width=".8" stroke-linecap="round"/><line x1="${X(17)}" y1="${Y(2.5)}" x2="${X(17.1)}" y2="${Y(25)}" stroke="${C.chop}" stroke-width=".8" stroke-linecap="round"/>`;
+   o+=`<circle cx="${X(10)}" cy="${Y(26.5)}" r="3.7" fill="${C.amber}" fill-opacity=".45" stroke="${C.amber}" stroke-width=".6"/>`;
+   if(mark){const M=[[0,8.5],[6.5,16.5],[-12,6],[12,9],[16.4,8],[14.6,29.6]];o+=M.map(([a,b],i)=>`<g><circle cx="${X(a)}" cy="${Y(b)}" r="2.3" fill="${C.ink}" stroke="#fff" stroke-width=".35"/><text x="${X(a)}" y="${Y(b)+.95}" text-anchor="middle" font-size="2.7" font-weight="700" fill="#fff" font-family="IBM Plex Mono,monospace">${i+1}</text></g>`).join('');}
+   return o;};}
+function centre(t,W,D){let o='';const caddy=(cx,cy)=>`<rect x="${cx-9}" y="${cy-3.3}" width="18" height="6.6" rx=".8" fill="${C.brass}"/>`+[-5.6,0,5.6].map(dx=>`<circle cx="${cx+dx}" cy="${cy}" r="2.5" fill="#f4f2ec" stroke="${C.blue}" stroke-width=".7"/>`).join('');
+  const candle=(cx,cy)=>`<circle cx="${cx}" cy="${cy}" r="4.5" fill="#fff" fill-opacity=".25" stroke="${C.brass}" stroke-width=".6"/><circle cx="${cx}" cy="${cy}" r="3" fill="#f3e3c0"/><circle cx="${cx}" cy="${cy}" r="1" fill="#ffb347"/>`;
+  const m=(cx,cy,n)=>`<g><circle cx="${cx}" cy="${cy}" r="2.3" fill="${C.ink}" stroke="#fff" stroke-width=".35"/><text x="${cx}" y="${cy+.95}" text-anchor="middle" font-size="2.7" font-weight="700" fill="#fff" font-family="IBM Plex Mono,monospace">${n}</text></g>`;
+  const num=(cx,cy)=>`<circle cx="${cx}" cy="${cy}" r="2.2" fill="${C.brass}" stroke="${C.rim}" stroke-width=".3"/>`;
+  if(t==='sq'){o+=caddy(40,38)+candle(40,46.5)+num(40,30.5)+m(27.5,38,7)+m(33,51,8)+m(45.5,29,9);}
+  else if(t==='six'){o+=caddy(85,45)+num(98,45)+candle(50,45)+candle(122,45)+candle(150,45)+m(85,38.5,7)+m(50,38,8)+m(98,38.8,9);}
+  else{o+=caddy(28,35)+num(41,35)+candle(53,35)+m(16.5,35,7)+m(53,28.5,8)+m(41,28.8,9);}
+  return o;}
+function draw(t){const T=TB[t],W=T.W,D=T.D,pad=12,svg=document.getElementById('laysvg');
+  let o=`<rect x="-${pad}" y="-${pad}" width="${W+2*pad}" height="${D+2*pad+8}" fill="none"/>`;
+  for(let x=0;x<=W;x+=10)o+=`<line x1="${x}" y1="0" x2="${x}" y2="${D}" stroke="#fff" stroke-opacity=".07" stroke-width=".3"/>`;
+  o=`<rect x="0" y="0" width="${W}" height="${D}" rx="1" fill="${C.cloth}" stroke="${C.clothEdge}" stroke-width="1.2"/>`+o;
+  T.covers.forEach(([px,rot],i)=>{const g=cover(px,i)(D,i===0);o+=rot?`<g transform="rotate(${rot} ${W/2} ${D/2})">${g}</g>`:g;});
+  o+=centre(t,W,D);
+  o+=`<text x="${W/2}" y="${D+pad+3}" text-anchor="middle" font-size="3" fill="currentColor" font-family="IBM Plex Mono,monospace">${W} × ${D} cm · one guest sits at each place</text>`;
+  svg.setAttribute('viewBox',`-${pad} -${pad} ${W+2*pad} ${D+2*pad+8}`);svg.innerHTML=o;
+  document.getElementById('laycap').textContent=T.cap;}
+document.getElementById('laykey').innerHTML=KEY.map(([a,b])=>`<li><span><b>${a}</b><small>${b}</small></span></li>`).join('');
+document.querySelectorAll('#laytabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#laytabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw(b.dataset.t);}));
+draw('sq');
+const PRE=[['Table steady','Rock it; fold a felt wedge under a short leg. Chairs squared, seat fronts just under the cloth.'],['Cloth straight','Equal 25 cm drop on all sides, centre crease on the table\'s centre line, no stains or holes. Change it now if in doubt.'],['Every place the same','Plate 2 cm from the edge, napkin border at the bottom, fork, spoon and chopsticks parallel and level at the bottom.'],['Glass and metal polished','Hold each tumbler and fork up to the light: no water spots, lipstick or fingerprints. Polish with the lint-free cloth.'],['Caddy ready','Pots two-thirds full, lids clean, spoons in, outside wiped; the soy has no crust on the rim.'],['Candle on and charged','Switch on at dusk; swap any candle that flickers weak.'],['Table number','On the caddy, facing the entrance. "Reserved" sign on tonight\'s bookings.'],['Floor and chairs','Swept under every table, nothing sticky; chair seats wiped; bag hooks in place.'],['Side station stocked','Spare settings, dip dishes, rice bowls, soup spoons, napkins, wet wipes, bill boxes, pens, menus wiped.'],['Light and sound','Orbs on the right preset (Lunch or Evening), music on at a talking level, fans on if warm.'],['Last look from the door','Stand at the entrance and look at the room as a guest would: anything crooked, empty or out of place, fix it.']];
+const PK='ceg-prechk-'+new Date().toISOString().slice(0,10);let pg={};try{pg=JSON.parse(localStorage.getItem(PK)||'{}')}catch(e){}
+const pr=()=>{document.getElementById('prechk').innerHTML=PRE.map(([a,b],i)=>`<tr class="${pg[i]?'done':''}"><td class="c"><input type="checkbox" data-i="${i}" aria-label="Done: ${a}" ${pg[i]?'checked':''}></td><td><b>${a}</b><small>${b}</small></td></tr>`).join('');};
+document.getElementById('prechk').addEventListener('change',e=>{const i=e.target.dataset.i;if(i===undefined)return;pg[i]=e.target.checked;try{localStorage.setItem(PK,JSON.stringify(pg))}catch(x){}pr();});
+pr();
+})();
+</script>
+<script>
+(function(){
+const TIMES=[['Set-up','before opening; cleaning'],['Lunch','noon–4 pm, daylight'],['Afternoon','4 pm to sunset; happy hour'],['Sunset','about 6–7 pm*'],['Dinner','7–10 pm'],['Late','the last hour'],['Close-down','after the last guest']];
+// [name, how many, colour, group, [7 values: number % | text], note]
+const L=[
+ ['Dining room'],
+ ['Wicker orbs over the tables','22 (a pair over each four-top and six-top section, one over each two-top)','2200 K','A',[100,0,0,60,80,40,100],'Off on bright days at lunch; 30–40 if overcast or in the monsoon.'],
+ ['Wicker orbs, ambient','4 (bar end, entrance, west wing)','2200 K','A',[100,0,0,50,70,40,100],''],
+ ['Table candles','15 (one per small table, three per six-top)','flameless','—',['off','off','off','on','on','on','charge'],'On at sunset; back on the charging tray after close.'],
+ ['Festoon on the ceiling beams','about 50 m','2200 K','C',['off','off','off',50,70,30,'off'],'Decoration only; the orbs and wall lights do the work.'],
+ ['Walls and art'],
+ ['Gallery wall spots','5','2700 K','B',[100,40,40,70,80,60,100],'The gallery is under a deep roof, so it needs a little light even at lunch.'],
+ ['Bell-shaded brass wall lamps','4','2200 K','B',[100,'off','off',60,80,50,100],''],
+ ['Picture lights (oil painting, mural)','2','2700 K','B',[100,50,50,80,80,60,100],''],
+ ['Cage lanterns, brick bay','3','2200 K','B',[100,'off','off',60,80,50,100],''],
+ ['Bar'],
+ ['Edison drops on the bar beam','about 6','2200 K','D',[100,50,50,70,80,80,100],'The bar stays the brightest spot late: it draws people in and the bartender can see.'],
+ ['LED strips under the bar and coffee shelves','2','2700 K','D',[100,100,100,100,100,100,100],'Task light; not dimmed.'],
+ ['Outside'],
+ ['Approach-path lamp posts','3 (existing)','warm','E',['off','off','off','on','on','on','on until the last guest leaves'],'On the timer and light sensor.'],
+ ['Fairy-light canopy and globes over the path','1 set','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Centrepiece tree fairy lights','6 strings of 100','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Lit sign at the gate','1','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Back of house'],
+ ['Kitchen, dish wash and store battens','8','4000 K','—',['on','on','on','on','on','on','on'],'Never dimmed; 500 lux on the work surfaces.'],
+ ['Washroom and mirror light','1 + 1','3000 K','—',['on','on','on','on','on','on','on'],''],
+ ['Emergency lights and EXIT signs','4 + 2','','—',['always','always','always','always','always','always','always'],'Battery units; test the monthly button.']
+];
+document.getElementById('lthead').innerHTML='<th>Light</th><th>How many</th><th>Group</th>'+TIMES.map(([a,b])=>`<th>${a}<small>${b}</small></th>`).join('');
+const cell=v=>typeof v==='number'?(v===0?'<td class="lv off">off</td>':`<td class="lv">${v}<span class="lb"><i style="width:${v}%"></i></span></td>`):`<td class="lv${/off/.test(v)?' off':''}" style="white-space:normal">${v}</td>`;
+document.getElementById('ltbody').innerHTML=L.map(r=>r.length===1?`<tr class="grp"><td colspan="${3+TIMES.length}">${r[0]}</td></tr>`:`<tr><td><b>${r[0]}</b><small>${r[2]}${r[5]?' · '+r[5]:''}</small></td><td>${r[1]}</td><td>${r[3]}</td>${r[4].map(cell).join('')}</tr>`).join('')+`<tr><td colspan="${3+TIMES.length}"><small>* Sunset in Goa moves from about 6:00 pm (November–December) to about 7:15 pm (June). Switch to the Sunset settings when the sun drops behind the trees, not by the clock.</small></td></tr>`;
+})();
 </script>
 </body>
 </html>
