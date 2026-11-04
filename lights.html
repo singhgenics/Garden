@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cabin East Garden · Lighting</title>
+<meta name="description" content="Every light at Cabin East Garden: what it is, where it hangs on the plan, how many, which bulb, and how bright at each time of day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F2E8D2;--ink:#1C1714;--muted:#5A4C42;--line:#D9B98F;--card:#F6EDD9;--green:#1C1714;--brass:#E49B1D;--brass-ink:#B5321C;--burg:#B5321C;--ok:#2F6F57;--later:#9a5f0a;--red:#B5321C;--wood:#2A221D;--cream:#F2E8D2;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#2A221D;--ink:#E6DAC0;--muted:#CFC3AB;--line:#4a3c32;--card:#1C1714;--green:#E6DAC0;--brass:#E49B1D;--brass-ink:#E49B1D;--burg:#ec7a55;--ok:#6FC29A;--later:#E49B1D;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#2A221D;--ink:#E6DAC0;--muted:#CFC3AB;--line:#4a3c32;--card:#1C1714;--green:#E6DAC0;--brass:#E49B1D;--brass-ink:#E49B1D;--burg:#ec7a55;--ok:#6FC29A;--later:#E49B1D;color-scheme:dark}
+*{box-sizing:border-box}html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body)}
+a{color:var(--brass-ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:26px max(16px,env(safe-area-inset-left,0px)) 64px}
+.top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.top a{font:500 13px/1 var(--body);text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--card);border-radius:4px;padding:9px 12px}
+h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--ink);margin:0 0 6px;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(38px,7vw,64px)}h2{font-size:clamp(26px,4vw,36px)}h3{font-size:20px}
+.lead{color:var(--muted);font-size:17px;max-width:68ch;margin:0}
+p{max-width:72ch}
+section{margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+.stat b{display:block;font:400 30px/1.1 var(--display);color:var(--green)}.stat span{font-size:13.5px;color:var(--muted)}
+.call{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:4px;padding:12px 16px;margin:14px 0}.call b{color:var(--brass-ink)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.seg button{appearance:none;border:0;background:transparent;color:var(--ink);font:500 13.5px/1 var(--body);padding:10px 14px;cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--paper)}
+.bar{position:sticky;top:0;z-index:5;background:var(--paper);padding:10px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{appearance:none;font:500 13px/1 var(--body);padding:8px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;cursor:pointer;min-height:36px}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--paper)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.prog{margin-left:auto;font:500 12.5px var(--mono);color:var(--muted);display:flex;gap:8px;align-items:center}
+.prog .pb{width:120px;height:6px;border-radius:9px;background:var(--line);overflow:hidden}.prog .pb i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:12px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;display:block;background:#2a1a1a}
+.cb{padding:12px 14px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
+.cb h3{font-size:18px;margin:0}
+.qty{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.qty b{font:400 26px/1 var(--display);color:var(--burg)}.qty span{font:500 12.5px var(--mono);color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+.tag{display:inline-block;font:500 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:4px 7px;border-radius:3px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.d1{border-color:var(--ok);color:var(--ok)}.tag.later{border-color:var(--later);color:var(--later)}.tag.have{border-color:var(--brass);color:var(--brass-ink)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--card);margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.q{font:500 14px var(--mono);white-space:nowrap;color:var(--burg)}
+td.c{width:36px}td.c input{width:19px;height:19px;accent-color:var(--ok)}
+tr.done td:not(.c){opacity:.5;text-decoration:line-through;text-decoration-color:var(--muted)}
+td small{display:block;color:var(--muted);font-size:13px;line-height:1.45;margin-top:2px}
+td a.pic{font:500 11px var(--mono);text-decoration:none;border-bottom:1px dotted var(--brass)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);margin-top:10px}
+ul.tips{padding-left:20px;max-width:76ch}ul.tips li{margin:6px 0}
+footer{margin-top:44px;color:var(--muted);font-size:13px}
+@media (max-width:640px){th.hide,td.hide{display:none}}
+@media print{.bar,.top,.seg{display:none}tr{break-inside:avoid}body{font-size:12px}}
+
+/* page layout for the hoarding header and paper cards; colours and type come from theme.css (loaded last) */
+.hoard{background:var(--red);color:var(--cream);padding:18px 0 34px;
+  background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 23px),linear-gradient(180deg,#b5321c,#a22b17);border-bottom:6px solid var(--wood)}
+.hin{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.hoard h1{color:var(--cream);font-size:clamp(46px,9vw,104px);line-height:.88;letter-spacing:-.01em;margin:6px 0 14px;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.hoard .lead,.hoard .legend{color:#f6e3c8}.hoard .lead a,.hoard .lead b{color:#fff}
+.hoard .top a{background:#F2E8D2;color:#1C1714;border-color:transparent;border-radius:6px;font-family:var(--body);font-weight:600}
+.hoard .top a:hover{background:#2A221D;color:#F2E8D2}
+.hoard .tag{background:var(--cream)}
+.eyebrow-bill{display:inline-block;background:var(--cream);color:var(--red);font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:2px;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+h2,h3{color:var(--ink)}h2{font-size:clamp(28px,4.4vw,40px)}
+.card,.stat,.call,.sw div,.tw{background:var(--card);border:0;border-radius:2px;box-shadow:0 1px 0 rgba(28,23,20,.06),0 8px 18px -8px rgba(28,23,20,.28)}
+.stat b,.qty b{font-family:var(--display)}
+.call{border-left:5px solid var(--red)}
+.chip,.seg{border-radius:6px}.chip{border:2px solid var(--ink);background:transparent;font-weight:600}.chip[aria-pressed="true"],.seg button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.wrap>section:first-child{border-top:0;margin-top:0}
+.seg{border:2px solid var(--ink)}
+section{border-top:2px dashed var(--line)}
+th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
+
+.laywrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
+@media (max-width:820px){.laywrap{grid-template-columns:1fr}}
+.layfig{margin:0;background:var(--card);border-radius:2px;padding:12px;box-shadow:0 1px 0 rgba(28,23,20,.06),0 8px 18px -8px rgba(28,23,20,.28)}
+.layfig svg{display:block;width:100%;height:auto}.layfig figcaption{font-size:13.5px;color:var(--muted);padding-top:8px}
+.laykey ol{margin:6px 0 0;padding-left:0;list-style:none;counter-reset:k}
+.laykey li{counter-increment:k;display:grid;grid-template-columns:26px 1fr;gap:8px;margin:7px 0;font-size:14.5px}
+.laykey li::before{content:counter(k);display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font:600 12px var(--mono)}
+.laykey li small{display:block;color:var(--muted);font-size:13px}
+.laycols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:6px}.laycols .call{margin:8px 0}
+#prechk td{border-bottom:1px solid var(--line)}#prechk tr.done td:not(.c){opacity:.5;text-decoration:line-through}
+
+.ltab{table-layout:fixed;min-width:1040px}.ltab th{vertical-align:bottom;white-space:normal}.ltab th:nth-child(1){width:230px}.ltab th:nth-child(2){width:150px}.ltab th:nth-child(3){width:58px}.ltab th small{display:block;font:400 11px var(--mono);text-transform:none;letter-spacing:0;color:var(--muted)}
+.ltab td.lv{min-width:74px;font:500 12.5px var(--mono);white-space:nowrap}
+.ltab .lb{display:block;height:6px;border-radius:3px;background:var(--line);margin-top:4px;overflow:hidden}.ltab .lb i{display:block;height:100%;background:#E49B1D}
+.ltab td.lv.off{color:var(--muted)}
+.ltab tr.grp td{background:var(--paper);font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.setphotos{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(0,1fr);gap:14px;margin:16px 0 8px}
+@media (max-width:720px){.setphotos{grid-template-columns:1fr}}
+.setphotos figure{margin:0}.setphotos img{display:block;width:100%;height:100%;object-fit:cover;border-radius:2px;box-shadow:0 8px 18px -8px rgba(28,23,20,.35)}
+.setphotos a{display:block;aspect-ratio:auto}.setphotos figure:first-child a{aspect-ratio:1376/768}.setphotos figure:last-child a{aspect-ratio:1}
+.setphotos figcaption{font-size:13.5px;color:var(--muted);padding-top:6px}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend svg{width:16px;height:16px}
+#plan-svg{display:block;width:100%;height:auto;background:#F6EDD9}
+#plan-svg .lt{cursor:pointer}#plan-svg .lt:hover{opacity:.7}
+.ptip{font:500 13px var(--body);color:var(--ink);margin-top:8px;min-height:20px}
+</style>
+
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<header class="hoard"><div class="hin">
+  <div class="top"><a href="furnishing.html">&larr; Furnishing &amp; supplies</a><a href="garden.html">3D model</a><a href="crockery.html">Crockery</a><a href="decor.html">Decor concept</a><a href="#plan">Plan</a><a href="#fittings">Fittings</a><a href="#bulbs">Bulbs</a><a href="#schedule">Through the day</a></div>
+  <span class="eyebrow-bill">Cabin East · Garden · Furnishing</span>
+  <h1>Lighting</h1>
+  <p class="lead">Every light in the restaurant: what it is, where it hangs, how many you need, which bulb goes in it, and how bright it should be from opening to close. Positions and counts come from the 3D model at 40 covers.</p>
+</div></header>
+<div class="wrap">
+  <div class="stats" id="lstats"></div>
+
+  <section id="plan">
+    <h2>Where every light is</h2>
+    <p class="lead">Plan of the hall, the approach path and the back of house, north at the top, to scale (the grid is 1 m). Tap a symbol to see what it is.</p>
+    <div class="legend" id="plegend" style="margin:12px 0 4px"></div>
+    <figure class="layfig" style="margin-top:8px"><svg id="plan-svg" role="img" aria-label="Lighting plan of the restaurant"></svg><figcaption id="pcap">Bar lights are drawn at the bar; their exact spacing follows the 2.65 m counter. Battens and emergency lights are suggested positions (not in the model yet): the electrician and the Fire NOC decide the final ones.</figcaption></figure>
+  </section>
+
+  <section id="fittings">
+    <h2>The fittings</h2>
+    <div class="feat" id="lcards"></div>
+  </section>
+
+  <section id="bulbs">
+    <h2>Bulbs, groups and spares</h2>
+    <p class="lead">Buy every dining bulb from one brand and one batch so the colour matches, and keep about 10% spare. Wattages are typical LED figures; check against the fitting you buy.</p>
+    <div class="tw" style="margin-top:12px"><table><thead><tr><th>Light</th><th>Where</th><th>How many</th><th>Bulb</th><th>Colour</th><th>Group</th><th>Spares</th></tr></thead><tbody id="btab"></tbody></table></div>
+  </section>
+
+  <section id="schedule">
+    <h2>Lights through the day</h2>
+    <p class="lead">Every light in the 3D model, and how bright it should be at each point of the day. Numbers are the dimmer setting (100 = full). They match the model's Lighting presets (Lunch, Sunset, Evening, Late), so you can preview each one there.</p>
+    <div class="tw" style="margin-top:14px"><table class="ltab"><thead><tr id="lthead"></tr></thead><tbody id="ltbody"></tbody></table></div>
+    <div class="laycols" style="margin-top:6px">
+      <div class="call"><b>Wire it in five groups.</b> A: table orbs. B: wall lights (gallery spots, bell lamps, picture lights, brick-bay lanterns). C: festoon on the beams. D: bar. E: outdoor (path, tree, gate sign) on a timer with a light sensor. A to D each on its own dimmer, so one person can set the whole room in four turns of a knob.</div>
+      <div class="call"><b>How bright is right.</b> Tables at dinner: about 50–80 lux, a warm pool on each table and no bare bulb in a seated guest's eye line. Bar counter: about 150 lux. Kitchen and dish wash: 500 lux, cool white, never dimmed. Washroom: about 200 lux. All dining bulbs 2200 K so the room glows amber; walls and art 2700 K.</div>
+      <div class="call"><b>Rules of thumb.</b> Dim in steps, not all at once: change the room every hour after sunset. Late at night keep the walls and the bar a little brighter than the tables: the room still looks full. On a dark monsoon afternoon, use the Sunset settings at lunch. After close, turn everything up to full to clean, then off.</div>
+    </div>
+  </section>
+
+  <footer>Counts and positions come from the 3D model (garden.html) for the 40-cover layout. The plan is schematic for the bar and back of house. Photos are illustrative renders made in Google Flow, not real products. Final wiring, sockets and emergency lighting must be checked by a licensed electrician and the Fire NOC.</footer>
+</div>
+<script>
+(function(){
+const TIMES=[['Set-up','before opening; cleaning'],['Lunch','noon–4 pm, daylight'],['Afternoon','4 pm to sunset; happy hour'],['Sunset','about 6–7 pm*'],['Dinner','7–10 pm'],['Late','the last hour'],['Close-down','after the last guest']];
+// [name, how many, colour, group, [7 values: number % | text], note]
+const L=[
+ ['Dining room'],
+ ['Wicker orbs over the tables','22 (a pair over each four-top and six-top section, one over each two-top)','2200 K','A',[100,0,0,60,80,40,100],'Off on bright days at lunch; 30–40 if overcast or in the monsoon.'],
+ ['Wicker orbs, ambient','4 (bar end, entrance, west wing)','2200 K','A',[100,0,0,50,70,40,100],''],
+ ['Table candles','15 (one per small table, three per six-top)','flameless','—',['off','off','off','on','on','on','charge'],'On at sunset; back on the charging tray after close.'],
+ ['Festoon on the ceiling beams','about 50 m','2200 K','C',['off','off','off',50,70,30,'off'],'Decoration only; the orbs and wall lights do the work.'],
+ ['Walls and art'],
+ ['Gallery wall spots','5','2700 K','B',[100,40,40,70,80,60,100],'The gallery is under a deep roof, so it needs a little light even at lunch.'],
+ ['Bell-shaded brass wall lamps','4','2200 K','B',[100,'off','off',60,80,50,100],''],
+ ['Picture lights (oil painting, mural)','2','2700 K','B',[100,50,50,80,80,60,100],''],
+ ['Cage lanterns, brick bay','3','2200 K','B',[100,'off','off',60,80,50,100],''],
+ ['Bar'],
+ ['Edison drops on the bar beam','about 6','2200 K','D',[100,50,50,70,80,80,100],'The bar stays the brightest spot late: it draws people in and the bartender can see.'],
+ ['LED strips under the bar and coffee shelves','2','2700 K','D',[100,100,100,100,100,100,100],'Task light; not dimmed.'],
+ ['Outside'],
+ ['Approach-path lamp posts','3 (existing)','warm','E',['off','off','off','on','on','on','on until the last guest leaves'],'On the timer and light sensor.'],
+ ['Fairy-light canopy and globes over the path','1 set','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Centrepiece tree fairy lights','6 strings of 100','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Lit sign at the gate','1','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Back of house'],
+ ['Kitchen, dish wash and store battens','8','4000 K','—',['on','on','on','on','on','on','on'],'Never dimmed; 500 lux on the work surfaces.'],
+ ['Washroom and mirror light','1 + 1','3000 K','—',['on','on','on','on','on','on','on'],''],
+ ['Emergency lights and EXIT signs','4 + 2','','—',['always','always','always','always','always','always','always'],'Battery units; test the monthly button.']
+];
+document.getElementById('lthead').innerHTML='<th>Light</th><th>How many</th><th>Group</th>'+TIMES.map(([a,b])=>`<th>${a}<small>${b}</small></th>`).join('');
+const cell=v=>typeof v==='number'?(v===0?'<td class="lv off">off</td>':`<td class="lv">${v}<span class="lb"><i style="width:${v}%"></i></span></td>`):`<td class="lv${/off/.test(v)?' off':''}" style="white-space:normal">${v}</td>`;
+document.getElementById('ltbody').innerHTML=L.map(r=>r.length===1?`<tr class="grp"><td colspan="${3+TIMES.length}">${r[0]}</td></tr>`:`<tr><td><b>${r[0]}</b><small>${r[2]}${r[5]?' · '+r[5]:''}</small></td><td>${r[1]}</td><td>${r[3]}</td>${r[4].map(cell).join('')}</tr>`).join('')+`<tr><td colspan="${3+TIMES.length}"><small>* Sunset in Goa moves from about 6:00 pm (November–December) to about 7:15 pm (June). Switch to the Sunset settings when the sun drops behind the trees, not by the clock.</small></td></tr>`;
+})();
+</script>
+<script>
+(function(){
+// positions in metres from the 3D model (x east, y south from the north-west corner of the hall)
+const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,4],[12.0,1.45,4],[2.0,6.6,4],[4.4,4.2,4],[11.3,3.75,4],[7.05,4.5,2],[1.0,3.0,2],[3.9,10.1,2],[5.7,9.9,2]];
+const orbs=[];TABLES.forEach(([x,y,k])=>{if(k===6){[-0.5,0.5].forEach(d=>{orbs.push([x+d-0.17,y],[x+d+0.17,y+0.1])})}else if(k===4){orbs.push([x-0.17,y],[x+0.17,y+0.1])}else orbs.push([x,y]);});
+const T={
+ orb:{n:'Wicker orb pendant over a table',c:'#E49B1D',s:'circle',pts:orbs},
+ amb:{n:'Wicker orb, ambient',c:'#E49B1D',s:'ring',pts:[[3.5,9.9],[5.6,7.2],[13.1,3.9],[7.4,5.0]]},
+ spot:{n:'Gallery wall spot (on the beam, aimed at the wall)',c:'#2443A6',s:'tri',pts:[[2.45,1.3],[5.4,1.3],[8.65,1.3],[10.6,1.3],[14.5,1.3]]},
+ bell:{n:'Bell-shaded brass wall lamp',c:'#A9533A',s:'sq',pts:[[1.84,0.12],[3.87,0.12],[6.88,0.12],[7.72,0.12]]},
+ pic:{n:'Picture light (oil painting)',c:'#6A1622',s:'bar',pts:[[5.93,0.12]]},
+ cage:{n:'Cage lantern on the brick bay',c:'#4A2A1E',s:'sq',pts:[[7.62,0.12],[11.4,0.12],[13.35,0.12]]},
+ bar:{n:'Edison drop on the bar beam',c:'#C49A3C',s:'dot',pts:[[14.6,0.9],[14.6,1.32],[14.6,1.74],[14.6,2.16],[14.6,2.58],[14.6,3.0]]},
+ tree:{n:'Centrepiece tree fairy lights (6 strings)',c:'#2F6F57',s:'star',pts:[[3.95,6.3]]},
+ fan:{n:'Ceiling fan (not a light; on the same panel)',c:'#5A4C42',s:'fan',pts:[[3.0,2.74],[6.6,2.74],[10.2,2.74],[2.6,5.9]]},
+ post:{n:'Approach-path lamp post (existing)',c:'#1C1714',s:'post',pts:[[9.65,11.38],[9.65,13.24],[9.65,15.1]]},
+ batten:{n:'LED batten (back of house)',c:'#56635a',s:'bat',pts:[[18.4,3.3],[19.9,4.6],[21.4,3.3],[18.6,1.0],[21.2,1.0],[21.3,8.4],[21.3,11.0],[21.2,-0.85]]},
+ emer:{n:'Emergency light / EXIT sign',c:'#2f7d32',s:'x',pts:[[8.6,5.3],[15.4,3.6],[19.0,6.1],[0.3,7.4],[9.0,5.6],[17.5,2.1]]}
+};
+const sym=(k,x,y,sc)=>{const t=T[k],c=t.c,r=0.16;switch(t.s){
+ case 'circle':return `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="#1C1714" stroke-width=".03"/>`;
+ case 'ring':return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${c}" stroke-width=".07"/>`;
+ case 'tri':return `<path d="M${x} ${y-0.2} L${x+0.18} ${y+0.13} L${x-0.18} ${y+0.13}Z" fill="${c}"/>`;
+ case 'sq':return `<rect x="${x-0.13}" y="${y-0.13}" width=".26" height=".26" fill="${c}"/>`;
+ case 'bar':return `<rect x="${x-0.3}" y="${y-0.07}" width=".6" height=".14" fill="${c}"/>`;
+ case 'dot':return `<circle cx="${x}" cy="${y}" r=".1" fill="${c}" stroke="#1C1714" stroke-width=".02"/>`;
+ case 'star':return `<circle cx="${x}" cy="${y}" r=".75" fill="${c}" fill-opacity=".18" stroke="${c}" stroke-width=".05" stroke-dasharray=".1 .1"/><circle cx="${x}" cy="${y}" r=".18" fill="${c}"/>`;
+ case 'fan':return `<g stroke="${c}" stroke-width=".06" fill="none"><circle cx="${x}" cy="${y}" r=".4" stroke-dasharray=".08 .08"/><path d="M${x-0.3} ${y}H${x+0.3}M${x} ${y-0.3}V${y+0.3}"/></g>`;
+ case 'post':return `<circle cx="${x}" cy="${y}" r=".16" fill="#fff" stroke="${c}" stroke-width=".06"/><circle cx="${x}" cy="${y}" r=".06" fill="${c}"/>`;
+ case 'bat':return `<rect x="${x-0.6}" y="${y-0.06}" width="1.2" height=".12" fill="${c}"/>`;
+ case 'x':return `<g stroke="${c}" stroke-width=".07"><path d="M${x-0.13} ${y-0.13}L${x+0.13} ${y+0.13}M${x+0.13} ${y-0.13}L${x-0.13} ${y+0.13}"/></g>`;}};
+const svg=document.getElementById('plan-svg');const X0=-1.2,Y0=-2.3,W=25,H=19.4;svg.setAttribute('viewBox',`${X0} ${Y0} ${W} ${H}`);
+let o='';for(let x=0;x<=23;x++)o+=`<line x1="${x}" y1="-2" x2="${x}" y2="16.8" stroke="#D9B98F" stroke-width=".01"/>`;for(let y=-2;y<=16;y++)o+=`<line x1="-1" y1="${y}" x2="23.2" y2="${y}" stroke="#D9B98F" stroke-width=".01"/>`;
+const hall='0,0 15.67,0 15.67,5.48 6.46,5.48 6.46,10.93 3.48,10.93 0,7.76';
+o+=`<polygon points="${hall}" fill="#fff" fill-opacity=".55" stroke="#1F3D2E" stroke-width=".06"/><line x1="0" y1="0" x2="15.67" y2="0" stroke="#1F3D2E" stroke-width=".22"/>`;
+o+=`<rect x="13.9" y="0.6" width="1.6" height="2.9" fill="#4A2A1E" fill-opacity=".12" stroke="#4A2A1E" stroke-width=".03"/>`;
+TABLES.forEach(([x,y,k])=>{const w=k===6?1.9:k===4?0.8:0.7,d=k===6?0.9:k===4?0.8:0.7;o+=`<rect x="${x-w/2}" y="${y-d/2}" width="${w}" height="${d}" fill="#6a1622" fill-opacity=".22" stroke="#6a1622" stroke-width=".03"/>`;});
+o+=`<rect x="9.8" y="10.48" width="1.2" height="5.52" fill="#E8D9B8" stroke="#C9B38A" stroke-width=".03"/><rect x="9.65" y="11" width="2.1" height="4.5" fill="#E49B1D" fill-opacity=".08" stroke="#E49B1D" stroke-width=".04" stroke-dasharray=".15 .1"/>`;
+o+=`<rect x="6.6" y="5.48" width="5" height="5" fill="none" stroke="#C9B38A" stroke-width=".03" stroke-dasharray=".2 .1"/>`;
+o+=`<rect x="17.27" y="0" width="5.41" height="6.38" fill="#fff" fill-opacity=".4" stroke="#56635a" stroke-width=".05"/><line x1="17.27" y1="2.1" x2="22.68" y2="2.1" stroke="#56635a" stroke-width=".03"/><rect x="19.98" y="6.38" width="2.7" height="6.46" fill="#fff" fill-opacity=".4" stroke="#56635a" stroke-width=".05"/><rect x="19.72" y="-1.7" width="2.96" height="1.7" fill="#fff" fill-opacity=".4" stroke="#56635a" stroke-width=".05"/>`;
+const lab=(t,x,y,s,a)=>o+=`<text x="${x}" y="${y}" font-size="${s||0.34}" text-anchor="${a||'start'}" fill="#5A4C42" font-family="IBM Plex Mono,monospace">${t}</text>`;
+lab('Gallery wall (north)',0.2,-0.3);lab('Bar',14.7,4.0,0.34,'middle');lab('Kitchen',19.97,4.0,0.34,'middle');lab('Dish wash',19.97,1.6,0.34,'middle');lab('Store room',21.33,9.6,0.34,'middle');lab('Washroom',21.2,-0.25,0.3,'middle');lab('Landing',9.1,8.2,0.34,'middle');lab('Approach path',12.0,13.3);lab('fairy canopy + 7 globes',12.0,13.8,0.28);lab('Hall',3.0,8.6);
+for(const k in T)T[k].pts.forEach(([x,y],i)=>{o+=`<g class="lt" data-k="${k}"><title>${T[k].n}</title>${sym(k,x,y)}</g>`;});
+o+=`<g transform="translate(22.4,15.6)"><path d="M0 -.6 L.25 .1 L0 0 L-.25 .1Z" fill="#1C1714"/><text y=".55" font-size=".35" text-anchor="middle" fill="#1C1714" font-family="IBM Plex Mono,monospace">N</text></g>`;
+svg.innerHTML=o;
+const tip=document.createElement('div');tip.className='ptip';tip.textContent='Tap a symbol on the plan.';svg.parentNode.appendChild(tip);
+svg.addEventListener('click',e=>{const g=e.target.closest('.lt');if(g)tip.textContent=T[g.dataset.k].n+' · '+T[g.dataset.k].pts.length+' on the plan';});
+document.getElementById('plegend').innerHTML=Object.keys(T).map(k=>`<span><svg viewBox="-0.5 -0.5 1 1">${sym(k,0,0).replace(/r=".75"/,'r=".4"')}</svg>${T[k].n.replace(/ \(.*\)/,'')} · ${k==='tree'?6+' strings':T[k].pts.length}</span>`).join('');
+// fitting cards and bulb table
+const F=[
+ ['orb','Wicker orb pendants over the tables','A pair at staggered heights over every four-top and each half of a six-top, one over each two-top; 50–60 cm above the table top, ivy over the top.',orbs.length,'E27 LED filament globe, 4 W, dimmable','2200 K','A',3],
+ ['','Wicker orbs, ambient','Bar end, entrance, west wing and the two-tops on the garden rail: fill light between tables.',4,'E27 LED filament, 4 W, dimmable','2200 K','A',1],
+ ['candle','Table candle jars','On every table: one per four-top and two-top, three per six-top.',15,'Rechargeable LED pillar in a glass hurricane','flame-warm','—',2],
+ ['spot','Gallery wall spots','On the white beam about 1.3 m from the north wall, one per bay, aimed at the gallery.',5,'GU10 LED, 5 W, 36° beam, dimmable','2700 K','B',1],
+ ['belllamp','Bell-shaded brass wall lamps','At the ends of the gallery bays on the north wall, about 1.5 m up.',4,'E14 LED candle, 4 W, dimmable','2200 K','B',1],
+ ['','Picture lights','Over the bowl-and-thali oil painting and the coffee-wall mural.',2,'Built-in LED bar, 6 W','2700 K','B',0],
+ ['cage','Cage lanterns','On the exposed-brick bay of the north wall.',3,'E27 LED filament, 4 W','2200 K','B',1],
+ ['','Festoon string','Along the dark false beams of the ceiling.',50,'Ready-made low-voltage festoon, 1 W bulbs, outdoor-rated','2200 K','C',5],
+ ['','Edison drops on the bar beam','Hanging from the reclaimed beam over the guest side of the 2.65 m counter.',6,'E27 ST64 LED filament, 4 W, dimmable','2200 K','D',1],
+ ['','LED strips under the shelves','Under the two coffee-station shelves and the bar shelf.',2,'24 V LED strip with aluminium channel','2700 K','D',0],
+ ['fairy','Centrepiece tree fairy lights','Wound through the faux ficus round the west-wing pillar, about 520 bulbs.',6,'Strings of 100 micro LEDs on copper wire, low-voltage','warm','E',1],
+ ['lamppost','Approach-path lamp posts','The three black posts already on the path; check wiring and put them on the timer.',3,'E27 LED, 8 W, outdoor','2700 K','E',1],
+ ['','Fairy-light canopy and globes','On fine wires from the lamp-post line to the balcony roof over the path, with 7 hanging globes.',1,'Outdoor micro-LED strands + 7 E27 filament globes','2200 K','E',1],
+ ['','Gate sign and LED poster standee','The lit sign on the arched gate and the back-lit poster standee at the road.',2,'Built-in LED, outdoor','warm white','E',0],
+ ['','LED battens, back of house','Kitchen 3, dish wash 2, store room 2, washroom 1.',8,'4 ft LED batten, 20 W, not dimmed','4000 K (washroom 3000 K)','—',1],
+ ['','Emergency lights and EXIT signs','Hall, bar, kitchen, washroom; EXIT over the entrance and the back-of-house way out.',6,'Self-contained battery units, 3-hour backup','—','—',0]
+];
+document.getElementById('lcards').innerHTML=F.filter(f=>f[0]).map(f=>`<article class="card"><img src="furnishing/${f[0]}.jpg" alt="${f[1]}" loading="lazy" width="600" height="600"><div class="cb"><h3>${f[1]}</h3><div class="qty"><b>${f[3]}</b><span>${f[0]==='fairy'?'strings':'fittings'}</span><span class="tag d1">Group ${f[6]}</span></div><div class="note">${f[2]}</div></div></article>`).join('');
+document.getElementById('btab').innerHTML=F.map(f=>`<tr><td><b>${f[1]}</b></td><td><small>${f[2]}</small></td><td class="q">${f[3]}${f[1].startsWith('Festoon')?' m':''}</td><td>${f[4]}</td><td>${f[5]}</td><td>${f[6]}</td><td class="q">${f[7]}</td></tr>`).join('');
+const tot=F.filter(f=>!/Festoon/.test(f[1])).reduce((a,f)=>a+f[3],0);
+document.getElementById('lstats').innerHTML=[[orbs.length+4,'wicker orbs'],[15,'table candles'],[5+4+2+3,'wall lights'],[50,'m of festoon'],[8,'outside lights and strings'],[tot,'fittings in all (plus festoon)']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
+})();
+</script>
+</body>
+</html>

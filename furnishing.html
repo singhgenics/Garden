@@ -108,7 +108,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
 </head>
 <body>
 <header class="hoard"><div class="hin">
-  <div class="top"><a href="garden.html">&larr; 3D model</a><a href="crockery.html">Crockery &amp; glassware</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="opening-checklist.html">Opening checklist</a><a href="#setting">Laying the table</a><a href="#lights">Lights through the day</a><a href="decor.html">Decor concept</a></div>
+  <div class="top"><a href="garden.html">&larr; 3D model</a><a href="crockery.html">Crockery &amp; glassware</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="opening-checklist.html">Opening checklist</a><a href="#setting">Laying the table</a><a href="lights.html">Lighting</a><a href="decor.html">Decor concept</a></div>
   <span class="eyebrow-bill">Cabin East · Garden</span>
   <h1>Furnishing &amp; supplies</h1>
   <p class="lead">One list of everything the restaurant needs to open, apart from kitchen and bar equipment (in the <a href="equipment-plan.html">equipment plan</a>) and plates and glasses (on the <a href="crockery.html">crockery page</a>). It runs from tables and chairs down to tissues, bin bags and toilet rolls. Each line is marked <b>must have to open</b> or <b>add later</b>, so you can buy in two rounds.</p>
@@ -149,14 +149,8 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
   </section>
 
   <section id="lights">
-    <h2>Lights through the day</h2>
-    <p class="lead">Every light in the 3D model, and how bright it should be at each point of the day. Numbers are the dimmer setting (100 = full). They match the model's Lighting presets (Lunch, Sunset, Evening, Late), so you can preview each one there.</p>
-    <div class="tw" style="margin-top:14px"><table class="ltab"><thead><tr id="lthead"></tr></thead><tbody id="ltbody"></tbody></table></div>
-    <div class="laycols" style="margin-top:6px">
-      <div class="call"><b>Wire it in five groups.</b> A: table orbs. B: wall lights (gallery spots, bell lamps, picture lights, brick-bay lanterns). C: festoon on the beams. D: bar. E: outdoor (path, tree, gate sign) on a timer with a light sensor. A to D each on its own dimmer, so one person can set the whole room in four turns of a knob.</div>
-      <div class="call"><b>How bright is right.</b> Tables at dinner: about 50–80 lux, a warm pool on each table and no bare bulb in a seated guest's eye line. Bar counter: about 150 lux. Kitchen and dish wash: 500 lux, cool white, never dimmed. Washroom: about 200 lux. All dining bulbs 2200 K so the room glows amber; walls and art 2700 K.</div>
-      <div class="call"><b>Rules of thumb.</b> Dim in steps, not all at once: change the room every hour after sunset. Late at night keep the walls and the bar a little brighter than the tables: the room still looks full. On a dark monsoon afternoon, use the Sunset settings at lunch. After close, turn everything up to full to clean, then off.</div>
-    </div>
+    <h2>Lighting</h2>
+    <div class="call"><b>Every light has its own page now.</b> What each light is, where it hangs (on a plan of the hall from the 3D model), how many, which bulb, and how bright at each time of day: <a href="lights.html">Lighting &rarr;</a></div>
   </section>
 
   <section id="list">
@@ -206,7 +200,7 @@ const SECS=[
   ['hightable','Standing table, 60 cm round','Pool lounge, about 105 cm tall',2,'tables','later'],
   ['','Stools for the standing tables','Pool lounge, about 75 cm seat',4,'stools','later'],
   ['','Bag hooks','Brass clip-on, under the table edge',t=>t.tables*2,'hooks','later']]],
- ['Lighting',[
+ ['Lighting (details, plan and dimmer levels on the Lighting page)',[
   ['orb','Wicker orb pendant over tables','Open-weave rattan sphere, jute rope, faux ivy; a pair over each square and six-top table section, one over each two-top (as in the model)',t=>t.orbs,'pendants','d1'],
   ['','Wicker orbs, ambient','The four extra orbs in the model: bar end, entrance and the west wing',4,'pendants','later'],
   ['','LED filament bulbs, 2200 K, dimmable, E27','For every orb, lamp and lantern, plus 10% spare; one brand and batch',t=>Math.ceil((t.orbs+4+4+3)*1.1),'bulbs','d1'],
@@ -399,39 +393,6 @@ const PK='ceg-prechk-'+new Date().toISOString().slice(0,10);let pg={};try{pg=JSO
 const pr=()=>{document.getElementById('prechk').innerHTML=PRE.map(([a,b],i)=>`<tr class="${pg[i]?'done':''}"><td class="c"><input type="checkbox" data-i="${i}" aria-label="Done: ${a}" ${pg[i]?'checked':''}></td><td><b>${a}</b><small>${b}</small></td></tr>`).join('');};
 document.getElementById('prechk').addEventListener('change',e=>{const i=e.target.dataset.i;if(i===undefined)return;pg[i]=e.target.checked;try{localStorage.setItem(PK,JSON.stringify(pg))}catch(x){}pr();});
 pr();
-})();
-</script>
-<script>
-(function(){
-const TIMES=[['Set-up','before opening; cleaning'],['Lunch','noon–4 pm, daylight'],['Afternoon','4 pm to sunset; happy hour'],['Sunset','about 6–7 pm*'],['Dinner','7–10 pm'],['Late','the last hour'],['Close-down','after the last guest']];
-// [name, how many, colour, group, [7 values: number % | text], note]
-const L=[
- ['Dining room'],
- ['Wicker orbs over the tables','22 (a pair over each four-top and six-top section, one over each two-top)','2200 K','A',[100,0,0,60,80,40,100],'Off on bright days at lunch; 30–40 if overcast or in the monsoon.'],
- ['Wicker orbs, ambient','4 (bar end, entrance, west wing)','2200 K','A',[100,0,0,50,70,40,100],''],
- ['Table candles','15 (one per small table, three per six-top)','flameless','—',['off','off','off','on','on','on','charge'],'On at sunset; back on the charging tray after close.'],
- ['Festoon on the ceiling beams','about 50 m','2200 K','C',['off','off','off',50,70,30,'off'],'Decoration only; the orbs and wall lights do the work.'],
- ['Walls and art'],
- ['Gallery wall spots','5','2700 K','B',[100,40,40,70,80,60,100],'The gallery is under a deep roof, so it needs a little light even at lunch.'],
- ['Bell-shaded brass wall lamps','4','2200 K','B',[100,'off','off',60,80,50,100],''],
- ['Picture lights (oil painting, mural)','2','2700 K','B',[100,50,50,80,80,60,100],''],
- ['Cage lanterns, brick bay','3','2200 K','B',[100,'off','off',60,80,50,100],''],
- ['Bar'],
- ['Edison drops on the bar beam','about 6','2200 K','D',[100,50,50,70,80,80,100],'The bar stays the brightest spot late: it draws people in and the bartender can see.'],
- ['LED strips under the bar and coffee shelves','2','2700 K','D',[100,100,100,100,100,100,100],'Task light; not dimmed.'],
- ['Outside'],
- ['Approach-path lamp posts','3 (existing)','warm','E',['off','off','off','on','on','on','on until the last guest leaves'],'On the timer and light sensor.'],
- ['Fairy-light canopy and globes over the path','1 set','warm','E',['off','off','off','on','on','on','off'],''],
- ['Centrepiece tree fairy lights','6 strings of 100','warm','E',['off','off','off','on','on','on','off'],''],
- ['Lit sign at the gate','1','warm','E',['off','off','off','on','on','on','off'],''],
- ['Back of house'],
- ['Kitchen, dish wash and store battens','8','4000 K','—',['on','on','on','on','on','on','on'],'Never dimmed; 500 lux on the work surfaces.'],
- ['Washroom and mirror light','1 + 1','3000 K','—',['on','on','on','on','on','on','on'],''],
- ['Emergency lights and EXIT signs','4 + 2','','—',['always','always','always','always','always','always','always'],'Battery units; test the monthly button.']
-];
-document.getElementById('lthead').innerHTML='<th>Light</th><th>How many</th><th>Group</th>'+TIMES.map(([a,b])=>`<th>${a}<small>${b}</small></th>`).join('');
-const cell=v=>typeof v==='number'?(v===0?'<td class="lv off">off</td>':`<td class="lv">${v}<span class="lb"><i style="width:${v}%"></i></span></td>`):`<td class="lv${/off/.test(v)?' off':''}" style="white-space:normal">${v}</td>`;
-document.getElementById('ltbody').innerHTML=L.map(r=>r.length===1?`<tr class="grp"><td colspan="${3+TIMES.length}">${r[0]}</td></tr>`:`<tr><td><b>${r[0]}</b><small>${r[2]}${r[5]?' · '+r[5]:''}</small></td><td>${r[1]}</td><td>${r[3]}</td>${r[4].map(cell).join('')}</tr>`).join('')+`<tr><td colspan="${3+TIMES.length}"><small>* Sunset in Goa moves from about 6:00 pm (November–December) to about 7:15 pm (June). Switch to the Sunset settings when the sun drops behind the trees, not by the clock.</small></td></tr>`;
 })();
 </script>
 </body>
