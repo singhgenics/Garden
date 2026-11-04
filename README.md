@@ -77,3 +77,5 @@ Pool lounge (added 2026-11-03): outside the hall's 7.76 m west edge, 6.8 m hall 
 Floor plans tab: floor-plans.html (linked from the 3D toolbar) shows sheets A-01 to A-08 as images, with the PDF download.
 
 Colour-coded equipment plans (kitchen, dish wash, bar): drawings/Garden-equipment-colour-plans.pdf, shown on their own page, colour-plans.html (tabs E-01 to E-03), linked from the 3D toolbar.
+
+Essentials page (2026-11-04): essentials.html lists only the must-have kitchenware, store-room, dish-wash, cleaning, dustbin and safety items for the chef, helper and cleaner, with a Flow image for each (project Garden Essentials, Nano Banana 2.1); linked from the crockery page and the 3D toolbar. Source: Garden/Supplies/src/essentials_items.py and build_essentials.py.
