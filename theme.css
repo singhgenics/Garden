@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap");
+/* Cabin East website theme, shared by every tab of the 3D model.
+   Palette and type are the live site's (singhgenics.github.io/Cabin-East): bottle green leads, brass and Goa blue support, cream paper,
+   Alfa Slab One for headings, IBM Plex Sans for text, IBM Plex Mono for figures. Light only, like the site. Load this last. */
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+  color-scheme:light;
+  --bottle:#1F3D2E;--red-deep:#14291E;--choc:#4A2A1E;--goa-blue:#2443A6;--goa-navy:#1B3070;--brick:#A9533A;--brass:#C49A3C;--burgundy:#6A1622;--cognac:#A2582A;--bougain:#D81B7A;
+  --cream:#F2E8D2;--paper:#F2E8D2;--card:#F6EDD9;--ink:#17221C;--muted:#5A4C42;--line:#D9B98F;
+  --green:#1F3D2E;--brass-ink:#8A6420;--blue:#2443A6;--red:#1F3D2E;--wood:#17221C;--amber:#C49A3C;--jade:#1B3070;--burg:#6A1622;--ok:#2F6F57;--later:#8A6420;
+  --bg:#F2E8D2;--band:#17221C;--on-band:#F2E8D2;--on-red:#F2E8D2;
+  --hot:#A9533A;--cold:#2443A6;--wet:#2F6F57;--exist:#8c8a7c;--top:#C49A3C;--std:#DCCBA3;--wall:#1F3D2E;--gap:#F6EDD9;--dim:#2443A6;
+  --room:#FBF5E6;--rline:#C9B38A;--path:#E8D9B8;--figbg:#F6EDD9;--exh:#B8631A;--drn:#0E7F98;--fz:#1B3070;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --f-display:var(--display);--f-body:var(--body);--f-mono:var(--mono)}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--body)}
+h1,h2,h3,h4{font-family:var(--display)!important;font-weight:400!important;font-stretch:normal!important;font-synthesis:none;letter-spacing:.005em}
+h1,h2{color:var(--green)}
+h3{color:var(--ink)}
+a{color:var(--brass-ink)}
+/* the site's plywood hoarding header, in bottle green */
+.hoard{background-color:var(--bottle)!important;background-image:url("img/hoarding-wood-green.webp")!important;background-size:auto 100%!important;background-repeat:repeat-x!important;border-bottom:6px solid var(--wood)!important;color:var(--cream)}
+.hoard h1{color:var(--cream)!important}
+.hoard .eyebrow,.eyebrow-bill{color:var(--bottle)!important;background:var(--cream)!important}
+.hoard p,.hoard .lead,.hoard .k,.hoard .legend{color:#EADFC6!important}
+.hoard .top a,.hoard .nav a,.hoard a.back{background:var(--cream)!important;color:var(--ink)!important;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+.hoard .top a:hover,.hoard .nav a:hover{background:var(--wood)!important;color:var(--cream)!important}
+/* buttons and tabs, as the site's .btn */
+.top a,.tabs button,.bar a,.bar button,.nav a{font-family:var(--body);text-transform:uppercase;letter-spacing:.07em;font-weight:600;border-radius:6px}
+.tabs button[aria-selected=true]{background:var(--bottle);border-color:var(--bottle);color:var(--cream)}
+.tabs button b{color:var(--brass-ink)}.tabs button[aria-selected=true] b{color:var(--brass)}
+th{color:var(--muted)}
+td.id,.id{color:var(--brass-ink)}
+.call{border-left-color:var(--brass)}.call b{color:var(--bottle)}
+
+/* service playbook and opening checklist: bottle-green band instead of near-black, brass accents */
+.mast,.site{background:var(--bottle)!important}.mast h1{color:var(--cream)!important}.mast h1 em{color:var(--brass)!important}.mast p{color:#EADFC6!important}
+.site b{color:var(--brass)!important}.rail{background:var(--paper)}
+.rules li::before{background:var(--bottle)!important;color:var(--cream)!important}
+:focus-visible{outline-color:var(--brass)!important}

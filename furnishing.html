@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cabin East Garden · Furnishing &amp; supplies</title>
+<meta name="description" content="Everything Cabin East Garden needs besides kitchen equipment and crockery: furniture, lights, linen, paper goods, cleaning, safety, washroom, music and smallwares, split into must-have-to-open and add-later.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F2E8D2;--ink:#1C1714;--muted:#5A4C42;--line:#D9B98F;--card:#F6EDD9;--green:#1C1714;--brass:#E49B1D;--brass-ink:#B5321C;--burg:#B5321C;--ok:#2F6F57;--later:#9a5f0a;--red:#B5321C;--wood:#2A221D;--cream:#F2E8D2;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#2A221D;--ink:#E6DAC0;--muted:#CFC3AB;--line:#4a3c32;--card:#1C1714;--green:#E6DAC0;--brass:#E49B1D;--brass-ink:#E49B1D;--burg:#ec7a55;--ok:#6FC29A;--later:#E49B1D;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#2A221D;--ink:#E6DAC0;--muted:#CFC3AB;--line:#4a3c32;--card:#1C1714;--green:#E6DAC0;--brass:#E49B1D;--brass-ink:#E49B1D;--burg:#ec7a55;--ok:#6FC29A;--later:#E49B1D;color-scheme:dark}
+*{box-sizing:border-box}html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body)}
+a{color:var(--brass-ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:26px max(16px,env(safe-area-inset-left,0px)) 64px}
+.top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.top a{font:500 13px/1 var(--body);text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--card);border-radius:4px;padding:9px 12px}
+h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--ink);margin:0 0 6px;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(38px,7vw,64px)}h2{font-size:clamp(26px,4vw,36px)}h3{font-size:20px}
+.lead{color:var(--muted);font-size:17px;max-width:68ch;margin:0}
+p{max-width:72ch}
+section{margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+.stat b{display:block;font:400 30px/1.1 var(--display);color:var(--green)}.stat span{font-size:13.5px;color:var(--muted)}
+.call{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:4px;padding:12px 16px;margin:14px 0}.call b{color:var(--brass-ink)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.seg button{appearance:none;border:0;background:transparent;color:var(--ink);font:500 13.5px/1 var(--body);padding:10px 14px;cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--paper)}
+.bar{position:sticky;top:0;z-index:5;background:var(--paper);padding:10px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{appearance:none;font:500 13px/1 var(--body);padding:8px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;cursor:pointer;min-height:36px}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--paper)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.prog{margin-left:auto;font:500 12.5px var(--mono);color:var(--muted);display:flex;gap:8px;align-items:center}
+.prog .pb{width:120px;height:6px;border-radius:9px;background:var(--line);overflow:hidden}.prog .pb i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:12px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;display:block;background:#2a1a1a}
+.cb{padding:12px 14px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
+.cb h3{font-size:18px;margin:0}
+.qty{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.qty b{font:400 26px/1 var(--display);color:var(--burg)}.qty span{font:500 12.5px var(--mono);color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+.tag{display:inline-block;font:500 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:4px 7px;border-radius:3px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.d1{border-color:var(--ok);color:var(--ok)}.tag.later{border-color:var(--later);color:var(--later)}.tag.have{border-color:var(--brass);color:var(--brass-ink)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--card);margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.q{font:500 14px var(--mono);white-space:nowrap;color:var(--burg)}
+td.c{width:36px}td.c input{width:19px;height:19px;accent-color:var(--ok)}
+tr.done td:not(.c){opacity:.5;text-decoration:line-through;text-decoration-color:var(--muted)}
+td small{display:block;color:var(--muted);font-size:13px;line-height:1.45;margin-top:2px}
+td a.pic{font:500 11px var(--mono);text-decoration:none;border-bottom:1px dotted var(--brass)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);margin-top:10px}
+ul.tips{padding-left:20px;max-width:76ch}ul.tips li{margin:6px 0}
+footer{margin-top:44px;color:var(--muted);font-size:13px}
+@media (max-width:640px){th.hide,td.hide{display:none}}
+@media print{.bar,.top,.seg{display:none}tr{break-inside:avoid}body{font-size:12px}}
+
+/* page layout for the hoarding header and paper cards; colours and type come from theme.css (loaded last) */
+.hoard{background:var(--red);color:var(--cream);padding:18px 0 34px;
+  background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 23px),linear-gradient(180deg,#b5321c,#a22b17);border-bottom:6px solid var(--wood)}
+.hin{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.hoard h1{color:var(--cream);font-size:clamp(46px,9vw,104px);line-height:.88;letter-spacing:-.01em;margin:6px 0 14px;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.hoard .lead,.hoard .legend{color:#f6e3c8}.hoard .lead a,.hoard .lead b{color:#fff}
+.hoard .top a{background:#F2E8D2;color:#1C1714;border-color:transparent;border-radius:6px;font-family:var(--body);font-weight:600}
+.hoard .top a:hover{background:#2A221D;color:#F2E8D2}
+.hoard .tag{background:var(--cream)}
+.eyebrow-bill{display:inline-block;background:var(--cream);color:var(--red);font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:2px;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+h2,h3{color:var(--ink)}h2{font-size:clamp(28px,4.4vw,40px)}
+.card,.stat,.call,.sw div,.tw{background:var(--card);border:0;border-radius:2px;box-shadow:0 1px 0 rgba(28,23,20,.06),0 8px 18px -8px rgba(28,23,20,.28)}
+.stat b,.qty b{font-family:var(--display)}
+.call{border-left:5px solid var(--red)}
+.chip,.seg{border-radius:6px}.chip{border:2px solid var(--ink);background:transparent;font-weight:600}.chip[aria-pressed="true"],.seg button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.wrap>section:first-child{border-top:0;margin-top:0}
+.seg{border:2px solid var(--ink)}
+section{border-top:2px dashed var(--line)}
+th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
+</style>
+
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<header class="hoard"><div class="hin">
+  <div class="top"><a href="garden.html">&larr; 3D model</a><a href="crockery.html">Crockery &amp; glassware</a><a href="equipment-plan.html">Equipment plan</a><a href="stock-plan.html">Stock plan</a><a href="opening-checklist.html">Opening checklist</a><a href="decor.html">Decor concept</a></div>
+  <span class="eyebrow-bill">Cabin East · Garden</span>
+  <h1>Furnishing &amp; supplies</h1>
+  <p class="lead">One list of everything the restaurant needs to open, apart from kitchen and bar equipment (in the <a href="equipment-plan.html">equipment plan</a>) and plates and glasses (on the <a href="crockery.html">crockery page</a>). It runs from tables and chairs down to tissues, bin bags and toilet rolls. Each line is marked <b>must have to open</b> or <b>add later</b>, so you can buy in two rounds.</p>
+  <div class="legend"><span><span class="tag d1">Must have</span> needed on day one</span><span><span class="tag later">Add later</span> the room works without it; buy when money comes in</span><span><span class="tag have">Have</span> already on site or already owned</span></div>
+  </div></header>
+<div class="wrap">
+
+  <section id="layout">
+    <h2>Seating</h2>
+    <p>You have <b>ten square tables of 80 × 80 cm</b>. The 3D model seats <b>40</b>: five of the square tables as four-tops, two new tables for six and four new tables for two. That matches your 40-cover crockery. If all ten square tables go out, the room seats 60. Pick one and every count below changes to match.</p>
+    <div class="seg" role="group" aria-label="Seating layout"><button data-l="a" aria-pressed="true">40 covers (as in the model)</button><button data-l="b" aria-pressed="false">60 seats (all 10 square tables)</button></div>
+    <div class="stats" id="stats"></div>
+    <div class="call" id="lnote"></div>
+  </section>
+
+  <section id="look">
+    <h2>The key pieces</h2>
+    <p class="lead">The pieces that set the look. The chair is the one in your 3D model and decor renders: dark walnut frame, woven cane back, cognac seat.</p>
+    <div class="feat" id="feat"></div>
+  </section>
+
+  <section id="list">
+    <h2>The checklist</h2>
+    <div class="bar" role="toolbar" aria-label="Filter">
+      <button class="chip" data-p="all" aria-pressed="true">Everything</button><button class="chip" data-p="d1" aria-pressed="false">Must have to open</button><button class="chip" data-p="later" aria-pressed="false">Add later</button>
+      <span class="prog"><span id="pt"></span><span class="pb"><i id="pbi"></i></span></span>
+    </div>
+    <div id="secs"></div>
+  </section>
+
+  <section id="tips">
+    <h2>Small things people forget</h2>
+    <ul class="tips">
+      <li><b>Chair arms and table height.</b> Before ordering 40 chairs, check one sample at your real 80 × 80 table: the arms must slide under the table edge (arm top below about 65 cm) or guests cannot pull in. That is why this list uses armless chairs at the square tables.</li>
+      <li><b>Felt or nylon glides</b> under every chair and table leg. Granite chips and scratches, and dragged chairs are loud in an open hall.</li>
+      <li><b>Tablecloth size</b> = table + 2 × 25 cm drop: 130 × 130 cm for the 80 × 80 tables, 120 × 120 cm for the 70 × 70 two-tops, 240 × 140 cm for the 190 × 90 six-tops. Buy all cloths from one bolt so the burgundy matches.</li>
+      <li><b>Flameless candles.</b> The hall is open on three sides; a breeze blows real tealights out or into a napkin. Rechargeable LED candles with a charging tray cost more once and nothing after.</li>
+      <li><b>Bulbs all the same.</b> Buy every dining bulb as 2200 K, dimmable, from one brand and batch, plus 10% spare. Mixed whites look cheap.</li>
+      <li><b>Monsoon kit before June:</b> PVC curtains, a squeegee, absorbent entrance mats, an umbrella stand and wet-floor signs.</li>
+      <li><b>Bag hooks</b> under the table edge. In an open hall with a granite floor, guests will not want to put bags on the floor.</li>
+      <li><b>Labels and day dots</b> for the fridges and store follow the <a href="stock-plan.html">stock plan</a>'s day colours; buy the same colours.</li>
+      <li><b>Keep receipts and warranties</b> for furniture, fans, ACs, TV and speakers in one folder; you will need them for insurance and repairs.</li>
+    </ul>
+  </section>
+  <footer>Counts come from the 3D model (tables, chairs and light fittings) and the lean equipment plan. First-month stock assumes about 60 covers a day; reorder from what you actually use. Safety counts (extinguishers, exits) are a starting point only: the Fire Department's NOC inspection decides the final number and type. Pictures are illustrative renders made in Google Flow (project “Garden Furnishing”), not real products. Ticks are saved only in this browser.</footer>
+</div>
+<script>
+// layout: a = model (5 square 4-tops + 2 six-tops + 4 two-tops = 40), b = all 10 squares (60)
+const LAY={a:{sq:5,six:2,two:4},b:{sq:10,six:2,two:4}};
+let L='a';try{L=localStorage.getItem('ceg-furn-layout')||'a'}catch(e){}
+const T=()=>{const l=LAY[L];return Object.assign({},l,{tables:l.sq+l.six+l.two,seats:l.sq*4+l.six*6+l.two*2,orbs:l.sq*2+l.six*4+l.two,candles:l.sq+l.six*3+l.two});};
+// [img|'' , name, note, qty (number|string|fn(t)), unit, priority d1|later|have]
+const SECS=[
+ ['Furniture',[
+  ['table6','Table for six, 190 × 90 cm','Solid teak or sheesham top, dark walnut stain, square legs; must be sturdy enough for a lazy susan',t=>t.six,'tables','d1'],
+  ['table2','Table for two, 70 × 70 cm','Same timber and stain as the six-tops; along the railing',t=>t.two,'tables','d1'],
+  ['table4','Square table, 80 × 80 cm (yours)','Check every top is level and the legs are tight; re-stain to dark walnut if they do not match the new tables',t=>t.sq,'in use','have'],
+  ['sidechair','Dining chair, armless','Dark walnut frame, natural cane back, cognac leather-look seat in marine vinyl (wipes clean, survives humidity); at the square tables',t=>t.sq*4,'chairs','d1'],
+  ['chair','Dining armchair','Same chair with arms, at the six-tops and two-tops where there is room for arms',t=>t.six*6+t.two*2,'chairs','d1'],
+  ['','Spare chairs','Same model, ordered with the rest so they match; for breakage and a seventh guest',4,'chairs','d1'],
+  ['','Felt or nylon glides','Under every chair and table leg, protects the granite and cuts noise',t=>(t.seats+4)*4+t.tables*4,'glides','d1'],
+  ['stool','Bar stools with backrest','Sand velvet seat, black legs, brass footrest, seat about 74 cm; at the 2.65 m counter',4,'stools','d1'],
+  ['station','Waiter side station','Walnut cabinet with drawers for cutlery and shelves for napkins, condiments and water; between the dining room and the bar',1,'unit','d1'],
+  ['highchair','Child high chair','Families come for lunch and the beer garden',2,'chairs','later'],
+  ['pooltable','Pool table, 6 ft','Pool lounge; with cues, rack, chalk and a cue stand',1,'table + kit','later'],
+  ['hightable','Standing table, 60 cm round','Pool lounge, about 105 cm tall',2,'tables','later'],
+  ['','Stools for the standing tables','Pool lounge, about 75 cm seat',4,'stools','later'],
+  ['','Bag hooks','Brass clip-on, under the table edge',t=>t.tables*2,'hooks','later']]],
+ ['Lighting',[
+  ['orb','Wicker orb pendant over tables','Open-weave rattan sphere, jute rope, faux ivy; a pair over each square and six-top table section, one over each two-top (as in the model)',t=>t.orbs,'pendants','d1'],
+  ['','Wicker orbs, ambient','The four extra orbs in the model: bar end, entrance and the west wing',4,'pendants','later'],
+  ['','LED filament bulbs, 2200 K, dimmable, E27','For every orb, lamp and lantern, plus 10% spare; one brand and batch',t=>Math.ceil((t.orbs+4+4+3)*1.1),'bulbs','d1'],
+  ['','Dimmer for the dining lights','Orbs on their own circuit and dimmer so you can set lunch, sunset and late (as in the model\'s lighting panel)',2,'dimmers','d1'],
+  ['candle','Table candle jar + LED candle','Glass hurricane with brass rim, rechargeable flameless candle: one per small table, three per six-top',t=>t.candles,'jars','d1'],
+  ['','Candle charging tray','Charges all the LED candles overnight behind the bar',1,'tray','d1'],
+  ['','LED strips under the bar shelves','Two floating shelves at the coffee station, plus bar task light',2,'strips','d1'],
+  ['','LED battens, kitchen and back of house','Bright cool-white for safe work: kitchen 3, dish wash 2, store room 2, washroom 1',8,'battens','d1'],
+  ['','Emergency lights (battery)','Hall, bar, kitchen, washroom; come on in a power cut',4,'units','d1'],
+  ['','Lit EXIT signs','Over the entrance and the back-of-house way out',2,'signs','d1'],
+  ['spot','Gallery wall spots','Small adjustable warm spots on the beam, one per bay of the gallery wall',5,'spots','later'],
+  ['belllamp','Bell-shaded brass wall lamps','On the gallery wall at the ends of the bays',4,'lamps','later'],
+  ['','Brass picture lights','Over the bowl-and-thali oil painting and the coffee-wall mural',2,'lights','later'],
+  ['cage','Cage wall lanterns','On the exposed-brick bay',3,'lanterns','later'],
+  ['','Festoon string lights','Warm LED festoon along the dark ceiling beams (about 50 m total, low-voltage)',50,'metres','later'],
+  ['fairy','Fairy lights for the centrepiece tree','Warm micro LED on copper wire, low-voltage, outdoor-rated; about 520 bulbs in the model',6,'strings of 100','later'],
+  ['lamppost','Approach-path lamp posts','The three black lamp posts already on the path: check wiring, bulbs and timer',3,'posts','have'],
+  ['','Fairy-light canopy over the approach path','Warm micro LED strands on fine wire from the lamp posts to the balcony roof, plus 7 hanging globes',1,'set','later'],
+  ['','Lit sign at the gate','So people find you at night from the road',1,'sign','d1']]],
+ ['Fans, weather and insects',[
+  ['fan','Flush-mount ceiling fans','Hugger fans with walnut blades in the coffers (low ceiling: blades about 24 cm below it, at least 2.5 m above the floor)',4,'fans','d1'],
+  ['','Tower ACs','The two in the model; an open hall loses cool air, so add only if guests ask',2,'units','later'],
+  ['','Clear roll-down PVC curtains','On every open side, for monsoon rain and wind. Buy and fit before June',1,'set','later'],
+  ['','UV insect-killer units','Glue-board type, away from tables and food (not over the bar or pass)',3,'units','d1'],
+  ['','Mosquito repellent','Plug-in refills for the hall edges and citronella for the garden; repellent spray for guests on request',1,'month\'s stock','d1'],
+  ['umbrella','Umbrella stand','By the entrance in the monsoon',1,'stand','later'],
+  ['','Wet-floor signs + squeegee','Granite is slippery when wet; rain blows in',2,'of each','d1']]],
+ ['Linen and table dressing',[
+  ['cloth','Burgundy tablecloths','Heavy cotton-linen damask, 25 cm drop: 130 × 130 cm (squares), 120 × 120 (two-tops), 240 × 140 (six-tops). Two per table; a third set if the laundry is not same-day',t=>t.tables*2,'cloths','d1'],
+  ['','Table runners (lunch)','Ivory linen, for bare teak at lunch (decor plan); optional',t=>t.tables,'runners','later'],
+  ['','Cloth napkins','On the crockery page (80, ivory with a burgundy border)','see crockery','','d1'],
+  ['','Laundry arrangement','A Goa laundry service for cloths and napkins, daily pick-up; or a washing machine and drying line',1,'contract','d1'],
+  ['menu','Menu covers','Dark brown leather-look with brass corners; one per two seats plus spares',t=>Math.ceil(t.seats/2)+4,'covers','d1'],
+  ['','Printed menus','Food and drinks inserts from the menu site; reprint whenever prices change',t=>Math.ceil(t.seats/2)+10,'sets','d1'],
+  ['','Table numbers','Small brass stand with a number, so orders go to the right table',t=>t.tables,'stands','d1'],
+  ['','"Reserved" table signs','Brass or card',4,'signs','later'],
+  ['','Tissue holder on each table','Small brass box for paper napkins; for wings and chilli-oil fingers',t=>t.tables,'holders','d1']]],
+ ['Paper, packing and throwaways (first month)',[
+  ['','Paper napkins / tissues','Two-ply, plain ivory; in the table holders and at the bar',4000,'napkins','d1'],
+  ['','Wet wipes, single-pack','With every K-Pop Wings and on request',1000,'packs','d1'],
+  ['','Toothpicks, individually wrapped','Honey Trap and at the till',2000,'picks','d1'],
+  ['','Bill rolls for the POS printer','Thermal 80 mm (check your printer)',30,'rolls','d1'],
+  ['','Kitchen order rolls','If any order slip prints in the kitchen or bar',20,'rolls','d1'],
+  ['','Takeaway containers','Leak-proof, recyclable or compostable (Goa restricts single-use plastic): soups, noodles, rice, curries, dim sum',500,'mixed','d1'],
+  ['','Paper carry bags','For takeaway and Zomato/Swiggy orders',300,'bags','d1'],
+  ['','Wooden cutlery and chopsticks for takeaway','Wrapped sets',300,'sets','d1'],
+  ['','Cling film, foil, baking paper','Kitchen rolls, commercial size',3,'rolls of each','d1'],
+  ['','Food labels / day dots','In the stock plan\'s day colours',2000,'labels','d1'],
+  ['','Disposable gloves, hair nets','Food-safe nitrile gloves; hair nets or caps for the kitchen',1000,'gloves + 300 nets','d1'],
+  ['','Order pads and pens','For the floor, plus a reservation book',10,'pads + 20 pens','d1'],
+  ['','Bin bags','Black for dry, green for wet waste (segregated, as the panchayat collects)',300,'bags','d1']]],
+ ['Cleaning',[
+  ['','Dishwash liquid','For the three-bowl wash (no dishwasher)',20,'litres','d1'],
+  ['','Food-safe sanitiser','For the third bowl and work surfaces; with test strips',10,'litres','d1'],
+  ['','Kitchen degreaser','Hood, wok station, fryer area',10,'litres','d1'],
+  ['','Floor cleaner','Granite-safe (no acid) for the hall; heavy-duty for the kitchen',20,'litres','d1'],
+  ['','Glass and steel cleaner','Bar, brass, mirrors',5,'litres','d1'],
+  ['','Toilet cleaner and phenyl','Washroom and drains',10,'litres','d1'],
+  ['','Scrub pads and sponges','Non-scratch for the ceramics and gold cutlery; steel wool only for woks',50,'pcs','d1'],
+  ['','Microfibre cloths, colour-coded','Separate colours for kitchen, bar, tables and washroom',40,'cloths','d1'],
+  ['','Glass-polishing cloths','Lint-free, for glasses and cutlery',20,'cloths','d1'],
+  ['','Mops, buckets with wringer, brooms, dustpans','Separate set for the washroom',3,'sets','d1'],
+  ['','Pedal bins with lids','Kitchen (wet, dry), bar, dish wash, washroom, hall back corner; colour-coded',8,'bins','d1'],
+  ['','Pest control','Monthly contract with a licensed company (FSSAI expects a record)',1,'contract','d1']]],
+ ['Washroom',[
+  ['','Soap dispenser + hand soap','Amber bottles as in the decor plan; refill packs',2,'dispensers + 5 L','d1'],
+  ['','Paper towel dispenser + towels','Or a hand dryer later',1,'dispenser + 30 packs','d1'],
+  ['','Toilet rolls','First month',60,'rolls','d1'],
+  ['','Mirror, coat hook, shelf','Over the basin',1,'set','d1'],
+  ['','Sanitary bin with lid','With liners',1,'bin','d1'],
+  ['','Toilet brush, health faucet, air freshener','',1,'set','d1'],
+  ['','Extractor fan','In the model; check it works',1,'fan','have'],
+  ['','Framed house rules','The decor plan\'s small framed sign',1,'frame','later']]],
+ ['Safety and notices',[
+  ['','Fire extinguishers, ABC 6 kg','Hall, bar, store room (final number set by the Fire NOC)',3,'units','d1'],
+  ['','Fire extinguisher, CO2 4.5 kg','By the electrical panel and bar equipment',1,'unit','d1'],
+  ['','Fire extinguisher, wet-chemical (K class)','Kitchen, for oil and fryer fires',1,'unit','d1'],
+  ['','Fire blanket','On the kitchen wall by the door',1,'blanket','d1'],
+  ['','LPG gas leak detector','Kitchen, wired to an alarm',1,'unit','d1'],
+  ['','First-aid kit','Kitchen and bar; burns gel, plasters (blue for the kitchen), bandages',2,'kits','d1'],
+  ['','Anti-slip mats','Kitchen line, dish wash, behind the bar',4,'mats','d1'],
+  ['','CCTV cameras + recorder','Entrance, bar/till, store room, approach path',4,'cameras','d1'],
+  ['','Licence frames and notice boards','FSSAI licence and Food Safety Display Board, Excise licence and drinking-age notice, no-smoking signs, Shops and Establishments certificate',1,'set','d1'],
+  ['','Surge protectors and outdoor sockets','Weather-proof sockets on the open sides; RCCB on every circuit (ask the electrician)',1,'set','d1']]],
+ ['Front of house, music and tech',[
+  ['','Card machine + UPI QR standee','Bank or Pine Labs/Razorpay terminal; QR on the bill box or a brass standee',1,'machine + 2 QRs','d1'],
+  ['','POS, printer, cash drawer','In the equipment plan (B17, B17a)','see equipment plan','','d1'],
+  ['','Wi-Fi router + guest Wi-Fi','Business broadband with a backup 4G/5G dongle for the card machine',1,'set','d1'],
+  ['','Speakers + amplifier','Four weather-resistant speakers in the hall, one zone for the garden; a phone or tablet for the playlist',4,'speakers + 1 amp','d1'],
+  ['','Music licences (PPL and IPRS)','Needed to play recorded music in a commercial space',1,'set','d1'],
+  ['','Phone for reservations','A dedicated number (also on Google Maps and WhatsApp Business)',1,'phone','d1'],
+  ['tray','Waiter trays','Round, non-slip cork, brass rim',6,'trays','d1'],
+  ['','Staff bottle openers and waiter\'s friend','One per server and bartender',6,'openers','d1'],
+  ['','Staff uniforms and aprons','Two sets per person (dark green or black shirt, burgundy or brown apron)',2,'per person','d1'],
+  ['','Name badges','Brass or engraved',8,'badges','later'],
+  ['','65 in TV','The one TV in the north-west corner',1,'TV','later']]],
+ ['Entrance, garden and decor',[
+  ['','Coir mat and kilim runner','At the step and inside the entrance (as in the model)',1,'of each','d1'],
+  ['','Planters and plants','At the entrance and along the open edges; hanging planters on the path later',6,'planters','d1'],
+  ['','Bougainvillea on the open edges','Magenta and white, trained along the eaves (grows in; plant early)',8,'plants','later'],
+  ['','Faux ficus tree + teak planter','The centrepiece round the west-wing pillar',1,'tree','later'],
+  ['','Gallery wall: enamel signs, posters, frames, clocks','As in the decor concept; can grow over the first months',1,'set','later'],
+  ['','Bowl-and-thali oil painting','Commissioned statement piece',1,'painting','later'],
+  ['','Blue-and-white floor jars + ginger jars','Pair at the entrance, smaller ones on the shelves',2,'floor jars','later'],
+  ['','Brass CE plaque','Photo spot on the entrance column',1,'plaque','later'],
+  ['','Jasmine reed diffuser','At the entrance',1,'diffuser','later'],
+  ['','Acoustic felt panels','In the ceiling coffers over the dining room; add if the room is too loud',1,'set','later']]],
+ ['Kitchen and bar smallwares',[
+  ['','Big equipment','Ranges, hood, fridges, sinks, racks, POS: in the equipment plan','see equipment plan','','d1'],
+  ['','Woks, wok ladles and spatulas','Carbon-steel woks for the hot line',2,'woks + 3 ladles + 3 spatulas','d1'],
+  ['','Stock pots and saucepans','20 L and 10 L stock pots, three heavy saucepans',5,'pots','d1'],
+  ['','Spider strainers and colanders','For fryer and noodles',4,'pcs','d1'],
+  ['','Knives: chef, cleaver, paring; knife sharpener','',8,'knives + sharpener','d1'],
+  ['','Chopping boards, colour-coded','Red raw meat, blue seafood, green veg, white cooked/bread, yellow poultry',2,'sets of 5','d1'],
+  ['','Food containers with lids','GN pans (1/3, 1/6) for the line and stackable tubs for the store and chillers',40,'containers','d1'],
+  ['','Squeeze bottles and sauce pots','Sauces, chilli oil, sweet chilli, mayos',20,'bottles','d1'],
+  ['','Mixing bowls, sheet pans, tongs, ladles, whisks, peelers','Stainless',1,'set','d1'],
+  ['','Digital scale and thermometers','Kitchen scale; a probe thermometer; one thermometer in every fridge and freezer',2,'scales + 5 thermometers','d1'],
+  ['','Dumpling tools','Rolling pins, steamer cloths, bench scraper, pastry brushes',1,'set','d1'],
+  ['','Oven gloves and kitchen towels','',4,'pairs + 20 towels','d1'],
+  ['','Bar: speed pourers, bar mats, garnish tubs, bar knife and board','Shakers, jiggers and strainers are on the crockery page',30,'pourers + 3 mats','d1']]]
+];
+const KEY='ceg-furn-v1';let got={};try{got=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(got));localStorage.setItem('ceg-furn-layout',L)}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const q=v=>typeof v==='function'?v(T()):v;
+const fmt=v=>typeof v==='number'?v.toLocaleString('en-IN'):v;
+const PRI={d1:['d1','Must have'],later:['later','Add later'],have:['have','Have']};
+const rid=(s,i)=>s.replace(/\W+/g,'').slice(0,10)+'-'+i;
+let pf='all';
+function render(){
+  const t=T();
+  document.getElementById('stats').innerHTML=[[t.seats,'seats'],[t.tables,'tables'],[t.sq*4,'armless chairs'],[t.six*6+t.two*2,'armchairs'],[t.orbs,'wicker orbs over tables'],[t.tables*2,'tablecloths']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
+  document.getElementById('lnote').innerHTML=L==='a'?'<b>40 covers.</b> Five of your square tables are used and five are spare: keep them for the pool lounge, a busy garden night or a large booking. Crockery is counted for these 40 covers.':'<b>60 seats.</b> All ten square tables are used. The 3D model only fits 40 in the hall, so the extra five tables would need the pool lounge, the landing or the garden: check the space and the walkways before buying 20 more chairs. Crockery is counted for 40 covers; at 60 seats the place-setting pieces go up from 80 to 120.';
+  const FO=['chair','sidechair','table4','table6','table2','cloth','orb','candle','stool','station'];const feat=[];SECS.forEach(([s,rows])=>rows.forEach(r=>{if(FO.includes(r[0]))feat.push(r);}));feat.sort((a,b)=>FO.indexOf(a[0])-FO.indexOf(b[0]));
+  document.getElementById('feat').innerHTML=feat.map(r=>`<article class="card"><img src="furnishing/${r[0]}.jpg" alt="${esc(r[1])}" loading="lazy" width="600" height="600"><div class="cb"><h3>${esc(r[1])}</h3><div class="qty"><b>${fmt(q(r[3]))}</b><span>${esc(r[4])}</span><span class="tag ${PRI[r[5]][0]}">${PRI[r[5]][1]}</span></div><div class="note">${esc(r[2])}</div></div></article>`).join('');
+  let n=0,d=0;
+  document.getElementById('secs').innerHTML=SECS.map(([s,rows],si)=>{const vis=rows.map((r,i)=>[r,rid(s,i)]).filter(([r])=>pf==='all'||r[5]===pf||(pf==='d1'&&r[5]==='have'));if(!vis.length)return'';
+    return `<h3 style="margin-top:28px">${esc(s)}</h3><div class="tw"><table><thead><tr><th></th><th>Item</th><th>Qty</th><th class="hide">Unit</th><th>When</th></tr></thead><tbody>`+vis.map(([r,id])=>{n++;if(got[id])d++;
+      return `<tr class="${got[id]?'done':''}"><td class="c"><input type="checkbox" aria-label="Done: ${esc(r[1])}" data-id="${id}" ${got[id]?'checked':''}></td><td><b>${esc(r[1])}</b>${r[0]?` <a class="pic" href="furnishing/${r[0]}.jpg" target="_blank" rel="noopener">photo</a>`:''}${r[2]?`<small>${esc(r[2])}</small>`:''}</td><td class="q">${fmt(q(r[3]))}</td><td class="hide">${esc(r[4])}</td><td><span class="tag ${PRI[r[5]][0]}">${PRI[r[5]][1]}</span></td></tr>`;}).join('')+`</tbody></table></div>`;}).join('');
+  document.getElementById('pt').textContent=d+' / '+n+' done';document.getElementById('pbi').style.width=(n?100*d/n:0)+'%';
+}
+document.getElementById('secs').addEventListener('change',e=>{const id=e.target.dataset.id;if(!id)return;got[id]=e.target.checked;save();render();});
+document.querySelectorAll('[data-l]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.l===L);b.addEventListener('click',()=>{L=b.dataset.l;document.querySelectorAll('[data-l]').forEach(x=>x.setAttribute('aria-pressed',x===b));save();render();});});
+document.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{pf=b.dataset.p;document.querySelectorAll('[data-p]').forEach(x=>x.setAttribute('aria-pressed',x===b));render();}));
+render();
+</script>
+</body>
+</html>

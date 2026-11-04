@@ -6,17 +6,23 @@ Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 
 Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from the model's toolbar)
 
+Furnishing & supplies checklist (furniture, lights, linen, paper goods, cleaning, safety; must-have vs add-later): https://singhgenics.github.io/Garden/furnishing.html
+
+Crockery & glassware (40 covers × 2 sets, every menu item matched to a piece): https://singhgenics.github.io/Garden/crockery.html
+
+Image prompts and the Flow runner for both pages: Dream/Garden/Supplies/src (Flow projects "Garden Crockery" and "Garden Furnishing").
+
 ## What is in the model
 
 | Part | Size (m) | Notes |
 |---|---|---|
 | Main restaurant | 15.67 × 7.76 (irregular) | 5 square tables for 4 + 2 family tables for 6 (1.9 × 0.9 m, 3 chairs facing 3) = **32 covers** (cap 35), every table dressed in a heavy burgundy cloth (woven cotton-linen, tone-on-tone damask, 25 cm drop, stitched hem). Open on three sides, solid 15.67 m north wall |
-| Decor wall | 15.67 | White fluted pilasters on plinths kept as on site; the tile dado (0.95 m) is covered with glossy warm terracotta-chocolate tile in a vertical stacked pattern with cream grout (1.0 m, two-tone with the bottle green above, brass rail between); the colours above are repainted bottle green, with brass sconces, a salon hang, a chalkboard and blue-and-white porcelain in the pillars' cobalt (ginger jars on the shelves, wall plates, two floor jars inside the entrance) |
+| Decor wall | 15.67 | White fluted pilasters on plinths kept as on site; the tile dado is covered with glossy warm terracotta-chocolate tile in a vertical stacked pattern with cream grout (0.90 m, two-tone with the bottle green above, brass rail between); above it 1.28 m of bottle-green wall to the 2.18 m ceiling, hung as a dense vintage-sign gallery, with a chalkboard and blue-and-white porcelain in the pillars' cobalt (ginger jars on the shelves, wall plates, two floor jars inside the entrance) |
 | TV corner | NW corner | The only TV: a 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, on a slatted timber section |
 | End wall left of the bar | about 2.5 | The old white mural wall behind the coffee station, finished in exposed red brick to the ceiling, matching the bar counter  Deep oxblood brick with dark mortar, the mural in a teak frame with a brass line, and a teak corner post against the green wall |
 | Coffee station | about 1.3, left of the bar | Royal-blue panelled cabinet with brass knobs and a marble top against an exposed red-brick wall (same brick as the bar) carrying the reference mural (winking woman with red hanging-flower hair, img/coffee-wall-mural.jpg): twin filter-coffee brewer, hot-water urn, two lit oak shelves with glasses and cups (the bar counter stays 2.80) |
-| Bar | counter 2.80 long, half the end | The existing counter (it runs only half way across the end, on the right as you face it: from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall) in exposed red brick (the tan ply on site is temporary): brick pilasters, a brick end pier, dark timber top with brass edge, velvet stools, 3 craft taps on one brass font, floating glass rack; back bar with labelled bottles, infusion jars, lit cooler, ON TAP board |
-| Staff room | old store, 2.70 × 6.46 m | Accommodation for four: two black steel bunk beds along the west wall (0.92 × 2.0 m each), four tall lockers (one each), a shared two-door timber cupboard and a low shoe cabinet along the east wall, one flush-mount fan over the 1.08 m aisle. Entered from the kitchen through the old store door (0.9 m, beside the cooking line) into a 1 m lobby; the tall pantry T1 became an overhead cabinet above that door. Still to plan: a washroom link |
+| Bar | counter 2.65 long, half the end | The existing counter (it runs only half way across the end, on the right as you face it: from the brick pier at the open side towards the north wall, with the open staff entry on the left by the wall) in exposed red brick (the tan ply on site is temporary): brick pilasters, a brick end pier, dark timber top with brass edge, velvet stools, 3 craft taps on one brass font, floating glass rack; back bar with labelled bottles, infusion jars, lit cooler, ON TAP board |
+| Store room | 2.70 × 6.46 m | Back in use as the dry store: six steel racks (1.50 × 0.50 × 1.80) and a beverage pallet either side of a 1.46 m aisle, a locked spirits cage and a locked chemical cupboard at the far end, a high louvre and a door grille for air. Door straight into the kitchen beside the cooking line. The old bunk room is gone |
 | Entrance | middle of the 9.20 m open edge | 1.70 m opening in the balustrade, PVC strip door |
 | Open edges | all five | Blue round pillars (about 24 cm) on white pedestals and an 80 cm balustrade (navy balusters, white rail), as on site |
 | Centrepiece | west-wing pillar | Faux ficus tree wrapped around the blue pillar in a round slatted-teak planter with white pebbles, wide canopy under a warm glowing ceiling disc |
@@ -29,13 +35,12 @@ Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from
 | Designer's edit | hall | "bao down" neon removed; gallery hung with more air; one ceiling-light language (festoon on the bays + orbs); warmer 2200 K lamps; flush-mount (hugger) ceiling fans with walnut blades in the coffers, blades about 24 cm below the ceiling for the low roof (misting fans removed); bamboo steamer, blue-and-white chilli/soy pots, brass chopstick rests and a red lacquer bill box on every table; brass CE monogram plaque on the entrance column (photo spot), jasmine reed diffuser, coir mat at the step; washroom amber soap bottles, framed house rules, extractor fan |
 | Centrepiece lights | tree | About 520 warm fairy bulbs woven through and around the leaves, plus strands wound up the trunk |
 | Bougainvillea | open edges, entrance, gate | Magenta with some white, trained along the eave / ring beam of every open side with swags over the fretwork, trailing down every third column and heavily down both entrance columns; a mound over the gate arch cascading down one pier |
-| Floor and ceiling | hall | Blue-grey granite in 60 cm tiles; flat white ceiling with white dropped beams, dark walnut false-beams and an interlocking square-frame feature light, as on site |
+| Floor and ceiling | hall | Blue-grey granite in 60 cm tiles; flat white ceiling with white dropped beams, dark walnut false-beams and an interlocking square-frame feature light, as on site Heights as measured: tile 0.90 m plus 1.28 m of wall = 2.18 m ceiling at the main wall, rising evenly to about 2.8 m at the entrance edge (the entrance figure is an estimate to confirm); level at 2.8 m over the west wing |
 | Front | gate to hall | From the marked survey plan: arched whitewashed gateway (1.70 m, blue gable, sign) on the Cavelossim-Assolna road; main path east to the residence veranda; 5 × 5 m garden on its north side below the hall's 2.98 m edge; a 1.20 m stepping-stone approach path (about 5.5 m, to confirm) north to the 5 × 5 m red-oxide landing between the hall wing and the existing restaurant; the hall entrance faces the landing. Existing restaurant and residence shown as massing. Over the approach path: overhead lines from the lamp posts to the balcony roof with the Simplex brass lanterns and jute globes and hanging planters |
-| Equipment | all three areas | Kitchen, dish wash and bar are fitted out as in `equipment-plan.html`: work-table island, rice cooker, mixer-grinder and mortar on the granite, hand-wash basin, 1.50 m chiller, mop sink and two bins in the dish wash, a 0.60 m back bar with glass washer, ice machine and bottle cooler, and the bar counter moved 0.50 m off the wall (to be confirmed on site). One four-top moved 0.40 m west to clear the stools |
-| Kitchen | 5.41 × 4.38 | Laid out as filmed: door from the passage near the corner, black granite platform along the dish-wash wall with a shuttered window (no door in that wall), cooking line under a white masonry hood on the east wall, sloping white ceiling with a dark timber beam. Its south wall is the common wall with the existing restaurant (west of the store room). Cooking line under one hood, prep island, refrigeration, pass window |
-| Dish wash | 5.41 × 2.00 | Hatch, receiving table, double sink, hood dishwasher, clean table |
+| Equipment | all areas | A lean start-up kit as in `equipment-plan.html`: one dual-zone upright (chiller + freezer) and one 2-door under-counter chiller, wok, stock, fryer and steamer on the hot line under one hood, island, rice cooker, mixer-grinder and mortar on the granite, hand-wash basin on the south wall; three-bowl hand wash in the dish wash (no dishwasher); no ice machine, glass washer or shot freezer at the bar; a POS desk with an under-desk cash drawer beside the coffee station. Exhaust and drainage are drawn in the plan |
+| Kitchen | 4.10 × 4.18 clear | Re-measured on site: temporary wall at 4.10 m, 0.80 m door, granite platform removed, existing sink in the north-east corner; stock and wok ranges on the north wall, fryer and steamer on the east wall under an L-shaped hood whose duct crosses the dish wash to the roof fan; dual-zone upright on the south wall; closable pass hatch to the dish wash |
+| Dish wash | 5.41 × 2.00 | 1.17 m west doorway (no door), receiving table, clean table, and a 2.0 m cell at the east end with the 500 L overhead tank and two sinks (wash, rinse + sanitise) |
 | Washroom | 2.96 × 1.70 | As on site: 70 cm door, the only hand-wash basin on the right, a partition with a 70 cm opening, then the WC; reached through a plain lobby |
-| Store room | 2.70 × 6.46 | Steel racking, door into the kitchen |
 | Pathway behind the bar | 1.60 wide | From where the hall wall ends, between the bar side of the hall and the kitchen / dish-wash block, open |
 | Pathway south of the hall | 3.46 wide | Between the hall's 9.20 m edge and the existing restaurant, from the landing east to the passage behind the bar |
 
@@ -46,7 +51,7 @@ Every open side closes with roll-down clear PVC (button in the toolbar rolls the
 - Camera buttons jump to the decor wall, TV corner, gate, entrance, bar, kitchen, dish wash, washroom, store room, from outside and the plan.
 - **Walk in** gives a first-person walk (W A S D, arrow pad on phones). Walls and doors block you.
 - The Lighting panel (Lunch, Sunset, Evening, Late, plus Time and Lights sliders) works as in Simplex: warm 2700 K fittings. Sizes shows the plan dimensions.
-- URL options: `?view=kitchen`, `?time=night`, `?pvc=up`, `?roof=0`, `?sizes`.
+- The model opens with the PVC folded up and the labels off. URL options: `?view=kitchen`, `?time=night`, `?pvc=down`, `?labels`, `?roof=0`, `?sizes`.
 
 ## Sizes: where they come from
 
@@ -64,3 +69,9 @@ Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the
 - `decor.html` + `decor/`: the interior decor concept, Google Flow renders made from the model's camera views in the look of the Design Inspos boards, with a spec per zone. Source and image runner live in `../Decor` (outside this repo)
 
 Brand: https://singhgenics.github.io/Garden/brand-kit.html (logos, colours in the Garden palette, type, direction board) and https://singhgenics.github.io/Garden/brand-merch.html (coasters, stickers, bags, uniforms); both open from the model toolbar's Brand & merch button. Source and build scripts: `Dream/GardenBrand/` (local).
+
+Pool lounge (added 2026-11-03): outside the hall's 7.76 m west edge, 6.8 m hall side, 4.2 m rear wall with graffiti, two 2.8 m side walls, 1.6 m entrance; one 6 ft pool table and two standing tables. 3D view 'Pool lounge'; sheets A-07 (hall, pool lounge, garden and patio) and A-08 in drawings/Garden-architect-drawings.pdf.
+
+Floor plans tab: floor-plans.html (linked from the 3D toolbar) shows sheets A-01 to A-08 as images, with the PDF download.
+
+Colour-coded equipment plans (kitchen, dish wash, bar): drawings/Garden-equipment-colour-plans.pdf, shown on their own page, colour-plans.html (tabs E-01 to E-03), linked from the 3D toolbar.

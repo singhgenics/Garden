@@ -7,12 +7,12 @@
 <meta name="description" content="Stock list, storage map and daily opening and closing count sheet for the Cabin East Garden kitchen, dish wash and bar, with no store room.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;650&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-:root{--paper:#eef0ea;--ink:#1d2a22;--muted:#56635a;--line:#cfd5cc;--card:#f7f8f4;--green:#1f3d2e;--brass:#9a7434;--brass-ink:#7a5a22;--blue:#2443a6;
+:root{--paper:#F2E8D2;--ink:#1C1714;--muted:#5A4C42;--line:#D9B98F;--card:#F6EDD9;--green:#2F6F57;--brass:#E49B1D;--brass-ink:#B5321C;--blue:#2443a6;
   --hot:#9a3b2a;--cold:#2443a6;--wet:#2d6b4d;--exist:#8c8a7c;--top:#c79a45;--std:#d8cdb2;--wall:#1f3d2e;--figbg:#f7f8f4;--ok:#2d6b4d;--warn:#9a3b2a;--inp:#fff;
-  --display:"Gloock",Georgia,"Times New Roman",serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root{--paper:#111915;--ink:#e7ebe3;--muted:#9aa79d;--line:#2a3830;--card:#17221c;--green:#8fbfa3;--brass:#d2a75c;--brass-ink:#e2b96e;--blue:#8fa6f0;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--paper:#2A221D;--ink:#E6DAC0;--muted:#CFC3AB;--line:#4a3c32;--card:#1C1714;--green:#6FC29A;--brass:#E49B1D;--brass-ink:#E49B1D;--blue:#8fa6f0;
   --hot:#b8503c;--cold:#3a5fd0;--wet:#3f8a67;--exist:#6f6f63;--top:#c79a45;--std:#8d836c;--wall:#8fbfa3;--figbg:#17221c;--ok:#6fc29a;--warn:#e08a78;--inp:#0f1712;color-scheme:dark}}
 *{box-sizing:border-box}
 html{background:var(--paper)}
@@ -81,16 +81,32 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
   .sheet td input{border:0;border-bottom:1px solid #888;border-radius:0;width:56px}
   th{position:static}
 }
+
+/* Cabin East website theme ("the hoarding"): red plywood header, cream paper, ink type, Alfa Slab One + IBM Plex */
+:root{--red:#B5321C;--wood:#2A221D;--cream:#F2E8D2}
+.hoard{background:var(--red);color:var(--cream);padding:18px 0 34px;margin:0 0 8px;display:block;
+  background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 23px),linear-gradient(180deg,#b5321c,#a22b17);border-bottom:6px solid var(--wood)}
+.hin{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.hoard h1{color:var(--cream)!important;font-size:clamp(42px,8vw,96px);line-height:.9;letter-spacing:-.01em;margin:6px 0 14px;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.hoard p,.hoard .lead,.hoard .k,.hoard .legend{color:#f6e3c8!important}.hoard a:not(.top a):not(.nav a){color:#fff}.hoard b{color:#fff}
+.hoard .top a,.hoard .nav a,.hoard a.back{background:#F2E8D2!important;color:#1C1714!important;border-color:transparent!important;border-radius:6px;font-weight:600;text-decoration:none}
+.hoard .top a:hover,.hoard .nav a:hover{background:#2A221D!important;color:#F2E8D2!important}
+.hoard .eyebrow,.eyebrow-bill{display:inline-block;background:#F2E8D2;color:#B5321C!important;font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:2px;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.2);justify-self:start}
+h1,h2{font-family:var(--display);font-weight:400}
+h2,h3{color:var(--ink)}
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
-<div class="wrap">
+<header class="hoard"><div class="hin">
   <div class="top">
-    <div class="nav"><a href="garden.html">&larr; 3D model</a><a href="equipment-plan.html">Equipment plan</a><a href="sop.html">Service playbook</a><a href="brand-merch.html">Brand &amp; merch</a></div>
+    <div class="nav"><a href="garden.html">&larr; 3D model</a><a href="equipment-plan.html">Equipment plan</a><a href="furnishing.html">Furnishing &amp; supplies</a><a href="crockery.html">Crockery</a><a href="sop.html">Service playbook</a><a href="brand-merch.html">Brand &amp; merch</a></div>
     <span class="k">Quantities are starting levels for a 60-cover day. Adjust after two weeks of real sales.</span>
   </div>
   <h1>Stock plan</h1>
-  <p class="lead">Every ingredient and consumable the menu needs, where it lives when it is sealed (all of it inside the kitchen, the dish wash or the bar, because the store room is now staff accommodation), where it goes when it is in use, and a count sheet for opening and closing. Built from the food menu, the drinks menu and the kitchen, store room and bar in the equipment plan.</p>
+  <p class="lead">Every ingredient and consumable the menu needs, where it lives when it is sealed (bulk in the store room, cold stock in the kitchen and bar), where it goes when it is in use, how it rotates, and a count sheet for opening and closing. Built from the food menu, the drinks menu, and the kitchen, store room and bar in the equipment plan. The kit is a lean start-up kit, so cold storage is one dual-zone upright and two small chillers; the store room carries everything that does not need cold.</p>
+</div></header>
+<div class="wrap">
   <div class="cards" id="cards"></div>
 
   <section class="zone" id="how">
@@ -98,11 +114,11 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
     <div class="two">
       <div>
         <h3>Two homes for every item</h3>
-        <p>Each item has a <b>home</b>, where sealed stock sits (an under-counter cabinet, a chiller shelf, the locked spirits cabinet), and a <b>working spot</b>, where the open pack or the day's issue sits in the kitchen or at the bar. You count the home and the working spot together as one number.</p>
+        <p>Each item has a <b>home</b>, where sealed stock sits (a store-room rack, a chiller shelf, the locked spirits cage), and a <b>working spot</b>, where the open pack or the day's issue sits in the kitchen or at the bar. You count the home and the working spot together as one number.</p>
         <h3>Three kinds of count</h3>
         <ul class="tight">
           <li><b>Daily, opening and closing:</b> chilled and frozen food, eggs, dairy, kegs, and each bar bottle (open bottles in tenths).</li>
-          <li><b>Weekly, Monday opening:</b> every cabinet in the kitchen, dish wash and bar, unit by unit.</li>
+          <li><b>Weekly, Monday opening:</b> the full store room, rack by rack, top to bottom; then the kitchen and bar units.</li>
           <li><b>Monthly:</b> everything, with the sealed-stock value for the books.</li>
         </ul>
       </div>
@@ -119,23 +135,26 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
   </section>
 
   <section class="zone" id="store">
-    <h2>2 · Storage inside the kitchen</h2>
-    <p class="k">The store room is now staff accommodation. Everything is held in under-counter and wall units, so the plan relies on smaller orders, more often.</p>
+    <h2>2 · Store room</h2>
+    <p class="k"><a href="store-room.html">See the store room as images, with real sizes &rarr;</a></p>
+    <p class="k">2.70 × 6.46 m · racks both sides of a 1.46 m aisle · door from the kitchen at the north end · two corner windows on the east wall and a door grille · full sizes and drawing in the equipment plan, section 4</p>
     <div class="zgrid">
-      <div class="fig"><svg id="svgS" role="img" aria-label="Kitchen storage plan"></svg></div>
+      <div class="fig"><svg id="svgS" role="img" aria-label="Store room layout"></svg></div>
       <div><div class="tw"><table id="tS"></table></div></div>
     </div>
-    <div class="call"><b>It fits, with room to spare.</b> My rough estimate is that the dry goods, packaging and ambient vegetables need about 360 litres, at the weekly restock. The units above give roughly 1,200 litres of usable space. The two things that are tight are cold stock (K8 about 250 of 400 litres) and drinks, which is why drinks are restocked three times a week.</div>
-    <div class="call"><b>Heat and grease.</b> T1 stands 0.40 m from the wok burner. Keep it steel, line the wall beside the burner with a steel splash panel, and put no oil, paper or cardboard in its top shelf. Check the clearance against the gas installer's rule.</div>
-    <div class="call"><b>The old store door is the staff-room entrance.</b> Staff reach their room through the kitchen's south wall, beside the cooking line, so fit a self-closing, tight-fitting leaf with a bottom brush and keep the doorway clear. A sleeping room opening off a food-preparation area may not suit your FSSAI licence conditions; check it with a consultant, because I haven't verified the rule.</div>
-    <div class="call"><b>Not stored in the kitchen.</b> The LPG cylinders (outside, open air) and any spare kegs. A spare keg has no cold place, so the keg order is a standing weekly delivery, with a swap on the day a keg runs out.</div>
+    <div class="call"><b>Laid out for rotation.</b> Every shelf is reached from the aisle, so nothing hides behind anything. Fast-moving stock is nearest the door: oils and sauces, rice and noodles, drinks, vegetable crates. Slow stock is further in: spices and tins, bar dry goods, paper. Spirits and chemicals are locked at the far end. Heavy tins, sacks and cases go on the bottom shelf, bottles and jars above. New stock goes behind or beneath the old (section 7).</div>
+    <div class="call"><b>It has room to spare.</b> The six racks give roughly 6,000 L of shelf space. The dry goods, packaging and ambient vegetables on this list need roughly 400 L at the weekly restock (my estimate), so you can order dry goods fortnightly or monthly for a better price. Heavy things (oil tins, rice sacks, beer cases) are the limit on cash, not on space; only buy a month ahead what keeps a month.</div>
+    <div class="call"><b>The kitchen and bar keep working stock only.</b> The units below hold what is in use for two to three days; refill them from the store at opening. They are not counted as homes on the sheet; the store racks are.</div>
+    <div class="tw" style="margin-top:10px"><table id="tW"></table></div>
+    <div class="call"><b>Air, pests and heat.</b> Two windows on the east wall, one at each corner, let hot air out and a grille low in the door lets cool air in (fit fly mesh and keep the sun off the stock), so onions and potatoes do not sweat. Keep the door closed to kitchen steam, with a brush strip under it, and look for droppings and damp at every weekly sweep.</div>
+    <div class="call"><b>Not in the store room.</b> Anything that needs a chiller or freezer, the LPG cylinders (outside, open air) and spare kegs for more than 48 hours (they need a cold place; a keg room or cold room is the later fix). Spare kegs are a standing weekly delivery with a swap on the day one runs out.</div>
   </section>
 
   <section class="zone" id="cold">
     <h2>3 · Chillers, freezers and the bar</h2>
     <p class="k">Shelf numbers run from the top (1) to the bottom. Ready-to-eat goes on top, raw chicken on the bottom, so nothing drips onto food that is not cooked again.</p>
     <div class="two" id="coldmaps"></div>
-    <div class="call"><b>Prep surfaces.</b> Raw meat and fish come out of K6 and are prepared only on the island (K9). Vegetables come out of K8 and are prepared only at the west end of the granite platform (K10), at the veg wash sink. Dry goods are never opened on either surface.</div>
+    <div class="call"><b>Prep surfaces.</b> Raw meat and fish come out of K6 and are prepared only on the K8 worktop (red and blue boards). Vegetables come out of K8 and are prepared only at the K10 bench on the west wall (green board), at the veg wash sink. Dry goods are never opened on either surface.</div>
   </section>
 
   <section class="zone" id="restock">
@@ -191,14 +210,22 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
         <tr><td>Cooked pork, broths, sauces</td><td class="id">K6, K8</td><td>FEFO. Use the oldest tub first. Never top up an old tub with new.</td><td>Every opening and closing</td><td>Past the date in section 6, or if it was not chilled within 90 minutes.</td></tr>
         <tr><td>Vegetables, herbs, dairy, eggs, tofu, paneer</td><td class="id">K8</td><td>FIFO. Move the oldest to the front and the "use first" tray. Keep herbs dry and loosely wrapped.</td><td>Every opening</td><td>Wilted, wet, mouldy or past the date.</td></tr>
         <tr><td>Frozen dumplings, bao, wrappers, fries, ice cream</td><td class="id">K7</td><td>Date when frozen or received. Oldest bag at the front. Thaw only what the day needs, in K6, not on the bench.</td><td>Weekly</td><td>Freezer burn, ice crystals inside the bag, or thawed and refrozen.</td></tr>
-        <tr><td>Rice, noodles, flours, oil, canned sauces</td><td class="id">U2, K9</td><td>FIFO. New bag goes behind or under the old one. Decant into labelled bins and empty a bin fully before refilling.</td><td>Weekly</td><td>Weevils, damp, rancid smell, bulging cans.</td></tr>
-        <tr><td>Spices, small bottles, nuts, seeds</td><td class="id">W1</td><td>FIFO. Write the date opened on the lid.</td><td>Monthly</td><td>Faded, clumped or stale.</td></tr>
+        <tr><td>Rice, noodles, flours, oil, canned sauces</td><td class="id">SR-W2, U4</td><td>FIFO. New bag goes behind or under the old one. Decant into labelled bins and empty a bin fully before refilling.</td><td>Weekly</td><td>Weevils, damp, rancid smell, bulging cans.</td></tr>
+        <tr><td>Spices, small bottles, nuts, seeds</td><td class="id">SR-W3, K12</td><td>FIFO. Write the date opened on the lid.</td><td>Monthly</td><td>Faded, clumped or stale.</td></tr>
         <tr><td>Beer kegs</td><td class="id">B5</td><td>Tap the oldest keg first. Write the date on each keg when it is tapped and when it goes on a tap.</td><td>Every opening</td><td>Ask the brewery how many days a tapped keg stays good, and write that number on the keg-room wall.</td></tr>
-        <tr><td>Bottled beer, soft drinks, mixers</td><td class="id">B1, B9</td><td>FIFO. New cases go behind. Citrus, milk and cream in B9 are dated when opened.</td><td>Every opening</td><td>Past the date, flat, or cloudy.</td></tr>
-        <tr><td>Spirits</td><td class="id">B8, back bar</td><td>Open the bottle that is already open first. Spare sealed bottles stay in B8.</td><td>Weekly count</td><td>Spirits do not spoil. Count them instead.</td></tr>
-        <tr><td>Cleaning chemicals, paper, packaging</td><td class="id">CH, T1, U4</td><td>FIFO. Check the date on sanitiser and detergent.</td><td>Monthly</td><td>Past the date, or leaking.</td></tr>
+        <tr><td>Bottled beer, soft drinks, mixers</td><td class="id">SR-BEV, B1, B9</td><td>FIFO. New cases go behind. Citrus, milk and cream in B9 are dated when opened.</td><td>Every opening</td><td>Past the date, flat, or cloudy.</td></tr>
+        <tr><td>Spirits</td><td class="id">SR-SP, B8, back bar</td><td>Open the bottle that is already open first. Spare sealed bottles stay in B8.</td><td>Weekly count</td><td>Spirits do not spoil. Count them instead.</td></tr>
+        <tr><td>Cleaning chemicals, paper, packaging</td><td class="id">SR-CHEM, SR-E3, U4</td><td>FIFO. Check the date on sanitiser and detergent.</td><td>Monthly</td><td>Past the date, or leaking.</td></tr>
       </tbody>
     </table></div>
+
+    <h3>In the store room</h3>
+    <ul class="tight">
+      <li>Fill from the aisle, never from behind. New cartons go to the back of the shelf or beneath the old ones; the oldest is always at the front, with its day-colour label showing.</li>
+      <li>Keep a USE FIRST slot at the front of the bottom shelf of each rack. Anything within a week of its date moves there, and the next order is reduced to match.</li>
+      <li>Bring only what the working units (U1, U4, K12, the bar) need for two or three days, oldest first, at opening.</li>
+      <li>Keep everything 10 cm off the floor and 5 cm off the walls so air can move and the floor can be mopped. Spirits and chemicals stay locked.</li>
+    </ul>
 
     <h3>The "use first" tray</h3>
     <ul class="tight">
@@ -209,7 +236,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
 
     <h3>Weekly sweep (once a week, same day, with a second person)</h3>
     <ol class="tight">
-      <li>Empty one unit at a time: K6, K8, K7, U2, K9, W1, then the bar units.</li>
+      <li>Empty one unit at a time: K6, K8, K7, then each store rack in turn (SR-W1 to SR-E3), then the bar units.</li>
       <li>Throw out anything past its date or in poor condition. Write each item on the waste log below.</li>
       <li>Wipe the shelves and the inside of the door.</li>
       <li>Put stock back with the oldest at the front.</li>
@@ -241,10 +268,10 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
           <li>Read the chiller and freezer displays and write them on the log. Chilled should be 5 °C or below, frozen -18 °C or below.</li>
           <li>Receive deliveries. Check temperature, date and packaging, and put chilled and frozen goods away first. Write the quantities into the In column.</li>
           <li>Count the opening stock: K6, K8, K7, the bar fridge and each bar bottle. Write it in the Open column.</li>
-          <li>Top up the working bins and bottles from U2, W1, U4 and T1. Nothing needs carrying from another room.</li>
+          <li>Top up the working units (U1, U4, K12, B4, the bar) from the store room in one trip, oldest stock first.</li>
           <li>Thaw tomorrow's frozen prawns, wontons and bao in K6, not on the bench.</li>
           <li>Check the fryer oil level and colour in both tanks, and the gas bank gauge.</li>
-          <li>Bar: change the keg if one is empty, check the CO&#8322; gauge, fill the ice machine, and chill the vodka bottles in the shot freezer.</li>
+          <li>Bar: change the keg if one is empty, check the CO&#8322; gauge, tip the day's bagged ice into the B7 well, and chill the vodka for shots in B9.</li>
         </ol>
       </div>
       <div>
@@ -257,7 +284,7 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
           <li>Print or read the Order list, and send it to the suppliers.</li>
           <li>Put anything unopened back in its unit, labels facing out, oldest at the front.</li>
           <li>Close the gas at the cylinder bank, and check the hood and fryer controls are off.</li>
-          <li>Lock B8 (spirits), the chemical cabinet CH and T1. Check the gas is off at the cylinder bank.</li>
+          <li>Lock B8, the spirits cage and the chemical cupboard in the store room, and lock the cash drawer B17a. Check the gas is off at the cylinder bank.</li>
         </ol>
       </div>
     </div>
@@ -278,9 +305,10 @@ footer{margin-top:44px;color:var(--muted);font-size:13px}
       <li>Items marked A come from standard recipes. Check them against your own.</li>
       <li>Shelf lives and temperatures are typical values, not FSSAI limits. Check them with your food-safety consultant or your licence conditions.</li>
       <li>Where kegs, ice cream and bao come from and in what pack size is a choice for your suppliers. Pack sizes here (20 L kegs, 5 L ice-cream tubs, 1 L coconut-milk packs) are assumptions.</li>
-      <li>The unit sizes assume the model's kitchen (5.21 × 4.18 m clear) and the granite platform piers. Measure the bays on site; the piers may not be where the model puts them.</li>
+      <li>The unit sizes assume the re-measured kitchen (4.10 × 4.18 m clear). The U4 open base under the pass table (1.15 × 0.45 m) now holds the working dry stock the old U2 shelves did, so it is tight: bring only two days of rice, noodles and flour at a time. Measure the bays on site.</li>
       <li>Shelf lives are typical values for sealed and opened food, not FSSAI limits. The restock rhythm assumes your suppliers will deliver that often, which I haven't checked.</li>
-      <li>The chiller space for the vegetables and dairy in K8 is a rough estimate: about 250 litres of food in a 400-litre unit. If it overflows, order vegetables every day or add a second under-counter chiller.</li>
+      <li>Cold space is tight by design. K8 is a 2-door unit of about 250 to 280 L gross and holds about 200 L of food; the K6 chiller side (about 300 L) takes overflow on its second shelf. If both are full, order vegetables daily or add a second under-counter chiller. The freezer side (about 300 L) holds about 130 L; add an under-counter freezer if it fills.</li>
+      <li>The store-room shelf space (about 6,000 L) and the weekly dry-stock need (about 400 L) are my rough estimates.</li>
     </ul>
   </section>
 
@@ -293,19 +321,20 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'
 
 /* ---------- locations ---------- */
 const LOC={
- 'U1':['Kitchen · U1 under the granite, west bay','Slatted shelves 0.90 m wide, beside the veg wash sink. Onions, potatoes, garlic, ginger in ventilated crates.'],
- 'U2':['Kitchen · U2 under the granite, east bay','Lockable cabinet 1.56 m wide, bins on wheels. Oil, rice, noodles, flours, sugar, salt and the heavy sauce cans.'],
- 'U4':['Kitchen · U4 base cabinet under the pass shelf','Doors, 1.30 m wide. Paper, liners, gloves, bin bags, bill rolls.'],
- 'T1':['Kitchen · T1 overhead cabinet','Lockable, 0.45 m wide, above the staff-room door. Paper towels, napkins and other light items.'],
- 'W1':['Kitchen · W1 wall cabinet over K8','Doors, 1.50 m wide, at 1.30 m. Spices, small sauce bottles, peanuts, sesame, pepper.'],
- 'CH':['Dish wash · CH chemical wall cabinet','Locked, fixed to the masonry, 0.80 m wide at 1.30 m. Detergent, rinse aid, sanitiser, floor cleaner.'],
- 'B1':['Bar · B1 back-bar cooler','Beer, water, soft drinks, soda, tonic, ginger ale. About 1.5 days of stock.'],
- 'B4':['Bar · B4 cabinet under the POS','Tea, coffee, filters, brown sugar, kokum, black salt, Sichuan pepper, straws, cocktail sticks.'],
- 'B8':['Bar · B8 lockable under-counter cabinet','Sealed spare spirits only. Open bottles live on the back bar.'],
- 'K6':['Kitchen · K6 upright chiller','Raw non-veg and cooked pork.'],
- 'K8':['Kitchen · K8 under-counter chiller','Vegetables and herbs (left), sauces and dairy (middle), eggs, tofu, paneer, mushrooms (right).'],
- 'K7':['Kitchen · K7 freezer','Prawns, folded dumplings, bao, wrappers, edamame, fries, ice cream.'],
- 'B9':['Bar · B9 under-counter fridge','Milk, cream, citrus, bar syrups and mixers that need cold.'],
+ 'SR-W1':['Store room · SR-W1 west rack 1','Oils, sauces and vinegars. Heavy tins and bottles on the bottom shelf. Nearest the door.'],
+ 'SR-W2':['Store room · SR-W2 west rack 2','Rice, noodles, flour, starches, sugar, salt, nuts and seeds. Bins with lids on the bottom shelf.'],
+ 'SR-W3':['Store room · SR-W3 west rack 3','Tins, jars, spices and dried goods.'],
+ 'SR-BEV':['Store room · SR-BEV beverage pallet','Beer, water, soft drinks, soda and mixers, on a pallet by the door. Spare CO₂ cylinder chained upright beside it.'],
+ 'SR-E1':['Store room · SR-E1 east rack 1','Onions, potatoes, garlic, ginger in ventilated crates.'],
+ 'SR-E2':['Store room · SR-E2 east rack 2','Bar dry goods: tea, coffee, syrups, tinned fruit, sugar.'],
+ 'SR-E3':['Store room · SR-E3 east rack 3','Paper, liners, gloves, bin bags, bill rolls, napkins, straws. Slowest stock, furthest in.'],
+ 'SR-SPIRIT':['Store room · SR-SP spirits cage','Locked. Sealed spare bottles only. Open bottles live on the back bar; B8 holds about a week.'],
+ 'SR-CHEM':['Store room · SR-CHEM chemical cupboard','Locked, low, on a bund tray, away from food. Dish-wash liquid, sanitiser, degreaser, floor cleaner, soap.'],
+ 'K6':['Kitchen · K6 chiller side of the dual-zone upright','Raw non-veg, cooked pork and broths, plus overflow vegetables.'],
+ 'K8':['Kitchen · K8 under-counter chiller','Vegetables and herbs, sauces and dairy (left door), eggs, tofu, paneer, mushrooms (right door).'],
+ 'K7':['Kitchen · K7 freezer side of the dual-zone upright','Prawns, folded dumplings, bao, wrappers, edamame, fries, ice cream.'],
+ 'B9':['Bar · B9 under-counter fridge','Milk, cream, citrus, bar syrups, infused vodka and mixers that need cold.'],
+ 'B7':['Bar · B7 sink ice well','Bagged ice for the day, tipped into the well at opening.'],
  'B5':['Bar · B5 keg chiller','Three kegs on tap. Spare CO₂ cylinder chained beside it.'],
  'BACK':['Bar · back-bar shelves','One open bottle of each spirit, within reach of the bartender.']
 };
@@ -329,21 +358,21 @@ add('SR-W1',[
  ['Tomato ketchup','L',3,1,'A','Manchurian sauce, sweet chilli','K12',''],
  ['Sweet chilli sauce','L',2,1,'M','Wonton More dip','K8 middle after opening',''],
  ['Honey','L',2,1,'M','Honey Trap glaze, darsaan','K12',''],
- ['Chocolate sauce','L',1,1,'M','Scoop There It Is topping','K10 dessert end','']
+ ['Chocolate sauce','L',1,1,'M','Scoop There It Is topping','K11 top','']
 ]);
 add('SR-W2',[
- ['Jasmine rice','kg',12,1,'M','Plain Jane, curry rice bowls, basil rice, fried rice','K10 rice bin, K14 cooker','Wash and soak before cooking. Cook the day-old rice for fried rice one day ahead.'],
- ['Glutinous (sticky) rice','kg',2,1,'M','Sticky Situation','K10',''],
- ['Thin noodles (Hakka)','kg',3,1,'M','Noodle Around','K9 undershelf',''],
- ['Egg noodles','kg',1.5,1,'M','Suey Generis (khao suey)','K9 undershelf','Part of this is fried crisp for the topping.'],
- ['Flat noodles','kg',1.5,1,'M','Honey, I Shrunk the Noodles (darsaan)','K9 undershelf',''],
- ['Plain flour (maida)','kg',5,1,'A','Bao, batters, dusting','K9 undershelf bin',''],
- ['Cornflour','kg',3,1,'M','Egg-cornflour batter, sauces, Hot & Bothered','K9 undershelf bin',''],
- ['Wheat starch','kg',1.5,1,'M','Crystal Clear and prawn dumpling skins','K9 undershelf bin',''],
- ['Tapioca starch','kg',1,1,'A','Dumpling skins','K9 undershelf bin',''],
- ['Potato starch','kg',1.5,1,'M','K-Pop Wings crust','K9 undershelf bin',''],
+ ['Jasmine rice','kg',12,1,'M','Plain Jane, curry rice bowls, basil rice, fried rice','U4 rice bin, K14 cooker','Wash and soak before cooking. Cook the day-old rice for fried rice one day ahead.'],
+ ['Glutinous (sticky) rice','kg',2,1,'M','Sticky Situation','U4 shelves',''],
+ ['Thin noodles (Hakka)','kg',3,1,'M','Noodle Around','U4 shelves',''],
+ ['Egg noodles','kg',1.5,1,'M','Suey Generis (khao suey)','U4 shelves','Part of this is fried crisp for the topping.'],
+ ['Flat noodles','kg',1.5,1,'M','Honey, I Shrunk the Noodles (darsaan)','U4 shelves',''],
+ ['Plain flour (maida)','kg',5,1,'A','Bao, batters, dusting','U4 shelves, bin',''],
+ ['Cornflour','kg',3,1,'M','Egg-cornflour batter, sauces, Hot & Bothered','U4 shelves, bin',''],
+ ['Wheat starch','kg',1.5,1,'M','Crystal Clear and prawn dumpling skins','U4 shelves, bin',''],
+ ['Tapioca starch','kg',1,1,'A','Dumpling skins','U4 shelves, bin',''],
+ ['Potato starch','kg',1.5,1,'M','K-Pop Wings crust','U4 shelves, bin',''],
  ['White sugar','kg',4,1,'A','Syrups, sauces, brine','K12',''],
- ['Palm jaggery','kg',2,1,'M','Jaggery syrup, papaya salad, sticky rice','K10 dessert end',''],
+ ['Palm jaggery','kg',2,1,'M','Jaggery syrup, papaya salad, sticky rice','K11 top',''],
  ['Salt','kg',5,1,'A','Everywhere','K12',''],
  ['Black pepper, crushed','kg',1,1,'M','Salt & Pepa, basil chicken','K12',''],
  ['White pepper','kg',1,1,'M','Soups, wonton soup','K12',''],
@@ -362,7 +391,7 @@ add('SR-W3',[
  ['Cumin seeds','kg',0.3,0,'A','Green curry paste','K12',''],
  ['Coriander seeds','kg',0.3,0,'A','Green curry paste','K12','']
 ]);
-add('SR-E1',[
+add('SR-E3',[
  ['Greaseproof paper sheets (basket liners)','pcs',600,1,'M','Every fry basket: Salt & Pepa, wings, Wonton More, fries','K12 shelf by the fryer','One sheet per order, replaced every time.'],
  ['Perforated steamer liners','pcs',500,1,'M','Every dim sum basket','K4 side shelf',''],
  ['Cocktail sticks, box of 1,000','box',1,0,'M','Honey Trap','Bar and pass',''],
@@ -370,9 +399,9 @@ add('SR-E1',[
  ['Thermal rolls, 80 mm','roll',20,0,'A','KOT and bills','K11 printer, bar POS',''],
  ['Nitrile gloves, box of 100','box',4,1,'A','Handling food that is not cooked again','K12',''],
  ['Hair caps','pack',2,0,'A','Kitchen staff','Kitchen door',''],
- ['Cling film','roll',4,0,'A','Covering prep','K9 undershelf',''],
- ['Aluminium foil','roll',2,0,'A','Covering and braising','K9 undershelf',''],
- ['Bin bags, 60 L','pack',6,1,'A','Wet, dry and recycling bins','Under K10, D8',''],
+ ['Cling film','roll',4,0,'A','Covering prep','U4 shelves',''],
+ ['Aluminium foil','roll',2,0,'A','Covering and braising','U4 shelves',''],
+ ['Bin bags, 60 L','pack',6,1,'A','Wet, dry and recycling bins','Under K11, D8',''],
  ['Paper towels','roll',12,1,'A','Kitchen, dish wash','K13 basin, D2',''],
  ['Paper straws','pack',4,1,'A','Bar','Bar','']
 ]);
@@ -388,11 +417,11 @@ add('SR-E2',[
  ['Chickpeas, tin (for aquafaba)','tin',6,1,'M','Kokum feni sour','B9 once opened','Keep the liquid, use the chickpeas in the kitchen.'],
  ['Lychee, tin','tin',3,0,'M','Lychee & lemongrass martini','B9 once opened','']
 ]);
-add('SR-E3',[
- ['Red onion','kg',8,1,'M','Cabin Fever, Hakka, Manchurian, khao suey fried onion, pickled onion','K9 undershelf crate',''],
- ['Potato','kg',4,1,'M','Honey Trap potato fingers','K9 undershelf crate',''],
- ['Garlic','kg',2,1,'M','Almost every dish, fried garlic crumbs','K9 undershelf crate',''],
- ['Ginger','kg',1.5,1,'M','Wonton Kenobi, wontons, Manchurian, iced tea','K9 undershelf crate','']
+add('SR-E1',[
+ ['Red onion','kg',8,1,'M','Cabin Fever, Hakka, Manchurian, khao suey fried onion, pickled onion','U1 crate',''],
+ ['Potato','kg',4,1,'M','Honey Trap potato fingers','U1 crate',''],
+ ['Garlic','kg',2,1,'M','Almost every dish, fried garlic crumbs','U1 crate',''],
+ ['Ginger','kg',1.5,1,'M','Wonton Kenobi, wontons, Manchurian, iced tea','U1 crate','']
 ]);
 add('SR-BEV',[
  ['Kings 330 ml','pcs',72,1,'M','Beer; happy hour ₹99','B1 cooler, 1 day\'s worth','Rotate: bring one carton to B1 at opening.'],
@@ -413,14 +442,14 @@ add('SR-BEV',[
 const SP=[['Paul John Brilliance',3],['Amrut Fusion',3],['Glenlivet 12',3],['Talisker 10',3],['Dewar\'s White Label',6],['William Lawson\'s',3],['Monkey Shoulder',3],['Johnnie Walker Black Label',3],['Jameson',4],['Suntory Toki',4],['Haku rice vodka',3],['Belvedere',3],['House vodka (infusions, martini, Kimchi Mary)',4],['Gin',4],['Cashew feni',4],['Coconut feni',3],['Agave spirit',3],['Soju',8]];
 add('SR-SPIRIT',SP.map(([n,p])=>[n+', 750 ml','btl',p,0,'M','Whisky, vodka, cocktail menus','BACK, one open bottle','Count the open bottle in tenths. Sealed spares stay in the cage.']));
 add('SR-CHEM',[
- ['Dishwasher detergent','L',10,0,'A','D3','D3 dispenser (D10)',''],
- ['Rinse aid','L',5,0,'A','D3','D3 dispenser (D10)',''],
- ['Sanitiser (food-contact)','L',5,0,'A','All surfaces','D10, spray bottles',''],
+ ['Dish-wash liquid, for hand washing','L',10,0,'A','D2 wash bowl','D4a top shelf, bottle',''],
+  ['Sanitiser (food-contact)','L',5,0,'A','D3 sanitise bowl, all surfaces','D4a top shelf, spray bottles','Mix to the label strength and check it with test strips each shift.'],
  ['Degreaser','L',5,0,'A','Hood filters, hot line','Kitchen',''],
- ['Floor cleaner','L',10,0,'A','Floors','D9 mop sink',''],
+ ['Floor cleaner','L',10,0,'A','Floors','Mop bucket at D11',''],
  ['Hand soap','L',5,0,'A','K13, B7, washroom','K13, B7',''],
  ['Hand sanitiser','L',2,0,'A','Door','Kitchen door',''],
- ['Scourers and mop heads','pcs',20,0,'A','Cleaning','D2, D9','']
+ ['Scourers and mop heads','pcs',20,0,'A','Cleaning','D2, mop bucket',''],
+ ['Sanitiser test strips, pack','pack',2,0,'A','D3','D4a','']
 ]);
 add('K6',[
  ['Chicken, boneless thigh and breast','kg',6,1,'M','Cabin Fever, Honey Trap, curries, noodles, rice, soups, wontons, bao','Bottom shelf 5, in lidded trays','About 1.6 kg of this is minced daily for wontons, siu mai and basil chicken.'],
@@ -455,7 +484,7 @@ add('K8',[
  ['Tomato','kg',2.5,1,'M','Slap Happy, Kimchi Mary garnish','Left',''],
  ['Limes (kitchen share)','pcs',30,1,'M','Coconut Cuddle, papaya, curries, garnish','Left',''],
  ['Edamame, frozen, thawed for the day','kg',0.5,1,'M','Crystal Clear','Left','Main stock in K7.'],
- ['Mayonnaise','kg',3,1,'A','Base for kasundi, chilli and gochujang mayo','Middle','Sealed stock on SR-W1 shelf 1 if you buy by the case.'],
+ ['Mayonnaise','kg',3,1,'A','Base for kasundi, chilli and gochujang mayo','Middle','Buy in 1 kg packs; sealed stock in the K8 right door.'],
  ['Cheese, melting','kg',1,1,'M','Fry Hard','Middle',''],
  ['Butter','kg',0.5,1,'A','Cooking','Middle',''],
  ['Kimchi','kg',3,1,'P','Fry Hard','Middle, in a lidded jar','Make weekly. Open the jar slowly.'],
@@ -498,8 +527,11 @@ add('B9',[
  ['Lemongrass syrup','L',2,1,'P','Coconut feni highball','Bar','Use within 7 days.'],
  ['Kokum syrup','L',2,1,'P','Kokum soda, kokum feni sour','Bar','Use within 7 days.'],
  ['Lemongrass-ginger iced tea, brewed','L',8,1,'P','Zero-proof menu','Bar','Brew daily.'],
- ['Chilli-garlic vodka, infused','L',3,0,'P','Chilled shot','Shot freezer B10','48 hours to infuse.'],
- ['Lemongrass-ginger vodka, infused','L',3,0,'P','Chilled shot, tonic','Shot freezer B10','48 hours to infuse.']
+ ['Chilli-garlic vodka, infused','L',3,0,'P','Chilled shot','B9 bottom shelf, chilled','48 hours to infuse.'],
+ ['Lemongrass-ginger vodka, infused','L',3,0,'P','Chilled shot, tonic','B9 bottom shelf, chilled','48 hours to infuse.']
+]);
+add('B7',[
+ ['Ice, bagged','kg',30,1,'A','Highballs, cocktails, pitchers, iced tea','B7 ice well','Bought each morning; there is no ice machine at the start. Keep it in the well, never on the floor.']
 ]);
 add('B5',[
  ['Comrade Crisp keg, 20 L','keg',2,0,'M','Draught lager, pitchers, paddle, happy hour','B5 (1 on tap, 1 spare)','The spare can wait in the beverage stack for up to 48 hours only.'],
@@ -507,32 +539,12 @@ add('B5',[
  ['Guest tap keg, 20 L','keg',1,0,'M','Gimme Gimme Gimme, rotating','B5','New keg every second week.']
 ]);
 
-/* ---------- no store room: remap every item to a kitchen, dish-wash or bar home ---------- */
-(function(){
- const to=(r)=>{const h=r[0],n=r[1];
-  if(h==='SR-W1')return /frying oil|Light soy|Dark soy|White vinegar|Honey|ketchup/.test(n)?'U2':'W1';
-  if(h==='SR-W2')return /pepper|peanuts|sesame|Brown sugar/.test(n)?'W1':'U2';
-  if(h==='SR-W3')return 'W1';
-  if(h==='SR-E1')return /Paper towels|Napkins/.test(n)?'T1':'U4';
-  if(h==='SR-E2')return /Chickpeas|Lychee|Tamarind/.test(n)?'U2':'B4';
-  if(h==='SR-E3')return 'U1';
-  if(h==='SR-BEV')return /CO₂/.test(n)?'B5':'B1';
-  if(h==='SR-SPIRIT')return 'B8';
-  if(h==='SR-CHEM')return 'CH';
-  return h;};
- R.forEach(r=>{r[0]=to(r);});
- // with no store room, drinks are held at about 1.5 days and restocked three times a week
- const HALF={'Kings 330 ml':36,'Kings 650 ml':12,'Budweiser 330 ml':24,'Budweiser 650 ml':6,'Still water, 1 L':24,'Sparkling water, 330 ml':12,'Coke, 300 ml':12,'Diet Coke, 300 ml':12,'Thums Up, 300 ml':12,'Sprite, 300 ml':12,'Soda water, 300 ml':36,'Indian tonic water, 200 ml':24,'Ginger ale, 200 ml':12};
- R.forEach(r=>{if(HALF[r[1]]!=null)r[3]=HALF[r[1]];});
- R.forEach(r=>{if(/^Veg frying oil|^Non-veg frying oil/.test(r[1]))r[3]=1;if(/^Kings 330|^Budweiser 330/.test(r[1]))r[8]='Held at about 1.5 days. Cold stock only.';});
- R.forEach(r=>{if(r[1]==='Mayonnaise')r[8]='Buy in 1 kg packs; hold in K8 only.';});
-})();
 /* ---------- shelf life and restock, by item ---------- */
 const MR=[
  [/frying oil/,'12 months sealed. Fryer oil: change when dark, about every 3–5 days','Weekly'],
  [/keg/,'About 6–8 weeks unopened and cold; about 1 week once tapped','Weekly'],
  [/CO₂/,'Does not expire','On empty'],
- [/Kings|Budweiser|water, |Coke|Thums|Sprite|Soda water|tonic|Ginger ale/,'6–12 months sealed; chill before serving','3 times a week'],
+ [/Kings|Budweiser|water, |Coke|Thums|Sprite|Soda water|tonic|Ginger ale/,'6–12 months sealed; chill before serving','Weekly'],
  [/Chicken, boneless|wings/,'1–2 days at 5 °C or below; freeze on day 1 if not used','Daily'],
  [/Fish fillet/,'1 day; use the day it arrives','Daily'],
  [/thawed$|Prawns, peeled and deveined, thawed/,'24 hours once thawed','Daily (thaw from K7)'],
@@ -587,58 +599,57 @@ const MR=[
 ];
 function META(r){
  if(r[2]==='btl')return['Years sealed; an open bottle keeps 1–2 years','Monthly'];
- if(r[0]==='CH')return['12–24 months','Monthly'];
+ if(r[0]==='SR-CHEM')return['12–24 months','Monthly'];
+ if(r[0]==='B7')return['Use the day it is bought','Daily'];
  for(const [re,l,f] of MR)if(re.test(r[1]))return[l,f];
  return['—','Weekly'];
 }
 const FREQ=['Daily','Daily (thaw from K7)','Every 2 days','Twice a week','3 times a week','Weekly','Fortnightly','Every 2 weeks','Monthly','On empty'];
 
-/* ---------- kitchen storage plan ---------- */
+/* ---------- store room plan and working units ---------- */
 (function(){
- const P=100,W=5.21,H=4.18,M=45;const f=v=>Math.round(v*P*10)/10;
- const box=(x,y,w,h,c,id,dk)=>'<rect class="eq '+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>'+(id?'<text class="nm'+(dk?' dk':'')+'" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4" font-size="11">'+id+'</text>':'');
- const dash=(x,y,w,h,id)=>'<rect x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" fill="none" stroke="var(--brass)" stroke-width="2" stroke-dasharray="7 5"/>'+(id?'<text class="nm dk" style="fill:var(--brass-ink)" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4" font-size="11">'+id+'</text>':'');
+ const P=100,W=2.70,H=6.46,M=55;const f=v=>Math.round(v*P*10)/10;
+ const box=(x,y,w,h,c,id,dk)=>'<rect class="eq '+c+'" x="'+f(x)+'" y="'+f(y)+'" width="'+f(w)+'" height="'+f(h)+'" rx="2"/>'+(id?'<text class="nm'+(dk?' dk':'')+'" x="'+f(x+w/2)+'" y="'+f(y+h/2)+'" dy="4" font-size="'+(w<0.65&&h>w?10:11)+'" '+(w<0.65&&h>w?'transform="rotate(-90 '+f(x+w/2)+' '+f(y+h/2)+')"':'')+'>'+id+'</text>':'');
+ const dimH=(x1,x2,y,l)=>'<g><path class="dm" d="M'+f(x1)+' '+f(y)+'H'+f(x2)+'M'+f(x1)+' '+(f(y)-5)+'V'+(f(y)+5)+'M'+f(x2)+' '+(f(y)-5)+'V'+(f(y)+5)+'"/><text class="dt" x="'+f((x1+x2)/2)+'" y="'+(f(y)-7)+'">'+l+'</text></g>';
  let s='<rect class="wall" x="-5" y="-5" width="'+(W*P+10)+'" height="'+(H*P+10)+'"/>';
- s+='<path class="gap" d="M-5 '+f(0.25)+'V'+f(1.15)+'"/>';   // kitchen door
- s+=box(0.90,0,3.36,0.62,'r6','granite K10',0);
- s+=box(4.46,0.35,0.75,3.82,'r1','HOT LINE');
- s+=box(0.40,3.38,0.78,0.80,'r3','K6')+box(1.18,3.38,0.78,0.80,'r3','K7')+box(1.96,3.48,1.50,0.70,'r3','K8');
- s+=box(1.6,1.70,1.50,0.60,'r5','K9',1);
- // storage units
- s+=box(1.6,0.0,0.9,0.62,'r4','U1',1)+box(2.64,0.0,1.56,0.62,'r2','U2');
- s+=box(0,2.2,0.45,1.30,'r4','U4',1);
- s+=dash(3.48,3.78,0.45,0.40,'T1 above door');
- s+=dash(1.96,3.88,1.5,0.30,'W1 on the wall above K8');
- s+=dash(1.6,2.30,1.5,0.10,'');
- s+='<text class="zt" x="'+f(2.35)+'" y="'+f(2.58)+'" text-anchor="middle">K9: undershelf for trays, waste bin</text>';
- s+='<text class="zt" x="'+f(3.76)+'" y="'+f(4.42)+'" text-anchor="middle" style="font-size:9px">staff-room door</text>';
- s+='<text class="zt" x="'+f(2.6)+'" y="'+f(1.4)+'" text-anchor="middle" style="font-size:9px">aisle 1.08</text>';
- s+='<text class="zt" x="'+f(0.35)+'" y="'+f(1.95)+'" style="font-size:9px">door</text>';
+ s+='<path class="gap" d="M'+f(0.85)+' -5H'+f(1.75)+'"/>';
+ s+='<text class="zt" x="'+f(1.3)+'" y="-14" text-anchor="middle">Door from kitchen 0.90</text>';
+ s+=box(0.12,0.15,0.5,1.5,'r1','SR-W1')+box(0.12,1.65,0.5,1.5,'r2','SR-W2')+box(0.12,3.15,0.5,1.5,'r3','SR-W3')+box(0.12,4.75,0.5,1.2,'r1','SR-CHEM');
+ s+=box(1.98,0.15,0.6,1.2,'r3','SR-BEV')+box(2.08,1.45,0.5,1.5,'r5','SR-E1',1)+box(2.08,2.95,0.5,1.5,'r4','SR-E2',1)+box(2.08,4.45,0.5,1.5,'r4','SR-E3',1)+box(0.75,5.96,1.2,0.4,'r6','SPIRITS');
+ s+='<text class="zt" x="'+f(1.35)+'" y="'+f(3.0)+'" text-anchor="middle">aisle 1.46</text>';
+ s+=dimH(0.62,2.08,5.5,'1.46');
  const el=document.getElementById('svgS');
  el.setAttribute('viewBox',(-M)+' '+(-M)+' '+(W*P+M*2)+' '+(H*P+M*1.6));
  el.innerHTML=s;
  document.getElementById('tS').innerHTML='<thead><tr><th>Code</th><th>Unit (W × D × H, m)</th><th>What goes there</th></tr></thead><tbody>'+[
-  ['U1','Slatted shelves 0.90 × 0.55 × 0.80, under the granite K10, west bay','Onions, potatoes, garlic, ginger in ventilated crates. Beside the veg wash sink.'],
-  ['U2','Lockable cabinet 1.56 × 0.55 × 0.80, under K10, east bay','Two 15 L oil tins, rice and noodle bins (20 L, on wheels), flour and starch bins, sugar, salt, 5 and 10 L sauce cans.'],
-  ['U4','Base cabinet 1.30 × 0.45 × 0.90, under the pass shelf K11','Basket and steamer liners, gloves, caps, bin bags, bill rolls, cling film, foil.'],
-  ['T1','Lockable overhead cabinet 0.45 × 0.40 × 0.80, above the staff-room door','Paper towels and napkins; tins now go to W1 (coconut milk, bamboo shoot, chestnuts) and U2 (chickpeas, lychee, tamarind).'],
-  ['W1','Wall cabinet 1.50 × 0.30 × 0.80, at 1.30 m above the K8 worktop','Spices, small sauce bottles, peanuts, sesame, pepper.'],
-  ['CH','Locked wall cabinet 0.80 × 0.30 × 0.80, at 1.30 m in the dish wash','Detergent, rinse aid, sanitiser, floor cleaner. Fix to the masonry; the full cans weigh about 40 kg.'],
-  ['B4','Cabinet 0.60 × 0.60 × 0.85, under the POS at the bar','Tea, coffee, filters, brown sugar, kokum, black salt, Sichuan pepper, straws, cocktail sticks.'],
-  ['B8','Lockable under-counter cabinet 1.10 × 0.60 × 0.85 in the bar counter','Sealed spare spirits, about 45 bottles.'],
-  ['K9 under','Open undershelf 1.44 × 0.55 × 0.20, under the island','Trays, GN pans, clean containers; the non-veg waste bin at the west end.']
+  ['SR-W1','Rack 1.50 × 0.50 × 1.80, 4 shelves','Oils, sauces, vinegars. 15 L oil tins on the floor shelf.'],
+  ['SR-W2','Rack 1.50 × 0.50 × 1.80','Rice, noodles, flour and starches in lidded bins; sugar, salt, nuts, seeds.'],
+  ['SR-W3','Rack 1.50 × 0.50 × 1.80','Tins, jars, spices, dried goods.'],
+  ['SR-CHEM','Locked cupboard 1.20 × 0.50 × 1.80, on a bund tray','Dish-wash liquid, sanitiser, degreaser, floor cleaner, soap. Low shelf for the heavy cans.'],
+  ['SR-BEV','Pallet stack 1.20 × 0.60 × 1.20','Beer, water, soft drinks, soda, mixers; spare CO₂ cylinder chained to the wall.'],
+  ['SR-E1','Rack 1.50 × 0.50 × 1.80, slatted crates','Onions, potatoes, garlic, ginger in ventilated crates.'],
+  ['SR-E2','Rack 1.50 × 0.50 × 1.80','Tea, coffee, filters, syrups, tinned fruit and chickpeas, brown sugar.'],
+  ['SR-E3','Rack 1.50 × 0.50 × 1.80','Paper, liners, gloves, bin bags, bill rolls, napkins, straws.'],
+  ['SR-SP','Locked cage 1.20 × 0.40 × 1.80','Sealed spare spirits only. The owner holds the key.']
+ ].map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join('')+'</tbody>';
+ document.getElementById('tW').innerHTML='<thead><tr><th>Working unit</th><th>Size (W × D × H, m)</th><th>Holds (about 2 to 3 days)</th></tr></thead><tbody>'+[
+  ['K22 · U1','Slatted shelves 0.55 × 0.90 × 0.80, under the veg bench K10, west wall','Onions, potatoes, garlic, ginger for two days, beside the veg wash sink.'],
+  ['K11 · U4','Open steel shelves 0.45 × 1.15 × 0.85, under the pass table','Rice, noodle and flour bins, the oil tin in use, cling film and foil, basket liners, gloves, bin bags in use (two days).'],
+  ['K12','Wall shelves 0.95 × 0.30, two tiers, west wall above K10','Squeeze bottles, spice jars and small sauces in use.'],
+  ['D4a','Wall shelves 1.30 × 0.30, two tiers, over the clean table','Day-use dish-wash liquid, sanitiser and test strips.'],
+  ['B4','Back-bar cabinet 0.60 × 0.60 × 0.85','Tea, coffee, filters and straws in use.'],
+  ['B8','Lockable cabinet 0.95 × 0.60 × 0.85, in the counter','About a week of sealed spirits.']
  ].map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join('')+'</tbody>';
 })();
 
 /* ---------- cold maps ---------- */
 (function(){
  const maps=[
-  ['K6 upright chiller, 0.78 × 0.80 × 1.95','Raw non-veg and cooked pork',[['1 (top)','Braised pork belly in its liquid, clear chicken broth, hot & sour base, Manchurian sauce'],['2','Marinated and portioned, ready to cook (wings, chicken for Cabin Fever)'],['3','Raw pork belly, chouriço'],['4','Chonak fillet, thawed prawns'],['5 (bottom)','Raw chicken and wings, in lidded trays']]],
-  ['K8 under-counter chiller, 1.50 × 0.70 × 0.90','Vegetables, dairy, sauces',[['Left','Vegetables and herbs, pickled onion, chilli vinegar, day-old rice in shallow trays'],['Middle','Mayonnaise and flavoured mayos, kimchi, green curry paste, opened coconut milk, hoisin, gochujang, sweet chilli, cheese, butter'],['Right','Eggs, tofu, paneer, mushrooms']]],
-  ['K7 upright freezer, 0.78 × 0.80 × 1.95','Frozen food and ice cream',[['F1','Peeled prawns'],['F2','Bao buns, wonton wrappers, folded wontons, dumplings and siu mai'],['F3','Edamame, fries, kaffir lime leaves'],['F4','Ice-cream tubs: vanilla, tender coconut, kokum'],['F5','Spare shelf; keep clear for deliveries']]],
+  ['K6 chiller side of the dual-zone upright, 0.60 × 0.80 × 1.95','Raw non-veg, cooked pork, broths, overflow vegetables',[['1 (top)','Braised pork belly in its liquid, clear chicken broth, hot & sour base, Manchurian sauce'],['2','Overflow raw vegetables and herbs when K8 is full (nothing ready to eat below it)'],['3','Marinated and portioned, ready to cook (wings, chicken for Cabin Fever)'],['4','Raw pork belly, chouriço, chonak fillet, thawed prawns'],['5 (bottom)','Raw chicken and wings, in lidded trays']]],
+  ['K8 under-counter chiller, 1.20 × 0.70 × 0.90','Vegetables, dairy, sauces',[['Left door','Vegetables and herbs, pickled onion, chilli vinegar, day-old rice in shallow trays'],['Left door, back','Mayonnaise and flavoured mayos, kimchi, green curry paste, opened coconut milk, hoisin, gochujang, sweet chilli, cheese, butter'],['Right door','Eggs, tofu, paneer, mushrooms']]],
+  ['K7 freezer side of the dual-zone upright, 0.60 × 0.80 × 1.95','Frozen food and ice cream',[['F1','Peeled prawns'],['F2','Bao buns, wonton wrappers, folded wontons, dumplings and siu mai'],['F3','Edamame, fries, kaffir lime leaves'],['F4','Ice-cream tubs: vanilla, tender coconut, kokum'],['F5','Spare shelf; keep clear for deliveries']]],
   ['B1 back-bar cooler, 1.20 × 0.60 × 0.85','Cold drinks for service',[['Top','Bottled beer, Kings and Budweiser'],['Middle','Soda, tonic, ginger ale'],['Bottom','Water and soft drinks']]],
-  ['B9 under-counter fridge, 0.60 × 0.60 × 0.85','Coffee station and bar',[['Top','Milk, cream'],['Middle','Limes, lemons, grapefruit, Yakult'],['Bottom','Tomato juice, syrups, iced tea, opened tinned fruit and chickpeas']]],
-  ['B10 shot freezer, 0.60 × 0.60 × 0.85','At -5 °C',[['All','Haku, Belvedere, the two house infusions, chilled shot glasses']]],
+  ['B9 under-counter fridge, 0.60 × 0.60 × 0.85','Coffee station and bar',[['Top','Milk, cream'],['Middle','Limes, lemons, grapefruit, Yakult'],['Bottom','Tomato juice, syrups, iced tea, opened tinned fruit and chickpeas, the two house vodka infusions and the vodka for chilled shots']]],
   ['B5 keg chiller, 1.00 × 0.60 × 0.85','Three kegs on tap',[['Floor','Comrade Crisp, Gose Bumps, guest keg'],['Side','CO₂ cylinder, 2–3 kg, chained']]]
  ];
  document.getElementById('coldmaps').innerHTML=maps.map(m=>'<div><h3>'+m[0]+'</h3><p class="k" style="margin-bottom:6px">'+m[1]+'</p><div class="tw"><table><tbody>'+m[2].map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('')+'</tbody></table></div></div>').join('');
@@ -657,7 +668,7 @@ document.getElementById('tP').innerHTML='<thead><tr><th>Item</th><th>Batch</th><
  ['Pickled onion','1 kg twice a week','5 days','K8 left','Fever Pitch'],
  ['Green chillies in vinegar','1 L weekly','14 days','K8 left','Cabin Fever side'],
  ['House chilli oil','3 L every 2 weeks','30 days, at room temperature in a clean jar','K12 shelf','Fire Starters, Smash Hit, siu mai'],
- ['Warm palm jaggery syrup','1 L daily','2 days (reheat to serve)','K10 dessert end','Scoop There It Is'],
+ ['Warm palm jaggery syrup','1 L daily','2 days (reheat to serve)','K11 top','Scoop There It Is'],
  ['Sesame-peanut crunch and peanut crumb','0.5 kg each, weekly','14 days, airtight','K12 shelf','Scoop There It Is, Bao Down'],
  ['Fried garlic crumbs','0.5 kg weekly','7 days, airtight','K12 shelf','Salt & Pepa'],
  ['Folded wontons, dumplings, siu mai','Per the par, twice a week','30 days frozen; 24 hours thawed','K7 F2','Dim sum, soups, Wonton More'],
@@ -726,7 +737,7 @@ document.getElementById('csvbtn').onclick=()=>{
 const byHome={};R.forEach(r=>byHome[r[0]]=(byHome[r[0]]||0)+1);
 document.getElementById('cards').innerHTML=[
  ['Items on the list',R.length+'','across '+Object.keys(byHome).length+' storage locations'],
- ['Storage','9 units','all inside the kitchen, dish wash and bar'],
+ ['Storage','9 store units','bulk in the store room; cold in K6, K7, K8, B9, B5'],
  ['Cold stock',(byHome.K6+byHome.K8+byHome.K7+byHome.B9+byHome.B5)+' items','K6, K8, K7, B9, B5'],
  ['Counts','Daily · weekly · monthly','open and close, one sheet']
 ].map(c=>'<div class="cd"><span>'+c[0]+'</span><b>'+c[1]+'</b><span>'+c[2]+'</span></div>').join('');
