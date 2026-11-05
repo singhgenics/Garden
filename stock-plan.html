@@ -154,7 +154,7 @@ h2,h3{color:var(--ink)}
     <h2>3 · Chillers, freezers and the bar</h2>
     <p class="k">Shelf numbers run from the top (1) to the bottom. Ready-to-eat goes on top, raw chicken on the bottom, so nothing drips onto food that is not cooked again.</p>
     <div class="two" id="coldmaps"></div>
-    <div class="call"><b>Prep surfaces.</b> Raw meat and fish come out of K6 and are prepared only on the K8 worktop (red and blue boards). Vegetables come out of K8 and are prepared only at the K10 bench on the west wall (green board), at the veg wash sink. Dry goods are never opened on either surface.</div>
+    <div class="call"><b>Prep surfaces.</b> Raw meat and fish come out of K6 and are prepared only on the K8 worktop (red and blue boards). Vegetables come out of K8 and are prepared only at the K10 bench on the west wall (green board), at the veg wash sink. Prepared vegetables wait in lidded pans on the K33 rail at the back of K8. Dry goods are never opened on either surface.</div>
   </section>
 
   <section class="zone" id="restock">
@@ -183,6 +183,11 @@ h2,h3{color:var(--ink)}
     <h2>6 · House-made items</h2>
     <p class="k">Typical shelf lives for chilled food stored at 5 °C or below. These are working values to check with your food-safety consultant. Label every tub with the item, the date made and the use-by date.</p>
     <div class="tw"><table id="tP"></table></div>
+
+    <h3 id="prepstations">Prep stations: chopped and chilled, ready for service</h3>
+    <p class="k">Pan-Asian wok cooking and craft cocktails are both fast, so the chopping is done before service and held cold, not during it. Kitchen: the <b>K33 chilled prep rail</b> at the back of the K8 worktop. Bar: the <b>B22 chilled garnish rail</b> on the bartender work slab. Both hold covered 1/3 and 1/6 pans at 4 °C or below, every pan dated, and both are prepped fresh each day. The quantities are starting estimates for about 60 covers: adjust them after two weeks.</p>
+    <div class="call"><b>Where it is chopped.</b> Vegetables are cut at the K10 bench on the green board and carried to K33 in lidded pans, so nothing is chopped on the K8 worktop (raw meat and fish stay at the front on the red and blue boards). At the bar, cut fruit on its own board and knife, never on a board that has touched anything else. <b>Never keep chopped garlic or ginger in oil at room temperature</b>: keep it dry, covered and cold, and use it within the shelf life below.</div>
+    <div class="tw"><table id="tR"></table></div>
   </section>
 
   <section class="zone" id="rotation">
@@ -301,6 +306,7 @@ h2,h3{color:var(--ink)}
   <section class="zone" id="checks">
     <h2>9 · What is not verified</h2>
     <ul class="tight">
+      <li>The prep-rail list (K33 and B22) comes from the dishes and drinks named in this stock list, not from your finished cocktail recipes. If your recipes also use mint, orange, cucumber or other garnish, add them to the B22 rows.</li>
       <li>Every quantity is my estimate from the menu, for 60 covers a day and an assumed dish mix. It is not from your recipe cards or sales. Change the covers box to scale it, then adjust each par after two weeks.</li>
       <li>Items marked A come from standard recipes. Check them against your own.</li>
       <li>Shelf lives and temperatures are typical values, not FSSAI limits. Check them with your food-safety consultant or your licence conditions.</li>
@@ -656,6 +662,21 @@ const FREQ=['Daily','Daily (thaw from K7)','Every 2 days','Twice a week','3 time
 })();
 
 /* ---------- house-made list ---------- */
+document.getElementById('tR').innerHTML='<thead><tr><th>Station</th><th>Item and cut</th><th>Made each day</th><th>Hold</th><th>Used in</th></tr></thead><tbody>'+[
+ ['K33 kitchen','Garlic, chopped','0.8 kg','1 day (24 h); not in oil','Almost every wok dish, fried garlic crumbs'],
+ ['K33 kitchen','Ginger, chopped','0.5 kg','1 day (24 h)','Wonton Kenobi, Manchurian, wontons, iced tea'],
+ ['K33 kitchen','Capsicum, cut','1 kg','2 days','Cabin Fever'],
+ ['K33 kitchen','Spring onion, chopped (whites and greens in separate pans)','1 kg','2 days','Garnish, filling, noodles, wontons'],
+ ['K33 kitchen','Green and bird\'s-eye chilli, sliced','0.4 kg','2 days','Cabin Fever, basil chicken, Coconut Cuddle'],
+ ['K33 kitchen','Coriander and holy basil, leaves picked, on a damp towel','0.4 kg','1–2 days','Smash Hit, Bao Down, Holy Basil, Batman!'],
+ ['K33 kitchen','Hakka veg mix: cabbage, carrot, French beans, cut','3 kg','1 day (24 h)','Hakka noodles, fried rice'],
+ ['K33 kitchen','Squeeze bottles: sweet chilli, hoisin, chilli, kasundi and gochujang mayo (day\'s quantity, decanted from K8)','0.2 L each','Finish by close; never pour back into the tub','Dips, wok finishing, Salt & Pepa, Fever Pitch, Fry Hard'],
+ ['B22 bar','Limes, wedges and wheels','25 limes','24 hours','Lime soda, cocktails, garnish'],
+ ['B22 bar','Lemons, wheels, wedges and twists','8 lemons','24 hours','Toki highball, whisky highball'],
+ ['B22 bar','Grapefruit, wedges','3 fruits','24 hours','Sichuan G&T'],
+ ['B22 bar','Lemongrass stalks trimmed, ginger sliced','12 stalks, 0.1 kg ginger','2 days','Coconut feni highball, lemongrass-ginger tea and shots'],
+ ['B22 bar','Tomato, wedges (from the kitchen share)','4 tomatoes','24 hours','Kimchi Mary garnish'],
+].map(r=>'<tr>'+r.map((c,i)=>'<td'+(i===0?' class="nm"':'')+'>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</tbody>';
 document.getElementById('tP').innerHTML='<thead><tr><th>Item</th><th>Batch</th><th>Shelf life, chilled</th><th>Lives in</th><th>Used in</th></tr></thead><tbody>'+[
  ['Clear chicken broth','10 L daily','2 days','K6 shelf 1','Wonton Kenobi'],
  ['Hot & sour base','6 L every 2 days','2 days','K6 shelf 1','Hot & Bothered'],

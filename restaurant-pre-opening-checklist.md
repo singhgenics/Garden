@@ -222,6 +222,19 @@ Timeline: start 6–12 months out. Tick items off as you go. Written for a resta
 - [ ] No fogging or chemical spraying while guests are present or food is exposed; treat only before opening or after closing with approved products
 - [ ] Monsoon routine: more frequent drain checks, treatment and curtain use
 
+## 18. Prep Stations: Chopped & Chilled (before soft opening)
+- [ ] K33 chilled prep rail (kitchen) and B22 chilled garnish rail (bar) ordered, delivered, fitted and tested; one dedicated socket each
+- [ ] Rails hold 4 °C or below; temperature checked at opening and logged with the other cold units
+- [ ] Gastronorm pans with lids bought: 6 × 1/3 for K33, 8 × 1/6 for B22, plus a spare set for the dish wash
+- [ ] Day-dot labels and markers at both rails; every pan dated and timed
+- [ ] Daily prep list written from the menu (garlic, ginger, capsicum, spring onion, chilli, herbs, Hakka veg mix, sauces; limes, lemons, grapefruit, lemongrass, ginger, tomato) and confirmed against the final cocktail recipes
+- [ ] Morning prep routine trained: vegetables chopped at K10 on the green board, carried to K33 in lidded pans; nothing chopped on the K8 worktop
+- [ ] Chopped garlic and ginger never stored in oil at room temperature; kept dry, covered, cold and used within 24 hours
+- [ ] Cut citrus discarded after 24 hours; herbs kept dry and used within 2–3 days; fruit cut on a dedicated bar board and knife
+- [ ] Sauce squeeze bottles filled with the day's quantity and finished by close; never poured back into the tub
+- [ ] Rails wiped, lids on and pans swapped for clean ones at close; end-of-day waste logged
+- [ ] Prep quantities reviewed after the first two weeks and par levels adjusted
+
 ---
 
 ### Master Reminders
