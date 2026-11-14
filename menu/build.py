@@ -49,16 +49,16 @@ figcaption p{margin:3px 0 0;font-size:15px;opacity:.82}
 .band span{font-size:16px;max-width:56ch}
 .band .big{font:46px/1 PlexMono,monospace;color:var(--brass);font-weight:600}.band.top{margin:0 0 22px}
 .more{margin-top:26px;display:grid;column-gap:44px}.c2{grid-template-columns:1fr 1fr}
-.more .ln{padding:8px 0;font-size:16px;line-height:1.35}
+.more .ln{padding:8px 0;font-size:16px;line-height:1.35}.more .ln.wide{grid-column:1/-1}
 .more b{font-weight:600}.more em{display:none}.more .ln span{display:block;font-size:14px;opacity:.78}
 .c1{grid-template-columns:1fr}
 .foot{margin-top:40px;font-size:13.5px;opacity:.75;border-top:1px solid #c49a3c66;padding-top:14px}
 @media screen and (max-width:820px){.s3{grid-column:span 6}.s4,.s5,.s6,.s7{grid-column:span 12}.hero{grid-template-columns:1fr}.hero .ph{min-height:0;aspect-ratio:4/3}.c2{grid-template-columns:1fr}.s7 .ph,.s5 .ph{aspect-ratio:4/3}}
 @media screen and (max-width:560px){.s3{grid-column:span 12}.s3 .ph{aspect-ratio:4/3}.in{padding:0 16px}.band .big{font-size:36px}}
-@page{size:1200px 2250px;margin:0}
+@page{margin:0}
 @media print{
  body{width:1200px;-webkit-print-color-adjust:exact;print-color-adjust:exact}nav{display:none}
- .sec{break-before:page;height:2250px;overflow:hidden;padding:50px 0}.sec.pg1{break-before:auto}
+ .sec{break-before:page;overflow:hidden;padding:50px 0}.sec.pg1{break-before:auto}
  .in{max-width:none;padding:0 56px}
  .card,.hero,.band{break-inside:avoid}
  #dimsum .s7 .ph{aspect-ratio:7/4.4!important}#dimsum .s5 .ph{aspect-ratio:5/4.4!important}
@@ -181,6 +181,9 @@ spirits=rows([('Dewar’s White Label','Our highball whisky: honeyed and soft, s
  ('Suntory Toki Highball','Japanese blended whisky with green apple and white pepper, built tall with ice, soda and a lemon twist.','420'),
  ('Talisker 10','Isle of Skye single malt for peat lovers: sea salt, black pepper and bonfire smoke, neat.','520 / 1,000')])
 
+import json,os
+H=json.load(open('pageheights.json')) if os.path.exists('pageheights.json') else {}
+PAGECSS=''.join(f"@page p-{k}{{size:1200px {v}px;margin:0}}@media print{{#{k}{{page:p-{k};height:{v}px}}}}\n" for k,v in H.items())
 EXTRA='''
 html{scroll-padding-top:76px}
 nav{align-items:center;justify-content:flex-start}nav>:first-child{margin-left:auto}nav>:last-child{margin-right:auto}
@@ -194,21 +197,23 @@ nav{align-items:center;justify-content:flex-start}nav>:first-child{margin-left:a
 .dessertbtn small{display:block;font:500 13px Plex,sans-serif;opacity:.8}
 .hide{display:none!important}
 .hh s{opacity:.65}
-@media screen{.after.collapsed{display:none}}
+@media screen{.after.collapsed{display:none}.grid.filtered{display:flex;flex-wrap:wrap}.grid.filtered .card{flex:1 1 250px}.grid.filtered .ph{aspect-ratio:16/10}}
 @media print{.flt,.dessertbtn{display:none}.after.collapsed{display:block}}
 '''
 JS='''
 (()=>{const f=[...document.querySelectorAll('.flt button')];
  const set=m=>{f.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===m)));
+  document.querySelectorAll('.grid').forEach(g=>g.classList.toggle('filtered',m!=='all'));
   document.querySelectorAll('[data-v]').forEach(e=>{const v=e.dataset.v;e.classList.toggle('hide',(m==='veg'&&v==='nv')||(m==='nv'&&v==='v'))});};
- f.forEach(b=>b.addEventListener('click',()=>set(b.dataset.m)));
+ const fill=()=>document.querySelectorAll('.more.c2').forEach(m=>{const v=[...m.children].filter(c=>!c.classList.contains('hide'));v.forEach(c=>c.classList.remove('wide'));if(v.length%2)v[v.length-1].classList.add('wide')});
+ f.forEach(b=>b.addEventListener('click',()=>{set(b.dataset.m);fill()}));fill();
  const d=document.getElementById('dessertbtn'),a=document.getElementById('after');
  if(d)d.addEventListener('click',()=>{const c=a.classList.toggle('collapsed');d.setAttribute('aria-expanded',String(!c));d.firstChild.textContent=c?'Dessert and coffee ▾':'Dessert and coffee ▴'});
  if(location.hash==='#after'&&a){a.classList.remove('collapsed')}
 })();
 '''
 body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cabin East · Picture menu</title><style>{CSS}{EXTRA}</style></head><body>
+<title>Cabin East · Picture menu</title><style>{CSS}{EXTRA}{PAGECSS}</style></head><body>
 <nav><div class="flt" role="group" aria-label="Show"><button data-m="all" aria-pressed="true">All</button><button data-m="veg" aria-pressed="false">Veg</button><button data-m="nv" aria-pressed="false">Non-veg</button></div><a href="#dimsum">Dim sum &amp; bao</a><a href="#wok">Wok</a><a href="#mains">Mains</a><a href="#sweet">Taps &amp; dessert</a><a href="#cocktails">Cocktails</a></nav>
 
 <section class="sec dark pg1" id="dimsum"><div class="in">
