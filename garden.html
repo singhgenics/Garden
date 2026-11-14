@@ -1429,6 +1429,13 @@ bx(KX(0.90),KX(2.92),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(le
  bx(BX0-0.42,BX0+0.1,0.92,0.96,0.75,1.65,M.ss,g);}
 [[BX0+1.5,1.0],[BX0+3.2,1.0]].forEach(([x,z])=>bx(x-0.35,x+0.35,BH-0.04,BH-0.01,z-0.12,z+0.12,M.panelLight,G.dish,false));
 
+/* grease trap (Y6) and inspection chamber (Y7) outside the east wall of the dish wash, in line with the floor drain D11 (equipment plan, services sheet A-06):
+   cast masonry trap 0.60 x 0.40 with a lid, then a 0.45 m inspection chamber with a cover, on the 100 mm drain line to the outfall (not surveyed) */
+{const z=1.22,g=G.walls,cm=S({color:'#8a8a82',roughness:0.9}),lid=S({color:'#3b3b38',roughness:0.6});
+ bx(BX1+0.35,BX1+0.95,-0.15,0.02,z-0.2,z+0.2,cm,g);bx(BX1+0.4,BX1+0.9,0.02,0.04,z-0.15,z+0.15,lid,g,false);
+ bx(BX1+0.98,BX1+1.43,-0.15,0.02,z-0.225,z+0.225,cm,g);bx(BX1+1.02,BX1+1.39,0.02,0.04,z-0.19,z+0.19,lid,g,false);
+ rod(V(BX1,-0.08,z),V(BX1+0.35,-0.08,z),0.05,M.blackMetal,g,false);
+ lbl('Grease trap (Y6) and inspection chamber (Y7)',BX1+0.95,0.9,z,'k');}
 /* LPG cylinder bank (recommended siting): in the open air outside the east wall of the store room, midway between its two windows (at least 1.5 m from each),
    away from drains, the grease trap and every ignition source: a 0.90 m square chained steel cage on a raised concrete plinth, 4 x 19 kg cylinders, pipe to the kitchen at K29 */
 {const cx=BX1+0.6,cz=(BY1+1.05+SY1-1.05)/2,g=G.walls;bx(cx-0.55,cx+0.55,0,0.1,cz-0.55,cz+0.55,M.conc,g);
