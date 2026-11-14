@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cabin East Vendors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F2E8D2;--paper:#FBF6E8;--ink:#1C1714;--muted:#5B4D40;--line:#D8C8A6;--red:#B5321C;--amber:#E49B1D;--green:#2F6F57;--band:#1C1714;--on-band:#F2E8D2;--warn:#FFE9B8;
+--f-display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1714;--paper:#272019;--ink:#F2E8D2;--muted:#BDAE92;--line:#43382E;--red:#E0553D;--green:#4FA383;--band:#0E0B09;--warn:#3A2E14;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--f-body);padding:0 max(16px,env(safe-area-inset-right,0px)) 72px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:900px;margin:0 auto}
+h1,h2{font-family:var(--f-display);font-weight:400;line-height:1.05;margin:0;text-transform:uppercase;text-wrap:balance}
+h2{font-size:clamp(26px,5vw,38px)}
+h3{font-size:18px;margin:22px 0 6px}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+a{color:var(--red)}
+.full{margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.site{padding-block:10px;background:var(--band);color:var(--on-band);font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.site .wrap{display:flex;flex-wrap:wrap;gap:4px 18px}
+.site a{color:var(--on-band);text-decoration:none;opacity:.85}.site a:hover{opacity:1;text-decoration:underline}.site b{color:var(--amber)}
+.mast{background:var(--band);color:var(--on-band);padding-block:30px 32px}
+.mast h1{font-size:clamp(38px,9vw,78px)}.mast h1 em{font-style:normal;color:var(--amber)}
+.mast p{margin:14px 0 0;max-width:60ch;color:#E3D6BA}
+.rail{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--ink);overflow-x:auto}
+.rail .wrap{display:flex;gap:2px;white-space:nowrap}
+.rail a{padding:12px 11px;font:500 12px var(--f-mono);letter-spacing:.08em;color:var(--muted);text-decoration:none}.rail a:hover{color:var(--ink);background:var(--paper)}
+section{padding-block:44px 4px;scroll-margin-top:48px}
+.label{font:500 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.head{display:grid;gap:8px;margin-bottom:16px}
+.note{border:2px solid var(--ink);background:var(--warn);padding:12px 14px;margin:0 0 14px}
+.note b{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{border:2px solid var(--ink);background:var(--paper);padding:14px 14px 12px}
+.card h3{margin:0 0 4px;font-size:19px}
+.card p{margin:6px 0;font-size:15.5px}
+.chip{display:inline-block;font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1.5px solid var(--ink);margin:0 6px 4px 0}
+.chip.ok{background:var(--green);border-color:var(--green);color:#fff}
+.chip.ask{background:var(--amber);border-color:var(--amber);color:#1C1714}
+.chip.no{background:transparent;color:var(--muted);border-color:var(--muted)}
+.src{font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--muted);word-break:break-word}
+ul.q{margin:8px 0 0;padding-left:20px}ul.q li{margin:3px 0}
+table{width:100%;border-collapse:collapse;background:var(--paper);border:2px solid var(--ink);font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+th{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+td input{width:100%;min-width:90px;font:inherit;padding:6px 7px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:0}
+.tw{overflow-x:auto;margin-top:8px}
+.tools{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.tools button{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:11px 16px;min-height:44px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.menu-map td:first-child{font-weight:600;white-space:nowrap}
+body.embed .site,body.embed .mast{display:none}
+@media print{.rail,.tools,.site{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="site full"><div class="wrap"><a href="garden.html">&larr; 3D model</a><a href="stock-plan.html">Stock plan</a><a href="opening-checklist.html">Opening checklist</a><a href="essentials.html">Essentials</a><b>Vendors</b></div></div>
+
+<header class="mast full"><div class="wrap">
+<h1>Who we <em>buy from</em></h1>
+<p>Craft beer, spirits, mixers and food stock for the Garden, sourced from Goa. Every vendor says whether it was found online or still has to be found by a phone call. Nothing here is a quote.</p>
+</div></header>
+
+<nav class="rail full" aria-label="Sections"><div class="wrap">
+<a href="#licence">0 Licence first</a><a href="#beer">1 Craft beer</a><a href="#spirits">2 Spirits &amp; feni</a><a href="#mixers">3 Mixers</a><a href="#food">4 Food stock</a><a href="#sheet">5 Call sheet</a><a href="#gaps">6 Not verified</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="licence">
+<div class="head"><span class="label">Step 0</span><h2>Licence first</h2></div>
+<div class="note"><b>Read this before you call anyone for alcohol</b><br>
+Goa Excise says a wholesaler may sell only to a holder of a valid retail licence (packed bottles, drunk on the premises) in Goa. Until the bar licence is issued, a wholesaler or brewery cannot legally sell us beer, spirits or feni. Food and soft-drink vendors have no such rule.</div>
+<p>You can still talk to the breweries and wholesalers now, compare prices and agree terms for the day the licence arrives.</p>
+<p class="src">Source: <a href="https://excise.goa.gov.in/wholesale_of_IMFL.aspx">Goa Excise, wholesale of IMFL</a>. Licence codes and fees differ between websites, so confirm them with the Excise office or your advocate. The official site did not open when this was researched.</p>
+</section>
+
+<section id="beer">
+<div class="head"><span class="label">Section 1</span><h2>Craft beer for the taps</h2></div>
+<p>A <b>keg</b> is a sealed steel barrel of beer (usually 30 or 50 litres) that connects to the tap with a gas bottle. Ask every brewery the questions in the list below.</p>
+<div class="cards">
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">No trade contact</span>
+<h3>Goa Brewing Co (Goa Brewcrafts), Sangolda</h3>
+<p>Makes People&rsquo;s Lager and the Eight Finger Eddie IPA. Our Comrade Crisp is built on People&rsquo;s Lager, so this is the first call.</p>
+<p class="src"><a href="https://www.dsgcp.com/brands/goa-brewing-co">dsgcp.com/brands/goa-brewing-co</a></p></div>
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">No trade contact</span>
+<h3>Ministry of Beer</h3>
+<p>Delhi chain that came to Goa in December 2024. An interview says it recently got a supply licence, so it may sell to restaurants. Possible guest tap.</p>
+<p class="src"><a href="https://yourstory.com/ys-life/craft-beer-market-delhi-ministry-of-beer-goa-anjuna">YourStory interview</a></p></div>
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">No trade contact</span>
+<h3>Drifters Brewing Company</h3>
+<p>Maharashtra brand that launched two beers in Goa and plans draught supply to select venues. Possible guest tap.</p>
+<p class="src"><a href="https://www.restaurantindia.in/news/drifters-brewing-company-launches-belgian-white-and-mexican-crisp-in-goa.n17575">Restaurant India</a></p></div>
+<div class="card"><span class="chip no">Not found</span>
+<h3>Kings and Budweiser</h3>
+<p>These come through a licensed wholesaler or the brand&rsquo;s Goa distributor. No current named distributor was found. Ask the brand&rsquo;s sales representative, or ask two bars in Cavelossim or Margao who supplies them.</p></div>
+<div class="card"><span class="chip no">Not found</span>
+<h3>Gose Bumps (kokum gose)</h3>
+<p>No Goa brewery was confirmed for a kokum gose. Ask Goa Brewing Co whether they can brew it or have it, or pick another sour from a brewery that will supply us.</p></div>
+</div>
+<h3>Ask each brewery</h3>
+<ul class="q">
+<li>Do you deliver kegs to Cavelossim, and what do you charge for delivery?</li>
+<li>Price per litre, keg sizes, and the keg deposit (money held until the empty keg comes back).</li>
+<li>Who supplies the CO2 gas bottle and the tap fittings, and who fixes them if they fail?</li>
+<li>How long does a keg stay fresh once tapped, and how cold must it be kept?</li>
+<li>Can you supply a guest tap that changes every two weeks?</li>
+<li>Do you need our excise licence number before the first order?</li>
+</ul>
+</section>
+
+<section id="spirits">
+<div class="head"><span class="label">Section 2</span><h2>Spirits and feni</h2></div>
+<div class="cards">
+<div class="card"><span class="chip ask">Find by phone</span>
+<h3>Feni: cashew and coconut</h3>
+<p>Small distillers sell feni in bulk to bottlers and straight to bars. Coconut feni is mostly made and drunk in South Goa, which suits the coconut highball. Use sealed, labelled bottles from a distiller or bottler on the state list. Fake liquor is a known problem in Goa.</p>
+<p class="src">State list of feni bottling plants: <a href="https://www.goaipb.goa.gov.in/wp-content/uploads/2025/02/ODOP-Feni-List-of-Bottling-Plants.pdf">goaipb.goa.gov.in (PDF)</a>. It did not open when this was researched, so open it yourself and pick two bottlers near Cavelossim.</p></div>
+<div class="card"><span class="chip no">Not found</span>
+<h3>Whisky, vodka, agave, gin, soju</h3>
+<p>These come from a licensed wholesaler of Indian-made foreign liquor (IMFL) once the licence is in hand. No wholesaler was named online. Ask the Excise office for the list of licensed wholesalers, then get at least two quotes.</p>
+<p>Check each brand on our menu is available in Goa: Paul John, Glenlivet 12, Talisker 10, Dewar&rsquo;s White Label, Jameson, Suntory Toki, and a soju for Soju Yakult and Somaek.</p></div>
+</div>
+</section>
+
+<section id="mixers">
+<div class="head"><span class="label">Section 3</span><h2>Mixers, syrups, soft drinks</h2></div>
+<div class="cards">
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">Check Goa delivery</span>
+<h3>Hyperpure (Goa)</h3>
+<p>Online wholesale for restaurants: sodas, Schweppes tonic, juices, Red Bull, Monin syrups, sold by the unit or case of 24 or 30. The page does not say which Goa areas it delivers to or the minimum order.</p>
+<p class="src"><a href="https://www.hyperpure.com/ind/goa/beverages-and-mixers">hyperpure.com/ind/goa</a></p></div>
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">Panjim</span>
+<h3>Team24 Foods and Beverages</h3>
+<p>Wholesaler listing with bar mixers, non-alcoholic drinks, bulk rice, pulses, flour, spices and fresh produce. Based in Panjim, so ask whether they deliver to Cavelossim.</p>
+<p class="src"><a href="https://bizgoa.heloix.com/listings/team24-foods-and-beverages">bizgoa listing</a></p></div>
+<div class="card"><span class="chip no">Not found</span>
+<h3>Bitters</h3>
+<p>No Goa source was found. Buy online from a Mumbai or Bengaluru bar-supply seller and courier them, or ask the IMFL wholesaler. Bitters are a very small part of the bar cost.</p></div>
+<div class="card"><span class="chip ask">Make in house</span>
+<h3>Kokum, lemongrass, kimchi brine</h3>
+<p>Kokum, lemongrass, ginger, lime and kimchi are bought from the produce vendor in section 4, not from a bar supplier.</p></div>
+</div>
+</section>
+
+<section id="food">
+<div class="head"><span class="label">Section 4</span><h2>Food stock</h2></div>
+<div class="cards">
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">Fish: check status</span>
+<h3>Margao wholesale fish market</h3>
+<p>Goa&rsquo;s only wholesale fish market; restaurant owners buy here. The redeveloped complex has not fully opened and traders are disputing the layout, so check where trading happens now before you plan a morning run. No named supplier that delivers was found.</p>
+<p class="src"><a href="https://www.thegoan.net/goa-news/margao-wholesale-traders’-demand-puts-fish-market-revamp-in-a-fix/150556.html">The Goan, July 2026</a></p></div>
+<div class="card"><span class="chip ok">Found online</span>
+<h3>S V Gotti &amp; Sons, Margao</h3>
+<p>Wholesaler listing rice (including basmati), wheat flour and sunflower oil.</p>
+<p class="src"><a href="https://m.indiamart.com/company/182310084">IndiaMART listing</a></p></div>
+<div class="card"><span class="chip ok">Found online</span>
+<h3>Reliable Distributors, Margao</h3>
+<p>Canned goods: coconut milk and cream, tuna, sweet corn.</p>
+<p class="src"><a href="https://m.indiamart.com/reliable-distributors-margao">IndiaMART listing</a></p></div>
+<div class="card"><span class="chip ok">Found online</span><span class="chip ask">Check range</span>
+<h3>Hyperpure and Team24</h3>
+<p>Both list fresh produce and dry staples for restaurants (see section 3). Ask whether either carries chicken, eggs, dairy and ice cream.</p></div>
+<div class="card"><span class="chip no">Not found</span>
+<h3>Chicken, eggs, dairy, ice cream</h3>
+<p>No named supplier was found online. Ask the Margao market and the dry-goods wholesalers above, and two other restaurants nearby.</p></div>
+<div class="card"><span class="chip no">Not found</span>
+<h3>Asian staples</h3>
+<p>Soy and chilli sauces, gochujang, jasmine rice, noodles, dim sum wrappers, rice paper. No Goa source was found. Ask the dry-goods wholesalers; otherwise order online and courier to the restaurant.</p></div>
+</div>
+</section>
+
+<section id="sheet">
+<div class="head"><span class="label">Section 5</span><h2>Call sheet</h2></div>
+<p>Get at least two quotes for every line. Type here; your entries stay on this phone or computer only.</p>
+<div class="tw"><table class="menu-map" id="qt">
+<thead><tr><th>What</th><th>Vendor</th><th>Price</th><th>Delivery</th><th>Called on</th></tr></thead>
+<tbody></tbody></table></div>
+<div class="tools"><button id="reset" type="button">Clear sheet</button><button id="print" type="button">Print</button></div>
+</section>
+
+<section id="gaps">
+<div class="head"><span class="label">Section 6</span><h2>What is not verified</h2></div>
+<ul class="q">
+<li>No phone numbers, prices, minimum orders or delivery areas were found. Every vendor above needs a call.</li>
+<li>Whether any listed vendor still trades, and whether the wholesalers named from older reports are still active, is not confirmed.</li>
+<li>Licence codes and fees: third-party websites disagree. Confirm with Goa Excise or an advocate.</li>
+<li>FSSAI registration of each food supplier: ask for their licence number and keep a copy.</li>
+<li>Research was done from public web pages on 14 November 2026. IndiaMART and directory listings are not endorsements.</li>
+</ul>
+</section>
+
+</main>
+<script>
+(function(){
+if(/[?&]embed\b/.test(location.search))document.body.classList.add('embed');
+var ROWS=['Comrade Crisp / People’s Lager keg','Gose Bumps (kokum gose) keg','Guest tap keg','Kings (330 / 650 ml)','Budweiser (330 / 650 ml)','Cashew feni','Coconut feni','Whisky (Paul John, Glenlivet, Talisker, Dewar’s, Jameson, Toki)','Vodka and gin','Agave / tequila','Soju','Soda, tonic, Yakult, syrups','CO2 gas bottle and tap fittings','Prawns and fish','Chicken and eggs','Vegetables, herbs, kokum, lemongrass','Rice, noodles, flour, oil','Asian sauces and wrappers','Dairy and ice cream'];
+var KEY='garden-vendor-sheet',st={};
+try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var tb=document.querySelector('#qt tbody');
+function build(){
+  tb.innerHTML='';
+  ROWS.forEach(function(r,i){
+    var tr=document.createElement('tr'),td=document.createElement('td');td.textContent=r;tr.appendChild(td);
+    ['vendor','price','delivery','date'].forEach(function(f){
+      var c=document.createElement('td'),inp=document.createElement('input'),k=i+'.'+f;
+      inp.type='text';inp.value=st[k]||'';inp.setAttribute('aria-label',r+' '+f);
+      inp.addEventListener('input',function(){st[k]=inp.value;save()});
+      c.appendChild(inp);tr.appendChild(c);
+    });
+    tb.appendChild(tr);
+  });
+}
+build();
+document.getElementById('reset').onclick=function(){if(confirm('Clear everything typed in the call sheet?')){st={};save();build()}};
+document.getElementById('print').onclick=function(){window.print()};
+})();
+</script>
+</body>
+</html>
