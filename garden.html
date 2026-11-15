@@ -1220,7 +1220,7 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
 // misting fans removed; quiet flush-mount (hugger) ceiling fans with dark walnut blades sit in the coffers over the dining room - blades stay at least 2.5 m above the floor even at the low end (they also keep mosquitoes off)
 // flush-mount (hugger) fan for the low ceiling: no downrod, a low black canopy and motor housing, five walnut blades about 24 cm below the ceiling, a small light disc underneath
 function ceilFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);cyl(0.07,0.09,0.03,0,-0.03,0,M.blackMetal,g,18,false);cyl(0.12,0.12,0.09,0,-0.12,0,M.blackMetal,g,22,false);
-  const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.012,0.14),M.timberDark);b2.position.x=0.38;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
+  const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.52,0.012,0.14),M.timberDark);b2.position.x=0.34;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
   cyl(0.07,0.06,0.02,0,-0.185,0,M.panelLight,g,16,false);}
 [[4.1,3.3],[7.4,3.3],[11.9,2.74],[5.4,8.2]].forEach(([x,z])=>ceilFan(x,z));   // re-placed for the new table layout: over aisles, clear of the orbs and of the tree canopy (the old spots hung over a table and inside the canopy)
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
