@@ -305,7 +305,7 @@ ex.onchange=lay;dr.onchange=lay;lay();
 
 /* ---------- schedules: [id, name, qty, W, D, H, notes, floor-standing, existing] (metres) ---------- */
 const KIT=[
- ['K1','Wok range, 2 burners, high-pressure, with water tap and drain trough',1,1.07,0.75,0.85,'North wall, between K2 and the 0.58 m landing beside the sink. Hakka, fried rice, chilli dishes, basil chicken, Manchurian, kimchi fries',1],
+ ['K1','Wok range, 2 burners, high-pressure, with water tap and drain trough',1,1.07,0.75,0.85,'North wall, between K2 and the 0.58 m landing beside the sink. Hakka, fried rice, chilli dishes, basil chicken, the fried-rice gravies (Gravy Train, Sweet Talk), kimchi fries',1],
  ['K2','Stock / pot range, 2 burners',1,0.95,0.75,0.80,'North wall, west end of the line (0.90 m from the west wall, clear of the door swing). 3 soups, wonton poaching, claypot gravies, pork braise, noodle boil, house stocks. A pot on one burner can also carry bamboo baskets when the steamer K4 is busy',1],
  ['K3','Twin-tank gas fryer, 2 × 15 L',1,0.90,0.75,0.90,'East (temporary) wall, 1.40 to 2.30 m from the north wall, so there is 0.90 m of clear floor between it and the sink K28. One tank veg, one non-veg, so veg guests are never fed from meat oil. Salt & pepper, fried wontons, wings, fries, darsaan',1],
  ['K4','Dim sum steamer, 1 station, with bamboo baskets',1,0.55,0.75,0.90,'North wall, on the 0.58 m landing between the wok range K1 and the sink K28 (2.94 to 3.49 m from the west wall). Dim sum, bao, steamer for two, jasmine rice backup. One station fits here and keeps the 0.90 m clear in front of the sink; a two-station 0.90 m unit does not fit',1],
@@ -346,17 +346,16 @@ const DISH=[
  ['D12','Pass hatch, kitchen to dish wash, 0.70 m, with a closing roller shutter',1,0.70,0.10,0.70,'In the solid wall 0.15 to 0.85 m from the west wall, sill 0.95 m, beside the kitchen door and above D1. Dirty ware from the kitchen comes through it; the shutter drops at the end of service. Position assumed',0]
 ];
 const BAR=[
- ['B1','Back-bar bottle cooler, 2 glass doors',1,1.20,0.60,0.85,'Beer bottles, mixers, wine, soft drinks',0],
+ ['B1','Back-bar bottle cooler, 2 glass doors',1,1.20,0.60,0.85,'Value and premium beer bottles (Kings, Budweiser, Corona, Hoegaarden), mixers and soft drinks',0],
  ['B2','Back-bar base cabinet (plain, SS), in the bay for a future ice machine and glass washer',1,0.85,0.60,0.85,'Glasses, bar tools and cloths. Ice is bought in bags and kept in the B7 ice well',0],
  ['B17','POS desk on the coffee wall: terminal, receipt printer, card reader; counter-height, lockable',1,0.58,0.60,0.92,'On the bartender face of the coffee wall, north end, parallel to the counter. The only till in the place. The switch, router and 1 kVA UPS sit inside the cupboard below the drawer',0],
  ['B17a','Cash drawer, lockable, under the desk top',1,0.41,0.42,0.10,'Standard POS drawer (about 41 × 42 × 10 cm) fixed under the desk top, opened by the till and by key. Banking tray and float inside. Take the day\'s cash out at close',0],
  ['B4','Back-bar cabinet at the door end (was the POS nook)',1,0.60,0.60,0.85,'Tea, coffee, filters, brown sugar, kokum, straws. The KDS screen B16 is above it',0],
- ['B5','Keg chiller for 3 × 20 L kegs, with CO₂ cylinder (2–3 kg)',1,1.00,0.60,0.85,'Comrade Crisp, Gose Bumps, guest tap. Inside the counter',0],
- ['B6','Brass tap font, 3 taps',1,0.60,0.20,0.45,'On the counter top above B5',0],
- ['B7','Bar sink with ice well (hand wash, rinse and bagged ice)',1,0.70,0.55,0.85,'At the staff-entry end. Glasses are hand-washed here and in the dish-wash bowls',0],
+ ['B5','Under-counter bottle chiller, 2 glass doors (the second beer chiller)',1,1.00,0.60,0.85,'Inside the counter, where the keg chiller was. Craft bottles and the Bucket of Five stock. B1 holds the value and premium beers (Kings, Budweiser, Corona, Hoegaarden). Ask each dealer for the bottle capacity: aim for about 150 chilled bottles in B1 and B5 together (an estimate, not measured)',0],
+  ['B7','Bar sink with ice well (hand wash, rinse and bagged ice)',1,0.70,0.55,0.85,'At the staff-entry end. Glasses are hand-washed here and in the dish-wash bowls',0],
  ['B8','Lockable under-counter cabinet for spare spirits and bar tools',1,0.95,0.60,0.85,'About a week of sealed bottles; open bottles live on the back bar; the rest stay in the store-room cage. Fills the counter between B7 and B5',0],
  ['B9','Under-counter fridge (milk, cream, citrus, syrups, infused vodka)',1,0.60,0.60,0.85,'Under the coffee station, on the coffee wall, with a plain cupboard beside it (cups, filters) where a shot freezer could go',0],
- ['B22','Chilled garnish rail (bar-top refrigerated well), 0.62 m, 8 × 1/6 pans with a clear lid',1,0.34,0.62,0.16,'On the bartender work slab of the counter, between the drawers and the B7 sink (3.10 to 3.72 m on the plan), within reach of the stool side and the taps. Sliced lime, lemon and orange, mint, basil, lemongrass, ginger, chilli and cucumber for the menu; the syrups, juices and infusions stay in B9. About 120 W, one socket. Prepped at the start of each shift, every pan dated; cut citrus is thrown away after 24 hours',0],
+ ['B22','Chilled garnish rail (bar-top refrigerated well), 0.62 m, 8 × 1/6 pans with a clear lid',1,0.34,0.62,0.16,'On the bartender work slab of the counter, between the drawers and the B7 sink (3.10 to 3.72 m on the plan), within reach of the stool side. Sliced lime, lemon and orange, mint, basil, lemongrass, ginger, chilli and cucumber for the menu; the syrups, juices and infusions stay in B9. About 120 W, one socket. Prepped at the start of each shift, every pan dated; cut citrus is thrown away after 24 hours',0],
  ['B11','Twin filter-coffee brewer',1,0.45,0.40,0.65,'On the coffee station top',0],
  ['B12','Hot-water urn',1,0.30,0.30,0.55,'On the coffee station top',0],
  ['B13','Water filter set for B11 and drinking water',1,0.20,0.15,0.45,'Under B7, plumbed to the brewer',0],
@@ -365,15 +364,15 @@ const BAR=[
  ['B15','Hanging glass rack (already modelled)',1,2.60,0.67,0.28,'Over the counter, hung at 1.70 m (was 2.3 m): the ceiling is only 1.10 m above the bar top, so 2.18 m',0,1],
  ['B20','Bar top, guest side (recommended): hardwood or stone, 40 mm thick, 1.08 m high',1,2.65,0.35,1.08,'Standard bar top: 1.05 to 1.10 m high for a 0.75 m stool, 0.30 to 0.40 m deep (0.35 m chosen: elbow room and a drink, with a 0.05 m overhang to the brass edge). It stands 0.16 m above the 0.92 m work slab B18, so guests cannot reach the bartender\'s side and the bartender can keep things at the slab. Total counter depth 0.82 m; stools seat at 0.735 m',0],
  ['B21','Round blue pillar between the end of the bar counter and the coffee wall (existing)',1,0.30,0.30,3.00,'In line with the counter and the coffee wall, at the counter\'s north end (2.38 m from the north wall, 2.0 m from the east wall). From the site photo; about 0.30 m across and full height, not measured. The glass rack, soffit and counter top all stop at it',0,1],
- ['B18','Wooden slab, bartender side of the counter (existing)',1,2.65,0.47,0.92,'Re-measured: 2.65 m long and 0.47 m wide, built into the counter. Its bartender-side face is 1.30 m clear of the back bar. The glass rack, taps and cabinets above and below are fitted to it',0,1],
- ['B19','Sink in the aisle behind the coffee wall (existing, not measured)',1,0.60,0.50,0.85,'Against the east wall in the 1.30 m aisle between the coffee wall equipment and the east wall (2.20 m long), with spare floor beside it (to measure). Candidate for the day bar dry stock or the spare keg. Size shown is a typical sink, not measured',0,1]
+ ['B18','Wooden slab, bartender side of the counter (existing)',1,2.65,0.47,0.92,'Re-measured: 2.65 m long and 0.47 m wide, built into the counter. Its bartender-side face is 1.30 m clear of the back bar. The glass rack and cabinets above and below are fitted to it',0,1],
+ ['B19','Sink in the aisle behind the coffee wall (existing, not measured)',1,0.60,0.50,0.85,'Against the east wall in the 1.30 m aisle between the coffee wall equipment and the east wall (2.20 m long), with spare floor beside it (to measure). Candidate for the day bar dry stock. Size shown is a typical sink, not measured',0,1]
 ];
 const STORE=[
  ['SR-W1','Steel rack, 4 shelves: oils, sauces, vinegars',1,1.50,0.50,1.80,'15 L tins on the floor shelf, bottles above. Nearest the door',1],
  ['SR-W2','Steel rack, 4 shelves: rice, noodles, flour, starches, sugar, salt',1,1.50,0.50,1.80,'Lidded bins on the floor shelf, sacks and packs above',1],
  ['SR-W3','Steel rack, 4 shelves: tins, jars, spices, nuts',1,1.50,0.50,1.80,'Smaller, slower stock',1],
  ['SR-CHEM','Locked chemical cupboard (steel, on a bund tray)',1,1.20,0.50,1.80,'Detergent, sanitiser, degreaser, floor cleaner. Low, locked, away from food',1],
- ['SR-BEV','Beverage pallet stack',1,1.20,0.60,1.20,'Cases of beer, water, soft drinks, mixers. Spare CO₂ cylinder chained to the wall beside it. Nearest the door',1],
+ ['SR-BEV','Beverage pallet stack',1,1.20,0.60,1.20,'Cases of beer, water, soft drinks, mixers. Nearest the door',1],
  ['SR-E1','Steel rack, 4 shelves: vegetable crates (slatted)',1,1.50,0.50,1.80,'Onions, potatoes, garlic, ginger in ventilated crates; air from the louvre and door grille',1],
  ['SR-E2','Steel rack, 4 shelves: bar dry goods',1,1.50,0.50,1.80,'Tea, coffee, syrups, tinned fruit, brown sugar',1],
  ['SR-E3','Steel rack, 4 shelves: paper and packaging',1,1.50,0.50,1.80,'Liners, gloves, bin bags, bill rolls, napkins, straws. Slowest stock, furthest in',1],
@@ -435,6 +434,7 @@ const SERV=[
  ['Safety and hygiene','First-aid kit, colour-coded boards, wall thermometer log sheets, hand-wash soap at B7 and the washroom.']
 ];
 const LEFT=[
+ ['Draught beer: keg chiller, brass tap font and CO₂ cylinder','Bar, counter bay B5 and the counter top above it','Start with bottled beer: no kegs to buy, chill, tap or clean. Add draught once beer sales justify about a 3-keg chiller, a tap font and a CO₂ cylinder (2–3 kg). B5 swaps for the keg chiller, and a line is run to the font on the counter top.'],
  ['Hood-type dishwasher','Dish wash, east cell (no room beside D2 and D3)','Hand wash in three bowls does the job at this volume. Add when plates pile up at the peak even with two people on the sinks. It needs 3-phase, a booster heater and a drain.'],
  ['Ice machine, 50 kg/day','Bar, bay B2','Buy bagged ice and keep it in the B7 well. Add when buying and carrying ice costs more than the machine\'s running cost, or you run out at the peak.'],
  ['Glass washer','Bar, bay B2','Glasses go through B7 and the dish-wash bowls. Add with the ice machine when bar volume grows.'],
@@ -463,7 +463,7 @@ function lst(id,rows,short){document.getElementById(id).innerHTML='<thead><tr><t
    rows.map(r=>'<tr><td class="id">'+r[0]+'</td><td>'+esc(short[r[0]]||r[1])+(r[2]>1?' <span class="q2">× '+r[2]+'</span>':'')+(r[8]?'<span class="exs">existing</span>':'')+'</td><td class="sz">'+sz(r[3],r[4],r[5])+'</td></tr>').join('')+'</tbody>';}
 const SH={'K33':'Chilled prep rail','B22':'Chilled garnish rail','K1':'Wok range, 2 burners','K4':'Dim sum steamer, 1 station','K2':'Stock / pot range, 2 burners','K3':'Twin-tank fryer, 2 × 15 L','K5':'Exhaust hood','K6/K7':'Dual-zone upright: chiller + freezer','K8':'Under-counter chiller + raw bench','K10':'Veg prep bench','K11':'Pass table, by the door','K12':'Wall shelf, one tier','K13':'Hand-wash basin','K14':'Rice cooker, 10 L','K15':'Mixer-grinder','K16':'Mortar and pestle','K26':'KDS screen S1, 27 in','K27':'KDS screen S2, 21.5 in','K19':'Waste bins, red and green','K21':'Veg wash sink','K22':'U1 slatted shelves, under K10','K23':'U2 open shelves, under K10','K20':'Extinguishers and blanket',
  'D1':'Used-plate drop-off table','D2':'Wash sink (east cell)','D3':'Rinse + sanitise sink (east cell)','D9':'Water tank, 500 L (existing)','D12':'Pass hatch with shutter','D13':'Crockery racks','K29':'Gas shut-off + detector','K30':'Kitchen door 0.80','K32':'Washroom opening 0.90','K31':'False partition (existing)','D14':'Dish-wash door 1.17','K28':'Sink (existing, NE corner)','D10':'Cell partition (existing)','D4':'Clean table','D4a':'Wall shelves, 2 tiers','D5':'Water heater, 50 L','D6':'Racks','D7':'Bus tubs','D8':'Waste bins','D11':'Floor drain grating','D9':'Water tank, 500 L','D10':'Cell partition','B18':'Wooden slab 0.47 wide','B19':'Sink behind coffee wall',
- 'B1':'Bottle cooler, 2 glass doors','B2':'Base cabinet (plain)','B4':'Back-bar cabinet','B17':'POS desk','B17a':'Cash drawer, under the desk','B5':'Keg chiller, 3 kegs','B6':'Tap font, 3 taps','B7':'Sink with ice well','B8':'Lockable cabinet','B9':'Under-counter fridge','B11':'Filter-coffee brewer','B12':'Hot-water urn','B13':'Water filter','B14':'Bar bin','B16':'KDS screen S3, 15.6 in','B15':'Hanging glass rack','B18':'Wooden slab, 0.47 wide (existing)','B20':'Bar top, 1.08 m high','B21':'Blue pillar (existing)','B19':'Sink in the aisle (existing)',
+ 'B1':'Bottle cooler, 2 glass doors','B2':'Base cabinet (plain)','B4':'Back-bar cabinet','B17':'POS desk','B17a':'Cash drawer, under the desk','B5':'Bottle chiller, 2 glass doors','B7':'Sink with ice well','B8':'Lockable cabinet','B9':'Under-counter fridge','B11':'Filter-coffee brewer','B12':'Hot-water urn','B13':'Water filter','B14':'Bar bin','B16':'KDS screen S3, 15.6 in','B15':'Hanging glass rack','B18':'Wooden slab, 0.47 wide (existing)','B20':'Bar top, 1.08 m high','B21':'Blue pillar (existing)','B19':'Sink in the aisle (existing)',
  'SR-W1':'Rack: oils, sauces','SR-W2':'Rack: rice, noodles, flour','SR-W3':'Rack: tins, jars, spices','SR-CHEM':'Chemical cupboard, locked','SR-BEV':'Beverage pallet stack','SR-E1':'Rack: veg crates','SR-E2':'Rack: bar dry goods','SR-E3':'Rack: paper, packaging','SR-SP':'Spirits cage, locked','SR-FE':'Extinguisher',
  'X1':'Hood with grease filters','X2':'Duct across the dish wash','X3':'EXIT: roof fan and cowl','X4':'Make-up air louvre','X5':'Dish-wash louvre (existing)','X6':'Store windows ×2 + door grille','X7':'Washroom extractor (existing)',
  'Y1':'Hot-line trough','Y2':'Kitchen floor falls','Y3':'Kitchen outlet pipes','Y4':'Dish-wash floor drain','Y5':'Drain line to the trap','Y6':'Grease trap, outside','Y7':'Inspection chamber + outfall','Y8':'Washroom drain (separate)','Y9':'Bar sink gully','Y10':'Store room: none'};
@@ -545,7 +545,7 @@ const tap=(cx,cy)=>C(cx,cy,0.035,'tapc');
 
 const TS={'K33':'Chilled prep rail','B22':'Chilled garnish rail','K6/K7':'Dual-zone upright','K22':'U1 shelves','K16':'Mortar','K14':'Rice cooker','K15':'Mixer-grinder','K21':'Veg wash sink','K12':'Wall shelves','K20':'Extinguishers','K5':'Exhaust hood','X2':'Duct across the dish wash','X3':'Roof fan, cowl','K19':'Waste bins','K26':'KDS screen S1','K27':'KDS screen S2','K13':'Hand-wash basin','K11':'Pass table, by the door','K10':'Veg prep bench','K3':'Twin-tank fryer','K4':'Dim sum steamer','K1':'Wok range','K2':'Stock range','K9':'Non-veg prep table','K8':'Under-counter chiller',
  'D1':'Used-plate drop-off table','D2':'Wash sink (east cell)','D3':'Rinse + sanitise sink','D4':'Clean table','D4a':'Shelves, 2 tiers','D5':'Water heater','D11':'Floor drain grating','D8':'Waste bins',
- 'B1':'Bottle cooler','B2':'Base cabinet','B4':'Back-bar cabinet','B5':'Keg chiller','B6':'Tap font, 3 taps','B7':'Sink with ice well','B8':'Lockable cabinet','B9':'Under-counter fridge','B11':'Filter-coffee brewer','B12':'Hot-water urn','B14':'Bar bin','B16':'KDS screen S3','B17':'POS desk','B17a':'Cash drawer, under desk',
+ 'B1':'Bottle cooler','B2':'Base cabinet','B4':'Back-bar cabinet','B5':'Bottle chiller','B7':'Sink with ice well','B8':'Lockable cabinet','B9':'Under-counter fridge','B11':'Filter-coffee brewer','B12':'Hot-water urn','B14':'Bar bin','B16':'KDS screen S3','B17':'POS desk','B17a':'Cash drawer, under desk',
  'SR-W1':'Rack: oils, sauces','SR-W2':'Rack: rice, noodles','SR-W3':'Rack: tins, jars, spices','SR-CHEM':'Chemical cupboard','SR-BEV':'Beverage pallet','SR-E1':'Rack: veg crates','SR-E2':'Rack: bar dry goods','SR-E3':'Rack: paper, packs','SR-SP':'Spirits cage','X6':'Store louvre, grille','X5':'Dish-wash louvre','X7':'Washroom extractor','Y7':'Inspection + outfall'};
 const dmt=id=>dm(id).replace(/ × /g,'×');
 const T2=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),dmt(id),to,o);
@@ -652,12 +652,12 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  // POS desk with cash drawer under the top (y 0.28 to 0.86)
  s+=R(2.5,0.28,0.6,0.58,'blu')+R(2.62,0.35,0.22,0.18,'blk')+R(2.9,0.35,0.12,0.2,'blk')+C(2.7,0.68,0.05,'ln')+R(2.54,0.39,0.42,0.41,'dsh')+L(2.5,0.28,3.1,0.28,'lk');
  s+='</g>';
- // counter 2.65 m (y 2.45 to 5.10): its bartender-side 0.47 m is the existing wooden slab; sink + ice, cabinet, keg chiller
+ // counter 2.65 m (y 2.45 to 5.10): its bartender-side 0.47 m is the existing wooden slab; sink + ice, cabinet, bottle chiller
  s+=R(0.38,2.45,0.12,2.65,'std')+R(0.38,2.45,0.35,2.65,'top',{st:'opacity:.55'})+C(1.10,2.375,0.15,'blu');
  s+=R(0.73,2.45,0.47,2.65,'exist',{st:'opacity:.55'});
  s+=R(0.60,2.45,0.6,0.70,'wet')+R(0.68,2.53,0.26,0.54,'bowl',{rx:6})+R(0.96,2.53,0.2,0.54,'bowl2',{rx:6})+tap(0.80,2.51)+TXT(1.06,2.83,'ICE','nm','text-anchor="middle" style="font-size:8px"');
  s+=R(0.60,3.15,0.6,0.95,'std')+L(0.60,3.62,1.2,3.62,'lk')+C(1.05,3.38,0.03,'tapc')+C(1.05,3.88,0.03,'tapc');
- s+=R(0.60,4.10,0.6,1.0,'cold')+C(0.80,4.36,0.14,'keg')+C(0.80,4.72,0.14,'keg')+C(0.80,5.0,0.07,'keg')+C(1.06,4.9,0.06,'tapc')+R(0.98,4.30,0.2,0.6,'top');
+ s+=R(0.60,4.10,0.6,1.0,'cold')+L(0.60,4.60,1.2,4.60,'lk')+[0,1,2].map(i=>C(0.73,4.2+i*0.12,0.035,'bot')+C(0.87,4.2+i*0.12,0.035,'bot')+C(1.01,4.2+i*0.12,0.035,'bot')+C(0.73,4.7+i*0.12,0.035,'bot')+C(0.87,4.7+i*0.12,0.035,'bot')+C(1.01,4.7+i*0.12,0.035,'bot')).join('');
  s+=R(1.25,2.55,0.30,0.30,'std')+C(1.4,2.70,0.1,'bin');
  s+=R(0.80,3.10,0.34,0.62,'cold',{st:'opacity:.95'})+[0,1,2,3].map(i=>R(0.83,3.12+i*0.15,0.13,0.13,'jar')).join('')+[0,1,2,3].map(i=>R(0.99,3.12+i*0.15,0.13,0.13,'jar')).join('');
  [2.80,3.40,4.00,4.60].forEach(y=>s+=C(0.05,y,0.17,'stool'));

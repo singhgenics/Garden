@@ -61,7 +61,7 @@ h2,h3{color:var(--ink)}
 const SHEETS=[
  ['E-01','Kitchen','1:35','Gas appliances, gas pipe and cylinders, chillers, sink, benches, dustbins, screens, extinguishers'],
  ['E-02','Dish wash','1:35','Drop-off table, clean table, crockery racks, the two-sink cell, tank, bins'],
- ['E-03','Bar','1:30','Counter, coffee station, keg chiller with its CO₂ cylinder, sink, stools, bin']];
+ ['E-03','Bar','1:30','Counter, coffee station, bottle chiller, sink, stools, bin']];
 const tabs=document.getElementById('tabs'),img=document.getElementById('img'),view=document.getElementById('view'),meta=document.getElementById('meta'),open_=document.getElementById('open');
 function show(i){const s=SHEETS[i];img.src='drawings/'+s[0]+'.svg';img.alt=s[0]+' '+s[1];meta.textContent=s[0]+' · '+s[1]+' · scale '+s[2]+' · '+s[3];open_.href='drawings/'+s[0]+'.svg';
   [...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));view.classList.remove('zoom');document.getElementById('zoom').textContent='Zoom to full size';try{history.replaceState(null,'','#'+s[0])}catch(e){}}
