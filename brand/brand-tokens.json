@@ -1,23 +1,22 @@
 {
  "name": "Konso",
- "tagline": "WOK | STEAM | DRAUGHT",
+ "descriptor": "PAN ASIAN KITCHEN | BAR",
  "colours": {
-  "burgundy": "#6A1622",
-  "garden-ink": "#1D2A22",
-  "steam-cream": "#F2E8D2",
-  "draught-brass": "#C49A3C",
-  "bottle-green": "#1F3D2E"
+  "bottle-green": "#051C0A",
+  "konso-green": "#0B2A14",
+  "gold-foil": "#D89D3C",
+  "gold-foil-highlight": "#F0BE62",
+  "gold-foil-shadow": "#AA7A28",
+  "steam-cream": "#F2E8D2"
  },
  "supporting": {
-  "goa-blue": "#2443A6",
-  "old-brick": "#A9533A",
-  "cognac": "#A2582A",
-  "bougainvillea": "#D81B7A",
-  "chocolate": "#4A2A1E"
+  "bottle-green-light": "#1F3D2E"
  },
  "fonts": {
-  "display": "Alfa Slab One",
-  "label": "IBM Plex Mono Medium",
-  "body": "IBM Plex Sans"
- }
+  "wordmark": "artwork (traced, do not retype)",
+  "display-merch": "Cinzel",
+  "label": "Poppins SemiBold",
+  "body": "Poppins Regular"
+ },
+ "logo": "brand/konso/"
 }
