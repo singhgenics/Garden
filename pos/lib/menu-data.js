@@ -17,7 +17,7 @@ export const MENU = [
   ['Dim sum & bao', 'Fire Starters', 280, NV, F], ['Dim sum & bao', 'Prawn to Be Wild', 340, NV, F],
   ['Dim sum & bao', 'Bao Down', 320, NV, F], ['Dim sum & bao', 'Seoul Mate', 260, V, F], ['Dim sum & bao', 'Fever Pitch', 280, NV, F],
 
-  ['From the wok', 'Cabin Fever · paneer', 280, V, F], ['From the wok', 'Cabin Fever · chicken', 320, NV, F], ['From the wok', 'Cabin Fever · pork belly', 360, NV, F],
+  ['From the wok', 'Konso Fever · paneer', 280, V, F], ['From the wok', 'Konso Fever · chicken', 320, NV, F], ['From the wok', 'Konso Fever · pork belly', 360, NV, F],
   ['From the wok', 'Honey Trap · potato', 220, V, F], ['From the wok', 'Honey Trap · chicken', 320, NV, F],
   ['From the wok', 'Fry Hard', 240, V, F],
   ['From the wok', 'Wonton More · veg', 240, V, F], ['From the wok', 'Wonton More · chicken', 260, NV, F],
@@ -39,7 +39,7 @@ export const MENU = [
   ['Mains', 'Suey Generis · veg', 320, V, F], ['Mains', 'Suey Generis · chicken', 360, NV, F],
   ['Mains', 'Plain Jane', 120, V, F],
 
-  ['For the table', 'Steamer for two', 799, NV, F], ['For the table', 'Cabin feast for four', 2299, NV, F],
+  ['For the table', 'Steamer for two', 799, NV, F], ['For the table', 'Konso feast for four', 2299, NV, F],
   ['For the table', 'Bowl Game · chicken', 440, NV, F], ['For the table', 'Bowl Game · paneer', 380, V, F], ['For the table', 'Bowl Game · green curry', 360, V, F],
 
   ['Dessert', 'Honey, I Shrunk the Noodles', 220, V, F], ['Dessert', 'Sticky Situation', 220, V, F], ['Dessert', 'Scoop There It Is', 150, V, F],
@@ -121,8 +121,8 @@ r('Prawn to Be Wild', 'Dim sum wrappers', 4); r('Prawn to Be Wild', 'Tiger prawn
 r('Bao Down', 'Pork belly', 0.12); r('Bao Down', 'Bao buns', 2);
 r('Seoul Mate', 'Paneer', 0.1); r('Seoul Mate', 'Bao buns', 2);
 r('Fever Pitch', 'Chicken thigh boneless', 0.1); r('Fever Pitch', 'Bao buns', 2);
-r('Cabin Fever · paneer', 'Paneer', 0.18); r('Cabin Fever · chicken', 'Chicken thigh boneless', 0.22); r('Cabin Fever · chicken', 'Eggs', 1);
-r('Cabin Fever · pork belly', 'Pork belly', 0.2);
+r('Konso Fever · paneer', 'Paneer', 0.18); r('Konso Fever · chicken', 'Chicken thigh boneless', 0.22); r('Konso Fever · chicken', 'Eggs', 1);
+r('Konso Fever · pork belly', 'Pork belly', 0.2);
 r('Honey Trap · potato', 'Potato', 0.25); r('Honey Trap · chicken', 'Chicken thigh boneless', 0.2);
 r('Fry Hard', 'French fries, frozen', 0.25); r('Fry Hard', 'Cheese, melting', 0.05);
 r('Wonton More · veg', 'Wonton wrappers', 6); r('Wonton More · chicken', 'Wonton wrappers', 6); r('Wonton More · chicken', 'Chicken thigh boneless', 0.06);

@@ -24,14 +24,14 @@ export const COURSE_NAME = { 0: 'Drinks', 1: 'Starters', 2: 'Mains', 3: 'Dessert
 /** The current menu, dish by dish (station, usual minutes, course). Anything not listed falls through to the rules below. */
 const KNOWN = {
   'wonton kenobi': ['stock', 6, 1], 'hot & bothered': ['stock', 6, 1], 'coconut cuddle': ['stock', 6, 1],
-  'cabin fever': ['wok', 8, 1], 'honey trap': ['fry', 7, 1], 'salt & pepa': ['fry', 7, 1], 'wonton more': ['fry', 7, 1],
+  'konso fever': ['wok', 8, 1], 'honey trap': ['fry', 7, 1], 'salt & pepa': ['fry', 7, 1], 'wonton more': ['fry', 7, 1],
   'crystal clear': ['steam', 8, 1], 'fire starters': ['stock', 6, 1], 'siu mai goodness': ['steam', 8, 1], 'prawn to be wild': ['steam', 8, 1],
   'bao down': ['steam', 7, 1], 'fever pitch': ['steam', 7, 1], 'seoul mate': ['steam', 7, 1],
   'k-pop wings': ['fry', 10, 1], 'fry hard': ['fry', 7, 1], 'slap happy': ['cold', 4, 1], 'smash hit': ['cold', 3, 1],
   'noodle around': ['wok', 8, 2], 'rice rice baby': ['wok', 8, 2], 'holy basil, batman!': ['wok', 8, 2], 'plain jane': ['cold', 3, 2],
   'gravy train': ['stock', 10, 2], 'sweet talk': ['stock', 10, 2], 'green with envy': ['stock', 10, 2], 'suey generis': ['stock', 10, 2],
   'honey, i shrunk the noodles': ['fry', 6, 3], 'sticky situation': ['cold', 3, 3], 'scoop there it is': ['cold', 3, 3],
-  'steamer for two': ['pass', 15, 1], 'cabin feast for four': ['pass', 25, 2], 'bowl game': ['pass', 12, 2],
+  'steamer for two': ['pass', 15, 1], 'konso feast for four': ['pass', 25, 2], 'bowl game': ['pass', 12, 2],
 };
 
 /** Station, target minutes and course for a menu item, from its name, category and print station. The owner can override any of them on the item. */
@@ -52,7 +52,7 @@ export function prepFor(name = '', cat = '', catStation = '') {
   if (/bao/.test(n) || /^bao/.test(c)) return { prep: 'steam', prep_min: 7, course: 1 };
   if (/salad|papaya|cucumber/.test(n)) return { prep: 'cold', prep_min: 4, course: 1 };
   if (/gravy|curry|khao|suey/.test(n)) return { prep: 'stock', prep_min: 10, course: 2 };
-  if (/chowmein|noodle|rice|hakka|basil/.test(n) || /cabin mains/.test(c)) return { prep: 'wok', prep_min: 8, course: 2 };
+  if (/chowmein|noodle|rice|hakka|basil/.test(n) || /konso mains/.test(c)) return { prep: 'wok', prep_min: 8, course: 2 };
   if (/wings/.test(n)) return { prep: 'fry', prep_min: 10, course: 1 };
   if (/fries|prawn|fish|chonak|potato|wonton|crispy|golden/.test(n)) return { prep: 'fry', prep_min: 7, course: 1 };
   if (/korean/.test(c)) return { prep: 'fry', prep_min: 8, course: 1 };

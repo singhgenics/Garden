@@ -91,19 +91,19 @@ JS='''
 MK={'v':'<i class="m v" title="Veg"></i>','nv':'<i class="m n" title="Non-veg"></i>','vn':'<i class="m v" title="Veg"></i><i class="m n" title="Non-veg"></i>','':''}
 # veg / non-veg marker for every food line (FSSAI) and the filter; drinks have none and always show
 VEG={'Crystal Clear':'v','Fire Starters':'nv','Siu Mai Goodness':'nv','Prawn to Be Wild':'nv','Seoul Mate':'v','Fever Pitch':'nv','Bao Down':'nv',
- 'Cabin Fever':'vn','Honey Trap':'vn','Fry Hard':'v','Wonton More':'vn','Salt & Pepa':'vn','K-Pop Wings':'nv',
+ 'Konso Fever':'vn','Honey Trap':'vn','Fry Hard':'v','Wonton More':'vn','Salt & Pepa':'vn','K-Pop Wings':'nv',
  'Smash Hit':'v','Hot & Bothered':'vn','Wonton Kenobi':'nv','Coconut Cuddle':'vn','Slap Happy':'v',
  'Noodle Around':'vn','Rice Rice Baby':'vn','Gravy Train':'vn','Sweet Talk':'vn','Green With Envy':'vn','Holy Basil, Batman!':'nv','Suey Generis':'vn','Plain Jane':'v',
  'Honey, I Shrunk the Noodles':'v','Sticky Situation':'v','Scoop There It Is':'v'}
 # Allergens read from each dish's ingredient list in the menu data. THE CHEF MUST CONFIRM THESE AGAINST THE RECIPES before it goes live.
 AL={'Crystal Clear':'soy, wheat','Fire Starters':'wheat, sesame','Siu Mai Goodness':'pork, wheat','Prawn to Be Wild':'shellfish, wheat, soy','Seoul Mate':'milk, soy, sesame, wheat',
- 'Fever Pitch':'egg, soy, wheat','Bao Down':'pork, peanuts, soy, sesame, wheat','Cabin Fever':'egg, soy (pork option: pork)','Honey Trap':'egg, sesame','Fry Hard':'milk, egg, soy',
+ 'Fever Pitch':'egg, soy, wheat','Bao Down':'pork, peanuts, soy, sesame, wheat','Konso Fever':'egg, soy (pork option: pork)','Honey Trap':'egg, sesame','Fry Hard':'milk, egg, soy',
  'Wonton More':'wheat, sesame, soy','Salt & Pepa':'egg, wheat, mustard (chonak: fish; prawns: shellfish)','K-Pop Wings':'soy, wheat','Smash Hit':'sesame','Hot & Bothered':'soy, egg',
  'Wonton Kenobi':'wheat, egg','Slap Happy':'peanuts','Noodle Around':'wheat, soy (mixed: egg, shellfish)','Rice Rice Baby':'soy (chicken and mixed: egg)','Gravy Train':'soy, wheat','Sweet Talk':'soy, wheat (paneer: milk)',
  'Green With Envy':'(prawn option: shellfish)','Holy Basil, Batman!':'egg, soy','Suey Generis':'egg, wheat','Honey, I Shrunk the Noodles':'milk, wheat, sesame','Sticky Situation':'milk, sesame',
  'Scoop There It Is':'milk, peanuts, sesame','Comrade Crisp':'gluten','Gose Bumps':'gluten','Kings':'gluten','Budweiser':'gluten','Corona Extra':'gluten','Hoegaarden':'gluten (wheat, barley)','Eight Finger Eddie IPA':'gluten','Vanilla Porter':'gluten, milk (lactose)','Bucket of Five':'gluten',
  'Somaek':'gluten','Soju Yakult':'milk','Irish Coffee':'milk','Kimchi Mary':'ask us (kimchi brine)'}
-HEAT={'Cabin Fever':2,'Honey Trap':1,'Salt & Pepa':1,'Wonton More':1,'Fire Starters':2,'Siu Mai Goodness':1,'Seoul Mate':1,'Fever Pitch':2,'K-Pop Wings':1,'Fry Hard':1,'Slap Happy':2,'Smash Hit':1,
+HEAT={'Konso Fever':2,'Honey Trap':1,'Salt & Pepa':1,'Wonton More':1,'Fire Starters':2,'Siu Mai Goodness':1,'Seoul Mate':1,'Fever Pitch':2,'K-Pop Wings':1,'Fry Hard':1,'Slap Happy':2,'Smash Hit':1,
  'Hot & Bothered':2,'Coconut Cuddle':1,'Noodle Around':1,'Holy Basil, Batman!':2,'Green With Envy':2,'Suey Generis':1,'Gravy Train':2,'Sweet Talk':1}
 def meta(name):
     h=HEAT.get(name,0); a=AL.get(name,'')
@@ -131,12 +131,12 @@ dim_tx=rows([('Fire Starters','Housemade chicken wontons poached silky, then dro
  ('Prawn to Be Wild','Plump pink prawn, garlic chives and bamboo shoot in a pleated wheat-starch skin, with chilli-soy.','340')])
 bao_ph=card('baodown','Bao Down','Pork belly slow-braised three hours in soy and star anise, seared to order with hoisin and peanut crumb.','320','Signature','3/2',12)
 bao_tx=rows([('Seoul Mate','Paneer seared hard and glazed sticky-spicy with gochujang, tucked into a soft bun with cucumber and sesame.','260'),
- ('Fever Pitch','Our crisp Cabin Fever chicken with pickled onion and chilli mayo, piled into a soft steamed bun.','280')])
-hero=f'''<figure class="hero" data-v="vn"><div class="ph"><img src="img/cabinfever.jpg" alt="Cabin Fever"><b class="tag burg">Bestseller</b></div>
-<figcaption><small>Our wok classic</small><h3><i class="m v"></i><i class="m n"></i>Cabin Fever</h3>
+ ('Fever Pitch','Our crisp Konso Fever chicken with pickled onion and chilli mayo, piled into a soft steamed bun.','280')])
+hero=f'''<figure class="hero" data-v="vn"><div class="ph"><img src="img/cabinfever.jpg" alt="Konso Fever"><b class="tag burg">Bestseller</b></div>
+<figcaption><small>Our wok classic</small><h3><i class="m v"></i><i class="m n"></i>Konso Fever</h3>
 <p>Double-fried, then tossed on full flame so the green chilli sauce catches and smokes.</p>
 <div class="vars"><span>Paneer <b>280</b></span><span>Chicken <b>320</b></span><span>Pork belly <b>360</b></span></div>
-{meta('Cabin Fever')}<div class="pair">Pair it with a bottle of <b>Gose Bumps</b> · 300</div></figcaption></figure>'''
+{meta('Konso Fever')}<div class="pair">Pair it with a bottle of <b>Gose Bumps</b> · 300</div></figcaption></figure>'''
 wok_tx=rows([('Honey Trap','Twice-fried potato fingers or chicken strips, tossed in a sticky honey-chilli glaze with sesame. Potato 220 · chicken 320',''),
  ('Fry Hard','Crisp fries loaded with housemade kimchi and melted cheese, finished under the torch with gochujang mayo.','240'),
  ('Wonton More','Hand-folded wontons fried golden to order, served hot with a sticky sweet chilli dip. Veg 240 · chicken 260',''),
@@ -175,7 +175,7 @@ cock_tx=rows([('Somaek','A shot of soju dropped into a cold lager, the loud and 
  ('Kimchi Mary','Vodka, tomato and housemade kimchi brine rolled between tins to keep it smooth, with a gochugaru rim.','420'),
  ('Lychee & Lemongrass Martini','Vodka, lychee, lemongrass and lime, shaken hard, double-strained and crowned with a whole lychee.','440'),
  ('Tamarind Chilli Margarita','Agave spirit, tamarind and lime shaken and served on the rocks with a chilli-salt rim.','460')],1)
-zero=rows([('Fresh Lime Soda','Limes pressed to order with soda, sweet or salted: the cabin-table standard.','120'),
+zero=rows([('Fresh Lime Soda','Limes pressed to order with soda, sweet or salted: the table standard.','120'),
  ('Kokum Soda','Kokum and black salt over soda, the coast’s salty-sour pink summer cooler.','140'),
  ('Lemongrass-Ginger Iced Tea','Black tea brewed in house with lemongrass and ginger, then chilled and served over ice.','160'),
  ('Tonic or Ginger Ale','Indian tonic or ginger ale, over ice.','120'),('Soft Drinks','Coke, Diet Coke, Thums Up or Sprite, chilled.','80'),('Water','Still 1 L 60 · sparkling 330 ml 120','')],1)
@@ -241,7 +241,7 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 {bao_tx}
 </div></section>
 <section class="sec cream" id="wok"><div class="in">
-{sh("From the Wok","High flame · double-fried · extra chilli","Indo-Chinese cabin classics and Korean bar food. On most dishes you pick your protein.")}
+{sh("From the Wok","High flame · double-fried · extra chilli","Indo-Chinese house classics and Korean bar food. On most dishes you pick your protein.")}
 {hero}
 {wok_tx}
 {sh("Soups &amp; Salads","Light, sharp, cold",sub=True)}
@@ -249,10 +249,10 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 </div></section>
 <section class="sec dark" id="mains"><div class="in">
 {sh("Mains","Thai · Burmese · street-style","One big bowl. Add steamed jasmine rice, Plain Jane, 120, to any curry.")}
-<div class="band top" style="margin-top:22px"><span><strong>Cabin feast for four</strong><br>4 soups, Cabin Fever chicken, Salt &amp; Pepa chonak, mixed Noodle Around, Green With Envy with rice, darsaan. About 12% under ordering separately.</span><span class="big">2,299</span></div>
+<div class="band top" style="margin-top:22px"><span><strong>Konso feast for four</strong><br>4 soups, Konso Fever chicken, Salt &amp; Pepa chonak, mixed Noodle Around, Green With Envy with rice, darsaan. About 12% under ordering separately.</span><span class="big">2,299</span></div>
 <div class="grid" style="margin-top:0">{mains_ph}</div>
 {mains_tx}
-<div class="band" style="margin-top:16px"><span><strong>Bowl Game · lunch, 12 to 4</strong><br>Any noodles or fried rice + Cabin Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
+<div class="band" style="margin-top:16px"><span><strong>Bowl Game · lunch, 12 to 4</strong><br>Any noodles or fried rice + Konso Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
 </div></section>
 </div></div>
 
