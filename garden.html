@@ -329,18 +329,18 @@ function bougFlush(parent){const mt=new THREE.Matrix4(),q=new THREE.Quaternion()
 /* ivy wicker orbs (reference): open-weave rattan spheres glowing warm from a bulb inside, hung on thick jute rope, ivy wrapped over the top and trailing down.
    Every hanging light in the hall and on the path uses them; all orbs, bulbs and ivy are instanced, so they cost a few draw calls in total */
 const ORBS=[];
-function ivyOrb(x,y,z,r,top){ORBS.push([x,y,z,r,top]);}
+function ivyOrb(x,y,z,r,top,trail){ORBS.push([x,y,z,r,top,trail]);}   // trail = longest ivy strand hanging below the orb (table orbs keep it short, so no ivy dips toward the food)
 function flushOrbs(){if(!ORBS.length)return;const wt=tex(256,256,(c,w,h)=>{c.clearRect(0,0,w,h);const rr=rng(5);c.lineCap='round';
    for(let i=0;i<34;i++){c.strokeStyle=['#c98a46','#b47436','#d9a060'][i%3];c.lineWidth=4+rr()*3;c.beginPath();const y0=rr()*h,amp=10+rr()*30,ph=rr()*6;for(let x=-10;x<=w+10;x+=8)c.lineTo(x,y0+Math.sin(x/w*6.283*2+ph)*amp);c.stroke();}
    for(let i=0;i<20;i++){c.strokeStyle='#a8682e';c.lineWidth=3;c.beginPath();const x0=rr()*w;for(let y=-10;y<=h+10;y+=8)c.lineTo(x0+Math.sin(y/h*6.283+i)*20,y);c.stroke();}},2,2);
   const wm=S({map:wt,alphaTest:0.5,transparent:false,side:THREE.DoubleSide,roughness:0.9,emissive:'#ff9a40',emissiveMap:wt,emissiveIntensity:0.95});EMI.push(['orbWicker',0.95]);M.orbWicker=wm;
   const mt=new THREE.Matrix4(),q=new THREE.Quaternion(),sc=new THREE.Vector3(),e=new THREE.Euler(),r=rng(812),ivy=[],ropeP=[];
   const om=new THREE.InstancedMesh(new THREE.SphereGeometry(1,20,14),wm,ORBS.length),bm=new THREE.InstancedMesh(new THREE.SphereGeometry(1,12,10),M.globe,ORBS.length),cm=new THREE.InstancedMesh(new THREE.SphereGeometry(1,10,8),(M.orbGlow=S({color:'#ffcf8a',emissive:'#ffa040',emissiveIntensity:1.1,transparent:true,opacity:0.45,depthWrite:false})),ORBS.length);
-  ORBS.forEach(([x,y,z,rad,top],i)=>{e.set(0,r()*6.28,0);q.setFromEuler(e);sc.set(rad,rad*0.95,rad);mt.compose(new THREE.Vector3(x,y,z),q,sc);om.setMatrixAt(i,mt);
+  ORBS.forEach(([x,y,z,rad,top,trail],i)=>{e.set(0,r()*6.28,0);q.setFromEuler(e);sc.set(rad,rad*0.95,rad);mt.compose(new THREE.Vector3(x,y,z),q,sc);om.setMatrixAt(i,mt);
    sc.set(rad*0.82,rad*0.78,rad*0.82);mt.compose(new THREE.Vector3(x,y,z),q,sc);cm.setMatrixAt(i,mt);mt.makeScale(0.045,0.055,0.045);mt.setPosition(x,y,z);bm.setMatrixAt(i,mt);
    ropeP.push(V(x,top,z),V(x,y+rad*0.95,z));
    for(let k=0;k<40;k++){const a=r()*6.283,el=0.2+r()*1.2;ivy.push([x+Math.cos(a)*Math.cos(el)*rad*1.02,y+Math.sin(el)*rad*0.97,z+Math.sin(a)*Math.cos(el)*rad*1.02]);}
-   for(let k=0;k<4;k++){const a=r()*6.283,len=0.2+r()*0.6;for(let t=0;t<len;t+=0.05)ivy.push([x+Math.cos(a)*(rad+0.02)+(r()-0.5)*0.03,y+rad*0.3-t,z+Math.sin(a)*(rad+0.02)+(r()-0.5)*0.03]);}
+   for(let k=0;k<4;k++){const a=r()*6.283,len=Math.min(0.2+r()*0.6,trail===undefined?9:trail);for(let t=0;t<len;t+=0.05)ivy.push([x+Math.cos(a)*(rad+0.02)+(r()-0.5)*0.03,y+rad*0.3-t,z+Math.sin(a)*(rad+0.02)+(r()-0.5)*0.03]);}
    for(let yy=y+rad;yy<top-0.05;yy+=0.07)if(r()<0.6)ivy.push([x+(r()-0.5)*0.05,yy,z+(r()-0.5)*0.05]);});
   [om,cm,bm].forEach(m=>G.deco.add(m));EMI.push(['orbGlow',1.1]);
   const rope=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ropeP),new THREE.LineBasicMaterial({color:'#8a6a40'}));G.deco.add(rope);
@@ -704,7 +704,7 @@ cageLantern(7.62,1.7);cageLantern(11.4,1.7);cageLantern(13.35,1.7);
 {   // ("bao down" neon removed: it competed with the gallery and the mural)
  const c=new THREE.Mesh(new THREE.PlaneGeometry(0.72,0.9),new THREE.MeshStandardMaterial({map:chalkTex,roughness:0.9}));c.position.set(12.95,1.5,zi+0.09);DW.add(c);bx(12.52,13.38,1.1,1.9,zi+0.07,zi+0.09,M.timberDark,DW,false).visible=false;
 }
-// blue-and-white porcelain in the pillars' cobalt, so the blue repeats inside the hall: ginger jars on the shelves, wall plates, two floor jars at the entrance
+// blue-and-white porcelain in the pillars' cobalt, so the blue repeats inside the hall: ginger jars on the shelves and wall plates
 const COB='#22409a';
 const porcTex=tex(256,256,(g,w,h)=>{g.fillStyle='#f4f1ea';g.fillRect(0,0,w,h);g.strokeStyle=COB;g.fillStyle=COB;
   [[6,10],[h-16,10]].forEach(([y,t])=>g.fillRect(0,y,w,t));g.lineWidth=2;for(let x=0;x<w;x+=16){g.beginPath();g.moveTo(x,28);g.lineTo(x+8,40);g.lineTo(x+16,28);g.stroke();g.beginPath();g.moveTo(x,h-28);g.lineTo(x+8,h-40);g.lineTo(x+16,h-28);g.stroke();}
@@ -811,7 +811,7 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
    const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tx,roughness:0.55}));p.position.z=0.038;g.add(p);return g;};
  const roundPlate=(x,y,d,tx)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(d/2,d/2,0.02,36),[M.metalSide,new THREE.MeshStandardMaterial({map:tx,roughness:0.45,metalness:0.3}),M.metalSide]);m.rotation.x=Math.PI/2;m.position.set(x,y,zi+0.045);DW.add(m);};
  const clock=(x,y,d)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(d/2,d/2,0.035,32),[M.frameWalnut,new THREE.MeshStandardMaterial({map:clockTex,roughness:0.4}),M.frameWalnut]);m.rotation.x=Math.PI/2;m.position.set(x,y,zi+0.05);DW.add(m);};
- const bellLamp=(x,y)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);M.shade=M.shade||S({color:'#f2dcb4',emissive:'#ffb860',emissiveIntensity:0.9,roughness:0.6,side:THREE.DoubleSide});if(!EMI.some(e2=>e2[0]==='shade'))EMI.push(['shade',0.9]);
+ const bellLamp=(x,y,zb)=>{const g=new THREE.Group();g.position.set(x,y,zb||zi+0.03);DW.add(g);M.shade=M.shade||S({color:'#f2dcb4',emissive:'#ffb860',emissiveIntensity:0.9,roughness:0.6,side:THREE.DoubleSide});if(!EMI.some(e2=>e2[0]==='shade'))EMI.push(['shade',0.9]);
    bx(-0.03,0.03,-0.1,0.1,0,0.02,M.brass,g,false);rod(V(0,0,0.02),V(0,0,0.2),0.012,M.brass,g,false);rod(V(0,0.02,0.2),V(0,0.1,0.2),0.012,M.brass,g,false);
    const sh=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.15,0.17,22,1,true),M.shade);sh.position.set(0,0.2,0.2);g.add(sh);cyl(0.07,0.07,0.012,0,0.285,0.2,M.brass,g,16,false);sph(0.04,0,0.2,0.2,M.globe,g);};
  const art=(kind,sd)=>aart(kind,sd);
@@ -827,11 +827,12 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
  const pickKind=()=>{let u=r()*pt;for(const k of PK){u-=k[1];if(u<=0)return k[0];}return 'poster';};
  const POSTERS=['noodles','opart','chilli','dimsum'],ROUNDS=['lager','tea','beer'],OLD=[['wave',true],['bamboo',true],['plum',true],['callig',true],['eatery',false],['menu',true],['calendar',false]];
  let bi2=0;
+ PIL.forEach(px=>bellLamp(px,1.36,zi+0.08));   // one bell-shaded brass wall lamp on the face of each of the five white pilasters of the solid green wall, shade centre about 1.56 m up
  bays.forEach(([x0,x1],bi)=>{const W=x1-x0,cx=(x0+x1)/2;
   if(W>1.5){const bw=Math.min(W-0.12,bi===1?1.3:1.0);put(bi===1?cx-0.9:cx,1.96,bw,0.26,(x,y,w,h)=>plate(x,y,w,h,enamel(banners[bi%4],768,Math.round(768*h/w))));}
   if(bi===1){put(cx+0.55,1.42,0.86,0.66,(x,y,w,h)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.06;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.05,M.frameWalnut,g,false);bx(-w/2-f*0.45,w/2+f*0.45,-h/2-f*0.45,h/2+f*0.45,0.05,0.056,M.brass,g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:art('twotable',3),roughness:0.55}));p.position.z=0.06;g.add(p);
     const pl=new THREE.Group();bx(-0.2,0.2,0,0.025,0,0.05,M.brass,pl,false);rod(V(0,0,0.03),V(0,-0.06,0.14),0.006,M.brass,pl,false);bx(-0.19,0.19,-0.09,-0.06,0.1,0.2,M.brass,pl,false);bx(-0.18,0.18,-0.08,-0.075,0.12,0.19,M.led,pl,false);pl.position.set(x,y+h/2+0.12,zi+0.04);DW.add(pl);});}
-  if(W>1.5){put(x0+0.22,1.48,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));if(W>3)put(x1-0.22,1.48,0.3,0.34,(x,y)=>bellLamp(x,y-0.12));}
+  // (bell lamps no longer sit at the bay ends: one is now fixed on each white pilaster, see below)
   if(W>1.5)put(x0+W*0.62,1.5,0.3,0.3,(x,y,w)=>clock(x,y,0.28));
   for(let t=0;t<3200;t++){const k=pickKind();let w,h;
    if(k==='poster'){w=[0.28,0.34,0.4,0.46][Math.floor(r()*4)];h=w*(1.2+r()*0.2);}
@@ -1113,11 +1114,9 @@ solids.push([[HX-2.25,2.3],[HX-2.25,5.2]],[[HX-0.65,0.3],[HX-0.65,5.2]]);
  cyl(0.12,0.12,top-0.86,px,0.86,pz,M.pillarBlue,G.hall,24);
  solids.push([[px-q,pz-q],[px+q,pz-q]],[[px+q,pz-q],[px+q,pz+q]],[[px+q,pz+q],[px-q,pz+q]],[[px-q,pz+q],[px-q,pz-q]]);
  // centrepiece (reference): a large faux ficus tree wrapped around the pillar, its twisted trunk climbing the column into a wide canopy under the ceiling,
- // standing in a round slatted-teak planter with white pebbles, a warm glowing ceiling disc above
+ // rising straight from the floor (the old teak planter was removed to keep the aisles clear), a warm glowing ceiling disc above
  {const r=rng(88),O=new THREE.Matrix4(),q=new THREE.Quaternion(),sc=new THREE.Vector3(),e=new THREE.Euler();
-  const pr=0.62,ph=0.46;cyl(pr,pr,ph,px,0,pz,M.timber,G.hall,40);cyl(pr+0.02,pr+0.02,0.04,px,ph,pz,M.timberDark,G.hall,40);
-  for(let i=0;i<48;i++){const a=i/48*6.283;bx(px+Math.cos(a)*(pr+0.005)-0.012,px+Math.cos(a)*(pr+0.005)+0.012,0.03,ph-0.02,pz+Math.sin(a)*(pr+0.005)-0.012,pz+Math.sin(a)*(pr+0.005)+0.012,M.timberDark,G.hall,false);}
-  cyl(pr-0.04,pr-0.04,0.02,px,ph,pz,S({color:'#e8e4dc',roughness:1}),G.hall,40,false);
+  const pr=0.26,ph=0.0;   // no planter any more (it blocked the seating clearances): the trunk rises straight from the floor round the pillar
   const bark=S({color:'#4e3b2a',roughness:0.95}),top=hc(pz);
   // bark wrapped over the pillar's white base so the trunk reads from the planter up
   cyl(0.24,0.26,0.45,px,ph,pz,bark,G.hall,14);
@@ -1135,12 +1134,11 @@ solids.push([[HX-2.25,2.3],[HX-2.25,5.2]],[[HX-0.65,0.3],[HX-0.65,5.2]]);
    const fm=new THREE.InstancedMesh(new THREE.SphereGeometry(0.02,6,5),M.fairyTree,fp.length);fp.forEach(([x,y,z],i)=>{O.compose(new THREE.Vector3(x,y,z),new THREE.Quaternion(),new THREE.Vector3(1,1,1));fm.setMatrixAt(i,O);});G.hall.add(fm);
    glowDecal(px,2.4,pz,3.4,3.4,'#ffd27a',0.16,-Math.PI/2);}
   const disc=new THREE.Mesh(new THREE.CircleGeometry(1.5,40),S({color:'#f6b26b',emissive:'#ff9a40',emissiveIntensity:0.7,roughness:1}));disc.rotation.x=Math.PI/2;disc.position.set(px,top-0.02,pz);G.hall.add(disc);
-  glowDecal(px,0.47,pz,2.6,2.6,'#ffb060',0.22,-Math.PI/2);
+  glowDecal(px,0.03,pz,2.6,2.6,'#ffb060',0.22,-Math.PI/2);
   solids.push([[px-pr,pz-pr],[px+pr,pz-pr]],[[px+pr,pz-pr],[px+pr,pz+pr]],[[px+pr,pz+pr],[px-pr,pz+pr]],[[px-pr,pz+pr],[px-pr,pz-pr]]);}
  lbl('Centrepiece tree around the pillar',px,2.0,pz,'k');}
 /* --- tables: 5 tables for 4 + 2 family tables for 6 = 32 covers, + 4 couple tables = 40 --- */
-const TABLES=[[2.4,1.5,6],[5.6,1.5,6],[9.0,1.45,0],[12.0,1.45,0],[2.0,6.6,0],[4.4,4.2,0],[11.3,3.75,0],
-  [7.05,4.5,2,'x'],[1.0,3.0,2,'z'],[3.9,10.1,2,'x'],[5.7,9.9,2,'z']];   // + 4 couple tables (two-tops): by the south railing west of the entrance, on the west edge, and two on the garden-facing rail of the west wing   // 5 tables of 4 + 2 family tables of 6 = 32 covers
+const TABLES=[[2.81,1.89,6],[5.53,1.73,6],[8.36,1.54,0],[10.24,3.34,0],[4.91,9.38,0],[1.54,6.1,0],[2.82,8.17,0],[5.61,6.55,2,'z'],[3.62,4.9,2,'x'],[6.33,4.37,2,'x'],[0.84,3.21,2,'z']];   // + 4 couple tables (two-tops): by the south railing west of the entrance, on the west edge, and two on the garden-facing rail of the west wing   // 5 tables of 4 + 2 family tables of 6 = 32 covers
 // dining chair: dark walnut frame and legs, woven cane back, cognac leather-look (marine-grade vinyl) seat pad
 function chair(x,z,ang,seat){const g=new THREE.Group();
   bx(-0.22,0.22,0.43,0.47,-0.21,0.21,M.timberDark,g,false);bx(-0.19,0.19,0.47,0.54,-0.18,0.18,seat||M.taupe,g,false);
@@ -1150,7 +1148,9 @@ function chair(x,z,ang,seat){const g=new THREE.Group();
   [[-0.2,0.0],[0.2,0.0]].forEach(([sx])=>bx(sx-0.015,sx+0.015,0.5,0.95,-0.2,-0.18,M.walnut,g));bx(-0.22,0.22,0.92,0.96,-0.21,-0.17,M.walnut,g,false);
   const cn=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.4),M.cane);cn.position.set(0,0.74,-0.19);g.add(cn);
   g.position.set(x,0,z);g.rotation.y=ang;G.hall.add(g);}
-function pendant(x,z,dome){const top=hc(z)-0.15;ivyOrb(x-0.17,hc(z)-0.62,z,0.2,top);ivyOrb(x+0.17,hc(z)-0.38,z+0.1,0.16,top);}   // a pair of ivy wicker orbs at staggered heights over each table
+/* table orbs follow the lighting guide: a pair counts as one pendant, about 25-30 cm orbs, and the shade bottoms hang 77 and 84 cm above the tabletop (0.788 m) at every table, whatever the soffit does (rope length changes, not the height) */
+const ORB_BOT_A=1.56,ORB_BOT_B=1.63;
+function pendant(x,z,dome){const top=hc(z)-0.15;ivyOrb(x-0.13,ORB_BOT_A+0.15*0.95,z,0.15,top,0.16);ivyOrb(x+0.13,ORB_BOT_B+0.12*0.95,z+0.1,0.12,top,0.16);}   // a pair of ivy wicker orbs at staggered heights over each table
 // burgundy tablecloths on every table: heavy woven cotton-linen with a tone-on-tone damask, 25 cm drop on all sides and a stitched hem
 const clothTex=tex(512,512,(g,w)=>{g.fillStyle='#5c1322';g.fillRect(0,0,w,w);const r=rng(61);
   for(let y=0;y<w;y+=2){g.fillStyle=`rgba(${r()<.5?'120,30,48':'40,6,14'},${0.18+r()*0.12})`;g.fillRect(0,y,w,1);}
@@ -1171,7 +1171,7 @@ TABLES.forEach(([x,z,kind,ori],i)=>{
   M.bamboo=M.bamboo||S({color:'#c9a46a',roughness:0.8});cyl(0.085,0.085,0.055,x-0.13,0.79,z+0.1,M.bamboo,G.hall,14,false);[[0.12,-0.12],[0.19,-0.12]].forEach(([dx,dz])=>cyl(0.024,0.02,0.04,x+dx,0.79,z+dz,M.white,G.hall,10,false));
   [[0,-0.22],[0,0.22]].forEach(([dx,dz])=>cyl(0.1,0.09,0.012,x+(ori==='x'?dz:dx),0.79,z+(ori==='x'?dx:dz),M.white,G.hall,16,false));
   if(ori==='x'){chair(x-0.58,z,Math.PI/2,M.chester);chair(x+0.58,z,-Math.PI/2,M.chester);}else{chair(x,z-0.58,0,M.chester);chair(x,z+0.58,Math.PI,M.chester);}
-  ivyOrb(x,1.88,z,0.17,hc(z)-0.15);glowDecal(x,0.795,z,0.95,0.95,'#ffb060',0.3,-Math.PI/2);return;}
+  ivyOrb(x,ORB_BOT_A+0.15*0.95,z,0.15,hc(z)-0.15,0.16);glowDecal(x,0.795,z,0.95,0.95,'#ffb060',0.3,-Math.PI/2);return;}
  if(kind===6){const w=0.9,l=1.9;
   bx(x-l/2,x+l/2,0.72,0.78,z-w/2,z+w/2,M.timber,G.hall);bx(x-l/2-0.01,x+l/2+0.01,0.72,0.745,z-w/2-0.01,z+w/2+0.01,M.timberDark,G.hall,false);
   [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>bx(x+a*(l/2-0.08)-0.04,x+a*(l/2-0.08)+0.04,0,0.72,z+b*(w/2-0.08)-0.04,z+b*(w/2-0.08)+0.04,M.timberDark,G.hall));
@@ -1199,7 +1199,7 @@ TABLES.forEach(([x,z,kind,ori],i)=>{
   else{chair(x,z+0.7,Math.PI,seat);chair(x,z-0.7,0,seat);chair(x-0.7,z,Math.PI/2,seat);chair(x+0.7,z,-Math.PI/2,seat);}
   pendant(x,z,z<2);glowDecal(x,0.795,z,1.3,1.3,'#ffb060',0.32,-Math.PI/2);});   // each orb pair throws a warm pool on its table
 /* bar stools stand at the counter; planters + a kilim runner at the entrance */
-[-1.0,1.0].forEach(dx=>{gingerJar(ENT_MID+dx,0,4.75,0.62,G.hall);solids.push([[ENT_MID+dx-0.2,4.75],[ENT_MID+dx+0.2,4.75]]);});   // a pair of big blue-and-white floor jars framing the kilim runner just inside the entrance
+// (the pair of floor jars at the entrance was removed to keep the entrance aisle clear)
 {const cm=new THREE.Mesh(new THREE.PlaneGeometry(1.3,0.6),M.coir);cm.rotation.x=-Math.PI/2;cm.position.set(ENT_MID,0.004,5.85);G.hall.add(cm);const k=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.2),M.kilim);k.rotation.x=-Math.PI/2;k.position.set(ENT_MID,0.005,4.3);G.hall.add(k);}
 function planter(x,z,s){bx(x-0.25*s,x+0.25*s,0,0.5*s,z-0.25*s,z+0.25*s,M.pot,G.hall);for(let i=0;i<5;i++){const l=new THREE.Mesh(new THREE.SphereGeometry(0.2*s,8,6),M.leaf);l.position.set(x+(i-2)*0.07,0.65*s+i%2*0.14,z+(i%3-1)*0.06);l.castShadow=true;G.hall.add(l);}}
 
@@ -1252,7 +1252,7 @@ lbl('Tower AC',0.55,2.0,4.2,'k');lbl('Tower AC',6.2,2.0,8.6,'k');
    [-0.45,0,0.45].forEach(k=>{const rg=new THREE.Mesh(new THREE.TorusGeometry(r*Math.sqrt(1-k*k)*1.001,0.004,5,24),M.brass);rg.rotation.x=Math.PI/2;rg.position.set(x,y+k*r*1.15,z);g.add(rg);});cyl(0.02,0.02,0.04,x,y+r*1.15,z,M.brass,g,8,false);}
  // 4. rattan cone pendants (open lobe and bar end)
  function rattanShade(x,z,y,r){ivyOrb(x,y+0.05,z,r*0.7,hc(z)-0.15);return;const top=hc(z)-0.2;rod(V(x,top,z),V(x,y+0.12,z),0.006,M.steel,g,false);const s2=new THREE.Mesh(new THREE.CylinderGeometry(r*0.35,r,0.3,22,1,true),M.rattan);s2.position.set(x,y,z);g.add(s2);sph(0.045,x,y-0.02,z,M.filament,g);}
- [[3.5,9.9,1.9,0.34],[5.6,7.2,1.85,0.34],[13.1,3.9,1.9,0.3],[7.4,5.0,1.95,0.3]].forEach(a=>rattanShade(...a));
+ [[1.6,4.7,2.23,0.34],[4.5,7.6,2.23,0.34],[12.8,3.8,2.2,0.3],[9.1,4.3,2.2,0.3]].forEach(a=>rattanShade(...a));   // ambient orbs hang over the aisles with their bottoms about 2.05 m up, clear of heads
  // 5. hanging macrame planters with trailing greenery along the open edges
  function hangPlanter(x,z,drop){const r=rng(Math.round(x*7+z*3)+1),top=hc(z)-0.15,y=top-drop;cyl(0.012,0.012,0.04,x,top-0.04,z,M.brass,g,8,false);
    [0,2.1,4.2].forEach(a=>rod(V(x,top-0.04,z),V(x+Math.cos(a)*0.12,y+0.18,z+Math.sin(a)*0.12),0.004,M.jute,g,false));{const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.17,14,8,0,Math.PI*2,Math.PI/2,Math.PI/2),M.coir);bowl.position.set(x,y+0.1,z);g.add(bowl);}
@@ -1566,12 +1566,12 @@ function applyLight(){const t=LIGHT.t,d=LIGHT.dim,day=1-t;const sky=skyAt(t);sce
   renderer.toneMappingExposure=1.0+0.15*t;
   const rd=document.getElementById('lc-read');if(rd)rd.textContent=Math.round(d*100)+'% · '+(d<0.02?'off':(t>0.6?'2700/2200 K':'2700 K'));
   renderer.shadowMap.needsUpdate=true;dirty=true;}
-const PRE={lunch:[0,100],dusk:[55,70],evening:[85,80],late:[100,40]};
+const PRE={lunch:[0,100],dusk:[55,70],evening:[85,80],late:[100,50]};   // Late raised from 40 to 50 so the tables never fall below about 30 lux
 const PRE_NAME={lunch:'Lunch',dusk:'Sunset',evening:'Evening',late:'Late'};
 function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.getElementById('lc-time').value=t;document.getElementById('lc-dim').value=d;document.querySelectorAll('.lc-pre button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pre===k)));document.getElementById('lc-name').textContent=PRE_NAME[k];applyLight();}
 
 /* ======================= labels ======================= */
-lbl('Main restaurant · 40 covers (5 × 4 + 4 couple tables + 2 × 6)',6.5,2.6,3.2,'');lbl('Couple table',7.05,1.5,4.5,'');lbl('Couple table · by the TV',1.0,1.5,3.0,'');lbl('Couple tables · overlooking the garden',4.8,1.5,10.1,'');
+lbl('Main restaurant · 40 covers (5 × 4 + 4 couple tables + 2 × 6)',6.5,2.6,3.2,'');lbl('Couple table',6.33,1.5,4.37,'');lbl('Couple table · by the TV',0.84,1.5,3.21,'');lbl('Couple table · by the pillar',5.61,1.5,6.55,'');
 lbl('Decor wall · 15.67 m',7.8,3.0,0.2,'o');
 lbl('Bar · exposed-brick counter',14.6,2.6,1.5,'');lbl('65 in TV · the only screen',0.75,2.65,0.75,'');
 lbl('Pathway behind the bar · 1.60 m',(HX+BX0)/2,0.4,4.6,'k');lbl('1.30 m aisle behind the coffee wall: existing sink + spare space',HX-0.9,0.4,1.9,'k');
@@ -1627,11 +1627,11 @@ const VIEWS={
  plan:{p:[11,36,5.6],t:[11,0,5.55],card:'plan',roof:false,fov:46},
 };
 const CARDS={
- overview:['Overview','Konso Garden','A 40-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers; 4 couple tables (two-tops) add 8 more = 40','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy terracotta-chocolate stacked tile (cream grout) under the bottle green','Blue-and-white porcelain in the pillars\' cobalt: ginger jars on the wall shelves, plates on the gallery wall, two floor jars at the entrance','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet flush-mount ceiling fans (blades about 24 cm below the ceiling) in the coffers, plus two tower ACs']],
+ overview:['Overview','Konso Garden','A 40-cover pub in the open hall of an old Portuguese house, with its kitchen block beside it. Everything is on the plan dimensions.',['5 square tables for 4 + 2 family tables for 6 = 32 covers; 4 couple tables (two-tops) add 8 more = 40','Gallery wall washed by warm adjustable spots; acoustic felt in the ceiling coffers','Bar at the counter zone, east end of the hall','Decor wall along the solid 15.67 m north wall','Centrepiece ficus tree around the middle pillar','Entrance on the 9.20 m open edge, facing the landing','Blue round pillars on white pedestals and an 80 cm balustrade (navy balusters), as on site','Blue-grey granite floor; the north wall tiles covered with glossy terracotta-chocolate stacked tile (cream grout) under the bottle green','Blue-and-white porcelain in the pillars\' cobalt: ginger jars on the wall shelves and plates on the gallery wall','One 65 in TV, on the diagonal of the north-west corner','Front: arched gate on the road (1.70 m), main path east to the residence, 5 × 5 m garden beside it, 1.20 m approach path north to a 5 × 5 m landing','Every open side closes with roll-down clear PVC','Quiet flush-mount ceiling fans (blades about 24 cm below the ceiling) in the coffers, plus two tower ACs']],
  decor:['Decor wall','The solid north wall, 15.67 m','Covered end to end: the old tile dado is covered with glossy warm terracotta-chocolate vertical stacked tile with cream grout (0.90 m, two-tone with the bottle green above, brass rail between; 1.28 m of wall above it to a 2.18 m ceiling), white fluted pilasters kept, emerald paint above with brass globe sconces, a dense vintage-sign gallery: weathered enamel banner signs (DIM SUM, NOODLES, CHOWMEIN) across the top of each bay, tall TEA signs, round LAGER and BEER signs, slim walnut-framed bold red, yellow and cream graphic posters, bell-shaded brass wall lamps, wall clocks and a few small prints, with a large oil still life of a Chinese bowl beside a steel thali as the statement piece under a brass picture light, and an exposed-brick bay with black wire-grid panels (green LED glow, vintage tin signs), caged lanterns and a menu board.',['Vintage-sign gallery wall: enamel banner signs, tall and round signs, bold graphic posters in slim walnut frames, bell-shaded brass lamps, clocks, and the bowl-and-thali oil under a picture light','One screen only: the 65 in TV across the north-west corner','Warm 2700 K sconces; ivy-wrapped wicker orb pendants in pairs over every table']],
  entry:['Entrance','On the 9.20 m edge, facing the landing','Guests come up the 1.20 m approach path, cross the 5 × 5 m red-oxide landing (between the hall wing and the existing restaurant) and step up through a 1.70 m opening in the balustrade, over a kilim runner, straight into the dining room.',['PVC flaps overlap, so the door is always passable','Blue round pillars either side, as on site','Magenta and white bougainvillea along the eave of every open side, cascading down the entrance columns']],
  tv:['TV corner','North-west corner · 65 in screen','A 65 in screen set exactly on the diagonal where the decor wall meets the 7.76 m open side, facing the room at 45°, on a slatted timber section that closes the corner between the wall and the corner pillar.',['Screen centre 1.62 m, bottom edge about 1.22 m, top 2.02 m under a 2.2 m ceiling at this corner','Linear LED log-effect fireplace in a white mantel console under the screen','Seen from every table on the west half of the hall']],
- couples:['Couple tables','Four tables for two','0.70 m square teak tables in burgundy linen, two chairs each, one wicker orb overhead. Two sit on the garden-facing rail of the west wing, one on the west edge by the TV corner and one on the south railing west of the entrance.',['Each keeps about 1.2 m clear walkway','Adds 8 covers: 32 to 40 (check the permitted limit)','Best seats for date night: the wing rail looks onto the lit garden']],
+ couples:['Couple tables','Four tables for two','0.70 m square teak tables in burgundy linen, two chairs each, one wicker orb overhead. One sits on the west edge by the TV corner, two in the south part of the hall west of the entrance, and one beside the pillar in the west wing.',['At least 0.6 m between seated guests and aisles of 1.0 m or more around them','Adds 8 covers: 32 to 40 (check the permitted limit)','Best seats for date night: by the TV corner, or beside the pillar away from the bar']],
  gardencard:['Garden','5 × 5 m, on the left as you come in','The lawn on the left of the main path just inside the gate, below the hall\'s 2.98 m edge: areca palms, white flowering shrubs and a hedge inside a laterite kerb, with the three lamp posts and the festoon canopy of the approach path along its far side.',['Warm uplights at the palms','Hedge along the hall side and the main path']],
  approach:['Approach path','1.20 m, lamp posts to the landing','The narrow stepping-stone path from the main path to the landing. Dense strands of warm micro fairy lights are strung on fine wires from the three black lamp posts to the existing restaurant\'s balcony roof, with no frame, and among them hang brass lanterns and ivy-wrapped wicker orbs.',['Lights kept 2.1 m or more above the path','Warm 2200-2700 K']],
  gate:['Gate','Front entrance on the road · 1.70 m opening','The whitewashed arched gateway as it stands on site, with its blue gable, sign board, black wall lanterns and wrought-iron double gates, on the Cavelossim-Assolna road. The main path (red oxide with grey kota edges) runs straight in to the veranda of the existing residence. On its left is the 5 × 5 m garden; past the garden a 1.20 m stepping-stone approach path (red squares in grey kota, grass joints) turns left to the 5 × 5 m red-oxide landing in front of the hall entrance.',['Layout from the marked survey plan: main path orange, garden red, approach path blue','Approach path length about 5.5 m, from the plan (to confirm on site)','Magenta and white bougainvillea over the arch and spilling down one pier onto the compound wall','Gate leaves open inwards','Compound wall with a navy picket either side','Three black lamp posts along the narrow approach path, areca palms and a hedge in the garden','A glowing LED poster standee at the outer gate, just north of the opening on the road side, facing the traffic: our own quirky poster of a sunglasses-wearing dumpling surfing a beer wave, with the tagline Wok, Steam & Draught','Sign board shows Konso (the site sign today is the old one)']],
