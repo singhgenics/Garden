@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&display=swap");
 /* Konso website theme, shared by every tab of the 3D model.
    Palette and type are the live site's (singhgenics.github.io/Konso): bottle green leads, brass and Goa blue support, cream paper,
-   Alfa Slab One for headings, IBM Plex Sans for text, IBM Plex Mono for figures. Light only, like the site. Load this last. */
+   Prata for headings, Montserrat for text and figures (the fonts of the Konso logo). Light only, like the site. Load this last. */
 :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
   color-scheme:light;
   --bottle:#1F3D2E;--red-deep:#14291E;--choc:#4A2A1E;--goa-blue:#2443A6;--goa-navy:#1B3070;--brick:#A9533A;--brass:#C49A3C;--burgundy:#6A1622;--cognac:#A2582A;--bougain:#D81B7A;
@@ -10,7 +10,7 @@
   --bg:#F2E8D2;--band:#17221C;--on-band:#F2E8D2;--on-red:#F2E8D2;
   --hot:#A9533A;--cold:#2443A6;--wet:#2F6F57;--exist:#8c8a7c;--top:#C49A3C;--std:#DCCBA3;--wall:#1F3D2E;--gap:#F6EDD9;--dim:#2443A6;
   --room:#FBF5E6;--rline:#C9B38A;--path:#E8D9B8;--figbg:#F6EDD9;--exh:#B8631A;--drn:#0E7F98;--fz:#1B3070;
-  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --display:"Prata",Georgia,serif;--body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Montserrat",system-ui,sans-serif;
   --f-display:var(--display);--f-body:var(--body);--f-mono:var(--mono)}
 html,body{background:var(--paper);color:var(--ink)}
 body{font-family:var(--body)}

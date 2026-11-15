@@ -6,9 +6,9 @@
 # and check each print sheet still fits (food and drinks must each be one A3 page).
 import re,base64
 CSS=r'''
-@font-face{font-family:Alfa;src:url(fonts/AlfaSlabOne-Regular.ttf)}
-@font-face{font-family:Plex;src:url(fonts/IBMPlexSans.ttf);font-weight:100 700}
-@font-face{font-family:PlexMono;src:url(fonts/IBMPlexMono-Medium.ttf)}
+@font-face{font-family:Alfa;src:url(fonts/Prata-Regular.ttf)}
+@font-face{font-family:Plex;src:url(fonts/Montserrat.ttf);font-weight:100 700}
+@font-face{font-family:PlexMono;src:url(fonts/Montserrat-Medium.ttf)}
 :root{--green:#1F3D2E;--ink:#1D2A22;--cream:#F2E8D2;--paper:#FBF4E4;--brass:#C49A3C;--burg:#6A1622;--bou:#D81B7A;--mut:#5b4d40}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--ink);color:var(--cream);font:17px/1.45 Plex,system-ui,sans-serif}
