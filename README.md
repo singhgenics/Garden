@@ -27,7 +27,7 @@ Image prompts and the Flow runner for both pages: Dream/Garden/Supplies/src (Flo
 | Store room | 2.70 × 6.46 m | Back in use as the dry store: six steel racks (1.50 × 0.50 × 1.80) and a beverage pallet either side of a 1.46 m aisle, a locked spirits cage and a locked chemical cupboard at the far end, a high louvre and a door grille for air. Door straight into the kitchen beside the cooking line. The old bunk room is gone |
 | Entrance | middle of the 9.20 m open edge | 1.70 m opening in the balustrade, PVC strip door |
 | Open edges | all five | Blue round pillars (about 24 cm) on white pedestals and an 80 cm balustrade (navy balusters, white rail), as on site |
-| Centrepiece | west-wing pillar | Faux ficus tree wrapped around the blue pillar in a round slatted-teak planter with white pebbles, wide canopy under a warm glowing ceiling disc |
+| Centrepiece | west-wing pillar | Faux ficus tree wrapped around the blue pillar and rising straight from the floor (no planter, so the aisles stay clear), wide canopy under a warm glowing ceiling disc |
 | Bar ceiling | over the counter | Reclaimed timber beam on black chains, rope lashings, trailing ivy, Edison bulbs on long drops |
 | Washroom walls | | Bright orange with black doodle line art over a white tiled dado |
 | Approach path | | Dense warm fairy-light strands on fine wires from the lamp posts to the balcony roof (no frame), plus the brass lanterns and ivy wicker orbs |
