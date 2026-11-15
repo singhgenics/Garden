@@ -93,18 +93,18 @@ MK={'v':'<i class="m v" title="Veg"></i>','nv':'<i class="m n" title="Non-veg"><
 VEG={'Crystal Clear':'v','Fire Starters':'nv','Siu Mai Goodness':'nv','Prawn to Be Wild':'nv','Seoul Mate':'v','Fever Pitch':'nv','Bao Down':'nv',
  'Cabin Fever':'vn','Honey Trap':'vn','Fry Hard':'v','Wonton More':'vn','Salt & Pepa':'vn','K-Pop Wings':'nv',
  'Smash Hit':'v','Hot & Bothered':'vn','Wonton Kenobi':'nv','Coconut Cuddle':'vn','Slap Happy':'v',
- 'Noodle Around':'vn','Rice Rice Baby':'vn','Man, Churian!':'vn','Green With Envy':'vn','Holy Basil, Batman!':'nv','Suey Generis':'vn','Plain Jane':'v',
+ 'Noodle Around':'vn','Rice Rice Baby':'vn','Gravy Train':'vn','Sweet Talk':'vn','Green With Envy':'vn','Holy Basil, Batman!':'nv','Suey Generis':'vn','Plain Jane':'v',
  'Honey, I Shrunk the Noodles':'v','Sticky Situation':'v','Scoop There It Is':'v'}
 # Allergens read from each dish's ingredient list in the menu data. THE CHEF MUST CONFIRM THESE AGAINST THE RECIPES before it goes live.
 AL={'Crystal Clear':'soy, wheat','Fire Starters':'wheat, sesame','Siu Mai Goodness':'pork, wheat','Prawn to Be Wild':'shellfish, wheat, soy','Seoul Mate':'milk, soy, sesame, wheat',
  'Fever Pitch':'egg, soy, wheat','Bao Down':'pork, peanuts, soy, sesame, wheat','Cabin Fever':'egg, soy (pork option: pork)','Honey Trap':'egg, sesame','Fry Hard':'milk, egg, soy',
  'Wonton More':'wheat, sesame, soy','Salt & Pepa':'egg, wheat, mustard (chonak: fish; prawns: shellfish)','K-Pop Wings':'soy, wheat','Smash Hit':'sesame','Hot & Bothered':'soy, egg',
- 'Wonton Kenobi':'wheat, egg','Slap Happy':'peanuts','Noodle Around':'wheat, soy (mixed: egg, shellfish)','Rice Rice Baby':'soy (chicken and mixed: egg)','Man, Churian!':'soy, wheat',
+ 'Wonton Kenobi':'wheat, egg','Slap Happy':'peanuts','Noodle Around':'wheat, soy (mixed: egg, shellfish)','Rice Rice Baby':'soy (chicken and mixed: egg)','Gravy Train':'soy, wheat','Sweet Talk':'soy, wheat (paneer: milk)',
  'Green With Envy':'(prawn option: shellfish)','Holy Basil, Batman!':'egg, soy','Suey Generis':'egg, wheat','Honey, I Shrunk the Noodles':'milk, wheat, sesame','Sticky Situation':'milk, sesame',
- 'Scoop There It Is':'milk, peanuts, sesame','Comrade Crisp':'gluten','Gose Bumps':'gluten','Kings':'gluten','Budweiser':'gluten','Guest Tap':'gluten','Tasting Paddle':'gluten',
+ 'Scoop There It Is':'milk, peanuts, sesame','Comrade Crisp':'gluten','Gose Bumps':'gluten','Kings':'gluten','Budweiser':'gluten','Corona Extra':'gluten','Hoegaarden':'gluten (wheat, barley)','Eight Finger Eddie IPA':'gluten','Vanilla Porter':'gluten, milk (lactose)','Bucket of Five':'gluten',
  'Somaek':'gluten','Soju Yakult':'milk','Irish Coffee':'milk','Kimchi Mary':'ask us (kimchi brine)'}
 HEAT={'Cabin Fever':2,'Honey Trap':1,'Salt & Pepa':1,'Wonton More':1,'Fire Starters':2,'Siu Mai Goodness':1,'Seoul Mate':1,'Fever Pitch':2,'K-Pop Wings':1,'Fry Hard':1,'Slap Happy':2,'Smash Hit':1,
- 'Hot & Bothered':2,'Coconut Cuddle':1,'Noodle Around':1,'Holy Basil, Batman!':2,'Green With Envy':2,'Suey Generis':1,'Man, Churian!':1}
+ 'Hot & Bothered':2,'Coconut Cuddle':1,'Noodle Around':1,'Holy Basil, Batman!':2,'Green With Envy':2,'Suey Generis':1,'Gravy Train':2,'Sweet Talk':1}
 def meta(name):
     h=HEAT.get(name,0); a=AL.get(name,'')
     if not h and not a: return ''
@@ -136,7 +136,7 @@ hero=f'''<figure class="hero" data-v="vn"><div class="ph"><img src="img/cabinfev
 <figcaption><small>Our wok classic</small><h3><i class="m v"></i><i class="m n"></i>Cabin Fever</h3>
 <p>Double-fried, then tossed on full flame so the green chilli sauce catches and smokes.</p>
 <div class="vars"><span>Paneer <b>280</b></span><span>Chicken <b>320</b></span><span>Pork belly <b>360</b></span></div>
-{meta('Cabin Fever')}<div class="pair">Pair it with a pint of <b>Gose Bumps</b> · 260</div></figcaption></figure>'''
+{meta('Cabin Fever')}<div class="pair">Pair it with a bottle of <b>Gose Bumps</b> · 300</div></figcaption></figure>'''
 wok_tx=rows([('Honey Trap','Twice-fried potato fingers or chicken strips, tossed in a sticky honey-chilli glaze with sesame. Potato 220 · chicken 320',''),
  ('Fry Hard','Crisp fries loaded with housemade kimchi and melted cheese, finished under the torch with gochujang mayo.','240'),
  ('Wonton More','Hand-folded wontons fried golden to order, served hot with a sticky sweet chilli dip. Veg 240 · chicken 260',''),
@@ -149,19 +149,24 @@ soups=rows([('Smash Hit','Cucumber smashed to order so it soaks up black vinegar
  ('Slap Happy','Green papaya, long beans and peanuts pounded to order in the mortar: sour, sweet, hot and crunchy.','240')],1)
 mains_ph=card('noodlearound','Noodle Around','Thin noodles tossed dry on a high flame, street style, with cabbage, carrot and chilli vinegar. Veg 240 · chicken 280 · mixed 340','',"Chef’s pick",'3/2',12)
 mains_tx=rows([('Rice Rice Baby','Day-old rice fried hot with real wok smoke and burnt garlic, every grain separate. Veg 240 · chicken 280 · mixed 320',''),
- ('Man, Churian!','Crisp-fried veg dumplings or chicken simmered briefly in a dark ginger-garlic-soy Manchurian gravy. Veg 260 · chicken 300',''),
+ ('Gravy Train','A hot, glossy chilli-garlic gravy with crisp-fried veg or chicken, made to spoon over fried rice. Veg 260 · chicken 300',''),
+ ('Sweet Talk','A sticky sweet-chilli gravy with peppers and onion and crisp paneer or chicken: the gentle, tangy one for fried rice. Paneer 260 · chicken 300',''),
  ('Green With Envy','Thai green curry from paste pounded in house, simmered gently in coconut milk with aubergine and basil. Veg 300 · chicken 340 · prawn 440',''),
  ('Holy Basil, Batman!','Minced chicken with holy basil from our courtyard, bird’s-eye chilli and a runny fried egg over rice.','320'),
  ('Suey Generis','A Burmese coconut-curry noodle bowl, built your way with crispy noodles, fried onion, lime and chilli. Veg 320 · chicken 360',''),
  ('Plain Jane','Steamed jasmine rice, fragrant and plain, for the curries.','120')],1)
 
 # ---- drinks face ----
-taps_ph=card('gose','Gose Bumps','Susegado kokum gose, tart, salty and pink, soured with kokum from our own coast. Try this first. Pint 260 · 500 ml 350','','Konkan touch','3/2',12)
-taps_tx=rows([('Comrade Crisp','People’s Lager, a crisp rice lager from a small farm-to-barrel brewery in Sangolda: the beach beer. Pint 220 · 500 ml 300',''),
- ('Kings','The coast’s own cult pilsner, crisp and a little malty, served ice-cold. 330 ml 120 · 650 ml 180',''),
- ('Budweiser','The easy American classic: light, clean and gently sweet, poured ice-cold. 330 ml 180 · 650 ml 260',''),
- ('Guest Tap','A new keg from up the coast every couple of weeks: ask what is pouring. Pint 260 · 500 ml 360',''),
- ('Tasting Paddle','Three 150 ml pours of every tap on a wooden paddle, the best way to meet the taps. Pitcher of Comrade Crisp 850','320')],1)
+taps_ph=card('bottles','Craft, in the bottle','Four bottles from up the coast and beyond, poured into a glass at the table: a crisp rice lager, a pink kokum gose, an IPA and a vanilla porter.','','Konkan touch','3/2',12)
+taps_tx=rows([('Kings','The coast’s own cult pilsner, crisp and a little malty, served ice-cold. 330 ml 120 · 650 ml 180',''),
+ ('Budweiser','The easy American classic: light, clean and gently sweet, served ice-cold. 330 ml 180 · 650 ml 260',''),
+ ('Corona Extra','Light, crisp Mexican lager, served ice-cold with a wedge of lime in the neck.','320'),
+ ('Hoegaarden','Belgian wheat beer, cloudy and soft, brewed with coriander and orange peel: a long, easy summer drink.','340'),
+ ('Comrade Crisp','People’s Lager, a crisp rice lager from a small farm-to-barrel brewery in Sangolda: the beach beer.','260'),
+ ('Gose Bumps','Susegado kokum gose, tart, salty and pink, soured with kokum from our own coast. Try this first.','300'),
+ ('Eight Finger Eddie IPA','A hoppy, bitter-orange IPA for people who like their beer to talk back.','320'),
+ ('Vanilla Porter','Susegado porter, dark and smooth, with roasted malt and a soft vanilla finish.','320'),
+ ('Bucket of Five','Five ice-cold bottles in an ice bucket for the table. Kings 330 ml 499 · Budweiser 330 ml 749',''),],1)
 cock_ph=card('kokumsour','Kokum Feni Sour','Cashew feni from Goa shaken hard with kokum, lime and aquafaba for a silky pink foam, served up.','420','Konkan touch','3/2',12)
 cock_tx=rows([('Somaek','A shot of soju dropped into a cold lager, the loud and cheerful Seoul pub classic.','360'),
  ('Coconut Feni Highball','Coconut feni and housemade lemongrass syrup built over ice and topped with soda: our long, easy drink.','380'),
@@ -202,7 +207,7 @@ PRINT='''
  .mast{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:16px}
  .mast img{height:62px;border-radius:10px}.mast .t{font:12px PlexMono,monospace;letter-spacing:.2em;text-transform:uppercase;text-align:right;color:var(--burg)}.mast .t b{display:block;font:30px Alfa,serif;letter-spacing:.02em;color:var(--ink);font-weight:400;margin-bottom:4px}
  .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:1.04}
- .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:1.1}.face.drinks .card .ph{aspect-ratio:16/10!important}
+ .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:1.03}.face.drinks .card .ph{aspect-ratio:16/10!important}
  .sec,.dark,.cream,.wine{padding:0!important;margin:0 0 12px;background:none!important;color:var(--ink)!important;break-inside:auto;height:auto!important;overflow:visible!important}
  .in{max-width:none;padding:0}
  .dark .sh small,.wine .sh small{color:var(--burg)}.dark .sh,.wine .sh{border-color:var(--burg)}
@@ -223,7 +228,7 @@ PRINT='''
 def mast(t): return f'<div class="mast"><img src="logo/A-lockup-reversed.svg" alt="Cabin East"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
 body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cabin East · Picture menu</title><style>{CSS}{EXTRA}{PRINT}</style></head><body>
-<nav><div class="flt" role="group" aria-label="Show"><button data-m="all" aria-pressed="true">All</button><button data-m="veg" aria-pressed="false">Veg</button><button data-m="nv" aria-pressed="false">Non-veg</button></div><a href="#dimsum">Dim sum &amp; bao</a><a href="#wok">Wok</a><a href="#mains">Mains</a><a href="#taps">Taps</a><a href="#cocktails">Cocktails</a><a href="#dessert">Dessert</a></nav>
+<nav><div class="flt" role="group" aria-label="Show"><button data-m="all" aria-pressed="true">All</button><button data-m="veg" aria-pressed="false">Veg</button><button data-m="nv" aria-pressed="false">Non-veg</button></div><a href="#dimsum">Dim sum &amp; bao</a><a href="#wok">Wok</a><a href="#mains">Mains</a><a href="#taps">Beer</a><a href="#cocktails">Cocktails</a><a href="#dessert">Dessert</a></nav>
 
 <div class="face food">{mast('Food')}<div class="cols">
 <section class="sec dark pg1" id="dimsum"><div class="in">
@@ -253,8 +258,8 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 
 <div class="face drinks">{mast('Drinks')}<div class="cols">
 <section class="sec cream" id="taps"><div class="in">
-{sh("On Tap &amp; Bottle","Brewed up the coast")}
-<div class="band" style="margin:16px 0 0"><strong>Happy hour 12 to 6</strong><span class="hh">330 ml taps 179 <s>pint 220</s> · Kings 330 ml 99 <s>120</s></span></div>
+{sh("Beer","Cold bottles · craft from up the coast")}
+<div class="band" style="margin:16px 0 0"><strong>Happy hour 12 to 6</strong><span class="hh">Kings 330 ml 99 <s>120</s> · Budweiser 330 ml 149 <s>180</s></span></div>
 <div class="grid" style="margin-top:20px">{taps_ph}</div>
 {taps_tx}
 </div></section>

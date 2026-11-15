@@ -107,7 +107,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
       <div><i style="background:radial-gradient(circle,#f4f2ec 38%,#2a4a8a 40%,#2a4a8a 52%,#f4f2ec 54%)"></i><p><b>Blue-and-white porcelain</b><span>Rice bowls, dip dishes, soup spoons, condiment pots: the cobalt of the pillars, the ginger jars and the bowl in the oil painting.</span></p></div>
       <div><i style="background:#b08a4a"></i><p><b>Brushed brass and gold</b><span>Chopstick rests, cutlery (gold PVD steel), the condiment caddy and bar tools. Repeats the brass rail and lamps.</span></p></div>
       <div><i style="background:#b8742a"></i><p><b>Amber ribbed glass</b><span>Water tumblers and carafes only. Glows under the orbs and hides water marks. Beer, whisky and cocktail glasses stay clear.</span></p></div>
-      <div><i style="background:linear-gradient(135deg,#4a2c18 50%,#9a1c18 51%)"></i><p><b>Walnut, bamboo and red lacquer</b><span>Boards, lazy susan and paddles in dark walnut; bamboo steamers; a red lacquer bill box on every table.</span></p></div>
+      <div><i style="background:linear-gradient(135deg,#4a2c18 50%,#9a1c18 51%)"></i><p><b>Walnut, bamboo and red lacquer</b><span>Boards and lazy susan in dark walnut; bamboo steamers; a red lacquer bill box on every table.</span></p></div>
     </div>
     <div class="call"><b>One change from the decor renders.</b> The renders show wine glasses at each place. There is no wine on the menu, so the place setting uses the amber water tumbler instead. The decor page also listed matte black cutlery; the renders show gold, and gold matches the brass better, so this list uses brushed gold. Pick one and buy the whole range from that one supplier.</div>
   </section>
@@ -163,7 +163,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
 </div>
 <script>
 const COVERS=40,SETS=2,PER=COVERS*SETS;
-const GROUPS={cover:['On every place setting','Two sets per cover ('+PER+'), with extra side plates, dip dishes and napkins'],food:['Food serving','From the pass to the table'],service:['On every table','Shared on each table (11 tables in the layout plus spares)'],carry:['Carrying to the table','What the servers carry food and drinks on, from the pass and the bar'],beer:['Beer','Three taps, two bottles, pitchers and the paddle'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed and Irish coffee'],tools:['Bar tools','Behind the bar, in brass']};
+const GROUPS={cover:['On every place setting','Two sets per cover ('+PER+'), with extra side plates, dip dishes and napkins'],food:['Food serving','From the pass to the table'],service:['On every table','Shared on each table (11 tables in the layout plus spares)'],carry:['Carrying to the table','What the servers carry food and drinks on, from the pass and the bar'],beer:['Beer','Bottled beer, poured into a glass at the table'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed and Irish coffee'],tools:['Bar tools','Behind the bar, in brass']};
 // [id, group, name, spec, used for, qty, unit, how counted, priority d1|later]
 const ITEMS=[
  ['side','cover','Side plate, 19 cm','Ivory matte stoneware, thin raw chocolate-brown rim','Each guest\'s eating plate; underplate for soup bowls and steamer baskets',100,'pcs','40 covers × 2 = 80, plus 20 because every soup bowl also sits on a side plate','d1'],
@@ -190,7 +190,7 @@ const ITEMS=[
  ['soup','food','Soup bowl, 14 cm','450 ml, bottle-green reactive glaze outside, ivory inside; served on a side plate','Wonton Kenobi, Hot & Bothered, Coconut Cuddle, Fire Starters (chilli oil pools); feast soups',48,'pcs','~24 soups at once (4 per feast) × 2','d1'],
  ['noodle','food','Wide shallow bowl, 23 cm','900 ml, ivory inside, chocolate-speckled outside','Noodle Around, Suey Generis, Slap Happy',32,'pcs','~16 at once × 2','d1'],
  ['oval','food','Oval platter, 30 cm','Ivory stoneware, chocolate rim','Rice Rice Baby (fried rice, mounded)',30,'pcs','~15 at once × 2','d1'],
- ['claypot','food','Claypot with stand','About 600 ml, glazed earthenware with lid, wire stand','Man, Churian! and Green With Envy: keeps gravy hot on the table',24,'pots + stands','~12 at once × 2','d1'],
+ ['claypot','food','Claypot with stand','About 600 ml, glazed earthenware with lid, wire stand','Gravy Train, Sweet Talk and Green With Envy: keeps gravy hot on the table',24,'pots + stands','~12 at once × 2','d1'],
  ['toptray','food','Topping tray, 5 sections','25 cm ivory stoneware, chocolate rim','Suey Generis: crispy noodles, shallots, fried garlic, lime, chilli flakes',10,'pcs','~5 at once × 2','d1'],
  ['dessert','food','Dessert and salad bowl, 15 cm','Shallow, bottle-green reactive glaze, ivory inside','Darsaan, Sticky Situation, Scoop There It Is, Smash Hit',40,'pcs','~20 at once × 2','d1'],
  ['board','food','Serving board','Dark walnut, about 40 × 25 cm, with handle','Steamer for two: the baskets, the bao plate and dips carried out together',8,'pcs','~4 at once × 2','d1'],
@@ -206,10 +206,8 @@ const ITEMS=[
  ['traystand','carry','Tray stand','Folding walnut stand with burgundy straps','Opened beside the table so the food tray rests on it while plates go down; never put a tray on a guest\'s table',3,'stands','one per dining area (hall, west wing, garden side)','d1'],
  ['servcloth','carry','Service cloth','Ivory cotton, folded long, burgundy stripe','Carried over the forearm to hold hot plates, claypots and steamer baskets and to wipe a drip',12,'cloths','3 per server per shift, one shift in the wash','d1'],
 
- ['pint','beer','Pint glass, 500 ml','Clear nonic, tempered, fill line at 500 ml','Large pours of Comrade Crisp, Gose Bumps, the guest tap; Kings and Budweiser bottles',60,'pcs','~30 at once × 2','d1'],
- ['beer330','beer','Beer glass, 330 ml','Clear straight-sided, tempered, fill line','Small pours, happy-hour taps and Kings 330, Somaek, pitcher glasses',60,'pcs','~30 at once × 2','d1'],
- ['pitcher','beer','Beer pitcher, 1.5 L','Clear glass (polycarbonate for the garden if you prefer)','Pitcher of Comrade Crisp or craft',8,'pcs','~4 at once × 2','d1'],
- ['paddle','beer','Tasting paddle + taster glasses','Dark walnut paddle with 3 holes; 150 ml clear tasters','Tasting paddle of all three taps',8,'paddles + 30 tasters','~4 at once × 2','d1'],
+ ['pint','beer','Pint glass, 500 ml','Clear nonic, tempered, fill line at 500 ml','The 650 ml Kings and Budweiser to share, and craft bottles for guests who want a full glass',30,'pcs','~15 at once × 2','d1'],
+ ['beer330','beer','Beer glass, 330 ml','Clear straight-sided, tempered, fill line','Every bottle poured at the table: Kings, Budweiser, Corona, Hoegaarden and the craft bottles; Somaek',60,'pcs','~30 at once × 2','d1'],
 
  ['nosing','spirits','Whisky nosing glass','Glencairn-style tulip, about 175 ml','Paul John, Amrut, Glenlivet, Talisker neat; flight glasses',24,'pcs','~12 at once × 2','d1'],
  ['flight','spirits','Whisky flight board','Dark walnut, 3 glass holes, with a water dropper','Single malt flight with water and chilli peanuts',4,'boards + 4 droppers','~2 at once × 2','d1'],
@@ -228,7 +226,7 @@ const ITEMS=[
  ['shaker','tools','Boston shaker set','Two weighted tins, brushed brass finish','Feni sour, lychee martini, margarita, Soju Yakult, Kimchi Mary',3,'sets','one in use, one washing, one spare','d1'],
  ['bartools','tools','Bar tool kit','Brass: 30/60 ml jigger, Hawthorne and fine strainers, bar spoon, muddler, bottle opener','Every cocktail; opening Kings, Budweiser, soju and soft drinks',2,'kits','one per station + spare','d1'],
  ['squeezer','tools','Citrus squeezer','Hand press, brass finish','Fresh lime soda, margarita, G&T, sours',2,'pcs','','d1'],
- ['icebucket','tools','Ice bucket + scoop + tongs','Brass, double-walled','Bar well, Kings and Budweiser bottles at the table, garden tables',6,'sets','','d1'],
+ ['icebucket','tools','Ice bucket + scoop + tongs','Brass, double-walled','Bar well, plus the Bucket of Five (5 bottles on ice) at the table, one per group order',10,'sets','4 buckets out at a time + bar and garden + spares','d1'],
  ['rim','tools','Rimming dish + garnish tray','Shallow black rim dish; lidded garnish tray','Chilli-salt and gochugaru rims; lime, lychee, lemon twists',2,'of each','','d1'],
  ['icescoop','tools','Ice-cream scoop, dipper well, 3 topping pots','Stainless steel, about 50 ml scoop','Scoop There It Is and the two desserts with ice cream',2,'sets','','d1']
 ];
@@ -239,10 +237,10 @@ const MAP=[
  ['Bao',[['Bao Down','bao',''],['Fever Pitch','bao',''],['Seoul Mate','bao','']]],
  ['Seoul to Bangkok',[['K-Pop Wings','basket','Bone bowl, wet wipes'],['Fry Hard','basket','Gochujang mayo on top'],['Slap Happy','noodle','Serving spoons'],['Smash Hit','dessert','Chopsticks']]],
  ['Noodles & rice',[['Noodle Around','noodle','Rice bowls, noodle tongs'],['Rice Rice Baby','oval','Rice bowls, serving spoon'],['Holy Basil, Batman!','deep','Bird\'s-eye chillies in a dip dish'],['Plain Jane','rice','Serving spoon']]],
- ['Gravies & curries',[['Man, Churian!','claypot','Serving spoon'],['Green With Envy','claypot','Jasmine rice, serving spoon'],['Suey Generis','noodle','Topping tray, soup spoon']]],
+ ['Gravies & curries',[['Gravy Train','claypot','Serving spoon; goes beside the fried rice'],['Sweet Talk','claypot','Serving spoon; goes beside the fried rice'],['Green With Envy','claypot','Jasmine rice, serving spoon'],['Suey Generis','noodle','Topping tray, soup spoon']]],
  ['For the table',[['Steamer for two','board','Two-tier 8" steamer, long plate for the bao, dips'],['Cabin feast for four','susan','Four soup bowls first, then five shared dishes on the turntable'],['Bowl game (lunch)','deep',''],['Happy hour','plate','Dumplings in a 6" steamer'],['Cheeselings (free)','cheese','Brought as the guests sit; refilled once']]],
  ['Sweet',[['Honey, I Shrunk the Noodles','dessert','Teaspoon'],['Sticky Situation','dessert','Teaspoon'],['Scoop There It Is','dessert','Teaspoon; topping pots at the pass']]],
- ['Beer',[['Comrade Crisp, Gose Bumps, guest tap','pint','330 ml glass for small pours'],['Kings, Budweiser','pint','Bottle opened at the table; ice bucket outdoors'],['Pitcher','pitcher','330 ml glasses'],['Tasting paddle','paddle','']]],
+ ['Beer',[['Kings, Budweiser, Corona Extra, Hoegaarden','beer330','Bottle opened at the table; lime wedge for the Corona; 650 ml bottles go in a pint glass'],['Craft bottles (Comrade Crisp, Gose Bumps, IPA, Porter)','beer330','Poured at the table; keep the bottle beside the glass'],['Bucket of Five','icebucket','Five bottles on ice, with the bottle opener']]],
  ['Whisky',[['Single malts neat','nosing','Water dropper'],['On the rocks','rocks','One large cube'],['Highballs and blends with soda','highball','Mixer on the side'],['Single malt flight','flight','Chilli peanuts in a dip dish']]],
  ['Vodka',[['Haku, Belvedere, house infusions','shot','Glass from the freezer'],['Vodka with tonic or soda','highball','']]],
  ['Cocktails',[['Kokum feni sour, Lychee martini','coupe','Served up'],['Coconut feni highball, Sichuan G&T, Kimchi Mary','highball','Rims from the rimming dish'],['Tamarind chilli margarita, Soju Yakult','rocks','Big cube'],['Somaek','beer330','Soju in a shot glass, dropped in']]],
