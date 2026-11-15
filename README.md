@@ -1,4 +1,4 @@
-# Cabin East Garden
+# Konso Garden
 
 A 3D model of the Garden restaurant: an open-sided pub hall with its bar, kitchen, dish wash, washroom and store room. Built in the same style, lighting and palette as the Simplex model.
 

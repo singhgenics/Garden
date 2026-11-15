@@ -225,14 +225,14 @@ PRINT='''
  .foot{position:absolute;left:44px;right:44px;bottom:22px;margin:0;font-size:11px;padding-top:7px;color:#5b4d40;border-top:1px solid var(--brass)}
 }
 '''
-def mast(t): return f'<div class="mast"><img src="logo/A-lockup-reversed.svg" alt="Cabin East"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
+def mast(t): return f'<div class="mast"><img src="logo/A-lockup-reversed.svg" alt="Konso"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
 body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cabin East · Picture menu</title><style>{CSS}{EXTRA}{PRINT}</style></head><body>
+<title>Konso · Picture menu</title><style>{CSS}{EXTRA}{PRINT}</style></head><body>
 <nav><div class="flt" role="group" aria-label="Show"><button data-m="all" aria-pressed="true">All</button><button data-m="veg" aria-pressed="false">Veg</button><button data-m="nv" aria-pressed="false">Non-veg</button></div><a href="#dimsum">Dim sum &amp; bao</a><a href="#wok">Wok</a><a href="#mains">Mains</a><a href="#taps">Beer</a><a href="#cocktails">Cocktails</a><a href="#dessert">Dessert</a></nav>
 
 <div class="face food">{mast('Food')}<div class="cols">
 <section class="sec dark pg1" id="dimsum"><div class="in">
-<img src="logo/A-lockup-reversed.svg" alt="Cabin East · Wok Steam Draught" class="biglogo" style="display:block;margin:-24px auto 22px;width:min(420px,80%);border-radius:14px">
+<img src="logo/A-lockup-reversed.svg" alt="Konso · Wok Steam Draught" class="biglogo" style="display:block;margin:-24px auto 22px;width:min(420px,80%);border-radius:14px">
 {sh("Dim Sum &amp; Bao","Hand-folded · dim sum 4 to a basket · bao 2 to a plate")}
 <div class="band top" style="margin-top:20px"><strong>Steamer for two · 799</strong><span>2 baskets of dim sum and a plate of bao, our pick of the day. Best with a Comrade Crisp.</span></div>
 <div class="grid" style="margin-top:0">{dim_ph}</div>

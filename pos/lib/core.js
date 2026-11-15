@@ -17,7 +17,7 @@ export function fy(dateStr) {
 
 // ---------- settings ----------
 export const DEFAULT_SETTINGS = {
-  business_name: 'Cabin East',
+  business_name: 'Konso',
   legal_name: '',
   address: 'Shop No. 4, Tulip Residency, Gandaulim, Salcete, Goa',
   phone: '',

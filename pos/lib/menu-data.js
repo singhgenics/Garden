@@ -1,4 +1,4 @@
-// The Cabin East menu, stock items and recipes, one source for both the first-run seed and
+// The Konso menu, stock items and recipes, one source for both the first-run seed and
 // scripts/apply-new-menu.js (which moves an existing database onto this menu).
 // Menu: Garden/menu/build.py (the published picture menu). Stock list: Garden/web/stock-plan.html.
 // Prices come from the menu. Stock quantities are the stock plan's pars for 60 covers a day; costs are estimates:

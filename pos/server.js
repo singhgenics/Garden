@@ -1,4 +1,4 @@
-// Cabin East POS server. Run on the counter PC:  node server.js   (Node 22.5+; no npm install needed)
+// Konso POS server. Run on the counter PC:  node server.js   (Node 22.5+; no npm install needed)
 // Tablets and the kitchen screen open the LAN address it prints.
 import http from 'node:http';
 import fs from 'node:fs';

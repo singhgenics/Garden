@@ -1,4 +1,4 @@
-# Cabin East POS
+# Konso POS
 
 A complete point-of-sale for the pub that runs on one counter computer and works on every tablet and phone on the same Wi-Fi.
 No internet, no subscription, no installs beyond Node.js.

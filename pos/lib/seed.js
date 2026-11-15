@@ -1,4 +1,4 @@
-// First-run data: taxes, the Cabin East menu, tables for the 28-cover plan,
+// First-run data: taxes, the Konso menu, tables for the 28-cover plan,
 // starter stock items with recipes, and the two craft-beer suppliers (menu, stock and recipes live in menu-data.js).
 // Everything is editable in the app.
 import { get, run, tx } from './db.js';

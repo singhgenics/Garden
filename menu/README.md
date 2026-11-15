@@ -1,4 +1,4 @@
-# Cabin East menu
+# Konso menu
 
 The one menu, for the table and the phone. `index.html` is self-contained (images, fonts and logo embedded) and `picture-menu.pdf` is the same page printed as two A3 sheets: food on the front, drinks and dessert on the back. Live at https://singhgenics.github.io/Garden/menu/
 
