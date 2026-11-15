@@ -327,7 +327,7 @@ function bougFlush(parent){const mt=new THREE.Matrix4(),q=new THREE.Quaternion()
   const mk=(list,geo,col,var_)=>{if(!list.length)return;const m=S({color:'#ffffff',roughness:0.75,side:THREE.DoubleSide});const im=new THREE.InstancedMesh(geo,m,list.length);const c=new THREE.Color();
    list.forEach(([x,y,z,k],i)=>{e.set(r()*3,r()*3,r()*3);q.setFromEuler(e);sc.set(k,k*0.7,k);mt.compose(new THREE.Vector3(x,y,z),q,sc);im.setMatrixAt(i,mt);c.set(col).offsetHSL((r()-0.5)*var_,0,(r()-0.5)*0.12);im.setColorAt(i,c);});im.castShadow=false;parent.add(im);list.length=0;};
   mk(BOUG.leaf,new THREE.OctahedronGeometry(0.036,0),'#2f6a2c',0.04);mk(BOUG.mag,new THREE.OctahedronGeometry(0.028,0),'#d81b7a',0.05);mk(BOUG.wht,new THREE.OctahedronGeometry(0.027,0),'#f6efe6',0.0);}
-/* ivy wicker orbs (reference): open-weave rattan spheres glowing warm from a bulb inside, hung on thick jute rope, ivy wrapped over the top and trailing down.
+/* wicker orbs (reference, now without the ivy): open-weave rattan spheres glowing warm from a bulb inside, hung on thick jute rope; the old ivy wrapped over the top and trailing down.
    Every hanging light in the hall and on the path uses them; all orbs, bulbs and ivy are instanced, so they cost a few draw calls in total */
 const ORBS=[];
 function ivyOrb(x,y,z,r,top,trail){ORBS.push([x,y,z,r,top,trail]);}   // trail = longest ivy strand hanging below the orb (table orbs keep it short, so no ivy dips toward the food)
@@ -340,9 +340,8 @@ function flushOrbs(){if(!ORBS.length)return;const wt=tex(256,256,(c,w,h)=>{c.cle
   ORBS.forEach(([x,y,z,rad,top,trail],i)=>{e.set(0,r()*6.28,0);q.setFromEuler(e);sc.set(rad,rad*0.95,rad);mt.compose(new THREE.Vector3(x,y,z),q,sc);om.setMatrixAt(i,mt);
    sc.set(rad*0.82,rad*0.78,rad*0.82);mt.compose(new THREE.Vector3(x,y,z),q,sc);cm.setMatrixAt(i,mt);mt.makeScale(0.045,0.055,0.045);mt.setPosition(x,y,z);bm.setMatrixAt(i,mt);
    ropeP.push(V(x,top,z),V(x,y+rad*0.95,z));
-   for(let k=0;k<40;k++){const a=r()*6.283,el=0.2+r()*1.2;ivy.push([x+Math.cos(a)*Math.cos(el)*rad*1.02,y+Math.sin(el)*rad*0.97,z+Math.sin(a)*Math.cos(el)*rad*1.02]);}
-   for(let k=0;k<4;k++){const a=r()*6.283,len=Math.min(0.2+r()*0.6,trail===undefined?9:trail);for(let t=0;t<len;t+=0.05)ivy.push([x+Math.cos(a)*(rad+0.02)+(r()-0.5)*0.03,y+rad*0.3-t,z+Math.sin(a)*(rad+0.02)+(r()-0.5)*0.03]);}
-   for(let yy=y+rad;yy<top-0.05;yy+=0.07)if(r()<0.6)ivy.push([x+(r()-0.5)*0.05,yy,z+(r()-0.5)*0.05]);});
+   // (no ivy on the orbs: they are plain open-weave wicker spheres on a jute rope)
+  });
   [om,cm,bm].forEach(m=>G.deco.add(m));EMI.push(['orbGlow',1.1]);
   const rope=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ropeP),new THREE.LineBasicMaterial({color:'#8a6a40'}));G.deco.add(rope);
   const leafG=new THREE.CircleGeometry(0.03,6);leafG.scale(1,1.3,1);const lm=new THREE.InstancedMesh(leafG,S({color:'#ffffff',roughness:0.7,side:THREE.DoubleSide}),ivy.length);const col=new THREE.Color();
@@ -427,8 +426,7 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
   push(sag(V(lx,ly,zA),V(lx,ly,zB),12,0.12));                                            // line along the three lamp posts
   [zA,(zA+zB)/2,zB].forEach(z=>{cyl(0.012,0.012,ly-2.4,lx,2.4,z,M.blackMetal,G.ground,6,false);});
   for(let z=zA;z<=zB+0.01;z+=(zB-zA)/6){const ex=z<13.0?11.75:12.45,ey=2.85,pts=sag(V(lx,ly,z),V(ex,ey,z),10,0.16);push(pts);
-   {const a=pts[3],b=pts[7];wires.push(a,V(a.x,a.y-0.08,a.z));lants.push(V(a.x,a.y-0.46,a.z));wires.push(b,V(b.x,b.y-0.22,b.z));globes.push(V(b.x,b.y-0.36,b.z));
-    for(let yy=b.y-0.24;yy<b.y-0.02;yy+=0.06)ivy.push([b.x+(r()-0.5)*0.05,yy,b.z+(r()-0.5)*0.05]);}
+   {const a=pts[3],b=pts[7];wires.push(a,V(a.x,a.y-0.08,a.z));lants.push(V(a.x,a.y-0.46,a.z));wires.push(b,V(b.x,b.y-0.22,b.z));globes.push(V(b.x,b.y-0.36,b.z));}
    // (hanging planters removed: only lights over the path)
   }
   G.ground.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(wires),new THREE.LineBasicMaterial({color:'#262626'})));
@@ -1218,12 +1216,24 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
   const ring=new THREE.Mesh(new THREE.TorusGeometry(0.2,0.012,6,28),M.brass);ring.position.z=0.24;g.add(ring);for(let i=0;i<8;i++){const a=i/8*6.283;sph(0.012,Math.cos(a)*0.2,Math.sin(a)*0.2,0.25,M.brass,g);}
   const mist=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.1,1.3,22,1,true),M.mist);mist.rotation.x=Math.PI/2;mist.position.z=0.9;mist.castShadow=false;g.add(mist);
   g.position.set(x+nx*0.2,2.2,z+nz*0.2);g.rotation.y=Math.atan2(nx,nz);g.rotation.x=0.3;G.fans.add(g);}
-// misting fans removed; quiet flush-mount (hugger) ceiling fans with dark walnut blades sit in the coffers over the dining room - blades stay at least 2.5 m above the floor even at the low end (they also keep mosquitoes off)
+// misting fans removed; the hall now has small grilled cabin fans flat on the ceiling (see cabinFan below); the old hugger fans were replaced
 // flush-mount (hugger) fan for the low ceiling: no downrod, a low black canopy and motor housing, five walnut blades about 24 cm below the ceiling, a small light disc underneath
 function ceilFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);cyl(0.07,0.09,0.03,0,-0.03,0,M.blackMetal,g,18,false);cyl(0.12,0.12,0.09,0,-0.12,0,M.blackMetal,g,22,false);
   const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.52,0.012,0.14),M.timberDark);b2.position.x=0.34;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
   cyl(0.07,0.06,0.02,0,-0.185,0,M.panelLight,g,16,false);}
-[[4.1,3.3],[7.4,3.3],[11.9,2.74],[5.4,8.2]].forEach(([x,z])=>ceilFan(x,z));   // re-placed for the new table layout: over aisles, clear of the orbs and of the tree canopy (the old spots hung over a table and inside the canopy)
+/* cabin fans (Happy Home HH-79RG style, 16 in, grilled): a flat round fan with a grey ring housing, a white swirl guard and a grey hub, fixed flat to the ceiling and blowing down.
+   One over each table, 0.5 m on the aisle side of its orb (13 fans), so the air reaches every table without hitting the orb rope. The listing gives no specs: confirm sweep, depth and power with the seller. */
+function cabinFan(x,z){const top=hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);
+  M.fanGrey=M.fanGrey||S({color:'#b9bbb6',roughness:0.55,side:THREE.DoubleSide});M.fanWhite=M.fanWhite||S({color:'#f4f3ee',roughness:0.5,side:THREE.DoubleSide});M.fanSpiral=M.fanSpiral||new THREE.LineBasicMaterial({color:'#f6f5f0'});
+  cyl(0.215,0.215,0.02,0,-0.01,0,M.fanGrey,g,32,false);                                           // back plate on the ceiling
+  const ring=new THREE.Mesh(new THREE.CylinderGeometry(0.215,0.215,0.12,32,1,true),M.fanGrey);ring.position.y=-0.08;g.add(ring);   // housing ring
+  const rim=new THREE.Mesh(new THREE.TorusGeometry(0.205,0.016,6,32),M.fanGrey);rim.rotation.x=Math.PI/2;rim.position.y=-0.14;g.add(rim);   // front rim
+  const pts=[];for(let a=0;a<9;a++){const a0=a/9*Math.PI*2;for(let t=0;t<12;t++){const t1=t/12,t2=(t+1)/12;const f=u=>[Math.cos(a0+u*1.7)*(0.055+u*0.145),-0.138,Math.sin(a0+u*1.7)*(0.055+u*0.145)];const p1=f(t1),p2=f(t2);pts.push(V(p1[0],p1[1],p1[2]),V(p2[0],p2[1],p2[2]));}}
+  g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts),M.fanSpiral));   // white swirl guard
+  cyl(0.06,0.06,0.012,0,-0.142,0,M.fanGrey,g,24,false);                                           // grey hub
+  const bl=new THREE.Group();bl.position.y=-0.1;for(let i=0;i<3;i++){const pv=new THREE.Group();pv.rotation.y=i/3*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.004,0.07),M.fanWhite);b2.position.x=0.12;b2.rotation.x=0.25;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);   // 3 blades
+}
+TABLES.forEach(([x,z,k])=>{if(k===6){[-0.48,0.48].forEach(dx=>cabinFan(x+dx,z+0.5));}else cabinFan(x,z+0.5);});
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
   bx(-0.18,0.18,0.06,1.75,-0.15,0.15,body,g);bx(-0.17,0.17,0.0,0.06,-0.14,0.14,M.black,g);
   bx(-0.16,0.16,1.35,1.62,0.15,0.152,M.black,g,false);for(let y=1.38;y<1.6;y+=0.04)bx(-0.15,0.15,y,y+0.012,0.152,0.158,M.ssDark,g,false);   // louvres
