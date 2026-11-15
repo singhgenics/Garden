@@ -46,7 +46,7 @@ Image prompts and the Flow runner for both pages: Dream/Garden/Supplies/src (Flo
 | Pathway behind the bar | 1.60 wide | From where the hall wall ends, between the bar side of the hall and the kitchen / dish-wash block, open |
 | Pathway south of the hall | 3.46 wide | Between the hall's 9.20 m edge and the existing restaurant, from the landing east to the passage behind the bar |
 
-Every open side closes with roll-down clear PVC (button in the toolbar rolls them up or down). The roof is low, so there are no hanging fans: 13 small grilled cabin fans (Happy Home style, 16 in) are fixed flat to the ceiling, one beside each orb and blowing down, and two vertical tower ACs help cool the hall. The listing gives no specs, so confirm sweep, depth and power with the seller before ordering.
+Every open side closes with roll-down clear PVC (button in the toolbar rolls them up or down). The roof is low, so there are no hanging fans: 17 small grilled cabin fans (Happy Home style, 16 in) are fixed flat to the ceiling and blow down: one directly over each table beside its orb, two over the bar guests and two over the pool lounge, and two vertical tower ACs help cool the hall. The listing gives no specs, so confirm sweep, depth and power with the seller before ordering.
 
 ## Using it
 

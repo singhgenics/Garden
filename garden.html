@@ -1222,8 +1222,8 @@ function ceilFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.
   const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.52,0.012,0.14),M.timberDark);b2.position.x=0.34;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
   cyl(0.07,0.06,0.02,0,-0.185,0,M.panelLight,g,16,false);}
 /* cabin fans (Happy Home HH-79RG style, 16 in, grilled): a flat round fan with a grey ring housing, a white swirl guard and a grey hub, fixed flat to the ceiling and blowing down.
-   One over each table, 0.5 m on the aisle side of its orb (13 fans), so the air reaches every table without hitting the orb rope. The listing gives no specs: confirm sweep, depth and power with the seller. */
-function cabinFan(x,z){const top=hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);
+   One directly over each table, 0.3 m on the aisle side of its orb so it clears the orb rope (13 fans), plus two over the bar guests and two over the pool lounge (17 in all). The listing gives no specs: confirm sweep, depth and power with the seller. */
+function cabinFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);
   M.fanGrey=M.fanGrey||S({color:'#b9bbb6',roughness:0.55,side:THREE.DoubleSide});M.fanWhite=M.fanWhite||S({color:'#f4f3ee',roughness:0.5,side:THREE.DoubleSide});M.fanSpiral=M.fanSpiral||new THREE.LineBasicMaterial({color:'#f6f5f0'});
   cyl(0.215,0.215,0.02,0,-0.01,0,M.fanGrey,g,32,false);                                           // back plate on the ceiling
   const ring=new THREE.Mesh(new THREE.CylinderGeometry(0.215,0.215,0.12,32,1,true),M.fanGrey);ring.position.y=-0.08;g.add(ring);   // housing ring
@@ -1233,7 +1233,10 @@ function cabinFan(x,z){const top=hc(z),g=new THREE.Group();g.position.set(x,top,
   cyl(0.06,0.06,0.012,0,-0.142,0,M.fanGrey,g,24,false);                                           // grey hub
   const bl=new THREE.Group();bl.position.y=-0.1;for(let i=0;i<3;i++){const pv=new THREE.Group();pv.rotation.y=i/3*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.004,0.07),M.fanWhite);b2.position.x=0.12;b2.rotation.x=0.25;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);   // 3 blades
 }
-TABLES.forEach(([x,z,k])=>{if(k===6){[-0.48,0.48].forEach(dx=>cabinFan(x+dx,z+0.5));}else cabinFan(x,z+0.5);});
+const fanDz=(x,z)=>Math.hypot(x-3.95,z+0.3-6.3)<1.6?-0.3:0.3;   // flip to the other side of the orb if the fan would sit inside the tree canopy
+TABLES.forEach(([x,z,k])=>{if(k===6){[-0.48,0.48].forEach(dx=>cabinFan(x+dx,z+fanDz(x+dx,z)));}else cabinFan(x,z+fanDz(x,z));});
+[[12.35,3.2],[12.35,4.5]].forEach(([x,z])=>cabinFan(x,z));          // over the bar guests and the lane behind the stools
+[[-1.4,2.6],[-1.4,5.2]].forEach(([x,z])=>cabinFan(x,z,2.9));       // pool lounge: flat roof at 2.90 m, one over each end of the pool table
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
   bx(-0.18,0.18,0.06,1.75,-0.15,0.15,body,g);bx(-0.17,0.17,0.0,0.06,-0.14,0.14,M.black,g);
   bx(-0.16,0.16,1.35,1.62,0.15,0.152,M.black,g,false);for(let y=1.38;y<1.6;y+=0.04)bx(-0.15,0.15,y,y+0.012,0.152,0.158,M.ssDark,g,false);   // louvres
