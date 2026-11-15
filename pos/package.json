@@ -1,0 +1,9 @@
+{
+  "name": "dumplings-draught-pos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Restaurant POS: orders, KOT, GST + VAT billing, thermal printing, inventory, vendors, staff, reports",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": { "start": "node server.js" }
+}
