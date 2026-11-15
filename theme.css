@@ -49,3 +49,4 @@ td.id,.id{color:var(--brass-ink)}
 .hoard .top a,.hoard .nav a{box-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .16s cubic-bezier(.23,1,.32,1),filter .16s}
 @media (hover:hover) and (pointer:fine){.hoard .top a:hover,.hoard .nav a:hover{filter:brightness(1.12);transform:translateY(-1px)}}
 .hoard .top a:active,.hoard .nav a:active{transform:scale(.97)}
+.hoard h1{line-height:1.04!important;margin-top:16px!important}
