@@ -4,7 +4,6 @@ A 3D model of the Garden restaurant: an open-sided pub hall with its bar, kitche
 
 Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 
-Decor concept: https://singhgenics.github.io/Garden/decor.html (also linked from the model's toolbar)
 
 Furnishing & supplies checklist (furniture, lights, linen, paper goods, cleaning, safety; must-have vs add-later): https://singhgenics.github.io/Garden/furnishing.html
 
@@ -68,7 +67,6 @@ Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the
 - `kds.html`: the smart kitchen and bar display (KDS) that replaces paper KOT and BOT: what the three screens show, where they are mounted, how each dish is routed and timed, a planner, setup steps and failure cases. Opens in the model from the Kitchen screens button. The working KDS itself is part of the POS (`pos/`, local, not on GitHub)
 - `opening-checklist.html`: pre-opening checklist (18 stages, 192 items, including lighting, mosquito control and prep stations; licences and approvals pre-ticked as done, Goa and India items tagged IN) with tick boxes that save on the device and a progress bar. Opens inside the model from the toolbar's Opening checklist button (`garden.html?checklist` opens it directly)
 - `equipment-plan.html`: opening-day equipment plan for the kitchen, dish wash and bar (plans, schedules with W × D × H in metres, smallwares, services). Opens inside the model from the toolbar's Equipment plan button, or on its own; `garden.html?eq` opens it directly
-- `decor.html` + `decor/`: the interior decor concept, Google Flow renders made from the model's camera views in the look of the Design Inspos boards, with a spec per zone. Source and image runner live in `../Decor` (outside this repo)
 
 Brand: https://singhgenics.github.io/Garden/brand-kit.html (logos, colours in the Garden palette, type, direction board) and https://singhgenics.github.io/Garden/brand-merch.html (coasters, stickers, bags, uniforms); both open from the model toolbar's Brand & merch button. Source and build scripts: `Dream/GardenBrand/` (local).
 
