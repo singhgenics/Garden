@@ -115,7 +115,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
   <section id="count">
     <h2>How the numbers were worked out</h2>
     <ul class="tips">
-      <li><b>On every place setting (×80):</b> 40 covers × 2 sets. One set is on the tables while the second is in the three-bowl wash or drying. This covers plates, rice bowls, dips, soup spoons, chopsticks and rests, cutlery, napkins and water glasses.</li>
+      <li><b>On every place setting (×80):</b> 40 covers × 2 sets. One set is on the tables while the second is in the three-bowl wash or drying. This covers plates, rice bowls, dips, soup spoons, chopsticks and rests, cutlery and water glasses. Three lines are higher: side plates (100, because every soup bowl also sits on one), dipping dishes (120, because dishes bring their own dips) and napkins (120, a third set for late laundry).</li>
       <li><b>Serving pieces and bar glasses:</b> two sets as well, but of what a full house actually uses at once, not 80 of everything. Example: at a busy moment about 20 dim sum baskets are on tables or in the steamer, so you buy 40. Each card shows its own count line.</li>
       <li><b>Paper and disposables:</b> shown as a first month's stock at about 60 covers a day. Reorder from what you actually use.</li>
       <li><b>Breakage:</b> not included. After the first month, top up about 10% of the ceramics and glass from the <i>same batch</i>; glaze colour changes from batch to batch.</li>
@@ -163,18 +163,18 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
 </div>
 <script>
 const COVERS=40,SETS=2,PER=COVERS*SETS;
-const GROUPS={cover:['On every place setting','Two sets per cover: '+PER+' of each'],food:['Food serving','From the pass to the table'],service:['On every table','Shared on each table (11 tables in the layout plus spares)'],carry:['Carrying to the table','What the servers carry food and drinks on, from the pass and the bar'],beer:['Beer','Three taps, two bottles, pitchers and the paddle'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed and Irish coffee'],tools:['Bar tools','Behind the bar, in brass']};
+const GROUPS={cover:['On every place setting','Two sets per cover ('+PER+'), with extra side plates, dip dishes and napkins'],food:['Food serving','From the pass to the table'],service:['On every table','Shared on each table (11 tables in the layout plus spares)'],carry:['Carrying to the table','What the servers carry food and drinks on, from the pass and the bar'],beer:['Beer','Three taps, two bottles, pitchers and the paddle'],spirits:['Whisky, vodka & cocktails','Neat, on the rocks, tall and up'],zero:['Zero-proof & coffee','Sodas, water, brewed and Irish coffee'],tools:['Bar tools','Behind the bar, in brass']};
 // [id, group, name, spec, used for, qty, unit, how counted, priority d1|later]
 const ITEMS=[
- ['side','cover','Side plate, 19 cm','Ivory matte stoneware, thin raw chocolate-brown rim','Each guest\'s eating plate; underplate for soup bowls and steamer baskets',PER,'pcs','40 covers × 2','d1'],
+ ['side','cover','Side plate, 19 cm','Ivory matte stoneware, thin raw chocolate-brown rim','Each guest\'s eating plate; underplate for soup bowls and steamer baskets',100,'pcs','40 covers × 2 = 80, plus 20 because every soup bowl also sits on a side plate','d1'],
  ['rice','cover','Rice bowl, 11 cm','Blue-and-white porcelain, about 300 ml','Rice, noodles and curry at the table; Plain Jane jasmine rice',PER,'pcs','40 covers × 2','d1'],
- ['dip','cover','Dipping dish, 8 cm','Blue-and-white porcelain, about 50 ml','Soy-chilli, black vinegar, kasundi mayo, sweet chilli, gochujang mayo, chilli oil',PER,'pcs','40 covers × 2','d1'],
+ ['dip','cover','Dipping dish, 8 cm','Blue-and-white porcelain, about 50 ml','Soy-chilli, black vinegar, kasundi mayo, sweet chilli, gochujang mayo, chilli oil',120,'pcs','40 covers × 2 = 80, plus 40 because dishes bring their own dips (sweet chilli, kasundi, gochujang mayo, black vinegar, chilli oil)','d1'],
  ['cspoon','cover','Porcelain soup spoon','Blue-and-white, about 14 cm','Wonton Kenobi, Hot & Bothered, Coconut Cuddle, Suey Generis, Fire Starters',PER,'pcs','40 covers × 2','d1'],
  ['chop','cover','Chopsticks, reusable','Square-edged, dark walnut-brown fibreglass or lacquered wood, brass-coloured tip; heat-safe for hand washing','One pair per cover',PER,'pairs','40 covers × 2','d1'],
  ['crest','cover','Chopstick rest','Solid brushed brass, small bar shape','One per cover, as in the decor renders',PER,'pcs','40 covers × 2','d1'],
  ['cutlery','cover','Dinner fork + dinner spoon','Brushed gold (PVD) stainless steel, one slim square range','Rice, noodles, darsaan; for guests who prefer them to chopsticks',PER,'of each','40 covers × 2','d1'],
  ['teaspoon','cover','Teaspoon','Same gold range','Coffee, ice cream, sugar',PER,'pcs','40 covers × 2','d1'],
- ['napkin','cover','Cloth napkin','Ivory cotton-linen, about 45 × 45 cm, thin burgundy stitched border','One per cover; ivory reads crisp on the burgundy cloth',PER,'pcs','40 covers × 2 (a third set helps if the laundry is not back the same day)','d1'],
+ ['napkin','cover','Cloth napkin','Ivory cotton-linen, about 45 × 45 cm, thin burgundy stitched border','One per cover; ivory reads crisp on the burgundy cloth',120,'pcs','40 covers × 3: two sets plus a third so a late laundry does not stop service','d1'],
  ['water','cover','Water tumbler, 300 ml','Amber-tinted ribbed glass, heavy base','Water at every cover (replaces the wine glass in the renders)',PER,'pcs','40 covers × 2','d1'],
 
  ['susan','food','Lazy susan, 45 cm','Dark oiled walnut turntable','Cabin feast for four: four soups and five shared dishes on one 80 cm table',3,'pcs','Up to 3 feast tables at once','d1'],
@@ -199,6 +199,7 @@ const ITEMS=[
  ['sauces','service','Condiment caddy + 3 pots','Brass caddy, three lidded blue-and-white pots with spoons','Soy, green chillies in vinegar, house chilli oil on every table',13,'caddies + 39 pots','11 tables + 2 spare','d1'],
  ['carafe','service','Water carafe, 1 L','Amber-tinted ribbed glass, narrow neck','Water on every table',22,'pcs','11 tables × 2 (one out, one chilling)','d1'],
  ['coaster','service','Coasters','Thick card, cream with a burgundy border (print the logo later)','Under every glass on bare tables, at the bar and in the pool lounge',1000,'a month','throwaway','d1'],
+ ['cheese','service','Cheeselings bowl, 12 cm','Ivory stoneware, thin chocolate-brown rim (small, to keep it apart from the bone bowls)','Free cheeselings brought to every table as the guests sit; refilled once on request',24,'pcs','11 tables × 2 + 2 spare','d1'],
  ['bill','service','Bill box','Red lacquer with brass corners','Bill and card slip to the table',13,'pcs','11 tables + 2 spare','d1'],
  ['drinktray','carry','Drinks tray, round 35 cm','Non-slip cork top, thin brass rim, light to hold on one hand','Every drinks order from the bar: glasses by the base, tallest and heaviest in the middle',6,'trays','2 per server + 2 waiting at the bar','d1'],
  ['foodtray','carry','Food tray, oval about 60 × 45 cm','Non-slip walnut-look top, brass rim, heat-proof','Orders of three or more plates, steamer stacks, claypots and the feast for four',4,'trays','1 per server + 2 spare','d1'],
@@ -239,7 +240,7 @@ const MAP=[
  ['Seoul to Bangkok',[['K-Pop Wings','basket','Bone bowl, wet wipes'],['Fry Hard','basket','Gochujang mayo on top'],['Slap Happy','noodle','Serving spoons'],['Smash Hit','dessert','Chopsticks']]],
  ['Noodles & rice',[['Noodle Around','noodle','Rice bowls, noodle tongs'],['Rice Rice Baby','oval','Rice bowls, serving spoon'],['Holy Basil, Batman!','deep','Bird\'s-eye chillies in a dip dish'],['Plain Jane','rice','Serving spoon']]],
  ['Gravies & curries',[['Man, Churian!','claypot','Serving spoon'],['Green With Envy','claypot','Jasmine rice, serving spoon'],['Suey Generis','noodle','Topping tray, soup spoon']]],
- ['For the table',[['Steamer for two','board','Two-tier 8" steamer, long plate for the bao, dips'],['Cabin feast for four','susan','Four soup bowls first, then five shared dishes on the turntable'],['Bowl game (lunch)','deep',''],['Happy hour','plate','Dumplings in a 6" steamer']]],
+ ['For the table',[['Steamer for two','board','Two-tier 8" steamer, long plate for the bao, dips'],['Cabin feast for four','susan','Four soup bowls first, then five shared dishes on the turntable'],['Bowl game (lunch)','deep',''],['Happy hour','plate','Dumplings in a 6" steamer'],['Cheeselings (free)','cheese','Brought as the guests sit; refilled once']]],
  ['Sweet',[['Honey, I Shrunk the Noodles','dessert','Teaspoon'],['Sticky Situation','dessert','Teaspoon'],['Scoop There It Is','dessert','Teaspoon; topping pots at the pass']]],
  ['Beer',[['Comrade Crisp, Gose Bumps, guest tap','pint','330 ml glass for small pours'],['Kings, Budweiser','pint','Bottle opened at the table; ice bucket outdoors'],['Pitcher','pitcher','330 ml glasses'],['Tasting paddle','paddle','']]],
  ['Whisky',[['Single malts neat','nosing','Water dropper'],['On the rocks','rocks','One large cube'],['Highballs and blends with soda','highball','Mixer on the side'],['Single malt flight','flight','Chilli peanuts in a dip dish']]],
