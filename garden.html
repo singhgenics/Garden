@@ -1148,9 +1148,10 @@ function chair(x,z,ang,seat){const g=new THREE.Group();
   [[-0.2,0.0],[0.2,0.0]].forEach(([sx])=>bx(sx-0.015,sx+0.015,0.5,0.95,-0.2,-0.18,M.walnut,g));bx(-0.22,0.22,0.92,0.96,-0.21,-0.17,M.walnut,g,false);
   const cn=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.4),M.cane);cn.position.set(0,0.74,-0.19);g.add(cn);
   g.position.set(x,0,z);g.rotation.y=ang;G.hall.add(g);}
-/* table orbs follow the lighting guide: a pair counts as one pendant, about 25-30 cm orbs, and the shade bottoms hang 77 and 84 cm above the tabletop (0.788 m) at every table, whatever the soffit does (rope length changes, not the height) */
-const ORB_BOT_A=1.56,ORB_BOT_B=1.63;
-function pendant(x,z,dome){const top=hc(z)-0.15;ivyOrb(x-0.13,ORB_BOT_A+0.15*0.95,z,0.15,top,0.16);ivyOrb(x+0.13,ORB_BOT_B+0.12*0.95,z+0.1,0.12,top,0.16);}   // a pair of ivy wicker orbs at staggered heights over each table
+/* table orbs follow the lighting guide: ONE orb per four-top and per two-top, two per six-top (one over each half), each orb 1/3 to 1/2 of the 0.9 m table width
+   (30, 34 and 26 cm across) and never wider than the table less 30 cm of clear tabletop at each end; the shade bottom hangs 79 cm above the tabletop (0.788 m), 1.58 m above the floor, at every table whatever the soffit does (rope length changes, not the height) */
+const ORB_BOT=1.58;
+function pendant(x,z,r){const top=hc(z)-0.15;ivyOrb(x,ORB_BOT+r*0.95,z,r,top,0.16);}
 // burgundy tablecloths on every table: heavy woven cotton-linen with a tone-on-tone damask, 25 cm drop on all sides and a stitched hem
 const clothTex=tex(512,512,(g,w)=>{g.fillStyle='#5c1322';g.fillRect(0,0,w,w);const r=rng(61);
   for(let y=0;y<w;y+=2){g.fillStyle=`rgba(${r()<.5?'120,30,48':'40,6,14'},${0.18+r()*0.12})`;g.fillRect(0,y,w,1);}
@@ -1171,7 +1172,7 @@ TABLES.forEach(([x,z,kind,ori],i)=>{
   M.bamboo=M.bamboo||S({color:'#c9a46a',roughness:0.8});cyl(0.085,0.085,0.055,x-0.13,0.79,z+0.1,M.bamboo,G.hall,14,false);[[0.12,-0.12],[0.19,-0.12]].forEach(([dx,dz])=>cyl(0.024,0.02,0.04,x+dx,0.79,z+dz,M.white,G.hall,10,false));
   [[0,-0.22],[0,0.22]].forEach(([dx,dz])=>cyl(0.1,0.09,0.012,x+(ori==='x'?dz:dx),0.79,z+(ori==='x'?dx:dz),M.white,G.hall,16,false));
   if(ori==='x'){chair(x-0.58,z,Math.PI/2,M.chester);chair(x+0.58,z,-Math.PI/2,M.chester);}else{chair(x,z-0.58,0,M.chester);chair(x,z+0.58,Math.PI,M.chester);}
-  ivyOrb(x,ORB_BOT_A+0.15*0.95,z,0.15,hc(z)-0.15,0.16);glowDecal(x,0.795,z,0.95,0.95,'#ffb060',0.3,-Math.PI/2);return;}
+  pendant(x,z,0.13);glowDecal(x,0.795,z,0.95,0.95,'#ffb060',0.3,-Math.PI/2);return;}
  if(kind===6){const w=0.9,l=1.9;
   bx(x-l/2,x+l/2,0.72,0.78,z-w/2,z+w/2,M.timber,G.hall);bx(x-l/2-0.01,x+l/2+0.01,0.72,0.745,z-w/2-0.01,z+w/2+0.01,M.timberDark,G.hall,false);
   [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>bx(x+a*(l/2-0.08)-0.04,x+a*(l/2-0.08)+0.04,0,0.72,z+b*(w/2-0.08)-0.04,z+b*(w/2-0.08)+0.04,M.timberDark,G.hall));
@@ -1180,7 +1181,7 @@ TABLES.forEach(([x,z,kind,ori],i)=>{
   [-0.6,0,0.6].forEach(dx=>{cyl(0.04,0.04,0.11,x+dx*0.8,0.79,z,M.flameGlass,G.hall,12,false);cyl(0.045,0.045,0.012,x+dx*0.8,0.9,z,M.brass,G.hall,12,false);});
   [-0.6,0,0.6].forEach(dx=>[-1,1].forEach(sz=>cyl(0.115,0.1,0.014,x+dx,0.79,z+sz*0.28,M.white,G.hall,18,false)));
   const sk=M.chester;[-0.6,0,0.6].forEach(dx=>{chair(x+dx,z+0.73,Math.PI,sk);chair(x+dx,z-0.73,0,sk);});
-  pendant(x-0.5,z,false);pendant(x+0.5,z,false);glowDecal(x,0.795,z,2.4,1.4,'#ffb060',0.32,-Math.PI/2);return;}
+  pendant(x-0.48,z,0.17);pendant(x+0.48,z,0.17);glowDecal(x,0.795,z,2.4,1.4,'#ffb060',0.32,-Math.PI/2);return;}
   const wallT=0;
   bx(x-0.45,x+0.45,0.72,0.78,z-0.45,z+0.45,M.timber,G.hall);bx(x-0.46,x+0.46,0.72,0.745,z-0.46,z+0.46,M.timberDark,G.hall,false);
   [[-0.36,-0.36],[0.36,-0.36],[-0.36,0.36],[0.36,0.36]].forEach(p=>bx(x+p[0]-0.04,x+p[0]+0.04,0,0.72,z+p[1]-0.04,z+p[1]+0.04,M.timberDark,G.hall));
@@ -1197,7 +1198,7 @@ TABLES.forEach(([x,z,kind,ori],i)=>{
   const seat=M.chester;
   if(wallT){chair(x-0.25,z+0.7,Math.PI,seat);chair(x+0.25,z+0.7,Math.PI,seat);}
   else{chair(x,z+0.7,Math.PI,seat);chair(x,z-0.7,0,seat);chair(x-0.7,z,Math.PI/2,seat);chair(x+0.7,z,-Math.PI/2,seat);}
-  pendant(x,z,z<2);glowDecal(x,0.795,z,1.3,1.3,'#ffb060',0.32,-Math.PI/2);});   // each orb pair throws a warm pool on its table
+  pendant(x,z,0.15);glowDecal(x,0.795,z,1.3,1.3,'#ffb060',0.32,-Math.PI/2);});   // each orb throws a warm pool on its table
 /* bar stools stand at the counter; planters + a kilim runner at the entrance */
 // (the pair of floor jars at the entrance was removed to keep the entrance aisle clear)
 {const cm=new THREE.Mesh(new THREE.PlaneGeometry(1.3,0.6),M.coir);cm.rotation.x=-Math.PI/2;cm.position.set(ENT_MID,0.004,5.85);G.hall.add(cm);const k=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.2),M.kilim);k.rotation.x=-Math.PI/2;k.position.set(ENT_MID,0.005,4.3);G.hall.add(k);}
@@ -1221,7 +1222,7 @@ function pillarMistFan(x,z){const inx=7.5-x,inz=4.5-z,il=Math.hypot(inx,inz)||1,
 function ceilFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);cyl(0.07,0.09,0.03,0,-0.03,0,M.blackMetal,g,18,false);cyl(0.12,0.12,0.09,0,-0.12,0,M.blackMetal,g,22,false);
   const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.012,0.14),M.timberDark);b2.position.x=0.38;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
   cyl(0.07,0.06,0.02,0,-0.185,0,M.panelLight,g,16,false);}
-[[3.0,2.74],[6.6,2.74],[10.2,2.74],[2.6,5.9]].forEach(([x,z])=>ceilFan(x,z));
+[[4.1,3.3],[7.4,3.3],[11.9,2.74],[5.4,8.2]].forEach(([x,z])=>ceilFan(x,z));   // re-placed for the new table layout: over aisles, clear of the orbs and of the tree canopy (the old spots hung over a table and inside the canopy)
 function towerAC(x,z,ang){const g=new THREE.Group();const body=S({color:'#efece6',roughness:0.45});
   bx(-0.18,0.18,0.06,1.75,-0.15,0.15,body,g);bx(-0.17,0.17,0.0,0.06,-0.14,0.14,M.black,g);
   bx(-0.16,0.16,1.35,1.62,0.15,0.152,M.black,g,false);for(let y=1.38;y<1.6;y+=0.04)bx(-0.15,0.15,y,y+0.012,0.152,0.158,M.ssDark,g,false);   // louvres
@@ -1566,7 +1567,7 @@ function applyLight(){const t=LIGHT.t,d=LIGHT.dim,day=1-t;const sky=skyAt(t);sce
   renderer.toneMappingExposure=1.0+0.15*t;
   const rd=document.getElementById('lc-read');if(rd)rd.textContent=Math.round(d*100)+'% · '+(d<0.02?'off':(t>0.6?'2700/2200 K':'2700 K'));
   renderer.shadowMap.needsUpdate=true;dirty=true;}
-const PRE={lunch:[0,100],dusk:[55,70],evening:[85,80],late:[100,50]};   // Late raised from 40 to 50 so the tables never fall below about 30 lux
+const PRE={lunch:[0,100],dusk:[55,70],evening:[85,85],late:[100,65]};   // Evening 85 and Late 65 keep the tables at about 46 and 35 lux with the 900 lm table lamp (30 lux minimum)
 const PRE_NAME={lunch:'Lunch',dusk:'Sunset',evening:'Evening',late:'Late'};
 function setPre(k){const [t,d]=PRE[k];LIGHT.t=t/100;LIGHT.dim=d/100;document.getElementById('lc-time').value=t;document.getElementById('lc-dim').value=d;document.querySelectorAll('.lc-pre button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pre===k)));document.getElementById('lc-name').textContent=PRE_NAME[k];applyLight();}
 

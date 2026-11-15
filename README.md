@@ -32,8 +32,8 @@ Image prompts and the Flow runner for both pages: Dream/Garden/Supplies/src (Flo
 | Washroom walls | | Bright orange with black doodle line art over a white tiled dado |
 | Approach path | | Dense warm fairy-light strands on fine wires from the lamp posts to the balcony roof (no frame), plus the brass lanterns and ivy wicker orbs |
 | Gallery wall | main wall | Vintage-sign style, from the references (enamel signs, a pub wall of signs and lamps, bold graphic ramen posters on brick): weathered enamel banner signs across the top of each bay (DIM SUM, NOODLES, CHOWMEIN, HAKKA NOODLES), tall TEA and OPEN signs, round LAGER / TEA / BEER signs, slim walnut-framed bold red, yellow and cream posters (fresh noodles, op-art steaming bowl, giant chilli, DIM SUM x4), bell-shaded brass wall lamps, a few wall clocks, a few earlier prints, and the bowl-and-thali oil as the statement piece under a brass picture light. No neon on the wall |
-| Hanging lights | throughout | Ivy wicker orbs: open-weave rattan spheres on thick jute rope, glowing warm inside, ivy wrapped over the top and trailing down; a pair at staggered heights over every table, and among the fairy lights on the path (bar keeps its beam with Edison drops) |
-| Lighting and acoustics | hall | Warm adjustable spots on the beam wash each bay of the gallery wall; each orb pair throws a warm pool on its table; off-white acoustic felt panels in the ceiling coffers |
+| Hanging lights | throughout | Ivy wicker orbs: open-weave rattan spheres on thick jute rope, glowing warm inside, ivy wrapped over the top and trailing down; one orb over each four-top and two-top and two over each six-top (bottoms 79 cm above the tabletop), and among the fairy lights on the path (bar keeps its beam with Edison drops) |
+| Lighting and acoustics | hall | Warm adjustable spots on the beam wash each bay of the gallery wall; each orb throws a warm pool on its table; off-white acoustic felt panels in the ceiling coffers |
 | Designer's edit | hall | "bao down" neon removed; gallery hung with more air; one ceiling-light language (festoon on the bays + orbs); warmer 2200 K lamps; flush-mount (hugger) ceiling fans with walnut blades in the coffers, blades about 24 cm below the ceiling for the low roof (misting fans removed); bamboo steamer, blue-and-white chilli/soy pots, brass chopstick rests and a red lacquer bill box on every table; brass CE monogram plaque on the entrance column (photo spot), jasmine reed diffuser, coir mat at the step; washroom amber soap bottles, framed house rules, extractor fan |
 | Centrepiece lights | tree | About 520 warm fairy bulbs woven through and around the leaves, plus strands wound up the trunk |
 | Bougainvillea | open edges, entrance, gate | Magenta with some white, trained along the eave / ring beam of every open side with swags over the fretwork, trailing down every third column and heavily down both entrance columns; a mound over the gate arch cascading down one pier |
@@ -46,7 +46,7 @@ Image prompts and the Flow runner for both pages: Dream/Garden/Supplies/src (Flo
 | Pathway behind the bar | 1.60 wide | From where the hall wall ends, between the bar side of the hall and the kitchen / dish-wash block, open |
 | Pathway south of the hall | 3.46 wide | Between the hall's 9.20 m edge and the existing restaurant, from the landing east to the passage behind the bar |
 
-Every open side closes with roll-down clear PVC (button in the toolbar rolls them up or down). The roof is low, so there are no ceiling fans: misting fans on the pillars and two vertical tower ACs cool the hall.
+Every open side closes with roll-down clear PVC (button in the toolbar rolls them up or down). The roof is low, so the four ceiling fans are flush-mount (hugger) 1200 mm fans, hung over the aisles with their blades about 2.25 to 2.56 m above the floor; two vertical tower ACs help cool the hall. Check the blade height on site and the fan model before ordering.
 
 ## Using it
 
