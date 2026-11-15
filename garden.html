@@ -372,6 +372,8 @@ function pave(x0,x1,z0,z1,y,tx,tile,m){if(!m){const t=tx.clone();t.needsUpdate=t
  [APP[2]+0.9,(APP[2]+APP[3])/2,APP[3]-0.9].forEach(z=>{const x=APP[0]-0.15;   // the three black lamp posts along the narrow approach path, as filmed
  cyl(0.09,0.11,0.25,x,-0.15,z,M.blackMetal,G.ground,12);cyl(0.035,0.04,2.3,x,0.1,z,M.blackMetal,G.ground,10);
   cyl(0.11,0.07,0.06,x,2.38,z,M.blackMetal,G.ground,4,false);cyl(0.07,0.07,0.24,x,2.44,z,M.globe,G.ground,4,false);const cap=new THREE.Mesh(new THREE.ConeGeometry(0.14,0.14,4),M.blackMetal);cap.position.set(x,2.75,z);cap.rotation.y=Math.PI/4;G.ground.add(cap);});
+ // decoy lamp (L25, group E): one brighter, warmer post in the far corner of the lawn, about 6 m from the nearest table, to pull moths, midges and winged termites away from the dining area
+ {const x=GDN[0]+1.3,z=GDN[3]-0.35;cyl(0.1,0.12,0.25,x,-0.15,z,M.blackMetal,G.ground,12);cyl(0.04,0.045,2.6,x,0.1,z,M.blackMetal,G.ground,10);cyl(0.12,0.08,0.06,x,2.68,z,M.blackMetal,G.ground,4,false);cyl(0.1,0.1,0.3,x,2.74,z,M.globe,G.ground,4,false);const cap2=new THREE.Mesh(new THREE.ConeGeometry(0.18,0.16,4),M.blackMetal);cap2.position.set(x,3.12,z);cap2.rotation.y=Math.PI/4;G.ground.add(cap2);lbl('Decoy lamp · draws insects away from the tables',x,3.4,z,'o');}
  // ---- the gateway on the road (built in local coordinates: x across the 1.70 m opening, +z towards the road; turned to face west) ----
  const gw=new THREE.Group();gw.position.set(GXI,0,(MZ[0]+MZ[1])/2);gw.rotation.y=-Math.PI/2;G.ground.add(gw);
  {const s=new THREE.Shape();s.moveTo(-1.4,-0.15);s.lineTo(1.4,-0.15);s.lineTo(1.4,3.0);s.lineTo(-1.4,3.0);s.closePath();
@@ -810,9 +812,9 @@ function asianArt(kind,seed,W,H){W=W||192;H=H||240;return tex(W,H,(c,w,h)=>{cons
    const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tx,roughness:0.55}));p.position.z=0.038;g.add(p);return g;};
  const roundPlate=(x,y,d,tx)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(d/2,d/2,0.02,36),[M.metalSide,new THREE.MeshStandardMaterial({map:tx,roughness:0.45,metalness:0.3}),M.metalSide]);m.rotation.x=Math.PI/2;m.position.set(x,y,zi+0.045);DW.add(m);};
  const clock=(x,y,d)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(d/2,d/2,0.035,32),[M.frameWalnut,new THREE.MeshStandardMaterial({map:clockTex,roughness:0.4}),M.frameWalnut]);m.rotation.x=Math.PI/2;m.position.set(x,y,zi+0.05);DW.add(m);};
- const bellLamp=(x,y,zb)=>{const g=new THREE.Group();g.position.set(x,y,zb||zi+0.03);DW.add(g);M.shade=M.shade||S({color:'#f2dcb4',emissive:'#ffb860',emissiveIntensity:0.9,roughness:0.6,side:THREE.DoubleSide});if(!EMI.some(e2=>e2[0]==='shade'))EMI.push(['shade',0.9]);
+ const bellLamp=(x,y,zb)=>{const g=new THREE.Group();g.position.set(x,y,zb||zi+0.03);DW.add(g);M.shade=M.shade||S({color:'#f2dcb4',emissive:'#ffa24a',emissiveIntensity:0.9,roughness:0.6,side:THREE.DoubleSide});if(!EMI.some(e2=>e2[0]==='shade'))EMI.push(['shade',0.9]);M.shadeOpal=M.shadeOpal||S({color:'#f4e6cc',emissive:'#ff9a40',emissiveIntensity:0.6,roughness:0.7});if(!EMI.some(e2=>e2[0]==='shadeOpal'))EMI.push(['shadeOpal',0.6]);   // 2200 K shade; an opal diffuser under the bulb hides it from the table (insects circle a bare bulb)
    bx(-0.03,0.03,-0.1,0.1,0,0.02,M.brass,g,false);rod(V(0,0,0.02),V(0,0,0.2),0.012,M.brass,g,false);rod(V(0,0.02,0.2),V(0,0.1,0.2),0.012,M.brass,g,false);
-   const sh=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.15,0.17,22,1,true),M.shade);sh.position.set(0,0.2,0.2);g.add(sh);cyl(0.07,0.07,0.012,0,0.285,0.2,M.brass,g,16,false);sph(0.04,0,0.2,0.2,M.globe,g);};
+   const sh=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.15,0.17,22,1,true),M.shade);sh.position.set(0,0.2,0.2);g.add(sh);cyl(0.07,0.07,0.012,0,0.285,0.2,M.brass,g,16,false);sph(0.04,0,0.2,0.2,M.globe,g);cyl(0.1,0.1,0.008,0,0.112,0.2,M.shadeOpal,g,20,false);};
  const art=(kind,sd)=>aart(kind,sd);
  const oldArt=(x,y,w,h,kind,sd,mat)=>{const g=new THREE.Group();g.position.set(x,y,zi+0.03);DW.add(g);const f=0.03;bx(-w/2-f,w/2+f,-h/2-f,h/2+f,0,0.03,M.frameWalnut,g,false);
    if(mat){bx(-w/2,w/2,-h/2,h/2,0.03,0.032,S({color:'#efe8da',roughness:0.9}),g,false);const p=new THREE.Mesh(new THREE.PlaneGeometry(w*0.72,h*0.72),new THREE.MeshStandardMaterial({map:art(kind,sd),roughness:0.85}));p.position.z=0.034;g.add(p);}
@@ -1222,7 +1224,7 @@ function ceilFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.
   const bl=new THREE.Group();bl.position.y=-0.17;for(let i=0;i<5;i++){const pv=new THREE.Group();pv.rotation.y=i/5*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.52,0.012,0.14),M.timberDark);b2.position.x=0.34;b2.rotation.x=0.1;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);
   cyl(0.07,0.06,0.02,0,-0.185,0,M.panelLight,g,16,false);}
 /* cabin fans (Happy Home HH-79RG style, 16 in, grilled): a flat round fan with a grey ring housing, a white swirl guard and a grey hub, fixed flat to the ceiling and blowing down.
-   One directly over each table, 0.3 m on the aisle side of its orb so it clears the orb rope (13 fans), plus two over the bar guests and two over the pool lounge (17 in all). The listing gives no specs: confirm sweep, depth and power with the seller. */
+   One directly over each table, 0.26 m beside its orb (the smallest offset that keeps the 0.43 m fan housing clear of the orb rope, so the jet stays over the tabletop) (13 fans), plus two over the bar guests and two over the pool lounge (17 in all). The listing gives no specs: confirm sweep, depth and power with the seller. */
 function cabinFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position.set(x,top,z);G.fans.add(g);
   M.fanGrey=M.fanGrey||S({color:'#b9bbb6',roughness:0.55,side:THREE.DoubleSide});M.fanWhite=M.fanWhite||S({color:'#f4f3ee',roughness:0.5,side:THREE.DoubleSide});M.fanSpiral=M.fanSpiral||new THREE.LineBasicMaterial({color:'#f6f5f0'});
   cyl(0.215,0.215,0.02,0,-0.01,0,M.fanGrey,g,32,false);                                           // back plate on the ceiling
@@ -1233,7 +1235,7 @@ function cabinFan(x,z,topY){const top=topY||hc(z),g=new THREE.Group();g.position
   cyl(0.06,0.06,0.012,0,-0.142,0,M.fanGrey,g,24,false);                                           // grey hub
   const bl=new THREE.Group();bl.position.y=-0.1;for(let i=0;i<3;i++){const pv=new THREE.Group();pv.rotation.y=i/3*Math.PI*2;const b2=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.004,0.07),M.fanWhite);b2.position.x=0.12;b2.rotation.x=0.25;pv.add(b2);bl.add(pv);}g.add(bl);fanBlades.push(bl);   // 3 blades
 }
-const fanDz=(x,z)=>Math.hypot(x-3.95,z+0.3-6.3)<1.6?-0.3:0.3;   // flip to the other side of the orb if the fan would sit inside the tree canopy
+const fanDz=(x,z)=>Math.hypot(x-3.95,z+0.26-6.3)<1.6?-0.26:0.26;   // flip to the other side of the orb if the fan would sit inside the tree canopy
 TABLES.forEach(([x,z,k])=>{if(k===6){[-0.48,0.48].forEach(dx=>cabinFan(x+dx,z+fanDz(x+dx,z)));}else cabinFan(x,z+fanDz(x,z));});
 [[12.35,3.2],[12.35,4.5]].forEach(([x,z])=>cabinFan(x,z));          // over the bar guests and the lane behind the stools
 [[-1.4,2.6],[-1.4,5.2]].forEach(([x,z])=>cabinFan(x,z,2.9));       // pool lounge: flat roof at 2.90 m, one over each end of the pool table

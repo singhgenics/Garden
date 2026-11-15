@@ -245,7 +245,7 @@ th{color:var(--muted)}td.sec{background:var(--paper);color:var(--red)}
     <p class="lead">Every light in the 3D model, and how bright it should be at each point of the day. Each cell says whether the group is on. There are no dimmers: every lamp has a fixed output chosen to give its lux target, so you switch groups on and off. The model's Lighting button only changes the time of day.</p>
     <div class="tw" style="margin-top:14px"><table class="ltab"><thead><tr id="lthead"></tr></thead><tbody id="ltbody"></tbody></table></div>
     <div class="laycols" style="margin-top:6px">
-      <div class="call"><b>Wire it in five groups.</b> A: table orbs. B: wall lights (gallery spots, bell lamps). C: the open edges (pillar lanterns and the festoon inside the PVC). D: bar. F: pool lounge. E: outside (path, gate, standee, tree) on a timer with a light sensor. A to D and F each on a wall switch, so one person can set the whole place in a few flicks.</div>
+      <div class="call"><b>Wire it in five groups.</b> A: table orbs. B: wall lights (gallery spots, bell lamps). C: the open edges (pillar lanterns and the festoon inside the PVC). D: bar. F: pool lounge. E: outside (path, gate, standee, tree) on a timer with a light sensor. A to D and F each on a wall switch, so one person can set the whole place in a few flicks. <b>Swarm nights</b> (the first heavy rains bring winged termites, and moths and midges gather at the lights): switch C off until they pass, because the pillar lanterns and the festoon are the lights nearest the edge tables. Keep A, B and D on, and keep E on: the decoy lamp must stay the brightest light outdoors.</div>
       <div class="call"><b>How bright is right.</b> Tables: about 48 lux at the table centre, fixed (calculated for one 800 lm orb), never below 30, with a warm pool on each table and no bare bulb in a seated guest's eye line. Orbs hang with their bottoms 79 cm above the tabletop. Bar counter: about 150 lux. Kitchen: 500 lux, 4000 K, and dish wash: 300 lux, 5000 K, never dimmed. Washroom: about 200 lux. All dining bulbs 2200 K and CRI 90+ so the room glows amber and food looks right; walls and art 2700 K. Confirm the lux with a meter on the vendor's mock-up table before ordering all the orbs.</div>
       <div class="call"><b>The orb lamp (fixed lux).</b> E27 G125 LED filament globe, amber, 2200 K, CRI 90+ (R9 above 50), 8 W, about 800 lm, flicker-free, <b>not dimmable</b>, from one brand and batch. Choose it by lumens, not watts: with no dimmer the lamp output sets the table lux, so a lamp of 640 lm gives about 38 lux and one of 960 lm about 58. Test one table with a lux meter before ordering all 17 orbs. Each orb is one third to one half of the table width (30 cm over a four-top, 34 cm over each half of a six-top, 26 cm over a two-top), with its bottom 1.58 m above the floor, 79 cm over the tabletop, the same at every table.</div>
       <div class="call"><b>Rules of thumb.</b> With fixed lux, switching is the control: turn the table orbs on when the sun drops behind the trees, and leave them off at a bright lunch. On a dark monsoon afternoon, switch on the Sunset groups at lunch. Keep the bar and the walls on all evening so the room still looks full. After close, switch everything on to clean, then off.</div>
@@ -329,10 +329,14 @@ const SECS=[
   ['','Emergency lights (battery)','Hall, bar, kitchen, washroom; come on in a power cut',4,'units','d1'],
   ['','Lit EXIT signs','Over the entrance and the back-of-house way out',2,'signs','d1']]],
  ['Fans, weather and insects',[
-  ['fan','Cabin fans, 16 in grilled (Happy Home HH-79RG: to be confirmed)','13 directly over the tables (0.3 m beside each orb), 2 over the bar guests and 2 over the pool lounge, each fixed flat to the ceiling and blowing down. The listing gives no specs and its title says both 16 in and 1200 mm: confirm sweep, depth, power and the mounting bracket with the seller before ordering',t=>t.orbs+4,'fans','d1'],
+  ['fan','Cabin fans, 16 in grilled (Happy Home HH-79RG: to be confirmed)','13 over the tables (0.26 m beside each orb: the least that clears the orb rope, so the jet stays over the tabletop), 2 over the bar guests and 2 over the pool lounge, each fixed flat to the ceiling and blowing down. The listing gives no specs and its title says both 16 in and 1200 mm: confirm sweep, depth, power and the mounting bracket with the seller before ordering. TEST ONE FIRST on the mock-up table at the real ceiling height: you want 0.5 to 1 m/s at ankle and tabletop level, because mosquitoes cannot land in moving air. The fan face hangs at about 2.04 m under the 2.18 m ceiling, so keep it over tables, not over the aisle',t=>t.orbs+4,'fans','d1'],
   ['','Tower ACs','The two in the model; an open hall loses cool air, so add only if guests ask',2,'units','later'],
   ['','Clear roll-down PVC curtains','On every open side, for monsoon rain and wind. Buy and fit before June',1,'set','later'],
   ['','UV insect-killer units','Glue-board type, away from tables and food (not over the bar or pass)',3,'units','d1'],
+  ['','Hand-held anemometer (airflow meter)','To test one cabin fan on the mock-up table: read the air speed at ankle height and at the tabletop (target 0.5 to 1 m/s). The same session as the lux-meter test',1,'meter','d1'],
+  ['','Edge fans, only if the test falls short','Oscillating wall or pillar fans on the open rails, blowing across the edge tables. Fix them high and on a bracket so no guest can knock them over',4,'fans','later'],
+  ['','Fly screens and an air curtain at the kitchen door and the pass','The kitchen (4000 K) and dish wash (5000 K) are the coolest, most attractive lights on the plot: screen the dish-wash window and keep both doors self-closing',1,'set','d1'],
+  ['','Lidded pedal bins, and a bin point away from the tables','Flies come for waste, not for light. Lids on, emptied before they smell, washed down every evening',3,'bins','d1'],
   ['','Mosquito repellent','Plug-in refills for the hall edges and citronella for the garden; repellent spray for guests on request',1,'month\'s stock','d1'],
   ['umbrella','Umbrella stand','By the entrance in the monsoon',1,'stand','later'],
   ['','Wet-floor signs + squeegee','Granite is slippery when wet; rain blows in',2,'of each','d1']]],
@@ -516,7 +520,7 @@ const L=[
  ['Gallery wall spots','5','2700 K','B',[100,40,40,70,80,60,100],'The gallery is under a deep roof, so it needs a little light even at lunch.'],
  ['Bell-shaded brass wall lamps (one on each white pilaster)','5','2200 K','B',[100,'off','off',60,80,50,100],''],
  ['Open edges (bougainvillea side)'],
- ['Bronze cage lanterns on the pillars','14','2200 K','C',['off','off','off',60,80,50,'off'],'Mark the edge of the hall for guests after dark.'],
+ ['Bronze cage lanterns on the pillars','14','2200 K','C',['off','off','off',60,80,50,'off'],'Mark the edge of the hall for guests after dark. SWARM NIGHT: switch group C off until the insects pass.'],
  ['Festoon inside the PVC curtains','79 bulbs, 35.6 m','2200 K','C',['off','off','off',50,70,30,'off'],''],
  ['Bar'],
  ['String lights along the counter front','19 bulbs','2200 K','D',[100,40,50,70,80,80,100],'The bar stays the brightest spot late: it draws people in.'],
@@ -530,6 +534,7 @@ const L=[
  ['Approach-path lamp posts','3 (existing)','warm','E',['off','off','off','on','on','on','on until the last guest leaves'],'On the timer and light sensor.'],
  ['Brass lanterns, wicker orbs and fairy canopy over the path','7 + 7 + canopy','2200 K','E',['off','off','off','on','on','on','off'],''],
  ['Gate lanterns, lit sign and LED poster standee','2 + 2','warm','E',['off','off','off','on','on','on','off'],''],
+ ['Decoy lamp post','1','2700 K','E',['off','off','off','on','on','on','off'],'The brightest outdoor light on purpose: stays on even when group C is off on a swarm night.'],
  ['Kitchen, dish wash, store room, washroom'],
  ['Kitchen ceiling panels and hood light','2 + hood','4000 K','—',['on','on','on','on','on','on','on'],'Never dimmed; 500 lux on the work surfaces.'],
  ['Dish wash battens','2','5000 K','—',['on','on','on','on','on','on','on'],''],
@@ -564,11 +569,12 @@ const T={
  plant:{n:'Brass lantern over the path',g:'E',c:'#C49A3C',s:'sq',pts:D.pathlant},
  porb:{n:'Wicker orb over the path',g:'E',c:'#E49B1D',s:'ring',pts:D.pathorbs},
  gate:{n:'Gate lantern, lit sign or LED poster standee',g:'E',c:'#6A1622',s:'sq',pts:[[0.35,15.15],[0.75,16.9],[2.45,16.9]]},
+ decoy:{n:'Decoy lamp post (insects)',g:'E',c:'#4C8C4A',s:'tri',pts:[[5.9,15.65]]},
  boh:{n:'Kitchen, dish wash, store or washroom light',g:'—',c:'#56635a',s:'bat',pts:[[19.2,3.4],[20.6,3.4],[18.9,1.0],[20.6,1.0],[21.33,8.4],[21.33,10.6],[21.0,-0.9],[20.3,-0.3]]}
 };
 // colour code by AREA: restaurant orange, bar amber, kitchen blue, dish wash teal, toilet yellow, outdoor green
 const AREAC={rest:'#B8431B',bar:'#E39B1A',kit:'#6FA3C7',dish:'#2FA7A0',wc:'#E8D36A',out:'#4C8C4A'};
-const KAREA={orb:'rest',amb:'rest',spot:'rest',bell:'rest',pic:'rest',fanl:'rest',tree:'rest',lant:'rest',fest:'rest',pool:'rest',poolw:'rest',barstr:'bar',drop:'bar',onyx:'bar',upl:'out',post:'out',plant:'out',porb:'out',gate:'out',gard:'out',boh:'kit'};
+const KAREA={orb:'rest',amb:'rest',spot:'rest',bell:'rest',pic:'rest',fanl:'rest',tree:'rest',lant:'rest',fest:'rest',pool:'rest',poolw:'rest',barstr:'bar',drop:'bar',onyx:'bar',upl:'out',post:'out',plant:'out',porb:'out',gate:'out',decoy:'out',gard:'out',boh:'kit'};
 Object.keys(T).forEach(k=>{if(KAREA[k])T[k].c=AREAC[KAREA[k]];});
 const sym=(k,x,y)=>{const t=T[k],c=t.c,r=0.16;switch(t.s){
  case 'circle':return `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="#1C1714" stroke-width=".03"/>`;
@@ -613,7 +619,7 @@ const F=[
  ['fairy','Centrepiece tree','About 590 micro LEDs through the faux ficus round the west-wing pillar, and the glowing disc in the ceiling above it.',6,'Strings of 100 micro LEDs + 1 LED ceiling disc','warm','E',1],
  ['Walls and art'],
  ['spot','Gallery wall spots','On the white beam about 1.3 m from the north wall, one per bay, aimed at the gallery.',5,'GU10 LED, 5 W, 36° beam','2700 K','B',1],
- ['belllamp','Bell-shaded brass wall lamps','One on the face of each of the five white pilasters of the solid green north wall (x 1.4, 3.45, 7.3, 10.0 and 13.75 m), shade centre about 1.55 m up.',5,'E14 LED candle, 4 W','2200 K','B',1],
+ ['belllamp','Bell-shaded brass wall lamps','One on the face of each of the five white pilasters of the solid green north wall (x 1.4, 3.45, 7.3, 10.0 and 13.75 m), shade centre about 1.55 m up, with an opal diffuser under the bulb so the bulb never shows (insects circle a bare bulb, and these sit beside the north-wall tables).',5,'E14 LED candle, 4 W','2200 K','B',1],
  ['Open edges, where the bougainvillea is'],
  ['pillarlantern','Bronze cage lanterns on the pillars','On a curved arm on each of the 14 pillars round the open edges: south front, entrance, west wing, the angled corner and the west side.',14,'E27 LED filament, 4 W','2200 K','C',2],
  ['festoon','Festoon inside the PVC curtains','On a sagging wire just inside the curtains on all 13 bays: 35.6 m with a bulb every 38 cm.',D.fest.length,'Outdoor-rated festoon, 1 W bulbs, low-voltage','2200 K','C',8],
@@ -629,6 +635,7 @@ const F=[
  ['lamppost','Approach-path lamp posts','The three black posts already on the path; check wiring and put them on the timer.',3,'E27 LED, 8 W, outdoor','2700 K','E',1],
  ['pathlantern','Brass lanterns, wicker orbs and fairy canopy','Over the path: 7 brass lanterns and 7 wicker orbs on the overhead line, about 1,100 micro LEDs on fine wires.',14,'Outdoor micro-LED strands + E27 filament bulbs','2200 K','E',2],
  ['','Gate lanterns, lit sign and LED poster standee','The two black lanterns on the arched gate (on site), the gate sign and the back-lit standee at the road.',4,'Built-in LED / E27 outdoor','warm white','E',1],
+ ['lamppost','Decoy lamp post (insects)','One post on the south-west corner of the lawn, about 6 m from the nearest table: the brightest outdoor light, so night insects gather there and not at the tables.',1,'E27 LED, 12 W, about 1,100 lm, outdoor','2700 K','E',1],
  ['Kitchen, dish wash, store room, washroom'],
  ['','Kitchen ceiling panels and hood light','Over the hot line and benches; the hood has its own built-in light.',2,'LED panel 2 × 2 ft, 36 W, not dimmed','4000 K','—',0],
  ['','Dish wash battens','Over the sinks and racks along the 2.4 m run.',2,'4 ft LED batten, 20 W','5000 K','—',1],
