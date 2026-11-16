@@ -1,0 +1,20 @@
+{
+ "name": "Konso",
+ "tagline": "Pan Asian Kitchen & Pub",
+ "colours": {
+  "bottle-green": "#051C0A",
+  "konso-green": "#0B2A14",
+  "gold-foil": "#D89D3C",
+  "gold-foil-highlight": "#F0BE62",
+  "gold-foil-shadow": "#AA7A28",
+  "steam-cream": "#F2E8D2"
+ },
+ "gold-gradient": ["#EBB85B", "#E2AA4A", "#DA9F3E", "#D49739", "#D19333"],
+ "fonts": {
+  "wordmark": "artwork (traced, never retype)",
+  "display": "Prata Regular",
+  "label": "Montserrat SemiBold, tracking +0.18em, uppercase",
+  "body": "Montserrat Regular / Medium"
+ },
+ "logo": "logo/"
+}

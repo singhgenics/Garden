@@ -1,0 +1,11 @@
+/* Konso brand tokens */
+@font-face{font-family:"Prata";src:url("fonts/Prata-Regular.ttf") format("truetype");font-display:swap}
+@font-face{font-family:"Montserrat";src:url("fonts/Montserrat-Variable.ttf") format("truetype");font-weight:100 900;font-display:swap}
+:root{
+ --konso-green:#051C0A; --konso-green-2:#0B2A14;
+ --konso-gold:#D89D3C; --konso-gold-hi:#F0BE62; --konso-gold-lo:#AA7A28;
+ --konso-cream:#F2E8D2;
+ --konso-foil:linear-gradient(180deg,#EBB85B,#E2AA4A,#DA9F3E,#D49739,#D19333);
+ --konso-display:"Prata",Georgia,serif;
+ --konso-body:"Montserrat","Helvetica Neue",Arial,sans-serif;
+}

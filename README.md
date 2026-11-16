@@ -70,7 +70,7 @@ Hall edges (15.67, 7.76, 4.71, 2.98, 5.45, 9.20), the counter length (5.48), the
 - `opening-checklist.html`: pre-opening checklist (18 stages, 192 items, including lighting, mosquito control and prep stations; licences and approvals pre-ticked as done, Goa and India items tagged IN) with tick boxes that save on the device and a progress bar. Opens inside the model from the toolbar's Opening checklist button (`garden.html?checklist` opens it directly)
 - `equipment-plan.html`: opening-day equipment plan for the kitchen, dish wash and bar (plans, schedules with W × D × H in metres, smallwares, services). Opens inside the model from the toolbar's Equipment plan button, or on its own; `garden.html?eq` opens it directly
 
-Brand: https://singhgenics.github.io/Garden/brand-kit.html (logos, colours in the Garden palette, type, direction board) and https://singhgenics.github.io/Garden/brand-merch.html (coasters, stickers, bags, uniforms); both open from the model toolbar's Brand & merch button. Source and build scripts: `Dream/GardenBrand/` (local).
+Brand: https://singhgenics.github.io/Garden/brand-kit.html (Konso kit: logos, colours, Prata + Montserrat type, tokens, PDF; source Dream/Konso/brand-kit) and https://singhgenics.github.io/Garden/brand-merch.html (coasters, stickers, bags, uniforms); both open from the model toolbar's Brand & merch button.
 
 Pool lounge (added 2026-11-03): outside the hall's 7.76 m west edge, 6.8 m hall side, 4.2 m rear wall with graffiti, two 2.8 m side walls, 1.6 m entrance; one 6 ft pool table and two standing tables. 3D view 'Pool lounge'; sheets A-07 (hall, pool lounge, garden and patio) and A-08 in drawings/Garden-architect-drawings.pdf.
 

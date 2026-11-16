@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Konso Brand Kit</title>
+<meta name="description" content="Konso brand kit: logo, colour, typography, usage rules and downloads.">
+<link rel="icon" href="logo/foil/konso-favicon-256.png">
+<link rel="stylesheet" href="konso-tokens.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--konso-green);color:var(--konso-cream);font:400 16px/1.65 var(--konso-body)}
+.page{max-width:1120px;margin:0 auto;padding:64px 24px;border-top:1px solid rgba(216,157,60,.28)}
+.page:first-child{border-top:0}
+.eyebrow{font:600 12px/1 var(--konso-body);letter-spacing:.18em;text-transform:uppercase;color:var(--konso-gold)}
+h1,h2,h3{font-family:var(--konso-display);font-weight:400;margin:0}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.05;color:var(--konso-gold)}
+h2{font-size:clamp(28px,4vw,40px);line-height:1.1;color:var(--konso-gold);margin:10px 0 8px}
+h3{font-size:20px;color:var(--konso-gold);margin:0 0 6px}
+p{margin:0 0 14px;max-width:680px}.muted{color:#B9B39F}
+.cover{text-align:center;padding-top:40px}
+.cover img{width:min(760px,100%);height:auto;display:block;margin:0 auto 30px;border-radius:6px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));margin-top:24px}
+.tile{margin:0;border:1px solid rgba(216,157,60,.28);border-radius:8px;overflow:hidden;break-inside:avoid}
+.tile .t{display:grid;place-items:center;aspect-ratio:16/10;padding:9%}
+.tile img{max-width:100%;max-height:100%}
+.tile figcaption{padding:10px 14px;font-size:14px;color:#B9B39F;background:rgba(0,0,0,.28)}
+.sw{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:24px}
+.sw div{border:1px solid rgba(216,157,60,.28);border-radius:8px;overflow:hidden;break-inside:avoid}
+.sw i{display:block;height:120px}.sw b{display:block;padding:12px 14px 0;font:600 15px var(--konso-body)}
+.sw span{display:block;padding:2px 14px 14px;font:13px/1.55 var(--konso-body);color:#B9B39F}
+.foil{background:var(--konso-foil)}
+.spec{border:1px solid rgba(216,157,60,.28);border-radius:8px;padding:26px;margin-top:20px;break-inside:avoid}
+.spec .big{font:400 clamp(40px,7vw,72px)/1.05 var(--konso-display);color:var(--konso-gold)}
+.spec .lab{font:600 14px var(--konso-body);letter-spacing:.18em;text-transform:uppercase;color:var(--konso-gold)}
+.spec .bod{font:400 17px/1.65 var(--konso-body)}
+.spec small{display:block;margin-top:12px;color:#B9B39F;font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin-top:14px}
+td,th{padding:9px 12px;border-bottom:1px solid rgba(216,157,60,.28);text-align:left}th{color:var(--konso-gold);font-weight:600}
+.two{display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:20px}
+ul{padding-left:20px;margin:0}li{margin:7px 0}
+.dl{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));list-style:none;padding:0;margin:22px 0 0}
+.dl a{display:block;padding:12px 14px;border:1px solid rgba(216,157,60,.28);border-radius:8px;color:var(--konso-cream);text-decoration:none}
+.dl a:hover{border-color:var(--konso-gold)}.dl small{display:block;color:#B9B39F}
+@media print{@page{size:A4 landscape;margin:0}
+ body{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:13px}
+ .page{break-after:page;padding:26px 44px;max-width:none;border:0;overflow:hidden}
+ .cover img{width:560px}.grid{grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.tile .t{aspect-ratio:16/7;padding:6%}.sw i{height:90px}.dl a{padding:8px 12px}}
+</style></head><body>
+
+<section class="page cover">
+<img src="logo/foil/konso-foil-on-green-lockup.png" alt="Konso, Pan Asian Kitchen and Pub, in gold foil on bottle green">
+<div class="eyebrow">Brand kit · 2026</div>
+<p class="muted" style="margin:16px auto 0">Pan Asian Kitchen &amp; Pub. Quiet and warm: a flared serif wordmark in gold foil on deep bottle green, with a swash K that curls under the o.</p>
+</section>
+
+<section class="page" id="logo">
+<div class="eyebrow">01 · Logo</div><h2>Wordmark and lockup</h2>
+<p>The wordmark is artwork, not a typeface. Always place the supplied files and never retype or redraw it. The lockup adds the descriptor line; use the wordmark alone when space is tight.</p>
+<div class="grid">
+<figure class="tile"><div class="t" style="background:var(--konso-green-2)"><img src="logo/svg/konso-lockup-gold.svg" alt="Konso lockup, gold"></div><figcaption>Lockup: the default, gold on green</figcaption></figure>
+<figure class="tile"><div class="t" style="background:var(--konso-green-2)"><img src="logo/svg/konso-wordmark-gold.svg" alt="Konso wordmark, gold"></div><figcaption>Wordmark: nav bars, small spaces, stamps</figcaption></figure>
+<figure class="tile"><div class="t" style="background:var(--konso-green-2)"><img src="logo/svg/konso-monogram-K-gold.svg" alt="K monogram" style="width:45%"></div><figcaption>Monogram K: favicon, avatar, seals</figcaption></figure>
+</div>
+<p class="muted" style="margin-top:22px">Note: the lockup artwork still carries the earlier descriptor "Pan Asian Kitchen | Bar". The official line is <b>Pan Asian Kitchen &amp; Pub</b>; set it in Montserrat beside the wordmark until the lockup is redrawn.</p>
+</section>
+
+<section class="page" id="versions">
+<div class="eyebrow">02 · Versions</div><h2>Colourways</h2>
+<p>Gold on green is the signature. Green on cream for light grounds. Cream on green for one-colour jobs.</p>
+<div class="grid">
+<figure class="tile"><div class="t" style="background:#051C0A"><img src="logo/svg/konso-lockup-gold.svg" alt=""></div><figcaption>Gold on bottle green: signage, menus, screens</figcaption></figure>
+<figure class="tile"><div class="t" style="background:#F2E8D2"><img src="logo/svg/konso-lockup-green.svg" alt=""></div><figcaption>Green on cream: print, receipts, paper bags</figcaption></figure>
+<figure class="tile"><div class="t" style="background:#051C0A"><img src="logo/svg/konso-lockup-cream.svg" alt=""></div><figcaption>Cream on green: one-colour printing, embroidery</figcaption></figure>
+<figure class="tile"><div class="t" style="background:#fff"><img src="logo/svg/konso-wordmark-green.svg" alt=""></div><figcaption>Green on white: invoices, documents</figcaption></figure>
+<figure class="tile"><div class="t" style="background:#051C0A"><img src="logo/svg/konso-lockup-gold-flat.svg" alt=""></div><figcaption>Flat gold #D89D3C: vinyl, stamps, embroidery only</figcaption></figure>
+<figure class="tile"><div class="t" style="background:#0B2A14"><img src="logo/foil/konso-app-icon-1024.png" alt="" style="width:45%;border-radius:20%"></div><figcaption>App icon: foil K on green</figcaption></figure>
+</div>
+<p style="margin-top:22px"><b>Foil finish.</b> For menus, cards and door signs use the foil artwork in <code>logo/foil</code>. For flat print, vinyl, embroidery and web, use the vectors.</p>
+</section>
+
+<section class="page" id="colour">
+<div class="eyebrow">03 · Colour</div><h2>Palette</h2>
+<p>Sampled from the approved logo. For print, match to a foil sample, not to a screen.</p>
+<div class="sw">
+<div><i style="background:#051C0A;border-bottom:1px solid rgba(216,157,60,.28)"></i><b>Bottle green</b><span>#051C0A · RGB 5, 28, 10<br>Primary ground</span></div>
+<div><i style="background:#0B2A14"></i><b>Konso green</b><span>#0B2A14 · RGB 11, 42, 20<br>Panels and cards on green</span></div>
+<div><i class="foil"></i><b>Gold foil</b><span>#D89D3C · RGB 216, 157, 60<br>Highlight #F0BE62 · shadow #AA7A28</span></div>
+<div><i style="background:#F2E8D2"></i><b>Steam cream</b><span>#F2E8D2 · RGB 242, 232, 210<br>Light grounds, text on green</span></div>
+</div>
+<h3 style="margin-top:34px">Foil gradient</h3>
+<p class="muted">Gold in any logo is a vertical gradient, light at the top, warmer at the bottom: #EBB85B, #E2AA4A, #DA9F3E, #D49739, #D19333. Use flat #D89D3C only where a gradient is impossible.</p>
+<table><tr><th>Pair</th><th>Contrast</th><th>Use</th></tr>
+<tr><td>Gold on bottle green</td><td>7.5 : 1</td><td>All text sizes</td></tr>
+<tr><td>Cream on bottle green</td><td>14.7 : 1</td><td>Body text on green</td></tr>
+<tr><td>Green on cream</td><td>14.7 : 1</td><td>Body text on paper</td></tr>
+<tr><td>Gold on cream</td><td>2.0 : 1</td><td>Never; use green</td></tr></table>
+</section>
+
+<section class="page" id="type">
+<div class="eyebrow">04 · Typography</div><h2>Fonts</h2>
+<p>Both are free (SIL Open Font License) and included in <code>fonts/</code>. The wordmark itself is artwork, not set in either.</p>
+<div class="spec"><div class="lab">Display · Prata Regular</div><div class="big">Wok, steam &amp; supper</div><small>Headings, menu section titles, large quotes. Sentence case, regular weight only, never bold or faux-bold.</small></div>
+<div class="spec"><div class="lab" style="margin-bottom:8px">Label · Montserrat SemiBold 600</div><div class="lab" style="color:var(--konso-cream);font-size:20px;letter-spacing:.2em">Pan Asian Kitchen &amp; Pub</div><small>Descriptor, buttons, navigation, captions. Uppercase, tracking +0.18em, small sizes.</small></div>
+<div class="spec"><div class="lab" style="margin-bottom:8px">Body · Montserrat Regular 400 / Medium 500</div><div class="bod">Hand-folded dumplings, wok-fired noodles and slow broths, served with something cold and good to drink. Open from noon, late into the evening.</div><small>Menus, signage copy, web and print body text. Line-height 1.5 to 1.65. Fallbacks: Helvetica Neue, Arial.</small></div>
+</section>
+
+<section class="page" id="rules">
+<div class="eyebrow">05 · Usage</div><h2>Rules</h2>
+<div class="two">
+<div><h3>Do</h3><ul>
+<li>Leave clear space on every side equal to the height of the K stem.</li>
+<li>Keep the wordmark at least 24 mm wide in print, 120 px on screen. Smaller: use the monogram.</li>
+<li>Use the lockup at 40 mm or wider; smaller, use the wordmark alone.</li>
+<li>Put gold only on bottle green; put green only on cream or white.</li>
+<li>Use Prata for headings and Montserrat for everything else.</li></ul></div>
+<div><h3>Don't</h3><ul>
+<li>Don't retype the name, stretch it, or detach the swash from the K.</li>
+<li>Don't put gold on cream, white or photographs.</li>
+<li>Don't add outlines, shadows or glows to the flat versions.</li>
+<li>Don't crop the wordmark or recolour outside the palette.</li>
+<li>Don't mix in old Cabin East artwork (pint glass, burgundy, hoarding signs, slab type).</li></ul></div>
+</div></section>
+
+<section class="page" id="files">
+<div class="eyebrow">06 · Files</div><h2>Downloads</h2>
+<ul class="dl">
+<li><a href="logo/svg/">logo/svg<small>Vector logos: use these first</small></a></li>
+<li><a href="logo/png/">logo/png<small>6000 px transparent and on-colour PNGs</small></a></li>
+<li><a href="logo/foil/">logo/foil<small>Foil textured art, app icon, favicon</small></a></li>
+<li><a href="fonts/">fonts<small>Prata, Montserrat and licences</small></a></li>
+<li><a href="konso-tokens.css">konso-tokens.css<small>Colours and fonts for web</small></a></li>
+<li><a href="brand-tokens.json">brand-tokens.json<small>Colours and fonts for tools</small></a></li>
+</ul></section>
+</body></html>
