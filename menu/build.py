@@ -197,7 +197,7 @@ sweet_tx=rows([('Sticky Situation','Steamed sticky rice soaked in warm salted co
 PRINT='''
 .s12{grid-column:span 12}
 .more .ln .meta span{display:inline;font-size:inherit;opacity:inherit}.more .ln .meta{display:block}
-.mast{display:none}
+.mast{display:none}.bowl-dim{display:none}
 @page{size:A3;margin:0}
 @media print{
  body{width:1123px;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -206,22 +206,22 @@ PRINT='''
  .face:last-child{break-after:auto}
  .mast{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:16px}
  .mast img{height:96px}.mast .t{font:13px PlexMono,monospace;letter-spacing:.2em;text-transform:uppercase;text-align:right;color:var(--burg)}.mast .t b{display:block;font:30px Alfa,serif;letter-spacing:.02em;color:var(--ink);font-weight:400;margin-bottom:4px}
- .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:.97}
- .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:1}.face.drinks .card .ph{aspect-ratio:3.8/1!important}
- .sec,.dark,.cream,.wine{padding:0!important;margin:0 0 12px;background:none!important;color:var(--ink)!important;break-inside:auto;height:auto!important;overflow:visible!important}
+ .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:.96}
+ .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:1}.face.drinks .card .ph{aspect-ratio:4/3!important}.face.drinks .card{grid-template-columns:47% 1fr}
+ .sec,.dark,.cream,.wine{padding:0!important;margin:0 0 9px;background:none!important;color:var(--ink)!important;break-inside:auto;height:auto!important;overflow:visible!important}
  .in{max-width:none;padding:0}
  .dark .sh small,.wine .sh small{color:var(--burg)}.dark .sh,.wine .sh{border-color:var(--burg)}
  .dark .band,.wine .band{border-color:var(--burg)}.dark .band strong,.wine .band strong,.dark .band .big,.wine .band .big{color:var(--burg)}
  .dark .heat,.wine .heat{color:var(--burg)}.biglogo{display:none}
  .sh h2{font-size:24px}.sh{padding-bottom:6px;margin-bottom:6px}.sh small{font-size:11.5px;letter-spacing:.06em}.sh.sub{margin-top:14px}.lede{font-size:14px;margin-bottom:8px}
- .grid{display:block;margin:8px 0 2px}.card{margin:0 0 8px;break-inside:avoid}.card .ph{aspect-ratio:3.3/1!important}.ph{aspect-ratio:3/1!important}
- .hero{display:block;margin:12px 0 14px;break-inside:avoid}.hero .ph{min-height:0;aspect-ratio:3.5/1}.hero figcaption{padding:12px 14px}.hero h3{font-size:26px}.hero p{font-size:14px;margin-bottom:8px}.hero .vars{margin-bottom:8px}.pair{font-size:13.5px;padding:6px 10px}
+ .grid{display:block;margin:8px 0 2px}.card{margin:0 0 8px;break-inside:avoid;display:grid;grid-template-columns:46% 1fr;column-gap:10px;align-items:start}.card .ph{aspect-ratio:4/3!important;border-radius:10px}.card figcaption{padding:0;min-width:0}.ph{aspect-ratio:4/3!important}
+ .hero{display:block;margin:8px 0 10px;break-inside:avoid}.hero .ph{min-height:0;aspect-ratio:4/3}.hero figcaption{padding:12px 14px}.hero h3{font-size:26px}.hero p{font-size:14px;margin-bottom:8px}.hero .vars{margin-bottom:8px}.pair{font-size:13.5px;padding:6px 10px}
  h3{font-size:17px}figcaption p{font-size:14px}.meta{font-size:11.5px;margin-top:2px}.heat{font-size:15px}
- .more{display:block;margin-top:6px}.more .ln{padding:2px 0;font-size:14.5px;line-height:1.28;break-inside:avoid}.more .ln span{font-size:14px;opacity:.95}
+ .more{display:block;margin-top:6px}.more .ln{padding:1.5px 0;font-size:14.5px;line-height:1.28;break-inside:avoid}.more .ln span{font-size:14px;opacity:.95}
  .band{margin:8px 0;padding:8px 12px;break-inside:avoid;border-width:1.5px}.band strong{font-size:17px}.band span{font-size:13.5px}.band .big{font-size:24px}
  .vars span{padding:5px 11px;font-size:14px}
  .sh{display:block;break-inside:avoid;break-after:avoid}.sh h2,.sh small{display:inline-block;vertical-align:baseline}.sh small{margin-left:10px}.lede{break-after:avoid}.biglogo{display:none!important}.card h3{font-size:17px!important}.meta{display:block}.more .ln .meta span,.meta span{display:inline;font-size:inherit;opacity:inherit}.heat{margin-right:8px}.hero .meta{font-size:12px}
- #wok{break-before:column}
+ #wok{break-before:column}.bowl-dim{display:block!important;margin-top:12px!important}.bowl-main{display:none!important}
  .after.collapsed{display:block}
  .foot{position:absolute;left:44px;right:44px;bottom:22px;margin:0;font-size:11.5px;padding-top:7px;color:#5b4d40;border-top:1px solid var(--brass)}
 }
@@ -240,6 +240,7 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 {dim_tx}
 <div class="grid" style="margin-top:22px">{bao_ph}</div>
 {bao_tx}
+<div class="band bowl-dim" style="margin-top:16px"><span><strong>Bowl Game · lunch, 12 to 4</strong><br>Any noodles or fried rice + Konso Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
 </div></section>
 <section class="sec cream" id="wok"><div class="in">
 {sh("From the Wok","High flame · double-fried · extra chilli","Indo-Chinese house classics and Korean bar food. On most dishes you pick your protein.")}
@@ -253,7 +254,7 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 <div class="band top" style="margin-top:22px"><span><strong>Konso feast for four</strong><br>4 soups, Konso Fever chicken, Salt &amp; Pepa chonak, mixed Noodle Around, Green With Envy with rice, darsaan. About 12% under ordering separately.</span><span class="big">2,299</span></div>
 <div class="grid" style="margin-top:0">{mains_ph}</div>
 {mains_tx}
-<div class="band" style="margin-top:16px"><span><strong>Bowl Game · lunch, 12 to 4</strong><br>Any noodles or fried rice + Konso Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
+<div class="band bowl-main" style="margin-top:16px"><span><strong>Bowl Game · lunch, 12 to 4</strong><br>Any noodles or fried rice + Konso Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
 </div></section>
 </div></div>
 
