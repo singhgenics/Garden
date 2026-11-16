@@ -9,12 +9,32 @@
   "gold-foil-shadow": "#AA7A28",
   "steam-cream": "#F2E8D2"
  },
- "gold-gradient": ["#EBB85B", "#E2AA4A", "#DA9F3E", "#D49739", "#D19333"],
+ "gold-gradient": [
+  "#EBB85B",
+  "#E2AA4A",
+  "#DA9F3E",
+  "#D49739",
+  "#D19333"
+ ],
  "fonts": {
   "wordmark": "artwork (traced, never retype)",
   "display": "Prata Regular",
   "label": "Montserrat SemiBold, tracking +0.18em, uppercase",
   "body": "Montserrat Regular / Medium"
  },
- "logo": "logo/"
+ "logo": "logo/",
+ "restaurant": {
+  "bottle-green": "#1F3D2E",
+  "deep-green": "#14291E",
+  "chocolate": "#4A2A1E",
+  "brick": "#A9533A",
+  "brass": "#C49A3C",
+  "cognac": "#A2582A",
+  "burgundy": "#6A1622",
+  "goa-blue": "#2443A6",
+  "goa-navy": "#1B3070",
+  "bougainvillea": "#D81B7A",
+  "steam-cream": "#F2E8D2",
+  "ink": "#17221C"
+ }
 }

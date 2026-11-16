@@ -5,6 +5,8 @@
  --konso-green:#051C0A; --konso-green-2:#0B2A14;
  --konso-gold:#D89D3C; --konso-gold-hi:#F0BE62; --konso-gold-lo:#AA7A28;
  --konso-cream:#F2E8D2;
+ /* restaurant room palette */
+ --room-bottle:#1F3D2E; --room-deep:#14291E; --room-choc:#4A2A1E; --room-brick:#A9533A; --room-brass:#C49A3C; --room-cognac:#A2582A; --room-burgundy:#6A1622; --room-goa-blue:#2443A6; --room-goa-navy:#1B3070; --room-bougainvillea:#D81B7A; --room-ink:#17221C;
  --konso-foil:linear-gradient(180deg,#EBB85B,#E2AA4A,#DA9F3E,#D49739,#D19333);
  --konso-display:"Prata",Georgia,serif;
  --konso-body:"Montserrat","Helvetica Neue",Arial,sans-serif;
