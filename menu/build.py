@@ -205,9 +205,9 @@ PRINT='''
  .face{width:1123px;height:1587px;overflow:hidden;break-after:page;padding:34px 44px 24px;background:var(--paper);color:var(--ink);position:relative}
  .face:last-child{break-after:auto}
  .mast{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:16px}
- .mast img{height:62px;border-radius:10px}.mast .t{font:12px PlexMono,monospace;letter-spacing:.2em;text-transform:uppercase;text-align:right;color:var(--burg)}.mast .t b{display:block;font:30px Alfa,serif;letter-spacing:.02em;color:var(--ink);font-weight:400;margin-bottom:4px}
- .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:1.04}
- .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:1.03}.face.drinks .card .ph{aspect-ratio:16/10!important}
+ .mast img{height:96px}.mast .t{font:12px PlexMono,monospace;letter-spacing:.2em;text-transform:uppercase;text-align:right;color:var(--burg)}.mast .t b{display:block;font:30px Alfa,serif;letter-spacing:.02em;color:var(--ink);font-weight:400;margin-bottom:4px}
+ .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:1.0}
+ .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:.97}.face.drinks .card .ph{aspect-ratio:16/10!important}
  .sec,.dark,.cream,.wine{padding:0!important;margin:0 0 12px;background:none!important;color:var(--ink)!important;break-inside:auto;height:auto!important;overflow:visible!important}
  .in{max-width:none;padding:0}
  .dark .sh small,.wine .sh small{color:var(--burg)}.dark .sh,.wine .sh{border-color:var(--burg)}
@@ -225,7 +225,7 @@ PRINT='''
  .foot{position:absolute;left:44px;right:44px;bottom:22px;margin:0;font-size:11px;padding-top:7px;color:#5b4d40;border-top:1px solid var(--brass)}
 }
 '''
-def mast(t): return f'<div class="mast"><img src="logo/A-lockup-reversed.svg" alt="Konso"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
+def mast(t): return f'<div class="mast"><img src="logo/A-lockup-colour.svg" alt="Konso"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
 body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Konso · Picture menu</title><style>{CSS}{EXTRA}{PRINT}</style></head><body>
 <nav><div class="flt" role="group" aria-label="Show"><button data-m="all" aria-pressed="true">All</button><button data-m="veg" aria-pressed="false">Veg</button><button data-m="nv" aria-pressed="false">Non-veg</button></div><a href="#dimsum">Dim sum &amp; bao</a><a href="#wok">Wok</a><a href="#mains">Mains</a><a href="#taps">Beer</a><a href="#cocktails">Cocktails</a><a href="#dessert">Dessert</a></nav>
