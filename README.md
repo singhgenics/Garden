@@ -5,7 +5,7 @@ A 3D model of the Garden restaurant: an open-sided pub hall with its bar, kitche
 Live: https://singhgenics.github.io/Garden/ (opens `garden.html`)
 
 
-Revolving table menu (the whole food menu, 29 dishes on five turning tables; open a dish and its ingredients spread out around the plate): https://singhgenics.github.io/Garden/menu/table/ . Source, image runner and cut-out script: Dream/Revolving menu (Flow project "Menu"). Prices are copied from `menu/build.py`: change them there first, then in `menu/table/index.html`.
+Revolving table menu (the whole food menu, 29 dishes on five turning tables; open a dish and its ingredients spread out around the plate): https://singhgenics.github.io/Garden/menu/table/ . Guests can also set their own table (the + buttons, or https://singhgenics.github.io/Garden/menu/table/#order) and place the order: it becomes a ticket to show the server, with POS item names; nothing is sent anywhere. Put `?table=12` in a table's QR code to fill in its number. Source, image runner and cut-out script: Dream/Revolving menu (Flow project "Menu"). Prices are copied from `menu/build.py`: change them there first, then in `menu/table/index.html`.
 
 Furnishing & supplies checklist (furniture, lights, linen, paper goods, cleaning, safety; must-have vs add-later): https://singhgenics.github.io/Garden/furnishing.html
 

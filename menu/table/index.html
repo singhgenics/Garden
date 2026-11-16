@@ -10,7 +10,7 @@
 <style>
 @font-face{font-family:Prata;src:url(assets/fonts/Prata-Regular.ttf);font-display:swap}
 @font-face{font-family:Mont;src:url(assets/fonts/Montserrat.ttf);font-weight:100 900;font-display:swap}
-:root{--bg:#1F3D2E;--acc:#C49A3C;--tint:#F2E8D2;--cream:#F2E8D2;--ink:#17221C;--ease:cubic-bezier(.65,0,.2,1);--dur:1.1s;--pad:clamp(18px,4.5vw,56px)}
+:root{--bg:#1F3D2E;--acc:#C49A3C;--tint:#F2E8D2;--cream:#F2E8D2;--ink:#17221C;--bottle:#1F3D2E;--deep:#14291E;--paper:#F2E8D2;--choc:#4A2A1E;--brass:#C49A3C;--brass-ink:#8A6420;--burgundy:#6A1622;--ease:cubic-bezier(.65,0,.2,1);--dur:1.1s;--pad:clamp(18px,4.5vw,56px)}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--cream);font:16px/1.5 Mont,system-ui,sans-serif;overflow:hidden;transition:background-color var(--dur) var(--ease);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
@@ -123,6 +123,9 @@ body[data-view=table] .note{display:none}
  .count{flex-wrap:wrap;gap:2px 10px;font-size:10px;letter-spacing:.2em}
  .price{font-size:25px}
  .nav{margin-top:8px;gap:8px}
+ .buy{flex-wrap:nowrap;gap:10px}
+ .buy .btn{padding:0 14px;letter-spacing:.14em;font-size:10.5px}
+ .buy .plus{width:42px;height:42px}
  .dots button{width:clamp(14px,5vw,22px)}
  .btn{padding:0 18px}
  .brand img{height:40px}.brand span{font-size:7.5px}
@@ -137,13 +140,183 @@ body[data-view=table] .note{display:none}
  .prices{margin-top:12px}
 }
 @media (prefers-reduced-motion:reduce){:root{--dur:.01s}#swap,.plate,.prop,.ing,#wheel{transition:none!important}}
+
+/* ---------- ordering: header button, add buttons ---------- */
+.hright{flex:none;display:flex;align-items:center;gap:8px}
+.cartbtn{display:inline-flex;align-items:center;gap:9px;min-height:40px;padding:0 8px 0 16px;border-radius:99px;background:var(--cream);color:var(--ink);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:transform .2s}
+.cartbtn b{display:grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:99px;background:var(--bottle);color:var(--cream);font-weight:600;letter-spacing:0;font-size:12px}
+.cartbtn.bump{animation:bump .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bump{40%{transform:scale(1.12)}}
+.plus{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--acc);color:var(--acc);display:grid;place-items:center;font-size:22px;line-height:1;transition:background .2s,color .2s,transform .2s}
+.plus:hover{background:var(--acc);color:var(--ink)}
+.plus:active{transform:scale(.92)}
+.prices .vbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid #f2e8d255;border-radius:99px;padding:0 8px 0 16px;font-size:14px;white-space:nowrap;transition:background .2s,border-color .2s}
+.prices .vbtn b{font:400 18px Prata,serif;color:var(--acc)}
+.prices .vbtn i.pl{font-style:normal;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--ink);font-size:17px}
+.prices .vbtn:hover{border-color:var(--acc);background:#f2e8d214}
+.prices .vbtn.done i.pl{background:var(--cream)}
+.addlab{margin-top:18px}
+#intro .two-btn{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn.ghost{background:none;color:var(--cream);border:1px solid #f2e8d266}
+.btn.ghost:hover{background:#f2e8d21a}
+.btn.dark{background:var(--bottle);color:var(--cream)}
+.btn.dark:hover{background:var(--deep)}
+.btn[disabled]{opacity:.4;cursor:default;transform:none}
+.flyer{position:fixed;z-index:60;pointer-events:none;border-radius:50%;will-change:transform}
+
+/* ---------- order view ---------- */
+#order{position:fixed;inset:0;z-index:20;overflow-y:auto;background:var(--bg);transition:background-color var(--dur) var(--ease),opacity .35s ease,visibility 0s;scrollbar-width:thin}
+body:not([data-order]) #order{opacity:0;visibility:hidden;pointer-events:none;transition:background-color var(--dur) var(--ease),opacity .3s ease,visibility 0s .3s}
+body[data-order] header{z-index:30}
+body[data-order] header::before{content:"";position:absolute;inset:0 0 -20px 0;z-index:-1;background:var(--bg);transition:background-color var(--dur) var(--ease);-webkit-mask:linear-gradient(#000 72%,transparent);mask:linear-gradient(#000 72%,transparent)}
+body[data-order] #tabs,body[data-order] .cartbtn{visibility:hidden}
+body[data-order] #stage,body[data-order] #panel,body[data-order] #intro,body[data-order] .note{visibility:hidden}
+.o-wrap{max-width:1240px;margin:0 auto;padding:96px var(--pad) 80px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:56px}
+.o-left{position:sticky;top:84px;align-self:start;display:flex;flex-direction:column;align-items:center;gap:22px}
+#otable{position:relative;width:min(34vw,40vh,440px);aspect-ratio:1;border-radius:50%;background:var(--paper) url(assets/linen.webp) center/60% auto;
+ box-shadow:0 0 0 12px var(--choc),0 0 0 13px #C49A3C66,0 30px 70px #0009,inset 0 0 50px #4A2A1E33}
+#otable svg{position:absolute;inset:4%;width:92%;height:92%;opacity:.55;pointer-events:none}
+.o-empty{position:absolute;inset:0;display:grid;place-items:center;margin:0;font:italic 400 16px/1.4 Prata,serif;color:var(--brass-ink);text-align:center;padding:0 28%;transition:opacity .3s}
+#otable.has .o-empty{opacity:0}
+.op{position:absolute;transition:left .5s var(--ease),top .5s var(--ease),width .5s var(--ease),height .5s var(--ease)}
+.op>img{position:absolute;left:-6.82%;top:-6.82%;width:113.64%;height:113.64%;max-width:none;display:block}
+.op b{position:absolute;right:2%;top:2%;min-width:26px;height:26px;padding:0 6px;border-radius:99px;background:var(--bottle);color:var(--cream);font:600 12px/26px Mont,sans-serif;text-align:center;box-shadow:0 2px 6px #0005}
+.op.more{display:grid;place-items:center;border-radius:50%;background:var(--bottle);color:var(--cream);font:400 20px Prata,serif}
+
+.card{width:min(100%,400px);background:var(--paper);color:var(--ink);border-radius:18px;padding:18px 20px 16px;box-shadow:0 20px 50px #0007}
+.card-h{display:flex;align-items:baseline;gap:12px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase}
+.card-h b{font-weight:600}
+.card-h span{margin-left:auto;opacity:.65}
+.card-h button{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--burgundy);text-decoration:underline;text-underline-offset:3px;min-height:32px}
+.card-h button[hidden]{display:none}
+.card-toggle{display:none}
+#clist{list-style:none;margin:10px 0 0;padding:0;max-height:max(90px,calc(100vh - 40vh - 330px));overflow-y:auto;overscroll-behavior:contain}
+#clist li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #4A2A1E1f;font-size:14px}
+#clist li small{display:block;font-size:12px;opacity:.6}
+.qty{display:flex;align-items:center;gap:2px}
+.qty button{width:32px;height:32px;border-radius:50%;border:1px solid #17221C33;display:grid;place-items:center;font-size:16px;line-height:1}
+.qty button:hover{border-color:var(--ink)}
+.qty span{min-width:22px;text-align:center;font-weight:600}
+#clist .lp{font:400 17px Prata,serif;min-width:52px;text-align:right}
+.cempty{margin:12px 0 4px;font-size:14px;opacity:.6}
+.notebtn{margin-top:10px;min-height:32px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-ink)}
+.notebtn:hover{color:var(--ink)}
+.cnote[hidden]{display:none}
+.cnote{display:block;margin-top:12px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-ink)}
+.cnote textarea{display:block;width:100%;margin-top:6px;border:1px solid #4A2A1E33;border-radius:10px;background:#fff6;padding:9px 11px;font:14px/1.4 Mont,sans-serif;color:var(--ink);resize:vertical;letter-spacing:0;text-transform:none}
+.cnote textarea:focus{outline:2px solid var(--brass);outline-offset:1px}
+.ctot{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 12px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase}
+.ctot b{font:400 30px Prata,serif;letter-spacing:0}
+.card .btn{width:100%;justify-content:center}
+.cfine{margin:10px 0 0;font-size:11.5px;opacity:.6;text-align:center}
+
+.o-right{min-width:0}
+.oback{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.oback:hover{opacity:1;color:var(--acc)}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--acc)}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.o-right h2{margin:10px 0 10px;font:400 clamp(36px,4.4vw,58px)/1.05 Prata,Georgia,serif}
+.o-right h2 em{font-style:normal;color:var(--acc)}
+.o-lede{margin:0 0 8px;max-width:46ch;font-size:15.5px;opacity:.86}
+.o-table-no{margin:0 0 20px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.ogroup{margin-top:34px}
+.ogroup h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0 0 4px;padding-bottom:8px;border-bottom:1px solid #C49A3C66;font:400 13px Mont,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--acc)}
+.ogroup h3>span{white-space:nowrap}
+.ogroup h3 small{font-size:10.5px;letter-spacing:.16em;opacity:.75;color:var(--cream)}
+.orow{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:14px 0;border-bottom:1px solid #f2e8d21f}
+.th{position:relative;width:56px;height:56px}
+.th img{position:absolute;left:-6.82%;top:-6.82%;width:113.64%;height:113.64%;max-width:none}
+.th b{position:absolute;right:-6px;top:-6px;min-width:22px;height:22px;padding:0 5px;border-radius:99px;background:var(--acc);color:var(--ink);font:600 11px/22px Mont,sans-serif;text-align:center}
+.th b:empty{display:none}
+.orow h4{margin:0;font:400 21px/1.2 Prata,Georgia,serif}
+.orow h4 .m{vertical-align:2px}
+.orow p{margin:3px 0 0;font-size:13.5px;line-height:1.45;opacity:.75}
+.orow .ometa{margin-top:4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.orow .ometa .heat{font-size:15px}
+.oend{display:flex;align-items:center;gap:14px}
+.oend .pr{font:400 21px Prata,serif;white-space:nowrap}
+.ovars{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ovars button{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 6px 0 14px;border:1px solid #f2e8d244;border-radius:99px;font-size:13.5px;white-space:nowrap;transition:border-color .2s,background .2s}
+.ovars button b{font:400 16px Prata,serif;color:var(--acc)}
+.ovars button i.pl{font-style:normal;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--acc);color:var(--acc);font-size:16px}
+.ovars button:hover{border-color:var(--acc);background:#f2e8d210}
+.ovars button:hover i.pl{background:var(--acc);color:var(--ink)}
+.ovars .m{margin-right:0}
+.ofine{margin-top:30px;font-size:12.5px;opacity:.6;max-width:60ch}
+
+/* desktop: the card always fits under the table; only its dish list shrinks and scrolls */
+@media (min-aspect-ratio:1/1) and (min-width:761px){
+ .card{display:flex;flex-direction:column;max-height:calc(100vh - 110px - min(34vw,40vh,440px))}
+ .card>*{flex:none}
+ #clist{flex:1 1 auto;min-height:56px;max-height:none}
+}
+@media (min-aspect-ratio:1/1) and (min-width:761px) and (max-height:800px){
+ #otable{width:min(34vw,34vh,440px)}
+ .card{max-height:calc(100vh - 104px - min(34vw,34vh,440px));padding:14px 18px 12px}
+ .cfine{display:none}
+ .cnote textarea{height:46px;min-height:46px}
+ .ctot{margin:10px 0 8px}.ctot b{font-size:26px}
+ .o-wrap{padding-top:84px}
+}
+/* ---------- ticket ---------- */
+#ticket{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:20px;background:#0b140fcc;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:opacity .3s ease,visibility 0s}
+#ticket[hidden]{display:grid;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility 0s .25s}
+.tk{width:min(100%,440px);max-height:calc(100vh - 40px);overflow-y:auto;background:var(--paper);color:var(--ink);border-radius:20px;padding:26px 26px 20px;text-align:center;box-shadow:0 30px 80px #000a;transform:translateY(0);transition:transform .35s var(--ease)}
+#ticket[hidden] .tk{transform:translateY(16px)}
+.tk-no{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--brass-ink)}
+.tk h2{margin:8px 0 6px;font:400 34px/1.1 Prata,Georgia,serif}
+.tk h2 em{display:block;font-style:normal;color:var(--burgundy)}
+.tk>p{margin:0 auto 14px;max-width:34ch;font-size:14px;opacity:.75}
+.tk-table{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 12px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase}
+.tk-table input{width:110px;height:42px;border:1px solid #4A2A1E44;border-radius:10px;background:#fff8;text-align:center;font:400 22px Prata,serif;color:var(--ink)}
+.tk-table input:focus{outline:2px solid var(--brass)}
+#tklist{list-style:none;margin:0;padding:8px 0;border-top:1px dashed #4A2A1E55;border-bottom:1px dashed #4A2A1E55;text-align:left}
+#tklist li{display:grid;grid-template-columns:34px 1fr auto;gap:8px;padding:6px 0;font-size:15px}
+#tklist li b{font-weight:600}
+#tklist li span:last-child{font:400 16px Prata,serif}
+#tknote{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:#6A16220f;color:var(--burgundy);font-size:13.5px;text-align:left}
+#tknote:empty{display:none}
+.tk-tot{display:flex;align-items:baseline;justify-content:space-between;margin:12px 0 2px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase}
+.tk-tot b{font:400 30px Prata,serif;letter-spacing:0}
+.tk .fine{margin:0 0 14px;font-size:11.5px;opacity:.6;text-align:right}
+.tk .btn{width:100%;justify-content:center}
+.tk .linkb{display:block;margin:8px auto 0;min-height:40px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:3px;opacity:.7}
+
+@media (max-aspect-ratio:1/1),(max-width:760px){
+ .hright{margin-left:auto}
+ .hright .full{display:none}
+ .cartbtn{min-height:36px;padding:0 6px 0 12px;font-size:10px;letter-spacing:.14em}
+ .cartbtn b{min-width:24px;height:24px}
+ .o-wrap{display:block;padding:calc(64px + env(safe-area-inset-top)) 20px 150px}
+ .o-left{position:static;gap:0}
+ #otable{width:min(78vw,40vh);margin:16px auto 8px;box-shadow:0 0 0 8px var(--choc),0 0 0 9px #C49A3C66,0 20px 50px #0009,inset 0 0 40px #4A2A1E33}
+ .o-empty{font-size:14px;padding:0 24%}
+ .card{position:fixed;z-index:25;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));width:auto;padding:12px 16px 12px;border-radius:16px}
+ .card-toggle{display:block;position:absolute;inset:0 0 auto 0;height:44px;border-radius:16px 16px 0 0}
+ .card:not(.open) #clist,.card:not(.open) .cnote,.card:not(.open) .notebtn,.card:not(.open) .cempty,.card:not(.open) .cfine{display:none}
+ .card:not(.open) .ctot{margin:4px 0 10px}
+ .card-h{position:relative;z-index:1;pointer-events:none}
+ .card-h button{pointer-events:auto}
+ .card-h::after{content:"▴";font-size:12px;letter-spacing:0;opacity:.6}
+ .card.open .card-h::after{content:"▾"}
+ #clist{max-height:34vh}
+ .ctot b{font-size:24px}
+ .o-right h2{font-size:clamp(32px,9.5vw,44px)}
+ .orow{grid-template-columns:48px minmax(0,1fr) auto;gap:4px 12px}
+ .th{width:48px;height:48px}
+ .orow h4{font-size:19px}
+ .oend{gap:10px}.oend .pr{font-size:18px}
+ .ovars{grid-column:1/-1}
+}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 </style>
 </head>
 <body data-view="table">
 <header>
  <a class="brand" href="#" id="home" aria-label="Konso, back to the whole table"><img src="assets/konso-wordmark-gold.svg" alt="Konso"><span>Pan Asian Kitchen | Bar</span></a>
  <nav id="tabs" aria-label="Menu sections"></nav>
- <a class="full" href="https://singhgenics.github.io/Garden/menu/">Full menu</a>
+ <div class="hright"><a class="full" href="https://singhgenics.github.io/Garden/menu/">Full menu</a><button class="cartbtn" id="cartbtn" type="button">Your table <b id="ccount">0</b></button></div>
 </header>
 
 <main id="stage">
@@ -165,12 +338,13 @@ body[data-view=table] .note{display:none}
   <p class="desc" id="desc"></p>
   <div class="marks" id="marks"></div>
   <div class="browse">
-   <div class="buy"><span class="price" id="price"></span><button class="btn" id="view" type="button">View the dish <span aria-hidden="true">→</span></button></div>
+   <div class="buy"><span class="price" id="price"></span><button class="btn" id="view" type="button">View the dish <span aria-hidden="true">→</span></button><button class="plus" id="addq" type="button" aria-label="Add this dish to your table">+</button></div>
   </div>
   <div class="detail">
    <div class="lab">On the plate</div>
    <ul class="on-plate" id="onplate"></ul>
    <div class="two"><div><div class="lab">Contains</div><p id="al"></p></div><div id="knowbox"><div class="lab">Good to know</div><p id="know"></p></div></div>
+   <div class="lab addlab">Add to your table</div>
    <div class="prices" id="prices"></div>
   </div>
  </div>
@@ -181,8 +355,56 @@ body[data-view=table] .note{display:none}
  </div>
 </section>
 
-<div id="intro"><p><b id="isec"></b> · <span id="inote"></span></p><button class="btn" id="start" type="button">Spin the table <span aria-hidden="true">→</span></button></div>
+<div id="intro"><p><b id="isec"></b> · <span id="inote"></span></p><div class="two-btn"><button class="btn" id="start" type="button">Spin the table <span aria-hidden="true">→</span></button><button class="btn ghost" id="ostart" type="button">Set your own table</button></div></div>
 <p class="note">Prices in rupees, taxes extra. Please tell us about any allergy. Photos show the style of each dish.</p>
+
+<section id="order" aria-label="Set your own table">
+ <div class="o-wrap">
+  <div class="o-left">
+   <div id="otable">
+    <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="orp" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+     <text font-family="Prata,serif" font-size="9.6" letter-spacing="5.2" fill="#8A6420"><textPath href="#orp">YOUR TABLE · KONSO · SET IT YOUR WAY · YOUR TABLE · KONSO ·</textPath></text></svg>
+    <p class="o-empty">Tap + on a dish to set it down here</p>
+    <div id="oplates"></div>
+   </div>
+   <div class="card" id="card">
+    <button class="card-toggle" id="ctoggle" type="button" aria-expanded="false" aria-controls="clist"><span class="sr">Show or hide your table</span></button>
+    <div class="card-h"><b>Your table</b><span id="cn">0 dishes</span><button id="clear" type="button" hidden>Clear table</button></div>
+    <ul id="clist" aria-live="polite"></ul>
+    <p class="cempty" id="cempty">Nothing on the table yet.</p>
+    <button class="notebtn" id="notebtn" type="button" aria-expanded="false" aria-controls="notebox">+ Note for the kitchen</button>
+    <label class="cnote" id="notebox" hidden>Note for the kitchen<textarea id="note" rows="2" maxlength="240" placeholder="Allergies, less spice, no onion…"></textarea></label>
+    <div class="ctot"><span>Total</span><b id="ctotal">0</b></div>
+    <button class="btn dark" id="place" type="button" disabled>Place order <span aria-hidden="true">→</span></button>
+    <p class="cfine">Prices in rupees, taxes extra.</p>
+   </div>
+  </div>
+  <div class="o-right">
+   <button class="oback" id="oback" type="button"><span aria-hidden="true">←</span> Back to the turning table</button>
+   <div class="eyebrow">The menu</div>
+   <h2>Set your <em>own table.</em></h2>
+   <p class="o-lede">Tap + to set a dish down. When the table looks right, place the order and show it to your server.</p>
+   <p class="o-table-no" id="otno" hidden></p>
+   <div id="olist"></div>
+   <p class="ofine"><a href="https://singhgenics.github.io/Garden/menu/">See the full menu with drinks</a>. Prices in rupees, taxes extra. Allergens are listed from our recipes; our kitchen also handles shellfish, pork, peanuts, gluten, egg, soy, sesame and milk, so please tell us about any allergy. Photos show the style of each dish.</p>
+  </div>
+ </div>
+</section>
+
+<div id="ticket" role="dialog" aria-modal="true" aria-labelledby="tkh" hidden>
+ <div class="tk">
+  <div class="tk-no">Order <b id="tkno"></b> · <span id="tktime"></span></div>
+  <h2 id="tkh">Show this to <em>your server.</em></h2>
+  <p>Your server checks it with you and sends it to the kitchen. Nothing is cooked until they do.</p>
+  <label class="tk-table">Table <input id="tktable" inputmode="text" maxlength="6" placeholder="No." autocomplete="off"></label>
+  <ol id="tklist"></ol>
+  <p id="tknote"></p>
+  <div class="tk-tot"><span>Total</span><b id="tktotal"></b></div>
+  <p class="fine">Prices in rupees, taxes extra.</p>
+  <button class="btn dark" id="tknew" type="button">Start a new order</button>
+  <button class="linkb" id="tkclose" type="button">Back to my table</button>
+ </div>
+</div>
 
 <script>
 // The whole food menu, one table per section. Dishes, prices and allergens are copied from the live menu
@@ -359,7 +581,8 @@ function fill(){
  $('#price').innerHTML=(d.from?'<small>from</small>':'')+d.price;
  $('#onplate').innerHTML=d.on.map(x=>`<li>${x}</li>`).join('');$('#al').textContent=d.al||'None listed. Please tell us about any allergy.';
  $('#know').textContent=d.know||'';$('#knowbox').style.display=d.know?'':'none';
- $('#prices').innerHTML=(d.vars||[['Price',d.price]]).map(([k,p])=>`<span>${k}<b>${p}</b></span>`).join('');
+ const vs=d.vars||OPT[d.id];   // each price is an add button
+ $('#prices').innerHTML=(vs||[['Add',d.price]]).map(([k,p])=>`<button class="vbtn" type="button" data-add="${d.id}"${vs?` data-opt="${k}"`:''} aria-label="Add ${dname(d)}${vs?', '+k:''}, ${p}, to your table">${k} <b>${p}</b><i class="pl" aria-hidden="true">+</i></button>`).join('');
  setTone(d.tone);
  plates.forEach((p,i)=>p.classList.toggle('on',i===idx&&view!=='table'));
  dots.forEach((b,i)=>b.setAttribute('aria-current',String(i===idx)));
@@ -393,15 +616,16 @@ $('#start').addEventListener('click',()=>go(0,'browse'));
 $('#top').addEventListener('click',()=>{if(view==='table')go(0,'browse')});
 $('#view').addEventListener('click',()=>go(idx,'detail'));
 $('#back').addEventListener('click',()=>go(idx,'browse'));
-$('#home').addEventListener('click',e=>{e.preventDefault();go(idx,'table')});
+$('#home').addEventListener('click',e=>{e.preventDefault();if(document.body.dataset.order){closeOrder();return}go(idx,'table')});
 $('#prev').addEventListener('click',()=>go(idx-1));$('#next').addEventListener('click',()=>go(idx+1));
 addEventListener('keydown',e=>{
+ if(document.body.dataset.order){if(e.key==='Escape'){$('#ticket').hidden?closeOrder():closeTicket()}return}
  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();view==='table'?go(0,'browse'):go(idx+1,'browse')}
  else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();view==='table'?go(dishes().length-1,'browse'):go(idx-1,'browse')}
  else if(e.key==='Escape'){go(idx,view==='detail'?'browse':'table')}
 });
 let acc=0,cool=0;
-addEventListener('wheel',e=>{ if(view==='detail')return;const now=performance.now();if(now<cool)return;
+addEventListener('wheel',e=>{ if(view==='detail'||document.body.dataset.order)return;const now=performance.now();if(now<cool)return;
  acc+=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;
  if(Math.abs(acc)>50){const dir=acc>0?1:-1;acc=0;cool=now+750;view==='table'?go(dir>0?0:dishes().length-1,'browse'):go(idx+dir)} },{passive:true});
 let sx=null,sy=0;
@@ -410,6 +634,140 @@ $('#stage').addEventListener('touchend',e=>{if(sx===null)return;const dx=e.chang
  if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.3&&view!=='table')go(idx+(dx<0?1:-1),'browse')},{passive:true});
 addEventListener('resize',()=>{layout();if(view!=='table'){wheel.classList.add('free');turnTo(idx);wheel.offsetWidth;wheel.classList.remove('free')}});
 
+
+// ---------- ordering: set your own table, then a ticket to show the server ----------
+// The ticket uses the POS item names ("Dish · option") so the waiter can key it in quickly (Garden/web/pos/lib/menu-data.js).
+const EXTRAS={id:'forthetable',name:'For the table',note:'Shared plates and set meals',dishes:[
+ {id:'steamer',img:'crystal',a:'Steamer',b:'for two',v:'nv',heat:0,price:'799',tone:'green',desc:'Two baskets of dim sum and a plate of bao, our pick of the day. Best with a Comrade Crisp.'},
+ {id:'feast',img:'fever',a:'Konso feast',b:'for four',v:'nv',heat:0,price:'2,299',tone:'red',desc:'Four soups, Konso Fever chicken, Salt & Pepa chonak, mixed Noodle Around, Green With Envy with rice, and Honey, I Shrunk the Noodles. About 12% under ordering separately.'},
+ {id:'bowlgame',img:'noodle',a:'Bowl',b:'Game',v:'vn',heat:0,price:'360',from:true,tone:'amber',desc:'Lunch, 12 to 4. Any noodles or fried rice with Konso Fever chicken or paneer, or a green curry with rice.',vars:[['Chicken','440'],['Paneer','380'],['Green curry','360']]}]};
+const OPT={wings:[['Soy-garlic','380'],['Gochujang','380']]};      // a choice that is not a separate POS item: it goes on the ticket as a note
+const VEGV=/^(paneer|veg|potato|mushroom|green curry)$/i;
+const num=p=>+String(p).replace(/,/g,'');
+const fmt=n=>n.toLocaleString('en-IN');
+const ALL={};SECTIONS.forEach(S=>S.dishes.forEach(d=>ALL[d.id]=d));EXTRAS.dishes.forEach(d=>ALL[d.id]=d);
+const imgOf=d=>`assets/plates/${d.img||d.id}.webp`;
+const dname=d=>`${d.a} ${d.b}`.replace(/\s+/g,' ');
+const dbody=document.body,KEY='konso-table-order';
+let cart=[],tableNo='',lastAdded=null;
+try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');cart=Array.isArray(s.cart)?s.cart.filter(l=>ALL[l.id]):[];tableNo=s.table||'';$('#note').value=s.note||''}catch(e){}
+const qt=new URLSearchParams(location.search).get('table');if(qt)tableNo=qt.replace(/[^\w-]/g,'').slice(0,6).toUpperCase();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({cart,table:tableNo,note:$('#note').value}))}catch(e){}};
+// what the waiter reads: the POS name, plus a note for choices the POS keeps as one item
+function lineName(l){const d=ALL[l.id],base=d.id==='steamer'?'Steamer for two':d.id==='feast'?'Konso feast for four':dname(d);
+ if(!l.opt)return base;return OPT[l.id]?`${base} (${l.opt.toLowerCase()})`:`${base} · ${l.opt.toLowerCase()}`}
+function linePrice(l){const d=ALL[l.id],vs=d.vars||OPT[l.id];return num(vs?(vs.find(v=>v[0]===l.opt)||[0,d.price])[1]:d.price)}
+const vmark=v=>v==='v'?'<i class="m v" title="Veg"></i>':v==='nv'?'<i class="m n" title="Non-veg"></i>':'<i class="m v" title="Veg"></i><i class="m n" title="Non-veg"></i>';
+
+function addItem(id,opt,src){
+ const d=ALL[id];let l=cart.find(x=>x.id===id&&(x.opt||'')===(opt||''));
+ if(l)l.qty++;else{l={id,opt:opt||'',qty:1};cart.push(l)}
+ lastAdded=id;save();render();announce(`${lineName(l)} added. ${count()} on your table.`);
+ if(src)fly(src,imgOf(d));
+ if(dbody.dataset.order)setTone(d.tone);
+}
+function setQty(i,dq){const l=cart[i];if(!l)return;l.qty+=dq;if(l.qty<=0)cart.splice(i,1);save();render()}
+const count=()=>cart.reduce((s,l)=>s+l.qty,0);
+const total=()=>cart.reduce((s,l)=>s+l.qty*linePrice(l),0);
+function announce(t){let a=$('#olive');if(!a){a=document.createElement('p');a.id='olive';a.className='sr';a.setAttribute('aria-live','polite');dbody.appendChild(a)}a.textContent=t}
+
+// a plate lifts off the button and lands on the table (or on the header button when the table is out of sight)
+function fly(src,img){
+ if(reduce)return bump();
+ const r=src.getBoundingClientRect();let dest=null;
+ if(dbody.dataset.order){const el=[...$('#oplates').children].find(e=>e.dataset.id===lastAdded);const t=$('#otable').getBoundingClientRect();
+  if(el&&t.bottom>0&&t.top<innerHeight)dest=el.getBoundingClientRect()}
+ if(!dest){dest=$('#cartbtn').getBoundingClientRect();dest={left:dest.left+dest.width-30,top:dest.top+dest.height/2-12,width:24,height:24}}
+ const s=Math.max(44,Math.min(r.width,r.height,90)),f=document.createElement('img');f.src=img;f.className='flyer';f.alt='';
+ f.style.cssText=`left:${r.left+r.width/2-s/2}px;top:${r.top+r.height/2-s/2}px;width:${s}px;height:${s}px`;dbody.appendChild(f);
+ const dx=dest.left+dest.width/2-(r.left+r.width/2),dy=dest.top+dest.height/2-(r.top+r.height/2),k=Math.max(dest.width/s,.3);
+ const a=f.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(${(1+k)/2*1.15})`,opacity:1,offset:.55},{transform:`translate(${dx}px,${dy}px) scale(${k})`,opacity:.9}],{duration:620,easing:'cubic-bezier(.45,0,.2,1)'});
+ a.onfinish=()=>{f.remove();bump()};
+}
+function bump(){const b=$('#cartbtn');b.classList.remove('bump');b.offsetWidth;b.classList.add('bump')}
+
+// plates on the order table: one plate per dish and option, laid out so they never overlap
+function spots(n){
+ if(n===1)return[[.5,.5,.5]];
+ if(n<=4){const r=.22,s=Math.min(.36,2*r*Math.sin(Math.PI/n)*.92);return[...Array(n)].map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/n;return[.5+r*Math.cos(a),.5+r*Math.sin(a),s]})}
+ const k=n-1,r=.31,s=Math.min(.28,2*r*Math.sin(Math.PI/k)*.92),c=Math.min(.28,(r-s/2)*1.8);
+ return[[.5,.5,c],...[...Array(k)].map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/k;return[.5+r*Math.cos(a),.5+r*Math.sin(a),s]})];
+}
+function renderTable(){
+ const box=$('#oplates'),old={};[...box.children].forEach(e=>old[e.dataset.k]=e.getBoundingClientRect());
+ const lines=cart.slice(0,12),extra=cart.length-lines.length,sp=spots(lines.length+(extra>0?1:0));
+ box.innerHTML=lines.map((l,i)=>{const [x,y,s]=sp[i];return `<div class="op" data-k="${l.id}|${l.opt}" data-id="${l.id}" style="left:${(x-s/2)*100}%;top:${(y-s/2)*100}%;width:${s*100}%;height:${s*100}%"><img src="${imgOf(ALL[l.id])}" alt="">${l.qty>1?`<b>×${l.qty}</b>`:''}</div>`}).join('')
+  +(extra>0?(()=>{const [x,y,s]=sp[lines.length];return `<div class="op more" style="left:${(x-s/2)*100}%;top:${(y-s/2)*100}%;width:${s*100}%;height:${s*100}%">+${extra}</div>`})():'');
+ $('#otable').classList.toggle('has',cart.length>0);
+ if(!reduce)[...box.children].forEach(e=>{const o=old[e.dataset.k];if(!o)return;const n=e.getBoundingClientRect();if(!n.width)return;
+  e.animate([{transform:`translate(${o.left-n.left}px,${o.top-n.top}px) scale(${o.width/n.width})`,transformOrigin:'0 0'},{transform:'none',transformOrigin:'0 0'}],{duration:480,easing:'cubic-bezier(.65,0,.2,1)'})});
+}
+function render(){
+ const c=count(),t=total();
+ $('#ccount').textContent=c;$('#cartbtn').setAttribute('aria-label',`Your table: ${c} ${c===1?'dish':'dishes'}`);
+ $('#cn').textContent=`${c} ${c===1?'dish':'dishes'}`;$('#clear').hidden=!c;$('#cempty').hidden=!!c;
+ $('#clist').innerHTML=cart.map((l,i)=>`<li><span>${lineName(l)}<small>${fmt(linePrice(l))} each</small></span><span class="qty"><button type="button" data-q="${i}" data-d="-1" aria-label="One fewer ${lineName(l)}">−</button><span>${l.qty}</span><button type="button" data-q="${i}" data-d="1" aria-label="One more ${lineName(l)}">+</button></span><span class="lp">${fmt(l.qty*linePrice(l))}</span></li>`).join('');
+ $('#ctotal').textContent=fmt(t);$('#place').disabled=!c;
+ document.querySelectorAll('.th b[data-id]').forEach(b=>{const n=cart.filter(l=>l.id===b.dataset.id).reduce((s,l)=>s+l.qty,0);b.textContent=n||''});
+ $('#otno').hidden=!tableNo;$('#otno').textContent=tableNo?`Table ${tableNo}`:'';
+ renderTable();
+}
+// the full food menu as a list, one + per dish (or one per option)
+function buildList(){
+ const groups=[...SECTIONS.slice(0,4),EXTRAS,SECTIONS[4]];
+ $('#olist').innerHTML=groups.map(S=>`<div class="ogroup"><h3><span>${S.name}</span><small>${S.note}</small></h3>`+S.dishes.map(d=>{
+  const vs=d.vars||OPT[d.id];
+  const meta=[d.heat?`<span>Spice <b class="heat">${'•'.repeat(d.heat)}</b></span>`:'',d.al?`<span>Contains: ${d.al}</span>`:''].filter(Boolean).join(' · ');
+  const end=d.vars?`<div class="oend"><span class="pr"><small style="font:500 10px Mont;letter-spacing:.14em;opacity:.7">FROM </small>${d.price}</span></div>`
+   :OPT[d.id]?`<div class="oend"><span class="pr">${d.price}</span></div>`
+   :`<div class="oend"><span class="pr">${d.price}</span><button class="plus" type="button" data-add="${d.id}" aria-label="Add ${dname(d)}, ${d.price}, to your table">+</button></div>`;
+  const chips=vs?`<div class="ovars">${vs.map(([k,p])=>`<button type="button" data-add="${d.id}" data-opt="${k}" aria-label="Add ${dname(d)}, ${k}, ${p}, to your table">${OPT[d.id]?'':d.v==='vn'?vmark(VEGV.test(k)?'v':'nv'):''}${k} <b>${p}</b><i class="pl" aria-hidden="true">+</i></button>`).join('')}</div>`:'';
+  return `<div class="orow"><span class="th"><img src="${imgOf(d)}" alt="" loading="lazy"><b data-id="${d.id}"></b></span><div><h4>${d.v==='vn'?'':vmark(d.v)}${dname(d)}</h4><p>${d.desc}</p>${meta?`<div class="ometa">${meta}</div>`:''}</div>${end}${chips}</div>`}).join('')+'</div>').join('');
+}
+function openOrder(push=true){
+ if(dbody.dataset.order)return;dbody.dataset.order='1';spinning=false;
+ if(push&&location.hash!=='#order')history.pushState({order:1},'','#order');
+ setTone(lastAdded?ALL[lastAdded].tone:'green');render();$('#order').scrollTop=0;setTimeout(()=>$('#oback').focus({preventScroll:true}),50);
+}
+function closeOrder(fromHistory=false){
+ if(!dbody.dataset.order)return;delete dbody.dataset.order;closeTicket();
+ if(!fromHistory&&location.hash==='#order')history.back();
+ if(view==='table'){setTone('green');if(!reduce){spinning=true;last=0;requestAnimationFrame(spin)}}else fill();
+}
+addEventListener('popstate',()=>{location.hash==='#order'?openOrder(false):closeOrder(true)});
+function openTicket(){
+ if(!cart.length)return;const now=new Date();
+ $('#tkno').textContent='Nº '+String(Math.floor(now/1000)%10000).padStart(4,'0');
+ $('#tktime').textContent=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+ $('#tktable').value=tableNo;
+ $('#tklist').innerHTML=cart.map(l=>`<li><b>${l.qty} ×</b><span>${lineName(l)}</span><span>${fmt(l.qty*linePrice(l))}</span></li>`).join('');
+ $('#tknote').textContent=$('#note').value.trim()?'Note: '+$('#note').value.trim():'';
+ $('#tktotal').textContent=fmt(total());
+ $('#ticket').hidden=false;setTimeout(()=>(tableNo?$('#tknew'):$('#tktable')).focus(),60);
+}
+function closeTicket(){if($('#ticket').hidden)return;$('#ticket').hidden=true;$('#place').focus({preventScroll:true})}
+
+buildList();render();
+$('#cartbtn').addEventListener('click',()=>openOrder());
+$('#ostart').addEventListener('click',()=>openOrder());
+$('#oback').addEventListener('click',()=>closeOrder());
+$('#olist').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(b)addItem(b.dataset.add,b.dataset.opt,b.closest('.orow').querySelector('.th')||b)});
+$('#clist').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(b)setQty(+b.dataset.q,+b.dataset.d)});
+$('#clear').addEventListener('click',()=>{cart=[];save();render();announce('Your table is clear.')});
+$('#note').addEventListener('input',save);
+const showNote=f=>{$('#notebox').hidden=false;$('#notebtn').hidden=true;$('#notebtn').setAttribute('aria-expanded','true');if(f)$('#note').focus()};
+$('#notebtn').addEventListener('click',()=>showNote(true));if($('#note').value.trim())showNote(false);
+$('#ctoggle').addEventListener('click',()=>{const o=$('#card').classList.toggle('open');$('#ctoggle').setAttribute('aria-expanded',String(o))});
+$('#place').addEventListener('click',openTicket);
+$('#tkclose').addEventListener('click',closeTicket);
+$('#tknew').addEventListener('click',()=>{cart=[];$('#note').value='';$('#notebox').hidden=true;$('#notebtn').hidden=false;save();render();closeTicket();$('#order').scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+$('#tktable').addEventListener('input',e=>{tableNo=e.target.value.replace(/[^\w-]/g,'').toUpperCase();save();$('#otno').hidden=!tableNo;$('#otno').textContent=tableNo?`Table ${tableNo}`:''});
+$('#ticket').addEventListener('click',e=>{if(e.target.id==='ticket')closeTicket()});
+// add from the turning table: the + in the dish view, and the option buttons in the detail view
+$('#addq').addEventListener('click',e=>{const d=dishes()[idx];if(d.vars||OPT[d.id])go(idx,'detail');else addItem(d.id,'',plates[idx]||e.currentTarget)});
+$('#prices').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;addItem(b.dataset.add,b.dataset.opt,plates[idx]||b);
+ const ic=b.querySelector('i.pl');b.classList.add('done');ic.textContent='✓';clearTimeout(b._t);b._t=setTimeout(()=>{b.classList.remove('done');ic.textContent='+'},1200)});
+
 // start. ?dish=fever opens on a dish, &view=detail opens it up, ?section=mains opens that table
 const q=new URLSearchParams(location.search),qv=q.get('view');let qd=-1;
 SECTIONS.forEach((S,si)=>{const di=S.dishes.findIndex(d=>d.id===q.get('dish'));if(di>=0){sec=si;qd=di} else if(S.id===q.get('section')&&qd<0)sec=si});
@@ -417,6 +775,8 @@ table.style.transition='none';build();wheel.style.transform=`rotate(${R}deg)`;la
 if(qd>=0||qv==='browse'||qv==='detail'){idx=Math.max(qd,0);R=0;view=qv==='detail'?'detail':'browse';spinning=false;body.dataset.view=view;layout();turnTo(idx);fill();wheel.offsetWidth;wheel.classList.remove('free')}
 else if(!reduce)requestAnimationFrame(spin); else wheel.classList.remove('free');
 requestAnimationFrame(()=>requestAnimationFrame(()=>{table.style.transition=''}));
+// ?order or #order opens the order table; ?table=12 (from the QR code on the table) fills in the table number
+if(location.hash==='#order'||new URLSearchParams(location.search).has('order'))openOrder(false);
 // warm the cache for the other tables once this one is showing
 addEventListener('load',()=>setTimeout(()=>SECTIONS.forEach(S=>S.dishes.forEach(d=>{new Image().src=`assets/plates/${d.id}.webp`})),1500));
 </script>
