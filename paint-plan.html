@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Konso Garden · Paint plan</title>
+<meta name="description" content="3D paint plan for the kitchen, dish wash, washroom and lobby block: every surface to be painted, outside and inside, with measured areas and a paint estimate.">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#F2E8D2;color:#17221C;font:15px/1.5 "Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
+.hd{background:#1F3D2E;color:#F2E8D2;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.hd h1{font:400 22px/1.1 "Prata",Georgia,serif;margin:0;color:#F2E8D2}
+.hd a{font:600 12px/1 inherit;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;color:#17221C;background:#F2E8D2;border-radius:6px;padding:9px 12px}
+.hd .sub{font-size:13px;color:#EADFC6;margin-left:auto}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 420px;height:calc(100vh - 57px);height:calc(100dvh - 57px)}
+#stage{min-width:0;position:relative;min-height:380px;background:#e8e1cf;touch-action:none}
+#stage canvas{display:block;width:100%;height:100%}
+#tip{position:absolute;pointer-events:none;background:#17221Cee;color:#F2E8D2;font-size:12.5px;padding:7px 10px;border-radius:6px;max-width:260px;display:none;z-index:3}
+#tip b{color:#C49A3C}
+.hint{position:absolute;left:12px;bottom:10px;font-size:12px;color:#5A4C42;background:#F6EDD9cc;padding:5px 9px;border-radius:6px;pointer-events:none}
+aside{min-width:0;overflow:auto;padding:16px 16px 40px;background:#F6EDD9;border-left:1px solid #D9B98F}
+aside h2{font:400 19px/1.2 "Prata",Georgia,serif;color:#1F3D2E;margin:20px 0 8px}
+aside h2:first-child{margin-top:0}
+.row{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+button{font:600 12px/1 inherit;letter-spacing:.04em;text-transform:uppercase;border:1px solid #D9B98F;background:#F2E8D2;color:#17221C;border-radius:6px;padding:9px 10px;cursor:pointer}
+button[aria-pressed=true]{background:#1F3D2E;border-color:#1F3D2E;color:#F2E8D2}
+button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid #C49A3C;outline-offset:2px}
+label.chk{display:flex;align-items:center;gap:6px;font-size:13px;margin-right:12px}
+.lead{font-size:13.5px;color:#5A4C42;margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:6px 5px;text-align:left;border-bottom:1px solid #D9B98F;vertical-align:top}
+th{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A4C42;font-weight:600}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.spec{cursor:pointer}
+tr.spec:hover,tr.spec.on{background:#E9DBB9}
+tr.grp td{font-weight:600;background:#EADFC6;color:#1F3D2E}
+tr.tot td{font-weight:700;border-top:2px solid #1F3D2E}
+.sw{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid #17221C55;vertical-align:-2px;margin-right:6px}
+.code{font-weight:700;color:#8A6420}
+small,.k{color:#5A4C42;font-size:12px}
+ul.n{margin:6px 0 0;padding-left:18px;font-size:13px}
+ul.n li{margin:3px 0}
+details{margin:8px 0;border:1px solid #D9B98F;border-radius:6px;background:#F2E8D2;padding:6px 10px}
+summary{cursor:pointer;font-weight:600;font-size:13px}
+.call{border-left:4px solid #C49A3C;background:#F2E8D2;padding:8px 12px;border-radius:4px;font-size:13px;margin:10px 0}
+#nogl{display:none;padding:24px;font-size:15px}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr;height:auto}
+  #stage{height:64vh;height:64dvh}
+  aside{border-left:0;border-top:1px solid #D9B98F}
+  .hd .sub{margin-left:0;width:100%}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@400;500;600;700&display=swap">
+</head>
+<body>
+<div class="hd">
+  <a href="garden.html">&larr; 3D model</a>
+  <h1>Paint plan</h1>
+  <span class="sub">Kitchen · dish wash · washroom · lobby. Outside and inside.</span>
+</div>
+<div class="app">
+  <div id="stage">
+    <div id="tip"></div>
+    <div class="hint">Drag to turn · scroll or pinch to zoom · right-drag to pan · hover a surface for its area</div>
+    <div id="nogl">This page needs WebGL to draw the 3D view.</div>
+  </div>
+  <aside>
+    <h2>View</h2>
+    <div class="row" id="modes" role="group" aria-label="Colour mode">
+      <button data-mode="finished" aria-pressed="true">Finished look</button>
+      <button data-mode="zones" aria-pressed="false">Paint zones</button>
+    </div>
+    <div class="row" id="views" role="group" aria-label="Camera views">
+      <button data-view="outNE">Outside NE</button>
+      <button data-view="outSW">Outside SW</button>
+      <button data-view="kitchen">Kitchen</button>
+      <button data-view="dish">Dish wash</button>
+      <button data-view="wash">Washroom</button>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="c-roof" checked> Roof</label>
+      <label class="chk"><input type="checkbox" id="c-cut"> Cut-away</label>
+      <label class="chk"><input type="checkbox" id="c-fix" checked> Fittings</label>
+    </div>
+
+    <h2>What gets painted</h2>
+    <p class="lead">Click a row to light it up in 3D. Openings are already taken out.</p>
+    <table id="sched"></table>
+
+    <h2>Paint estimate</h2>
+    <div id="est"></div>
+
+    <h2>Not painted</h2>
+    <ul class="n">
+      <li>Tiled walls (<span id="tilearea"></span>).</li>
+      <li>Stainless doors, floors, roof top, glass and equipment.</li>
+      <li>Store room and the closed strip behind the temporary wall (grey).</li>
+    </ul>
+
+    <h2>Assumptions</h2>
+    <ul class="n" id="assume"></ul>
+
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+/* ---------- the block, in the model's own plan coordinates (metres; x east, z south, y up) ---------- */
+const BX0=17.27,BX1=22.68,BY1=6.38,DISH=2.0,SD=6.46,SY1=BY1+SD,SX0=BX1-2.7,TX0=BX0+2.45,TY0=-1.7,BH=3.0,T=0.2;
+const kx0=BX0+0.1,kx1=kx0+4.10,kz0=DISH+0.1,kzOld=BY1-0.1;      // kitchen clear room
+const KZ=y=>kz0+y;
+const FACE=0.004;                                                 // overlay stand-off from the wall
+
+/* ---------- paint specification (proposed; colours as modelled) ---------- */
+const SPEC={
+ E1:{g:'ext',name:'External and lobby walls',where:'North, east, south and west faces; lobby walls',finish:'Exterior acrylic, deep green (as modelled)',prod:'Alkali-resistant masonry primer, then 2 coats exterior acrylic',col:'#1f4d3a',zone:'#2e9e6b',pc:10,fc:9,coats:2},
+ E2:{g:'ext',name:'Fascia (slab edge)',where:'200 mm edge all round the block roof',finish:'Exterior acrylic, cream (as modelled)',prod:'Masonry primer, then 2 coats exterior acrylic',col:'#efe3cc',zone:'#e8c53a',pc:10,fc:9,coats:2},
+ E3:{g:'ext',name:'Soffits',where:'Roof overhang underside and lobby ceiling',finish:'Exterior acrylic, cream',prod:'Masonry primer, then 2 coats exterior acrylic',col:'#efe3cc',zone:'#f08a3a',pc:10,fc:10,coats:2},
+ D1:{g:'door',name:'Timber doors, both faces',where:'Washroom door, store door',finish:'Enamel or PU varnish (colour to confirm)',prod:'Undercoat, then 2 coats enamel or varnish',col:'#9b6a3f',zone:'#8a5cc0',pc:12,fc:12,coats:2},
+ I1:{g:'int',name:'Kitchen walls above tile',where:'1.90 m up to the ceiling, 4 walls',finish:'White, washable and anti-fungal',prod:'Acrylic primer, then 2 coats scrubbable acrylic',col:'#f1eee6',zone:'#3a7bd5',pc:12,fc:11,coats:2},
+ I2:{g:'int',name:'Kitchen ceiling',where:'Gable ceiling, two slopes',finish:'White, anti-fungal matt',prod:'Primer, then 2 coats anti-fungal matt',col:'#f3f0ea',zone:'#86b6f3',pc:12,fc:12,coats:2},
+ I3:{g:'int',name:'Dish-wash walls above tile',where:'2.00 m up to the ceiling, 4 walls',finish:'White, anti-fungal, steam-proof',prod:'Anti-fungal primer, then 2 coats anti-fungal acrylic',col:'#f1eee6',zone:'#12a3a3',pc:12,fc:11,coats:2},
+ I4:{g:'int',name:'Dish-wash ceiling',where:'Flat ceiling at 3.00 m',finish:'White, anti-fungal matt',prod:'Primer, then 2 coats anti-fungal matt',col:'#f3f0ea',zone:'#70d6d0',pc:12,fc:12,coats:2},
+ I5:{g:'int',name:'Washroom feature wall',where:'0.90 to 2.40 m, 4 walls (the doodle band)',finish:'Bright orange, black line art by hand or stencil',prod:'Acrylic primer, then 2 coats washable acrylic, then line art',col:'#f28c1e',zone:'#e5461f',pc:12,fc:11,coats:2},
+ I6:{g:'int',name:'Washroom upper band and ceiling',where:'2.40 to 3.00 m, 4 walls, and the ceiling',finish:'White matt',prod:'Primer, then 2 coats anti-fungal matt',col:'#f3f0ea',zone:'#e26aa5',pc:12,fc:12,coats:2}
+};
+const ORDER=['E1','E2','E3','D1','I1','I2','I3','I4','I5','I6'];
+
+/* ---------- scene ---------- */
+const stage=document.getElementById('stage');
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});}catch(e){document.getElementById('nogl').style.display='block';return;}
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
+stage.insertBefore(renderer.domElement,stage.firstChild);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#e8e1cf');
+const camera=new THREE.PerspectiveCamera(42,1,0.1,200);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;controls.dampingFactor=0.08;controls.minDistance=0.4;controls.maxDistance=60;controls.maxPolarAngle=Math.PI*0.499;controls.screenSpacePanning=true;
+scene.add(new THREE.HemisphereLight(0xffffff,0x9a9080,0.7));
+const sun=new THREE.DirectionalLight(0xffffff,0.45);sun.position.set(30,40,-10);scene.add(sun);
+const sun2=new THREE.DirectionalLight(0xffffff,0.3);sun2.position.set(-10,25,30);scene.add(sun2);
+const under=new THREE.DirectionalLight(0xffffff,0.2);under.position.set(5,-20,8);scene.add(under);   // so ceilings seen from below are not dark
+
+const G={walls:new THREE.Group(),roof:new THREE.Group(),ceil:new THREE.Group(),fix:new THREE.Group(),lbl:new THREE.Group(),site:new THREE.Group()};
+Object.values(G).forEach(g=>scene.add(g));
+
+/* ---------- materials ---------- */
+const L=(c,o)=>new THREE.MeshLambertMaterial(Object.assign({color:c},o||{}));
+const core=L('#d3cab7'),ghost=L('#a9a79c'),steel=L('#aab2b7'),steelD=L('#7d858a'),floorK=L('#b5654a'),floorW=L('#46535c'),floorL=L('#33302c'),ground=L('#cfc8b4'),path=L('#9d9d99');
+const glass=L('#9fd0dc',{transparent:true,opacity:0.35,side:THREE.DoubleSide,depthWrite:false});
+const louvre=L('#7f8d92');
+const ivory=L('#ebe6d8'),tileWhite=L('#f4f4ef');
+const tileTex=(()=>{const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.fillStyle='#f6f6f1';g.fillRect(0,0,128,128);g.strokeStyle='#b8bdb8';g.lineWidth=5;g.strokeRect(0,0,128,128);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=4;return t;})();
+const tileMat=new THREE.MeshLambertMaterial({map:tileTex,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});
+const specMat={};
+ORDER.forEach(k=>{specMat[k]=new THREE.MeshLambertMaterial({color:SPEC[k].col,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});});
+let mode='finished';
+
+/* ---------- geometry helpers ---------- */
+function box(x0,x1,y0,y1,z0,z1,mat,grp){const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0),mat);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);(grp||G.fix).add(m);return m;}
+function interp(p,u){if(u<=p[0][0])return p[0][1];for(let i=1;i<p.length;i++){if(u<=p[i][0]+1e-9){const a=p[i-1],b=p[i];return b[0]===a[0]?b[1]:a[1]+(b[1]-a[1])*(u-a[0])/(b[0]-a[0]);}}return p[p.length-1][1];}
+/* a wall face as strips: bottom y0, top polyline, rectangular openings cut out. Returns geometry and exact area. */
+function stripFace(o){
+  const top=o.top,uA=top[0][0],uB=top[top.length-1][0],holes=o.holes||[];
+  const bp=new Set([uA,uB]);top.forEach(p=>bp.add(p[0]));holes.forEach(h=>{if(h[0]>uA&&h[0]<uB)bp.add(h[0]);if(h[1]>uA&&h[1]<uB)bp.add(h[1]);});
+  const us=[...bp].sort((a,b)=>a-b),pos=[],uv=[],idx=[];let area=0;
+  const off=o.n*FACE,rev=o.axis==='x'?o.n>0:o.n<0;
+  const P=(u,y)=>o.axis==='x'?[o.c+off,y,u]:[u,y,o.c+off];
+  const quad=(ua,ub,bA,bB,tA,tB)=>{if(tA-bA<1e-4&&tB-bB<1e-4)return;const i=pos.length/3;
+    [[ua,bA],[ub,bB],[ub,tB],[ua,tA]].forEach(([u,y])=>{pos.push(...P(u,y));uv.push(u/0.3,y/0.3);});
+    if(rev)idx.push(i,i+2,i+1,i,i+3,i+2);else idx.push(i,i+1,i+2,i,i+2,i+3);area+=((tA-bA)+(tB-bB))/2*(ub-ua);};
+  for(let i=0;i<us.length-1;i++){const ua=us[i],ub=us[i+1];if(ub-ua<1e-5)continue;const mid=(ua+ub)/2;
+    const tA=interp(top,ua+1e-7),tB=interp(top,ub-1e-7);const h=holes.find(h=>h[0]<=mid&&h[1]>=mid);
+    if(!h){quad(ua,ub,o.y0,o.y0,tA,tB);continue;}
+    const ya=Math.max(h[2],o.y0),yb=h[3];
+    if(ya>o.y0)quad(ua,ub,o.y0,o.y0,Math.min(ya,tA),Math.min(ya,tB));
+    if(yb<Math.max(tA,tB))quad(ua,ub,yb,yb,Math.max(tA,yb),Math.max(tB,yb));}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  const nm=[];for(let i=0;i<pos.length/3;i++)nm.push(...(o.axis==='x'?[o.n,0,0]:[0,0,o.n]));g.setAttribute('normal',new THREE.Float32BufferAttribute(nm,3));g.setIndex(idx);
+  return {geo:g,area};
+}
+/* flat or sloped quad facing down (ceilings, soffits); p = 4 world points */
+function quadDown(p){
+  const a=new THREE.Vector3(...p[0]),b=new THREE.Vector3(...p[1]),c=new THREE.Vector3(...p[2]),d=new THREE.Vector3(...p[3]);
+  let n=new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(d,a));
+  const area=(new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(d,a)).length()+new THREE.Vector3().subVectors(b,c).cross(new THREE.Vector3().subVectors(d,c)).length())/2;
+  const pts=[a,b,c,d];if(n.y>0)pts.reverse();
+  const pos=[],uv=[];pts.forEach(v=>{pos.push(v.x,v.y-FACE,v.z);uv.push(v.x/0.3,v.z/0.3);});
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex([0,1,2,0,2,3]);g.computeVertexNormals();
+  return {geo:g,area};
+}
+const faces=[];                       // every overlay: {mesh,code,label,room,area}
+const walls={};                       // wall groups, used by the cut-away
+function addWall(key,run,c,a,b,gaps,o){o=o||{};const t=o.t||T,h=o.h||BH,grp=new THREE.Group(),mat=o.ghost?ghost:core;
+  gaps=(gaps||[]).slice().sort((p,q)=>p[0]-q[0]);
+  const piece=(u0,u1,y0,y1)=>{if(u1-u0<0.004||y1-y0<0.004)return;run==='x'?box(u0,u1,y0,y1,c-t/2,c+t/2,mat,grp):box(c-t/2,c+t/2,y0,y1,u0,u1,mat,grp);};
+  let cur=a;for(const [g0,g1,sill,head] of gaps){const s=sill||0,hd=head===undefined?2.1:head;piece(cur,g0,0,h);if(s>0)piece(g0,g1,0,s);piece(g0,g1,hd,h);cur=g1;}piece(cur,b,0,h);
+  G.walls.add(grp);walls[key]={grp,nAxis:run==='x'?'z':'x',c,t};return walls[key];}
+/* paint or tile on a wall face. plane = c ± t/2 */
+function face(code,label,room,wallKey,axis,n,y0,top,holes){
+  const w=walls[wallKey],plane=w.c+n*w.t/2;
+  const f=stripFace({axis,c:plane,n,y0,top,holes});
+  const m=new THREE.Mesh(f.geo,code==='T'?tileMat:specMat[code]);m.userData={code,label,room};w.grp.add(m);faces.push({mesh:m,code,label,room,area:f.area});return m;}
+const R=(u0,u1,y)=>[[u0,y],[u1,y]];
+function ceilFace(code,label,room,pts,grp){const f=quadDown(pts);const m=new THREE.Mesh(f.geo,specMat[code]);m.userData={code,label,room};(grp||G.ceil).add(m);faces.push({mesh:m,code,label,room,area:f.area});return m;}
+/* fascia or soffit faces live on the roof group */
+function roofFace(code,label,room,axis,plane,n,u0,u1,y0,y1){const f=stripFace({axis,c:plane-n*0,n,y0,top:R(u0,u1,y1),holes:[]});const m=new THREE.Mesh(f.geo,specMat[code]);m.userData={code,label,room};G.roof.add(m);faces.push({mesh:m,code,label,room,area:f.area});}
+
+/* ---------- site: ground, pathway, floors ---------- */
+{const g=new THREE.Mesh(new THREE.PlaneGeometry(90,90),ground);g.rotation.x=-Math.PI/2;g.position.set(20,-0.16,3);G.site.add(g);
+ box(15.67,BX0-0.1,-0.15,0,-1.8,BY1+0.1,path,G.site);
+ box(kx0,kx1,-0.15,0,kz0,kzOld,floorK,G.site);box(kx1,BX1-0.1,-0.15,0,kz0,kzOld,ghost,G.site);
+ box(kx0,BX1-0.1,-0.15,0,0.1,DISH-0.1,floorK,G.site);
+ box(TX0+0.1,BX1-0.1,-0.15,0,TY0+0.1,-0.1,floorW,G.site);
+ box(BX0-0.1,TX0-0.1,-0.15,0,TY0+0.1,-0.1,floorL,G.site);
+ box(BX0-0.1,BX1+0.1,-0.15,0,-1.8,-1.6,core,G.site);
+ box(SX0,BX1,-0.15,0,BY1,SY1,ghost,G.site);}
+
+/* ---------- walls (cores) ---------- */
+const E3gaps=[[3.1,4.5,1.5,2.5]];
+addWall('N1','x',TY0,BX0,BX1+0.1,[[BX1-1.1,BX1-0.5,1.7,2.3]]);              // north wall of lobby and washroom
+addWall('N2','x',0,BX0,BX1,[[BX0+0.4,BX0+1.5,1.55,2.45]]);                  // dish-wash north wall, louvre
+addWall('N3','x',DISH,BX0,BX1,[[BX0+0.25,BX0+0.95,0.95,1.65]]);             // dish wash / kitchen, pass hatch
+addWall('N4','x',BY1,BX0-0.1,BX1+0.1,[[BX0+2.75,BX0+3.65,0,2.1]]);          // kitchen south wall, store door
+addWall('E1','z',TX0,TY0,0,[[-1.45,-0.75,0,2.1]]);                          // washroom partition, 70 cm door
+addWall('E2','z',BX0,0,BY1+0.1,[[0.73,1.9,0,2.1],[2.35,3.15,0,2.1]]);       // west wall onto the pathway
+addWall('E3','z',BX1,TY0-0.1,BY1+0.1,E3gaps);                               // east wall, block part
+addWall('TW','z',kx1+0.05,kz0,kzOld,[[KZ(2.85),KZ(3.75),0,2.05]],{t:0.1});  // temporary wall at 4.10 m
+// store room: out of scope, shown grey
+addWall('E3s','z',BX1,BY1+0.1,SY1+0.1,[[BY1+0.15,BY1+1.05,1.8,2.5],[SY1-1.05,SY1-0.15,1.8,2.5]],{ghost:true});
+addWall('SXW','z',SX0,BY1+0.1,SY1+0.1,[],{ghost:true});
+addWall('SXS','x',SY1,SX0,BX1+0.1,[],{ghost:true});
+/* windows, doors, louvre: each sits in its wall group so the cut-away takes it with the wall */
+{const wb=(key,x0,x1,y0,y1,z0,z1,mat)=>box(x0,x1,y0,y1,z0,z1,mat,walls[key].grp);
+ wb('N1',BX1-1.1,BX1-0.5,1.7,2.3,TY0-0.015,TY0+0.015,glass);
+ wb('N2',BX0+0.4,BX0+1.5,1.55,2.45,-0.03,0.03,louvre);
+ wb('E3',BX1-0.03,BX1+0.03,1.5,2.5,3.1,4.5,glass);
+ wb('N3',BX0+0.25,BX0+0.95,0.95,1.65,DISH-0.025,DISH+0.025,glass);
+ // stainless leaves (not painted): kitchen door, two dish-wash leaves
+ wb('E2',BX0-0.02,BX0+0.02,0,2.05,2.35,3.15,steel);
+ wb('E2',BX0-0.02,BX0+0.02,0,2.05,0.73,1.315,steel);wb('E2',BX0-0.02,BX0+0.02,0,2.05,1.315,1.9,steel);}
+// timber doors (painted), counted on both faces
+const doorWash=box(TX0-0.025,TX0+0.025,0,2.05,-1.45,-0.75,specMat.D1,walls.E1.grp);
+const doorStore=box(20.02,20.92,0,2.05,BY1-0.025,BY1+0.025,specMat.D1,walls.N4.grp);
+faces.push({mesh:doorWash,code:'D1',label:'Washroom door, both faces',room:'Washroom',area:2*0.7*2.05},{mesh:doorStore,code:'D1',label:'Store door, both faces',room:'Kitchen / store',area:2*0.9*2.05});
+doorWash.userData={code:'D1',label:'Washroom door, both faces',room:'Washroom'};doorStore.userData={code:'D1',label:'Store door, both faces',room:'Kitchen / store'};
+
+/* ---------- roof slab ---------- */
+box(17.12,22.93,BH,BH+0.2,-1.95,6.63,L('#c9c2b0'),G.roof);
+box(19.73,22.93,BH,BH+0.2,6.63,SY1+0.25,ghost,G.roof);
+
+/* ---------- EXTERNAL paint ---------- */
+face('E1','North face (washroom and lobby side)','External','N1','z',-1,0,R(17.27,22.78,BH),[[BX1-1.1,BX1-0.5,1.7,2.3]]);
+face('E1','East face','External','E3','x',1,0,R(TY0-0.1,BY1+0.1,BH),E3gaps);
+face('E1','South face (kitchen)','External','N4','z',1,0,R(BX0-0.1,SX0-0.1,BH),[]);
+face('E1','West face onto the pathway','External','E2','x',-1,0,R(0,BY1+0.1,BH),[[0.73,1.9,0,2.1],[2.35,3.15,0,2.1]]);
+// lobby walls (open to the pathway, so painted as exterior)
+face('E1','Lobby: north wall','Lobby','N1','z',1,0,R(BX0,TX0-0.1,BH),[]);
+face('E1','Lobby: washroom wall','Lobby','E1','x',-1,0,R(TY0+0.1,-0.1,BH),[[-1.45,-0.75,0,2.1]]);
+face('E1','Lobby: dish-wash wall','Lobby','N2','z',-1,0,R(BX0,TX0-0.1,BH),[[BX0+0.4,BX0+1.5,1.55,2.45]]);
+// fascia and soffits
+roofFace('E2','Fascia, north','External','z',-1.95,-1,17.12,22.93,BH,BH+0.2);
+roofFace('E2','Fascia, east','External','x',22.93,1,-1.95,6.63,BH,BH+0.2);
+roofFace('E2','Fascia, south','External','z',6.63,1,17.12,19.73,BH,BH+0.2);
+roofFace('E2','Fascia, west','External','x',17.12,-1,-1.95,6.63,BH,BH+0.2);
+{const y=BH;
+ [['north',[[17.12,y,-1.95],[22.93,y,-1.95],[22.93,y,-1.8],[17.12,y,-1.8]]],
+  ['east',[[22.78,y,-1.8],[22.93,y,-1.8],[22.93,y,6.63],[22.78,y,6.63]]],
+  ['south',[[17.12,y,6.48],[19.73,y,6.48],[19.73,y,6.63],[17.12,y,6.63]]],
+  ['west',[[17.12,y,-1.8],[17.17,y,-1.8],[17.17,y,6.63],[17.12,y,6.63]]]].forEach(([n,p])=>ceilFace('E3','Roof overhang soffit, '+n,'External',p,G.roof));
+ ceilFace('E3','Lobby ceiling','Lobby',[[17.12,y,-1.6],[TX0-0.1,y,-1.6],[TX0-0.1,y,-0.1],[17.12,y,-0.1]]);}
+
+/* ---------- KITCHEN (clear room 4.10 × 4.18 m) ---------- */
+{const gab=[[kz0,2.6],[(kz0+kzOld)/2,2.98],[kzOld,2.6]];
+ face('I1','Kitchen west wall','Kitchen','E2','x',1,1.9,gab,[[2.35,3.15,1.9,2.1]]);
+ face('T','Kitchen west wall tile','Kitchen','E2','x',1,0,R(kz0,kzOld,1.9),[[2.35,3.15,0,2.1]]);
+ face('I1','Kitchen east (temporary) wall','Kitchen','TW','x',-1,1.9,gab,[[KZ(2.85),KZ(3.75),1.9,2.05]]);
+ face('T','Kitchen east wall tile','Kitchen','TW','x',-1,0,R(kz0,kzOld,1.9),[[KZ(2.85),KZ(3.75),0,2.05]]);
+ face('I1','Kitchen south wall','Kitchen','N4','z',-1,1.9,R(kx0,kx1,2.6),[[20.02,20.92,1.9,2.1]]);
+ face('T','Kitchen south wall tile','Kitchen','N4','z',-1,0,R(kx0,kx1,1.9),[[20.02,20.92,0,2.1]]);
+ face('I1','Kitchen north wall (cooking line)','Kitchen','N3','z',1,1.9,R(kx0,kx1,2.6),[]);
+ face('T','Kitchen north wall tile','Kitchen','N3','z',1,0,R(kx0,kx1,1.9),[]);
+ const zm=(kz0+kzOld)/2;
+ ceilFace('I2','Kitchen ceiling, north slope','Kitchen',[[kx0,2.6,kz0],[kx1,2.6,kz0],[kx1,2.98,zm],[kx0,2.98,zm]]);
+ ceilFace('I2','Kitchen ceiling, south slope','Kitchen',[[kx0,2.98,zm],[kx1,2.98,zm],[kx1,2.6,kzOld],[kx0,2.6,kzOld]]);}
+
+/* ---------- DISH WASH (clear room 5.21 × 1.80 m) ---------- */
+{const dx0=kx0,dx1=BX1-0.1,dz0=0.1,dz1=DISH-0.1;
+ face('I3','Dish wash north wall','Dish wash','N2','z',1,2.0,R(dx0,dx1,BH),[[BX0+0.4,BX0+1.5,2.0,2.45]]);
+ face('T','Dish wash north wall tile','Dish wash','N2','z',1,0,R(dx0,dx1,2.0),[[BX0+0.4,BX0+1.5,1.55,2.0]]);
+ face('I3','Dish wash east wall','Dish wash','E3','x',-1,2.0,R(dz0,dz1,BH),[]);
+ face('T','Dish wash east wall tile','Dish wash','E3','x',-1,0,R(dz0,dz1,2.0),[]);
+ face('I3','Dish wash west wall','Dish wash','E2','x',1,2.0,R(dz0,dz1,BH),[[0.73,1.9,2.0,2.1]]);
+ face('T','Dish wash west wall tile','Dish wash','E2','x',1,0,R(dz0,dz1,2.0),[[0.73,1.9,0,2.0]]);
+ face('I3','Dish wash south wall','Dish wash','N3','z',-1,2.0,R(dx0,dx1,BH),[]);
+ face('T','Dish wash south wall tile','Dish wash','N3','z',-1,0,R(dx0,dx1,2.0),[[BX0+0.25,BX0+0.95,0.95,1.65]]);
+ ceilFace('I4','Dish wash ceiling','Dish wash',[[dx0,BH,dz0],[dx1,BH,dz0],[dx1,BH,dz1],[dx0,BH,dz1]]);}
+
+/* ---------- WASHROOM (clear room 2.76 × 1.50 m) ---------- */
+{const wx0=TX0+0.1,wx1=BX1-0.1,wz0=TY0+0.1,wz1=-0.1;
+ const four=(key,axis,n,u0,u1,hl,nm)=>{
+   face('I5','Washroom '+nm,'Washroom',key,axis,n,0.9,R(u0,u1,2.4),hl.map(h=>[h[0],h[1],Math.max(h[2],0.9),Math.min(h[3],2.4)]).filter(h=>h[3]>h[2]));
+   face('I6','Washroom '+nm+', upper band','Washroom',key,axis,n,2.4,R(u0,u1,BH),[]);
+   face('T','Washroom '+nm+' tile','Washroom',key,axis,n,0,R(u0,u1,0.9),hl.map(h=>[h[0],h[1],h[2],Math.min(h[3],0.9)]).filter(h=>h[2]<0.9));};
+ four('N1','z',1,wx0,wx1,[[BX1-1.1,BX1-0.5,1.7,2.3]],'north wall');
+ four('N2','z',-1,wx0,wx1,[],'south wall');
+ four('E3','x',-1,wz0,wz1,[],'east wall');
+ four('E1','x',1,wz0,wz1,[[-1.45,-0.75,0,2.1]],'west wall (door)');
+ ceilFace('I6','Washroom ceiling','Washroom',[[wx0,BH,wz0],[wx1,BH,wz0],[wx1,BH,wz1],[wx0,BH,wz1]]);}
+
+/* ---------- fittings, for orientation only (not painted) ---------- */
+{const F=G.fix,hz1=kz0+0.75;
+ box(kx0+0.9,kx0+3.4,0.06,0.94,kz0,hz1,steel,F);                                // cooking line on the north wall
+ box(kx0+0.9,kx0+3.4,0.94,0.98,kz0,hz1,steelD,F);
+ const PX=kx0+2.15,PZ=kz0+2.7;                                                    // existing false partition, white
+ box(PX,kx1,0,2.2,PZ-0.025,PZ+0.025,ivory,F);box(PX-0.025,PX+0.025,0,2.2,PZ,KZ(3.22),ivory,F);box(PX-0.025,PX+0.025,0,2.2,KZ(4.12),kzOld,ivory,F);
+ box(kx0+0.25,kx0+1.45,0,0.9,0.12,0.8,steel,F);                                  // dish wash receiving table
+ box(kx0+3.2,kx0+5.0,0,0.9,0.12,0.8,steel,F);                                    // wash and rinse sinks (indicative)
+ const px=TX0+1.15;box(px-0.05,px+0.05,0,2.4,TY0+0.1,-1.45,tileWhite,F);box(px-0.05,px+0.05,0,2.4,-0.75,-0.1,tileWhite,F);box(px-0.05,px+0.05,2.1,2.4,-1.45,-0.75,tileWhite,F);
+ box(BX1-0.55,BX1-0.15,0,0.4,-1.15,-0.75,tileWhite,F);box(BX1-0.2,BX1-0.1,0.4,0.95,-1.15,-0.75,tileWhite,F);   // WC
+ box(TX0+0.25,TX0+0.95,0,0.88,-0.5,-0.12,steelD,F);}                              // basin unit
+
+/* ---------- labels ---------- */
+function sprite(txt,sub,x,y,z,s){const c=document.createElement('canvas');c.width=512;c.height=sub?150:100;const g=c.getContext('2d');
+  g.fillStyle='rgba(23,34,28,.88)';const w=c.width,h=c.height,r=16;g.beginPath();g.moveTo(r,0);g.arcTo(w,0,w,h,r);g.arcTo(w,h,0,h,r);g.arcTo(0,h,0,0,r);g.arcTo(0,0,w,0,r);g.fill();
+  g.fillStyle='#F2E8D2';g.textAlign='center';g.font='700 46px Montserrat,system-ui,sans-serif';g.fillText(txt,w/2,sub?60:65);
+  if(sub){g.fillStyle='#C49A3C';g.font='500 30px Montserrat,system-ui,sans-serif';g.fillText(sub,w/2,112);}
+  const t=new THREE.CanvasTexture(c);const m=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:false,transparent:true}));
+  m.position.set(x,y,z);m.scale.set(s,s*c.height/c.width,1);m.renderOrder=20;G.lbl.add(m);return m;}
+sprite('KITCHEN','4.10 × 4.18 m',19.4,3.5,4.2,1.7);
+sprite('DISH WASH','5.21 × 1.80 m',20.0,3.5,1.0,1.7);
+sprite('WASHROOM','2.76 × 1.50 m',21.2,3.5,-0.85,1.5);
+sprite('LOBBY','',18.4,3.5,-0.85,0.9);
+sprite('STORE ROOM','not in scope',21.3,3.6,9.6,1.7);
+sprite('NORTH','',20.0,0.5,-3.4,1.0);sprite('EAST','',24.6,0.5,2.3,1.0);sprite('SOUTH','',18.5,0.5,8.2,1.0);sprite('WEST','pathway',15.6,0.5,2.3,1.2);
+
+/* ---------- mode, visibility, cut-away ---------- */
+const st={roof:true,cut:false,ceil:true,fix:true,lbl:true,grp:{ext:true,door:true,int:true},hi:null};
+function applyMode(){ORDER.forEach(k=>{specMat[k].color.set(mode==='zones'?SPEC[k].zone:SPEC[k].col);});
+  tileMat.color.set(mode==='zones'?'#dfe3e4':'#ffffff');core.color.set(mode==='zones'?'#e6e1d4':'#d3cab7');
+  document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode));dirty=true;}
+function applyHi(){ORDER.forEach(k=>{specMat[k].emissive.set(st.hi===k?'#ffcf5a':'#000000');specMat[k].emissiveIntensity=st.hi===k?0.45:0;});
+  document.querySelectorAll('tr.spec').forEach(r=>r.classList.toggle('on',r.dataset.code===st.hi));dirty=true;}
+function applyVis(){G.roof.visible=st.roof;G.ceil.visible=st.ceil&&!(st.cut&&!st.roof);G.fix.visible=st.fix;G.lbl.visible=st.lbl;
+  faces.forEach(f=>{if(f.code==='T')return;f.mesh.visible=st.grp[SPEC[f.code].g];});dirty=true;}
+function cutaway(){const t=controls.target,p=camera.position;
+  Object.values(walls).forEach(w=>{let hide=false;if(st.cut){const a=w.nAxis;hide=(p[a]-w.c)*(t[a]-w.c)<0;}w.grp.visible=!hide;});}
+
+/* ---------- camera presets ---------- */
+const VIEWS={
+ outNE:{p:[30,10,-9],t:[20,1.4,2.2],roof:true,cut:false,ceil:true},
+ outSW:{p:[10.5,9,14.5],t:[20,1.4,2.2],roof:true,cut:false,ceil:true},
+ kitchen:{p:[26.5,10.5,12],t:[19.4,1,4.2],roof:false,cut:true,ceil:false,lbl:false},
+ dish:{p:[28,11.5,9.5],t:[20,1,1],roof:false,cut:true,ceil:false,lbl:false},
+ wash:{p:[28,10,6.5],t:[21,1,-0.6],roof:false,cut:true,ceil:false,lbl:false},
+};
+let tween=null,dirty=true;
+function goView(k,instant){const v=VIEWS[k];if(!v)return;   // the look-up view needs the camera below its target
+  st.roof=v.roof;st.cut=v.cut;st.ceil=v.ceil;st.lbl=v.lbl!==false;syncChecks();applyVis();
+  const t1=new THREE.Vector3(...v.t),f=camera.aspect<1.1?Math.min(2.4,1.1/camera.aspect):1;   // stand further back on a tall, narrow screen
+  const p1=new THREE.Vector3(...v.p).sub(t1).multiplyScalar(f).add(t1);
+  if(instant){camera.position.copy(p1);controls.target.copy(t1);camera.lookAt(t1);controls.update();dirty=true;return;}
+  tween={p0:camera.position.clone(),t0:controls.target.clone(),p1,t1,s:performance.now(),d:700};}
+function syncChecks(){['roof','cut','fix'].forEach(k=>{document.getElementById('c-'+k).checked=st[k];});}
+
+/* ---------- schedule, estimate, detail ---------- */
+const sum={};ORDER.forEach(k=>sum[k]=0);let tileArea=0;
+faces.forEach(f=>{if(f.code==='T')tileArea+=f.area;else sum[f.code]+=f.area;});
+const r1=v=>(Math.round(v*10)/10).toFixed(1);
+const lit=k=>{const s=SPEC[k];return sum[k]*(1/s.pc+s.coats/s.fc)*1.10;};
+{const t=document.getElementById('sched');let h='<tr><th>Code · surface</th><th class="n">m²</th></tr>';
+ const groups=[['ext','External'],['door','Doors'],['int','Internal']];
+ groups.forEach(([g,nm])=>{const ks=ORDER.filter(k=>SPEC[k].g===g);const tot=ks.reduce((a,k)=>a+sum[k],0);
+  h+=`<tr class="grp"><td>${nm}</td><td class="n">${r1(tot)}</td></tr>`;
+  ks.forEach(k=>{const s=SPEC[k];h+=`<tr class="spec" data-code="${k}" tabindex="0"><td><span class="sw" style="background:${s.col}"></span><span class="code">${k}</span> ${s.name}<br><small>${s.where}.<br>${s.finish}.</small></td><td class="n">${r1(sum[k])}</td></tr>`;});});
+ const all=ORDER.reduce((a,k)=>a+sum[k],0);h+=`<tr class="tot"><td>Total to paint</td><td class="n">${r1(all)} m²</td></tr>`;t.innerHTML=h;
+ const ex=ORDER.filter(k=>SPEC[k].g==='ext').reduce((a,k)=>a+sum[k],0),inn=ORDER.filter(k=>SPEC[k].g==='int').reduce((a,k)=>a+sum[k],0);
+ t.insertAdjacentHTML('afterend',`<p class="k">External ${r1(ex)} m² · internal ${r1(inn)} m² · doors ${r1(sum.D1)} m².</p>`);
+ document.getElementById('tilearea').textContent=r1(tileArea)+' m² of tile';}
+{let h='<table><tr><th>Code</th><th>System</th><th class="n">Litres</th></tr>',tot=0;
+ ORDER.forEach(k=>{const l=lit(k);tot+=l;h+=`<tr><td><span class="code">${k}</span></td><td>${SPEC[k].prod}</td><td class="n">${r1(l)}</td></tr>`;});
+ h+=`<tr class="tot"><td colspan="2">Total, with 10% for waste</td><td class="n">${Math.ceil(tot)} L</td></tr></table>`;
+ document.getElementById('est').innerHTML=h+'<p class="k">Typical spreading rates, 10% waste. Washroom line art not included.</p>';}
+document.getElementById('assume').innerHTML=[
+ 'Sizes come from the model (walls 3.00 m high). Dish-wash and kitchen depths are scaled from a drawing: re-measure on site.',
+ 'Tile heights: kitchen 1.90 m, dish wash 2.00 m, washroom 0.90 m. Tile on the kitchen north wall and dish-wash south wall is assumed.',
+ 'Timber doors counted on both faces. The lobby is open to the pathway, so it gets exterior paint.',
+ 'Colours are as modelled: a proposal to confirm. Surface condition is unknown, so allow for patching and primer.'
+].map(s=>`<li>${s}</li>`).join('');
+
+/* ---------- interaction ---------- */
+document.getElementById('modes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.mode;applyMode();});
+document.getElementById('views').addEventListener('click',e=>{const b=e.target.closest('button');if(b)goView(b.dataset.view);});
+[['roof'],['cut'],['fix']].forEach(([k])=>document.getElementById('c-'+k).addEventListener('change',e=>{st[k]=e.target.checked;applyVis();}));
+function hiToggle(code){st.hi=st.hi===code?null:code;applyHi();}
+document.getElementById('sched').addEventListener('click',e=>{const r=e.target.closest('tr.spec');if(r)hiToggle(r.dataset.code);});
+document.getElementById('sched').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const r=e.target.closest('tr.spec');if(r){e.preventDefault();hiToggle(r.dataset.code);}}});
+const tip=document.getElementById('tip'),ray=new THREE.Raycaster(),mouse=new THREE.Vector2();
+function seen(o){for(;o;o=o.parent)if(!o.visible)return false;return true;}
+renderer.domElement.addEventListener('pointermove',e=>{const r=renderer.domElement.getBoundingClientRect();mouse.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
+  ray.setFromCamera(mouse,camera);const meshes=faces.filter(f=>seen(f.mesh)).map(f=>f.mesh);const hit=ray.intersectObjects(meshes,false)[0];
+  if(!hit){tip.style.display='none';return;}const d=hit.object.userData,f=faces.find(x=>x.mesh===hit.object);
+  if(d.code==='T'){tip.innerHTML=`<b>Tile</b> · ${d.label}<br>Not painted`;}else{tip.innerHTML=`<b>${d.code}</b> · ${d.label}<br>${SPEC[d.code].name} · ${r1(f.area)} m²`;}
+  tip.style.display='block';tip.style.left=Math.min(e.clientX-r.left+14,r.width-270)+'px';tip.style.top=(e.clientY-r.top+14)+'px';});
+renderer.domElement.addEventListener('pointerleave',()=>{tip.style.display='none';});
+controls.addEventListener('change',()=>{dirty=true;});
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();dirty=true;}
+addEventListener('resize',resize);
+(function loop(){requestAnimationFrame(loop);
+  if(tween){const k=Math.min(1,(performance.now()-tween.s)/tween.d),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;camera.position.lerpVectors(tween.p0,tween.p1,e);controls.target.lerpVectors(tween.t0,tween.t1,e);if(k>=1)tween=null;dirty=true;}
+  if(controls.update())dirty=true;
+  if(dirty){cutaway();renderer.render(scene,camera);dirty=false;}})();
+
+/* ---------- start ---------- */
+const q=new URLSearchParams(location.search);
+if(q.get('mode')==='zones')mode='zones';
+resize();applyMode();applyVis();goView(VIEWS[q.get('view')]?q.get('view'):'outNE',true);
+if(q.get('hi')&&SPEC[q.get('hi')]){st.hi=q.get('hi');applyHi();}
+if(q.has('cut')){st.cut=q.get('cut')==='1';syncChecks();}
+if(q.has('roof')){st.roof=q.get('roof')==='1';syncChecks();applyVis();}
+window.__paint={sum,tileArea,faces:faces.length,ready:true};
+})();
+</script>
+</body>
+</html>
