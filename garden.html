@@ -93,6 +93,7 @@ body.walk .pad{display:grid}
       <div class="seg"><a class="seglink" href="menu/table/" target="_blank" rel="noopener">Table menu &rarr;</a></div>
       <div class="seg"><a class="seglink" href="stock-plan.html" target="_blank" rel="noopener">Stock plan &rarr;</a></div>
       <div class="seg"><a class="seglink" href="work-plan.html" target="_blank" rel="noopener">Work plan</a></div>
+      <div class="seg"><a class="seglink" href="concept.html" target="_blank" rel="noopener">Concept views</a></div>
       <div class="seg"><a class="seglink" href="floor-plans.html" target="_blank" rel="noopener">Floor plans</a></div>
       <div class="seg"><a class="seglink" href="colour-plans.html" target="_blank" rel="noopener">Colour plans</a></div>
       <div class="seg"><a class="seglink" href="equipment-plan.html" target="_blank" rel="noopener">Equipment plan</a></div>
@@ -1710,6 +1711,7 @@ setPvc(pvcState.f);
 if(Q.get('roof')==='0')setRoof(false);
 if(Q.get('view')&&(VIEWS[Q.get('view')]||Q.get('view')==='walk')){const k=Q.get('view');document.querySelectorAll('#views button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===k));
   if(k==='walk'){setWalk(true);if(Q.get('stop')){const s=stops.find(s=>s[0]===Q.get('stop'));if(s)lookAt(s[1],s[2]);}}else{const v=VIEWS[k];showCard(v.card);if(k==='plan')setRoof(false);else if(v.roof!==undefined&&Q.get('roof')===null)setRoof(v.roof);camera.position.set(...v.p);controls.target.set(...v.t);setFov(v.fov||48);}}
+if(Q.get('cam')){const c=Q.get('cam').split(',').map(Number);if(c.length>=6&&c.every(Number.isFinite)){document.querySelectorAll('#views button').forEach(b=>b.setAttribute('aria-pressed',false));camera.position.set(c[0],c[1],c[2]);controls.target.set(c[3],c[4],c[5]);setFov(c[6]||48);controls.update();}}
 if(Q.has('labels')){SHOW.lbl=true;document.getElementById('t-lbl').setAttribute('aria-pressed',true);}
 if(Q.has('sizes')){SHOW.dims=true;document.getElementById('t-dims').setAttribute('aria-pressed',true);}
 if(Q.has('nocard'))document.getElementById('card').style.display='none';

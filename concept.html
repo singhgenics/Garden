@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Konso Garden · Concept views</title>
+<meta name="description" content="Konso Garden design concept: photoreal views of the dining hall from each corner, made from the 3D model, with the finishes the architect should follow.">
+<style>
+.wrap{max-width:1240px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-left,0px)) 64px}
+.hin{max-width:1240px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.hoard{padding:18px 0 34px;margin:0 0 8px;display:block}
+.top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.top a{font-size:12.5px;line-height:1;text-decoration:none;border:1px solid transparent;border-radius:6px;padding:10px 13px}
+.hoard h1{font-size:clamp(40px,7.5vw,88px);line-height:.95;margin:6px 0 14px}
+.lead{font-size:17px;line-height:1.6;max-width:70ch;margin:0 0 8px}
+.k{font-size:13px;line-height:1.55;color:var(--muted)}
+body{margin:0;font-size:16px;line-height:1.6}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;line-height:1.1}
+section{margin-top:48px;padding-top:26px;border-top:1px solid var(--line)}
+.intro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:26px}
+@media (max-width:860px){.intro{grid-template-columns:1fr}}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px;margin:0}
+.plan svg{display:block;width:100%;height:auto;border-radius:3px}
+.plan figcaption{font-size:13.5px;color:var(--muted);padding:8px 4px 2px}
+.idx{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.idx a{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.idx a:hover{border-color:var(--bottle)}
+.idx b{display:block;font-weight:600}.idx span{font-size:13.5px;color:var(--muted)}
+.idx .n{color:var(--cream);font-size:14px}
+.n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--bottle);color:var(--cream);font-weight:600;font-size:14px}
+.view h2{display:flex;gap:14px;align-items:center}
+.where{font-size:14px;color:var(--muted);margin:0 0 14px}
+.shot{position:relative;margin:0;background:#111;border-radius:6px;overflow:hidden;aspect-ratio:16/9}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .35s ease}
+.shot img.model{opacity:0}
+.shot.showmodel img.model{opacity:1}
+.tog{position:absolute;right:12px;bottom:12px;display:flex;background:rgba(23,34,28,.82);border-radius:999px;padding:3px;backdrop-filter:blur(4px)}
+.tog button{all:unset;cursor:pointer;color:#EADFC6;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:8px 13px;border-radius:999px}
+.tog button[aria-pressed=true]{background:var(--cream);color:var(--ink)}
+.tog button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.notes{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:16px}
+@media (max-width:760px){.notes{grid-template-columns:1fr}}
+.notes p{margin:0 0 10px}
+.spec{margin:0;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:6px;font-size:14px}
+.spec b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass-ink);margin-bottom:4px}
+.spec ul{margin:0;padding-left:18px}.spec li{margin:3px 0}
+.links{font-size:13.5px;margin-top:8px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--card);margin-top:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap}tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;white-space:nowrap}
+.call{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bottle);border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+footer{margin-top:48px;color:var(--muted);font-size:13px}
+a.full{font-size:13px}
+</style>
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<header class="hoard"><div class="hin">
+  <div class="top"><a href="garden.html">&larr; 3D model</a><a href="floor-plans.html">Floor plans</a><a href="drawings/Garden-architect-drawings.pdf">Architect drawings</a></div>
+  <span class="eyebrow">Design concept</span>
+  <h1>The hall, corner to corner</h1>
+  <p class="lead">What Konso Garden will look like on an evening service: the dining hall seen from each of its corners. Every picture is made from a frame of the 3D model, so the layout, tables, colours and finishes are the ones in the plan. Press <b>3D model</b> on any picture to see the frame it was made from.</p>
+</div></header>
+<div class="wrap">
+  <div class="intro">
+    <figure class="plan" id="plan"></figure>
+    <div>
+      <p class="k" style="margin-top:0">Six views, each from a corner of the L-shaped hall, looking across the room. The numbers match the cameras on the plan.</p>
+      <ul class="idx" id="idx"></ul>
+    </div>
+  </div>
+  <div id="views"></div>
+
+  <section id="finishes"><h2>Finishes to follow</h2>
+    <p class="k">The finishes the pictures show, for the architect and the site team. Sizes and positions come from the 3D model and the architect drawings; where a picture and a drawing differ, the drawing wins.</p>
+    <div class="tw"><table id="fin"><thead><tr><th>Element</th><th>Finish</th><th>Where</th></tr></thead><tbody></tbody></table></div>
+    <div class="call"><b>How the pictures were made.</b> Each frame was taken from the 3D model at eye level (1.6 m) in the evening lighting setting, then turned into a photograph-like render in Google Flow (project “Garden Concept Renders”) with instructions to keep the camera, layout and every object unchanged, and upscaled to 2K. Each one was checked at full size against its model frame for added, missing or moved objects, and any stray or misspelled lettering the generator invented was removed by hand before it was published. They are concept images: small details such as plates, glassware and the exact plant shapes are illustrative, and most wall signs and posters are shown blank or with pictures only, as placeholders for the final artwork.</div>
+  </section>
+  <footer>Konso Garden · concept views made from the 3D model, November 2026.</footer>
+</div>
+<script>
+const VIEWS=[{"id": "c2_nw", "title": "TV corner, looking down the hall", "short": "North-west corner · the decor wall to the bar", "cam": "0.9,1.6,0.9,12,1.2,4,70", "pin": [503, 313, 16], "where": "Camera in the north-west corner, beside the 65 in TV, at eye level (1.6 m), looking east along the decor wall towards the bar.", "alt": "Concept photograph of the dining hall from the TV corner: green decor wall with vintage signs on the left, family tables in burgundy linen, the lit ficus on the right and the bar at the far end", "text": "The first impression of the room's length. The 15.67 m decor wall runs the whole way on the left: emerald paint above a glossy brown stacked-tile dado with a brass rail, white fluted pilasters, vintage enamel signs, clocks and swing-arm brass lamps. The two family tables for six sit along the wall, the ficus centrepiece glows on the right, and the coffee wall mural and brick bar close the far end.", "spec": ["Decor wall: emerald above, brown stacked tile 0.90 m, brass cap rail", "White fluted pilasters kept at every bay", "Track spots on the walnut beams wash the gallery wall", "Family tables for 6 in burgundy linen; teak and cane armchairs"]}, {"id": "c1_ne", "title": "Coffee corner, looking back to the garden", "short": "North-east corner · across the hall to the west wing", "cam": "11.7,1.6,0.9,2,1.2,6,70", "pin": [821, 313, 152], "where": "Camera at the coffee station end of the decor wall (north-east), looking south-west across the hall to the west wing and the garden.", "alt": "Concept photograph from the coffee corner looking back across the hall to the open west side, blue pillars and the garden beyond", "text": "The view back from the service end: the room opens to the garden on the open sides, framed by the round blue pillars, white balustrade and magenta bougainvillea at the eaves. Wicker orb pendants hang over every table; the ficus marks the middle of the west wing and the TV corner with its fireplace console is at the far end.", "spec": ["Open sides: blue round pillars on white bases, 80 cm balustrade with navy balusters", "Bougainvillea along the eaves and down the outer pillars", "Wicker orb pendant over each table, warm 2200 K", "Blue-grey speckled granite floor, 60 cm tiles"]}, {"id": "c4_se", "title": "Entrance corner, looking west", "short": "South-east · from the entrance down the hall", "cam": "12.0,1.6,4.3,1,1.2,2.2,70", "pin": [829, 413, -169], "where": "Camera just inside the entrance on the landing side (south-east), looking west down the length of the hall.", "alt": "Concept photograph from the entrance looking down the hall: bougainvillea on the blue pillar, the diamond tile entrance mat and rows of tables along the green wall", "text": "What a guest sees on stepping in: the cream-and-grey diamond tile mat at the threshold, the blue entrance pillar wrapped in bougainvillea, and the whole hall laid out ahead with the decor wall on the right and the garden through the balustrade on the left.", "spec": ["Entrance opening in the balustrade, 1.70 m, facing the landing", "Diamond tile mat at the threshold", "Red-oxide landing with a timber step outside", "Gallery wall: enamel signs, framed posters, clocks and lamps"]}, {"id": "c6_inner", "title": "Inner corner, looking to the bar", "short": "The corner of the L · towards the bar and coffee wall", "cam": "6.3,1.6,5.2,14,1.3,1.2,70", "pin": [662, 440, -27], "where": "Camera at the inner corner of the L (where the main hall meets the west wing), looking east to the bar.", "alt": "Concept photograph looking towards the brick bar counter with stools, the blue coffee station and the mural wall", "text": "The bar end of the room. The exposed red-brick bar counter with its stools, the light-blue coffee station and the winking-woman mural on the coffee wall, with ivy over the back bar. Ceiling: white plaster with dark walnut false beams and the interlocking square-frame feature.", "spec": ["Bar counter: exposed red brick, timber top; teak and iron stools", "Coffee station with marble top in front of the mural wall", "Ivy and Edison drops over the back bar", "Walnut false beams and square-frame ceiling feature"]}, {"id": "c3_sw", "title": "West wing corner, looking across the room", "short": "South-west of the wing · past the ficus to the bar", "cam": "1.3,1.6,9.0,10,1.3,1.5,70", "pin": [514, 552, -41], "where": "Camera in the far corner of the west wing (south-west), looking north-east past the ficus towards the TV corner and the bar.", "alt": "Concept photograph across the west wing: the lit ficus centrepiece among tables, the TV corner and fireplace on the left", "text": "The heart of the west wing. The ficus centrepiece with warm fairy lights stands round the middle pillar with tables for four around it; the TV corner and its log-effect fireplace console are on the left, and the floor-standing air-conditioner sits against the railing on the right.", "spec": ["Ficus centrepiece round the middle pillar, warm fairy lights", "65 in TV on the corner diagonal, fireplace console below", "Floor-standing AC tower by the railing", "Square tables for 4; couple tables (0.70 m) at the edges"]}, {"id": "c5_wingse", "title": "Wing entrance corner, looking north-west", "short": "South-east of the wing · couple tables and the garden side", "cam": "6.0,1.6,10.2,1.5,1.3,1.5,70", "pin": [653, 587, -117], "where": "Camera at the south-east corner of the west wing, looking north-west across the couple tables towards the pool lounge side.", "alt": "Concept photograph from the wing corner: couple tables by the balustrade, the garden outside on the left, the ficus and the floor-standing AC on the right", "text": "The quieter side of the room: couple tables along the balustrade with the garden right outside, the lantern brackets and festoon bulbs along the eave, the ficus beside you and the pool lounge graffiti wall visible beyond the west edge.", "spec": ["Couple tables (two-tops) by the railing", "Black lantern brackets and festoon bulbs on the eave", "Floor-standing AC tower beside the pillar", "Pool lounge graffiti wall beyond the west edge"]}];
+const FIN=[["Floor", "Blue-grey speckled granite, 60 × 60 cm, as existing", "Whole hall"], ["Decor wall, lower", "Glossy brown vertical stacked tile, cream grout, 0.90 m high, brass cap rail", "North wall, 15.67 m"], ["Decor wall, upper", "Emerald / bottle-green paint to the ceiling", "North wall and end walls"], ["Pilasters", "Existing white fluted pilasters on plinths, kept", "Every bay of the north wall"], ["Ceiling", "Flat white plaster, white dropped beams, dark walnut false beams, square-frame feature", "Whole hall"], ["Pillars and railing", "Round royal-blue pillars on white square bases; 80 cm white balustrade with navy balusters", "All open sides"], ["Bar counter", "Exposed red brick with timber top; teak and iron stools", "East end"], ["Tables", "Teak; burgundy linen cloths. Squares for 4, family tables for 6, 0.70 m couple tables", "40 covers in all"], ["Chairs", "Teak frames, woven cane backs, cognac seat pads", "All tables"], ["Pendants", "Woven wicker orbs, warm 2200 K", "One over each table"], ["Wall lights", "Swing-arm brass lamps with cream shades; track spots on the beams", "Decor wall"], ["Centrepiece", "Ficus with warm fairy lights round the middle pillar", "West wing"], ["Planting", "Magenta bougainvillea along the eaves and down the outer pillars", "Open sides"], ["Entrance", "Cream-and-grey diamond tile mat; red-oxide landing and timber step outside", "South side, facing the landing"]];
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+// plan with camera markers (plan image 1600x900, cropped to the hall)
+(function(){const X0=330,Y0=230,W=700,H=430;
+  let s=`<svg viewBox="${X0} ${Y0} ${W} ${H}" role="img" aria-label="Plan of the hall with the six camera positions"><image href="concept/plan.jpg" x="0" y="0" width="1600" height="900"/>`;
+  VIEWS.forEach((v,i)=>{const [x,y,a]=v.pin,r=a*Math.PI/180,L=46,ex=x+Math.cos(r)*L,ey=y+Math.sin(r)*L,sp=0.42;
+    const p1=[x+Math.cos(r-sp)*L*1.15,y+Math.sin(r-sp)*L*1.15],p2=[x+Math.cos(r+sp)*L*1.15,y+Math.sin(r+sp)*L*1.15];
+    s+=`<a href="#v${i+1}"><path d="M${x} ${y}L${p1[0]} ${p1[1]}L${p2[0]} ${p2[1]}Z" fill="#C49A3C" fill-opacity=".45" stroke="#C49A3C" stroke-width="1.5"/><circle cx="${x}" cy="${y}" r="12" fill="#1F3D2E" stroke="#F2E8D2" stroke-width="2.5"/><text x="${x}" y="${y+4.5}" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="600" font-size="13" fill="#F2E8D2">${i+1}</text></a>`;});
+  s+='</svg><figcaption>Top-down view of the 3D model, roof off. North (the decor wall) is at the top; the bar is at the east end (right); the entrance is on the landing side (bottom). Each wedge shows where the camera stands and which way it looks.</figcaption>';
+  document.getElementById('plan').innerHTML=s;})();
+document.getElementById('idx').innerHTML=VIEWS.map((v,i)=>`<li><a href="#v${i+1}"><span class="n">${i+1}</span><span><b>${esc(v.title)}</b><span>${esc(v.short)}</span></span></a></li>`).join('');
+document.getElementById('views').innerHTML=VIEWS.map((v,i)=>`<section class="view" id="v${i+1}">
+  <h2><span class="n">${i+1}</span>${esc(v.title)}</h2>
+  <p class="where">${esc(v.where)}</p>
+  <figure class="shot" id="s${i+1}">
+    <img src="concept/${v.id}.jpg" alt="${esc(v.alt)}" width="2752" height="1536" loading="${i<2?'eager':'lazy'}" decoding="async">
+    <img class="model" src="concept/${v.id}-model.jpg" alt="The 3D model frame this picture was made from" width="1600" height="900" loading="lazy" decoding="async">
+    <div class="tog" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-m="0">Concept</button><button type="button" aria-pressed="false" data-m="1">3D model</button></div>
+  </figure>
+  <div class="notes"><div><p>${v.text}</p><p class="links"><a class="full" href="concept/${v.id}.jpg" target="_blank" rel="noopener">Full-size picture</a> · <a class="full" href="garden.html?cam=${v.cam}&nocard" target="_blank" rel="noopener">Open this view in the 3D model</a></p></div>
+  <div class="spec"><b>In this view</b><ul>${v.spec.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div></div>
+</section>`).join('');
+document.querySelectorAll('.shot').forEach(f=>f.querySelectorAll('.tog button').forEach(b=>b.onclick=()=>{const m=b.dataset.m==='1';f.classList.toggle('showmodel',m);f.querySelectorAll('.tog button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));
+document.querySelector('#fin tbody').innerHTML=FIN.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('');
+</script>
+</body>
+</html>
