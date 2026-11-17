@@ -30,7 +30,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.
 .dimmer input{accent-color:var(--amber);width:110px}
 .brand{pointer-events:none;font:700 15px/1 var(--display);letter-spacing:-.01em;display:flex;gap:10px;align-items:baseline}
 .brand span{font:400 11.5px/1 var(--mono);color:var(--muted)}
-.lightctl{flex-direction:column;gap:6px;padding:8px 10px;pointer-events:auto}.lightctl[hidden]{display:none}.lc-row{display:flex;align-items:center;gap:8px;font:500 12px/1 var(--body);color:var(--muted)}.lc-k{width:44px;color:var(--fg)}.lc-row input{accent-color:var(--amber);width:150px}.lc-v{font-family:var(--mono);font-size:11px;min-width:86px}.lc-pre button{appearance:none;border:0;background:transparent;color:var(--muted);font:500 12px/1 var(--body);padding:7px 10px;border-radius:9px;cursor:pointer}.lc-pre button:hover{color:var(--fg);background:rgba(255,255,255,.06)}.lc-pre button[aria-pressed="true"]{background:var(--amber);color:#1b120a}
+.lightctl{flex-direction:column;gap:6px;padding:8px 10px;pointer-events:auto}.lightctl[hidden]{display:none}.esspanel[hidden]{display:none}.lc-row{display:flex;align-items:center;gap:8px;font:500 12px/1 var(--body);color:var(--muted)}.lc-k{width:44px;color:var(--fg)}.lc-row input{accent-color:var(--amber);width:150px}.lc-v{font-family:var(--mono);font-size:11px;min-width:86px}.lc-pre button{appearance:none;border:0;background:transparent;color:var(--muted);font:500 12px/1 var(--body);padding:7px 10px;border-radius:9px;cursor:pointer}.lc-pre button:hover{color:var(--fg);background:rgba(255,255,255,.06)}.lc-pre button[aria-pressed="true"]{background:var(--amber);color:#1b120a}
 .card{position:absolute;right:12px;bottom:12px;width:min(380px,calc(100% - 24px));max-height:min(58%,calc(100% - 190px));overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13px}
 .card h2{font:700 17px/1.2 var(--display);margin:0 0 2px}
 .card .eye{font:500 11px/1 var(--mono);color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
@@ -100,7 +100,7 @@ body.walk .pad{display:grid}
       <div class="seg"><a class="seglink" href="furnishing.html" target="_blank" rel="noopener">Furnishing &amp; supplies</a></div>
       <div class="seg"><a class="seglink" href="crockery.html" target="_blank" rel="noopener">Crockery</a></div>
       <div class="seg"><a class="seglink" href="lighting-guide.pdf" target="_blank" rel="noopener">Lighting guide</a></div>
-      <div class="seg"><a class="seglink" href="essentials.html" target="_blank" rel="noopener">Essentials</a></div>
+      <div class="seg"><button id="t-ess" aria-expanded="false" aria-controls="esspanel">Essentials ▾</button></div>
       <div class="seg"><a class="seglink" href="vendors.html" target="_blank" rel="noopener">Vendors</a></div>
       <div class="seg"><a class="seglink" href="store-room.html" target="_blank" rel="noopener">Store room images</a></div>
       <div class="seg"><a class="seglink" href="sop.html" target="_blank" rel="noopener">Service playbook</a></div>
@@ -115,6 +115,7 @@ body.walk .pad{display:grid}
       <div class="lc-row" style="font-size:11px;line-height:1.5;display:block"><b>Colour of light, fixed lux (no dimmers)</b><br><span style="color:#B8431B">●</span> Restaurant 2200 K · <span style="color:#E39B1A">●</span> Bar 2700 K · <span style="color:#6FA3C7">●</span> Kitchen 4000 K · <span style="color:#2FA7A0">●</span> Dish wash 5000 K · <span style="color:#E8D36A">●</span> Toilet 3000 K · <span style="color:#4C8C4A">●</span> Outdoor 2200–2700 K</div>
       <div class="lc-row lc-pre"><button data-pre="lunch">Lunch</button><button data-pre="dusk">Sunset</button><button data-pre="evening" aria-pressed="true">Evening</button><button data-pre="late">Late</button></div>
     </div>
+    <div class="seg esspanel" id="esspanel" role="group" aria-label="Essentials by area" hidden><span class="seglink" style="color:var(--fg);font-weight:600;cursor:default">Essentials by area:</span><a class="seglink" href="essentials.html" target="_blank" rel="noopener">All areas</a><a class="seglink" href="essentials.html#a-kitchen" target="_blank" rel="noopener">Kitchen</a><a class="seglink" href="essentials.html#a-dish" target="_blank" rel="noopener">Dish wash</a><a class="seglink" href="essentials.html#a-store" target="_blank" rel="noopener">Store room</a><a class="seglink" href="essentials.html#a-bar" target="_blank" rel="noopener">Bar</a><a class="seglink" href="essentials.html#a-hall" target="_blank" rel="noopener">Hall, washroom &amp; outside</a></div>
   </div>
   <div class="card" id="card"><button class="x" id="cardx" aria-label="Close">×</button><div id="cardbody"></div></div>
   <div class="chkpanel" id="chkpanel" role="dialog" aria-label="Opening checklist" hidden><div class="chkbar"><b>Opening checklist</b><a href="opening-checklist.html" target="_blank" rel="noopener">Open in new tab</a><button id="chkx" type="button">Back to model</button></div><iframe id="chkframe" title="Opening checklist"></iframe></div>
@@ -1677,6 +1678,7 @@ document.getElementById('t-dims').onclick=e=>{SHOW.dims=!SHOW.dims;dirty=true;e.
 document.querySelectorAll('.lc-pre button').forEach(b=>b.onclick=()=>setPre(b.dataset.pre));
 document.getElementById('lc-time').oninput=e=>{LIGHT.t=e.target.value/100;document.querySelectorAll('.lc-pre button').forEach(x=>x.setAttribute('aria-pressed','false'));document.getElementById('lc-name').textContent='Custom';applyLight();};
 document.getElementById('lc-dim').oninput=e=>{LIGHT.dim=e.target.value/100;document.querySelectorAll('.lc-pre button').forEach(x=>x.setAttribute('aria-pressed','false'));document.getElementById('lc-name').textContent='Custom';applyLight();};
+document.getElementById('t-ess').onclick=e=>{const p=document.getElementById('esspanel');p.hidden=!p.hidden;e.currentTarget.setAttribute('aria-expanded',String(!p.hidden));};
 document.getElementById('t-light').onclick=e=>{const p=document.getElementById('lightpanel');p.hidden=!p.hidden;e.currentTarget.setAttribute('aria-expanded',String(!p.hidden));};
 
 /* walk mode */
