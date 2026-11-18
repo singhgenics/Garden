@@ -42,3 +42,6 @@ The picture menu is also the dine-in menu, so the notebook's advice on printed m
 
 
 **2026-11-15:** the beer section is bottles only (value, premium and craft) with a bucket of five; Man, Churian! was replaced by two fried-rice gravies, Gravy Train (chilli-garlic) and Sweet Talk (sweet chilli). All beer prices except Kings and Budweiser are placeholders until the supplier prices and the Goa excise MRPs are confirmed.
+
+## Update 2026-11-18 (prices easy to read)
+Prices were buried in the description at small size. Now every price is bold, burgundy (gold on dark panels) and set in the mono face: a single price sits at the end of the description (same line, no column, no dotted leader, no currency symbol), and dishes with options (Veg / Chicken / Mixed, 330 ml / 650 ml, 30 / 60 ml) get their own line, label then bold number. Happy hour shows the happy price large with the regular price struck through. Both A3 sheets re-checked: each is one page. Website menu.html (menu-sync.py) follows the same rule; the right-hand price column was removed. Dishes, order and prices are unchanged, so the table menu, POS and crockery lists need no edit.

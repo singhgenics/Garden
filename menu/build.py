@@ -61,6 +61,18 @@ figcaption p{margin:3px 0 0;font-size:15px;opacity:.82}
 @media screen and (max-width:560px){.s3{grid-column:span 12}.s3 .ph{aspect-ratio:4/3}.in{padding:0 16px}.band .big{font-size:36px}}
 '''
 EXTRA='''
+.pr{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-top:5px;font-size:17px;line-height:1.25;opacity:1!important;color:var(--ink)}
+.dark .pr,.wine .pr,.hero .pr{color:var(--cream)}
+.pe{font:700 1.15em PlexMono,monospace;color:var(--burg);white-space:nowrap;margin-left:3px;opacity:1}
+.dark .pe,.wine .pe{color:#E7C468}
+.pr b{font:700 19px PlexMono,monospace;letter-spacing:.01em;color:var(--burg)}
+.dark .pr b,.wine .pr b,.hero .pr b{color:#E7C468}
+.pr .o{font-size:14px;font-weight:500;opacity:.85;text-transform:none}.pr .o::first-letter{text-transform:uppercase}
+.pr i{font-style:normal;opacity:.4;margin:0 2px}
+.ln .pr,.card .pr{padding-bottom:1px}
+.more .ln span.pr span,.more .ln .pr span{display:inline;opacity:1;font-size:inherit}
+.band .pr{display:inline-flex}
+
 html{scroll-padding-top:76px}
 nav{align-items:center;justify-content:flex-start}nav>:first-child{margin-left:auto}nav>:last-child{margin-right:auto}
 .flt{flex:none;display:flex;border:1px solid #f2e8d255;border-radius:99px;overflow:hidden;margin-right:6px}
@@ -72,7 +84,7 @@ nav{align-items:center;justify-content:flex-start}nav>:first-child{margin-left:a
 .dessertbtn{display:block;width:100%;margin-top:44px;padding:16px 20px;border:2px solid var(--burg);border-radius:14px;background:none;color:var(--burg);font:700 17px Plex,sans-serif;cursor:pointer;text-align:left}
 .dessertbtn small{display:block;font:500 13px Plex,sans-serif;opacity:.8}
 .hide{display:none!important}
-.hh s{opacity:.65}
+.hh{display:flex;flex-wrap:wrap;gap:4px 22px}.hp{white-space:nowrap}.hp em{font-style:normal;font-size:15px}.hp b{font:700 22px PlexMono,monospace;color:var(--burg);margin:0 4px}.hh s{opacity:.6;font-size:15px}
 @media screen{.after.collapsed{display:none}.grid.filtered{display:flex;flex-wrap:wrap}.grid.filtered .card{flex:1 1 250px}.grid.filtered .ph{aspect-ratio:16/10}}
 @media print{.flt,.dessertbtn{display:none}.after.collapsed{display:block}}
 '''
@@ -114,12 +126,36 @@ def meta(name):
 def dv(name): return f' data-v="{VEG[name]}"' if name in VEG else ''
 
 
+def split_price(d,p):
+    """Return (description, price line). A single price p, or variants written at the end of d ('Veg 240 · chicken 280', '330 ml 120 · 650 ml 180'), become their own bold line."""
+    d=d.strip()
+    if p: return d,p
+    m=re.search(r'(?<=[.!?])\s+((?:[A-Za-z][A-Za-z0-9 ]*? )?(?:\d[\d,]*(?: ml| L)? ?\d*[\d,]*)(?: ?[·/] ?[^.]*?\d[\d,]*)*)$',d)
+    if m and re.search(r'\d',m.group(1)) and len(m.group(1))<70:
+        return d[:m.start()].strip(),m.group(1).strip()
+    return d,''
+def single(p): return bool(p) and ' · ' not in p and not re.search(r'[A-Za-z]{3}',p)
+def pe(p): return f' <b class="pe">{p}</b>'
+def pr(price):
+    """Price line: option labels in small caps-style, numbers bold. No currency symbol, no decimals, no leaders."""
+    if not price: return ''
+    parts=[x.strip() for x in re.split(r' · ',price)]
+    out=[]
+    for x in parts:
+        m=re.match(r'^(.*?)(\d[\d,]*(?: / \d[\d,]*)?)$',x)
+        out.append(f'<span class="o">{m.group(1).strip()}</span> <b>{m.group(2)}</b>' if m and m.group(1).strip() else f'<b>{x}</b>')
+    return '<div class="pr">'+'<i>·</i>'.join(f'<span>{o}</span>' for o in out)+'</div>'
 def card(img,name,sub,price,tag='',ar='3/2',span=6):
     t=f'<b class="tag">{tag}</b>' if tag else ''
+    d,p=split_price(sub,price)
     return (f'<figure class="card s{span}"{dv(name)}><div class="ph" style="--ar:{ar}"><img src="img/{img}.jpg" alt="{name}">{t}</div>'
-            f'<figcaption><h3>{MK[VEG.get(name,"")]}{name}</h3><p>{sub} {price}</p>{meta(name)}</figcaption></figure>')
+            f'<figcaption><h3>{MK[VEG.get(name,"")]}{name}</h3><p>{d}{pe(p) if single(p) else ""}</p>{"" if single(p) else pr(p)}{meta(name)}</figcaption></figure>')
 def rows(items,cols=2):
-    return f'<div class="more c{cols}">'+''.join(f'<div class="ln"{dv(n)}><b>{MK[VEG.get(n,"")]}{n}</b><span>{d} {p}</span>{meta(n)}</div>' for n,d,p in items)+'</div>'
+    out=[]
+    for n,d,p in items:
+        d,p=split_price(d,p)
+        out.append(f'<div class="ln"{dv(n)}><b>{MK[VEG.get(n,"")]}{n}</b><span>{d}{pe(p) if single(p) else ""}</span>{"" if single(p) else pr(p)}{meta(n)}</div>')
+    return f'<div class="more c{cols}">'+''.join(out)+'</div>'
 def sh(title,small,lede='',sub=False):
     l=f'<p class="lede">{lede}</p>' if lede else ''
     return f'<div class="sh{" sub" if sub else ""}"><h2>{title}</h2><small>{small}</small></div>{l}'
@@ -178,7 +214,7 @@ cock_tx=rows([('Somaek','A shot of soju dropped into a cold lager, the loud and 
 zero=rows([('Fresh Lime Soda','Limes pressed to order with soda, sweet or salted: the table standard.','120'),
  ('Kokum Soda','Kokum and black salt over soda, the coast’s salty-sour pink summer cooler.','140'),
  ('Lemongrass-Ginger Iced Tea','Black tea brewed in house with lemongrass and ginger, then chilled and served over ice.','160'),
- ('Tonic or Ginger Ale','Indian tonic or ginger ale, over ice.','120'),('Soft Drinks','Coke, Diet Coke, Thums Up or Sprite, chilled.','80'),('Water','Still 1 L 60 · sparkling 330 ml 120','')],1)
+ ('Tonic or Ginger Ale','Indian tonic or ginger ale, over ice.','120'),('Soft Drinks','Coke, Diet Coke, Thums Up or Sprite, chilled.','80'),('Water','Still or sparkling, chilled.','Still 1 L 60 · sparkling 330 ml 120')],1)
 spirits=rows([('Dewar’s White Label','Our highball whisky: honeyed and soft, served tall over ice with soda and a lemon twist.','200 / 380'),
  ('House Infused Vodkas','Lemongrass-ginger or chilli-garlic, infused in house and served ice-cold as a shot, or with tonic.','240 / 440'),
  ('Jameson','Irish whiskey, smooth with vanilla and toasted wood: neat, with ginger ale, or in our Irish coffee.','280 / 520'),
@@ -206,8 +242,8 @@ PRINT='''
  .face:last-child{break-after:auto}
  .mast{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:16px}
  .mast img{height:96px}.mast .t{font:13px PlexMono,monospace;letter-spacing:.2em;text-transform:uppercase;text-align:right;color:var(--burg)}.mast .t b{display:block;font:30px Alfa,serif;letter-spacing:.02em;color:var(--ink);font-weight:400;margin-bottom:4px}
- .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:.96}
- .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:1}.face.drinks .card .ph{aspect-ratio:4/3!important}.face.drinks .card{grid-template-columns:47% 1fr}
+ .cols{columns:3;column-gap:32px;column-fill:balance}.face.food .cols{zoom:.915}
+ .face.drinks .cols{columns:3;column-gap:32px;column-fill:balance;zoom:.965}.face.drinks .card .ph{aspect-ratio:4/3!important}.face.drinks .card{grid-template-columns:47% 1fr}
  .sec,.dark,.cream,.wine{padding:0!important;margin:0 0 9px;background:none!important;color:var(--ink)!important;break-inside:auto;height:auto!important;overflow:visible!important}
  .in{max-width:none;padding:0}
  .dark .sh small,.wine .sh small{color:var(--burg)}.dark .sh,.wine .sh{border-color:var(--burg)}
@@ -217,11 +253,12 @@ PRINT='''
  .grid{display:block;margin:8px 0 2px}.card{margin:0 0 8px;break-inside:avoid;display:grid;grid-template-columns:46% 1fr;column-gap:10px;align-items:start}.card .ph{aspect-ratio:4/3!important;border-radius:10px}.card figcaption{padding:0;min-width:0}.ph{aspect-ratio:4/3!important}
  .hero{display:block;margin:8px 0 10px;break-inside:avoid}.hero .ph{min-height:0;aspect-ratio:4/3}.hero figcaption{padding:12px 14px}.hero h3{font-size:26px}.hero p{font-size:14px;margin-bottom:8px}.hero .vars{margin-bottom:8px}.pair{font-size:13.5px;padding:6px 10px}
  h3{font-size:17px}figcaption p{font-size:14px}.meta{font-size:11.5px;margin-top:2px}.heat{font-size:15px}
+ .pr,.dark .pr,.wine .pr,.hero .pr{color:var(--ink)!important}.pr b,.pe,.dark .pe,.wine .pe,.dark .pr b,.wine .pr b{color:var(--burg)!important}.more .ln span.pe,.more .ln span b.pe{opacity:1;font-size:15.5px}.pr{margin-top:2px;font-size:14.5px}.pr b{font-size:16px}.pr .o{font-size:12.5px}.more .ln .pr span{font-size:inherit}
  .more{display:block;margin-top:6px}.more .ln{padding:1.5px 0;font-size:14.5px;line-height:1.28;break-inside:avoid}.more .ln span{font-size:14px;opacity:.95}
  .band{margin:8px 0;padding:8px 12px;break-inside:avoid;border-width:1.5px}.band strong{font-size:17px}.band span{font-size:13.5px}.band .big{font-size:24px}
  .vars span{padding:5px 11px;font-size:14px}
  .sh{display:block;break-inside:avoid;break-after:avoid}.sh h2,.sh small{display:inline-block;vertical-align:baseline}.sh small{margin-left:10px}.lede{break-after:avoid}.biglogo{display:none!important}.card h3{font-size:17px!important}.meta{display:block}.more .ln .meta span,.meta span{display:inline;font-size:inherit;opacity:inherit}.heat{margin-right:8px}.hero .meta{font-size:12px}
- #wok{break-before:column}.bowl-dim{display:block!important;margin-top:12px!important}.bowl-main{display:none!important}
+ #wok,.whk{break-before:column}.whk .sh.sub{margin-top:0}.bowl-dim{display:block!important;margin-top:12px!important}.bowl-main{display:none!important}
  .after.collapsed{display:block}
  .foot{position:absolute;left:44px;right:44px;bottom:22px;margin:0;font-size:11.5px;padding-top:7px;color:#5b4d40;border-top:1px solid var(--brass)}
 }
@@ -261,7 +298,7 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 <div class="face drinks">{mast('Drinks')}<div class="cols">
 <section class="sec cream" id="taps"><div class="in">
 {sh("Beer","Cold bottles · craft from up the coast")}
-<div class="band" style="margin:16px 0 0"><strong>Happy hour 12 to 6</strong><span class="hh">Kings 330 ml 99 <s>120</s> · Budweiser 330 ml 149 <s>180</s></span></div>
+<div class="band" style="margin:16px 0 0"><strong>Happy hour 12 to 6</strong><span class="hh"><span class="hp"><em>Kings 330 ml</em> <b>99</b> <s>120</s></span><span class="hp"><em>Budweiser 330 ml</em> <b>149</b> <s>180</s></span></span></div>
 <div class="grid" style="margin-top:20px">{taps_ph}</div>
 {taps_tx}
 </div></section>
@@ -273,9 +310,9 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 <section class="sec wine" id="spirits"><div class="in">
 {sh("Zero Proof","Pressed and brewed in house")}
 {zero}
-{sh("Whisky &amp; Vodka","30 / 60 ml",sub=True)}
+<div class="whk">{sh("Whisky &amp; Vodka","30 / 60 ml",sub=True)}
 <div class="band top" style="margin-top:18px"><strong>Single malt flight · 650</strong><span>Paul John, Glenlivet 12 and Talisker 10, 20 ml each, on a board with tasting notes and chilli peanuts.</span></div>
-{spirits}
+{spirits}</div>
 </div></section>
 <section class="sec cream" id="dessert"><div class="in">
 <button class="dessertbtn" id="dessertbtn" aria-expanded="false" aria-controls="after">Dessert and coffee ▾<small>Ready when you are: ask us, or tap here</small></button>
