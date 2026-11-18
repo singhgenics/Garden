@@ -50,8 +50,6 @@
 <text x="490.0" y="549.0" font-size="11" fill="#1d2a24" text-anchor="middle" font-weight="400">K28 sink</text>
 <rect x="445.0" y="660.0" width="75.0" height="90.0" fill="#f0c08a" stroke="#7d8a8f" stroke-width="1.2" opacity="0.9" />
 <text x="482.5" y="709.0" font-size="11" fill="#1d2a24" text-anchor="middle" font-weight="400">K3 fryer</text>
-<rect x="300.0" y="895.0" width="45.0" height="45.0" fill="#bcd9ea" stroke="#7d8a8f" stroke-width="1.2" opacity="0.9" />
-<text x="322.5" y="921.5" font-size="11" fill="#1d2a24" text-anchor="middle" font-weight="400">K13</text>
 <rect x="140.0" y="880.0" width="120.0" height="60.0" fill="#c9d1d4" stroke="#7d8a8f" stroke-width="1.2" opacity="0.9" />
 <text x="200.0" y="914.0" font-size="11" fill="#1d2a24" text-anchor="middle" font-weight="400">K6/K7 chillers</text>
 <rect x="125.0" y="320.0" width="120.0" height="68.0" fill="#c9d1d4" stroke="#7d8a8f" stroke-width="1.2" opacity="0.9" />
@@ -85,7 +83,6 @@
 <polyline points="584.0,410.0 615.0,410.0" fill="none" stroke="#2b7de9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 4"/>
 <polyline points="420.0,322.0 420.0,535.0 490.0,535.0 490.0,550.0" fill="none" stroke="#2b7de9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 4"/>
 <polyline points="420.0,535.0 320.0,535.0 320.0,560.0" fill="none" stroke="#2b7de9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 4"/>
-<polyline points="515.0,535.0 515.0,930.0 325.0,930.0 325.0,920.0" fill="none" stroke="#2b7de9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 4"/>
 <polyline points="370.0,322.0 370.0,298.0 380.0,180.0" fill="none" stroke="#2b7de9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 4"/>
 <rect x="250.0" y="600.0" width="240.0" height="10.0" fill="#2c2c2a" stroke="none" stroke-width="1" opacity="1" />
 <rect x="485.0" y="600.0" width="10.0" height="195.0" fill="#2c2c2a" stroke="none" stroke-width="1" opacity="1" />
@@ -173,9 +170,9 @@
 <text x="1166" y="585" font-size="15" font-weight="700" fill="#1d2a24">50 L heater D5 and hot to the sinks</text><text x="1660" y="585" font-size="11" fill="#5d6a62" text-anchor="end">checklist 4.4</text>
 <text x="1166" y="602" font-size="12.5" fill="#33423a">Over table D1; hot runs east to D2 and D3.</text>
 <circle cx="1144" cy="624" r="13" fill="#1f4f6e"/><text x="1144" y="629" font-size="13" fill="#fff" font-weight="700" text-anchor="middle">10</text>
-<text x="1166" y="629" font-size="15" font-weight="700" fill="#1d2a24">Cold to the kitchen and hand basins</text><text x="1660" y="629" font-size="11" fill="#5d6a62" text-anchor="end">checklist 4.4</text>
-<text x="1166" y="646" font-size="12.5" fill="#33423a">K28, wok tap K1, hand basin K13, washroom basin. Pressure test 1.5 × for 1</text>
-<text x="1166" y="663" font-size="12.5" fill="#33423a">hour.</text>
+<text x="1166" y="629" font-size="15" font-weight="700" fill="#1d2a24">Cold to the kitchen sink, wok tap and washroom basin</text><text x="1660" y="629" font-size="11" fill="#5d6a62" text-anchor="end">checklist 4.4</text>
+<text x="1166" y="646" font-size="12.5" fill="#33423a">K28, wok tap K1 and the washroom basin. The kitchen has no separate hand</text>
+<text x="1166" y="663" font-size="12.5" fill="#33423a">basin: K28 serves. Pressure test 1.5 × for 1 hour.</text>
 <circle cx="1144" cy="685" r="13" fill="#1f4f6e"/><text x="1144" y="690" font-size="13" fill="#fff" font-weight="700" text-anchor="middle">11</text>
 <text x="1166" y="690" font-size="15" font-weight="700" fill="#1d2a24">Washroom: separate soil line Y8</text><text x="1660" y="690" font-size="11" fill="#5d6a62" text-anchor="end">checklist 2.6</text>
 <text x="1166" y="707" font-size="12.5" fill="#33423a">WC and floor trap on their own line, not through the trap. Where it meets the</text>
