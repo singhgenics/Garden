@@ -1396,6 +1396,7 @@ bx(KX(0.90),KX(2.92),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(le
  [0.15,0.5].forEach(y=>bx(kx0+0.03,x1-0.03,y,y+0.03,z0+0.03,z1-0.03,M.timber,G.kitchen,false));
  bx(kx0+0.1,x1-0.08,0.94,0.955,z0+0.15,z0+0.6,S({color:'#3f8f55',roughness:0.6}),G.kitchen,false);   // green board, veg only (no sink here: the kitchen has one sink, K28)
  cyl(0.15,0.13,0.5,KX(0.95),0,KZ(2.8),S({color:'#3f8f55',roughness:0.7}),G.kitchen,14);}
+{const mx=kx0+0.30,mz=KZ(2.52);cyl(0.125,0.095,0.18,mx,0.94,mz,S({color:'#8a5a2b',roughness:0.8}),G.kitchen,16);rod(V(mx+0.03,1.16,mz),V(mx+0.07,1.02,mz+0.02),0.02,S({color:'#a77a47',roughness:0.8}),G.kitchen,false);}   // K16 wooden Thai mortar on K10, north end
 // rice cooker at the south end of the K10 veg bench, gas shut-off valve and leak detector at the door, extra dustbins on the south wall
 {const cx=kx0+0.27,cz=KZ(3.02);cyl(0.2,0.2,0.28,cx,0.94,cz,M.white,G.kitchen,20);cyl(0.18,0.2,0.05,cx,1.2,cz,M.ss,G.kitchen,20);sph(0.012,cx+0.15,1.05,cz,M.glow,G.kitchen);
  bx(KX(0.2),KX(0.5),1.4,1.7,kz0,kz0+0.12,M.red,G.kitchen);rod(V(KX(0.35),1.55,kz0+0.12),V(KX(0.35),1.55,kz0+0.28),0.012,M.black,G.kitchen,false);bx(KX(0.62),KX(0.72),1.5,1.58,kz0,kz0+0.06,M.black,G.kitchen,false);sph(0.012,KX(0.67),1.54,kz0+0.07,M.flame,G.kitchen);
