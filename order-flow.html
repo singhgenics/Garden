@@ -116,7 +116,7 @@ h2,h3{color:var(--ink)}
     
   </div>
   <h1>KOT and BOT flow</h1>
-  <p class="lead">One order on a tablet or phone becomes two tickets: the KOT for the kitchen and the BOT for the bar. This page shows who gets what, in what order, and how many copies are needed.</p>
+  <p class="lead">One order on a tablet or phone becomes two printed tickets: the KOT prints in the kitchen and the BOT prints at the bar. At opening there are no screens, so thermal printers do the job. This page shows who gets what, in what order, and how many copies are needed.</p>
 </div></header>
 <style>:root{--kot:#9a3b2a;--bot:#2443a6;--warn:#9a3b2a;--warn-soft:#f3d9d2;--green-soft:#e3ddc3}
 /* flow */
@@ -178,8 +178,8 @@ td.win{background:var(--green-soft);font-weight:500}
   <section>
     <div class="tldr">
       <div><b>One order, two tickets</b>Food items form the KOT. Drinks form the BOT. The waiter never sorts them by hand.</div>
-      <div><b>Paper copies: 1 per station</b>The old triplicate book needed 3 copies. A POS keeps the record itself, so one copy per station is enough.</div>
-      <div><b>With screens: 0 paper</b>The kitchen and bar screens replace the paper. A printer is only the backup.</div>
+      <div><b>Printed copies: 1 per station</b>The old triplicate book needed 3 copies. A POS keeps the record itself, so one copy per station is enough.</div>
+      <div><b>Screens come later</b>When kitchen and bar screens are added, they replace the slips and the printers become the backup.</div>
     </div>
   </section>
 
@@ -207,13 +207,13 @@ td.win{background:var(--green-soft);font-weight:500}
             <div class="arrow"></div>
             <div class="node">
               <span class="tag">KOT</span>
-              <h3>3a. Kitchen</h3>
-              <p>Appears on the kitchen screen, sorted by station (wok, steamer, fryer, cold). Slow dishes start first so the plates finish together. The ticket turns amber, then red, if it runs late.</p>
+              <h3>3a. Kitchen printer</h3>
+              <p>The KOT prints on the kitchen thermal printer, with the table, the dishes, the notes and the ticket number. The chef clips it on the rail and cooks in the order it arrives.</p>
             </div>
             <div class="arrow"></div>
             <div class="node">
-              <h3>4a. Chef taps Ready</h3>
-              <p>The dish moves to the pass.</p>
+              <h3>4a. Chef calls it up</h3>
+              <p>The dishes go to the pass. The slip comes off the rail once the table's food is out.</p>
             </div>
           </div>
           <div class="lane bot">
@@ -221,13 +221,13 @@ td.win{background:var(--green-soft);font-weight:500}
             <div class="arrow"></div>
             <div class="node">
               <span class="tag">BOT</span>
-              <h3>3b. Bar</h3>
-              <p>Appears on the bar screen. The bartender makes the drinks and pours.</p>
+              <h3>3b. Bar printer</h3>
+              <p>The BOT prints on the bar thermal printer. The bartender makes the drinks in the order the slips arrive.</p>
             </div>
             <div class="arrow"></div>
             <div class="node">
-              <h3>4b. Bartender taps Ready</h3>
-              <p>The drinks move to the pass.</p>
+              <h3>4b. Bartender sets drinks out</h3>
+              <p>The drinks go to the pass. The slip comes off the rail.</p>
             </div>
           </div>
         </div>
@@ -237,8 +237,8 @@ td.win{background:var(--green-soft);font-weight:500}
       <div class="arrow"></div>
       <div class="node start">
         <div class="who">Pass and waiter</div>
-        <h3>5. Pass shows "Ready to run"</h3>
-        <p>The waiter sees the table's food and drinks together and serves. Tapping Served closes the ticket.</p>
+        <h3>5. Waiter collects and serves</h3>
+        <p>Both stations call the table when the order is ready. The waiter checks the plates against the slip, then serves.</p>
       </div>
       <div class="arrow"><small>guest asks for the bill</small></div>
       <div class="node">
@@ -247,7 +247,7 @@ td.win{background:var(--green-soft);font-weight:500}
         <p>GST invoice for food, VAT invoice for liquor, built from the order already in the system. No ticket is copied or re-keyed.</p>
       </div>
     </div>
-    <p class="note" style="align-self:center">If a screen goes offline, the same KOT or BOT prints on that station's thermal printer instead.</p>
+    <p class="note" style="align-self:center">Two settings to get right: add a Kitchen KOT printer and a Bar BOT printer under Settings, Printers, and tick "Always print paper KOT and BOT slips". It is off by default because the POS expects screens.</p>
   </section>
 
   <section>
@@ -258,25 +258,25 @@ td.win{background:var(--green-soft);font-weight:500}
         <thead><tr><th>Setup</th><th>KOT (food)</th><th>BOT (drinks)</th><th>Who holds what</th></tr></thead>
         <tbody>
           <tr><td><b>Traditional paper book</b></td><td>3 copies</td><td>3 copies</td><td>Original to the kitchen or bar. Duplicate to the cashier, who bills from it. Triplicate stays with the waiter as proof of what was ordered.</td></tr>
-          <tr><td><b>POS with printers</b></td><td>1 copy</td><td>1 copy</td><td>One printout per station. The cashier and the waiter need no copy because the POS already holds the order.</td></tr>
-          <tr><td class="win"><b>POS with screens (Konso plan)</b></td><td class="win">0 paper</td><td class="win">0 paper</td><td class="win">The ticket lives on the kitchen and bar screens. The printer is the backup when a screen goes offline.</td></tr>
+          <tr><td class="win"><b>POS with printers (opening plan)</b></td><td class="win">1 copy</td><td class="win">1 copy</td><td class="win">One printout per station. The cashier and the waiter need no copy because the POS already holds the order.</td></tr>
+          <tr><td><b>POS with screens (later)</b></td><td>0 paper</td><td>0 paper</td><td>The ticket lives on the kitchen and bar screens. The printer is the backup when a screen goes offline.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>One printed KOT per station is the sensible minimum even with a POS. If the pass wants its own paper copy to track tables, that is a second copy for the kitchen only, and the screens do the same job.</p>
+    <p>One printed slip per station is the sensible minimum. If you later want a second copy for the pass to track tables, add it for the kitchen only. Screens will do that job when they arrive.</p>
   </section>
 
   <section>
     <h2>What happens when things change</h2>
     <div class="cases">
-      <div class="case"><h3>Guest adds a dish later</h3><p>The waiter taps Send KOT again. A new ticket, with the next number, goes only to the station that needs it. The earlier ticket is untouched.</p></div>
-      <div class="case bad"><h3>Guest cancels a dish</h3><p>If the kitchen already has it, a red CANCELLED card shows on that station's screen until someone taps OK. A manager PIN is needed to approve the void.</p></div>
+      <div class="case"><h3>Guest adds a dish later</h3><p>The waiter taps Send KOT again. A new slip, with the next number, prints only at the station that needs it. The earlier slip is untouched.</p></div>
+      <div class="case bad"><h3>Guest cancels a dish</h3><p>A slip headed VOID / CANCEL prints at that station with the reason, so the kitchen or bar stops making it. A manager PIN is needed to approve the void.</p></div>
       <div class="case"><h3>Table moves or merges</h3><p>The POS supports moving and merging tables, so the order and its tickets stay together on one bill.</p></div>
       <div class="case"><h3>Item runs out (86)</h3><p>Long-press the item and mark it 86 (out of stock), so waiters stop selling it.</p></div>
     </div>
   </section>
 
-  <footer>Companion to the <a href="kds.html">kitchen and bar screens</a>, the <a href="equipment-plan.html">equipment plan</a> and the <a href="sop.html">service playbook</a>. Copy counts for the paper book are general practice, not a legal rule. Printer brand and screen placement are still to be confirmed on site.</footer>
+  <footer>Screens are the later upgrade: see <a href="kds.html">kitchen and bar screens</a>, the <a href="equipment-plan.html">equipment plan</a> and the <a href="sop.html">service playbook</a>. Copy counts for the paper book are general practice, not a legal rule. Printer brand and screen placement are still to be confirmed on site.</footer>
 </div>
 </body>
 </html>
