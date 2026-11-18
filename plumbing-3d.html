@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Plumbing works 3D</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+:root{--bg:#f4efe4;--panel:#fffaf0;--ink:#1d2a24;--mute:#5d6a62;--line:#d9d0bc;--acc:#1f4f6e;
+ --drain:#b5651d;--cold:#2b7de9;--hot:#d6322b;--soil:#2e8b57;--trap:#6b6b63}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15201b;--panel:#1d2b25;--ink:#efe8d6;--mute:#a9b4ab;--line:#33443c;--acc:#7cc0ea}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+header{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+header h1{font-size:18px;margin:0;color:var(--ink)}
+@media (max-width:820px){header span{display:none}}
+body{overflow-x:hidden}
+aside h2{color:var(--ink)}
+header span{color:var(--mute);font-size:13px}
+header a:first-of-type{margin-left:auto}header a{font-size:13px;color:var(--acc)}
+main{flex:1;min-height:0;display:flex}
+#stage{position:relative;flex:1;min-width:0;background:linear-gradient(#e8e1d0,#cfd8cf)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #stage{background:linear-gradient(#22332b,#17231d)}}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+#pins{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px system-ui;text-align:center;border:2px solid #fff;box-shadow:0 2px 6px #0006;pointer-events:auto;cursor:pointer}
+.pin.on{background:#e0a100;color:#000;transform:translate(-50%,-50%) scale(1.25);z-index:5}
+.tag{position:absolute;transform:translate(-50%,-50%);font:600 11px/1.2 system-ui;color:#10201a;background:#fffaf0cc;border-radius:4px;padding:1px 5px;white-space:nowrap;pointer-events:none}
+.room{font:700 12px system-ui;letter-spacing:.12em;color:#10201a;opacity:.75;background:none}
+#bar{position:absolute;left:10px;top:10px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px)}
+#bar button,#bar label{font:600 13px system-ui;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 10px;border-radius:999px;cursor:pointer}
+#bar button:active{background:var(--acc);color:#fff}
+#bar label input{margin-right:5px}
+#legend{position:absolute;left:10px;bottom:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12px;display:grid;gap:3px}
+#legend i{display:inline-block;width:22px;height:5px;border-radius:3px;margin-right:6px;vertical-align:middle}
+aside{width:380px;max-width:44vw;border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:14px}
+aside h2{font-size:15px;margin:16px 0 6px}
+aside h2:first-child{margin-top:0}
+.card{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer;background:var(--bg)}
+.card.on{border-color:#e0a100;box-shadow:0 0 0 2px #e0a10066}
+.card b.n{display:inline-block;min-width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;text-align:center;line-height:22px;margin-right:6px;font-size:13px}
+.card .ref{float:right;font-size:11px;color:var(--mute)}
+.card p{margin:6px 0 0;font-size:13.5px}
+.card .ask{margin-top:6px;font-size:13px;color:var(--ink);border-left:3px solid #e0a100;padding-left:8px;display:none}
+.card.on .ask{display:block}
+.card .more{display:none}.card.on .more{display:block}
+.warn{background:#fff1c9;color:#3a2b00;border:1px solid #e3c35b;border-radius:10px;padding:10px 12px;font-size:13.5px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .warn{background:#3a3115;color:#f3e3a6;border-color:#6b5a20}}
+ul.q{margin:6px 0;padding-left:18px;font-size:13.5px}ul.q li{margin:3px 0}
+small{color:var(--mute)}
+@media (max-width:820px){
+ main{flex-direction:column}
+ #stage{flex:none;height:56vh}
+ aside{width:100%;max-width:none;border-left:0;border-top:1px solid var(--line);flex:1}
+ #legend{display:none}
+}
+</style>
+</head>
+<body>
+<header><h1>Plumbing works: kitchen, dish wash, grease trap</h1><span>Schematic cut-away for the plumber walk-through · drag to turn, pinch to zoom, tap a number</span><a href="plumbing-2d.png">2D plan</a><a href="equipment-plan.html" style="margin-left:12px">Equipment plan</a></header>
+<main>
+ <div id="stage">
+  <canvas id="c"></canvas><div id="pins"></div>
+  <div id="bar">
+   <button data-v="over">Overview</button><button data-v="dish">Dish wash</button><button data-v="kit">Kitchen</button><button data-v="trap">Grease trap</button><button data-v="wash">Washroom</button><button data-v="top">Plan view</button>
+   <label><input type="checkbox" id="t-floor" checked>See under the floor</label>
+   <label><input type="checkbox" id="t-drain" checked>Drains</label>
+   <label><input type="checkbox" id="t-water" checked>Water</label>
+   <label><input type="checkbox" id="t-eq" checked>Equipment</label>
+   <label><input type="checkbox" id="t-names">Equipment names</label>
+  </div>
+  <div id="legend">
+   <div><i style="background:var(--drain)"></i>Kitchen and dish-wash waste (to the grease trap)</div>
+   <div><i style="background:var(--soil)"></i>Washroom soil line (NOT through the trap)</div>
+   <div><i style="background:var(--cold)"></i>Cold water</div>
+   <div><i style="background:var(--hot)"></i>Hot water</div>
+  </div>
+ </div>
+ <aside id="side">
+  <div class="warn"><b>Read this first.</b> Schematic only. Pipe sizes, the trap size (about 90 L) and every route are estimates from our plans and site sketches; the plumber confirms or corrects each one. <b>The outfall (sewer, septic tank or soak pit) is not known.</b> Finding it and its level is job 1.</div>
+  <h2>The works, in order (tap one)</h2>
+  <div id="list"></div>
+  <h2>Ask the plumber</h2>
+  <ul class="q">
+   <li>Where does the drain finally go, and is it lower than the trap outlet? Is the 1:100 fall possible all the way?</li>
+   <li>Is about 90 L right for this kitchen? Is the council or FSSAI licence asking for a trap size or a position?</li>
+   <li>Where does the lid sit so it can be emptied weekly without crossing the garden path or guests?</li>
+   <li>Do the 100 mm line, the 75 mm trough outlet and the 50 mm sink wastes carry this load? Where do vents go?</li>
+   <li>Can the washroom soil line stay separate from the grease line, and where do the two meet after the trap?</li>
+   <li>Can the existing 500 L tank and its wall bracket take the load, and is the pressure enough for the heater and taps?</li>
+   <li>Flood test and pressure test: what will you do and when, before any tile goes down?</li>
+   <li>Time and cost for each numbered item; what must the mason or civil team do first?</li>
+  </ul>
+  <small>Sources: equipment plan (D, K and Y items), services sheet A-06 and trade checklist numbers 0.2, 2.1 to 2.4, 2.6, 4.4. Distances are in metres.</small>
+ </div>
+ </aside>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+/* Coordinates in metres, x = east, z = south, y = up; origin = west face of the kitchen/dish-wash block, north wall of the dish wash at z=0 (same as the 3D model, BX0 = 0). */
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const canvas=document.getElementById('c'),stage=document.getElementById('stage'),pinsEl=document.getElementById('pins');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(40,1,0.1,200);
+const ctl=new THREE.OrbitControls(cam,canvas);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI/2.02;ctl.minDistance=1.5;ctl.maxDistance=40;
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a8470,0.95));
+const sun=new THREE.DirectionalLight(0xffffff,0.8);sun.position.set(-6,14,-4);scene.add(sun);
+
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:0.7,metalness:0.05},o));
+const G={walls:new THREE.Group(),floor:new THREE.Group(),drain:new THREE.Group(),soil:new THREE.Group(),water:new THREE.Group(),eq:new THREE.Group(),trap:new THREE.Group()};
+Object.values(G).forEach(g=>scene.add(g));
+
+function box(g,x0,x1,y0,y1,z0,z1,mat){const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0),mat);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);g.add(m);return m}
+function cylY(g,r,h,x,y,z,mat,seg=24){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,seg),mat);m.position.set(x,y,z);g.add(m);return m}
+function seg(g,a,b,r,mat){const d=b.clone().sub(a),L=d.length();if(L<1e-4)return;const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,L,12),mat);m.position.copy(a).add(b).multiplyScalar(0.5);m.quaternion.setFromUnitVectors(V(0,1,0),d.normalize());g.add(m)}
+function pipe(g,pts,r,mat){if(mat===mDrain||mat===mSoil)r*=1.6;for(let i=0;i<pts.length-1;i++)seg(g,pts[i],pts[i+1],r,mat);pts.forEach(p=>{const s=new THREE.Mesh(new THREE.SphereGeometry(r*1.02,12,10),mat);s.position.copy(p);g.add(s)})}
+const pm=(c,e=0.25)=>M(c,{roughness:0.35,metalness:0.15,emissive:c,emissiveIntensity:e});
+const mDrain=pm(0xb5651d),mSoil=pm(0x2e8b57),mCold=pm(0x2b7de9),mHot=pm(0xd6322b);
+
+/* ---------- floors (slabs, room colours) ---------- */
+const floorMats=[];
+function slab(x0,x1,z0,z1,c){const m=M(c,{transparent:true,opacity:0.34,depthWrite:false});floorMats.push(m);box(G.floor,x0,x1,-0.15,0,z0,z1,m);
+ const e=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(x1-x0,0.15,z1-z0)),new THREE.LineBasicMaterial({color:0x6b6350,transparent:true,opacity:0.5}));e.position.set((x0+x1)/2,-0.075,(z0+z1)/2);G.floor.add(e)}
+slab(0,5.41,0,2.0,0xc9b48a);           // dish wash
+slab(0,5.41,2.0,6.38,0xd8c9a3);        // kitchen (+ closed strip east of the temporary wall)
+slab(2.45,5.41,-1.7,0,0x7f9bb0);       // washroom
+slab(0,2.45,-1.7,0,0xb9b39e);          // lobby
+slab(2.71,5.41,6.38,12.84,0xa9a9a0);   // store room
+/* ground outside (soil) east of the block, translucent so the trap shows */
+{const m=M(0x8a6b45,{transparent:true,opacity:0.28,depthWrite:false});box(G.floor,5.41,9.2,-0.55,0,-1.7,3.4,m)}
+
+/* ---------- low cut-away walls ---------- */
+const wallMat=M(0xe9e1cf,{roughness:0.9}),tempMat=M(0xd6a35b,{roughness:0.9}),H=0.9;
+const wx=(z0,z1,x,m=wallMat,t=0.2)=>box(G.walls,x-t/2,x+t/2,0,H,z0,z1,m);
+const wz=(x0,x1,z,m=wallMat,t=0.2)=>box(G.walls,x0,x1,0,H,z-t/2,z+t/2,m);
+// west wall: dish-wash doorway 0.73-1.90 and kitchen door 2.35-3.15
+wx(-1.7,0,0);wx(0,0.73,0);wx(1.9,2.35,0);wx(3.15,6.38,0);
+wz(0,2.45,-1.7);wz(2.45,5.41,-1.7);wx(-1.7,-1.45,2.45);wx(-0.75,0,2.45);     // lobby/washroom, door at 2.45 z -1.45..-0.75
+wz(0,5.41,0);        // dish wash north wall (washroom side)
+wz(0,5.41,2.0);      // dish wash / kitchen wall
+wx(-1.7,12.84,5.41,wallMat,0.2); // east wall
+wz(0,2.75,6.38);wz(3.65,4.2,6.38);wz(2.71,5.41,6.38,wallMat,0.0001); // kitchen south wall with the store door 2.75-3.65
+wx(6.38,12.84,2.71);wz(2.71,5.41,12.84);
+wx(2.0,6.38,4.2,tempMat,0.14);        // temporary wall (stays)
+box(G.walls,4.33,4.43,0,H,0,0.85,wallMat);box(G.walls,4.33,4.43,0,H,1.75,2.0,wallMat);   // D10 cell partition, 0.90 opening at z 0.85-1.75
+
+/* ---------- equipment (translucent so pipes read through) ---------- */
+const eqSS=M(0x9aa4a8,{metalness:0.5,roughness:0.4,transparent:true,opacity:0.5}),eqHot=M(0xc9632b,{transparent:true,opacity:0.5}),eqCold=M(0x6fa7c8,{transparent:true,opacity:0.5}),eqWood=M(0xb98d5a,{transparent:true,opacity:0.5}),eqW=M(0xf4f2ea,{transparent:true,opacity:0.9});
+const tags=[];  // {pos, text, room}
+function eq(id,name,x0,x1,z0,z1,h,mat,y0=0){box(G.eq,x0,x1,y0,y0+h,z0,z1,mat);tags.push({p:V((x0+x1)/2,y0+h+0.12,(z0+z1)/2),t:id+' '+name,kind:'eq'})}
+// kitchen: hot line on the north wall, fryer on the east (temporary) wall, sink in the NE corner
+eq('K2','stock range',0.9,1.85,2.1,2.85,0.8,eqHot);
+eq('K1','wok range',1.85,2.92,2.1,2.85,0.85,eqHot);
+eq('K4','steamer',2.94,3.49,2.1,2.85,0.9,eqHot);
+eq('K28','sink',3.6,4.2,2.1,2.6,0.85,eqSS);
+eq('K3','fryer',3.45,4.2,3.5,4.4,0.9,eqHot);
+eq('K13','hand basin',2.0,2.45,5.85,6.3,0.85,eqCold);
+eq('K6/K7','chillers',0.4,1.6,5.7,6.3,1.8,eqSS);
+// dish wash
+eq('D1','dirty-plate table',0.25,1.45,0.1,0.78,0.85,eqSS);
+eq('D4','clean table',2.8,4.12,0.1,0.78,0.85,eqSS);
+eq('D13','crockery racks',2.15,4.25,1.45,1.9,1.8,eqSS);
+eq('D2','wash sink',4.69,5.29,0.15,0.85,0.85,eqSS);
+eq('D3','rinse sink',4.69,5.29,0.95,1.65,0.85,eqSS);
+{const t=cylY(G.eq,0.34,1.3,4.84,2.35,1.0,M(0xf4f2ea,{transparent:true,opacity:0.92}),28);t.rotation.x=Math.PI/2;tags.push({p:V(4.84,2.95,1.0),t:'D9 500 L tank (existing)',kind:'eq'});}
+{cylY(G.eq,0.2,0.65,0.75,1.25,0.32,eqW);tags.push({p:V(0.75,1.75,0.32),t:'D5 50 L heater',kind:'eq'});}
+// washroom fittings
+eq('WC','',4.75,5.2,-1.2,-0.55,0.4,eqW);tags.push({p:V(4.98,0.7,-0.88),t:'WC',kind:'eq'});
+eq('Basin','',2.62,3.02,-1.55,-1.2,0.85,eqW);
+// store room note
+tags.push({p:V(4.0,0.2,9.6),t:'STORE ROOM: no water, no drain',kind:'room'});
+tags.push({p:V(1.0,0.2,4.2),t:'KITCHEN',kind:'room'});
+tags.push({p:V(2.7,0.2,1.0),t:'DISH WASH',kind:'room'});
+tags.push({p:V(4.0,0.2,-0.85),t:'WASHROOM',kind:'room'});
+tags.push({p:V(4.9,0.2,4.4),t:'closed strip',kind:'room'});
+
+/* ---------- DRAINS (orange): all kitchen and dish-wash water to the grease trap ---------- */
+const yD=-0.09,Z5=1.22;
+// floor drain D11 grating (aisle)
+box(G.drain,2.95,4.15,0,0.02,1.05,1.4,M(0x2c2c2a,{roughness:0.5}));tags.push({p:V(3.0,0.25,1.22),t:'D11 floor drain',kind:'drain'});
+// Y5 100 mm: D11 -> east through the cell opening and the east wall -> trap
+pipe(G.drain,[V(3.55,yD,Z5),V(5.76,yD,Z5)],0.05,mDrain);
+// Y4 50 mm wastes from D2 and D3 join Y5
+pipe(G.drain,[V(5.0,yD,0.5),V(5.0,yD,Z5)],0.025,mDrain);
+pipe(G.drain,[V(5.0,yD,1.3),V(5.0,yD,Z5)],0.025,mDrain);
+[0.5,1.3].forEach(z=>seg(G.drain,V(5.0,yD,z),V(5.0,0.55,z),0.025,mDrain));
+// Y3 75 mm: from the trough corner north under the dish-wash wall to join Y5
+pipe(G.drain,[V(3.9,yD,2.95),V(3.9,yD,Z5)],0.0375,mDrain);
+pipe(G.drain,[V(4.05,yD,2.35),V(3.9,yD,2.35)],0.025,mDrain);   // K28 sink waste joins Y3
+seg(G.drain,V(4.05,yD,2.35),V(4.05,0.5,2.35),0.025,mDrain);
+// Y1 L-shaped trough (cast channel with grating): front leg 2.40 m, east leg 1.90 m
+{const tm=M(0x2c2c2a,{roughness:0.5}),ch=M(0xb5651d,{roughness:0.6});
+ box(G.drain,1.5,3.9,-0.03,0.015,2.9,3.0,tm);box(G.drain,3.85,3.95,-0.03,0.015,2.9,4.85,tm);
+ box(G.drain,1.5,3.9,-0.08,-0.03,2.9,3.0,ch);box(G.drain,3.85,3.95,-0.08,-0.03,2.9,4.85,ch);
+ tags.push({p:V(2.7,0.2,3.2),t:'Y1 hot-line trough (L, 4.3 m)',kind:'drain'});}
+// floor falls: small arrows (1:100) kitchen toward the trough, dish wash toward D11
+[[0.9,4.5,0,-1],[2.2,4.8,0,-1],[2.2,5.6,0,-1],[3.1,4.4,1,0],[1.0,3.6,0,-1],[3.1,5.5,1,0]].forEach(([x,z,dx,dz])=>{const c=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.2,10),M(0xb5651d,{emissive:0xb5651d,emissiveIntensity:0.35}));c.position.set(x,0.04,z);
+ // cone default points +y; lay it flat and point it
+ const q=new THREE.Quaternion().setFromUnitVectors(V(0,1,0),V(dx,0,dz).normalize());c.quaternion.copy(q);G.drain.add(c)});
+[[0.9,1.5,1,0],[1.9,1.0,1,0],[2.3,1.45,1,0],[3.0,0.5,0,1]].forEach(([x,z,dx,dz])=>{const c=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.2,10),M(0xb5651d,{emissive:0xb5651d,emissiveIntensity:0.35}));c.position.set(x,0.04,z);c.quaternion.copy(new THREE.Quaternion().setFromUnitVectors(V(0,1,0),V(dx,0,dz).normalize()));G.drain.add(c)});
+
+/* ---------- GREASE TRAP Y6 + inspection chamber Y7 (outside the east wall) ---------- */
+{const g=G.trap;
+ const conc=M(0x8a8a82,{transparent:true,opacity:0.30,roughness:0.9,depthWrite:false}),lid=M(0x3b3b38,{roughness:0.6});
+ const tx0=5.76,tx1=6.36,tz0=Z5-0.2,tz1=Z5+0.2;
+ box(g,tx0,tx1,-0.5,-0.0,tz0,tz1,conc);                                   // 0.60 x 0.40, ~0.5 deep (schematic)
+ box(g,tx0+0.03,tx1-0.03,-0.5+0.03,-0.2,tz0+0.03,tz1-0.03,M(0x4aa3d8,{transparent:true,opacity:0.5,depthWrite:false}));   // water
+ box(g,tx0+0.03,tx1-0.03,-0.2,-0.16,tz0+0.03,tz1-0.03,M(0xd9b35c,{transparent:true,opacity:0.85}));   // grease layer floats on top
+ box(g,tx0+0.2,tx0+0.23,-0.5,-0.08,tz0,tz1,M(0x6b6b63));box(g,tx0+0.38,tx0+0.41,-0.38,0.0,tz0,tz1,M(0x6b6b63));   // two baffles
+ box(g,tx0-0.02,tx1+0.02,0.55,0.59,tz0-0.02,tz1+0.02,lid);                    // lid shown lifted so the inside can be seen (really sealed at ground level)
+ tags.push({p:V(6.06,0.75,Z5),t:'lid (lifted here; sealed on site)',kind:'trap'});
+ // inlet 100 mm (high), outlet to chamber (lower)
+ pipe(g,[V(tx1,-0.28,Z5),V(6.42,-0.28,Z5)],0.05,mDrain);
+ const cx0=6.39,cx1=6.84,cz0=Z5-0.225,cz1=Z5+0.225;
+ box(g,cx0,cx1,-0.6,0,cz0,cz1,conc);box(g,cx0+0.03,cx1-0.03,0,0.04,cz0+0.03,cz1-0.03,lid);
+ pipe(g,[V(cx1,-0.45,Z5),V(7.5,-0.45,Z5)],0.05,M(0xc0392b,{emissive:0xc0392b,emissiveIntensity:0.3}));
+ // dashed marker to the unknown outfall
+ for(let i=0;i<6;i++)seg(g,V(7.5+i*0.3,-0.45,Z5),V(7.5+i*0.3+0.15,-0.45,Z5),0.05,M(0xc0392b,{emissive:0xc0392b,emissiveIntensity:0.4}));
+ tags.push({p:V(6.06,-0.45,Z5-0.35),t:'Y6 grease trap (~90 L): grease floats, baffles hold it back',kind:'trap'});
+ tags.push({p:V(6.62,0.4,Z5+0.55),t:'Y7 inspection chamber (cover on)',kind:'trap'});
+ tags.push({p:V(8.7,0.25,Z5),t:'OUTFALL: NOT KNOWN YET (sewer, septic or soak pit?)',kind:'trap'});
+ tags.push({p:V(5.6,0.25,Z5+0.5),t:'100 mm in',kind:'trap'});
+}
+
+/* ---------- WASHROOM SOIL LINE Y8 (green), separate ---------- */
+{const g=G.soil;
+ pipe(g,[V(5.0,yD,-0.9),V(5.0,yD,-0.9),V(7.6,yD,-0.9)],0.045,mSoil);
+ pipe(g,[V(3.5,yD,-1.35),V(3.5,yD,-0.9),V(5.0,yD,-0.9)],0.03,mSoil);
+ box(g,3.4,3.6,0,0.02,-1.45,-1.25,M(0x2c2c2a));
+ seg(g,V(5.0,yD,-0.9),V(5.0,0.0,-0.9),0.045,mSoil);
+ for(let i=0;i<3;i++)seg(g,V(7.6+i*0.3,yD,-0.9),V(7.6+i*0.3+0.15,yD,-0.9),0.045,mSoil);
+ tags.push({p:V(6.5,0.3,-1.15),t:'Y8 washroom soil line (separate)',kind:'soil'});
+ tags.push({p:V(3.5,0.28,-1.6),t:'floor trap',kind:'soil'});
+}
+
+/* ---------- WATER ---------- */
+{const g=G.water,yC=1.9,zC=0.12;
+ // cold main from the tank outlet west along the north wall
+ pipe(g,[V(4.84,2.0,1.0),V(4.84,yC,1.0),V(4.84,yC,zC),V(0.75,yC,zC)],0.02,mCold);
+ // cold to the heater, hot from the heater back east along the wall to the two sinks
+ pipe(g,[V(0.75,yC,zC),V(0.75,0.95,zC),V(0.75,0.95,0.32),V(0.75,0.92,0.32)],0.015,mCold);
+ pipe(g,[V(0.75,1.58,0.32),V(0.75,1.65,0.32),V(0.75,1.65,0.2),V(5.0,1.65,0.2),V(5.0,1.25,0.2),V(5.0,1.25,0.5)],0.015,mHot);
+ pipe(g,[V(5.0,1.65,0.2),V(5.0,1.65,1.3),V(5.0,1.25,1.3)],0.015,mHot);
+ // cold to the two sink taps from the tank
+ pipe(g,[V(4.84,1.4,1.0),V(5.15,1.25,1.0),V(5.15,1.25,0.5)],0.015,mCold);pipe(g,[V(5.15,1.25,1.0),V(5.15,1.25,1.3)],0.015,mCold);
+ seg(g,V(4.84,yC,1.0),V(4.84,1.4,1.0),0.015,mCold);
+ // cold into the kitchen: wall penetration at x = 3.2, then to the sink K28, wok tap K1, and south to the hand basin K13
+ pipe(g,[V(3.2,yC,zC),V(3.2,yC,2.25),V(3.9,yC,2.25),V(3.9,1.2,2.25)],0.015,mCold);
+ pipe(g,[V(3.2,yC,2.25),V(2.2,yC,2.25),V(2.2,1.05,2.25)],0.015,mCold);
+ pipe(g,[V(4.15,yC,2.25),V(4.15,yC,6.2),V(2.25,yC,6.2),V(2.25,1.0,6.2)],0.013,mCold);
+ // cold to the washroom basin through the wall at x = 2.7
+ pipe(g,[V(2.7,yC,zC),V(2.7,yC,-0.12),V(2.8,yC,-1.3),V(2.8,1.1,-1.3)],0.013,mCold);
+ tags.push({p:V(2.0,2.05,0.0),t:'cold main from the tank (existing D9)',kind:'water'});
+ tags.push({p:V(2.2,1.78,0.2),t:'hot from D5',kind:'water'});
+ tags.push({p:V(3.2,2.1,3.3),t:'cold to K28, K1 tap, K13',kind:'water'});
+}
+
+/* ---------- DOM labels + pins ---------- */
+const labelsEl=document.createElement('div');pinsEl.appendChild(labelsEl);
+tags.forEach(t=>{const d=document.createElement('div');d.className='tag'+(t.kind==='room'?' room':'');d.textContent=t.t;labelsEl.appendChild(d);t.el=d});
+const WORKS=[
+ {n:1,ref:'0.2',k:'drain',title:'Find the outfall first',p:V(7.9,0.3,Z5),cam:'trap',
+  t:'Find where the drain finally goes (sewer, septic tank or soak pit) and measure its level against the kitchen floor.',
+  ask:'Nothing below can be fixed until this is known: the 1:100 falls only work if the outfall is lower than the trap outlet. Ask who owns the line and whether a connection permission is needed.'},
+ {n:2,ref:'2.1',k:'drain',title:'Dish-wash floor drain and 100 mm main line',p:V(3.55,0.25,Z5),cam:'dish',
+  t:'Cut the dish-wash floor. Lay the 100 mm drain Y5 from the floor drain D11 east, through the cell opening and the east wall, to the trap. Falls 1:100 (about 3.5 cm over 3.5 m). D11 also takes the mop bucket.',
+  ask:'Done when: pipes are at 1:100, bedded, and not yet covered. Check the pipe passes the cell opening (0.85 to 1.75 m) and the east wall at the right height.'},
+ {n:3,ref:'2.1',k:'drain',title:'Two sink wastes, 50 mm',p:V(5.0,0.7,0.9),cam:'dish',
+  t:'Wash sink D2 and rinse + sanitise sink D3 in the east cell: a 50 mm waste from each joins the 100 mm line at the east wall.',
+  ask:'Ask about traps on each waste and an air gap or vent. No dishwasher at the start, so these two sinks do all the washing.'},
+ {n:4,ref:'2.2',k:'trap',title:'Grease trap Y6 and inspection chamber Y7',p:V(6.06,0.2,Z5),cam:'trap',
+  t:'Build the cast masonry trap outside the east wall (about 0.60 × 0.40 m, about 90 L, plumber to size) with a sealed lid, then the inspection chamber 0.45 m square, then the line to the outfall. Kitchen and dish-wash water both pass through here. Emptied weekly.',
+  ask:'Done when: water poured at D11 reaches the outfall and the trap lid is sealed. Ask: size, depth, baffles, where the lid sits for emptying, and where the grease goes.'},
+ {n:5,ref:'2.3',k:'drain',title:'Hot-line trough Y1 and 75 mm outlet Y3',p:V(3.9,0.3,3.0),cam:'kit',
+  t:'Cast the L-shaped trough (4.3 m: 2.4 m in front of the stock and wok ranges, 1.9 m beside the fryer) with a removable grating. It takes wok water, hose-down and the fryer drain. A 75 mm outlet Y3 leaves its corner, goes through the north wall and joins the D11 line.',
+  ask:'Done when: the trough falls 1:100 to its north end and drains. Exact route of Y3 through the wall is for the plumber to confirm (clear of the sink K28 and the washroom shaft).'},
+ {n:6,ref:'2.3',k:'drain',title:'Kitchen sink K28 waste',p:V(4.05,0.7,2.35),cam:'kit',
+  t:'The kitchen has one sink (existing, north-east corner). Connect its waste into the Y3 outlet so it also goes through the grease trap.',
+  ask:'Sink size is typical, not measured. Check the existing waste is at the right height before the screed.'},
+ {n:7,ref:'2.4',k:'drain',title:'Screed to falls and waterproofing',p:V(1.6,0.12,4.7),cam:'kit',
+  t:'Screed so the kitchen floor falls 1:100 to the trough (about 4 cm over the room) and the dish wash falls to D11. Waterproofing membrane turned up the walls. Orange arrows show the direction of fall.',
+  ask:'Done when: straight-edge and level check at 2 m intervals. FLOOD TEST before any tile goes down.'},
+ {n:8,ref:'4.4',k:'water',title:'Cold water from the 500 L tank D9',p:V(4.84,2.35,1.0),cam:'dish',
+  t:'The existing 500 L tank over the east cell feeds the cold main along the north wall: to the two sink taps, to the heater, and on into the kitchen and washroom.',
+  ask:'Check the tank bracket and the wall under 500 L. Ask about pressure at the taps, a pump if needed, and a tank outlet valve.'},
+ {n:9,ref:'4.4',k:'water',title:'50 L water heater D5 and hot to the sinks',p:V(0.75,1.6,0.32),cam:'dish',
+  t:'Wall-mounted 50 L heater over the dirty-plate table D1 on the north wall. Cold in at the bottom; hot runs east along the wall to the wash and rinse sinks.',
+  ask:'Ask about the safety valve and its drain, the heater power point (electrician), and the length of the hot run.'},
+ {n:10,ref:'4.4',k:'water',title:'Cold to kitchen, wok tap and hand basins',p:V(3.9,1.3,2.25),cam:'kit',
+  t:'Cold branch through the dish-wash wall to the kitchen sink K28 and the wok range tap K1, then along the east side and south wall to the hand-wash basin K13. Another branch through the wall to the washroom basin.',
+  ask:'Done when: no leaks at 1.5 × working pressure for 1 hour. Hand basin K13 stands beside the store door and is needed for the food-safety rules. Routes are schematic.'},
+ {n:11,ref:'2.6',k:'soil',title:'Washroom: separate soil line Y8',p:V(5.0,0.5,-0.9),cam:'wash',
+  t:'WC and floor trap on their own soil line, NOT through the grease trap. Waterproof the floor and flood test.',
+  ask:'Ask where this line should meet the main drain: after the inspection chamber Y7, or its own run to the outfall. Not yet decided.'}
+];
+const listEl=document.getElementById('list');
+WORKS.forEach(w=>{
+ const d=document.createElement('div');d.className='card';d.dataset.n=w.n;
+ d.innerHTML=`<span class="ref">checklist ${w.ref}</span><b class="n">${w.n}</b><b>${w.title}</b><p>${w.t}</p><div class="ask"><b>Check:</b> ${w.ask}</div>`;
+ d.onclick=()=>pick(w.n);listEl.appendChild(d);
+ const p=document.createElement('div');p.className='pin';p.textContent=w.n;p.onclick=()=>pick(w.n);pinsEl.appendChild(p);w.pin=p;w.card=d;
+});
+let sel=0;
+function pick(n){sel=n;WORKS.forEach(w=>{w.pin.classList.toggle('on',w.n===n);w.card.classList.toggle('on',w.n===n)});
+ const w=WORKS[n-1];w.card.scrollIntoView({block:'nearest',behavior:'smooth'});fly(w.cam,w.p)}
+
+/* ---------- camera views ---------- */
+const VIEWS={
+ over:[V(3.9,0,1.6),V(3.2,12.5,8.2)],
+ dish:[V(3.0,0,1.0),V(3.0,8.8,4.6)],
+ kit:[V(2.3,0,3.8),V(2.3,9.5,9.0)],
+ trap:[V(6.2,-0.2,Z5),V(8.2,5.2,3.6)],
+ wash:[V(4.0,0.1,-0.8),V(3.8,4.8,3.4)],
+ top:[V(3.2,0,3.0),V(3.21,15.5,3.2)]
+};
+let tw=null;
+function fly(key,focus){const v=VIEWS[key];if(!v)return;let tgt=v[0].clone(),pos=v[1].clone();
+ if(focus&&key!=='over'&&key!=='top'){const off=pos.clone().sub(v[0]);tgt=focus.clone().lerp(v[0],0.35);pos=tgt.clone().add(off.multiplyScalar(0.8))}
+ tw={t0:performance.now(),d:800,p0:cam.position.clone(),t0v:ctl.target.clone(),p1:pos,t1v:tgt}}
+document.querySelectorAll('#bar button').forEach(b=>b.onclick=()=>{sel=0;WORKS.forEach(w=>{w.pin.classList.remove('on');w.card.classList.remove('on')});fly(b.dataset.v)});
+
+/* ---------- toggles ---------- */
+const $=id=>document.getElementById(id);
+function apply(){const fl=$('t-floor').checked;floorMats.forEach(m=>m.opacity=fl?0.34:0.95);
+ G.drain.visible=G.trap.visible=G.soil.visible=$('t-drain').checked;G.water.visible=$('t-water').checked;G.eq.visible=$('t-eq').checked;
+ WORKS.forEach(w=>{w.off=((w.k==='water'&&!$('t-water').checked)||((w.k==='drain'||w.k==='trap'||w.k==='soil')&&!$('t-drain').checked))})}
+['t-floor','t-drain','t-water','t-eq','t-names'].forEach(i=>$(i).onchange=apply);apply();
+
+/* ---------- loop ---------- */
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+addEventListener('resize',resize);resize();
+cam.position.copy(VIEWS.over[1]);ctl.target.copy(VIEWS.over[0]);
+const tmp=V(0,0,0);
+function place(el,p,show){tmp.copy(p).project(cam);if(!show||tmp.z>1||Math.abs(tmp.x)>1.1||Math.abs(tmp.y)>1.1){el.style.display='none';return}
+ el.style.display='';el.style.left=((tmp.x+1)/2*stage.clientWidth)+'px';el.style.top=((1-tmp.y)/2*stage.clientHeight)+'px'}
+function frame(now){
+ if(tw){const k=Math.min(1,(now-tw.t0)/tw.d),e=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;cam.position.lerpVectors(tw.p0,tw.p1,e);ctl.target.lerpVectors(tw.t0v,tw.t1v,e);if(k>=1)tw=null}
+ ctl.update();renderer.render(scene,cam);
+ const nm=$('t-names').checked,vis={drain:$('t-drain').checked,trap:$('t-drain').checked,soil:$('t-drain').checked,water:$('t-water').checked,eq:$('t-eq').checked,room:true};
+ const narrow=stage.clientWidth<700;
+ tags.forEach(t=>place(t.el,t.p,(t.kind==='eq'||t.kind==='water'||(narrow&&t.kind!=='room')?nm:true)&&vis[t.kind]));
+ WORKS.forEach(w=>place(w.pin,w.p,!w.off));
+ requestAnimationFrame(frame)}
+const q=new URLSearchParams(location.search);
+if(q.get('v')&&VIEWS[q.get('v')]){cam.position.copy(VIEWS[q.get('v')][1]);ctl.target.copy(VIEWS[q.get('v')][0])}
+if(q.has('names'))$('t-names').checked=true;if(q.has('solid')){$('t-floor').checked=false;apply()}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
