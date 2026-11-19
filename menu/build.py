@@ -9,7 +9,7 @@ CSS=r'''
 @font-face{font-family:Alfa;src:url(fonts/Prata-Regular.ttf)}
 @font-face{font-family:Plex;src:url(fonts/Montserrat.ttf);font-weight:100 700}
 @font-face{font-family:PlexMono;src:url(fonts/Montserrat-Medium.ttf)}
-:root{--green:#1F3D2E;--ink:#1D2A22;--cream:#F2E8D2;--paper:#FBF4E4;--brass:#C49A3C;--burg:#6A1622;--bou:#D81B7A;--mut:#5b4d40}
+:root{--green:#051C0A;--ink:#1D2A22;--cream:#F2E8D2;--paper:#FBF4E4;--brass:#C49A3C;--burg:#6A1622;--bou:#D81B7A;--mut:#5b4d40}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--ink);color:var(--cream);font:17px/1.45 Plex,system-ui,sans-serif}
 .sec{padding:56px 0 64px}.in{max-width:1100px;margin:0 auto;padding:0 24px}

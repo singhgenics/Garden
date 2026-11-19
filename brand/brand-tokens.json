@@ -3,7 +3,8 @@
  "tagline": "Pan Asian Kitchen | Pub",
  "colours": {
   "bottle-green": "#051C0A",
-  "konso-green": "#0B2A14",
+  "konso-green": "#051C0A",
+  "konso-green-2": "#0B2A14",
   "gold-foil": "#D89D3C",
   "gold-foil-highlight": "#F0BE62",
   "gold-foil-shadow": "#AA7A28",
