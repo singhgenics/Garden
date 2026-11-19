@@ -75,6 +75,7 @@ body.walk .pad{display:grid}
       <button data-view="backbar" aria-pressed="false">Back bar</button>
       <button data-view="kitchen" aria-pressed="false">Kitchen</button>
       <button data-view="dish" aria-pressed="false">Dish wash</button>
+      <button data-view="plumb" aria-pressed="false">Plumbing</button>
       <button data-view="wash" aria-pressed="false">Washroom</button>
       <button data-view="store" aria-pressed="false">Store room</button>
       <button data-view="pool" aria-pressed="false">Pool lounge</button>
@@ -88,6 +89,7 @@ body.walk .pad{display:grid}
         <button id="t-pvc" aria-pressed="false">PVC curtains up</button>
         <button id="t-lbl" aria-pressed="false">Labels</button>
         <button id="t-dims" aria-pressed="false">Sizes</button>
+        <button id="t-plumb" aria-pressed="false">Plumbing</button>
       </div>
       <div class="seg"><a class="seglink" href="https://singhgenics.github.io/Garden/menu/" target="_blank" rel="noopener">Picture menu &rarr;</a></div>
       <div class="seg"><a class="seglink" href="menu/table/" target="_blank" rel="noopener">Table menu &rarr;</a></div>
@@ -109,6 +111,7 @@ body.walk .pad{display:grid}
       <div class="seg"><a class="seglink" href="kds.html" target="_blank" rel="noopener">Kitchen screens</a></div>
       <div class="seg"><a class="seglink" href="order-flow.html" target="_blank" rel="noopener">KOT &amp; BOT flow</a></div>
       <div class="seg"><a class="seglink" href="brand-merch.html" target="_blank" rel="noopener">Brand &amp; merch</a></div>
+      <div class="seg"><button id="t-plw" aria-expanded="false" aria-controls="plwpanel">Plumbing works</button></div>
       <div class="seg"><button id="t-chk" aria-expanded="false" aria-controls="chkpanel">Opening checklist</button></div>
       <div class="seg"><button id="t-light" aria-expanded="false" aria-controls="lightpanel">Lighting · <span id="lc-name">Evening</span> ▾</button></div>
     </div>
@@ -121,6 +124,7 @@ body.walk .pad{display:grid}
   </div>
   <div class="card" id="card"><button class="x" id="cardx" aria-label="Close">×</button><div id="cardbody"></div></div>
   <div class="chkpanel" id="chkpanel" role="dialog" aria-label="Opening checklist" hidden><div class="chkbar"><b>Opening checklist</b><a href="opening-checklist.html" target="_blank" rel="noopener">Open in new tab</a><button id="chkx" type="button">Back to model</button></div><iframe id="chkframe" title="Opening checklist"></iframe></div>
+  <div class="chkpanel" id="plwpanel" role="dialog" aria-label="Plumbing works" hidden><div class="chkbar"><b>Plumbing works: kitchen, dish wash, grease trap</b><a href="plumbing-3d.html" target="_blank" rel="noopener">Open in new tab</a><button id="plwv" type="button">Show in the model</button><button id="plwx" type="button">Back to model</button></div><iframe id="plwframe" title="Plumbing works"></iframe></div>
   <div class="hint" id="hint">Drag to orbit · scroll to zoom · right-drag to pan</div>
   <div class="pad" id="pad"><span></span><button data-k="w">▲</button><span></span><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
 </div>
@@ -282,7 +286,7 @@ const EMI=[['dome',0.55],['beerGlass',0.5],['edisonGlass',0.2],['flameGlass',0.5
 
 /* ======================= scene helpers ======================= */
 const V=(x,y,z)=>new THREE.Vector3(x,y,z);
-const G={};['ground','floors','walls','roof','curt','deco','hall','bar','kitchen','dish','wash','store','fans','labelAnchors'].forEach(k=>{G[k]=new THREE.Group();scene.add(G[k]);});
+const G={};['ground','floors','walls','roof','curt','deco','hall','bar','kitchen','dish','wash','store','fans','plumb','labelAnchors'].forEach(k=>{G[k]=new THREE.Group();scene.add(G[k]);});
 function bx(x0,x1,y0,y1,z0,z1,mat,grp,sh){const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0),mat);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);if(sh!==false){m.castShadow=true;m.receiveShadow=true;}(grp||scene).add(m);return m;}
 function cyl(rt,rb,h,x,y,z,mat,grp,seg,sh){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||16),mat);m.position.set(x,y+h/2,z);if(sh!==false){m.castShadow=true;m.receiveShadow=true;}(grp||scene).add(m);return m;}
 function sph(r,x,y,z,mat,grp){const m=new THREE.Mesh(new THREE.SphereGeometry(r,14,10),mat);m.position.set(x,y,z);(grp||scene).add(m);return m;}
@@ -1370,8 +1374,10 @@ bx(KX(3.0),kx1,1.85,1.95,HZ0,KZ(2.5),M.ss,G.kitchen);bx(KX(3.05),kx1,1.95,2.55,H
  const fanM=new THREE.Mesh(new THREE.CylinderGeometry(0.34,0.34,0.3,20),M.ss);fanM.position.set((dx0+dx1)/2,BH+0.75,0.31);G.roof.add(fanM);
  cyl(0.42,0.3,0.12,(dx0+dx1)/2,BH+0.9,0.31,M.ssDark,G.roof,20);
  lbl('THE EXHAUST EXIT: one duct, one roof fan and cowl',(dx0+dx1)/2,BH+1.3,0.31,'k');}
-// floor drain channel in front of the line
-bx(KX(0.90),KX(2.92),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(let x=KX(0.92);x<KX(2.9);x+=0.1)bx(x,x+0.04,0.003,0.006,KZ(0.81),KZ(0.89),M.black,G.kitchen,false);bx(KX(3.20),KX(3.30),0.0,0.003,KZ(0.60),KZ(2.5),M.steel,G.kitchen,false);
+// floor drain channel in front of the line: one continuous L, 2.40 m along the front of K2 and K1 (to the east leg) then 1.90 m beside the fryer; the 75 mm outlet Y3 leaves the north end of the east leg
+// wok range water tap K1: swan neck on the splashback between the two woks, cold water
+{const tx=KX(2.385),tz=kz0+0.06;rod(V(tx,0.94,tz),V(tx,1.2,tz),0.014,M.ss,G.kitchen,false);rod(V(tx,1.2,tz),V(tx,1.2,tz+0.22),0.012,M.ss,G.kitchen,false);rod(V(tx,1.2,tz+0.22),V(tx,1.12,tz+0.22),0.012,M.ss,G.kitchen,false);}
+bx(KX(0.90),KX(3.30),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(let x=KX(0.92);x<KX(3.28);x+=0.1)bx(x,x+0.04,0.003,0.006,KZ(0.81),KZ(0.89),M.black,G.kitchen,false);bx(KX(3.20),KX(3.30),0.0,0.003,KZ(0.60),KZ(2.5),M.steel,G.kitchen,false);
 // ---- K8 under-counter chiller with worktop against the north face of the partition, facing the line: raw-protein bench (red board) ----
 {const xa=KX(2.25),xb=KX(3.15),z0=KZ(2.00),z1=KZ(2.70);ssBox(xa,xb,0.06,0.9,z0,z1);[xa+0.22,xa+0.68].forEach(x=>bx(x-0.2,x+0.2,0.15,0.75,z0-0.005,z0,M.ssDark,G.kitchen,false));bx(xa,xb,0.9,0.94,z0,z1,M.ss,G.kitchen);
  bx(xa+0.08,xa+0.5,0.94,0.955,z0+0.08,z0+0.46,S({color:'#b0432f',roughness:0.6}),G.kitchen,false);bx(xa+0.55,xa+0.82,0.94,0.955,z0+0.1,z0+0.44,S({color:'#2f6aa3',roughness:0.6}),G.kitchen,false);}
@@ -1455,7 +1461,52 @@ bx(KX(0.90),KX(2.92),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(le
  bx(BX1+0.35,BX1+0.95,-0.15,0.02,z-0.2,z+0.2,cm,g);bx(BX1+0.4,BX1+0.9,0.02,0.04,z-0.15,z+0.15,lid,g,false);
  bx(BX1+0.98,BX1+1.43,-0.15,0.02,z-0.225,z+0.225,cm,g);bx(BX1+1.02,BX1+1.39,0.02,0.04,z-0.19,z+0.19,lid,g,false);
  rod(V(BX1,-0.08,z),V(BX1+0.35,-0.08,z),0.05,M.blackMetal,g,false);
- lbl('Grease trap (Y6) and inspection chamber (Y7)',BX1+0.95,0.9,z,'k');}
+ lbl('Grease trap (Y6) and inspection chamber (Y7)',BX1+0.95,0.9,z,'k');labels[labels.length-1].also=true;}
+
+/* ======================= PLUMBING LAYER (toolbar: Plumbing) =======================
+   X-ray overlay of what is under the floor and behind the walls, drawn through everything: drains orange, washroom soil green, cold blue, hot red.
+   Positions follow the equipment plan (Y1-Y10, D2-D11) and services sheet A-06. Schematic: pipe sizes, routes and the 90 L trap are estimates; the outfall is not known. */
+{const g=G.plumb,L=x=>BX0+x,Z5=1.22,yD=-0.09;
+ const mk=c=>new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:1,depthTest:false,toneMapped:false});
+ const mD=mk(0xe07b1a),mS=mk(0x2fb36b),mC=mk(0x3a8dff),mH=mk(0xff4a3d),mO=mk(0xff2d20);
+ const pipe=(pts,r,m)=>{r*=1.5;for(let i=0;i<pts.length-1;i++)rod(V(...pts[i]),V(...pts[i+1]),r,m,g,false);pts.forEach(p=>{const q=new THREE.Mesh(new THREE.SphereGeometry(r*1.06,8,6),m);q.position.set(...p);g.add(q);});};
+ const PL=(t,x,y,z)=>{lbl(t,x,y,z,'k');labels[labels.length-1].plumb=true;};
+ // drains: Y5 100 mm main from the floor drain D11 east through the cell opening and the east wall to the trap; Y3 75 mm from the trough; D2/D3 50 mm wastes; K28 waste
+ pipe([[L(3.35),yD,Z5],[BX1+0.35,yD,Z5]],0.05,mD);
+ pipe([[L(3.35),yD,2.7],[L(3.35),yD,Z5]],0.04,mD);
+ pipe([[L(3.9),0.82,2.35],[L(3.9),yD,2.35],[L(3.35),yD,2.35]],0.027,mD);
+ [0.5,1.3].forEach(z=>pipe([[L(4.99),0.55,z],[L(4.99),yD,z],[L(4.99),yD,Z5]],0.027,mD));
+ // trough outlet marker at the north end of the east leg
+ {const m=new THREE.Mesh(new THREE.TorusGeometry(0.09,0.015,6,16),mD);m.rotation.x=Math.PI/2;m.position.set(L(3.35),0.02,2.72);g.add(m);}
+ // from the inspection chamber to the outfall (not known)
+ pipe([[BX1+1.43,-0.45,Z5],[BX1+2.6,-0.45,Z5]],0.05,mO);
+ // washroom soil line Y8: basin waste, floor trap and WC, its own run through the east wall, NOT through the grease trap
+ pipe([[L(3.05),0.7,-0.33],[L(3.05),yD,-0.33],[L(3.05),yD,-1.1],[L(4.3),yD,-1.1],[BX1+2.6,yD,-1.1]],0.045,mS);
+ pipe([[L(5.1),0.0,-1.1],[L(5.1),yD,-1.1]],0.045,mS);
+ // cold: tank D9 outlet to the main along the north wall, to the heater D5, the sink taps, K28, the wok tap K1 and the washroom basin
+ pipe([[L(4.84),1.0,1.0],[L(4.84),1.0,0.16],[L(0.85),1.0,0.16],[L(0.85),1.0,0.32],[L(0.85),1.25,0.32]],0.02,mC);
+ pipe([[L(4.84),1.12,1.0],[L(4.84),1.12,0.5]],0.017,mC);pipe([[L(4.84),1.12,1.0],[L(4.84),1.12,1.3]],0.017,mC);
+ pipe([[L(3.9),1.0,0.16],[L(3.9),1.0,2.16]],0.017,mC);
+ pipe([[L(2.485),1.0,0.16],[L(2.485),1.0,2.16],[L(2.485),0.94,2.16]],0.017,mC);
+ pipe([[L(3.05),1.0,0.16],[L(3.05),1.0,-0.17]],0.015,mC);
+ // hot: heater D5 up and east along the wall, down to the wash and rinse sinks
+ pipe([[L(0.85),1.9,0.32],[L(0.85),2.0,0.32],[L(0.85),2.0,0.18],[L(4.6),2.0,0.18],[L(4.6),1.2,0.18],[L(4.6),1.2,1.3]],0.017,mH);
+ pipe([[L(4.6),1.2,0.5],[L(4.69),1.2,0.5]],0.015,mH);
+ pipe([[L(1.25),1.0,0.16],[L(1.25),1.0,0.2]],0.015,mC);pipe([[L(1.25),2.0,0.18],[L(1.25),1.6,0.2]],0.015,mH);   // D1 pre-rinse spray: hot and cold
+ PL('Y5 · 100 mm drain from D11 to the grease trap, falls 1:100',L(3.9),0.55,Z5+0.35);
+ PL('Y3 · 75 mm trough outlet through the north wall',L(3.35),0.55,2.05);
+ PL('Y1 · hot-line trough, L-shaped, 4.3 m',KX(1.9),0.45,KZ(0.85));
+ PL('K28 sink waste joins Y3',L(3.9),0.55,2.4);
+ PL('D2 + D3 · 50 mm sink wastes',L(5.0),0.45,1.9);
+ PL('Cold from the 500 L tank D9',L(2.2),1.15,0.16);
+ PL('Hot from the 50 L heater D5',L(2.2),2.15,0.18);
+ PL('Cold to the wok tap K1',L(2.485),1.15,1.2);
+ PL('D1 pre-rinse spray: hot + cold',L(1.25),1.7,0.5);
+ PL('Cold to the sink K28',L(3.9),1.15,1.2);
+ PL('Y8 · washroom soil line, its own run (not through the trap)',BX1+1.6,0.3,-1.1);
+ PL('OUTFALL: NOT KNOWN YET (sewer, septic or soak pit?) · find it first',BX1+2.6,0.3,Z5);
+ g.traverse(o=>{if(o.isMesh)o.renderOrder=30;});
+ g.visible=false;}
 /* LPG cylinder bank (recommended siting): in the open air outside the east wall of the store room, midway between its two windows (at least 1.5 m from each),
    away from drains, the grease trap and every ignition source: a 0.90 m square chained steel cage on a raised concrete plinth, 4 x 19 kg cylinders, pipe to the kitchen at K29 */
 {const cx=BX1+0.6,cz=(BY1+1.05+SY1-1.05)/2,g=G.walls;bx(cx-0.55,cx+0.55,0,0.1,cz-0.55,cz+0.55,M.conc,g);
@@ -1496,6 +1547,8 @@ bx(KX(0.90),KX(2.92),0.0,0.003,KZ(0.80),KZ(0.90),M.steel,G.kitchen,false);for(le
   bx(-0.2,0.2,0.0,0.4,0.02,0.4,M.white,w);cyl(0.2,0.2,0.4,0,0,0.55,M.white,w,18);bx(-0.19,0.19,0.4,0.45,0.35,0.76,M.white,w,false);bx(-0.19,0.19,0.45,0.5,0.35,0.74,M.timber,w,false);
   bx(-0.22,0.22,0.5,1.05,0.04,0.22,M.white,w);cyl(0.035,0.035,0.02,0.1,1.05,0.13,M.ss,w,10,false);
   rod(V(0.35,0.9,0.03),V(0.35,0.75,0.12),0.015,M.ss,w,false);cyl(0.06,0.06,0.1,-0.38,0.8,0.07,M.white,w,12,false);}
+ // washroom floor trap (Y8) beside the WC, on the separate soil line
+ bx(BX0+4.23,BX0+4.37,0,0.004,-1.17,-1.03,M.steel,g,false);
  // high louvre window, plant, wall light
  bx(BX1-1.1,BX1-0.5,1.7,2.3,TY0+0.1,TY0+0.12,M.glass,g,false);
  {const bxp=TX0+0.6;[[-0.1,0.18],[0.0,0.2]].forEach(([dx,hh])=>{cyl(0.03,0.03,hh*0.8,bxp+0.25+dx,0.89,z1-0.08,M.amberBottle,g,10,false);cyl(0.008,0.008,0.05,bxp+0.25+dx,0.89+hh*0.8,z1-0.08,M.black,g,6,false);});
@@ -1599,12 +1652,13 @@ lbl('Store room · 2.70 × 6.46 m',SX0+1.35,3.2,BY1+3.2,'k');
 lbl('PVC roll-down curtains',-0.4,2.2,3.9,'o');
 [['15.67 m',7.8,0.05,-0.9],['7.76 m',-1.2,0.05,3.9],['4.71 m',1.1,0.05,9.8],['2.98 m',5.0,0.05,11.8],['5.45 m',7.5,0.05,8.2],['9.20 m',11.1,0.05,6.9],['5.00 m landing',EM,0.05,10.2],['5.00 m garden',7.1,0.05,16.0],['1.20 m approach path',10.4,0.05,15.6],['1.70 m gate',GXI-0.4,2.4,16.85],['0.80 m railing',-0.6,0.8,2.0],['3.46 m pathway',14.0,0.05,7.2],['1.60 m',(HX+BX0)/2,0.05,6.9]].forEach(([t,x,y,z])=>lbl(t,x,y,z,'d'));
 const lblEls=labels.map(l=>{const e=document.createElement('div');e.className='lbl '+l.cls;e.innerHTML=(l.cls==='d'?'':'<i></i>')+l.text;document.getElementById('labels').appendChild(e);return e;});
-const SHOW={lbl:false,dims:false};
+const SHOW={lbl:false,dims:false,plumb:false};
+function setPlumb(on){SHOW.plumb=on;G.plumb.visible=on;document.getElementById('t-plumb').setAttribute('aria-pressed',on);if(on){SHOW.lbl=true;document.getElementById('t-lbl').setAttribute('aria-pressed',true);}dirty=true;}
 const LPRI={'':0,o:1,w:2,k:3,d:4},LORDER=labels.map((l,i)=>i).sort((a,b)=>(LPRI[labels[a].cls]-LPRI[labels[b].cls])||a-b);
 function updateLabels(){const w=stage.clientWidth,h=stage.clientHeight,tmp=new THREE.Vector3(),sr=stage.getBoundingClientRect(),placed=[];const inside=camera.position.y<2.6;
   // keep labels off the controls and the open info card
   document.querySelectorAll('.toolbar .seg:not([hidden]),.toolbar .brand,#card').forEach(el=>{if(el.offsetParent===null&&el.id!=='card')return;if(el.id==='card'&&el.style.display==='none')return;const r=el.getBoundingClientRect();if(r.width)placed.push([r.left-sr.left,r.top-sr.top,r.right-sr.left,r.bottom-sr.top]);});
-  LORDER.forEach(i=>{const l=labels[i],e=lblEls[i];const on=l.cls==='d'?SHOW.dims:SHOW.lbl;if(!on){e.style.display='none';return;}
+  LORDER.forEach(i=>{const l=labels[i],e=lblEls[i];const on=(l.cls==='d'?SHOW.dims:SHOW.lbl)&&(l.plumb?SHOW.plumb:(!SHOW.plumb||l.also));if(!on){e.style.display='none';return;}
    if(inside&&l.cls!=='d'&&camera.position.distanceTo(l.p)>7){e.style.display='none';return;}   // eye-level views: only nearby labels, so other rooms don't show through walls
    tmp.copy(l.p).project(camera);if(tmp.z>1||tmp.z<-1||Math.abs(tmp.x)>1.05||Math.abs(tmp.y)>1.05){e.style.display='none';return;}
    const x=(tmp.x*0.5+0.5)*w,y=(-tmp.y*0.5+0.5)*h;if(!l.w){e.style.display='flex';l.w=e.offsetWidth;l.h=e.offsetHeight;}
@@ -1636,6 +1690,7 @@ const VIEWS={
  staffdoor:{p:[BX0+2.4,1.55,4.0],t:[BX0+3.2,1.2,BY1+1.2],card:'store',fov:68},
  kitchen:{p:[BX0+0.3,2.0,5.0],t:[BX0+2.7,0.9,2.7],card:'kitchen',fov:80},
  dish:{p:[BX0+0.35,1.7,1.7],t:[BX0+4.6,1.0,1.0],card:'dish',fov:72},
+ plumb:{p:[BX0+3.2,12.5,6.2],t:[BX0+3.2,0,1.9],card:'plumb',fov:46,roof:false},
  lobby:{p:[BX0+1.43,6.2,-0.2],t:[BX0+1.43,0,-0.95],card:'wash',fov:42,roof:false},
  wash:{p:[TX0+0.2,1.6,-1.1],t:[BX1,1.0,-1.1],card:'wash',fov:80},
  pool:{p:[3.6,1.65,4.7],t:[-2.4,1.0,3.6],card:'pool',fov:72},
@@ -1655,6 +1710,7 @@ const CARDS={
  backbar:['Back bar','Behind the counter','Runs behind the counter, with its bottles on two lit teak shelves within reach, against the end wall now painted bottle green. Olive back bar with a marble top, an amber onyx panel under green panelling, glass shelves and infusion jars, a lit mixer cooler, a plain base cabinet in the bay kept for an ice machine and glass washer, a lit bottle bay with the COLD BOTTLES board above it.',['Two glass-door bottle chillers: B1 on the back bar and B5 under the counter; beer is bottled only, no taps','Tea and coffee nook at the open-side end; the POS desk is beside the coffee station','Staff come in between the counter and the coffee station','Chilled garnish rail B22 on the work slab: sliced lime, lemon and orange, mint, basil, lemongrass, ginger and chilli, prepped each shift and dated']],
  bar:['Bar','The counter, 2.65 m, with a coffee station beside it','Re-measured: the counter is 2.65 m long and its bartender side is the existing 0.47 m wooden slab, 1.30 m clear of the 0.60 m back bar (so 1.90 m from the east wall). The coffee wall runs 2.20 m from the counter to the north end, in line with the counter, with a round blue pillar standing between the end of the counter and the wall; the coffee station, POS desk and fridge stand in front of it, parallel to the counter and flush with its front, and the 1.30 m aisle behind the wall has spare space and, on the aisle face of the coffee wall directly behind the blue pillar, an existing sink. The ceiling above the bar is only 1.10 m over the 1.08 m bar top (2.18 m), so the hanging glass rack and the beam hang inside that. The back bar has the bottle cooler, a plain base cabinet (no ice machine or glass washer at the start) and the tea and coffee nook; the POS desk with its cash drawer stands beside the coffee station. The counter is finished as exposed red brick (the tan ply on it today is temporary): brick pilasters on the front and a deeper brick pier at the hall end, a raised 1.08 m timber bar top, 0.35 m deep, with a brass edge and a warm LED lip, over the lower 0.47 m wooden work slab, brass foot rail, teak-seat black iron stools, a hanging glass rack, warm string lights along the counter edge and black iron brackets. Above it a reclaimed timber beam on black chains with rope lashings, trailing ivy and Edison bulbs on long drops.',['Coffee station on its left, against the exposed deep-red brick coffee wall (2.20 m) carrying the reference mural of the winking woman with red hanging-flower hair: royal-blue panelled cabinet with brass knobs and a marble top, twin filter-coffee brewer, hot-water urn, glasses kept in the cabinet so the mural reads in full','Bottles brought down onto the back bar shelves (1.80 m and 2.10 m, within reach), packed on teak shelves lit from below','The existing sink is modelled at an assumed size and place; the spare space in the aisle is noted, not modelled']],
  kitchen:['Kitchen','4.10 × 4.18 m clear, re-measured on site','Shortened from 5.21 m to 4.10 m: a temporary wall (which stays) closes the east side, with the WC shaft and a closed strip beyond it. The 0.80 m door is at the north end of the west wall. The granite platform is removed and the cooking line stands where it was, on the north wall (stock range, wok range, twin fryer), with a one-station dim sum steamer on the landing beside the sink in the north-east corner, the fryer on the east wall with 0.90 m of clear floor in front of the sink, and one continuous L-shaped hood above, drawing through a single duct. An existing sink stands at the north-east corner, where the granite ended. The false partition stays, as in the site photo: a white-painted timber and plywood panel about 2.2 m high and open above, with its door-less 0.90 m opening on the west face, beside the freezer; the 1.95 m store passage behind it has the store door moved west (2.65 to 3.55 m); the dual-zone upright stands against the south wall. A pass table stands right beside the door for order pick-up. The wall to the dish wash is solid, so there is a 0.70 m pass hatch with a closing shutter by the door; the old pass window and counter on the west wall are gone (solid wall). The gas shut-off valve and leak detector are by the door, and four colour-coded dustbins stand along the south wall. The only sink is the existing one in the north-east corner.',['Exhaust: the one exit. The hood duct leaves through the dish-wash wall, runs across the dish wash and goes up through the roof to the fan and cowl on the dish-wash roof','K8 under-counter chiller worktop against the partition is the raw-protein bench (red board); K10 veg bench and wash sink on the west wall','No separate hand basin: the sink K28 serves','Pass hatch with a shutter to the dish wash by the door; the old pass window is gone. Dimensions are from your site sketches; the store door position is to be confirmed','Chilled prep rail K33 on the K8 worktop: chopped garlic, ginger, capsicum, onion, spring onion, chilli, herbs and the ready sauces, within reach of the line']],
+ plumb:['Plumbing','Drains, grease trap and water: kitchen, dish wash, washroom','The Plumbing button shows the pipework through the floor and walls: orange is kitchen and dish-wash waste, green is the washroom soil line, blue is cold water and red is hot. Everything is schematic: the plumber confirms sizes and routes.',['Kitchen: hot-line trough Y1 (one L, 4.3 m) with a 75 mm outlet Y3, sink K28 waste, wok tap K1 (cold)','Dish wash: floor drain D11, 100 mm line Y5 to the grease trap Y6 and chamber Y7 outside the east wall, 50 mm wastes from the two sinks, 500 L tank D9, 50 L heater D5','Washroom soil line Y8 is separate, not through the trap','The outfall (sewer, septic tank or soak pit) is NOT known: find it first']],
  dish:['Dish wash','5.41 × 2.00 m, doorway 1.17 m','The west entry is now a 1.17 m doorway with no door. Dirty ware lands on the receiving table, goes through the 0.90 m opening into the 2.0 m cell at the east end (500 L tank overhead, two sinks: wash, then rinse and sanitise) and returns to the clean table beside the opening. Used plates are dropped on the table just inside the doorway, and all the working crockery is kept on racks along the south wall. The exhaust duct from the kitchen hood crosses overhead and rises at the north wall.',['500 L water tank over the cell, 2.0 m long','Hot-water cylinder, louvre extractor, floor drain','The 0.90 m opening in the cell wall is assumed, to be confirmed on site']],
  wash:['Washroom','2.96 × 1.70 m','As on site: the 70 cm door opens onto the hand-wash basin on the right (marble ledge, mirror), then a partition wall with a 70 cm opening, then the WC straight ahead at the far end. Walls in bright orange with black hand-drawn doodle art over a white tiled dado, as in the reference.',['Door opens from the lobby on the pathway side','Basin, partition and WC in a line, as in the site photo']],
  pool:['Pool lounge','Outside the hall\'s 7.76 m west edge','From your annotated plan: a walled lounge of about 14 m². The side toward the hall is 6.8 m, the rear wall (with the graffiti, facing the hall) is 4.2 m, the two corner walls are 2.8 m each, which makes it 2.48 m deep. A 1.6 m entrance opens from the hall. One 6 ft pool table and two standing (high) tables.',['The 6 ft table (2.14 × 1.22 m) leaves only about 0.5 to 0.75 m of cue space on its long sides: use short cues, or a smaller table','Graffiti wall, billiard lamp over the table, flat roof at 2.9 m','The hall edge keeps its balustrade and curtain either side of the entrance','Depth 2.48 m is worked out from your 2.8, 6.8 and 4.2 m figures: check it against the real site']],
@@ -1670,6 +1726,7 @@ let anim=null,walk=false,yaw=0,pitch=0;
 const ROOF={on:true};
 function setRoof(on){dirty=true;ROOF.on=on;G.roof.visible=on;document.getElementById('t-roof').setAttribute('aria-pressed',on);renderer.shadowMap.needsUpdate=true;}
 function go(k){document.querySelectorAll('#views button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===k));
+  if(k==='plumb')setPlumb(true);
   if(k==='walk'){setWalk(true);return;}if(walk)setWalk(false);const v=VIEWS[k];showCard(v.card);setFov(v.fov||48);
   if(k==='plan')setRoof(false);else if(v.roof!==undefined)setRoof(v.roof);
   anim={t:0,p0:camera.position.clone(),t0:controls.target.clone(),p1:V(...v.p),t1:V(...v.t)};}
@@ -1677,6 +1734,7 @@ document.querySelectorAll('#views button').forEach(b=>b.onclick=()=>go(b.dataset
 document.getElementById('t-roof').onclick=()=>setRoof(!ROOF.on);
 document.getElementById('t-pvc').onclick=e=>{pvcState.target=pvcState.target>0.5?0.06:1;e.target.setAttribute('aria-pressed',pvcState.target>0.5);e.target.textContent='PVC curtains '+(pvcState.target>0.5?'down':'up');};
 document.getElementById('t-lbl').onclick=e=>{SHOW.lbl=!SHOW.lbl;dirty=true;e.target.setAttribute('aria-pressed',SHOW.lbl);};
+document.getElementById('t-plumb').onclick=()=>setPlumb(!SHOW.plumb);
 document.getElementById('t-dims').onclick=e=>{SHOW.dims=!SHOW.dims;dirty=true;e.target.setAttribute('aria-pressed',SHOW.dims);};
 document.querySelectorAll('.lc-pre button').forEach(b=>b.onclick=()=>setPre(b.dataset.pre));
 document.getElementById('lc-time').oninput=e=>{LIGHT.t=e.target.value/100;document.querySelectorAll('.lc-pre button').forEach(x=>x.setAttribute('aria-pressed','false'));document.getElementById('lc-name').textContent='Custom';applyLight();};
@@ -1717,6 +1775,7 @@ if(Q.get('view')&&(VIEWS[Q.get('view')]||Q.get('view')==='walk')){const k=Q.get(
   if(k==='walk'){setWalk(true);if(Q.get('stop')){const s=stops.find(s=>s[0]===Q.get('stop'));if(s)lookAt(s[1],s[2]);}}else{const v=VIEWS[k];showCard(v.card);if(k==='plan')setRoof(false);else if(v.roof!==undefined&&Q.get('roof')===null)setRoof(v.roof);camera.position.set(...v.p);controls.target.set(...v.t);setFov(v.fov||48);}}
 if(Q.get('cam')){const c=Q.get('cam').split(',').map(Number);if(c.length>=6&&c.every(Number.isFinite)){document.querySelectorAll('#views button').forEach(b=>b.setAttribute('aria-pressed',false));camera.position.set(c[0],c[1],c[2]);controls.target.set(c[3],c[4],c[5]);setFov(c[6]||48);controls.update();}}
 if(Q.has('labels')){SHOW.lbl=true;document.getElementById('t-lbl').setAttribute('aria-pressed',true);}
+if(Q.has('plumb'))setPlumb(true);
 if(Q.has('sizes')){SHOW.dims=true;document.getElementById('t-dims').setAttribute('aria-pressed',true);}
 if(Q.has('nocard'))document.getElementById('card').style.display='none';
 
@@ -1795,6 +1854,12 @@ Promise.all(fonts).then(go,go);setTimeout(go,3000);
 })();
 </script>
 <script>
+(function(){var pn=document.getElementById('plwpanel'),fr=document.getElementById('plwframe'),b=document.getElementById('t-plw');
+function open(o){if(o&&!fr.getAttribute('src'))fr.src='plumbing-3d.html?embed';pn.hidden=!o;b.setAttribute('aria-expanded',o);if(o)document.getElementById('plwx').focus();else b.focus()}
+b.onclick=function(){open(pn.hidden)};document.getElementById('plwx').onclick=function(){open(false)};
+document.getElementById('plwv').onclick=function(){open(false);go('plumb')};
+addEventListener('keydown',function(e){if(e.key==='Escape'&&!pn.hidden)open(false)});
+if(/[?&]plumbing\b/.test(location.search))open(true)})();
 (function(){var pn=document.getElementById('chkpanel'),fr=document.getElementById('chkframe'),b=document.getElementById('t-chk');
 function open(o){if(o&&!fr.getAttribute('src'))fr.src='opening-checklist.html?embed';pn.hidden=!o;b.setAttribute('aria-expanded',o);if(o)document.getElementById('chkx').focus();else b.focus()}
 b.onclick=function(){open(pn.hidden)};document.getElementById('chkx').onclick=function(){open(false)};

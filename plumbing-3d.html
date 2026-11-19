@@ -18,8 +18,10 @@ header h1{font-size:18px;margin:0;color:var(--ink)}
 body{overflow-x:hidden}
 aside h2{color:var(--ink)}
 header span{color:var(--mute);font-size:13px}
-header a:first-of-type{margin-left:auto}header a{font-size:13px;color:var(--acc)}
+header .tab{font:600 13px system-ui;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}header .tab.on{background:var(--acc);color:#fff}header #tab3{margin-left:auto}header a{margin-left:8px;font-size:13px;color:var(--acc)}
 main{flex:1;min-height:0;display:flex}
+#p2{display:none;flex:1;overflow:auto;background:var(--bg);padding:10px;text-align:center}#p2 img{max-width:100%;height:auto;border:1px solid var(--line);background:#fbf8f0}#p2 a{display:block;margin:6px;color:var(--acc);font-size:13px}
+body.embed header h1,body.embed header>span,body.embed #tomodel{display:none}
 #stage{position:relative;flex:1;min-width:0;background:linear-gradient(#e8e1d0,#cfd8cf)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #stage{background:linear-gradient(#22332b,#17231d)}}
 canvas{display:block;width:100%;height:100%;touch-action:none}
@@ -58,7 +60,7 @@ small{color:var(--mute)}
 </style>
 </head>
 <body>
-<header><h1>Plumbing works: kitchen, dish wash, grease trap</h1><span>Schematic cut-away for the plumber walk-through · drag to turn, pinch to zoom, tap a number</span><a href="plumbing-2d.png">2D plan</a><a href="equipment-plan.html" style="margin-left:12px">Equipment plan</a></header>
+<header><h1>Plumbing works: kitchen, dish wash, grease trap</h1><span>Schematic cut-away for the plumber walk-through · drag to turn, pinch to zoom, tap a number</span><button class="tab on" id="tab3">3D</button><button class="tab" id="tab2">2D plan</button><a href="garden.html?view=plumb" id="tomodel" target="_top">See it in the main model</a></header>
 <main>
  <div id="stage">
   <canvas id="c"></canvas><div id="pins"></div>
@@ -77,6 +79,7 @@ small{color:var(--mute)}
    <div><i style="background:var(--hot)"></i>Hot water</div>
   </div>
  </div>
+ <div id="p2"><a href="plumbing-2d.pdf" target="_blank" rel="noopener">Open or print the 2D plan as a PDF</a><img src="plumbing-2d.png" alt="2D plan of the plumbing works"></div>
  <aside id="side">
   <div class="warn"><b>Read this first.</b> Schematic only. Pipe sizes, the trap size (about 90 L) and every route are estimates from our plans and site sketches; the plumber confirms or corrects each one. <b>The outfall (sewer, septic tank or soak pit) is not known.</b> Finding it and its level is job 1.</div>
   <h2>The works, in order (tap one)</h2>
@@ -165,10 +168,10 @@ eq('D13','crockery racks',2.15,4.25,1.45,1.9,1.8,eqSS);
 eq('D2','wash sink',4.69,5.29,0.15,0.85,0.85,eqSS);
 eq('D3','rinse sink',4.69,5.29,0.95,1.65,0.85,eqSS);
 {const t=cylY(G.eq,0.34,1.3,4.84,2.35,1.0,M(0xf4f2ea,{transparent:true,opacity:0.92}),28);t.rotation.x=Math.PI/2;tags.push({p:V(4.84,2.95,1.0),t:'D9 500 L tank (existing)',kind:'eq'});}
-{cylY(G.eq,0.2,0.65,0.75,1.25,0.32,eqW);tags.push({p:V(0.75,1.75,0.32),t:'D5 50 L heater',kind:'eq'});}
+{cylY(G.eq,0.2,0.65,0.85,1.25,0.32,eqW);tags.push({p:V(0.85,2.0,0.32),t:'D5 50 L heater',kind:'eq'});}
 // washroom fittings
-eq('WC','',4.75,5.2,-1.2,-0.55,0.4,eqW);tags.push({p:V(4.98,0.7,-0.88),t:'WC',kind:'eq'});
-eq('Basin','',2.62,3.02,-1.55,-1.2,0.85,eqW);
+eq('WC','',4.9,5.31,-1.3,-0.9,0.4,eqW);tags.push({p:V(5.1,0.7,-1.1),t:'WC',kind:'eq'});
+eq('Basin','',2.7,3.4,-0.52,-0.12,0.85,eqW);
 // store room note
 tags.push({p:V(4.0,0.2,9.6),t:'STORE ROOM: no water, no drain',kind:'room'});
 tags.push({p:V(1.0,0.2,4.2),t:'KITCHEN',kind:'room'});
@@ -181,19 +184,19 @@ const yD=-0.09,Z5=1.22;
 // floor drain D11 grating (aisle)
 box(G.drain,2.95,4.15,0,0.02,1.05,1.4,M(0x2c2c2a,{roughness:0.5}));tags.push({p:V(3.0,0.25,1.22),t:'D11 floor drain',kind:'drain'});
 // Y5 100 mm: D11 -> east through the cell opening and the east wall -> trap
-pipe(G.drain,[V(3.55,yD,Z5),V(5.76,yD,Z5)],0.05,mDrain);
+pipe(G.drain,[V(3.35,yD,Z5),V(5.76,yD,Z5)],0.05,mDrain);
 // Y4 50 mm wastes from D2 and D3 join Y5
 pipe(G.drain,[V(5.0,yD,0.5),V(5.0,yD,Z5)],0.025,mDrain);
 pipe(G.drain,[V(5.0,yD,1.3),V(5.0,yD,Z5)],0.025,mDrain);
 [0.5,1.3].forEach(z=>seg(G.drain,V(5.0,yD,z),V(5.0,0.55,z),0.025,mDrain));
 // Y3 75 mm: from the trough corner north under the dish-wash wall to join Y5
-pipe(G.drain,[V(3.9,yD,2.95),V(3.9,yD,Z5)],0.0375,mDrain);
-pipe(G.drain,[V(4.05,yD,2.35),V(3.9,yD,2.35)],0.025,mDrain);   // K28 sink waste joins Y3
+pipe(G.drain,[V(3.35,yD,2.7),V(3.35,yD,Z5)],0.0375,mDrain);
+pipe(G.drain,[V(3.9,yD,2.35),V(3.35,yD,2.35)],0.025,mDrain);   // K28 sink waste joins Y3
 seg(G.drain,V(4.05,yD,2.35),V(4.05,0.5,2.35),0.025,mDrain);
 // Y1 L-shaped trough (cast channel with grating): front leg 2.40 m, east leg 1.90 m
 {const tm=M(0x2c2c2a,{roughness:0.5}),ch=M(0xb5651d,{roughness:0.6});
- box(G.drain,1.5,3.9,-0.03,0.015,2.9,3.0,tm);box(G.drain,3.85,3.95,-0.03,0.015,2.9,4.85,tm);
- box(G.drain,1.5,3.9,-0.08,-0.03,2.9,3.0,ch);box(G.drain,3.85,3.95,-0.08,-0.03,2.9,4.85,ch);
+ box(G.drain,1.0,3.4,-0.03,0.015,2.9,3.0,tm);box(G.drain,3.3,3.4,-0.03,0.015,2.7,4.6,tm);
+ box(G.drain,1.0,3.4,-0.08,-0.03,2.9,3.0,ch);box(G.drain,3.3,3.4,-0.08,-0.03,2.7,4.6,ch);
  tags.push({p:V(2.7,0.2,3.2),t:'Y1 hot-line trough (L, 4.3 m)',kind:'drain'});}
 // floor falls: small arrows (1:100) kitchen toward the trough, dish wash toward D11
 [[0.9,4.5,0,-1],[2.2,4.8,0,-1],[2.2,5.6,0,-1],[3.1,4.4,1,0],[1.0,3.6,0,-1],[3.1,5.5,1,0]].forEach(([x,z,dx,dz])=>{const c=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.2,10),M(0xb5651d,{emissive:0xb5651d,emissiveIntensity:0.35}));c.position.set(x,0.04,z);
@@ -218,42 +221,39 @@ seg(G.drain,V(4.05,yD,2.35),V(4.05,0.5,2.35),0.025,mDrain);
  pipe(g,[V(cx1,-0.45,Z5),V(7.5,-0.45,Z5)],0.05,M(0xc0392b,{emissive:0xc0392b,emissiveIntensity:0.3}));
  // dashed marker to the unknown outfall
  for(let i=0;i<6;i++)seg(g,V(7.5+i*0.3,-0.45,Z5),V(7.5+i*0.3+0.15,-0.45,Z5),0.05,M(0xc0392b,{emissive:0xc0392b,emissiveIntensity:0.4}));
- tags.push({p:V(6.06,-0.45,Z5-0.35),t:'Y6 grease trap (~90 L): grease floats, baffles hold it back',kind:'trap'});
+ tags.push({p:V(6.06,-0.45,Z5-0.35),t:'Y6 grease trap (~90 L)',kind:'trap'});
  tags.push({p:V(6.62,0.4,Z5+0.55),t:'Y7 inspection chamber (cover on)',kind:'trap'});
  tags.push({p:V(8.7,0.25,Z5),t:'OUTFALL: NOT KNOWN YET (sewer, septic or soak pit?)',kind:'trap'});
  tags.push({p:V(5.6,0.25,Z5+0.5),t:'100 mm in',kind:'trap'});
 }
 
-/* ---------- WASHROOM SOIL LINE Y8 (green), separate ---------- */
+/* ---------- WASHROOM SOIL LINE Y8 (green), separate: basin waste, floor trap and WC, matches the main model ---------- */
 {const g=G.soil;
- pipe(g,[V(5.0,yD,-0.9),V(5.0,yD,-0.9),V(7.6,yD,-0.9)],0.045,mSoil);
- pipe(g,[V(3.5,yD,-1.35),V(3.5,yD,-0.9),V(5.0,yD,-0.9)],0.03,mSoil);
- box(g,3.4,3.6,0,0.02,-1.45,-1.25,M(0x2c2c2a));
- seg(g,V(5.0,yD,-0.9),V(5.0,0.0,-0.9),0.045,mSoil);
- for(let i=0;i<3;i++)seg(g,V(7.6+i*0.3,yD,-0.9),V(7.6+i*0.3+0.15,yD,-0.9),0.045,mSoil);
- tags.push({p:V(6.5,0.3,-1.15),t:'Y8 washroom soil line (separate)',kind:'soil'});
- tags.push({p:V(3.5,0.28,-1.6),t:'floor trap',kind:'soil'});
+ pipe(g,[V(3.05,0.7,-0.33),V(3.05,yD,-0.33),V(3.05,yD,-1.1),V(7.6,yD,-1.1)],0.045,mSoil);
+ box(g,4.23,4.37,0,0.02,-1.17,-1.03,M(0x2c2c2a));seg(g,V(4.3,yD,-1.1),V(4.3,0.0,-1.1),0.03,mSoil);
+ seg(g,V(5.1,yD,-1.1),V(5.1,0.0,-1.1),0.045,mSoil);
+ for(let i=0;i<3;i++)seg(g,V(7.6+i*0.3,yD,-1.1),V(7.6+i*0.3+0.15,yD,-1.1),0.045,mSoil);
+ tags.push({p:V(6.5,0.3,-1.4),t:'Y8 washroom soil line (separate)',kind:'soil'});
+ tags.push({p:V(4.3,0.28,-1.45),t:'floor trap',kind:'soil'});
 }
 
 /* ---------- WATER ---------- */
-{const g=G.water,yC=1.9,zC=0.12;
- // cold main from the tank outlet west along the north wall
- pipe(g,[V(4.84,2.0,1.0),V(4.84,yC,1.0),V(4.84,yC,zC),V(0.75,yC,zC)],0.02,mCold);
- // cold to the heater, hot from the heater back east along the wall to the two sinks
- pipe(g,[V(0.75,yC,zC),V(0.75,0.95,zC),V(0.75,0.95,0.32),V(0.75,0.92,0.32)],0.015,mCold);
- pipe(g,[V(0.75,1.58,0.32),V(0.75,1.65,0.32),V(0.75,1.65,0.2),V(5.0,1.65,0.2),V(5.0,1.25,0.2),V(5.0,1.25,0.5)],0.015,mHot);
- pipe(g,[V(5.0,1.65,0.2),V(5.0,1.65,1.3),V(5.0,1.25,1.3)],0.015,mHot);
- // cold to the two sink taps from the tank
- pipe(g,[V(4.84,1.4,1.0),V(5.15,1.25,1.0),V(5.15,1.25,0.5)],0.015,mCold);pipe(g,[V(5.15,1.25,1.0),V(5.15,1.25,1.3)],0.015,mCold);
- seg(g,V(4.84,yC,1.0),V(4.84,1.4,1.0),0.015,mCold);
- // cold into the kitchen: wall penetration at x = 3.2, then to the sink K28, wok tap K1
- pipe(g,[V(3.2,yC,zC),V(3.2,yC,2.25),V(3.9,yC,2.25),V(3.9,1.2,2.25)],0.015,mCold);
- pipe(g,[V(3.2,yC,2.25),V(2.2,yC,2.25),V(2.2,1.05,2.25)],0.015,mCold);
- // cold to the washroom basin through the wall at x = 2.7
- pipe(g,[V(2.7,yC,zC),V(2.7,yC,-0.12),V(2.8,yC,-1.3),V(2.8,1.1,-1.3)],0.013,mCold);
- tags.push({p:V(2.0,2.05,0.0),t:'cold main from the tank (existing D9)',kind:'water'});
- tags.push({p:V(2.2,1.78,0.2),t:'hot from D5',kind:'water'});
- tags.push({p:V(3.2,2.1,3.3),t:'cold to K28 and K1 tap',kind:'water'});
+{const g=G.water,yC=1.0,zC=0.16;
+ // cold main from the tank D9 outlet west along the north wall to the heater D5
+ pipe(g,[V(4.84,2.0,1.0),V(4.84,yC,1.0),V(4.84,yC,zC),V(0.85,yC,zC),V(0.85,yC,0.32),V(0.85,1.25,0.32)],0.02,mCold);
+ // hot: heater up and east along the wall, down to the wash and rinse sinks, and to the D1 pre-rinse spray
+ pipe(g,[V(0.85,1.9,0.32),V(0.85,2.0,0.32),V(0.85,2.0,0.18),V(4.6,2.0,0.18),V(4.6,1.2,0.18),V(4.6,1.2,1.3)],0.015,mHot);
+ pipe(g,[V(4.6,1.2,0.5),V(4.69,1.2,0.5)],0.013,mHot);pipe(g,[V(1.25,2.0,0.18),V(1.25,1.6,0.2)],0.013,mHot);pipe(g,[V(1.25,yC,zC),V(1.25,yC,0.2)],0.013,mCold);
+ // cold to the two sink taps
+ pipe(g,[V(4.84,1.12,1.0),V(4.84,1.12,0.5)],0.013,mCold);pipe(g,[V(4.84,1.12,1.0),V(4.84,1.12,1.3)],0.013,mCold);
+ // cold into the kitchen through the wall: sink K28, wok tap K1
+ pipe(g,[V(3.9,yC,zC),V(3.9,yC,2.16)],0.013,mCold);
+ pipe(g,[V(2.485,yC,zC),V(2.485,yC,2.16),V(2.485,0.94,2.16)],0.013,mCold);
+ // cold to the washroom basin through the wall
+ pipe(g,[V(3.05,yC,zC),V(3.05,yC,-0.17)],0.013,mCold);
+ tags.push({p:V(2.0,1.2,0.0),t:'cold main from the tank (existing D9)',kind:'water'});
+ tags.push({p:V(2.2,2.15,0.2),t:'hot from D5',kind:'water'});
+ tags.push({p:V(3.2,1.25,1.2),t:'cold to K28 and K1 tap',kind:'water'});
 }
 
 /* ---------- DOM labels + pins ---------- */
@@ -272,7 +272,7 @@ const WORKS=[
  {n:4,ref:'2.2',k:'trap',title:'Grease trap Y6 and inspection chamber Y7',p:V(6.06,0.2,Z5),cam:'trap',
   t:'Build the cast masonry trap outside the east wall (about 0.60 × 0.40 m, about 90 L, plumber to size) with a sealed lid, then the inspection chamber 0.45 m square, then the line to the outfall. Kitchen and dish-wash water both pass through here. Emptied weekly.',
   ask:'Done when: water poured at D11 reaches the outfall and the trap lid is sealed. Ask: size, depth, baffles, where the lid sits for emptying, and where the grease goes.'},
- {n:5,ref:'2.3',k:'drain',title:'Hot-line trough Y1 and 75 mm outlet Y3',p:V(3.9,0.3,3.0),cam:'kit',
+ {n:5,ref:'2.3',k:'drain',title:'Hot-line trough Y1 and 75 mm outlet Y3',p:V(3.35,0.3,3.0),cam:'kit',
   t:'Cast the L-shaped trough (4.3 m: 2.4 m in front of the stock and wok ranges, 1.9 m beside the fryer) with a removable grating. It takes wok water, hose-down and the fryer drain. A 75 mm outlet Y3 leaves its corner, goes through the north wall and joins the D11 line.',
   ask:'Done when: the trough falls 1:100 to its north end and drains. Exact route of Y3 through the wall is for the plumber to confirm (clear of the sink K28 and the washroom shaft).'},
  {n:6,ref:'2.3',k:'drain',title:'Kitchen sink K28 waste',p:V(4.05,0.7,2.35),cam:'kit',
@@ -284,13 +284,13 @@ const WORKS=[
  {n:8,ref:'4.4',k:'water',title:'Cold water from the 500 L tank D9',p:V(4.84,2.35,1.0),cam:'dish',
   t:'The existing 500 L tank over the east cell feeds the cold main along the north wall: to the two sink taps, to the heater, and on into the kitchen and washroom.',
   ask:'Check the tank bracket and the wall under 500 L. Ask about pressure at the taps, a pump if needed, and a tank outlet valve.'},
- {n:9,ref:'4.4',k:'water',title:'50 L water heater D5 and hot to the sinks',p:V(0.75,1.6,0.32),cam:'dish',
+ {n:9,ref:'4.4',k:'water',title:'50 L water heater D5 and hot to the sinks',p:V(0.85,1.6,0.32),cam:'dish',
   t:'Wall-mounted 50 L heater over the dirty-plate table D1 on the north wall. Cold in at the bottom; hot runs east along the wall to the wash and rinse sinks.',
   ask:'Ask about the safety valve and its drain, the heater power point (electrician), and the length of the hot run.'},
  {n:10,ref:'4.4',k:'water',title:'Cold to kitchen sink, wok tap and washroom basin',p:V(3.9,1.3,2.25),cam:'kit',
   t:'Cold branch through the dish-wash wall to the kitchen sink K28 and the wok range tap K1. Another branch through the wall to the washroom basin. No separate kitchen hand basin: K28 serves.',
   ask:'Done when: no leaks at 1.5 × working pressure for 1 hour. Routes are schematic.'},
- {n:11,ref:'2.6',k:'soil',title:'Washroom: separate soil line Y8',p:V(5.0,0.5,-0.9),cam:'wash',
+ {n:11,ref:'2.6',k:'soil',title:'Washroom: separate soil line Y8',p:V(5.1,0.5,-1.1),cam:'wash',
   t:'WC and floor trap on their own soil line, NOT through the grease trap. Waterproof the floor and flood test.',
   ask:'Ask where this line should meet the main drain: after the inspection chamber Y7, or its own run to the outfall. Not yet decided.'}
 ];
@@ -343,6 +343,9 @@ function frame(now){
  WORKS.forEach(w=>place(w.pin,w.p,!w.off));
  requestAnimationFrame(frame)}
 const q=new URLSearchParams(location.search);
+if(q.has('embed'))document.body.classList.add('embed');
+function tab(two){$('tab3').classList.toggle('on',!two);$('tab2').classList.toggle('on',two);stage.style.display=two?'none':'';$('side').style.display=two?'none':'';$('p2').style.display=two?'block':'none';if(!two)resize();}
+$('tab3').onclick=()=>tab(false);$('tab2').onclick=()=>tab(true);if(q.has('plan2d'))tab(true);
 if(q.get('v')&&VIEWS[q.get('v')]){cam.position.copy(VIEWS[q.get('v')][1]);ctl.target.copy(VIEWS[q.get('v')][0])}
 if(q.has('names'))$('t-names').checked=true;if(q.has('solid')){$('t-floor').checked=false;apply()}
 requestAnimationFrame(frame);
