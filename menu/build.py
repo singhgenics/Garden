@@ -100,6 +100,36 @@ JS='''
  if(location.hash==='#after'&&a){a.classList.remove('collapsed')}
 })();
 '''
+
+import random,urllib.parse
+def _uri(svg): return 'url("data:image/svg+xml,'+urllib.parse.quote(svg,safe="/:=,;() ")+'")'
+def brush(fill,streak,seed,w=400,h=64):
+    r=random.Random(seed); P=[(10,r.uniform(2,8))]
+    for i in range(1,9): P.append((10+i*(w-50)/8,r.uniform(0,6)))
+    y=4
+    while y<h-2:
+        P.append((w-(r.uniform(0,10) if int(y/4)%2 else r.uniform(14,40)),y)); y+=4
+    for i in range(8,-1,-1): P.append((10+i*(w-50)/8,h-r.uniform(0,7)))
+    y=h-4
+    while y>4:
+        P.append((r.uniform(0,6) if int(y/4)%2 else r.uniform(8,22),y)); y-=4
+    d='M'+' L'.join(f'{x:.1f} {y:.1f}' for x,y in P)+'Z'
+    st=''.join(f'<path d="M{r.uniform(24,90):.0f} {yy} H{r.uniform(w*.5,w-50):.0f}" stroke="{streak}" stroke-opacity=".22" stroke-width="1.6" fill="none"/>' for yy in (14,27,41,54))
+    return _uri(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" preserveAspectRatio="none"><path d="{d}" fill="{fill}"/>{st}</svg>')
+def splash(seed,n=34,w=300,h=226):
+    r=random.Random(seed); o=''
+    for i in range(n):
+        c=r.choice(['#1F3D2E','#1F3D2E','#C49A3C']); rad=r.choice([1.5,2,2.5,3,4,6])
+        o+=f'<circle cx="{r.uniform(0,w):.0f}" cy="{r.uniform(0,h):.0f}" r="{rad}" fill="{c}" fill-opacity="{r.uniform(.3,.7):.2f}"/>'
+    return _uri(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}">{o}</svg>')
+def speckle(seed,n=170,w=1123,h=1587):
+    r=random.Random(seed); o=''
+    for i in range(n):
+        c=r.choice(['#1F3D2E','#1F3D2E','#8A6A1E']); rad=r.choice([.8,1,1.2,1.6,2.2])
+        o+=f'<circle cx="{r.uniform(0,w):.0f}" cy="{r.uniform(0,h):.0f}" r="{rad}" fill="{c}" fill-opacity="{r.uniform(.12,.3):.2f}"/>'
+    return _uri(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" preserveAspectRatio="none">{o}</svg>')
+SPK=speckle(3)
+BR_GREEN=brush('#1F3D2E','#F2E8D2',7); BR_GOLD=brush('#C49A3C','#FBF4E4',11); SPL=splash(5)
 MK={'v':'<i class="m v" title="Veg"></i>','nv':'<i class="m n" title="Non-veg"></i>','vn':'<i class="m v" title="Veg"></i><i class="m n" title="Non-veg"></i>','':''}
 # veg / non-veg marker for every food line (FSSAI) and the filter; drinks have none and always show
 VEG={'Crystal Clear':'v','Fire Starters':'nv','Siu Mai Goodness':'nv','Prawn to Be Wild':'nv','Seoul Mate':'v','Fever Pitch':'nv','Bao Down':'nv',
@@ -114,13 +144,13 @@ AL={'Crystal Clear':'soy, wheat','Fire Starters':'wheat, sesame','Siu Mai Goodne
  'Wonton Kenobi':'wheat, egg','Slap Happy':'peanuts','Noodle Around':'wheat, soy (mixed: egg, shellfish)','Rice Rice Baby':'soy (chicken and mixed: egg)','Gravy Train':'soy, wheat','Sweet Talk':'soy, wheat (paneer: milk)',
  'Green With Envy':'(prawn option: shellfish)','Holy Basil, Batman!':'egg, soy','Suey Generis':'egg, wheat','Honey, I Shrunk the Noodles':'milk, wheat, sesame','Sticky Situation':'milk, sesame',
  'Scoop There It Is':'milk, peanuts, sesame','Comrade Crisp':'gluten','Gose Bumps':'gluten','Kings':'gluten','Budweiser':'gluten','Corona Extra':'gluten','Hoegaarden':'gluten (wheat, barley)','Eight Finger Eddie IPA':'gluten','Vanilla Porter':'gluten, milk (lactose)','Bucket of Five':'gluten',
- 'Somaek':'gluten','Soju Yakult':'milk','Irish Coffee':'milk','Kimchi Mary':'ask us (kimchi brine)'}
+ 'Somaek Bomb':'gluten','Yak Attack':'milk','Irish Coffee':'milk','Kimchi Mary':'ask us (kimchi brine)'}
 HEAT={'Konso Fever':2,'Honey Trap':1,'Salt & Pepa':1,'Wonton More':1,'Fire Starters':2,'Siu Mai Goodness':1,'Seoul Mate':1,'Fever Pitch':2,'K-Pop Wings':1,'Fry Hard':1,'Slap Happy':2,'Smash Hit':1,
  'Hot & Bothered':2,'Coconut Cuddle':1,'Noodle Around':1,'Holy Basil, Batman!':2,'Green With Envy':2,'Suey Generis':1,'Gravy Train':2,'Sweet Talk':1}
 def meta(name):
     h=HEAT.get(name,0); a=AL.get(name,'')
     if not h and not a: return ''
-    heat=f'<span class="heat" title="Spice {h} of 3">{"•"*h}</span>' if h else ''
+    heat=f'<span class="heat" title="Spice {h} of 3">Spice {"•"*h}</span>' if h else ''
     al=f'<span class="al">Contains: {a}</span>' if a else ''
     return f'<div class="meta">{heat}{al}</div>'
 def dv(name): return f' data-v="{VEG[name]}"' if name in VEG else ''
@@ -145,16 +175,20 @@ def pr(price):
         m=re.match(r'^(.*?)(\d[\d,]*(?: / \d[\d,]*)?)$',x)
         out.append(f'<span class="o">{m.group(1).strip()}</span> <b>{m.group(2)}</b>' if m and m.group(1).strip() else f'<b>{x}</b>')
     return '<div class="pr">'+'<i>·</i>'.join(f'<span>{o}</span>' for o in out)+'</div>'
+ITEMS={}
+def head(name,p,tag='div'):
+    pp='<b class="pe">'+p+'</b>' if single(p) else ''
+    return '<'+tag+' class="hd"><b>'+MK[VEG.get(name,"")]+name+'</b>'+pp+'</'+tag+'>'
 def card(img,name,sub,price,tag='',ar='3/2',span=6):
     t=f'<b class="tag">{tag}</b>' if tag else ''
-    d,p=split_price(sub,price)
+    d,p=split_price(sub,price); ITEMS[name]=(d,p)
     return (f'<figure class="card s{span}"{dv(name)}><div class="ph" style="--ar:{ar}"><img src="img/{img}.jpg" alt="{name}">{t}</div>'
-            f'<figcaption><h3>{MK[VEG.get(name,"")]}{name}</h3><p>{d}{pe(p) if single(p) else ""}</p>{"" if single(p) else pr(p)}{meta(name)}</figcaption></figure>')
+            f'<figcaption>{head(name,p,"h3")}<p>{d}</p>{"" if single(p) else pr(p)}{meta(name)}</figcaption></figure>')
 def rows(items,cols=2):
     out=[]
     for n,d,p in items:
-        d,p=split_price(d,p)
-        out.append(f'<div class="ln"{dv(n)}><b>{MK[VEG.get(n,"")]}{n}</b><span>{d}{pe(p) if single(p) else ""}</span>{"" if single(p) else pr(p)}{meta(n)}</div>')
+        d,p=split_price(d,p); ITEMS[n]=(d,p)
+        out.append(f'<div class="ln"{dv(n)}>{head(n,p)}<span class="ds">{d}</span>{"" if single(p) else pr(p)}{meta(n)}</div>')
     return f'<div class="more c{cols}">'+''.join(out)+'</div>'
 def sh(title,small,lede='',sub=False):
     l=f'<p class="lede">{lede}</p>' if lede else ''
@@ -175,9 +209,9 @@ hero=f'''<figure class="hero" data-v="vn"><div class="ph"><img src="img/cabinfev
 {meta('Konso Fever')}<div class="pair">Pair it with a bottle of <b>Gose Bumps</b> · 300</div></figcaption></figure>'''
 wok_tx=rows([('Honey Trap','Twice-fried potato fingers or chicken strips, tossed in a sticky honey-chilli glaze with sesame. Potato 220 · chicken 320',''),
  ('Fry Hard','Crisp fries loaded with housemade kimchi and melted cheese, finished under the torch with gochujang mayo.','240'),
- ('Wonton More','Hand-folded wontons fried golden to order, served hot with a sticky sweet chilli dip. Veg 240 · chicken 260',''),
- ('Salt & Pepa','Fried crisp in a thin batter, tossed with crushed pepper, fried garlic and green chilli, with kasundi mayo. Mushroom 260 · chonak 420 · prawns 460',''),
- ('K-Pop Wings','Six wings in a potato-starch crust, fried twice for a glass-crisp shell, brushed with soy-garlic or gochujang.','380')],1)
+ ('Wonton More','Hand-folded wontons fried golden to order, served hot with a sticky sweet chilli dip. Veg 240 · chicken 260','')],1)+\
+ '<div class="grid" style="margin-top:6px">'+card('saltpepa','Salt & Pepa','Fried crisp in a thin batter, tossed with crushed pepper, fried garlic and green chilli, with kasundi mayo. Mushroom 260 · chonak 420 · prawns 460','','','3/2',12)+\
+ card('kpop','K-Pop Wings','Six wings in a potato-starch crust, fried twice for a glass-crisp shell, brushed with soy-garlic or gochujang.','380','','3/2',12)+'</div>'
 soups=rows([('Smash Hit','Cucumber smashed to order so it soaks up black vinegar, garlic and housemade chilli oil, finished with sesame.','160'),
  ('Hot & Bothered','Mushroom, bamboo shoot, tofu and silky egg ribbons in a peppery broth finished sharp with black vinegar. Veg 180 · chicken 210',''),
  ('Wonton Kenobi','Our chicken wontons poached and floated in a clear ginger-chicken broth with bok choy and white pepper.','220'),
@@ -204,24 +238,34 @@ taps_tx=rows([('Kings','The coast’s own cult pilsner, crisp and a little malty
  ('Vanilla Porter','Susegado porter, dark and smooth, with roasted malt and a soft vanilla finish.','320'),
  ('Bucket of Five','Five ice-cold bottles in an ice bucket for the table. Kings 330 ml 499 · Budweiser 330 ml 749',''),],1)
 cock_ph=card('kokumsour','Kokum Feni Sour','Cashew feni from Goa shaken hard with kokum, lime and aquafaba for a silky pink foam, served up.','420','Konkan touch','3/2',12)
-cock_tx=rows([('Somaek','A shot of soju dropped into a cold lager, the loud and cheerful Seoul pub classic.','360'),
- ('Coconut Feni Highball','Coconut feni and housemade lemongrass syrup built over ice and topped with soda: our long, easy drink.','380'),
- ('Sichuan G&T','Gin and tonic built tall with grapefruit, finished with Sichuan pepper for a gentle, tingling hum.','420'),
- ('Soju Yakult','Soju, Yakult and fresh lime shaken over ice: sweet, tangy and dangerously easy, a Seoul bar classic.','420'),
- ('Kimchi Mary','Vodka, tomato and housemade kimchi brine rolled between tins to keep it smooth, with a gochugaru rim.','420'),
- ('Lychee & Lemongrass Martini','Vodka, lychee, lemongrass and lime, shaken hard, double-strained and crowned with a whole lychee.','440'),
- ('Tamarind Chilli Margarita','Agave spirit, tamarind and lime shaken and served on the rocks with a chilli-salt rim.','460')],1)
+cock_tx=rows([('Pink Panchayat','Coconut feni and housemade lemongrass syrup built over ice and topped with soda: long, easy, and the vote is unanimous.','380'),
+ ('Tingle All The Way','Gin and tonic built tall with grapefruit, finished with Sichuan pepper for a gentle, tingling hum.','420'),
+ ('Yak Attack','Soju, Yakult and fresh lime shaken over ice: sweet, tangy and dangerously easy, a Seoul bar classic.','420'),
+ ('Kimchi Mary','Vodka, tomato and housemade kimchi brine rolled between tins to keep it smooth, with a gochugaru rim. Brunch with a bite.','420'),
+ ('Lychee Lemon-Gras','Vodka, lychee, lemongrass and lime, shaken hard, double-strained and crowned with a whole lychee.','440'),
+ ('Tam-Tam Margarita','Agave spirit, tamarind and lime shaken and served on the rocks with a chilli-salt rim.','460'),
+ ('Somaek Bomb','A shot of soju dropped into a cold lager. Shout “Geonbae!” or it doesn’t count.','360')],1)
+
 zero=rows([('Fresh Lime Soda','Limes pressed to order with soda, sweet or salted: the table standard.','120'),
  ('Kokum Soda','Kokum and black salt over soda, the coast’s salty-sour pink summer cooler.','140'),
  ('Lemongrass-Ginger Iced Tea','Black tea brewed in house with lemongrass and ginger, then chilled and served over ice.','160'),
  ('Tonic or Ginger Ale','Indian tonic or ginger ale, over ice.','120'),('Soft Drinks','Coke, Diet Coke, Thums Up or Sprite, chilled.','80'),('Water','Still or sparkling, chilled.','Still 1 L 60 · sparkling 330 ml 120')],1)
-spirits=rows([('Dewar’s White Label','Our highball whisky: honeyed and soft, served tall over ice with soda and a lemon twist.','200 / 380'),
- ('House Infused Vodkas','Lemongrass-ginger or chilli-garlic, infused in house and served ice-cold as a shot, or with tonic.','240 / 440'),
- ('Jameson','Irish whiskey, smooth with vanilla and toasted wood: neat, with ginger ale, or in our Irish coffee.','280 / 520'),
- ('Paul John Brilliance','Indian single malt distilled in Cuncolim, South Goa: honey, vanilla and toffee, neat or on one large cube.','320 / 600'),
- ('Glenlivet 12','Speyside single malt, the easy first malt: pineapple, pear and vanilla, neat or on a rock.','420 / 800'),
- ('Suntory Toki Highball','Japanese blended whisky with green apple and white pepper, built tall with ice, soda and a lemon twist.','420'),
- ('Talisker 10','Isle of Skye single malt for peat lovers: sea salt, black pepper and bonfire smoke, neat.','520 / 1,000')],1)
+whisky=rows([('The Gateway','Dewar’s White Label highball, honeyed and soft.','200 / 380'),
+ ('Irish Eyes','Jameson: smooth vanilla and toasted wood, neat or with ginger ale.','280 / 520'),
+ ('Made in Cuncolim','Paul John, single malt from South Goa.','320 / 600'),
+ ('Easy Does It','Glenlivet 12, the friendly first malt.','420 / 800'),
+ ('Toki Time','Suntory Toki highball, crisp and green apple.','420'),
+ ('Bonfire Night','Talisker 10: sea salt and bonfire smoke.','520 / 1,000'),
+ ('The Flight','Paul John, Glenlivet and Talisker, 20 ml each, with chilli peanuts.','650')],1)
+vodka=rows([('Lemongrass-Ginger Vodka','Infused in house, ice-cold as a shot or long with tonic. Fresh and zingy.','240 / 440'),
+ ('Chilli-Garlic Vodka','Infused in house, for people who like to be woken up.','240 / 440'),
+ ('Clear Conscience','House vodka, tonic, lime. No regrets.','240 / 440')],1)
+wine=rows([('Bubbles','Sparkling brut, dim sum’s best friend.','450 / 1,900'),
+ ('Crisp White','Sauvignon Blanc, cuts through chilli and garlic.','380 / 1,600'),
+ ('Pink','Dry rosé. Pretty, and it behaves.','380 / 1,600'),
+ ('Easy Red','Shiraz, soft and fruity, good with pork belly.','400 / 1,700'),
+ ('Sangria Jug','Red wine and fruit. Serves 3 to 4.','1,100')],1)
+
 
 # ---- dessert face ----
 sweet_ph=card('darsaan','Honey, I Shrunk the Noodles','Flat noodles fried crisp, tossed in hot honey and sesame, with a scoop of vanilla ice cream.','220','Our dessert','3/2',12)
@@ -258,19 +302,79 @@ PRINT='''
  .band{margin:8px 0;padding:8px 12px;break-inside:avoid;border-width:1.5px}.band strong{font-size:17px}.band span{font-size:13.5px}.band .big{font-size:24px}
  .vars span{padding:5px 11px;font-size:14px}
  .sh{display:block;break-inside:avoid;break-after:avoid}.sh h2,.sh small{display:inline-block;vertical-align:baseline}.sh small{margin-left:10px}.lede{break-after:avoid}.biglogo{display:none!important}.card h3{font-size:17px!important}.meta{display:block}.more .ln .meta span,.meta span{display:inline;font-size:inherit;opacity:inherit}.heat{margin-right:8px}.hero .meta{font-size:12px}
- #wok,.whk{break-before:column}.whk .sh.sub{margin-top:0}.bowl-dim{display:block!important;margin-top:12px!important}.bowl-main{display:none!important}
+ .whk .sh.sub{margin-top:0}.bowl-dim{display:block!important;margin-top:12px!important}.bowl-main{display:none!important}
  .after.collapsed{display:block}
- .foot{position:absolute;left:44px;right:44px;bottom:22px;margin:0;font-size:11.5px;padding-top:7px;color:#5b4d40;border-top:1px solid var(--brass)}
+ .foot{position:absolute;left:36px;right:36px;bottom:22px;margin:0;font-size:11.5px;padding-top:7px;color:#5b4d40;border-top:1px solid var(--brass)}
 }
 '''
-def mast(t): return f'<div class="mast"><img src="logo/A-lockup-colour.svg" alt="Konso"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
+STYLE2=r"""
+:root{--bgreen:@BG;--bgold:@BO;--inkg:#12261B}
+.sh{border-bottom:1.5px solid #8884;padding-bottom:7px;align-items:center}
+.sh h2{display:inline-block;background:var(--bgreen) 0 0/100% 100% no-repeat;color:#F4E3AE;font:400 clamp(28px,5vw,40px)/1.05 Prata,Georgia,serif;letter-spacing:.03em;padding:.26em 1.7em .34em .75em;margin-left:-8px}
+.dark .sh h2,.wine .sh h2{background-image:var(--bgold);color:#12261B}
+.sh small{font:600 13.5px Plex,sans-serif;letter-spacing:.14em;color:var(--brass)}.cream .sh small{color:#1F3D2E}
+.more .ln{padding:10px 0 9px;border-top:1px solid #8885}.more .ln:first-child{border-top:0}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin:0}
+.hd>b:first-child{font:600 19px/1.2 Plex,sans-serif}.hd .pe{font:700 19px PlexMono,monospace;margin:0;color:var(--burg)}.dark .hd .pe,.wine .hd .pe{color:#E7C468}
+.more .ln .ds{display:block;font-size:15.5px;line-height:1.38;opacity:.92;margin-top:2px}
+.card figcaption p{font-size:15.5px;opacity:.92}
+.meta{font-size:13px;opacity:.85}.combos,.fill{display:none}
+.mast .mk img{display:block}
+@media print{
+ :root{--burg:#1F3D2E;--brass:#8A6A1E}
+ body{background:#fff}
+ .face{background:@SP var(--paper);color:var(--inkg);padding:28px 36px 18px;display:flex;flex-direction:column}
+ .mast{border:0;margin:0 0 10px;padding:0;position:relative;height:206px;align-items:flex-start;gap:20px}
+ .mast .mk{width:500px;padding-top:4px}.mast .mk img{width:470px}
+ .mast .ft{font:400 32px/1 Prata,serif;letter-spacing:.1em;text-transform:uppercase;color:#1F3D2E;margin-top:12px;border-top:1.5px solid #1F3D2E55;padding-top:14px}
+ .mast .splash{position:absolute;right:265px;top:0;width:300px;height:206px;background:@SPL no-repeat 0 0/100% 100%;z-index:0}
+ .mast .feat{position:relative;z-index:1;display:flex;align-items:center;gap:20px;flex:1;justify-content:flex-end}
+ .feat .disc{flex:none;width:184px;height:184px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E2AA4A,#C49A3C 55%,#9C7524);padding:9px;box-shadow:0 0 0 4px #1F3D2E}
+ .feat .disc{position:relative}.feat .disc::before{content:'';position:absolute;inset:-18px -8px -12px -24px;border-radius:50%;background:#E2AA4A;z-index:-1}
+ .seal{display:block;width:56px;height:56px;border-radius:50%;background:#1F3D2E;outline:1.5px solid #C49A3C;outline-offset:-4px;padding:13px 10px;box-sizing:border-box}.mast .mk .seal img{width:100%;height:auto;display:block}
+ .mast .ft{display:flex;justify-content:space-between;align-items:center}
+ .feat .disc img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+ .feat .fc{width:250px;color:var(--inkg)}.feat .fc small{font:700 13px Plex,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#7a5c14}
+ .feat .fc h3{font:400 27px/1.05 Prata,serif;margin:4px 0 7px}.feat .fc p{font-size:14.5px;line-height:1.35;margin:0 0 8px}
+ .feat .fc .fv{display:flex;flex-wrap:wrap;gap:6px}.feat .fc .fv span{background:#1F3D2E;color:#F4E3AE;border-radius:99px;padding:4px 12px;font-size:14px}.feat .fc .fv b{font:700 14.5px PlexMono,monospace;margin-left:5px;color:#fff}
+ .cols,.face.food .cols,.face.drinks .cols{zoom:1;flex:1;min-height:0;columns:3;column-gap:24px;column-fill:balance;position:relative;z-index:1}
+ .sec,.dark,.cream,.wine{color:var(--inkg)!important}
+ .dark .sh h2,.wine .sh h2{background-image:var(--bgreen);color:#F4E3AE}.dark .sh small,.wine .sh small{color:#1F3D2E}.dark .sh,.wine .sh{border-color:#8884}
+ .sh h2{font-size:25px}.sh{display:block!important;margin-bottom:5px}.sh small{display:inline-block;margin-left:12px;font-size:12.5px}.sh.sub{margin-top:12px}
+ .hero,.bowl-dim,.band,#cocktails .grid{display:none!important}
+ .more{margin-top:3px}.more .ln{padding:3px 0 3px;font-size:14px;line-height:1.28}.hd>b:first-child{font-size:17px}.hd .pe{font-size:17px}
+ .more .ln .ds{font-size:13.9px;line-height:1.28;opacity:1}.card figcaption p{font-size:13.9px;opacity:1}.lede{font-size:14.5px}
+ .meta{font-size:12px;opacity:.85;margin-top:0}.pr{font-size:14.5px}.pr b{font-size:16px}
+ .card{grid-template-columns:34% 1fr;margin:4px 0 2px;column-gap:9px}.card h3.hd{font-size:17px}.lede{margin:0 0 4px}.card .ph{border-radius:8px;outline:1.5px solid #1F3D2E}.tag{background:#1F3D2E!important;color:#F4E3AE!important;font-size:10.5px}
+ .fill{display:flex;align-items:center;gap:14px;background:#1F3D2E;color:#F2E8D2;border-radius:6px;padding:9px 14px;margin:8px 0 0;break-inside:avoid;outline:1.5px solid #C49A3C;outline-offset:-5px}.fill img{width:58px;flex:none}.fill p{margin:0;font-size:13.8px;line-height:1.3}.fill b{font:400 19px Prata,serif;color:#E7C468;display:block}
+ .combos{display:grid;grid-template-columns:repeat(3,1fr);margin:6px 0 30px;border:2px solid #1F3D2E;outline:1px solid #1F3D2E;outline-offset:3px;border-radius:3px;position:relative;z-index:1;background:var(--paper)}
+ .combos>div{padding:10px 16px 11px;border-left:1.5px solid #1F3D2E55}.combos>div:first-child{border:0}
+ .combos strong{display:block;font:400 21px/1.1 Prata,serif;color:#1F3D2E}.combos b{font:700 22px PlexMono,monospace;color:#1F3D2E;float:right}.combos span{display:block;font-size:13.5px;line-height:1.3;margin-top:4px}
+ .lede,.sh{break-inside:avoid}.face.drinks .cols{margin-bottom:60px}#dessert .card,#taps .card,#wok .lede,#taps .grid,#cocktails .grid,#dessert .grid{display:none!important}#taps .band{display:block!important;margin:6px 0 8px;padding:7px 11px;border:1.5px solid #1F3D2E;border-radius:3px}#taps .band strong{font-size:19px;color:#1F3D2E}#taps .band .hh{display:flex!important;gap:4px 14px;margin-top:3px}#taps .band .hp em{font-size:14px}#taps .band .hp b{font-size:17px;color:#1F3D2E}#taps .band s{font-size:13px}.foot{color:#2c3a31;font-size:12.5px;border-top:1.5px solid #1F3D2E55}
+}
+"""
+
+STYLE2=STYLE2.replace('@BG',BR_GREEN).replace('@BO',BR_GOLD).replace('@SPL',SPL).replace('@SP',SPK+' 0 0/100% 100% no-repeat,')
+
+def feat(img,tag,name,desc,vars_):
+    v=''.join(f'<span>{a}<b>{b}</b></span>' for a,b in vars_)
+    return (f'<div class="feat"><div class="disc"><img src="img/{img}.jpg" alt="{name}"></div>'
+            f'<div class="fc"><small>{tag}</small><h3>{name}</h3><p>{desc}</p><div class="fv">{v}</div></div></div>')
+def mast(t,ft):
+    return (f'<div class="mast"><div class="splash"></div><div class="mk"><img src="logo/B-lockup-tight.svg" alt="Konso · Pan Asian Kitchen | Bar"><div class="ft"><span>{t}</span><i class="seal"><img src="logo/B-monogram-gold.svg" alt=""></i></div></div>{ft}</div>')
+FEAT_FOOD=feat('cabinfever','Bestseller','Konso Fever','Double-fried, then tossed on full flame so the green chilli sauce catches and smokes.',[('Paneer',280),('Chicken',320),('Pork belly',360)])
+FEAT_DRINK=feat('kokumsour','Konkan touch','Kokum Feni Sour','Cashew feni from Goa shaken hard with kokum, lime and aquafaba for a silky pink foam, served up.',[('Only',420)])
+COMBOS='''<div class="combos"><div><strong>Steamer for two <b>799</b></strong><span>2 baskets of dim sum and a plate of bao, our pick of the day. Best with a Comrade Crisp.</span></div>
+<div><strong>Bowl Game <b>lunch 12–4</b></strong><span>Any noodles or fried rice + Konso Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
+<div><strong>Feast for four <b>2,299</b></strong><span>4 soups, Konso Fever chicken, Salt &amp; Pepa chonak, mixed Noodle Around, Green With Envy with rice, darsaan.</span></div></div>'''
+def mast_old(t): return f'<div class="mast"><img src="logo/A-lockup-colour.svg" alt="Konso"><div class="t"><b>{t}</b>Wok | Steam | Draught</div></div>'
 body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Konso · Picture menu</title><style>{CSS}{EXTRA}{PRINT}</style></head><body>
+<title>Konso · Picture menu</title><style>{CSS}{EXTRA}{PRINT}{STYLE2}</style></head><body>
 <nav><div class="flt" role="group" aria-label="Show"><button data-m="all" aria-pressed="true">All</button><button data-m="veg" aria-pressed="false">Veg</button><button data-m="nv" aria-pressed="false">Non-veg</button></div><a href="#dimsum">Dim sum &amp; bao</a><a href="#wok">Wok</a><a href="#mains">Mains</a><a href="#taps">Beer</a><a href="#cocktails">Cocktails</a><a href="#dessert">Dessert</a></nav>
 
-<div class="face food">{mast('Food')}<div class="cols">
+<div class="face food">{mast("Food",FEAT_FOOD)}<div class="cols">
 <section class="sec dark pg1" id="dimsum"><div class="in">
-<img src="logo/A-lockup-reversed.svg" alt="Konso · Wok Steam Draught" class="biglogo" style="display:block;margin:-24px auto 22px;width:min(420px,80%);border-radius:14px">
+<img src="logo/B-lockup-gold.svg" alt="Konso · Wok Steam Draught" class="biglogo" style="display:block;margin:-24px auto 22px;width:min(420px,80%);border-radius:14px">
 {sh("Dim Sum &amp; Bao","Hand-folded · dim sum 4 to a basket · bao 2 to a plate")}
 <div class="band top" style="margin-top:20px"><strong>Steamer for two · 799</strong><span>2 baskets of dim sum and a plate of bao, our pick of the day. Best with a Comrade Crisp.</span></div>
 <div class="grid" style="margin-top:0">{dim_ph}</div>
@@ -293,9 +397,10 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 {mains_tx}
 <div class="band bowl-main" style="margin-top:16px"><span><strong>Bowl Game · lunch, 12 to 4</strong><br>Any noodles or fried rice + Konso Fever chicken 440, or paneer 380, or a green curry with rice 360.</span></div>
 </div></section>
-</div></div>
+<div class="fill"><img src="logo/B-monogram-gold.svg" alt=""><p><b>Allergies?</b> Please tell us before you order. Our kitchen also handles shellfish, nuts, gluten, egg, soy and milk.</p></div>
+</div>{COMBOS}</div>
 
-<div class="face drinks">{mast('Drinks')}<div class="cols">
+<div class="face drinks">{mast("Drinks &amp; Dessert",FEAT_DRINK)}<div class="cols">
 <section class="sec cream" id="taps"><div class="in">
 {sh("Beer","Cold bottles · craft from up the coast")}
 <div class="band" style="margin:16px 0 0"><strong>Happy hour 12 to 6</strong><span class="hh"><span class="hp"><em>Kings 330 ml</em> <b>99</b> <s>120</s></span><span class="hp"><em>Budweiser 330 ml</em> <b>149</b> <s>180</s></span></span></div>
@@ -310,9 +415,9 @@ body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 <section class="sec wine" id="spirits"><div class="in">
 {sh("Zero Proof","Pressed and brewed in house")}
 {zero}
-<div class="whk">{sh("Whisky &amp; Vodka","30 / 60 ml",sub=True)}
-<div class="band top" style="margin-top:18px"><strong>Single malt flight · 650</strong><span>Paul John, Glenlivet 12 and Talisker 10, 20 ml each, on a board with tasting notes and chilli peanuts.</span></div>
-{spirits}</div>
+{sh("Vodka","Infused in house · 30 / 60 ml",sub=True)}{vodka}
+<div class="whk">{sh("Whisky","30 / 60 ml",sub=True)}
+{whisky}{sh('Wine','Glass / bottle',sub=True)}{wine}</div>
 </div></section>
 <section class="sec cream" id="dessert"><div class="in">
 <button class="dessertbtn" id="dessertbtn" aria-expanded="false" aria-controls="after">Dessert and coffee ▾<small>Ready when you are: ask us, or tap here</small></button>
