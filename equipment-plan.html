@@ -319,7 +319,7 @@ const KIT=[
  ['K12','Wall shelf, one tier (spices, sauces in squeeze bottles)',1,0.30,1.15,0.04,'West wall above the pass table K11, at 1.30 m, below screen S2. The only wall storage in the kitchen; the stock plan keeps the jars and bottles in use here',0],
  ['K14','Rice cooker / warmer, 10 L',1,0.45,0.45,0.45,'On the K10 veg bench, south end (2.82 to 3.22 m from the north wall). Plain Jane and rice bowls',0],
  ['K16','Wooden Thai mortar and pestle, about 25 cm across',1,0.25,0.25,0.20,'On the K10 veg bench, north end (2.40 to 2.65 m from the north wall), beside the rice cooker K14. Slap Happy is pounded to order here; the Green With Envy paste and the Bao Down peanut crumb are pounded here too (the heavy granite mortar stays in the store). Wipe down and move to the dish wash after service. Added 2026-11-18',0],
- ['K17','Electric chopper / mini food processor, 1.5 L, with lid and spare blade',1,0.20,0.20,0.30,'On the K10 veg bench, against the west wall behind the green board (about 2.55 to 2.75 m from the north wall), clear of the rice cooker K14. Garlic, ginger, chilli and spring-onion chopping for the prep rail K33 and the pastes. Position assumed; uses the bench socket. Washed at K28, never in the dish wash, and the blade stored in a closed box',0],
+ ['K17','Electric chopper / mini food processor, 1.5 L, with lid and spare blade',1,0.20,0.20,0.30,'On the north end of the K10 veg bench, east half (0.33 to 0.53 m from the west wall, 2.42 to 2.62 m from the north wall), standing on the corner of the green board area and clear of the rice cooker K14. Garlic, ginger, chilli and spring-onion chopping for the prep rail K33 and the pastes. Position assumed; uses the bench socket. Washed at K28, never in the dish wash, and the blade stored in a closed box',0],
  ['K26','KDS hot-line screen S1: 27 in touch, sealed front',1,0.62,0.05,0.37,'On the north face of the store-passage partition (3.35 to 3.97 m from the west wall), bottom at 1.52 m, facing the cooks, tilted 10° down. Network cable. Wok, stock pots, fryer, steamer, cold and plate',0],
  ['K27','KDS pass screen S2: 21.5 in touch',1,0.50,0.05,0.29,'West wall above the pass table K11, bottom at 1.95 m, facing the kitchen. Ready-to-run view',0],
  ['K19','Dustbins, lidded and colour-coded: green veg waste (under K10), red non-veg waste, black dry, blue recycling',4,0.35,0.35,0.55,'The red, black and blue bins stand along the south wall between K6/K7 and the store door; the green bin is under K10. Wet bins are emptied every service. Pedal lids, liners in every bin',1],
@@ -574,7 +574,7 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  s+=gapV(KW,2.85,3.75)+'<path class="drl" style="stroke:var(--muted);stroke-dasharray:4 3" d="M'+f(4.05)+' '+f(3.3)+'L'+f(4.7)+' '+f(3.3)+'L'+f(4.7)+' '+f(2.5)+'" marker-end="url(#mfl)"/>'+R(4.42,2.28,0.56,0.07,'blu')+TXT(4.68,2.15,'washroom door','zt','text-anchor="middle" style="font-size:9px;fill:#fff"')+TXT(4.6,3.55,'to washroom','zt','text-anchor="middle" style="font-size:9px;fill:#fff"');
  s+='<rect class="scr" x="'+f(3.35)+'" y="'+f(2.66)+'" width="'+f(0.62)+'" height="9" rx="2"/>';
  // west wall: K10, K12, K11, S2
- s+=R(0,2.32,0.60,0.95,'std')+R(0.06,2.40,0.48,0.40,'vb')+R(0.04,2.34,0.52,0.91,'dsh')+C(0.27,3.02,0.2,'cook')+C(0.27,3.02,0.14,'cook2');
+ s+=R(0,2.32,0.60,0.95,'std')+R(0.06,2.40,0.48,0.40,'vb')+R(0.04,2.34,0.52,0.91,'dsh')+C(0.27,3.02,0.2,'cook')+C(0.27,3.02,0.14,'cook2')+R(0.33,2.42,0.20,0.20,'cook')+C(0.43,2.52,0.07,'cook2');
  s+=R(0,1.12,0.55,1.15,'std')+R(0.04,1.16,0.47,1.07,'dsh')+[0,1,2].map(i=>C(0.2,1.35+i*0.3,0.13,'cook2')).join('');
  s+=R(0,1.12,0.28,1.15,'shelf');
  s+=R(-0.05,1.45,0.07,0.5,'scr');
@@ -587,7 +587,7 @@ const TN=(id,x,y,to,o)=>tag(x,y,id+' · '+(TS[id]||SH[id]),null,to,o);
  // tags
  s+=T2('K2',6.0,0.20,[1.4,0.36])+T2('K1',6.0,0.62,[2.4,0.4])+T2('K4',6.0,0.83,[3.2,0.4])+T2('K28',6.0,1.04,[3.8,0.25])+T2('K3',6.0,1.46,[3.7,1.0])+T2('K5',6.0,2.30,[3.0,1.4]);
  s+=T2('K8',6.0,2.72,[2.7,2.35])+T2('K33',6.0,2.95,[3.15,2.62]);
- s+=T2('K11',-1.5,1.55,[0.25,1.7])+T2('K10',-1.5,2.55,[0.3,2.8]);
+ s+=T2('K11',-1.5,1.55,[0.25,1.7])+T2('K10',-1.5,2.55,[0.3,2.8])+T2('K17',-1.5,2.15,[0.43,2.42]);
  s+=T2('K6/K7',2.1,H+0.65,[1.15,4.0]);
  // drainage
  s+=LD(R(0.90,0.80,2.40,0.10,'drc')+R(3.20,0.60,0.10,1.90,'drc')+[...Array(16)].map((_,i)=>L(0.95+i*0.15,0.80,0.95+i*0.15,0.90,'drt')).join('')+[...Array(12)].map((_,i)=>L(3.20,0.66+i*0.15,3.30,0.66+i*0.15,'drt')).join('')+
