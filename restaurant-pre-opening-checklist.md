@@ -228,7 +228,7 @@ Timeline: start 6–12 months out. Tick items off as you go. Written for a resta
 - [ ] Gastronorm pans with lids bought: 6 × 1/3 for K33, 8 × 1/6 for B22, plus a spare set for the dish wash
 - [ ] Day-dot labels and markers at both rails; every pan dated and timed
 - [ ] Daily prep list written from the menu (garlic, ginger, capsicum, spring onion, chilli, herbs, Hakka veg mix, sauces; limes, lemons, grapefruit, lemongrass, ginger, tomato) and confirmed against the final cocktail recipes
-- [ ] Morning prep routine trained: vegetables chopped at K10 on the green board, carried to K33 in lidded pans; nothing chopped on the K8 worktop
+- [ ] Morning prep routine trained: vegetables chopped at K10 on the green board (electric chopper K17 and hand chilli chopper K18 on the same bench, washed at K28 after use), carried to K33 in lidded pans; nothing chopped on the K8 worktop
 - [ ] Chopped garlic and ginger never stored in oil at room temperature; kept dry, covered, cold and used within 24 hours
 - [ ] Cut citrus discarded after 24 hours; herbs kept dry and used within 2–3 days; fruit cut on a dedicated bar board and knife
 - [ ] Sauce squeeze bottles filled with the day's quantity and finished by close; never poured back into the tub
