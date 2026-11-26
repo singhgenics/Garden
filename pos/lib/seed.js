@@ -36,10 +36,11 @@ export function seedIfEmpty() {
       run('INSERT INTO vendors (name, address, supplies, notes) VALUES (?, ?, ?, ?)', name, address, supplies, notes).id);
 
     const st = {};
-    for (const [n, c, u, q, cost, v] of STOCK) {
+    for (const [n, c, u, q, cost, v, open] of STOCK) {
+      const o = open ?? q;   // opening stock defaults to par; items with nothing bought yet say 0
       st[n] = run('INSERT INTO stock_items (name, category, unit, qty, reorder_level, par_level, cost, vendor_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        n, c, u, q, q / 2, q, cost, v == null ? null : ven[v]).id;
-      run("INSERT INTO stock_moves (stock_id, qty, type, note, cost, at, bdate) VALUES (?, ?, 'opening', 'Opening stock', ?, ?, ?)", st[n], q, cost, now(), bdate());
+        n, c, u, o, q / 2, q, cost, v == null ? null : ven[v]).id;
+      if (o) run("INSERT INTO stock_moves (stock_id, qty, type, note, cost, at, bdate) VALUES (?, ?, 'opening', 'Opening stock', ?, ?, ?)", st[n], o, cost, now(), bdate());
     }
     for (const [i, s, q] of RECIPES) run('INSERT INTO recipes (item_id, stock_id, qty) VALUES (?, ?, ?)', item[i], st[s], q);
   });

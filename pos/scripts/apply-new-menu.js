@@ -43,13 +43,14 @@ tx(() => {
   // stock items
   const st = {}; let newStock = 0;
   run('UPDATE stock_items SET active = 0');
-  for (const [n, c, u, q, cost, v] of STOCK) {
+  for (const [n, c, u, q, cost, v, open] of STOCK) {
+    const o = open ?? q;   // opening stock defaults to par; items with nothing bought yet say 0
     const ex = get('SELECT id FROM stock_items WHERE name = ?', n);
     const vid = v == null ? null : ven[v];
     if (ex) { run('UPDATE stock_items SET active = 1, category = ?, unit = ?, reorder_level = ?, par_level = ?, vendor_id = COALESCE(?, vendor_id) WHERE id = ?', c, u, q / 2, q, vid, ex.id); st[n] = ex.id; }
     else {
-      st[n] = run('INSERT INTO stock_items (name, category, unit, qty, reorder_level, par_level, cost, vendor_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', n, c, u, q, q / 2, q, cost, vid).id;
-      run("INSERT INTO stock_moves (stock_id, qty, type, note, cost, at, bdate) VALUES (?, ?, 'opening', 'Opening stock, new menu', ?, ?, ?)", st[n], q, cost, now(), bdate());
+      st[n] = run('INSERT INTO stock_items (name, category, unit, qty, reorder_level, par_level, cost, vendor_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', n, c, u, o, q / 2, q, cost, vid).id;
+      if (o) run("INSERT INTO stock_moves (stock_id, qty, type, note, cost, at, bdate) VALUES (?, ?, 'opening', 'Opening stock, new menu', ?, ?, ?)", st[n], o, cost, now(), bdate());
       newStock++;
     }
   }
